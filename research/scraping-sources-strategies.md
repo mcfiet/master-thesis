@@ -21,15 +21,18 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
 *   **Status:** `Gut geeignet`
 *   **Strategie (Toborek / Eigene Analyse):** Die taz platziert den Hinweis auf den Originalartikel oft in einem kursiv gesetzten Absatz (`<em>`) am Ende des Textes. Der Crawler muss im LS-Artikel nach Links innerhalb von `<em>`-Tags suchen, deren Text "aus diesem „schweren“ Text" o.ä. lautet.
 *   **Beispielpaar:**
-    *   **AS:** [Barrierefreie Kommunikation im Netz](https://taz.de/Barrierefreie-Kommunikation-im-Netz/!5619787/)
-    *   **LS:** [Leichte Sprache in der taz](https://taz.de/Leichte-Sprache/!5634433/)
+    *   **AS:** [Migrantisches Leben in Dresden](https://taz.de/Migrantisches-Leben-in-Dresden/!5613086/)
+    *   **LS:** [Döner aus Dresden](https://taz.de/Leichte-Sprache/!5617312/)
 
-### Stadt Köln
+### ✅ Stadt Köln
 *   **Status:** `Sehr gut geeignet` (Umfangreiche Sammlung an Dienstleistungen)
-*   **Strategie (Toborek):** Suche nach einem Link, dessen Text exakt `"Diese Seite in Alltags-Sprache lesen"` lautet (Groß-/Kleinschreibung ignorieren).
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery:** Da die Original-Übersicht nicht mehr aktiv ist, Nutzung des Wayback-Archivs: [`web.archive.org/.../informationen-leichter-sprache`](https://web.archive.org/web/20220804230818/https://www.stadt-koeln.de/leben-in-koeln/soziales/informationen-leichter-sprache).
+    2.  **Link-Extraktion:** Suche in `ul.textteaserliste` nach Links (`li a.linkintern`). Diese führen zu den LS-Artikeln.
+    3.  **Alignment (Toborek):** Suche im LS-Artikel nach einem Link, dessen Text exakt `"Diese Seite in Alltags-Sprache lesen"` lautet (Groß-/Kleinschreibung ignorieren).
 *   **Beispielpaar:**
-    *   **AS:** [Pflege-Eltern werden](https://www.stadt-koeln.de/service/produkt/pflege-eltern-werden)
-    *   **LS:** [Pflege-Eltern werden (LS)](https://www.stadt-koeln.de/leben-in-koeln/soziales/pflege-eltern-werden)
+    *   **AS:** [Ausweis-Papiere verloren?](http://www.stadt-koeln.de/leben-in-koeln/soziales/ausweis-papiere-verloren)
+    *   **LS:** [Verlust von Ausweispapieren](http://www.stadt-koeln.de/service/produkt/verlust-von-ausweispapieren-1)
 
 ### Apotheken Umschau
 *   **Status:** `Gut geeignet`
