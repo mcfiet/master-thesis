@@ -50,13 +50,19 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **AS:** [Verhütung: Die Pille](https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetung-die-pille-707733.html)
     *   **LS:** [Pille](https://www.apotheken-umschau.de/einfache-sprache/verhuetung/pille-805349.html)
 
-### Der Behindertenbeauftragte
-*   **Status:** `Gut geeignet`
-*   **Strategie (Toborek):** Suche gezielt nach einem Link mit der HTML-Klasse `.c-language-switch__l--as` und dem Text "Alltagssprache". Validierung über Regex: Der Link-Titel sollte den Satz "Lesen Sie den Artikel ... in Alltagssprache" enthalten.
+### ✅ Der Behindertenbeauftragte
+*   **Status:** `Sehr gut geeignet` (fast flächendeckendes Angebot)
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery 1 (Site-Crawl):** Start auf der Startseite in Alltagssprache: [`behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html`](https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html). Der Crawler kann einfach allen internen Links folgen, die `/DE/AS/` im Pfad haben, um alle AS-Artikel zu finden.
+    2.  **Discovery 2 (Suche/Archiv & Pagination):** Alternativ können alle (älteren) Artikel über die paginierte Suche unter `behindertenbeauftragter.de/SiteGlobals/Forms/Suche/Expertensuche_Formular.html` gefunden werden. 
+        *   **Artikel-Extraktion:** Artikel befinden sich in der Liste `ul.searchresult > li.teaser`.
+        *   **Pagination:** Da es sich um statische HTML-Links handelt, ist kein Headless-Browser (Clicking) nötig. Der Scraper extrahiert auf jeder Ergebnisseite den Link für die nächste Seite über das Element `a.forward.button` (oder iteriert den URL-Parameter `gtp=43638_list%253D[SEITE]`) und wiederholt dies, bis kein "vor"-Button mehr existiert.
+    3.  **Alignment (Language Switcher):** Auf nahezu jedem AS-Artikel gibt es einen direkten Sprachwechsler. Suche gezielt nach einem Link mit der HTML-Klasse `.c-language-switch__l--ls` (für Leichte Sprache).
+    4.  **Validierung:** Der `title`-Text dieses Links enthält meist das Muster `"Lesen Sie den Artikel ... in Leichte Sprache"`. 
+*   **Alternative URL-Strategie:** Die URL-Pfade sind oft parallel aufgebaut, wobei lediglich `/AS/` durch `/LS/` ausgetauscht wird (z.B. `/DE/AS/der-beauftragte/lebenslauf/...` vs. `/DE/LS/der-beauftragte/lebenslauf/...`).
 *   **Beispielpaar:**
-    *   **AS:** [Aufgabe des Beauftragten](https://www.behindertenbeauftragter.de/DE/DerBeauftragte/DieAufgabe/Aufgabe_node.html)
-    *   **LS:** [Aufgabe des Beauftragten (LS)](https://www.behindertenbeauftragter.de/DE/LS/DerBeauftragte/DerBeauftragte_node.html)
-*   **Alternative URL-Strategie:** Die URL-Pfade sind oft parallel aufgebaut (z.B. `/DE/DerBeauftragte/` vs. `/DE/LS/DerBeauftragte/`).
+    *   **AS:** [Lebenslauf Jürgen Dusel](https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/lebenslauf/lebenslauf-node.html)
+    *   **LS:** [Lebenslauf Jürgen Dusel (LS)](https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/lebenslauf/lebenslauf-node.html)
 
 ### Sozialpolitik.com
 *   **Status:** `Gut geeignet`
