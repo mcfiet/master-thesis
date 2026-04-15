@@ -1,0 +1,19 @@
+# Obsidian
+# Kompletten Obsidian-Config-Ordner ignorieren (da Livesync genutzt wird oder Einstellungen privat bleiben sollen)
+.obsidian/
+
+# OS files
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+._*
+
+# Office / Excel temporary files
+~$*.xlsx
+
+# Temporary / Research scraps
+seafile_content.txt
+seafile_page.html
+*.tmp
+*.log
