@@ -38,9 +38,14 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **AS:** [Ausweis-Papiere verloren?](http://www.stadt-koeln.de/leben-in-koeln/soziales/ausweis-papiere-verloren)
     *   **LS:** [Verlust von Ausweispapieren](http://www.stadt-koeln.de/service/produkt/verlust-von-ausweispapieren-1)
 
-### Apotheken Umschau
+### ✅ Apotheken Umschau
 *   **Status:** `Gut geeignet`
-*   **Strategie (Toborek):** Suche in jedem LS-Artikel nach einem Link, der das Wort `"hier"` im `title`-Attribut trägt. Dieser Link führt zur Standard-Version.
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery (Hierarchisch):** 
+        *   Start auf der Übersichtsseite [`apotheken-umschau.de/einfache-sprache/`](https://www.apotheken-umschau.de/einfache-sprache/).
+        *   Extrahiere alle Rubriken-Links (z.B. `/einfache-sprache/krankheiten/`, `/einfache-sprache/medikamente-heilpflanzen/`), typischerweise aus Elementen wie `a.stretched-link` in den Themenkacheln.
+        *   Navigiere in diese Unterseiten und extrahiere dort die Links zu den einzelnen Artikeln, die auf `.html` enden (z.B. `href="/einfache-sprache/krankheiten/adipositas-769803.html"`).
+    2.  **Alignment (Toborek):** Suche in jedem LS-Artikel nach einem Link, der das Wort `"hier"` im `title`-Attribut trägt. Dieser Link führt zur Standard-Version.
 *   **Beispielpaar:**
     *   **AS:** [Verhütung: Die Pille](https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetung-die-pille-707733.html)
     *   **LS:** [Pille](https://www.apotheken-umschau.de/einfache-sprache/verhuetung/pille-805349.html)
