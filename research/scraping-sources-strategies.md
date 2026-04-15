@@ -6,9 +6,12 @@ Dieses Dokument dient als "Living Document" (fortlaufend aktualisiert) für die 
 
 Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) direkt auf die Version in Alltagssprache (AS) verlinkt (oder umgekehrt). Hier kann das Alignment 1:1 durch das Verfolgen von Links automatisiert werden.
 
-### MDR (Mitteldeutscher Rundfunk)
+### ✅ MDR (Mitteldeutscher Rundfunk)
 *   **Status:** `Sehr gut geeignet`
-*   **Strategie (Toborek / Eigene Analyse):** Suche im LS-Artikel nach einem Teaser-Block für die "schwere" Version. Spezifisch nach einem Element mit der Klasse `conHeadline` und dem Text `"Hier können Sie diese Nachricht auch in schwerer Sprache lesen:"`. Der darin liegende Link führt zum AS-Artikel.
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery:** Start auf der Übersichtsseite [`mdr.de/nachrichten-leicht/nachrichten-in-leichter-sprache-114.html`](https://www.mdr.de/nachrichten-leicht/nachrichten-in-leichter-sprache-114.html).
+    2.  **Link-Extraktion:** Suche nach `div.box.cssArticle` oder `div.box.cssInfoTeaser`. Die Links zu den LS-Artikeln befinden sich in `h4 a.headline`.
+    3.  **Alignment (Toborek / Eigene Analyse):** Suche im LS-Artikel nach einem Teaser-Block für die "schwere" Version. Spezifisch nach einem Element mit der Klasse `conHeadline` und dem Text `"Hier können Sie diese Nachricht auch in schwerer Sprache lesen:"`. Der darin liegende Link führt zum AS-Artikel.
 *   **Beispielpaar:**
     *   **AS:** [Prozess Antifa Ost](https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/prozess-antifa-ost-kronzeuge-linksextremismus-100.html)
     *   **LS:** [Antifa-Prozess in Leichter Sprache](https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-antifa-prozess-100.html)
@@ -71,12 +74,15 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
 
 Quellen, bei denen die Sprachversionen nicht durch direkte externe Links, sondern durch Struktur, CSS oder Metadaten miteinander verknüpft sind.
 
-### Brand Eins
-*   **Status:** `Besonderheit`
-*   **Strategie (Toborek):** Beide Sprachversionen stehen auf *derselben* URL. Die Unterscheidung erfolgt rein über CSS: Absätze, die in roter Farbe (`#ff0000`) formatiert sind, werden als Leichte Sprache extrahiert, alle anderen als Standardsprache.
+### ✅ Brand Eins
+*   **Status:** `Sehr gut geeignet` (Paralleltexte auf einer Seite)
+*   **Strategie (Übersicht & Extraktion):**
+    1.  **Discovery:** Start auf der Übersichtsseite [`brandeins.de/themen/rubriken/leichte-sprache`](https://www.brandeins.de/themen/rubriken/leichte-sprache).
+    2.  **Link-Extraktion:** Suche in `section.multicolumn-wrapper` nach Artikeln. Ein Eintrag wird durch `div.column.col-xs-12` definiert. Der Link zum Artikel befindet sich in `span.like-h1.like-h2 a`.
+    3.  **Identifikation:** Artikel in dieser Rubrik (oft erkennbar am roten Kicker `color: #fa4600` oder entsprechenden Teaser-Texten wie "Die Leichte Sprache nimmt den Inhalt ernst...") enthalten sowohl die Alltags- als auch die Leichte Sprache.
+    4.  **Inhalts-Extraktion:** Auf der Artikelseite stehen beide Sprachversionen. Die Unterscheidung erfolgt rein über CSS: Absätze/Elemente, die in roter Farbe (z. B. `#ff0000` oder `#fa4600`) formatiert sind, bilden die Leichte Sprache. Alle anderen (schwarzen) Texte sind die Standardsprache (AS).
 *   **Beispielpaar:**
-    *   **AS:** [URL_BRAND_EINS] (Inhalt im Standard-Stil)
-    *   **LS:** [URL_BRAND_EINS] (Inhalt in Rot)
+    *   **AS & LS:** [Die Regierung zieht nicht mit um](https://www.brandeins.de/magazine/brand-eins-wirtschaftsmagazin/2024/kommunikation-in-zeiten-von-fake-news/die-regierung-zieht-nicht-mit-um) (LS ist der rot gesetzte Teil).
 
 ### Saarländischer Rundfunk (sr.de)
 *   **Status:** `Bedingt geeignet` (Oft Video als AS, Text als LS)
