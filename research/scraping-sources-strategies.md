@@ -17,9 +17,13 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **LS:** [Antifa-Prozess in Leichter Sprache](https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-antifa-prozess-100.html)
 *   **Zusatzinfo:** Sitemaps unter `/index-sitemap.xml` erleichtern das Finden der Seiten massiv.
 
-### taz (taz.de)
+### ✅ taz (taz.de)
 *   **Status:** `Gut geeignet`
-*   **Strategie (Toborek / Eigene Analyse):** Die taz platziert den Hinweis auf den Originalartikel oft in einem kursiv gesetzten Absatz (`<em>`) am Ende des Textes. Der Crawler muss im LS-Artikel nach Links innerhalb von `<em>`-Tags suchen, deren Text "aus diesem „schweren“ Text" o.ä. lautet.
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery:** Start auf der Übersichtsseite [`taz.de/Politik/Deutschland/Leichte-Sprache/!p5097/`](https://taz.de/Politik/Deutschland/Leichte-Sprache/!p5097/).
+    2.  **Link-Extraktion:** Suche im Bereich `section.module-linklist_article_teaser` nach Artikel-Elementen (`article.article-teaser`). Die Links zu den LS-Artikeln befinden sich im direkten Kind-Element `a.teaser-link`.
+    3.  **Alignment (Toborek / Eigene Analyse):** Die taz platziert den Hinweis auf den Originalartikel oft in einem kursiv gesetzten Absatz (`<em>`) am Ende des Textes. Der Crawler muss im LS-Artikel nach Links innerhalb von `<em>`-Tags suchen, deren Text "aus diesem „schweren“ Text" o.ä. lautet.
+    4.  **Besonderheit (n:m Mapping):** Es gibt LS-Artikel, die Informationen aus mehreren AS-Artikeln zusammenfassen (z. B. „kommen aus diesem, diesem und diesem ‚schweren‘ Text“). Hier muss der Scraper alle verlinkten URLs extrahieren, da ein 1:1 Alignment nicht immer gegeben ist.
 *   **Beispielpaar:**
     *   **AS:** [Migrantisches Leben in Dresden](https://taz.de/Migrantisches-Leben-in-Dresden/!5613086/)
     *   **LS:** [Döner aus Dresden](https://taz.de/Leichte-Sprache/!5617312/)
