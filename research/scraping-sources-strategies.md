@@ -83,12 +83,17 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **AS:** [Bücherei](https://www.lebenshilfe-main-taunus.de/buecherei-74.html)
     *   **LS:** [Bücherei (LS)](https://www.lebenshilfe-main-taunus.de/ls/buecherei-74.html)
 
-### Hamburg.de
-*   **Status:** `Evaluierung ausstehend`
-*   **Strategie (Excel-Liste):** Direkte Übersetzungsmöglichkeit wird über einen Button ("Leichte Sprache") prominent angezeigt. Crawler muss die Button-Ziele auslesen.
+### ✅ Hamburg.de
+*   **Status:** `Sehr gut geeignet`
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery (Hierarchisch):** 
+        *   Start auf der Übersichtsseite [`hamburg.de/barrierefrei/leichte-sprache`](https://www.hamburg.de/barrierefrei/leichte-sprache).
+        *   Extrahiere die Kategorie-Links im Hauptmenü (z. B. `/barrierefrei/leichte-sprache/politik`, `/barrierefrei/leichte-sprache/bezirke`), die in `ul.km1-link-navigation__list` liegen.
+        *   Navigiere in diese Unterseiten und extrahiere dort die Artikel-Links, die in Elementen der Klasse `a.km1-teaser__heading-link` stecken.
+    2.  **Alignment (Language Switcher):** Auf jedem LS-Artikel gibt es eine Sprachauswahl-Leiste (`km1-language-bar__language`). Suche dort nach einem Link, der ein SVG-Icon mit der Klasse `km1-icon--original-language` enthält. Dieser Link führt direkt zur Version in Standardsprache.
 *   **Beispielpaar:**
-    *   **AS:** [Hamburg barrierefrei](https://www.hamburg.de/hamburg-barrierefrei/)
-    *   **LS:** [Hamburg barrierefrei (LS)](https://www.hamburg.de/hamburg-barrierefrei/leichte-sprache/)
+    *   **AS:** [Der Senat](https://www.hamburg.de/politik-und-verwaltung/senat/senat-236762)
+    *   **LS:** [Was ist der Senat?](https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-der-senat-576194)
 
 ---
 
