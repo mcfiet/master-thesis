@@ -64,13 +64,15 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **AS:** [Lebenslauf Jürgen Dusel](https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/lebenslauf/lebenslauf-node.html)
     *   **LS:** [Lebenslauf Jürgen Dusel (LS)](https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/lebenslauf/lebenslauf-node.html)
 
-### Sozialpolitik.com
+### ✅ Sozialpolitik.com
 *   **Status:** `Gut geeignet`
-*   **Strategie (Toborek):** Suche nach einem Link mit der Klasse `underline easy`, der explizit den Text `"Standardsprache"` enthält und auf die deutsche Version (`hreflang="de-DE"`) verweist.
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery:** Start auf der Sitemap/Seiten-Übersicht für Leichte Sprache: [`sozialpolitik.com/es/seiten-uebersicht`](https://www.sozialpolitik.com/es/seiten-uebersicht). Dort sind alle verfügbaren LS-Artikel aufgelistet. Extrahiere alle Links, die mit `/es/` beginnen.
+    2.  **Alignment (Toborek):** Suche im LS-Artikel nach einem Link mit der Klasse `underline easy`, der explizit den Text `"Standardsprache"` (oder `"Inhalte für Standardsprache"`) enthält und auf die deutsche Version (`hreflang="de-DE"`) verweist.
 *   **Beispielpaar:**
     *   **AS:** [Recht auf soziale Entschädigung](https://www.sozialpolitik.com/es/recht-auf-soziale-entschaedigung)
     *   **LS:** [Opferentschaedigung (LS)](https://www.sozialpolitik.com/opferentschaedigung)
-*   **Alternative URL-Strategie:** Der URL der Leichten Sprache wird oft einfach das Präfix `ls-` vorangestellt.
+*   **Alternative URL-Strategie:** Oft ist das Alignment direkt über die URL nicht möglich, da die Titel in LS abweichen (z.B. `/arbeitswelt-von-morgen` in AS wird zu `/es/die-arbeits-welt` in LS). Daher ist die Extraktion über den Sprachwechsler essenziell.
 
 ### Lebenshilfe Main-Taunus
 *   **Status:** `Gut geeignet` (Achtung: oft Einfache Sprache, nicht zwingend zertifizierte Leichte Sprache)
