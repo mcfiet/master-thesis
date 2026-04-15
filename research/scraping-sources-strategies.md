@@ -74,9 +74,11 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **LS:** [Opferentschaedigung (LS)](https://www.sozialpolitik.com/opferentschaedigung)
 *   **Alternative URL-Strategie:** Oft ist das Alignment direkt über die URL nicht möglich, da die Titel in LS abweichen (z.B. `/arbeitswelt-von-morgen` in AS wird zu `/es/die-arbeits-welt` in LS). Daher ist die Extraktion über den Sprachwechsler essenziell.
 
-### Lebenshilfe Main-Taunus
+### ✅ Lebenshilfe Main-Taunus
 *   **Status:** `Gut geeignet` (Achtung: oft Einfache Sprache, nicht zwingend zertifizierte Leichte Sprache)
-*   **Strategie (Toborek):** Suche im Bereich `mod_menue_top` nach einem Link mit dem Titel `"Auf Alltags-Sprache umstellen"`.
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery:** Da die Hauptseite ins Archiv gewandert ist, nutze die "Inhalt"-Seite (Sitemap) in der Wayback-Machine: [`web.archive.org/.../lebenshilfe-main-taunus.de/ls/inhalt/`](https://web.archive.org/web/20200926190423/https://www.lebenshilfe-main-taunus.de/ls/inhalt/). Diese Seite listet alle verfügbaren `/ls/`-Links auf.
+    2.  **Alignment (Toborek):** Suche im HTML (meist im Bereich `mod_menue_top` oder bei den Bedienelementen) nach einem Link mit dem Titel `"Auf Alltags-Sprache umstellen"`. Dieser führt zur Standard-Version.
 *   **Beispielpaar:**
     *   **AS:** [Bücherei](https://www.lebenshilfe-main-taunus.de/buecherei-74.html)
     *   **LS:** [Bücherei (LS)](https://www.lebenshilfe-main-taunus.de/ls/buecherei-74.html)
