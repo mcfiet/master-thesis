@@ -1,0 +1,72 @@
+{
+    "summary": {
+        "total_ls_articles_scanned": 14,
+        "aligned_pairs_count": 10,
+        "total_ls_tokens": 4514,
+        "total_as_tokens": 11321,
+        "average_ls_tokens": 451.4,
+        "average_as_tokens": 1132.1
+    },
+    "pairs": [
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-wildkatzen-thueringen-rhoen-hauskatze-naturschuetzer-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/wildkatze-verbreitung-nicht-mitnehmen-bund-100.html",
+            "ls_tokens": 235,
+            "as_tokens": 567
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-dieselklau-boerde-zunahme-diesel-diebstahl-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/boerde/diesel-diebstahl-lkw-102.html",
+            "ls_tokens": 271,
+            "as_tokens": 432
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-ice-oberleitung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/dessau/wittenberg/ice-gestrandet-oberleitung-bahn-zuege-umleitung-108.html",
+            "ls_tokens": 234,
+            "as_tokens": 434
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-streik-mitteldeutschland-dvb-nahverkehr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/warnstreik-verdi-nahverkehr-bus-faehre-kirnitzschtalbahn-102.html",
+            "ls_tokens": 249,
+            "as_tokens": 633
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-gedenkfeier-buchenwald-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/weimar/gedenken-kz-gedenkstaette-buchenwald-kerkeling-100.html",
+            "ls_tokens": 1178,
+            "as_tokens": 1950
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-mittelbau-dora-gedenken-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/nord-thueringen/nordhausen/mittelbau-dora-gedenken-106.html",
+            "ls_tokens": 793,
+            "as_tokens": 594
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-prozess-magdeburg-zeugen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/anschlag-weihnachtsmarkt-prozess-verhandlung-zusammenfassung-124.html",
+            "ls_tokens": 406,
+            "as_tokens": 4965
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-strassenbahn-plauen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/vogtland/plauen-strassenbahn-insolvenz-rettung-betriebsversammung-100.html",
+            "ls_tokens": 209,
+            "as_tokens": 631
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-filmfest-dresden-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/filmfest-dresden-programm-kino-kurzfilme-kultur-news-100.html",
+            "ls_tokens": 332,
+            "as_tokens": 811
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-gohrischheide-waldbrand-sachsen-ursache-kampfmittel-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/grossenhain-riesa/waldbrand-ursache-gohrischheide-phosphor-feuerwehr-100.html",
+            "ls_tokens": 607,
+            "as_tokens": 304
+        }
+    ]
+}
