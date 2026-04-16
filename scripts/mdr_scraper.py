@@ -98,9 +98,45 @@ def get_as_token_count(as_url):
     as_text = " ".join([el.get_text() for el in as_text_elements])
     return count_tokens(as_text)
 
+def get_archive_state_links(archive_index_url):
+    """Extracts the links to the state-specific archive pages."""
+    print(f"Crawling archive index: {archive_index_url}")
+    try:
+        response = requests.get(archive_index_url, timeout=10)
+        response.raise_for_status()
+    except Exception as e:
+        print(f"Error fetching archive index: {e}")
+        return []
+        
+    soup = BeautifulSoup(response.text, 'html.parser')
+    state_links = []
+    for a in soup.select('a'):
+        href = a.get('href')
+        if href and 'rueckblick-buendelgruppe' in href:
+            if not href.startswith('http'):
+                href = "https://www.mdr.de" + href
+            state_links.append(href)
+    return list(set(state_links))
+
 def main():
     start_url = "https://www.mdr.de/nachrichten-leicht/nachrichten-in-leichter-sprache-114.html"
+    archive_url = "https://www.mdr.de/nachrichten-leicht/rueckblick/index.html"
+    
+    # 1. Get current news
     ls_urls = get_mdr_ls_articles(start_url)
+    print(f"Found {len(ls_urls)} articles on main page.")
+    
+    # 2. Get archive state links
+    state_archive_links = get_archive_state_links(archive_url)
+    
+    # 3. Get articles from each state archive
+    for state_link in state_archive_links:
+        archive_ls_urls = get_mdr_ls_articles(state_link)
+        print(f"Found {len(archive_ls_urls)} articles in {state_link.split('/')[-1]}")
+        ls_urls.extend(archive_ls_urls)
+        
+    # Deduplicate
+    ls_urls = list(set(ls_urls))
     
     aligned_pairs = []
     total_ls_tokens = 0
