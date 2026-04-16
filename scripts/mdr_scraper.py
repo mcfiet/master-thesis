@@ -139,6 +139,7 @@ def main():
     ls_urls = list(set(ls_urls))
     
     aligned_pairs = []
+    unaligned_count = 0
     total_ls_tokens = 0
     total_as_tokens = 0
     pair_count = 0
@@ -162,8 +163,10 @@ def main():
                 })
                 print(f"Match found: {pair_count} - {ls_url}")
             else:
+                unaligned_count += 1
                 print(f"AS article found but no content: {as_url}")
         else:
+            unaligned_count += 1
             print(f"No AS link found for: {ls_url}")
         
         # Respectful scraping
@@ -174,6 +177,7 @@ def main():
         "summary": {
             "total_ls_articles_scanned": len(ls_urls),
             "aligned_pairs_count": pair_count,
+            "unaligned_articles_count": unaligned_count,
             "total_ls_tokens": total_ls_tokens,
             "total_as_tokens": total_as_tokens,
             "average_ls_tokens": total_ls_tokens / pair_count if pair_count > 0 else 0,
@@ -188,7 +192,9 @@ def main():
         json.dump(results, f, ensure_ascii=False, indent=4)
 
     print("\n--- Scraping Report ---")
+    print(f"Total LS articles scanned: {len(ls_urls)}")
     print(f"Aligned pairs found: {pair_count}")
+    print(f"Unaligned articles: {unaligned_count}")
     print(f"Total LS tokens: {total_ls_tokens}")
     print(f"Total AS tokens: {total_as_tokens}")
     print(f"Results saved to {output_file}")
