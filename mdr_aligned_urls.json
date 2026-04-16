@@ -1,18 +1,138 @@
 {
     "summary": {
-        "total_ls_articles_scanned": 14,
-        "aligned_pairs_count": 10,
-        "total_ls_tokens": 4514,
-        "total_as_tokens": 11321,
-        "average_ls_tokens": 451.4,
-        "average_as_tokens": 1132.1
+        "total_ls_articles_scanned": 298,
+        "aligned_pairs_count": 241,
+        "total_ls_tokens": 96690,
+        "total_as_tokens": 195831,
+        "average_ls_tokens": 401.2033195020747,
+        "average_as_tokens": 812.5767634854772
     },
     "pairs": [
         {
-            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-wildkatzen-thueringen-rhoen-hauskatze-naturschuetzer-100.html",
-            "as_url": "https://www.mdr.de/nachrichten/thueringen/wildkatze-verbreitung-nicht-mitnehmen-bund-100.html",
-            "ls_tokens": 235,
-            "as_tokens": 567
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-erfurt-nach-brand-einsturzgefahr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/erfurt/domplatz-brand-haus-abgerissen-102.html",
+            "ls_tokens": 281,
+            "as_tokens": 533
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-sachsen-anhalt-software-panne-behoerden-schwerbehinderte-betroffen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/gesellschaft/behoerden-it-panne-betrifft-behinderte-100.html",
+            "ls_tokens": 772,
+            "as_tokens": 1878
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-sozialreform-grad-der-behinderung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/landtag-beschliesst-reform-sozialverwaltung-100.html",
+            "ls_tokens": 709,
+            "as_tokens": 368
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-muellkippenbrand-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/ost-thueringen/greiz/brand-muell-deponie-feuerwehr-zeulenroda-102.html",
+            "ls_tokens": 451,
+            "as_tokens": 443
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sport-thueringen-sachsen-skispringen-hoffmann-freitag-100.html",
+            "as_url": "https://www.mdr.de/sport/skispringen-vierschanzentournee-garmisch-felix-hoffmann-100.html",
+            "ls_tokens": 449,
+            "as_tokens": 366
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-fussball-dresden-herta-ausschreitungen-krawall-schuster-konsequenzen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/fussball-dynamo-fans-hertha-gewalt-innenminister-102.html",
+            "ls_tokens": 215,
+            "as_tokens": 1149
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-industrieansiedlung-zorbau-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/burgenland/luetzen-foerdermittel-investition-104.html",
+            "ls_tokens": 336,
+            "as_tokens": 529
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-erstes-inklusions-theater-in-dresden-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/farbwerk-inklusion-tanz-schauspiel-ensemble-kultur-news-100.html",
+            "ls_tokens": 184,
+            "as_tokens": 1230
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-wochenende-tipps-leipzig-asisi-panometer-gera-100.html",
+            "as_url": "https://www.mdr.de/kultur/ausflug-tipps/hainich-quedlinburg-muldental-wohin-am-wochenende-tipps-100.html",
+            "ls_tokens": 548,
+            "as_tokens": 1058
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-kulturnachricht-quedlinburg-hainich-mulderadweg-100.html",
+            "as_url": "https://www.mdr.de/kultur/ausflug-tipps/hainich-quedlinburg-muldental-wohin-am-wochenende-tipps-100.html",
+            "ls_tokens": 498,
+            "as_tokens": 1058
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-stuendliche-bahnverbindung-nach-berlin-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/bahn-berlin-anbindung-nasa-fahrplanaenderung-100.html",
+            "ls_tokens": 237,
+            "as_tokens": 376
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-antifa-prozess-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/prozess-antifa-ost-kronzeuge-linksextremismus-100.html",
+            "ls_tokens": 639,
+            "as_tokens": 709
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-bildungsurlaub-arbeitnehmer-qualifikation-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/politik/bildungsurlaub-anspruch-abstimmung-beschluss-landtag-100.html",
+            "ls_tokens": 794,
+            "as_tokens": 1192
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-scheibe-see-hoyerswerda-mole-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/bautzen/bautzen-hoyerswerda-kamenz/scheibe-see-boot-mole-tourismus-100.html",
+            "ls_tokens": 353,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-brocken-mann-gerettet-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/mann-brocken-gerettet-feuerwehr-104.html",
+            "ls_tokens": 216,
+            "as_tokens": 465
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-oberhof-biathlon-voller-erfolg-100.html",
+            "as_url": "https://www.mdr.de/sport/andere_sportarten/biathlon-frauen-verfolgung-weltcup-oberhof-vanessa-voigt-100.html",
+            "ls_tokens": 257,
+            "as_tokens": 471
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-heizkosten-steigerung-fernwaerme-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/wirtschaft/heizkosten-gestiegen-sachsen-anhalt-thueringen-verbrauch-januar-100.html",
+            "ls_tokens": 497,
+            "as_tokens": 777
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-dessau-drohnen-apotheke-medikamente-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/dessau/dessau-rosslau/apotheke-liefert-medikamente-per-drohne-100.html",
+            "ls_tokens": 227,
+            "as_tokens": 1286
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-buchmesse-leipzig-eroeffnung-festakt-100.html",
+            "as_url": "https://www.mdr.de/kultur/buchmesse/leipzig-weimer-kritik-protest-buchhandlungspreis-kultur-news-100.html",
+            "ls_tokens": 834,
+            "as_tokens": 1179
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-sachsen-anhalt-streik-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/warnstreik-nahverkehr-verdi-dvs-saechsische-schweiz-osterzgebirge-regionalverkehr-102.html",
+            "ls_tokens": 356,
+            "as_tokens": 404
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-dresden-festspielhaus-hellerau-theaterpreis-des-bundes-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/festspielhaus-hellerau-theater-preis-kultur-news-102.html",
+            "ls_tokens": 237,
+            "as_tokens": 902
         },
         {
             "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-dieselklau-boerde-zunahme-diesel-diebstahl-100.html",
@@ -21,16 +141,124 @@
             "as_tokens": 432
         },
         {
-            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-ice-oberleitung-100.html",
-            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/dessau/wittenberg/ice-gestrandet-oberleitung-bahn-zuege-umleitung-108.html",
-            "ls_tokens": 234,
-            "as_tokens": 434
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-quedlinburg-feininger-museum-ausstellung-blaue-vier-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/feininger-museum-quedlinburg-sonderausstellung-die-blauen-vier-kultur-news-100.html",
+            "ls_tokens": 351,
+            "as_tokens": 1297
         },
         {
-            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-streik-mitteldeutschland-dvb-nahverkehr-100.html",
-            "as_url": "https://www.mdr.de/nachrichten/sachsen/warnstreik-verdi-nahverkehr-bus-faehre-kirnitzschtalbahn-102.html",
-            "ls_tokens": 249,
-            "as_tokens": 633
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-erfurt-rot-weiss-insolvenz-rwe-100.html",
+            "as_url": "https://www.mdr.de/sport/fussball_rl/rot-weiss-erfurt-insolvenzverfahren-ende-100.html",
+            "ls_tokens": 199,
+            "as_tokens": 626
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-kultur-nachricht-dresden-erfurt-magdeburg-100.html",
+            "as_url": "https://www.mdr.de/kultur/ausflug-tipps/hainich-quedlinburg-muldental-wohin-am-wochenende-tipps-100.html",
+            "ls_tokens": 597,
+            "as_tokens": 1058
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-weimar-gedenkstaette-buchenwald-widerstand-gegen-ki-fake-bilder-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/weimar/gedenkstaette-buchenwald-widerstand-gegen-ki-fake-holocaust-bilder-kultur-news-100.html",
+            "ls_tokens": 430,
+            "as_tokens": 1216
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-harz-rodeln-loipen-geoeffnet-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/harz-schneehoehe-skifahren-rodeln-wintersport-loipen-bedingungen-104.html",
+            "ls_tokens": 373,
+            "as_tokens": 526
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-warn-streik-bus-bahn-verdi-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/warnstreik-bus-strassenbahn-erfurt-jena-gera-102.html",
+            "ls_tokens": 329,
+            "as_tokens": 1466
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-kultur-meissen-heimkehle-albrechtsburg-altenburg-100.html",
+            "as_url": "https://www.mdr.de/kultur/ausflug-tipps/hainich-quedlinburg-muldental-wohin-am-wochenende-tipps-100.html",
+            "ls_tokens": 503,
+            "as_tokens": 1058
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-chemnitz-congress-hotel-schliesst-ngg-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/chemnitz-stollberg/congress-hotel-schliesst-zukunft-unklar-100.html",
+            "ls_tokens": 269,
+            "as_tokens": 1005
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-fsme-risiko-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/halle/zecken-fsme-risikogebiet-impfung-100.html",
+            "ls_tokens": 324,
+            "as_tokens": 354
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-magdeburg-anschlag-weihnachtsmarkt-prozesstag-vierundzwanzig-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/anschlag-weihnachtsmarkt-prozess-verhandlung-zusammenfassung-124.html",
+            "ls_tokens": 440,
+            "as_tokens": 4965
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-magdeburg-prozess-taleb-a-anschlag-fachliche-eignung-zweifel-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/landespolitik/taleb-a-kritik-zweifel-arzt-anschlag-magdeburg-weihnachtsmarkt-100.html",
+            "ls_tokens": 257,
+            "as_tokens": 304
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-misstrauensvotum-voigt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/voigt-afd-misstrauensvotum-abstimmung-100.html",
+            "ls_tokens": 394,
+            "as_tokens": 723
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-kulturnachricht-alle-laender-100.html",
+            "as_url": "https://www.mdr.de/kultur/ausflug-tipps/hainich-quedlinburg-muldental-wohin-am-wochenende-tipps-100.html",
+            "ls_tokens": 673,
+            "as_tokens": 1058
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/spezial/leichte-sprache-ticker-sachsen-anhalt-haseloff-schulze-neuwahl-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/landtagswahl/wahl-ministerpraesident-schulze-102.html",
+            "ls_tokens": 2808,
+            "as_tokens": 3017
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-anschlag-magdeburg-prozesstag-sechszehn-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/anschlag-weihnachtsmarkt-prozess-verhandlung-zusammenfassung-124.html",
+            "ls_tokens": 356,
+            "as_tokens": 4965
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-thueringen-streik-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/verdi-streik-nahverkehr-erzgebirge-meissen-chemnitz-100.html",
+            "ls_tokens": 349,
+            "as_tokens": 576
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-leipzig-strassenbahn-entgleist-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/strassenbahn-lvb-entgleist-ausfall-stoerung-100.html",
+            "ls_tokens": 233,
+            "as_tokens": 345
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-fcm-rueckzug-sponsor-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/fcm-ausschreitungen-gewalt-fussball-sponsor-rueckzug-100.html",
+            "ls_tokens": 259,
+            "as_tokens": 440
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-beratungsstelle-menschen-ohne-krankenversicherung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/krankenversicherung-clearingstelle-gesundheitsversorgung-100.html",
+            "ls_tokens": 261,
+            "as_tokens": 384
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-streik-sachsen-anhalt-busse-bahnen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/nahverkehr-warnstreik-tarif-bus-bahn-110.html",
+            "ls_tokens": 291,
+            "as_tokens": 1000
         },
         {
             "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-gedenkfeier-buchenwald-100.html",
@@ -39,16 +267,118 @@
             "as_tokens": 1950
         },
         {
-            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-mittelbau-dora-gedenken-100.html",
-            "as_url": "https://www.mdr.de/nachrichten/thueringen/nord-thueringen/nordhausen/mittelbau-dora-gedenken-106.html",
-            "ls_tokens": 793,
-            "as_tokens": 594
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-magdeburg-anschlag-prozess-zeugen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/anschlag-weihnachtsmarkt-prozess-verhandlung-zusammenfassung-124.html",
+            "ls_tokens": 357,
+            "as_tokens": 4965
         },
         {
-            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-prozess-magdeburg-zeugen-100.html",
-            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/anschlag-weihnachtsmarkt-prozess-verhandlung-zusammenfassung-124.html",
-            "ls_tokens": 406,
-            "as_tokens": 4965
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-buchmesse-leipzig-absage-krah-100.html",
+            "as_url": "https://www.mdr.de/kultur/buchmesse/absage-veranstaltung-afd-politiker-maximilian-krah-buch-kultur-news-100.html",
+            "ls_tokens": 299,
+            "as_tokens": 396
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-chemnitz-neues-kardiologisches-zentrum-eroeffnet-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/chemnitz-stollberg/kardiologisches-zentrum-klinikum-eroeffnet-100.html",
+            "ls_tokens": 351,
+            "as_tokens": 311
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-tod-pflegeheim-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/chemnitz-stollberg/toetungsdelikt-pflegeheim-polizei-bernsdorf-todesursache-100.html",
+            "ls_tokens": 247,
+            "as_tokens": 194
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-schleusingen-lindenschule-frist-unterricht-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/sued-thueringen/hildburghausen/schleusingen-lindenschule-unterricht-frist-100.html",
+            "ls_tokens": 219,
+            "as_tokens": 240
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-magdeburg-gefaelschte-paketbenachrichtigungen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/polizei-warnung-betrug-karten-108.html",
+            "ls_tokens": 411,
+            "as_tokens": 402
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-fcm-strafe-nach-krawallen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/fcm-ausschreitungen-fanausschluss-geldstrafe-100.html",
+            "ls_tokens": 201,
+            "as_tokens": 298
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-thueringen-was-machen-an-ostern-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/sued-thueringen/schmalkalden-meiningen/osterspaziergang-wandern-ostersonntag-vorbei-100.html",
+            "ls_tokens": 865,
+            "as_tokens": 573
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-neue-s-bahn-flotte-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/burgenland/neue-s-bahn-zuege-mireo-100.html",
+            "ls_tokens": 254,
+            "as_tokens": 250
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-weimar-foerderzentrum-fuer-sehbehinderte-bleibt-bestehen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/blindenschule-diesterweg-schliessung-bildungsminister-100.html",
+            "ls_tokens": 300,
+            "as_tokens": 1049
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-hoffmann-sport-vierschanzentournee-100.html",
+            "as_url": "https://www.mdr.de/sport/andere_sportarten/wintersport-vierschanzentournee-innsbruch-felix-hoffmann-100.html",
+            "ls_tokens": 298,
+            "as_tokens": 540
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-gotha-saniert-bahnhof-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/west-thueringen/gotha/bahnhof-sanierung-foerdermittel-100.html",
+            "ls_tokens": 242,
+            "as_tokens": 360
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-saalekreis-anhalt-querfurt-sirene-heulen-falsch-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/saalekreis/querfurt-sirenen-alarm-ermittlungen-polizei-104.html",
+            "ls_tokens": 248,
+            "as_tokens": 900
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-bernburg-polizeimunition-taucht-wieder-auf-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/salzland/harzer-polizei-findet-munition-wieder-102.html",
+            "ls_tokens": 248,
+            "as_tokens": 292
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-dresden-polizei-gedenken-sicherheitszone-nationalsozialismus-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/sicherheit-schutz-demos-gedenken-allgemeinverfuegung-100.html",
+            "ls_tokens": 729,
+            "as_tokens": 541
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-brand-in-pflegeheim-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/chemnitz-stollberg/brand-feuer-toter-altersheim-senioren-100.html",
+            "ls_tokens": 262,
+            "as_tokens": 524
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-chemnitz-kongresshotel-kuendigt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/chemnitz-stollberg/congress-hotel-kuendigung-arbeitslos-abfindung-100.html",
+            "ls_tokens": 229,
+            "as_tokens": 304
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-attentaeter-magdeburg-hungerstreik-androhung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/fuenfundzwanzigster-prozesstag-anschlag-weihnachtsmarkt-102.html",
+            "ls_tokens": 444,
+            "as_tokens": 462
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-gohrischheide-waldbrand-sachsen-ursache-kampfmittel-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/grossenhain-riesa/waldbrand-ursache-gohrischheide-phosphor-feuerwehr-100.html",
+            "ls_tokens": 607,
+            "as_tokens": 304
         },
         {
             "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-strassenbahn-plauen-100.html",
@@ -57,16 +387,1072 @@
             "as_tokens": 631
         },
         {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-kultur-zwickau-oldtimer-kinofilm-cranach-thueringen-skilift-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/burgenland/naumburger-dom-kunst-film-triegel-cranach-kultur-news-100.html",
+            "ls_tokens": 524,
+            "as_tokens": 1391
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-zugverkehr-leipzig-chemnitz-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/stoerung-zugverkehr-leipzig-chemnitz-ersatzverkehr-100.html",
+            "ls_tokens": 167,
+            "as_tokens": 348
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-urteil-knockout-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/west-thueringen/wartburgkreis/eisenach-knockout-urteile-neonazis-100.html",
+            "ls_tokens": 386,
+            "as_tokens": 666
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sport-olympia-skeleton-medaillen-kreher-100.html",
+            "as_url": "https://www.mdr.de/sport/andere_sportarten/olympische-winterspiele-skeleton-susanne-kreher-jacqueline-pfeifer-100.html",
+            "ls_tokens": 333,
+            "as_tokens": 692
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-moschee-in-erfurt-eroeffnet-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/erfurt/moschee-ahmadiyya-marbach-eroeffnung-100.html",
+            "ls_tokens": 526,
+            "as_tokens": 601
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-erfurt-domplatz-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/erfurt/brand-domplatz-haus-schwelbrand-silvester-100.html",
+            "ls_tokens": 189,
+            "as_tokens": 425
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-afd-will-voigt-stuerzen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/afd-voigt-misstrauens-votum-100.html",
+            "ls_tokens": 547,
+            "as_tokens": 178
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-dresden-prozess-saechsiche-separatisten-hauptverhandlung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/prozess-saechsische-separatisten-gericht-100.html",
+            "ls_tokens": 475,
+            "as_tokens": 982
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-sondervermoegen-des-bundes-infrastruktur-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/sondervermoegen-bund-projekte-100.html",
+            "ls_tokens": 497,
+            "as_tokens": 1147
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-neonazi-attacke-auf-journalisten-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/nord-thueringen/eichsfeld/heise-fretterode-spiegel-tv-angriff-100.html",
+            "ls_tokens": 240,
+            "as_tokens": 718
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-groebener-see-unfall-toter-eise-feuerwehr-warnung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/dessau/wittenberg/graefenhainichen-unfall-toter-eis-groebener-see-feuerwehr-warnt-100.html",
+            "ls_tokens": 274,
+            "as_tokens": 420
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-sachsen-anhalt-geld-fuer-flughaefen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/rettung-millionen-flughafen-leipzig-halle-dresden-100.html",
+            "ls_tokens": 230,
+            "as_tokens": 720
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-kultur-ausflugstipps-fuers-wochenende-100.html",
+            "as_url": "https://www.mdr.de/kultur/ausstellungen/sachsen-aktuelle-ausstellungen-museen-kunst-grafik-350.html",
+            "ls_tokens": 500,
+            "as_tokens": 5924
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-thueringen-risiko-stromausfall-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/stromversorgung-anschlag-berlin-maier-teag-100.html",
+            "ls_tokens": 447,
+            "as_tokens": 597
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-torgau-sachsen-tafel-oeffnung-lebensmittel-wasserschaden-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/delitzsch-eilenburg-torgau/tafel-wiedereroeffnung-wasserschaden-neues-domizil-100.html",
+            "ls_tokens": 193,
+            "as_tokens": 203
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-quattro-polizei-auf-hbf-leipzig-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/hauptbahnhof-gewalt-kriminalitaet-sicherheit-polizei-100.html",
+            "ls_tokens": 234,
+            "as_tokens": 308
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-dresden-protest-buendnis-krieg-gedenken-stadt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/gedenken-krieg-zerstoerung-demos-erinnerung-kultur-100.html",
+            "ls_tokens": 733,
+            "as_tokens": 1228
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-sprit-preise-steigen-wegen-krieg-im-nahen-osten-102.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/wirtschaft/iran-krieg-benzinpreise-spritpreise-oelpreise-gaspreise-erdgas-100.html",
+            "ls_tokens": 692,
+            "as_tokens": 1301
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-satelittenmission-weltraum-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/raumfahrt-satellit-mission-weltall-100.html",
+            "ls_tokens": 377,
+            "as_tokens": 289
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-magdeburg-attentag-prozesstag-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/ticker-anschlag-weihnachtsmarkt-prozess-tag-fuenfzehn-100.html",
+            "ls_tokens": 330,
+            "as_tokens": 2168
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-brocken-rettung-mann-gipfel-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/mann-brocken-gerettet-feuerwehr-104.html",
+            "ls_tokens": 245,
+            "as_tokens": 465
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-kitas-erhalten-mehr-geld-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/landespolitik/landtag-kita-foerderung-stellen-100.html",
+            "ls_tokens": 375,
+            "as_tokens": 372
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-weissensee-runneburg-brand-feuer-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/soemmerda/runneburg-weissensee-brand-feuer-100.html",
+            "ls_tokens": 261,
+            "as_tokens": 485
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-elektroschiff-bleilochtalsperre-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/ost-thueringen/saale-orla/saalburg-elektro-dampfer-ms-gera-bleilochtalsperre-104.html",
+            "ls_tokens": 171,
+            "as_tokens": 740
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-olympia-bob-cortina-medaillen-100.html",
+            "as_url": "https://www.mdr.de/sport/andere_sportarten/olympia-bob-zweier-francesco-friedrich-cortina-dampezzo-100.html",
+            "ls_tokens": 308,
+            "as_tokens": 470
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-luchs-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/mansfeld/luchs-reisst-dutzende-schafe-100.html",
+            "ls_tokens": 203,
+            "as_tokens": 505
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-tarifrunde-gescheitert-neue-streiks-im-nahverkehr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/warnstreik-verdi-nahverkehr-bus-faehre-kirnitzschtalbahn-102.html",
+            "ls_tokens": 633,
+            "as_tokens": 633
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-polizei-computer-problem-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/software-panne-polizei-kritik-100.html",
+            "ls_tokens": 685,
+            "as_tokens": 1374
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-dresden-zoo-rote-pandas-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/panda-zoo-tiere-100.html",
+            "ls_tokens": 293,
+            "as_tokens": 378
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-dresden-csd-als-strassenfest-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/csd-demo-veranstaltung-entscheidung-strassenfest-100.html",
+            "ls_tokens": 713,
+            "as_tokens": 559
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-schulschwaenzer-schulverweigerer-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/schule-schwaenzen-schulverweigerer-bildung-100.html",
+            "ls_tokens": 351,
+            "as_tokens": 503
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-akkuzuege-zwischen-leipzig-und-chemnitz-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/regiobahn-akkuzug-chemnitz-leipzig-100.html",
+            "ls_tokens": 196,
+            "as_tokens": 415
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-kulturnachricht-106.html",
+            "as_url": "https://www.mdr.de/kultur/ausflug-tipps/hainich-quedlinburg-muldental-wohin-am-wochenende-tipps-100.html",
+            "ls_tokens": 647,
+            "as_tokens": 1058
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-frauen-sexualisierte-gewalt-schutz-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/sexualisierte-gewalt-schutz-frauen-hilfe-collien-fernandes-100.html",
+            "ls_tokens": 567,
+            "as_tokens": 1039
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-bad-liebenstein-heilwasser-sprudelt-wieder-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/west-thueringen/wartburgkreis/heilwasser-bad-liebenstein-100.html",
+            "ls_tokens": 325,
+            "as_tokens": 349
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-zugverkehr-ausfaelle-dresden-chemnitz-bruecke-baustelle-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/hauptbahnhof-bahn-umleitung-ausfall-bauarbeiten-102.html",
+            "ls_tokens": 257,
+            "as_tokens": 687
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-neues-wolfspaar-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/arnstadt-ilmkreis/woelfe-kalmberg-rudolstadt-territorium-100.html",
+            "ls_tokens": 245,
+            "as_tokens": 292
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-ddr-zug-testfahrt-svt-goerlitz-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/ddr-zug-absolviert-erste-probefahrt-104.html",
+            "ls_tokens": 203,
+            "as_tokens": 498
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-vw-zwickau-recycling-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/zwickau/vw-krise-zwickau-zukunft-recyclingstrecke-100.html",
+            "ls_tokens": 584,
+            "as_tokens": 1014
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-ice-oberleitung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/dessau/wittenberg/ice-gestrandet-oberleitung-bahn-zuege-umleitung-108.html",
+            "ls_tokens": 234,
+            "as_tokens": 434
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-zeulenroda-grossbrand-feuerwehr-thueringen-deponie-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/ost-thueringen/greiz/brand-muell-deponie-feuerwehr-zeulenroda-102.html",
+            "ls_tokens": 183,
+            "as_tokens": 443
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-sicherheit-bahnverkehr-zuege-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/sicherheit-bahnverkehr-zuege-hueskens-100.html",
+            "ls_tokens": 309,
+            "as_tokens": 392
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-barrierefreie-xxl-rolltreppe-leipzig-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/sanierung-citytunnel-bahn-rolltreppe-barrierefrei-100.html",
+            "ls_tokens": 502,
+            "as_tokens": 428
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-magdeburg-dom-kaiser-knochen-otto-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/gebeine-otto-grosse-dom-magdeburg-authentisch-kultur-news-100.html",
+            "ls_tokens": 248,
+            "as_tokens": 602
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-volleyball-vfb-suhl-pokalsieg-gegen-mtv-mannheim-100.html",
+            "as_url": "https://www.mdr.de/sport/volleyball/nachklapp-laura-berger-volleyball-pokal-finale-vfb-suhl-mtv-stuttgart-100.html",
+            "ls_tokens": 215,
+            "as_tokens": 707
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-eisbrecher-elbe-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/wetter-winter-schnee-glatteis-probleme-schule-ticker-106.html",
+            "ls_tokens": 178,
+            "as_tokens": 4412
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-haseloff-neuwahl-sven-schulze-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/landespolitik/haseloff-ruecktritt-offiziell-100.html",
+            "ls_tokens": 357,
+            "as_tokens": 290
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-fcm-mehr-sicherheit-nach-ausschreitungen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/fcm-statement-konsequenzen-ausschreitungen-dynamo-dresden-102.html",
+            "ls_tokens": 628,
+            "as_tokens": 706
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sport-fussball-magdeburg-dresden-ausschreitungen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/fcm-dynamo-dresden-ausschreitungen-polizei-festnahme100.html",
+            "ls_tokens": 233,
+            "as_tokens": 1176
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-polizeigesetz-entwurf-befugnisse-taser-drohnen-ki-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/polizeigesetz-taser-drohnen-abwehr-kritik-opposition-100.html",
+            "ls_tokens": 359,
+            "as_tokens": 480
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-geld-fuer-kommunen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/sondervermoegen-staedte-gemeinden-investitionen-strassen-schulen-milliarden-102.html",
+            "ls_tokens": 243,
+            "as_tokens": 599
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-warnstreik-schulen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/warnstreik-mehr-gehalt-schulen-gew-102.html",
+            "ls_tokens": 280,
+            "as_tokens": 748
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-kulturnachricht-schamanin-meese-orchideen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/ost-thueringen/jena/ausstellung-wagner-hommage-meese-kunstsammlung-kultur-news-100.html",
+            "ls_tokens": 498,
+            "as_tokens": 922
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-magdeburg-anschlag-prozesstag-fuenfzehn-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/ticker-anschlag-weihnachtsmarkt-prozess-tag-fuenfzehn-100.html",
+            "ls_tokens": 486,
+            "as_tokens": 2168
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-halle-chlor-unfall-gas-neustadt-schwimmbad-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/halle/halle-neustadt-chlorgas-schwimmhalle-102.html",
+            "ls_tokens": 263,
+            "as_tokens": 156
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-storch-stoerche-winterquartier-rueckkehr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/jerichow/storch-stoerche-rueckkehrer-104.html",
+            "ls_tokens": 237,
+            "as_tokens": 396
+        },
+        {
             "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-filmfest-dresden-100.html",
             "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/filmfest-dresden-programm-kino-kurzfilme-kultur-news-100.html",
             "ls_tokens": 332,
             "as_tokens": 811
         },
         {
-            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-gohrischheide-waldbrand-sachsen-ursache-kampfmittel-100.html",
-            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/grossenhain-riesa/waldbrand-ursache-gohrischheide-phosphor-feuerwehr-100.html",
-            "ls_tokens": 607,
-            "as_tokens": 304
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-erfurter-schueler-erinnern-an-ns-opfer-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/erfurt/nationalsozialismus-gedenken-topf-und-soehne-100.html",
+            "ls_tokens": 707,
+            "as_tokens": 1541
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-online-erpressung-nacktbilder-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/sextortion-erpressung-nacktbilder-bilianz-lovescamming-100.html",
+            "ls_tokens": 767,
+            "as_tokens": 892
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-streik-oepnv-blk-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/burgenland/bus-streik-burgenlandkreis-104.html",
+            "ls_tokens": 325,
+            "as_tokens": 548
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-wernigerode-stolpersteine-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/wernigerode-stolperstein-verlegt-euthanasie-opfer-102.html",
+            "ls_tokens": 750,
+            "as_tokens": 836
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-kirche-gegen-afd-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/evangelische-kirche-ekm-gegen-afd-wahlkampf-kultur-news-100.html",
+            "ls_tokens": 337,
+            "as_tokens": 1226
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-streik-oeffentlicher-dienst-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/politik/warnstreik-oeffentlicher-dienst-schulen-kitas-kliniken-104.html",
+            "ls_tokens": 641,
+            "as_tokens": 976
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-streik-dresden-nahverkehr-thueringen-verdi-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/warnstreik-nahverkehr-verdi-dvs-saechsische-schweiz-osterzgebirge-regionalverkehr-102.html",
+            "ls_tokens": 245,
+            "as_tokens": 404
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-tierpark-thale-baeren-winterschlaf-fruehling-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/thale-tierpark-baeren-winterschlaf-beendet-100.html",
+            "ls_tokens": 148,
+            "as_tokens": 296
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-glatteis-unfaelle-gehweg-streupflicht-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/panorama/glatteis-unfaelle-gehweg-streupflicht-nicht-eingehalten-100.html",
+            "ls_tokens": 271,
+            "as_tokens": 1087
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-demos-schueler-wehrpflicht-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/gesellschaft/schulstreik-wehrpflicht-schueler-streik-sachsen-anhalt-thueringen-100.html",
+            "ls_tokens": 739,
+            "as_tokens": 708
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-kultur-ausfluege-am-wochenende-100.html",
+            "as_url": "https://www.mdr.de/kultur/ausflug-tipps/hainich-quedlinburg-muldental-wohin-am-wochenende-tipps-100.html",
+            "ls_tokens": 473,
+            "as_tokens": 1058
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-angriff-polizist-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/halle/hfc-fans-greifen-polizisten-an-100.html",
+            "ls_tokens": 175,
+            "as_tokens": 240
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-hfc-teambus-angezuendet-100.html",
+            "as_url": "https://www.mdr.de/sport/fussball_rl/bus-ausgebrannt-hallescher-fc-frankfurt-100.html",
+            "ls_tokens": 213,
+            "as_tokens": 395
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-drogen-in-spaetis-in-leipzig-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/drogen-handel-spaeti-leipzig-razzia-100.html",
+            "ls_tokens": 327,
+            "as_tokens": 1834
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-dresden-filmfest-keine-barrierefreien-angebote-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/filmfest-dresden-programm-kino-kurzfilme-kultur-news-100.html",
+            "ls_tokens": 346,
+            "as_tokens": 811
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-einschraenkung-zugverkehr-zwickau-dresden-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/bahn-verspaetung-bauarbeiten-ersatzverkehr-fahrplan-100.html",
+            "ls_tokens": 296,
+            "as_tokens": 196
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-altenburg-wieder-in-skat-bundesliga-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/ost-thueringen/altenburg/bundesliga-skatverein-kartenspiel-100.html",
+            "ls_tokens": 358,
+            "as_tokens": 1824
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-altenberg-buergermeister-wahl-barth-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dippoldiswalde-sebnitz/altenberg-buergermeister-wahl-vorzeitig-102.html",
+            "ls_tokens": 223,
+            "as_tokens": 704
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-moegliche-evakuierung-dresden-bombenfund-carolabruecke-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/carolabruecke-blindgaenger-evakuierung-bombe-gefahr-100.html",
+            "ls_tokens": 493,
+            "as_tokens": 581
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-schneeberg-abrafaxe-comic-erzgebirge-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/annaberg-aue-schwarzenberg/abrafaxe-comic-erzgebirge-mosaik-ddr-kultur-news100.html",
+            "ls_tokens": 341,
+            "as_tokens": 820
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-torgau-vermieter-fernwaerme-streit-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/delitzsch-eilenburg-torgau/mieter-heizung-waermeversorgung-streit-vermieter-energierversorger-100.html",
+            "ls_tokens": 429,
+            "as_tokens": 895
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-hochwasserwarnung-bode-ilse-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/wetter-heute-regen-gewitter-fruehling-100.html",
+            "ls_tokens": 669,
+            "as_tokens": 385
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-delitzsch-verseuchtes-grundwasser-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/delitzsch-eilenburg-torgau/grundwasser-gift-verbot-gefahr-schadstoffe-100.html",
+            "ls_tokens": 235,
+            "as_tokens": 472
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-halle-zug-liegengeblieben-vier-stunden-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/halle/bahn-liegen-geblieben-fahrgaeste-sitzen-fest-100.html",
+            "ls_tokens": 195,
+            "as_tokens": 246
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-polarlichter-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/polarlichter-sonne-nachthimmel-100.html",
+            "ls_tokens": 219,
+            "as_tokens": 578
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-prozess-magdeburg-zeugen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/anschlag-weihnachtsmarkt-prozess-verhandlung-zusammenfassung-124.html",
+            "ls_tokens": 406,
+            "as_tokens": 4965
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-haushalt-software-fehler-landesfinanzen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/landespolitik/software-debakel-landtag-ohne-einblick-in-landesfinanzen-102.html",
+            "ls_tokens": 595,
+            "as_tokens": 1125
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-gefahr-vor-eisflaechen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/frost-eisflaechen-gefahr-100.html",
+            "ls_tokens": 696,
+            "as_tokens": 586
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-haseloff-schulze-ministerpraesident-wahl-januar-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/landespolitik/haseloff-ruecktritt-schulze-wechsel-ministerpraesident-cdu-spd-fdp-100.html",
+            "ls_tokens": 464,
+            "as_tokens": 712
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-gefluegelpest-vogelgrippe-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/gefluegelpest-vogelgrippe-ausbruch-zahlen-infektion-100.html",
+            "ls_tokens": 253,
+            "as_tokens": 613
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-streik-geht-weiter-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/politik/verdi-streik-oepnv-nahverkehr-sachsen-anhalt-thueringen-102.html",
+            "ls_tokens": 255,
+            "as_tokens": 630
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-dresden-neustadt-bahnhof-empfangshalle-gesperrt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/bahnhof-neustadt-empfangshalle-gesperrt-einschraenkungen-100.html",
+            "ls_tokens": 252,
+            "as_tokens": 381
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-sanierung-gueterzug-brand-einschraenkungen-bahnverkehr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/politik/bahn-sanierung-hamburg-berlin-100.html",
+            "ls_tokens": 776,
+            "as_tokens": 554
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-naunhof-buergerentscheid-windkraft-abstimmung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/windkraft-buergerentscheid-naunhof-wahl-abstimmung-104.html",
+            "ls_tokens": 183,
+            "as_tokens": 582
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-leipzig-auenwald-baerlauch-polizei-kontrollen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/baerlauch-diebe-diebstahl-auwald-kontrolle-polizei-100.html",
+            "ls_tokens": 435,
+            "as_tokens": 206
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-therme-saniert-muehlhausen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/nord-thueringen/unstrut-hainich/foerdermittel-thueringentherme-sanierung-100.html",
+            "ls_tokens": 289,
+            "as_tokens": 309
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-chemnitz-marx-denkmal-nischel-sanierung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/chemnitz-stollberg/marx-kopf-restaurierung-nischel-denkmal-100.html",
+            "ls_tokens": 347,
+            "as_tokens": 421
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-magdeburg-fcm-dynamo-dresden-ausschreitungen-polizei-ermittlungen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/fcm-dynamo-dresden-ausschreitungen-polizei-festnahme100.html",
+            "ls_tokens": 387,
+            "as_tokens": 1176
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-tarif-abschluss-oeffentlicher-dienst-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/politik/tarifeinigung-beschaeftigte-oeffentlicher-dienst-laender-abschluss-100.html",
+            "ls_tokens": 438,
+            "as_tokens": 838
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-software-panne-weitet-sich-aus-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/politik/software-umstellung-sachsen-anhalt-buerokratie-chaos-bussgelder-100.html",
+            "ls_tokens": 388,
+            "as_tokens": 2024
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-greiz-betrug-ehepaar-verliert-hohe-geldsumme-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/ost-thueringen/greiz/betrug-hohe-geldsumme-polizei-102.html",
+            "ls_tokens": 393,
+            "as_tokens": 288
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-schlaitz-freizeitanlage-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/dessau/dessau-rosslau/muldestausee-freizeitanlage-jugendrat-102.html",
+            "ls_tokens": 544,
+            "as_tokens": 1329
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-verdi-warnstreik-nahverkehr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/warnstreik-nahverkehr-oepnv-102.html",
+            "ls_tokens": 550,
+            "as_tokens": 1259
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-streik-im-nahverkehr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/zwickau/bus-streik-strassenbahn-schuelerverkehr-ausfall-montag-104.html",
+            "ls_tokens": 371,
+            "as_tokens": 1579
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-sturmwarnung-fuer-den-brocken-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/unwetter-wind-sturm-brocken-104.html",
+            "ls_tokens": 405,
+            "as_tokens": 452
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-naturschutz-gebiet-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/sued-thueringen/suhl/wald-naturschutz-baeche-moore-bergwiesen-100.html",
+            "ls_tokens": 187,
+            "as_tokens": 386
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-thueringen-warnstreik-gew-lehrkraefte-schulen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/gewerkschaft-kuendigt-lehrerstreik-an-tarifvertrag-102.html",
+            "ls_tokens": 233,
+            "as_tokens": 200
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-vonovia-prozess-amtsgericht-dresden-mieterverein-klagewelle-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/vonovia-miete-streit-klagen-gericht-100.html",
+            "ls_tokens": 313,
+            "as_tokens": 777
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-sport-fusball-frauen-jena-100.html",
+            "as_url": "https://www.mdr.de/sport/fussball_pokal/dfb-pokal/bericht-dfb-pokal-frauen-fc-carl-zeiss-jena-sc-sand-100.html",
+            "ls_tokens": 259,
+            "as_tokens": 673
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-postauto-unter-zug-geraten-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/sued-thueringen/sonneberg/unfall-regionalzug-postauto-verletzter-104.html",
+            "ls_tokens": 252,
+            "as_tokens": 279
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-rennsteig-neue-schilder-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/sued-thueringen/suhl/rennsteig-beschilderung-wandern-modernisieren-100.html",
+            "ls_tokens": 163,
+            "as_tokens": 266
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-rechenschwaeche-mathematik-beschluss-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/schueler-mathematik-rechenschwaeche-dyskalkulie-102.html",
+            "ls_tokens": 873,
+            "as_tokens": 326
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-musashi-schliessung-leinefelde-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/nord-thueringen/eichsfeld/musashi-sozialplan-auto-zulieferer-entlassungen-100.html",
+            "ls_tokens": 306,
+            "as_tokens": 452
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-regionalliga-auftakt-faellt-wegen-wetter-aus-100.html",
+            "as_url": "https://www.mdr.de/sport/fussball_1bl/regionalliga-absagen-wochenende-spieltag-winter-100.html",
+            "ls_tokens": 269,
+            "as_tokens": 354
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-vetternwirtschaft-afd-kein-sonderparteitag-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/landespolitik/afd-kommission-anstellungen-kein-sonderparteitag-100.html",
+            "ls_tokens": 871,
+            "as_tokens": 248
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-tarifstreit-beigelegt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/nahverkehr-tarifeinigung-warnstreik-arbeitgeber-verdi-100.html",
+            "ls_tokens": 476,
+            "as_tokens": 502
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-handy-verbot-an-grundschulen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/gesellschaft/handy-verbot-grundschule-smartphone-unterricht-100.html",
+            "ls_tokens": 225,
+            "as_tokens": 999
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-leipzig-demos-linke-polizei-strafanzeigen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/connewitz-demo-linke-polizei-straftaten-100.html",
+            "ls_tokens": 755,
+            "as_tokens": 489
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-waldbraende-ostern-lilienstein-niesky-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/freital-pirna/brand-feuerstelle-saechsische-schweiz-elbsandsteingebirge-100.html",
+            "ls_tokens": 363,
+            "as_tokens": 562
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-kommunen-planen-fruehjahrsputz-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/kommunen-planen-fruejahrsputz-aktionen-100.html",
+            "ls_tokens": 223,
+            "as_tokens": 446
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-leipzig-naturkunde-museum-bowling-treff-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/naturkundemuseum-foerderung-umbau-millionen-euro-bowlingtreff-100.html",
+            "ls_tokens": 215,
+            "as_tokens": 512
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-oberhof-weltcups-rodeln-noko-langlauf-100.html",
+            "as_url": "https://www.mdr.de/sport/andere_sportarten/rodeln-em-oberhof-eggert-mueller-unterliegen-wendl-arlt-100.html",
+            "ls_tokens": 205,
+            "as_tokens": 392
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-razzia-menschenhandel-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/panorama/razzia-sachsen-anhalt-thueringen-vietnamesinnen-bordelle-chemnitz-halle-100.html",
+            "ls_tokens": 498,
+            "as_tokens": 469
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-sirene-halle-alarm-cyper-attacke-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/halle/sirenen-alarm-cyberangriff-attacke-lka-halle-102.html",
+            "ls_tokens": 253,
+            "as_tokens": 404
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-erfurt-strassenbahn-sperrung-anger-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/erfurt/strassenbahn-umleitung-evag-anger-domplatz-100.html",
+            "ls_tokens": 185,
+            "as_tokens": 364
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-leipzig-bauen-carbotbeton-klima-carbonbetonwerk-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/carbon-beton-werk-bauen-forschung-100.html",
+            "ls_tokens": 611,
+            "as_tokens": 437
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-buecher-leichte-sprache-inklusion-100.html",
+            "as_url": "https://www.mdr.de/kultur/buchmesse/leipzig-buecher-leichte-einfache-sprache-trend-inklusion-kultur-news-102.html",
+            "ls_tokens": 735,
+            "as_tokens": 1064
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-wochenend-tipps-kultur-halle-goerlitz-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/bautzen/goerlitz-weisswasser-zittau/ausstellung-schatz-goetter-bronzezeit-kaisertrutz-kultur-news-100.html",
+            "ls_tokens": 556,
+            "as_tokens": 1350
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-schamanin-bad-duerrenberg-boerde-kopfschmuck-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/boerde/schamanin-archaeologie-rehgeweih-114.html",
+            "ls_tokens": 581,
+            "as_tokens": 431
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-insolvenz-crimmitschauer-wohnungsgesellschaft-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/zwickau/insolvenz-crimmitschau-wohnunsggesellschaft-100.html",
+            "ls_tokens": 287,
+            "as_tokens": 227
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-waffen-verteidigung-ruestungsmilliarden-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/wirtschaft/ruestung-industrie-osten-chancen-sondervermoegen-100.html",
+            "ls_tokens": 501,
+            "as_tokens": 1584
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-goldmedaille-langenhan-100.html",
+            "as_url": "https://www.mdr.de/sport/andere_sportarten/olympia-rodeln-einzel-maenner-langenhan-100.html",
+            "ls_tokens": 713,
+            "as_tokens": 382
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-streik-mitteldeutschland-dvb-nahverkehr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/warnstreik-verdi-nahverkehr-bus-faehre-kirnitzschtalbahn-102.html",
+            "ls_tokens": 249,
+            "as_tokens": 633
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-erhoehte-ticketpreise-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/bahn-preise-fahrkarte-tickets-teurer-dresden-vvo-vms-100.html",
+            "ls_tokens": 255,
+            "as_tokens": 352
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-soemmerda-klinik-schliessung-brustzentrum-gynaekologie-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/soemmerda/kmg-klinikum-gynaekologie-brustzentrum-schliessen-krankenhausreform-100.html",
+            "ls_tokens": 403,
+            "as_tokens": 324
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-magdeburg-gedenken-bomben-weltkrieg-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/bombardierung-aktionswoche-eine-stadt-fuer-alle-veranstaltungen-kultur-news-100.html",
+            "ls_tokens": 557,
+            "as_tokens": 1039
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-cannabis-im-supermarkt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/quedlinburg-cannabis-samen-netto-kaufen-104.html",
+            "ls_tokens": 221,
+            "as_tokens": 1053
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-kunst-kultur-nashorn-kirche-magdeburg-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/rhinoceros-ausstellung-nashorn-itamar-gov-kultur-news-100.html",
+            "ls_tokens": 221,
+            "as_tokens": 1452
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-harz-klinikum-zuschuss-kreistag-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/harz/harzklinikum-krankenhaus-geld-kreistag-102.html",
+            "ls_tokens": 334,
+            "as_tokens": 398
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-erste-queere-buchmesse-in-magdeburg-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/erste-queere-buchmesse-magdequeer-kultur-news-100.html",
+            "ls_tokens": 285,
+            "as_tokens": 895
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-sachsenforst-waldbrand-saison-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/wetter-fruehling-wochenende-waldbrand-gefahr-102.html",
+            "ls_tokens": 285,
+            "as_tokens": 600
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-wetter-umschwung-glatteis-gefahr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/panorama/glatteis-glaette-unfaelle-schnee-sachsen-anhalt-thueringen-unwetter-warnung-100.html",
+            "ls_tokens": 589,
+            "as_tokens": 1071
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-kulturnachricht-108.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/erfurt/women-in-the-dark-ausstellung-kunst-installation-gewalt-gegen-frauen-kultur-news-100.html",
+            "ls_tokens": 772,
+            "as_tokens": 1302
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-verhinderter-raub-in-dresden-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/polizei-zwinger-einbruch-versuch-cyberangriff-porzellansammlung-100.html",
+            "ls_tokens": 472,
+            "as_tokens": 505
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-magdeburg-strassenbahn-schienen-neu-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/baustelle-innenstadt-verkehr-strassenbahn-106.html",
+            "ls_tokens": 508,
+            "as_tokens": 845
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-schlechte-inklusion-auf-dem-arbeitsmarkt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/wirtschaft/inklusion-arbeitsmarkt-schwerbehinderung-unternehmen-100.html",
+            "ls_tokens": 534,
+            "as_tokens": 1937
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-haushaltsluecke-bildungsticket-preiserhoehung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/politik/bildungsticket-preiserhoehung-haushaltsluecke-100.html",
+            "ls_tokens": 359,
+            "as_tokens": 971
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-armutsgefaehrdung-quote-berechnung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/armut-gefaehrdung-berechnungen-100.html",
+            "ls_tokens": 805,
+            "as_tokens": 663
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-fussball-jena-lok-100.html",
+            "as_url": "https://www.mdr.de/sport/fussball_rl/bericht-regionalliga-nordost-fc-lok-leipzig-fc-carl-zeiss-jena-110.html",
+            "ls_tokens": 414,
+            "as_tokens": 644
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-einfuehrung-e-akte-verschoben-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/elektronische-akte-justiz-einfuehrung-verschoben-100.html",
+            "ls_tokens": 411,
+            "as_tokens": 873
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-halle-roemisches-lager-aken-trabitz-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/halle/archaeologie-roemer-lager-fund-kultur-news-100.html",
+            "ls_tokens": 336,
+            "as_tokens": 1024
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-ausgrabungen-in-weissenfels-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/burgenland/weissenfels-ausgrabungen-neubau-promenade-100.html",
+            "ls_tokens": 206,
+            "as_tokens": 158
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-mittelbau-dora-gedenken-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/nord-thueringen/nordhausen/mittelbau-dora-gedenken-106.html",
+            "ls_tokens": 793,
+            "as_tokens": 594
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-schnee-glaette-wintereinbruch-verkehr-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/winter-wetter-neuschnee-unfaelle-glaette-autobahn-stau-100.html",
+            "ls_tokens": 537,
+            "as_tokens": 631
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-weihnachtsmarkt-attentat-angeklagter-wuetet-im-gerichtssaal-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/prozess-attentaeter-taleb-a-tag-siebzehn-106.html",
+            "ls_tokens": 708,
+            "as_tokens": 1040
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-zugausfaelle-leipzig-chemnitz-doebeln-leinefelde-sangerhausen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/bahn-fahrplan-aenderungen-bauarbeiten-100.html",
+            "ls_tokens": 150,
+            "as_tokens": 245
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-sommer-flugplan-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/leipzig/leipzig-leipzig-land/flughafen-airport-sommerflugplan-urlaub-fluege-102.html",
+            "ls_tokens": 371,
+            "as_tokens": 259
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-wildkatzen-thueringen-rhoen-hauskatze-naturschuetzer-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/wildkatze-verbreitung-nicht-mitnehmen-bund-100.html",
+            "ls_tokens": 235,
+            "as_tokens": 567
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-braende-an-silvester-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/brand-sternstrasse-hasselbachplatz-feuerwehr-106.html",
+            "ls_tokens": 622,
+            "as_tokens": 455
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-sexualisierte-gewalt-im-internet-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/ki-sexualisierte-gewalt-im-internet-alltag-vieler-frauen-102.html",
+            "ls_tokens": 772,
+            "as_tokens": 1463
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-entschaedigung-magdeburg-opfer-anschlag-geld-bund-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/landesverwaltungsamt-entschaedigung-anschlag-weihnachtsmarkt-102.html",
+            "ls_tokens": 405,
+            "as_tokens": 288
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-magdeburg-bahn-einschraenkungen-aufgehoben-brand-guterzug-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/magdeburg/magdeburg/magdeburg-einschraenkungen-bahnverkehr-nach-gueterzugbrand-104.html",
+            "ls_tokens": 200,
+            "as_tokens": 390
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-warnstreik-oepnv-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/warnstreik-nahverkehr-streik-busse-regionalverkehr-100.html",
+            "ls_tokens": 526,
+            "as_tokens": 543
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-laussnitzer-heide-huegelgraeber-entdeckt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/bautzen/bautzen-hoyerswerda-kamenz/ottendorf-okrilla-huegelgrab-schnurkeramik-perlen-100.html",
+            "ls_tokens": 251,
+            "as_tokens": 218
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-erfurt-brand-verbot-von-feuerwerk-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/erfurt/grossbrand-domplatz-silvester-stadt-boellerverbotszone-100.html",
+            "ls_tokens": 189,
+            "as_tokens": 462
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-krankenhaeuser-finanzierung-investitionen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/krankenhaeuser-gesundheit-landtag-investitionen-100.html",
+            "ls_tokens": 243,
+            "as_tokens": 973
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-lufthansa-streik-dresden-leipzig-passagiere-flughafen-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/wirtschaft/lufthansa-streik-fluege-gestrichen-leipzig-halle-dresden-102.html",
+            "ls_tokens": 235,
+            "as_tokens": 616
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-stendal-ns-verbrechen-ausstellung-schueler-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/stendal/stendal/denken-ohne-gelaender-schueler-erinnern-ns-verbrechen-102.html",
+            "ls_tokens": 227,
+            "as_tokens": 1329
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-pflege-azubis-vietnam-altenburg-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/ost-thueringen/altenburg/pflege-azubis-aus-vietnam-neue-perspektiven-100.html",
+            "ls_tokens": 441,
+            "as_tokens": 685
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-lufthansa-streik-flughafen-leipzig-halle-dresden-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/deutschland/politik/lufthansa-streik-flug-ausfaelle-leipzig-dresden-freitag-100.html",
+            "ls_tokens": 309,
+            "as_tokens": 616
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-serie-wohnungseinbrueche-aufgeklaert-wittenberg-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/dessau/wittenberg/serie-von-wohnungseinbruechen-wittenberg-aufgeklaert-106.html",
+            "ls_tokens": 175,
+            "as_tokens": 744
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-kahla-insolvenz-porzellan-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/ost-thueringen/saale-holzland/kahla-porzellan-insolvenz-104.html",
+            "ls_tokens": 193,
+            "as_tokens": 398
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mittel-deutschland-sport-pokal-spiele-am-wochenende-100.html",
+            "as_url": "https://www.mdr.de/sport/fussball_pokal/vorschau-mdr-sport-im-osten-sachsenpokal-fsa-pokal-thueringenpokal-100.html",
+            "ls_tokens": 512,
+            "as_tokens": 1252
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-plagiatsvorwurf-gegen-mario-voigt-mp-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/voigt-doktortitel-aberkannt-100.html",
+            "ls_tokens": 339,
+            "as_tokens": 1195
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-leuna-drei-erweiterung-chemiepark-foerdung-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/halle/saalekreis/merseburg-stadtrat-fuer-erweiterung-chemiepark-leuna-drei-100.html",
+            "ls_tokens": 168,
+            "as_tokens": 574
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-anhalt-zerbst-klinik-in-kommunaler-hand-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen-anhalt/dessau/anhalt/klinik-zerbst-wieder-in-kommunaler-hand-102.html",
+            "ls_tokens": 657,
+            "as_tokens": 436
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thuerinen-fuenf-autos-ausgebrannt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/mitte-thueringen/erfurt/nach-autobrand-in-erfurt-tatverdaechtige-ermittelt-100.html",
+            "ls_tokens": 154,
+            "as_tokens": 199
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-fcm-magdeburg-geldstrafe-pyro-fussball-100.html",
+            "as_url": "https://www.mdr.de/sport/fussball_2bl/fcm-geldstrafe-dfb-100.html",
+            "ls_tokens": 241,
+            "as_tokens": 452
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-thueringen-sachsen-anhalt-luchs-im-harz-angesiedelt-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/thueringen/nord-thueringen/nordhausen/luchs-harz-wieder-angesiedelt-100.html",
+            "ls_tokens": 246,
+            "as_tokens": 318
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-chemnitz-congress-hotel-mitarbeiter-suchen-betreiber-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/chemnitz-stollberg/congress-hotel-mitarbeiter-kaempfen-jobs-100.html",
+            "ls_tokens": 287,
+            "as_tokens": 420
+        },
+        {
+            "ls_url": "https://www.mdr.de/nachrichten-leicht/leichte-sprache-mitteldeutschland-schnee-unfaelle-100.html",
+            "as_url": "https://www.mdr.de/nachrichten/sachsen/chemnitz/annaberg-aue-schwarzenberg/zwoenitz-toedlicher-unfall-glatt-strasse-100.html",
+            "ls_tokens": 635,
+            "as_tokens": 643
         }
     ]
 }
