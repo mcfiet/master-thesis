@@ -12,6 +12,9 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     1.  **Discovery:** Start auf der Übersichtsseite [`mdr.de/nachrichten-leicht/nachrichten-in-leichter-sprache-114.html`](https://www.mdr.de/nachrichten-leicht/nachrichten-in-leichter-sprache-114.html).
     2.  **Link-Extraktion:** Suche nach `div.box.cssArticle` oder `div.box.cssInfoTeaser`. Die Links zu den LS-Artikeln befinden sich in `h4 a.headline`.
     3.  **Alignment (Toborek / Eigene Analyse):** Suche im LS-Artikel nach einem Teaser-Block für die "schwere" Version. Spezifisch nach einem Element mit der Klasse `conHeadline` und dem Text `"Hier können Sie diese Nachricht auch in schwerer Sprache lesen:"`. Der darin liegende Link führt zum AS-Artikel.
+    4.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Um Rauschen (Menüs, Navigation, Footer) zu vermeiden, extrahiert der Scraper gezielt Inhalte aus `div.paragraph` und `p.text`.
+        *   **Token-Zählung:** Erfolgt auf Basis von Whitespace-Splitting des bereinigten Fließtextes. Dies stellt sicher, dass nur der redaktionelle Inhalt in die Statistik einfließt.
 *   **Beispielpaar:**
     *   **AS:** [Prozess Antifa Ost](https://www.mdr.de/nachrichten/sachsen/dresden/dresden-radebeul/prozess-antifa-ost-kronzeuge-linksextremismus-100.html)
     *   **LS:** [Antifa-Prozess in Leichter Sprache](https://www.mdr.de/nachrichten-leicht/leichte-sprache-sachsen-antifa-prozess-100.html)
