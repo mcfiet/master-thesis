@@ -24,9 +24,12 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
 *   **Status:** `Gut geeignet`
 *   **Strategie (Übersicht & Alignment):**
     1.  **Discovery:** Start auf der Übersichtsseite [`taz.de/Politik/Deutschland/Leichte-Sprache/!p5097/`](https://taz.de/Politik/Deutschland/Leichte-Sprache/!p5097/).
-    2.  **Link-Extraktion:** Suche im Bereich `section.module-linklist_article_teaser` nach Artikel-Elementen (`article.article-teaser`). Die Links zu den LS-Artikeln befinden sich im direkten Kind-Element `a.teaser-link`.
-    3.  **Alignment (Toborek / Eigene Analyse):** Die taz platziert den Hinweis auf den Originalartikel oft in einem kursiv gesetzten Absatz (`<em>`) am Ende des Textes. Der Crawler muss im LS-Artikel nach Links innerhalb von `<em>`-Tags suchen, deren Text "aus diesem „schweren“ Text" o.ä. lautet.
-    4.  **Besonderheit (n:m Mapping):** Es gibt LS-Artikel, die Informationen aus mehreren AS-Artikeln zusammenfassen (z. B. „kommen aus diesem, diesem und diesem ‚schweren‘ Text“). Hier muss der Scraper alle verlinkten URLs extrahieren, da ein 1:1 Alignment nicht immer gegeben ist.
+    2.  **Link-Extraktion:** Suche direkt nach Links mit der Klasse `a.teaser-link`, die `Leichte-Sprache` in der URL enthalten. (URLs müssen oft am Semikolon `;` gekürzt werden).
+    3.  **Alignment (Toborek / Eigene Analyse):** Die taz platziert den Hinweis auf den Originalartikel oft am Ende des Textes. Der Crawler sucht nach Links (`<a>`), die den Text `"schweren Text"` (oder ähnlich) enthalten, ODER nach Links, die innerhalb von kursiven Absätzen (`<em>`) liegen.
+    4.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Die taz verwendet oft `p.bodytext`, `p.article` oder legt den Inhalt in `<article itemprop="articleBody">` ab. Diese werden extrahiert und gefiltert (z. B. Ausschluss von Navigation, Footer und Trennlinien wie `──────────────────`).
+        *   **Token-Zählung:** Analog zum MDR erfolgt die Zählung nach Entfernen von HTML-Tags über Whitespace-Splitting.
+    5.  **Besonderheit (n:m Mapping):** Es gibt LS-Artikel, die Informationen aus mehreren AS-Artikeln zusammenfassen (z. B. „kommen aus diesem, diesem und diesem ‚schweren‘ Text“). Hier extrahiert das Skript alle passenden URLs und summiert die Tokens der AS-Artikel.
 *   **Beispielpaar:**
     *   **AS:** [Migrantisches Leben in Dresden](https://taz.de/Migrantisches-Leben-in-Dresden/!5613086/)
     *   **LS:** [Döner aus Dresden](https://taz.de/Leichte-Sprache/!5617312/)
