@@ -46,3 +46,14 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 97.255                  |
 | **Tokens (Alltagssprache)**    | 197.978                 |
 | **Datei** | [`mdr_aligned_urls.json`](../mdr_aligned_urls.json) |
+
+### taz (die tageszeitung)
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 48                      |
+| **Alignierte Paare (LS ↔ AS)** | 7                       |
+| **Nicht-alignierte Artikel**   | 41                      |
+| **Tokens (Leichte Sprache)**   | 4.452                   |
+| **Tokens (Alltagssprache)**    | 8.130                   |
+| **Datei** | [`taz_aligned_urls.json`](../taz_aligned_urls.json) |
