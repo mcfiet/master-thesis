@@ -40,6 +40,10 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     1.  **Discovery:** Da die Original-Übersicht nicht mehr aktiv ist, Nutzung des Wayback-Archivs: [`web.archive.org/.../informationen-leichter-sprache`](https://web.archive.org/web/20220804230818/https://www.stadt-koeln.de/leben-in-koeln/soziales/informationen-leichter-sprache).
     2.  **Link-Extraktion:** Suche in `ul.textteaserliste` nach Links (`li a.linkintern`). Diese führen zu den LS-Artikeln.
     3.  **Alignment (Toborek):** Suche im LS-Artikel nach einem Link, dessen Text exakt `"Diese Seite in Alltags-Sprache lesen"` lautet (Groß-/Kleinschreibung ignorieren).
+    4.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Der Hauptinhalt wird aus dem `<main id="inhalt">`-Element extrahiert. Es werden `p`, `li`, `h2` und `h3` Tags berücksichtigt.
+        *   **Bereinigung:** Meta-Texte (wie der Alignment-Link selbst) und Wayback-Banner werden ignoriert.
+    5.  **Technische Besonderheit (Wayback Machine):** Da archive.org bei hoher Last Verbindungen abbricht (`Connection refused`), muss der Scraper eine **Retry-Logik mit Exponential Backoff** (z. B. 2s, 4s, 8s) und einen höheren Delay zwischen Anfragen (mind. 4s) nutzen.
 *   **Beispielpaar:**
     *   **AS:** [Ausweis-Papiere verloren?](http://www.stadt-koeln.de/leben-in-koeln/soziales/ausweis-papiere-verloren)
     *   **LS:** [Verlust von Ausweispapieren](http://www.stadt-koeln.de/service/produkt/verlust-von-ausweispapieren-1)
