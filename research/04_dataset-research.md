@@ -57,3 +57,14 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 4.452                   |
 | **Tokens (Alltagssprache)**    | 8.130                   |
 | **Datei** | [`taz_aligned_urls.json`](../taz_aligned_urls.json) |
+
+### Stadt Köln
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 95                      |
+| **Alignierte Paare (LS ↔ AS)** | 57                      |
+| **Nicht-alignierte Artikel**   | 38                      |
+| **Tokens (Leichte Sprache)**   | 47.834                  |
+| **Tokens (Alltagssprache)**    | 46.939                  |
+| **Datei** | [`koeln_aligned_urls.json`](../koeln_aligned_urls.json) |
