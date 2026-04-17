@@ -1,4 +1,6 @@
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 import json
 import re
@@ -13,13 +15,28 @@ def count_tokens(text):
     tokens = clean_text.split()
     return len(tokens)
 
+def fetch_with_retry(url, max_retries=3):
+    """Fetches a URL with exponential backoff to handle rate limits/connection drops."""
+    session = requests.Session()
+    retry = Retry(
+        total=max_retries,
+        read=max_retries,
+        connect=max_retries,
+        backoff_factor=2, # 2s, 4s, 8s
+        status_forcelist=[429, 500, 502, 503, 504],
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('http://', adapter)
+    session.mount('https://', adapter)
+    
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+    return session.get(url, headers=headers, timeout=30)
+
 def get_koeln_ls_articles(base_url):
     """Extracts LS article links from the Stadt Koeln overview page (via Wayback Machine)."""
     print(f"Crawling overview page: {base_url}")
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        # Using timeout=30 since Wayback Machine can be slow
-        response = requests.get(base_url, timeout=30, headers=headers)
+        response = fetch_with_retry(base_url)
         response.raise_for_status()
     except Exception as e:
         print(f"Error fetching overview: {e}")
@@ -35,7 +52,6 @@ def get_koeln_ls_articles(base_url):
         for link in links:
             href = link.get('href')
             if href:
-                # Resolve relative wayback machine links
                 full_url = urljoin("https://web.archive.org", href)
                 ls_links.append(full_url)
     
@@ -43,18 +59,14 @@ def get_koeln_ls_articles(base_url):
 
 def extract_koeln_content(soup):
     """Extracts clean article content from a Stadt Koeln page."""
-    # Main content is inside <main id="inhalt">
     main_content = soup.find('main', id='inhalt')
     
     texts = []
     if main_content:
-        # Get paragraphs and list items
         content_tags = main_content.find_all(['p', 'li', 'h2', 'h3'])
         for tag in content_tags:
-            # Skip if it's a link to the AS version to avoid counting meta text
             if "Alltags-Sprache lesen" in tag.get_text():
                 continue
-            # Skip wayback machine injected banners or UI elements if any
             if tag.find_parent(id='wm-ipp-base'):
                 continue
                 
@@ -67,8 +79,7 @@ def extract_koeln_content(soup):
 def extract_as_link_and_content(ls_url):
     """Finds the AS link within an LS article and extracts content."""
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        response = requests.get(ls_url, timeout=30, headers=headers)
+        response = fetch_with_retry(ls_url)
         response.raise_for_status()
     except Exception as e:
         print(f"Error fetching LS article {ls_url}: {e}")
@@ -76,12 +87,9 @@ def extract_as_link_and_content(ls_url):
 
     soup = BeautifulSoup(response.text, 'html.parser')
     
-    # 1. Extract LS content
     ls_text = extract_koeln_content(soup)
     ls_tokens = count_tokens(ls_text)
 
-    # 2. Find AS link
-    # Look for a link whose text contains "Diese Seite in Alltags-Sprache lesen"
     as_link = None
     for a in soup.find_all('a', href=True):
         if "alltags-sprache lesen" in a.get_text().lower():
@@ -96,8 +104,7 @@ def get_as_article_data(as_url):
     if not as_url:
         return 0, ""
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        response = requests.get(as_url, timeout=30, headers=headers)
+        response = fetch_with_retry(as_url)
         response.raise_for_status()
     except Exception as e:
         print(f"Error fetching AS article {as_url}: {e}")
@@ -144,8 +151,8 @@ def main():
             unaligned_count += 1
             print(f"No AS link found for: {ls_url}")
         
-        # Respectful scraping (Wayback Machine needs more delay to prevent blocks)
-        time.sleep(2)
+        # Increased delay significantly to avoid Wayback Machine bans
+        time.sleep(4)
 
     results = {
         "summary": {
