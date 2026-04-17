@@ -33,3 +33,16 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
   - [Link (Verlag/Projekt)](https://www.frank-timme.de/de/programm/produkt/leichte-sprache-im-arbeitsleben)
 - **Jach [36] (KED)**: Umfangreiche Sammlung (Korpus Einfaches Deutsch), eher monolingual/vergleichbar als strikt parallel.
   - [Link (Projektseite)](https://korpus-einfaches-deutsch.de/)
+
+## Scraping Reports
+
+### MDR (Mitteldeutscher Rundfunk)
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 298                     |
+| **Alignierte Paare (LS ↔ AS)** | 242                     |
+| **Nicht-alignierte Artikel**   | 56                      |
+| **Tokens (Leichte Sprache)**   | 97.255                  |
+| **Tokens (Alltagssprache)**    | 197.978                 |
+| **Datei** | [`mdr_aligned_urls.json`](../mdr_aligned_urls.json) |
