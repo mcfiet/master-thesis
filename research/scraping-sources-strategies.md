@@ -55,7 +55,10 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
         *   Start auf der Übersichtsseite [`apotheken-umschau.de/einfache-sprache/`](https://www.apotheken-umschau.de/einfache-sprache/).
         *   Extrahiere alle Rubriken-Links (z.B. `/einfache-sprache/krankheiten/`, `/einfache-sprache/medikamente-heilpflanzen/`), typischerweise aus Elementen wie `a.stretched-link` in den Themenkacheln.
         *   Navigiere in diese Unterseiten und extrahiere dort die Links zu den einzelnen Artikeln, die auf `.html` enden (z.B. `href="/einfache-sprache/krankheiten/adipositas-769803.html"`).
-    2.  **Alignment (Toborek):** Suche in jedem LS-Artikel nach einem Link, der das Wort `"hier"` im `title`-Attribut trägt. Dieser Link führt zur Standard-Version.
+    2.  **Alignment (Flexible Suche):** Suche in jedem LS-Artikel nach einem Link, der auf einen Artikel *außerhalb* des `/einfache-sprache/`-Verzeichnisses verweist. Der Link muss das Wort `"hier"` ODER `"informationen"` im `title`-Attribut tragen (z.B. `"mehr Informationen über die Krankheit"`).
+    3.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Fließtext befindet sich in `<article>` oder `<div class="article-body">`. Extrahiert werden die Tags `p` (oft als `p.text`), `h2`, `h3` und `li`.
+        *   **Bereinigung:** Navigations-Elemente, Inhaltsverzeichnisse (`.article-chapter`) und Meta-Hinweise (wie "Dieser Link führt aus unserem Angebot heraus") werden strikt herausgefiltert.
 *   **Beispielpaar:**
     *   **AS:** [Verhütung: Die Pille](https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetung-die-pille-707733.html)
     *   **LS:** [Pille](https://www.apotheken-umschau.de/einfache-sprache/verhuetung/pille-805349.html)
