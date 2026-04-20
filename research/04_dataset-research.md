@@ -123,3 +123,14 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 84.829                  |
 | **Tokens (Alltagssprache)**    | 131.199                 |
 | **Datei** | [`hamburg_aligned_urls.json`](../hamburg_aligned_urls.json) |
+
+### Brand Eins
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 90                      |
+| **Alignierte Paare (LS ↔ AS)** | 34                      |
+| **Nicht-alignierte Artikel**   | 56                      |
+| **Tokens (Leichte Sprache)**   | 7.837                   |
+| **Tokens (Alltagssprache)**    | 5.400                   |
+| **Datei** | [`brandeins_aligned_urls.json`](../brandeins_aligned_urls.json) |
