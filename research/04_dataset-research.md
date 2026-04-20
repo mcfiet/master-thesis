@@ -79,3 +79,14 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 131.655                 |
 | **Tokens (Alltagssprache)**    | 227.266                 |
 | **Datei** | [`apotheken_aligned_urls.json`](../apotheken_aligned_urls.json) |
+
+### Der Behindertenbeauftragte
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 95                      |
+| **Alignierte Paare (LS ↔ AS)** | 73                      |
+| **Nicht-alignierte Artikel**   | 22                      |
+| **Tokens (Leichte Sprache)**   | 22.580                  |
+| **Tokens (Alltagssprache)**    | 36.453                  |
+| **Datei** | [`behindertenbeauftragter_aligned_urls.json`](../behindertenbeauftragter_aligned_urls.json) |
