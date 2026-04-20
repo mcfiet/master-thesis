@@ -101,3 +101,14 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 7.048                   |
 | **Tokens (Alltagssprache)**    | 14.295                  |
 | **Datei** | [`sozialpolitik_aligned_urls.json`](../sozialpolitik_aligned_urls.json) |
+
+### Lebenshilfe Main-Taunus
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 59                      |
+| **Alignierte Paare (LS ↔ AS)** | 46                      |
+| **Nicht-alignierte Artikel**   | 13                      |
+| **Tokens (Leichte Sprache)**   | 8.050                   |
+| **Tokens (Alltagssprache)**    | 9.243                   |
+| **Datei** | [`main_taunus_aligned_urls.json`](../main_taunus_aligned_urls.json) |
