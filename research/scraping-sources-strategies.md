@@ -91,8 +91,12 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
 ### ✅ Lebenshilfe Main-Taunus
 *   **Status:** `Gut geeignet` (Achtung: oft Einfache Sprache, nicht zwingend zertifizierte Leichte Sprache)
 *   **Strategie (Übersicht & Alignment):**
-    1.  **Discovery:** Da die Hauptseite ins Archiv gewandert ist, nutze die "Inhalt"-Seite (Sitemap) in der Wayback-Machine: [`web.archive.org/.../lebenshilfe-main-taunus.de/ls/inhalt/`](https://web.archive.org/web/20200926190423/https://www.lebenshilfe-main-taunus.de/ls/inhalt/). Diese Seite listet alle verfügbaren `/ls/`-Links auf.
-    2.  **Alignment (Toborek):** Suche im HTML (meist im Bereich `mod_menue_top` oder bei den Bedienelementen) nach einem Link mit dem Titel `"Auf Alltags-Sprache umstellen"`. Dieser führt zur Standard-Version.
+    1.  **Discovery:** Da die Hauptseite ins Archiv gewandert ist, nutze die "Inhalt"-Seite (Sitemap) in der Wayback-Machine: [`web.archive.org/.../lebenshilfe-main-taunus.de/ls/inhalt/`](https://web.archive.org/web/20200926190423/https://www.lebenshilfe-main-taunus.de/ls/inhalt/). Diese Seite listet alle verfügbaren `/ls/`-Links auf. Administrative Seiten (z.B. Impressum, Kontakt) sollten ausgeschlossen werden.
+    2.  **Alignment (Toborek):** Suche im HTML nach einem Link mit dem Attribut `title="Auf Alltags-Sprache umstellen"`. Dieser führt zur Standard-Version.
+    3.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Der Hauptinhalt der Artikel befindet sich innerhalb von `<div class="inhalt">`. Es werden `p`, `li`, `h1`, `h2` und `h3` extrahiert.
+        *   **Bereinigung:** Navigationsleisten (`nav`) und Sidebars (`#sidebar`) werden ignoriert. Typografische Artefakte der alten Website, wie gehäufte geschützte Leerzeichen (`\xa0`), werden durch normale Leerzeichen ersetzt.
+    4.  **Technische Besonderheit (Wayback Machine):** Da die Seite komplett über archive.org gescrapt wird und diese restriktive Rate-Limits hat, ist eine starke Fehlerbehandlung zwingend erforderlich (z.B. 5 Retries, Exponentieller Backoff mit Faktor 2, und mindestens 5 Sekunden Pause zwischen den Artikelaufrufen), um `Connection refused` Fehler zu minimieren.
 *   **Beispielpaar:**
     *   **AS:** [Bücherei](https://www.lebenshilfe-main-taunus.de/buecherei-74.html)
     *   **LS:** [Bücherei (LS)](https://www.lebenshilfe-main-taunus.de/ls/buecherei-74.html)
