@@ -68,3 +68,14 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 47.834                  |
 | **Tokens (Alltagssprache)**    | 46.939                  |
 | **Datei** | [`koeln_aligned_urls.json`](../koeln_aligned_urls.json) |
+
+### Apotheken Umschau
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 484                     |
+| **Alignierte Paare (LS ↔ AS)** | 161                     |
+| **Nicht-alignierte Artikel**   | 323                     |
+| **Tokens (Leichte Sprache)**   | 131.655                 |
+| **Tokens (Alltagssprache)**    | 227.266                 |
+| **Datei** | [`apotheken_aligned_urls.json`](../apotheken_aligned_urls.json) |
