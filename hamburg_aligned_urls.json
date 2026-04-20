@@ -1,0 +1,943 @@
+{
+    "summary": {
+        "total_ls_articles_scanned": 156,
+        "aligned_pairs_count": 155,
+        "unaligned_articles_count": 1,
+        "total_ls_tokens": 84829,
+        "total_as_tokens": 131199,
+        "average_ls_tokens": 547.2838709677419,
+        "average_as_tokens": 846.4451612903226
+    },
+    "pairs": [
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/kindergesundheit-576382",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/themen/gesundheit/kinder-jugend-gesundheitsdienst-64382",
+            "ls_tokens": 821,
+            "as_tokens": 738
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/pflege-stuetz-punkt-bergedorf-1144248",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/bergedorf/themen/soziales/pflegestuetzpunkt-56364",
+            "ls_tokens": 228,
+            "as_tokens": 162
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/gesundheit/pflege-stuetz-punkte-575966",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/pflege/beratung/pflegestuetzpunkte/pflegestuetzpunkte-hamburg-85942",
+            "ls_tokens": 594,
+            "as_tokens": 308
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/erziehungsberatung-leichte-sprache-575914",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/themen/familie-jugend-senior-innen/eltern/erziehungsberatung-36408",
+            "ls_tokens": 507,
+            "as_tokens": 314
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/beratungsstelle-menschen-mit-koerper-behinderung-bergedorf-1144740",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/bergedorf/themen/soziales/beratungsstelle-koerperbehinderte-56362",
+            "ls_tokens": 557,
+            "as_tokens": 313
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-infos-zur-muell-trennung-576350",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 1329,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/sturmflut-wasser-576270",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 295,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/landungsbruecken-575858",
+            "as_url": "https://www.hamburg.de/tourismus/sehenswuerdigkeiten/landungsbruecken-artikel-298738",
+            "ls_tokens": 419,
+            "as_tokens": 515
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/neuigkeiten/20260409-ls-reise-buegermeister-1163438",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/senatskanzlei/aktuelles/pressemeldungen/buergermeister-tschentscher-und-ministerpraesident-guenther-besuchen-polen-und-das-baltikum-1163380",
+            "ls_tokens": 419,
+            "as_tokens": 972
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/leichte-sprache-frisches-wasser-576404",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 255,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/pflege-stuetz-punkt-wandsbek-575918",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/wandsbek/themen/soziales/pflegestuetzpunkt-77634",
+            "ls_tokens": 370,
+            "as_tokens": 213
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-zigarettenkippen-entsorgen-576358",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 310,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/verkaufsoffene-sonntage-hamburg-el-576000",
+            "as_url": "https://www.hamburg.de/freizeit/shopping/verkaufsoffene-sonntage-hamburg-321768",
+            "ls_tokens": 190,
+            "as_tokens": 255
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/flughafen-barrierefreies-reisen-576420",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/schlichtungsstelle-behinderung/infos-zum-gesetz-43316",
+            "ls_tokens": 258,
+            "as_tokens": 121
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/geheimtipps-el-576458",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 685,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/ls-freiwillig-helfen-in-hamburg-576410",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/soziales/obdachlosigkeit/soziale-beratungsstellen-42902",
+            "ls_tokens": 139,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/bezirksversammlung-harburg-1133984",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/bezirksversammlung/bezirksversammlung-63912",
+            "ls_tokens": 344,
+            "as_tokens": 152
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/oeffentliche-rechtsauskunft-576260",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/soziales/obdachlosigkeit/soziale-beratungsstellen-42902",
+            "ls_tokens": 547,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-infos-bio-abfall-576348",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 778,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/wohnen/allgemeine-wohnungsangelegenheiten-el-575500",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/mitte/themen/soziales/wohnberechtigungsschein-67884",
+            "ls_tokens": 120,
+            "as_tokens": 542
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/schul-zahn-aerztlicher-dienst-575912",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/bergedorf/themen/gesundheit/schulzahnarzt-56606",
+            "ls_tokens": 267,
+            "as_tokens": 228
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/bussgeld-und-verwarnung-576266",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 1132,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-freie-fahrt-fuer-die-feuerwehr-576310",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 324,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/schoeffen-bei-gericht-575928",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bjv/services/schoeffen-215578",
+            "ls_tokens": 325,
+            "as_tokens": 223
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-geschichte-vom-hamburger-rathaus-575832",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/osterbotschaft-des-ersten-buergermeister-peter-tschentscher-1162320",
+            "ls_tokens": 939,
+            "as_tokens": 111
+        },
+        {
+            "ls_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bwfg/einrichtungen/hamburgisches-krebsregister/infos-ueber-menschen-mit-krebs-sammeln-1030538",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bwfg/einrichtungen/hamburgisches-krebsregister/informationen-patienten-196606",
+            "ls_tokens": 995,
+            "as_tokens": 431
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/familie/ls-die-kinder-vorsorge-untersuchung-576446",
+            "as_url": "https://www.hamburg.de/service/schwangerschaft-und-geburt/checkliste-schwangerschaft-und-geburt-1021688",
+            "ls_tokens": 385,
+            "as_tokens": 455
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/info-steuer-erklaerung-576394",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 441,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/bussgeldstelle-576264",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 606,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/gesundheit/infos-ueber-demenz-576448",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bsfb/familie/kinderbetreuung/krankheitssymptome-35072",
+            "ls_tokens": 568,
+            "as_tokens": 310
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/hintergrund-infos-575956",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/schlichtungsstelle-behinderung/infos-zum-gesetz-43316",
+            "ls_tokens": 211,
+            "as_tokens": 121
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-2026-01-01-neujahrsempfang-1130926",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/500-hamburgerinnen-und-hamburger-ueberbringen-gruesse-zum-neuen-jahr-1130612",
+            "ls_tokens": 162,
+            "as_tokens": 659
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/2025-11-25-bundeskanzler-merz-besucht-hamburg-1121028",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/antrittsbesuch-von-bundeskanzler-merz-1120634",
+            "ls_tokens": 282,
+            "as_tokens": 382
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-betrug-der-schock-anruf-576316",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 421,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/ls-gutes-verhalten-im-strassen-verkehr-576428",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 419,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/die-rechte-von-opfern-von-gewalt-576300",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 421,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/buergersaal-wandsbek-575834",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/wandsbek/ihr-bezirksamt/barrierefrei-75148",
+            "ls_tokens": 369,
+            "as_tokens": 227
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/der-reise-pass-576370",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 683,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/wohnen/laerm-schutz-576338",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/grundsteinlegung-fuer-das-moosrosenquartier-nord-in-bramfeld-sued-1104304",
+            "ls_tokens": 1020,
+            "as_tokens": 385
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-energie-sparen-mieter-576344",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 540,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/familie/guter-start-kinder-575970",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/gesundheit/gesundheitsfoerderung/kindergesundheit/guter-start-33646",
+            "ls_tokens": 253,
+            "as_tokens": 186
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/ls-hilfe-fuer-opfer-von-gewalt-576406",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/soziales/obdachlosigkeit/soziale-beratungsstellen-42902",
+            "ls_tokens": 1021,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-tipps-bei-hochwasser-1057898",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/hochwasser-946796",
+            "ls_tokens": 2345,
+            "as_tokens": 1210
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/stadt-rad-576426",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 382,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-trinkwasser-ist-kostbar-1004728",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/wasser/grundwasser/wassersparen/wertvoll-unser-trinkwasser-176418",
+            "ls_tokens": 455,
+            "as_tokens": 381
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/sturmflut-infos-576268",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/behoerde-fuer-inneres-und-sport/themen/katastrophenschutz/sturmflut-fragen-und-anworten-94034",
+            "ls_tokens": 604,
+            "as_tokens": 1589
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/pflege-stuetz-punkt-mitte-575910",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/mitte/themen/gesundheit/pflegestuetzpunkt-67526",
+            "ls_tokens": 349,
+            "as_tokens": 225
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/ls-naturschutzgebiete-575848",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/naturschutz-knigge-282398",
+            "ls_tokens": 212,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/schulaerztlicher-dienst-altona-1070832",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/altona/themen/gesundheit/schulaerztlicher-dienst-51572",
+            "ls_tokens": 334,
+            "as_tokens": 164
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/fussgaenger-575946",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussgaengerleitsystem-414328",
+            "ls_tokens": 312,
+            "as_tokens": 240
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-betrug-der-enkel-trick-576314",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 527,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/die-elbphilharmonie-576220",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 666,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/regeln-in-parks-575852",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/park-knigge-282402",
+            "ls_tokens": 294,
+            "as_tokens": 351
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/sturmflut-schutz-576272",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 331,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/hamburger-wasser-el-575502",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 214,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-alte-medikamente-gehoeren-in-den-rest-muell-575900",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/abfall-entsorgung/siedlungsabfaelle/altmedikamente-159982",
+            "ls_tokens": 780,
+            "as_tokens": 307
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/planten-un-blomen-576226",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 636,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/ls-behindertenparkplaetze-575948",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/mobilitaet/behindertenparkplaetze-31264",
+            "ls_tokens": 271,
+            "as_tokens": 138
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/der-personal-ausweis-576362",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 867,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/das-modell-von-der-stadt-hamburg-576248",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 430,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/steuern-arbeitnehmer-unternehmen-576392",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 374,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/ls-annemarie-dose-preis-576412",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/soziales/obdachlosigkeit/soziale-beratungsstellen-42902",
+            "ls_tokens": 474,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-falsche-gewinnversprechen-576312",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 228,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/energie-spar-beratung-575898",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/energie/beratung-und-foerderung/stromspar-check-158188",
+            "ls_tokens": 303,
+            "as_tokens": 406
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/ls-regeln-auf-dem-wasser-575850",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/wasser-knigge-282406",
+            "ls_tokens": 478,
+            "as_tokens": 509
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/die-polizei-hilft-opfern-von-gewalt-576298",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 278,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/neuigkeiten/2026-04-14-ls-vielfalts-wochen-in-altona-1164238",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/altona/aktuelles/pressemitteilungen/altonaer-vielfaltswochen-2026-teilnahme-1164120",
+            "ls_tokens": 319,
+            "as_tokens": 224
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/infos-finanzamt-steuern-575922",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/faq-207490",
+            "ls_tokens": 183,
+            "as_tokens": 2689
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/rede-sportgala-2026-auszug-1147848",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/senat/reden-und-dokumente/2026-02-17-hamburger-sportgala-2026-1147126",
+            "ls_tokens": 498,
+            "as_tokens": 1045
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/zurueck-ins-leben-nach-dem-gefaengnis-575930",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bjv/themen/justizvollzug/resozialisierung-214978",
+            "ls_tokens": 901,
+            "as_tokens": 815
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/justiz-kasse-hamburg-575932",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bjv/services/justizkasse-215516",
+            "ls_tokens": 278,
+            "as_tokens": 118
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/wohnen/laerm-schutz-beim-sport-576342",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/grundsteinlegung-fuer-das-moosrosenquartier-nord-in-bramfeld-sued-1104304",
+            "ls_tokens": 403,
+            "as_tokens": 385
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/die-messe-hamburg-576174",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/osterbotschaft-des-ersten-buergermeister-peter-tschentscher-1162320",
+            "ls_tokens": 217,
+            "as_tokens": 111
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/neuigkeiten/2026-04-09-ls-rueckkehr-der-alsterschwaene-verzoegert-sich-1163448",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/hamburg-nord/aktuelles/rueckkehr-der-alsterschwaene-verzoegert-sich-2026-1163272",
+            "ls_tokens": 210,
+            "as_tokens": 139
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/hamburg-und-die-elbe-576246",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 484,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/oeffentliche-rechtsauskunft-576262",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/soziales/obdachlosigkeit/soziale-beratungsstellen-42902",
+            "ls_tokens": 461,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/die-bezirksversammlung-576182",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/bezirksversammlung/bezirksversammlung-63912",
+            "ls_tokens": 321,
+            "as_tokens": 152
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/besucher-jva-billwerder-575934",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bjv/themen/justizvollzug/justizvollzugsanstalten/jva-billwerder/informationen-und-kontakt-214876",
+            "ls_tokens": 1244,
+            "as_tokens": 146
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/ls-schwerbehinderten-ausweis-merk-zeichen-575938",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/anerkennung/schwerbehindertenausweis/schwerbehindertenausweis-22870",
+            "ls_tokens": 690,
+            "as_tokens": 1583
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-termine-beim-hamburg-service-1004778",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 605,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-starkregen-1019916",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 2338,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/gesundheit/der-arzt-ruf-in-hamburg-575964",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/gesundheit/arztruf-hamburg-32384",
+            "ls_tokens": 460,
+            "as_tokens": 125
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-die-geschichte-der-polizei-in-hamburg-576308",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 658,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/ls-politik-im-hamburger-rathaus-576186",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/bezirksversammlung/bezirksversammlung-63912",
+            "ls_tokens": 156,
+            "as_tokens": 152
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/hvv-online-shop-el-576022",
+            "as_url": "https://www.hamburg.de/verkehr/hvv/hvv-online-shop-410924",
+            "ls_tokens": 234,
+            "as_tokens": 162
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-besondere-orte-und-dinge-im-rathaus-576200",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/osterbotschaft-des-ersten-buergermeister-peter-tschentscher-1162320",
+            "ls_tokens": 801,
+            "as_tokens": 111
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/rathausfuehrung-576210",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/senat/rathaus-hamburg/rathausfuehrungen-237546",
+            "ls_tokens": 648,
+            "as_tokens": 962
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-rede-buergermeister-tschentscher-hsc-1065996",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/senat/reden-und-dokumente/2025-06-02-eroeffnung-hamburg-sustainability-conference-1065970",
+            "ls_tokens": 632,
+            "as_tokens": 485
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/familie/ganz-tags-schule-576328",
+            "as_url": "https://www.hamburg.de/service/schwangerschaft-und-geburt/checkliste-schwangerschaft-und-geburt-1021688",
+            "ls_tokens": 271,
+            "as_tokens": 455
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/ls-zu-fuss-gehen-1050284",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 213,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/u5-artikel-el-576438",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 609,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-matthiae-mahl-2026-1153666",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/senat/rathaus-hamburg/matthiae-mahl/matthiae-mahl-2026-1151332",
+            "ls_tokens": 912,
+            "as_tokens": 1566
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/der-hamburger-michel-576234",
+            "as_url": "https://www.hamburg.de/tourismus/sehenswuerdigkeiten/michel-hamburg-306340",
+            "ls_tokens": 1285,
+            "as_tokens": 1354
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/schul-zahn-aerztlicher-dienst-altona-1071746",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/altona/themen/gesundheit/schulzahnaerztlicher-dienst-51582",
+            "ls_tokens": 856,
+            "as_tokens": 472
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/so-gehen-sie-gut-mit-lebensmitteln-um-575894",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bjv/themen/verbraucherschutz/lebensmittel/lebensmittelverschwendung-88828",
+            "ls_tokens": 565,
+            "as_tokens": 435
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/freiwilliges-engagement-bergedorf-1145306",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/bergedorf/themen/soziales/freiwilliges-engagement-44222",
+            "ls_tokens": 956,
+            "as_tokens": 438
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-beratung-von-der-polizei-in-hamburg-576318",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 434,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-rauch-melder-retten-leben-576280",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 192,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-tipps-bei-hitze-1066810",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/hitze-946798",
+            "ls_tokens": 2031,
+            "as_tokens": 1139
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/wohnen/laerm-schutz-nachbarschaft-576340",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/luft-laerm-elektromagnetische-felder/nachbarschaft-164004",
+            "ls_tokens": 946,
+            "as_tokens": 1016
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-hamburg-service-1004756",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 237,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/wohnen/wohn-geld-von-der-stadt-hamburg-575870",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/grundsteinlegung-fuer-das-moosrosenquartier-nord-in-bramfeld-sued-1104304",
+            "ls_tokens": 305,
+            "as_tokens": 385
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/wohnen/wohn-raum-schutz-gesetz-hamburg-575876",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/behoerde-fuer-stadtentwicklung-und-wohnen/themen/wohnen/wohnraumschutz/hmbwoschg-190974",
+            "ls_tokens": 323,
+            "as_tokens": 153
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/informationen-fuer-besucher-576396",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/soziales/obdachlosigkeit/soziale-beratungsstellen-42902",
+            "ls_tokens": 906,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/soziale-integration-576388",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/themen/soziales/integration/harburger-integrationskonzept-64842",
+            "ls_tokens": 259,
+            "as_tokens": 226
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/2025-05-21-ls-regierungserklaerung-buergermeister-1061642",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/senat/reden-und-dokumente/2025-05-13-senatsempfang-mediendialog-hamburg-1061440",
+            "ls_tokens": 1591,
+            "as_tokens": 3250
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-tipps-bei-duerre-1057882",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/duerre-946800",
+            "ls_tokens": 1454,
+            "as_tokens": 772
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-der-senat-576194",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/senat/senat-236762",
+            "ls_tokens": 193,
+            "as_tokens": 235
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/hamburger-deckel-575944",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 453,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/muetter-beratung-576360",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/soziales/obdachlosigkeit/soziale-beratungsstellen-42902",
+            "ls_tokens": 210,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/senats-koordinatorin-fuer-gleichstellung-576418",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/schlichtungsstelle-behinderung/infos-zum-gesetz-43316",
+            "ls_tokens": 279,
+            "as_tokens": 121
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/senats-koordinatorin-fuer-die-gleichstellung-von-menschen-mit-behinderungen-576414",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/schlichtungsstelle-behinderung/infos-zum-gesetz-43316",
+            "ls_tokens": 538,
+            "as_tokens": 121
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/sturmflut-576274",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/behoerde-fuer-inneres-und-sport/themen/katastrophenschutz/sturmflut-massnahmen-93280",
+            "ls_tokens": 745,
+            "as_tokens": 551
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/startseite-575952",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/schlichtungsstelle-behinderung/start-43312",
+            "ls_tokens": 899,
+            "as_tokens": 508
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/ls-sicherheit-beim-fahrrad-fahren-576434",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 391,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/familie/ferien-betreuung-in-der-schule-575888",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bsfb/themen/ganztag/ferienbetreuung-141126",
+            "ls_tokens": 341,
+            "as_tokens": 194
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-fragen-und-antworten-neue-grundsteuer-1091686",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/grundsteuer/fragen-und-antworten-zur-neuen-grundsteuer-969932",
+            "ls_tokens": 1421,
+            "as_tokens": 2686
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/leben-und-arbeiten-in-hamburg-576218",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 451,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/ls-notfall-seelsorge-in-hamburg-576276",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 555,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/kinderschutz-576386",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/themen/familie-jugend-senior-innen/kinderschutz-64022",
+            "ls_tokens": 332,
+            "as_tokens": 380
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/so-finden-sie-eine-loesung-575954",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/schlichtungsstelle-behinderung/details-zum-verfahren-43314",
+            "ls_tokens": 357,
+            "as_tokens": 189
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/gesundheit/schluss-mit-dem-rauchen-575978",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/gesundheit/gesundheitsfoerderung/nichtrauchen/schluss-mit-dem-rauchen-33740",
+            "ls_tokens": 507,
+            "as_tokens": 595
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/wohnen/ls-saga-baut-moosrosen-quartier-1105658",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/grundsteinlegung-fuer-das-moosrosenquartier-nord-in-bramfeld-sued-1104304",
+            "ls_tokens": 234,
+            "as_tokens": 385
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/der-hafen-geburtstag-575868",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 294,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/beratung-fuer-verbraucher-in-hamburg-575968",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bjv/themen/verbraucherschutz/kundenschutz/kontakt-beratung-88526",
+            "ls_tokens": 763,
+            "as_tokens": 242
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/familie/die-einschulung-575886",
+            "as_url": "https://www.hamburg.de/service/schwangerschaft-und-geburt/checkliste-schwangerschaft-und-geburt-1021688",
+            "ls_tokens": 262,
+            "as_tokens": 455
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/ls-anerkennung-behinderung-576440",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/schlichtungsstelle-behinderung/infos-zum-gesetz-43316",
+            "ls_tokens": 308,
+            "as_tokens": 121
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ehren-buerger-hamburg-576196",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/osterbotschaft-des-ersten-buergermeister-peter-tschentscher-1162320",
+            "ls_tokens": 224,
+            "as_tokens": 111
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/die-velorouten-576242",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 851,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/polizei-feuerwehr/das-polizei-museum-von-hamburg-576302",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/klima/starkregen-946792",
+            "ls_tokens": 581,
+            "as_tokens": 1474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/integrationsrat-576384",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/themen/soziales/integration/harburger-integrationsrat-64780",
+            "ls_tokens": 198,
+            "as_tokens": 234
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/draussen-sport-machen-in-harburg-575804",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/themen/freizeit-kultur/sport/sport-64348",
+            "ls_tokens": 450,
+            "as_tokens": 298
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/die-bezirke-in-hamburg-575812",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/themen/bezirke-und-bezirksverwaltung/startseite-bezirke-85604",
+            "ls_tokens": 164,
+            "as_tokens": 201
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/bezirke/beratung-fuer-menschen-mit-koerper-behinderungen-575916",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/mitte/themen/gesundheit/behinderung/beratungsstelle-fuer-koerperbehinderte-67506",
+            "ls_tokens": 598,
+            "as_tokens": 212
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/ausfluege-575864",
+            "as_url": "https://www.hamburg.de/freizeit/ausfluege/in-hamburg/ausfluege-in-hamburg-368184",
+            "ls_tokens": 637,
+            "as_tokens": 1208
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/hilfe-fuer-schwangere-frauen-575962",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/gesundheit/gesundheitsfoerderung/schwangerschaftskonfliktberatung/schwangerschaftskonflikte-34970",
+            "ls_tokens": 1033,
+            "as_tokens": 727
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/service-und-tipps/ls-wasser-sparen-1052304",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bukea/themen/wasser/grundwasser/wassersparen/tipps-zum-wassersparen-176410",
+            "ls_tokens": 535,
+            "as_tokens": 367
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/metropol-region-hamburg-576180",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/osterbotschaft-des-ersten-buergermeister-peter-tschentscher-1162320",
+            "ls_tokens": 453,
+            "as_tokens": 111
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/neuigkeiten/2026-03-27-ls-finanzamt-schliesst-frueher-1160222",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/finanzbehoerde/aktuelles/verkuerzte-oeffnungszeitender-hamburger-finanzaemter-am-gruendonnerstag-bis-14-00-uhr-1160108",
+            "ls_tokens": 157,
+            "as_tokens": 66
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/konsulate-576198",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/osterbotschaft-des-ersten-buergermeister-peter-tschentscher-1162320",
+            "ls_tokens": 344,
+            "as_tokens": 111
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/gesundheit/ls-kranke-kinder-gehoeren-nicht-in-die-kita-1109042",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bsfb/familie/kinderbetreuung/krankheitssymptome-35072",
+            "ls_tokens": 589,
+            "as_tokens": 310
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/die-hamburger-kunst-halle-576214",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 861,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-der-buergermeister-576188",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/osterbotschaft-des-ersten-buergermeister-peter-tschentscher-1162320",
+            "ls_tokens": 162,
+            "as_tokens": 111
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/gerichte-von-hamburg-576398",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/soziales/obdachlosigkeit/soziale-beratungsstellen-42902",
+            "ls_tokens": 1210,
+            "as_tokens": 244
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/freizeit/der-elbstrand-576240",
+            "as_url": "https://www.hamburg.de/tourismus/weihnachten-hamburg/weihnachtsmarkt-hamburg/kleine-weihnachtsmaerkte-hamburg-307632",
+            "ls_tokens": 965,
+            "as_tokens": 2157
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/infos-fuer-menschen-mit-behinderung/ls-fahr-dienst-fuer-menschen-mit-behinderungenls--575940",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/behinderung/mobilitaet/behindertenfahrten-43710",
+            "ls_tokens": 753,
+            "as_tokens": 533
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/ls-kinder-im-strassen-verkehr-576430",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 628,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/2025-10-13-ls-rede-buergermeister-volksentscheid-1106912",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/senat/reden-und-dokumente/statement-zum-zukunftsentscheid-1106784",
+            "ls_tokens": 369,
+            "as_tokens": 574
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/gesundheit/hilfe-bei-demenz-575980",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/pflege/demenz/allgemeine-informationen-86144",
+            "ls_tokens": 618,
+            "as_tokens": 2058
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/gesundheit/ls-grippe-impfung-1103306",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/themen/gesundheit/impfen/impfkampagne-hamburg-34426",
+            "ls_tokens": 584,
+            "as_tokens": 474
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/verkehr/ls-alte-menschen-im-strassen-verkehr-576432",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/die-themen-der-behoerde/fussverkehr/fussverkehr-191850",
+            "ls_tokens": 418,
+            "as_tokens": 377
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-politik-im-hamburger-rathaus-575820",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/senat/buergermeister-236760",
+            "ls_tokens": 269,
+            "as_tokens": 231
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/soziales-hilfen/informationen-fuer-besucher-575936",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bjv/themen/justizvollzug/justizvollzugsanstalten/jva-fuhlsbuettel/informationen-und-kontakt-214904",
+            "ls_tokens": 888,
+            "as_tokens": 187
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/familie/kita-oder-vor-schule-576326",
+            "as_url": "https://www.hamburg.de/service/schwangerschaft-und-geburt/checkliste-schwangerschaft-und-geburt-1021688",
+            "ls_tokens": 204,
+            "as_tokens": 455
+        },
+        {
+            "ls_url": "https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-die-mitglieder-im-senat-576190",
+            "as_url": "https://www.hamburg.de/politik-und-verwaltung/aktuelles/osterbotschaft-des-ersten-buergermeister-peter-tschentscher-1162320",
+            "ls_tokens": 374,
+            "as_tokens": 111
+        }
+    ]
+}

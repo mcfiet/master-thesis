@@ -112,3 +112,14 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 8.050                   |
 | **Tokens (Alltagssprache)**    | 9.243                   |
 | **Datei** | [`main_taunus_aligned_urls.json`](../main_taunus_aligned_urls.json) |
+
+### Hamburg.de
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 156                     |
+| **Alignierte Paare (LS ↔ AS)** | 155                     |
+| **Nicht-alignierte Artikel**   | 1                       |
+| **Tokens (Leichte Sprache)**   | 84.829                  |
+| **Tokens (Alltagssprache)**    | 131.199                 |
+| **Datei** | [`hamburg_aligned_urls.json`](../hamburg_aligned_urls.json) |
