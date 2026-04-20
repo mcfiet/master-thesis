@@ -134,3 +134,23 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 7.837                   |
 | **Tokens (Alltagssprache)**    | 5.400                   |
 | **Datei** | [`brandeins_aligned_urls.json`](../brandeins_aligned_urls.json) |
+
+## 04 Zusammenfassung der Ergebnisse
+
+Nach Abschluss der Scraping-Phase für alle Quellen ergibt sich folgendes Gesamtergebnis für das neu erstellte Korpus:
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 1.347                   |
+| **Alignierte Paare (LS ↔ AS)** | 797                     |
+| **Nicht-alignierte Artikel**   | 550                     |
+| **Tokens (Leichte Sprache)**   | 411.540                 |
+| **Tokens (Alltagssprache)**    | 676.903                 |
+
+### Fazit
+Mit insgesamt **797 alignierten Artikelpaaren** bietet der Datensatz eine solide Grundlage für weitere Analysen und das Training von Vereinfachungsmodellen. Zum Vergleich: Bestehende Korpora wie das von Toborek et al. umfassen etwa 708 Dokument-Alignments. 
+
+Die wichtigsten Erkenntnisse:
+- **Hauptquellen:** Die größten Datenmengen stammen vom MDR, der Apotheken Umschau und Hamburg.de.
+- **Erfolgsquote:** Durchschnittlich konnten ca. **59%** der gescannten Leichte-Sprache-Artikel erfolgreich ihrem Gegenstück in Alltagssprache zugeordnet werden.
+- **Textumfang:** Die Artikel in Alltagssprache sind im Durchschnitt etwa 65% länger als ihre Entsprechungen in Leichter Sprache (basierend auf der Token-Anzahl).
