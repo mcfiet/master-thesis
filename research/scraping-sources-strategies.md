@@ -125,10 +125,11 @@ Quellen, bei denen die Sprachversionen nicht durch direkte externe Links, sonder
 ### ✅ Brand Eins
 *   **Status:** `Sehr gut geeignet` (Paralleltexte auf einer Seite)
 *   **Strategie (Übersicht & Extraktion):**
-    1.  **Discovery:** Start auf der Übersichtsseite [`brandeins.de/themen/rubriken/leichte-sprache`](https://www.brandeins.de/themen/rubriken/leichte-sprache).
-    2.  **Link-Extraktion:** Suche in `section.multicolumn-wrapper` nach Artikeln. Ein Eintrag wird durch `div.column.col-xs-12` definiert. Der Link zum Artikel befindet sich in `span.like-h1.like-h2 a`.
-    3.  **Identifikation:** Artikel in dieser Rubrik (oft erkennbar am roten Kicker `color: #fa4600` oder entsprechenden Teaser-Texten wie "Die Leichte Sprache nimmt den Inhalt ernst...") enthalten sowohl die Alltags- als auch die Leichte Sprache.
-    4.  **Inhalts-Extraktion:** Auf der Artikelseite stehen beide Sprachversionen. Die Unterscheidung erfolgt rein über CSS: Absätze/Elemente, die in roter Farbe (z. B. `#ff0000` oder `#fa4600`) formatiert sind, bilden die Leichte Sprache. Alle anderen (schwarzen) Texte sind die Standardsprache (AS).
+    1.  **Discovery:** Da die Live-Seite von Brand Eins strenge Cloudflare-Blockaden für automatisierte Abrufe hat, muss die Übersichtsseite über die Wayback Machine geladen werden (z. B. ein Schnappschuss aus 2024 unter [`web.archive.org/.../brandeins.de/themen/rubriken/leichte-sprache`](https://web.archive.org/web/20240401000000/https://www.brandeins.de/themen/rubriken/leichte-sprache)).
+    2.  **Link-Extraktion:** Suche nach allen Links (`<a>`), die auf `/magazine/` verweisen und keine reinen Systemlinks (wie `/products/` oder `/sign_in`) sind.
+    3.  **Content-Extraktion & Alignment (Dual-Heuristik):** Da beide Sprachversionen auf derselben Seite im Element `section.textblock` stehen, müssen sie getrennt extrahiert werden:
+        *   **Farben-Heuristik:** Suche im `style`-Attribut der `<p>`-Tags nach den Rottönen der Leichten Sprache (`#fa4600`, `#ff4948`, `#ff0000`, `color: red`).
+        *   **Struktur-Heuristik (Fallback):** Ist keine Farbe im HTML-Schnappschuss hinterlegt, greift die Struktur-Regel: In einem `textblock` ist der erste `<p>`-Tag meist der schwerere Originaltext (AS), alle folgenden `<p>`-Tags sind Leichte Sprache. AS-Absätze lassen sich zudem oft durch Auslassungszeichen `(…)` oder eine überdurchschnittliche Länge (> 300 Zeichen) verifizieren.
 *   **Beispielpaar:**
     *   **AS & LS:** [Die Regierung zieht nicht mit um](https://www.brandeins.de/magazine/brand-eins-wirtschaftsmagazin/2024/kommunikation-in-zeiten-von-fake-news/die-regierung-zieht-nicht-mit-um) (LS ist der rot gesetzte Teil).
 
