@@ -66,13 +66,13 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
 ### ✅ Der Behindertenbeauftragte
 *   **Status:** `Sehr gut geeignet` (fast flächendeckendes Angebot)
 *   **Strategie (Übersicht & Alignment):**
-    1.  **Discovery 1 (Site-Crawl):** Start auf der Startseite in Alltagssprache: [`behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html`](https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html). Der Crawler kann einfach allen internen Links folgen, die `/DE/AS/` im Pfad haben, um alle AS-Artikel zu finden.
-    2.  **Discovery 2 (Suche/Archiv & Pagination):** Alternativ können alle (älteren) Artikel über die paginierte Suche unter `behindertenbeauftragter.de/SiteGlobals/Forms/Suche/Expertensuche_Formular.html` gefunden werden. 
+    1.  **Discovery (Suche/Archiv & Pagination):** Die effizienteste Methode ist die Nutzung der Expertensuche unter `behindertenbeauftragter.de/SiteGlobals/Forms/Suche/Expertensuche_Formular.html` mit dem expliziten Filter `documentLanguage_str=de_ls`.
         *   **Artikel-Extraktion:** Artikel befinden sich in der Liste `ul.searchresult > li.teaser`.
-        *   **Pagination:** Da es sich um statische HTML-Links handelt, ist kein Headless-Browser (Clicking) nötig. Der Scraper extrahiert auf jeder Ergebnisseite den Link für die nächste Seite über das Element `a.forward.button` (oder iteriert den URL-Parameter `gtp=43638_list%253D[SEITE]`) und wiederholt dies, bis kein "vor"-Button mehr existiert.
-    3.  **Alignment (Language Switcher):** Auf nahezu jedem AS-Artikel gibt es einen direkten Sprachwechsler. Suche gezielt nach einem Link mit der HTML-Klasse `.c-language-switch__l--ls` (für Leichte Sprache).
-    4.  **Validierung:** Der `title`-Text dieses Links enthält meist das Muster `"Lesen Sie den Artikel ... in Leichte Sprache"`. 
-*   **Alternative URL-Strategie:** Die URL-Pfade sind oft parallel aufgebaut, wobei lediglich `/AS/` durch `/LS/` ausgetauscht wird (z.B. `/DE/AS/der-beauftragte/lebenslauf/...` vs. `/DE/LS/der-beauftragte/lebenslauf/...`).
+        *   **Pagination:** Der Scraper extrahiert auf jeder Ergebnisseite den Link für die nächste Seite über das Element `a.forward.button` und wiederholt dies, bis kein "vor"-Button mehr existiert.
+    2.  **Alignment (Language Switcher):** Auf nahezu jedem Artikel gibt es einen direkten Sprachwechsler. Die Strategie sucht vom LS-Artikel ausgehend gezielt nach einem Link mit der HTML-Klasse `.c-language-switch__l--as` (für Alltagssprache). Als Fallback wird nach einem Link mit dem Text "Alltagssprache" gesucht.
+    3.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Der Fließtext wird primär aus dem Container `<div id="content">` extrahiert (Tags: `p`, `h1`, `h2`, `h3`, `li`).
+        *   **Bereinigung:** Essentiell ist das Filtern von Navigationselementen (`.c-mobile-nav__link`) und insbesondere des Sprachwechslers selbst (`.c-language-switch__li`, `.c-language-switch`), um zu verhindern, dass die Meta-Texte ("Lesen Sie den Artikel in Alltagssprache") als Tokens gezählt werden.
 *   **Beispielpaar:**
     *   **AS:** [Lebenslauf Jürgen Dusel](https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/lebenslauf/lebenslauf-node.html)
     *   **LS:** [Lebenslauf Jürgen Dusel (LS)](https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/lebenslauf/lebenslauf-node.html)
