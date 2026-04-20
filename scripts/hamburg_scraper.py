@@ -84,20 +84,28 @@ def get_articles_from_category(cat_url):
 
 def extract_hamburg_content(soup):
     """Extracts clean article content from a Hamburg.de page."""
+    # Check for 404 error pages due to recent site restructure
+    if "Seite nicht gefunden" in soup.get_text() or "Fehler 404" in soup.get_text():
+        return ""
+        
     # Main content is in .km1-richtext within .km1-article
-    content_area = soup.select_one('.km1-richtext') or soup.select_one('.km1-article')
+    # We find all .km1-richtext to catch multi-part articles
+    content_areas = soup.select('.km1-richtext')
+    if not content_areas:
+        content_areas = soup.select('.km1-article')
     
     texts = []
-    if content_area:
-        content_tags = content_area.find_all(['p', 'h2', 'h3', 'li'])
-        for tag in content_tags:
-            # Skip language bar or navigation if caught
-            if tag.find_parent(class_='km1-language-bar') or tag.find_parent(class_='km1-navigation'):
-                continue
-            
-            text = tag.get_text(separator=" ", strip=True)
-            if text:
-                texts.append(text)
+    if content_areas:
+        for area in content_areas:
+            content_tags = area.find_all(['p', 'h2', 'h3', 'li'])
+            for tag in content_tags:
+                # Skip language bar or navigation if caught
+                if tag.find_parent(class_='km1-language-bar') or tag.find_parent(class_='km1-navigation'):
+                    continue
+                
+                text = tag.get_text(separator=" ", strip=True)
+                if text:
+                    texts.append(text)
                 
     return " ".join(texts)
 
