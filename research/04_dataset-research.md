@@ -90,3 +90,14 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
 | **Tokens (Leichte Sprache)**   | 22.580                  |
 | **Tokens (Alltagssprache)**    | 36.453                  |
 | **Datei** | [`behindertenbeauftragter_aligned_urls.json`](../behindertenbeauftragter_aligned_urls.json) |
+
+### Sozialpolitik.com
+
+| Metrik                         | Ergebnis                |
+| :----------------------------- | :---------------------- |
+| **Gescannte LS-Artikel**       | 22                      |
+| **Alignierte Paare (LS ↔ AS)** | 22                      |
+| **Nicht-alignierte Artikel**   | 0                       |
+| **Tokens (Leichte Sprache)**   | 7.048                   |
+| **Tokens (Alltagssprache)**    | 14.295                  |
+| **Datei** | [`sozialpolitik_aligned_urls.json`](../sozialpolitik_aligned_urls.json) |
