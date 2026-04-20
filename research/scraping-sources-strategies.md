@@ -106,9 +106,12 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
 *   **Strategie (Übersicht & Alignment):**
     1.  **Discovery (Hierarchisch):** 
         *   Start auf der Übersichtsseite [`hamburg.de/barrierefrei/leichte-sprache`](https://www.hamburg.de/barrierefrei/leichte-sprache).
-        *   Extrahiere die Kategorie-Links im Hauptmenü (z. B. `/barrierefrei/leichte-sprache/politik`, `/barrierefrei/leichte-sprache/bezirke`), die in `ul.km1-link-navigation__list` liegen.
-        *   Navigiere in diese Unterseiten und extrahiere dort die Artikel-Links, die in Elementen der Klasse `a.km1-teaser__heading-link` stecken.
-    2.  **Alignment (Language Switcher):** Auf jedem LS-Artikel gibt es eine Sprachauswahl-Leiste (`km1-language-bar__language`). Suche dort nach einem Link, der ein SVG-Icon mit der Klasse `km1-icon--original-language` enthält. Dieser Link führt direkt zur Version in Standardsprache.
+        *   Extrahiere die Kategorie-Links (z. B. `/politik`, `/verkehr`, `/wohnen`), typischerweise Links mit genau 3 Slashes im Pfad.
+        *   Navigiere in diese Unterseiten und extrahiere dort die Artikel-Links (Selektor: `a.km1-teaser__heading-link`).
+    2.  **Alignment (Language Switcher):** Auf jedem LS-Artikel gibt es eine Sprachauswahl-Leiste (`.km1-language-bar__language`). Suche dort nach einem Link, der ein SVG-Icon mit der Klasse `.km1-icon--original-language` enthält. Dieser Link führt zur Version in Standardsprache.
+    3.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Da Artikel oft aus mehreren Textblöcken bestehen, müssen *alle* Elemente mit der Klasse `.km1-richtext` extrahiert werden.
+        *   **Fehler-Erkennung:** Aufgrund einer kürzlichen Umstrukturierung des Portals führen einige Alignment-Links zu "Seite nicht gefunden (Fehler 404)". Der Scraper muss diese Texte erkennen und das Alignment in solchen Fällen verwerfen.
 *   **Beispielpaar:**
     *   **AS:** [Der Senat](https://www.hamburg.de/politik-und-verwaltung/senat/senat-236762)
     *   **LS:** [Was ist der Senat?](https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-der-senat-576194)
