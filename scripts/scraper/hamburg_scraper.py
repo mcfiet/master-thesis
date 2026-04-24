@@ -83,28 +83,47 @@ def get_articles_from_category(cat_url):
     return list(set(articles))
 
 def extract_hamburg_content(soup):
-    """Extracts clean article content from a Hamburg.de page."""
-    # Check for 404 error pages due to recent site restructure
+    """Extracts clean article content from a Hamburg.de page and filters boilerplate."""
+    # Check for 404 error pages
     if "Seite nicht gefunden" in soup.get_text() or "Fehler 404" in soup.get_text():
         return ""
         
-    # Main content is in .km1-richtext within .km1-article
-    # We find all .km1-richtext to catch multi-part articles
     content_areas = soup.select('.km1-richtext')
     if not content_areas:
         content_areas = soup.select('.km1-article')
     
     texts = []
+    
+    # Boilerplate patterns to exclude
+    boilerplate_patterns = [
+        r"Bitte beachten Sie, dass dieser Inhalt automatisch übersetzt wurde",
+        r"Ein Computer hat diesen Text in Leichte Sprache übertragen",
+        r"Der Text ist nicht durch Menschen mit Behinderungen geprüft worden",
+        r"Sie können hier dazu mehr lesen",
+        r"Büro für Leichte Sprache Köln",
+        r"Kirsten Scholz hat den Text",
+        r"Dirk Stauber, Sandra Mambrini und Wolfgang Klein haben den Text",
+        r"\[zorn\d+\]"
+    ]
+
     if content_areas:
         for area in content_areas:
             content_tags = area.find_all(['p', 'h2', 'h3', 'li'])
             for tag in content_tags:
-                # Skip language bar or navigation if caught
+                # Skip language bar or navigation
                 if tag.find_parent(class_='km1-language-bar') or tag.find_parent(class_='km1-navigation'):
                     continue
                 
                 text = tag.get_text(separator=" ", strip=True)
-                if text:
+                
+                # Filter out boilerplate
+                is_boilerplate = False
+                for pattern in boilerplate_patterns:
+                    if re.search(pattern, text):
+                        is_boilerplate = True
+                        break
+                
+                if text and not is_boilerplate:
                     texts.append(text)
                 
     return " ".join(texts)
@@ -116,27 +135,35 @@ def extract_as_link_and_content(ls_url):
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
         
+        # Check for machine-translated disclaimer in the raw text first
+        if "Ein Computer hat diesen Text in Leichte Sprache übertragen" in soup.get_text():
+            print(f"Skipping machine-translated article: {ls_url}")
+            return None, 0, ""
+
         ls_text = extract_hamburg_content(soup)
         ls_tokens = count_tokens(ls_text)
 
         as_link = None
-        # Strategy: Look for link in .km1-language-bar__language containing original-language icon
-        # The icon is often inside a link button
-        lang_buttons = soup.select('.km1-language-bar__language')
-        for btn in lang_buttons:
-            if btn.select_one('.km1-icon--original-language'):
-                if btn.name == 'a' and btn.get('href'):
-                    as_link = urljoin("https://www.hamburg.de", btn['href'])
-                else:
-                    # Check parent or children for link
-                    parent_a = btn.find_parent('a', href=True)
-                    if parent_a:
-                        as_link = urljoin("https://www.hamburg.de", parent_a['href'])
-                    else:
-                        child_a = btn.find('a', href=True)
-                        if child_a:
-                            as_link = urljoin("https://www.hamburg.de", child_a['href'])
-                if as_link: break
+        # Strategy 1: Look in known language bar containers
+        lang_bar = soup.select_one('.km1-language-bar') or \
+                   soup.select_one('.language-bar') or \
+                   soup.select_one('.km1-language-bar__btn-wrapper')
+        
+        if lang_bar:
+            for a in lang_bar.find_all('a', href=True):
+                text = a.get_text().lower()
+                title = a.get('title', '').lower()
+                if "originaltext" in text or "alltagssprache" in text or "originaltext" in title:
+                    as_link = urljoin("https://www.hamburg.de", a['href'])
+                    break
+        
+        # Strategy 2: Look for specific 'original-text' class which is unlikely to be used for unrelated links
+        if not as_link:
+            original_link = soup.select_one('a.original-text') or \
+                            soup.select_one('a.original-language') or \
+                            soup.find('a', class_='original-text')
+            if original_link and original_link.get('href'):
+                as_link = urljoin("https://www.hamburg.de", original_link['href'])
             
         return as_link, ls_tokens, ls_text
     except Exception as e:
@@ -212,7 +239,9 @@ def main():
         "pairs": aligned_pairs
     }
 
-    output_file = "hamburg_aligned_urls.json"
+    import os
+    output_file = os.path.join("results", "aligned_urls", "hamburg_aligned_urls.json")
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=4)
 
