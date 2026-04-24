@@ -83,7 +83,28 @@ Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
 
 ---
 
-## 5. Architektur der Korpus-Scraper (Allgemein)
+## 5. Stadt Köln
+
+### Initialer Status
+*   **Skript:** `koeln_scraper.py`
+*   **Vorgehen:** Extraktion von Inhalten aus dem Wayback Machine Archiv, da viele historische LS-Texte nicht mehr direkt live verfügbar sind.
+*   **Probleme:** 
+    *   **Encoding-Fehler:** Massive Probleme mit Umlauten (z. B. `kÃ¶nnen`), da die automatische Erkennung von `requests` bei den Archiv-Seiten oft fehlschlug.
+    *   **Text-Duplikation:** Die Struktur der Kölner Service-Seiten führte bei einfacher Tag-Extraktion (`p`, `li`) zu doppelten Inhalten, wenn Paragraph-Tags innerhalb von Listen-Elementen verschachtelt waren.
+    *   **Boilerplate-Noise:** AS-Texte enthielten umfangreiche Formularreste ("War dieser Artikel hilfreich?", "Ihre E-Mail-Adresse"), Kontaktboxen und Vorlese-Funktionen.
+    *   **Hub-Pages:** Einige AS-URLs verwiesen auf reine Verteilerseiten mit minimalem Textanteil, was zu einem starken Ungleichgewicht gegenüber den LS-Texten führte.
+
+### Verbesserungen
+*   **Encoding-Autodetect:** Umstellung auf `response.apparent_encoding`, um die korrekte Zeichenkodierung der archivierten HTML-Snapshots sicherzustellen.
+*   **Smart Content Selection:** Implementierung eines Parent-Checks während der Extraktion, um verschachtelte Duplikate systematisch zu überspringen.
+*   **String-Deduplizierung:** Zusätzlicher Filter für identische Textblöcke, um redundante Inhaltsabschnitte innerhalb eines Artikels zu eliminieren.
+*   **Aggressiver Boilerplate-Filter:** Erweiterung der Blacklist um spezifische Phrasen der Kölner Feedback- und Kontaktformulare.
+*   **Robustes Prozess-Management:** Einführung eines inkrementellen Speichersystems, um den Fortschritt auch bei den häufigen Verbindungsabbrüchen zum Wayback-Archiv zu sichern.
+*   **Ergebnis:** Ein hochqualitatives Teilkorpus (aktuell 39 Paare) mit sauberen Umlauten und minimiertem Rauschen.
+
+---
+
+## 6. Architektur der Korpus-Scraper (Allgemein)
 
 Nach den ersten Analysen wurden alle Scraper im Verzeichnis `scripts/corpus_scrapers/` auf ein einheitliches **Downloader-Prinzip** umgestellt:
 
@@ -98,7 +119,6 @@ Nach den ersten Analysen wurden alle Scraper im Verzeichnis `scripts/corpus_scra
 
 Für die folgenden Quellen wurden die Scraper bereits auf das Downloader-Prinzip umgestellt. Eine detaillierte qualitative Analyse der extrahierten Texte steht hier noch aus und erfolgt analog zu den obigen Beispielen:
 
-*   **Stadt Köln:** Fokus auf das Haupt-Inhaltsverzeichnis der archivierten Wayback-Snapshots.
 *   **MDR:** Extraktion der News-Beiträge inklusive Archiv-Suche.
 *   **Taz:** Unterstützung von 1-zu-n Mappings (ein LS-Artikel referenziert oft mehrere AS-Artikel).
 *   **Lebenshilfe Main-Taunus:** Extraktion aus dem lokalen Inhaltsverzeichnis `/ls/inhalt/`.
