@@ -47,7 +47,25 @@ Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
 
 ---
 
-## 3. Architektur der Korpus-Scraper (Allgemein)
+## 3. Brand eins
+
+### Initialer Status
+*   **Skript:** `brandeins_scraper.py`
+*   **Vorgehen:** Extraktion beider Sprachstufen von einer einzigen URL. Da AS und LS oft im selben Textblock stehen, basierte die Trennung initial auf einer simplen Heuristik (erster Paragraph = AS, Rest = LS).
+*   **Probleme:** 
+    *   **Parsing-Fehler:** Die strukturelle Heuristik schlug oft fehl, wodurch LS-Texte im AS-Feld landeten und umgekehrt.
+    *   **Boilerplate:** Jeder Artikel enthielt den gleichen Einleitungssatz ("Die Leichte Sprache nimmt den Inhalt ernst...") sowie Autorenzeilen ("Text: Holger Fröhlich").
+    *   **Unsichtbare Formatierung:** Die farbliche Kennzeichnung (Rot für LS) war im HTML oft in verschachtelten `<span>`-Tags versteckt, die vom Scraper ignoriert wurden.
+
+### Verbesserungen
+*   **Deep-Color-Inspection:** Der Scraper prüft nun das gesamte HTML jedes Absatzes auf rote Farbcodes (`#ff0000`, `#fa4600` etc.) und `<strong>`-Tags. Dies ermöglicht eine präzise Trennung, auch wenn die Struktur innerhalb der Absätze variiert.
+*   **Aggressives Cleaning:** Systematische Entfernung des Standard-Einleitungssatzes und variierender Vorspann-Phrasen ("Hier die Übersetzung von...") per Regex.
+*   **Autoren-Filter:** Automatisches Ausfiltern von Namenszeilen und Credit-Fragmenten.
+*   **Ergebnis:** Ein hochgradig balanciertes Korpus (ca. 167 LS-Tokens vs. 189 AS-Tokens im Durchschnitt) ohne strukturelle Vermischung.
+
+---
+
+## 4. Architektur der Korpus-Scraper (Allgemein)
 
 Nach den ersten Analysen wurden alle Scraper im Verzeichnis `scripts/corpus_scrapers/` auf ein einheitliches **Downloader-Prinzip** umgestellt:
 
@@ -62,7 +80,6 @@ Nach den ersten Analysen wurden alle Scraper im Verzeichnis `scripts/corpus_scra
 
 Für die folgenden Quellen wurden die Scraper bereits auf das Downloader-Prinzip umgestellt. Eine detaillierte qualitative Analyse der extrahierten Texte steht hier noch aus und erfolgt analog zu den obigen Beispielen:
 
-*   **Brand eins:** Extraktion beider Sprachstufen von einer einzigen URL (Heuristik basierend auf Textblöcken und Farbindikatoren).
 *   **Stadt Köln:** Fokus auf das Haupt-Inhaltsverzeichnis der archivierten Wayback-Snapshots.
 *   **MDR:** Extraktion der News-Beiträge inklusive Archiv-Suche.
 *   **Taz:** Unterstützung von 1-zu-n Mappings (ein LS-Artikel referenziert oft mehrere AS-Artikel).
