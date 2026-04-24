@@ -65,7 +65,25 @@ Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
 
 ---
 
-## 4. Architektur der Korpus-Scraper (Allgemein)
+## 4. Hamburg.de
+
+### Initialer Status
+*   **Skript:** `hamburg_scraper.py`
+*   **Vorgehen:** Suche nach Links zum "Originaltext" mittels CSS-Selektoren.
+*   **Probleme:** 
+    *   **Fehl-Alignments:** Die alte Logik nutzte zu schwache Selektoren und griff bei fehlendem Sprachumschalter auf beliebige Links im Fließtext zurück. Dies führte dazu, dass dutzende LS-Artikel fälschlicherweise derselben AS-URL (z.B. "Grundsteuer" oder "Starkregen") zugeordnet wurden.
+    *   **Maschinelle Übersetzung:** Ein signifikanter Teil der LS-Texte auf Hamburg.de wurde automatisch generiert (Hinweis: "Ein Computer hat diesen Text übertragen"). Diese Texte entsprechen oft nicht den Qualitätsstandards für Leichte Sprache.
+    *   **Boilerplate-Noise:** AS-Texte enthielten oft Banner-Hinweise auf automatische Übersetzungen. LS-Texte enthielten am Ende oft mehrfache Impressum-Blöcke ("Büro für Leichte Sprache Köln...").
+
+### Verbesserungen
+*   **Sprachleisten-Fokus:** Die Suche nach dem AS-Gegenstück wurde strikt auf die offizielle Sprachleiste (`.km1-language-bar`) begrenzt. Fallback-Suchen im restlichen Dokument wurden entfernt, um "Geister-Alignments" zu verhindern.
+*   **MT-Filter:** Texte, die den Disclaimer für maschinelle Übersetzung enthalten, werden nun systematisch identifiziert und komplett aus dem Datensatz entfernt.
+*   **Surgical Cleaning:** Gezielte Filterung von Standard-Bannern ("Bitte beachten Sie, dass dieser Inhalt...") und Übersetzer-Nennungen per Regex während der Extraktion.
+*   **Ergebnis:** Reduktion von 155 auf 57 qualitativ hochwertige, manuell geprüfte Paare mit präzisem Themen-Alignment.
+
+---
+
+## 5. Architektur der Korpus-Scraper (Allgemein)
 
 Nach den ersten Analysen wurden alle Scraper im Verzeichnis `scripts/corpus_scrapers/` auf ein einheitliches **Downloader-Prinzip** umgestellt:
 
