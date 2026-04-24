@@ -37,62 +37,62 @@ def fetch_with_retry(url, max_retries=5):
         print(f"Error fetching {url}: {e}")
         return None
 
+def clean_text(text):
+    """Removes editorial boilerplate and cleaning whitespace."""
+    if not text:
+        return ""
+    
+    # 1. Remove standard intro sentence
+    text = text.replace("Die Leichte Sprache nimmt den Inhalt ernst, aber nicht schwer. Das kann erhellend sein.", "")
+    
+    # 2. Remove "Hier die Übersetzung..." and the following sentence (introductory context)
+    # These usually end with a period and a year or just a period.
+    text = re.sub(r"Hier die Übersetzung.*?(\d{4}\.|\.)", "", text)
+    
+    # 3. Remove Author/Credits
+    # Matches "Text: Holger Fröhlich", "Text: ...", etc.
+    text = re.sub(r"Text:\s+.*?(?=[A-ZÄÖÜ][a-z]|Hier|$)", "", text)
+    # Fallback for remaining author fragments
+    text = text.replace("öhlich", "") 
+    
+    return " ".join(text.split())
+
 def extract_brandeins_content(soup):
-    """Extracts AS and LS content using structural heuristics and color indicators."""
+    """Extracts AS and LS content strictly based on color indicators."""
     as_text_parts = []
     ls_text_parts = []
     
-    # 1. Capture Title and Kicker
+    # 1. Capture Title (usually LS)
     title = soup.select_one('.title-headline')
     if title:
-        ls_text_parts.append(title.get_text(strip=True))
+        ls_text_parts.append(clean_text(title.get_text(strip=True)))
     
     # 2. Capture Summary (Intro)
     intro = soup.select_one('.title-text.text-big')
     if intro:
-        ls_text_parts.append(intro.get_text(strip=True))
+        # Intros often contain boilerplate, cleaning is essential
+        ls_text_parts.append(clean_text(intro.get_text(strip=True)))
 
     # 3. Process Textblocks
-    # Heuristic: First <p> in a textblock is AS, subsequent <p> are LS.
+    # We iterate through each paragraph and check for red color indicators
+    # in the tag itself OR any nested children (spans, etc.)
     textblocks = soup.select('section.textblock')
+    red_indicators = ['#fa4600', '#ff4948', '#ff0000', 'color: red', 'color:#ff0000']
+    
     for block in textblocks:
         paragraphs = block.find_all('p')
-        if not paragraphs:
-            continue
-            
-        current_block_as = []
-        current_block_ls = []
-        
-        has_color_indicator = False
         for p in paragraphs:
-            # Check for red colors in style attribute
-            style = p.get('style', '').lower()
-            if any(c in style for c in ['#fa4600', '#ff4948', '#ff0000', 'color: red']):
-                current_block_ls.append(p.get_text(strip=True))
-                has_color_indicator = True
-            elif has_color_indicator:
-                # If we already found LS in this block, assume subsequent are LS unless color changes
-                current_block_ls.append(p.get_text(strip=True))
+            p_html = str(p).lower()
+            p_text = clean_text(p.get_text(strip=True))
+            
+            if not p_text:
+                continue
+
+            # Check for color in the paragraph's HTML (deep inspection)
+            if any(c in p_html for c in red_indicators):
+                ls_text_parts.append(p_text)
             else:
-                # No color yet, might be AS
-                current_block_as.append(p.get_text(strip=True))
-        
-        if not has_color_indicator:
-            # Fallback to Structural Heuristic: First P is AS, rest is LS
-            if len(paragraphs) > 1:
-                as_text_parts.append(paragraphs[0].get_text(strip=True))
-                for p in paragraphs[1:]:
-                    ls_text_parts.append(p.get_text(strip=True))
-            else:
-                # If only one paragraph, check if it looks like AS (shortened with (...))
-                txt = paragraphs[0].get_text(strip=True)
-                if '(…)' in txt or len(txt) > 300:
-                    as_text_parts.append(txt)
-                else:
-                    ls_text_parts.append(txt)
-        else:
-            as_text_parts.extend(current_block_as)
-            ls_text_parts.extend(current_block_ls)
+                as_text_parts.append(p_text)
             
     return " ".join(as_text_parts), " ".join(ls_text_parts)
 
