@@ -39,6 +39,20 @@ def fetch_with_retry(url, max_retries=3):
 
 def extract_bb_content(soup):
     """Extracts clean article content from the Behindertenbeauftragter page."""
+    # Handle script and style
+    for script_or_style in soup(["script", "style"]):
+        script_or_style.decompose()
+
+    # Decompose unwanted elements
+    unwanted_classes = [
+        'c-teaser', 'c-nav', 'c-mobile-nav', 'c-breadcrumb', 'c-language-switch',
+        'c-footer', 'c-meta-nav', 'c-social-links', 'c-share-links',
+        'c-audio-player', 'c-download-box', 'c-context-menu'
+    ]
+    for cls in unwanted_classes:
+        for element in soup.find_all(class_=cls):
+            element.decompose()
+
     # Main content is in <div id="content">
     content_div = soup.find('div', id='content')
     if not content_div:
@@ -46,17 +60,25 @@ def extract_bb_content(soup):
         
     texts = []
     if content_div:
-        # Avoid navigation, language switcher, etc.
-        # Often these have specific classes or are in <nav> or <header>
+        skip_keywords = [
+            "Dokument vorlesen",
+            "Herunterladen (PDF",
+            "Top Meldung",
+            "Weitere Themen",
+            "Aktuelles auf einen Blick",
+            "Filtern nach Dokumenttyp",
+            "Suchergebnisse",
+            "Ergebnisse sortieren nach",
+            "Anlage zum Positionspapier",
+            "nach oben"
+        ]
+        
         for tag in content_div.find_all(['p', 'h1', 'h2', 'h3', 'li']):
-            # Skip if it's in a language switcher or other meta areas
-            if any(cls in (tag.get('class') or []) for cls in ['c-language-switch__li', 'c-mobile-nav__link']):
-                continue
-            if tag.find_parent(class_='c-language-switch'):
-                continue
-                
             text = tag.get_text(separator=" ", strip=True)
             if text:
+                # Filter specific patterns
+                if any(kw in text for kw in skip_keywords):
+                    continue
                 texts.append(text)
                 
     return " ".join(texts)
@@ -75,11 +97,18 @@ def main():
     aligned_pairs = []
     total_ls_tokens = 0
     total_as_tokens = 0
+    startpage_skips = 0
+    quality_skips = 0
     
     for i, pair in enumerate(data['pairs']):
         ls_url = pair['ls_url']
         as_url = pair['as_url']
         
+        if 'startseite-node.html' in as_url:
+            print(f"Skipping pair {i+1} due to startpage fallback in AS URL: {as_url}")
+            startpage_skips += 1
+            continue
+
         print(f"Processing pair {i+1}/{len(data['pairs'])}: {ls_url}")
         
         # Fetch LS content
@@ -91,6 +120,12 @@ def main():
             ls_text = extract_bb_content(ls_soup)
             ls_tokens = count_tokens(ls_text)
         
+        # Check quality skip
+        if ls_tokens < 50 and any(kw in ls_text for kw in ["Herunterladen", "PDF"]):
+            print(f"Skipping pair {i+1} due to low quality / PDF link in LS text.")
+            quality_skips += 1
+            continue
+
         time.sleep(1)
         
         # Fetch AS content
@@ -119,6 +154,8 @@ def main():
     results = {
         "summary": {
             "total_pairs_attempted": len(data['pairs']),
+            "startpage_skips": startpage_skips,
+            "quality_skips": quality_skips,
             "aligned_pairs_count": len(aligned_pairs),
             "total_ls_tokens": total_ls_tokens,
             "total_as_tokens": total_as_tokens,
@@ -134,6 +171,8 @@ def main():
         json.dump(results, f, ensure_ascii=False, indent=4)
 
     print(f"\nResults saved to {output_file}")
+    print(f"Pairs skipped due to startpage fallback: {startpage_skips}")
+    print(f"Pairs skipped due to quality filters: {quality_skips}")
 
 if __name__ == "__main__":
     main()
