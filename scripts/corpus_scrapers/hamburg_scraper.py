@@ -38,27 +38,47 @@ def fetch_with_retry(url, max_retries=3):
         return None
 
 def extract_hamburg_content(soup):
-    """Extracts clean article content from a Hamburg.de page."""
-    # Check for 404 error pages due to recent site restructure
+    """Extracts clean article content from a Hamburg.de page and filters boilerplate."""
+    # Check for 404 error pages
     if "Seite nicht gefunden" in soup.get_text() or "Fehler 404" in soup.get_text():
         return ""
         
-    # Main content is in .km1-richtext within .km1-article
     content_areas = soup.select('.km1-richtext')
     if not content_areas:
         content_areas = soup.select('.km1-article')
     
     texts = []
+    
+    # Boilerplate patterns to exclude
+    boilerplate_patterns = [
+        r"Bitte beachten Sie, dass dieser Inhalt automatisch übersetzt wurde",
+        r"Ein Computer hat diesen Text in Leichte Sprache übertragen",
+        r"Der Text ist nicht durch Menschen mit Behinderungen geprüft worden",
+        r"Sie können hier dazu mehr lesen",
+        r"Büro für Leichte Sprache Köln",
+        r"Kirsten Scholz hat den Text",
+        r"Dirk Stauber, Sandra Mambrini und Wolfgang Klein haben den Text",
+        r"\[zorn\d+\]"
+    ]
+
     if content_areas:
         for area in content_areas:
             content_tags = area.find_all(['p', 'h2', 'h3', 'li'])
             for tag in content_tags:
-                # Skip language bar or navigation if caught
+                # Skip language bar or navigation
                 if tag.find_parent(class_='km1-language-bar') or tag.find_parent(class_='km1-navigation'):
                     continue
                 
                 text = tag.get_text(separator=" ", strip=True)
-                if text:
+                
+                # Filter out boilerplate
+                is_boilerplate = False
+                for pattern in boilerplate_patterns:
+                    if re.search(pattern, text):
+                        is_boilerplate = True
+                        break
+                
+                if text and not is_boilerplate:
                     texts.append(text)
                 
     return " ".join(texts)
