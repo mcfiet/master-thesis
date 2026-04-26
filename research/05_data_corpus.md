@@ -127,21 +127,25 @@ Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
 
 ---
 
-## 7. Architektur der Korpus-Scraper (Allgemein)
+## 7. MDR (Mitteldeutscher Rundfunk)
 
-Nach den ersten Analysen wurden alle Scraper im Verzeichnis `scripts/corpus_scrapers/` auf ein einheitliches **Downloader-Prinzip** umgestellt:
+### Initialer Status
+*   **Skript:** `mdr_scraper.py`
+*   **Vorgehen:** Extraktion von News-Beiträgen und deren Archiv-Gegenstücken in Alltagssprache.
+*   **Probleme:** 
+    *   **Massive Textduplikation ("Echo-Effekt"):** Fast jeder Absatz wurde doppelt extrahiert, da der Selektor (`div.paragraph, p.text`) sowohl den Container als auch das darin liegende Paragraph-Tag erfasste.
+    *   **Strukturelles Rauschen:** Metadaten wie "Hauptinhalt", "Neuer Bereich", "Neuer Abschnitt" und Bildrechte wurden als Fließtext mitgenommen.
+    *   **Boilerplate-Anhänge:** LS-Artikel endeten oft mit Verweisen auf Radio-Studios oder Sendungen ("Über dieses Thema berichtet der MDR auch in schwerer Sprache...").
+    *   **Extreme Längenunterschiede:** Live-Ticker oder Sammelartikel in Alltagssprache (oft > 3000 Tokens) wurden kurzen LS-Meldungen (ca. 200 Tokens) zugeordnet, was für das Alignment unbrauchbar war.
 
-1.  **Input:** Die Skripte lesen die `*_aligned_urls.json` aus `results/aligned_urls/`.
-2.  **Kein Crawling:** Es findet keine neue Suche nach URLs statt; das schont die Serverressourcen und erhöht die Geschwindigkeit.
-3.  **Output:** Die bereinigten Daten werden nach `results/corpus/` geschrieben.
-4.  **Einheitliche Reinigung:** Alle Skripte nutzen nun eine verbesserte Basis-Reinigung (Entfernung von Script-, Style- und Bild-Tags).
+### Verbesserungen
+*   **Nested-Element-Filter:** Implementierung eines Parent-Checks (`any(parent in candidates for parent in el.parents)`), der sicherstellt, dass Text innerhalb verschachtelter Tags nur einmal (vom obersten relevanten Element) extrahiert wird.
+*   **Targeted Content Area:** Begrenzung der Suche auf den `<main>` oder `<article>` Bereich, um globale Navigationselemente von vornherein auszuschließen.
+*   **Smarte Skip-Signale:** Einführung einer Blacklist für strukturelle MDR-Begriffe (z. B. "Hauptinhalt", "Neuer Bereich") und Metadaten, die während der Iteration über die HTML-Elemente gefiltert werden.
+*   **Ratio-Filter:** Einführung eines Grenzwerts für das Längenverhältnis. Textpaare mit einer Ratio > 5.0 (AS massiv länger als LS) werden automatisch aussortiert, um Ticker und Megaseiten zu eliminieren.
+*   **Bulletpoint-Optimierung:** Automatische Isolation von Aufzählungszeichen (`•`) durch Leerzeichen für eine saubere Tokenisierung.
+*   **Ergebnis:** Ein hocheffizienter Korpus mit 235 validen Paaren. Die durchschnittliche Token-Länge sank durch die Duplikat-Entfernung auf realistische Werte (ca. 239 LS-Tokens vs. 354 AS-Tokens).
 
 ---
 
-## Status der weiteren Quellen
-
-Für die folgenden Quellen wurden die Scraper bereits auf das Downloader-Prinzip umgestellt. Eine detaillierte qualitative Analyse der extrahierten Texte steht hier noch aus und erfolgt analog zu den obigen Beispielen:
-
-*   **MDR:** Extraktion der News-Beiträge inklusive Archiv-Suche.
-*   **Taz:** Unterstützung von 1-zu-n Mappings (ein LS-Artikel referenziert oft mehrere AS-Artikel).
-*   **Sozialpolitik.com:** Extraktion basierend auf der Sitemap-Übersicht.
+## 8. Architektur der Korpus-Scraper (Allgemein)
