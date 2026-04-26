@@ -40,6 +40,35 @@ def get_mdr_ls_articles(base_url):
     
     return list(set(ls_links)) # Remove duplicates
 
+def extract_mdr_text(soup):
+    """Extracts clean article content from an MDR page."""
+    # 1. Target the main content area
+    content_area = soup.select_one('main, article, .article-content')
+    if not content_area:
+        content_area = soup
+        
+    # 2. Selection
+    candidates = content_area.select('h1, .article-header__lead, .media-item__caption, div.paragraph, p.text')
+    
+    content_parts = []
+    for el in candidates:
+        if any(parent in candidates for parent in el.parents):
+            continue
+        text = el.get_text(separator=" ", strip=True)
+        if text:
+            # 3. Skip signals
+            lower_text = text.lower()
+            skip_signals = ["hier können sie", "schwerer sprache lesen", "bildrechte:", "nachrichten in leichter sprache"]
+            if any(sig in lower_text for sig in skip_signals):
+                continue
+            content_parts.append(text)
+    
+    full_text = " ".join(content_parts)
+    # Basic cleaning
+    full_text = full_text.replace("•", " • ")
+    full_text = re.sub(r'\s+', ' ', full_text).strip()
+    return full_text
+
 def extract_as_link_and_content(ls_url):
     """Finds the AS link within an LS article and extracts content for token counting."""
     try:
@@ -49,12 +78,10 @@ def extract_as_link_and_content(ls_url):
         print(f"Error fetching LS article {ls_url}: {e}")
         return None, 0, ""
 
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(response.content, 'html.parser')
     
     # 1. Extract LS content and count tokens
-    # Typically MDR articles have content in div.paragraph or similar
-    ls_text_elements = soup.select('div.paragraph, p.text')
-    ls_text = " ".join([el.get_text() for el in ls_text_elements])
+    ls_text = extract_mdr_text(soup)
     ls_tokens = count_tokens(ls_text)
 
     # 2. Find AS link
@@ -93,9 +120,8 @@ def get_as_token_count(as_url):
         print(f"Error fetching AS article {as_url}: {e}")
         return 0
 
-    soup = BeautifulSoup(response.text, 'html.parser')
-    as_text_elements = soup.select('div.paragraph, p.text')
-    as_text = " ".join([el.get_text() for el in as_text_elements])
+    soup = BeautifulSoup(response.content, 'html.parser')
+    as_text = extract_mdr_text(soup)
     return count_tokens(as_text)
 
 def get_archive_state_links(archive_index_url):
