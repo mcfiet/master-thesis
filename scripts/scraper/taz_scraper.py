@@ -40,7 +40,10 @@ def get_taz_ls_articles(base_url):
 
 def extract_taz_content(soup):
     """Extracts clean article content."""
-    # taz uses p.bodytext or p.article or inside article[itemprop="articleBody"]
+    # Remove donation boilerplate and other non-article elements before extracting
+    for unwanted in soup.select('.tzi-bottom-container, .tziBottom, .social-media-title'):
+        unwanted.decompose()
+
     texts = []
     
     # Try finding elements by specific classes first
@@ -57,8 +60,19 @@ def extract_taz_content(soup):
             if tag.find_parent('nav') or tag.find_parent('footer'):
                 continue
             text = tag.get_text(separator=" ", strip=True)
+            
+            # Filter standard boilerplate phrases
             if "──────────────────" in text or "Hinweis:" in text:
                 continue
+            if "können Sie den Text herunterladen" in text or text == "Hier":
+                continue
+            if "Dieser Text ist Werbung für die Zeitung taz" in text:
+                continue
+            if "Als Genossenschaft gehören wir unseren Leser:innen" in text:
+                continue
+            if "Die Infos in diesem leichten Text kommen aus" in text:
+                continue
+                
             if text:
                 texts.append(text)
         
@@ -83,6 +97,8 @@ def extract_as_links_and_content(ls_url):
     for a in soup.find_all('a', href=True):
         txt = a.get_text().lower()
         if "schweren" in txt and "text" in txt:
+            # specifically check for singular to avoid overview pages if possible, 
+            # though we will filter URLs next.
             as_links.append(urljoin("https://taz.de/", a['href']))
             
     # Strategy 2: Look for <em> tags with links
@@ -94,6 +110,9 @@ def extract_as_links_and_content(ls_url):
     valid_as_links = []
     for link in set(as_links):
         if 'taz.de' in link and 'Leichte-Sprache' not in link:
+            # Ignore tag pages (!t...) and overview pages (!p...)
+            if '/!t' in link or '/!p' in link:
+                continue
             valid_as_links.append(link)
         
     return valid_as_links, ls_tokens, ls_text
