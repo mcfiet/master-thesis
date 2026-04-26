@@ -42,21 +42,31 @@ def extract_sp_content(soup):
     # Main content is in <main>
     main_content = soup.find('main')
     
+    if not main_content:
+        return ""
+
+    # Remove boilerplate elements
+    for boilerplate in main_content.select('.quiz-container, .quiz-wrapper, .download-area, .box-grey, aside, .sidebar-right, .info-box'):
+        boilerplate.decompose()
+    
     texts = []
-    if main_content:
-        # Get paragraphs, list items, and headings
-        for tag in main_content.find_all(['p', 'li', 'h1', 'h2', 'h3']):
-            # Skip language switchers
-            if 'header-navigation-point' in (tag.get('class') or []) or tag.find_parent(class_='header-navigation-point'):
-                continue
-            if 'underline easy' in (tag.get('class') or []) or tag.find_parent(class_='underline'):
-                continue
-            
-            text = tag.get_text(separator=" ", strip=True)
-            if text:
-                texts.append(text)
+    # Get paragraphs, list items, and headings
+    for tag in main_content.find_all(['p', 'li', 'h1', 'h2', 'h3']):
+        # Skip language switchers
+        if 'header-navigation-point' in (tag.get('class') or []) or tag.find_parent(class_='header-navigation-point'):
+            continue
+        if 'underline easy' in (tag.get('class') or []) or tag.find_parent(class_='underline'):
+            continue
+        
+        text = tag.get_text(separator=" ", strip=True)
+        if text:
+            texts.append(text)
                 
-    return " ".join(texts)
+    # Join with newlines to preserve structure
+    content = "\n".join(texts)
+    # Clean up multiple newlines
+    content = re.sub(r'\n+', '\n', content).strip()
+    return content
 
 def main():
     # Path to the aligned URLs
@@ -72,6 +82,7 @@ def main():
     aligned_pairs = []
     total_ls_tokens = 0
     total_as_tokens = 0
+    identical_pairs_count = 0
     
     for i, pair in enumerate(data['pairs']):
         ls_url = pair['ls_url']
@@ -100,6 +111,11 @@ def main():
             as_tokens = count_tokens(as_text)
             
         if ls_text and as_text:
+            if ls_text.strip() == as_text.strip():
+                print(f"Skipping pair {i+1} as LS and AS texts are identical.")
+                identical_pairs_count += 1
+                continue
+
             aligned_pairs.append({
                 "ls_url": ls_url,
                 "as_url": as_url,
@@ -117,6 +133,7 @@ def main():
         "summary": {
             "total_pairs_attempted": len(data['pairs']),
             "aligned_pairs_count": len(aligned_pairs),
+            "identical_pairs_skipped": identical_pairs_count,
             "total_ls_tokens": total_ls_tokens,
             "total_as_tokens": total_as_tokens,
             "average_ls_tokens": total_ls_tokens / len(aligned_pairs) if aligned_pairs else 0,
