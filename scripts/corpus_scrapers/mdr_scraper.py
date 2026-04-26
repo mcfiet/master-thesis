@@ -27,8 +27,43 @@ def fetch_with_retry(url, max_retries=3):
 
 def extract_mdr_content(soup):
     """Extracts clean article content from an MDR page."""
-    text_elements = soup.select('div.paragraph, p.text')
-    return " ".join([el.get_text(separator=" ", strip=True) for el in text_elements])
+    # 1. Selection: Pick potential content containers
+    candidates = soup.select('div.paragraph, p.text, h1, h2, h3')
+    
+    content_parts = []
+    for el in candidates:
+        # Avoid duplicate text if tags are nested
+        if any(parent in candidates for parent in el.parents):
+            continue
+            
+        text = el.get_text(separator=" ", strip=True)
+        if text:
+            content_parts.append(text)
+    
+    full_text = " ".join(content_parts)
+
+    # 2. Boilerplate removal (MDR specific LS footers)
+    boilerplate_signals = [
+        r"Über dieses Thema berichtet der MDR auch in schwerer Sprache.*",
+        r"Hier können Sie diese Nachricht auch in schwerer Sprache lesen.*",
+        r"MDR SACHSEN - Das Sachsenradio.*",
+        r"MDR SACHSEN-ANHALT.*",
+        r"MDR THÜRINGEN.*",
+        r"MDR KULTUR.*",
+        r"MDR AKTUELL.*",
+        r"MDR SPORT.*"
+    ]
+    
+    for pattern in boilerplate_signals:
+        full_text = re.sub(pattern, "", full_text, flags=re.IGNORECASE)
+
+    # 3. Clean up whitespace and special characters
+    # Ensure bullet points have spaces
+    full_text = full_text.replace("•", " • ")
+    # Remove multiple spaces
+    full_text = re.sub(r'\s+', ' ', full_text).strip()
+    
+    return full_text
 
 def main():
     # Path to the aligned URLs
@@ -44,6 +79,8 @@ def main():
     aligned_pairs = []
     total_ls_tokens = 0
     total_as_tokens = 0
+    skipped_ratio = 0
+    skipped_short = 0
     
     for i, pair in enumerate(data['pairs']):
         ls_url = pair['ls_url']
@@ -56,22 +93,37 @@ def main():
         ls_text = ""
         ls_tokens = 0
         if ls_response:
-            ls_soup = BeautifulSoup(ls_response.text, 'html.parser')
+            # Use content (bytes) for better encoding detection
+            ls_soup = BeautifulSoup(ls_response.content, 'html.parser')
             ls_text = extract_mdr_content(ls_soup)
             ls_tokens = count_tokens(ls_text)
         
-        time.sleep(1)
+        time.sleep(0.5)
         
         # Fetch AS content
         as_response = fetch_with_retry(as_url)
         as_text = ""
         as_tokens = 0
         if as_response:
-            as_soup = BeautifulSoup(as_response.text, 'html.parser')
+            as_soup = BeautifulSoup(as_response.content, 'html.parser')
             as_text = extract_mdr_content(as_soup)
             as_tokens = count_tokens(as_text)
             
         if ls_text and as_text:
+            # --- FILTERING LOGIC ---
+            # 1. Length check
+            if ls_tokens < 20 or as_tokens < 20:
+                print(f"  -> Skipped: Text too short (LS: {ls_tokens}, AS: {as_tokens})")
+                skipped_short += 1
+                continue
+                
+            # 2. Ratio check (e.g., skip live tickers where AS is 10x longer)
+            ratio = as_tokens / ls_tokens if ls_tokens > 0 else 0
+            if ratio > 5.0 or ratio < 0.2:
+                print(f"  -> Skipped: Extreme length ratio ({ratio:.2f})")
+                skipped_ratio += 1
+                continue
+
             aligned_pairs.append({
                 "ls_url": ls_url,
                 "as_url": as_url,
@@ -83,12 +135,14 @@ def main():
             total_ls_tokens += ls_tokens
             total_as_tokens += as_tokens
         
-        time.sleep(1)
+        time.sleep(0.5)
 
     results = {
         "summary": {
             "total_pairs_attempted": len(data['pairs']),
             "aligned_pairs_count": len(aligned_pairs),
+            "skipped_short": skipped_short,
+            "skipped_ratio": skipped_ratio,
             "total_ls_tokens": total_ls_tokens,
             "total_as_tokens": total_as_tokens,
             "average_ls_tokens": total_ls_tokens / len(aligned_pairs) if aligned_pairs else 0,
