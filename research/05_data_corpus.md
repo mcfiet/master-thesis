@@ -104,7 +104,30 @@ Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
 
 ---
 
-## 6. Architektur der Korpus-Scraper (Allgemein)
+## 6. Lebenshilfe Main-Taunus
+
+### Initialer Status
+*   **Skript:** `main_taunus_scraper.py`
+*   **Vorgehen:** Extraktion von Inhalten aus dem Wayback Machine Archiv der Lebenshilfe Main-Taunus.
+*   **Probleme:** 
+    *   **Platzhalter-Inhalte:** Viele Seiten enthielten nur den Hinweis "Bald steht hier ein Text in Leichter Sprache" oder "Bitte um etwas Geduld", was wertlose Datensätze erzeugte.
+    *   **Content-Duplikate:** Die Webseite nutzt verschiedene Navigations-IDs in der URL (z.B. `m-20`, `m-79`), die auf den identischen Inhalt führen. Dies führte zu massiven Redundanzen im Korpus.
+    *   **Technisches Rauschen:** Fragmente wie `(Diese Datei existiert leider nicht mehr.)` oder `mutex/ocfipreoqyfb/mutex` wurden mitextrahiert.
+    *   **Linguistischer "Ballast":** Fast jeder Artikel endete mit umfangreichen Kontaktblöcken (Telefonnummern, E-Mails, Adressen, Spendenkonten), die linguistisch repetitiv sind und das LS-AS-Verhältnis verfälschen.
+    *   **Informationsarme Seiten:** Reine Namenslisten (z.B. der Künstlergalerie) wurden als Fließtext erfasst.
+
+### Verbesserungen
+*   **Platzhalter-Ausschluss:** Implementierung eines Filters, der Texte mit Phrasen wie "Bald steht hier..." oder "Geduld" systematisch erkennt und das gesamte Paar verwirft.
+*   **Content-Hashing:** Einführung einer De-Duplizierung basierend auf dem Hash des bereinigten Textinhalts. Identische Texte werden unabhängig von ihrer URL nur einmal aufgenommen.
+*   **Surgical Cleanup (Regex):** Entfernung von technischen Artefakten und Navigations-Phrasen ("Hier kommen Sie zum Faltblatt", "Hier erfahren Sie mehr") mittels regulärer Ausdrücke.
+*   **Kontakt-Truncation:** Automatisches Abschneiden der Texte bei Signalwörtern wie "Ansprechpartner", "Kontakt:" oder "Adresse:". Dies stellt sicher, dass nur der eigentliche redaktionelle Inhalt im Korpus verbleibt.
+*   **Heuristischer Token-Filter:** Paare mit weniger als 20 Tokens nach der Bereinigung werden als unzureichend verworfen.
+*   **Encoding-Optimierung:** Nutzung von `response.content` (Bytes) für BeautifulSoup, um die im HTML deklarierte Zeichenkodierung des Archivs korrekt zu interpretieren.
+*   **Ergebnis:** Eine signifikante Reduktion des Rauschens; der Korpus besteht nun aus 36 hochwertigen, distinkten Textpaaren.
+
+---
+
+## 7. Architektur der Korpus-Scraper (Allgemein)
 
 Nach den ersten Analysen wurden alle Scraper im Verzeichnis `scripts/corpus_scrapers/` auf ein einheitliches **Downloader-Prinzip** umgestellt:
 
@@ -121,5 +144,4 @@ Für die folgenden Quellen wurden die Scraper bereits auf das Downloader-Prinzip
 
 *   **MDR:** Extraktion der News-Beiträge inklusive Archiv-Suche.
 *   **Taz:** Unterstützung von 1-zu-n Mappings (ein LS-Artikel referenziert oft mehrere AS-Artikel).
-*   **Lebenshilfe Main-Taunus:** Extraktion aus dem lokalen Inhaltsverzeichnis `/ls/inhalt/`.
 *   **Sozialpolitik.com:** Extraktion basierend auf der Sitemap-Übersicht.
