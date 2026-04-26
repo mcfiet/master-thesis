@@ -168,4 +168,23 @@ Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
 
 ---
 
-## 9. Architektur der Korpus-Scraper (Allgemein)
+## 9. taz (Die Tageszeitung)
+
+### Initialer Status
+*   **Skript:** `taz_scraper.py` (sowohl für URL-Alignment als auch Content-Extraktion)
+*   **Vorgehen:** Suche nach Links mit den Wörtern "schweren" und "text" in den Leichte-Sprache-Artikeln, um die alltagssprachlichen Pendants zu finden.
+*   **Probleme:**
+    *   **Fehlerhaftes Alignment (Zeit-Diskrepanz):** Der Scraper unterschied nicht zwischen Links zu spezifischen Quellartikeln und Links zu Sammel-/Themenseiten (z. B. "Texte zur Europawahl"). Dies führte dazu, dass LS-Texte von 2019 mit AS-Übersichtsseiten von 2024 gepaart wurden.
+    *   **Metadaten und Boilerplate:** LS-Texte begannen fast immer mit dem Hinweis "Hier können Sie den Text herunterladen" oder endeten mit Verweisen auf den "schweren Text".
+    *   **Spendenaufruf in AS-Texten:** Die AS-Artikel der *taz* schließen standardmäßig mit einem langen Spendenaufruf ("Als Genossenschaft gehören wir unseren Leser:innen..."). Da dieser die CSS-Klasse `.article` trug, wurde er stets als redaktioneller Inhalt mitextrahiert (ca. 100 Token Rauschen pro Artikel).
+    *   **1:N-Mapping (Aggregation):** Ein LS-Text der *taz* fasst häufig die Kernaussagen von bis zu drei separaten AS-Artikeln zusammen.
+
+### Verbesserungen
+*   **Targeted URL-Filtering:** Implementierung eines Filters im Alignment-Skript, der Tag- und Übersichtsseiten (erkennbar an `/!t` oder `/!p` in der URL) explizit ignoriert, um nur direkte Artikel-Links zuzulassen.
+*   **Boilerplate-Decomposition:** Gezieltes Löschen des Spendenaufrufs über die Entfernung der HTML-Container `.tzi-bottom-container`, `.tziBottom` und `.social-media-title` vor der Textextraktion.
+*   **String-Matching-Filter:** Implementierung spezifischer String-Filter, um Standardphrasen ("Hier können Sie den Text herunterladen", "Dieser Text ist Werbung", "──────────────────") aus dem Fließtext zu tilgen.
+*   **Ergebnis:** Das Rauschen wurde drastisch reduziert (Entfernung von ca. 1.400 unnötigen AS-Token und 800 LS-Token über das Test-Set). Das Token-Verhältnis blieb stabil bei ca. 1.85, die inhaltliche Qualität und Kohärenz der Paare stieg jedoch massiv an. Das inhärente Problem der 1:N-Aggregation bleibt als Charakteristikum der *taz*-Texte bestehen und muss bei feingranularem Alignment berücksichtigt werden.
+
+---
+
+## 10. Architektur der Korpus-Scraper (Allgemein)
