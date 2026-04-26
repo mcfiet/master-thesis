@@ -28,6 +28,10 @@ def fetch_with_retry(url, max_retries=3):
 
 def extract_taz_content(soup):
     """Extracts clean article content."""
+    # Remove donation boilerplate and other non-article elements before extracting
+    for unwanted in soup.select('.tzi-bottom-container, .tziBottom, .social-media-title'):
+        unwanted.decompose()
+
     texts = []
     
     # Try finding elements by specific classes first
@@ -44,8 +48,19 @@ def extract_taz_content(soup):
             if tag.find_parent('nav') or tag.find_parent('footer'):
                 continue
             text = tag.get_text(separator=" ", strip=True)
+            
+            # Filter standard boilerplate phrases
             if "──────────────────" in text or "Hinweis:" in text:
                 continue
+            if "können Sie den Text herunterladen" in text or text == "Hier":
+                continue
+            if "Dieser Text ist Werbung für die Zeitung taz" in text:
+                continue
+            if "Als Genossenschaft gehören wir unseren Leser:innen" in text:
+                continue
+            if "Die Infos in diesem leichten Text kommen aus" in text:
+                continue
+                
             if text:
                 texts.append(text)
         
