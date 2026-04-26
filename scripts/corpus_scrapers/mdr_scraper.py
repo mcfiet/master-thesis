@@ -27,8 +27,15 @@ def fetch_with_retry(url, max_retries=3):
 
 def extract_mdr_content(soup):
     """Extracts clean article content from an MDR page."""
-    # 1. Selection: Pick potential content containers
-    candidates = soup.select('div.paragraph, p.text, h1, h2, h3')
+    # 1. Target the main content area to avoid nav/header/footer noise
+    content_area = soup.select_one('main, article, .article-content')
+    if not content_area:
+        content_area = soup # Fallback
+        
+    # 2. Selection: Get Headline, Lead, and Paragraphs
+    # In MDR LS, paragraphs are often in div.paragraph
+    # In MDR AS, paragraphs are often in div.paragraph or p.text
+    candidates = content_area.select('h1, .article-header__lead, .media-item__caption, div.paragraph, p.text')
     
     content_parts = []
     for el in candidates:
@@ -38,29 +45,27 @@ def extract_mdr_content(soup):
             
         text = el.get_text(separator=" ", strip=True)
         if text:
+            # 3. Targeted Boilerplate removal (within elements)
+            # Skip elements that are clearly not content
+            lower_text = text.lower()
+            skip_signals = [
+                "hier können sie", 
+                "schwerer sprache lesen", 
+                "bildrechte:", 
+                "nachrichten in leichter sprache",
+                "neuer bereich",
+                "neuer abschnitt",
+                "hauptinhalt"
+            ]
+            if any(sig in lower_text for sig in skip_signals):
+                continue
+                
             content_parts.append(text)
     
     full_text = " ".join(content_parts)
 
-    # 2. Boilerplate removal (MDR specific LS footers)
-    boilerplate_signals = [
-        r"Über dieses Thema berichtet der MDR auch in schwerer Sprache.*",
-        r"Hier können Sie diese Nachricht auch in schwerer Sprache lesen.*",
-        r"MDR SACHSEN - Das Sachsenradio.*",
-        r"MDR SACHSEN-ANHALT.*",
-        r"MDR THÜRINGEN.*",
-        r"MDR KULTUR.*",
-        r"MDR AKTUELL.*",
-        r"MDR SPORT.*"
-    ]
-    
-    for pattern in boilerplate_signals:
-        full_text = re.sub(pattern, "", full_text, flags=re.IGNORECASE)
-
-    # 3. Clean up whitespace and special characters
-    # Ensure bullet points have spaces
+    # 4. Clean up whitespace and special characters
     full_text = full_text.replace("•", " • ")
-    # Remove multiple spaces
     full_text = re.sub(r'\s+', ' ', full_text).strip()
     
     return full_text
