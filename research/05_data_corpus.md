@@ -148,4 +148,24 @@ Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
 
 ---
 
-## 8. Architektur der Korpus-Scraper (Allgemein)
+## 8. Sozialpolitik.com
+
+### Initialer Status
+*   **Skript:** `sozialpolitik_scraper.py`
+*   **Vorgehen:** Suche nach "Standardsprache"-Links in LS-Artikeln.
+*   **Probleme:** 
+    *   **Identische Texte:** Bei vielen Paaren (ca. 30%) waren LS und AS Text zu 100% identisch, da das CMS für beide Versionen denselben Inhalt auslieferte (besonders bei News/Wettbewerben).
+    *   **Boilerplate-Code:** Mitextraktion von interaktiven Elementen wie Quizzen ("Teste dein Wissen"), Download-Bereichen ("Hol dir das Magazin") und umfangreichen Seitenleisten (`aside`).
+    *   **Strukturverlust:** Fließtext wurde ohne Zeilenumbrüche zusammengefügt, was Listen und Absätze unkenntlich machte.
+    *   **Fehl-Alignments:** Die Startseite (`/es/`) und Übersichtsseiten wurden fälschlicherweise als Artikel-Paare erfasst.
+
+### Verbesserungen
+*   **Identitäts-Filter:** Automatischer Vergleich von LS- und AS-Texten. Identische Paare werden nun konsequent aussortiert, um die Trennschärfe des Korpus zu wahren.
+*   **Surgical Decomposing:** Explizites Entfernen von CSS-Klassen wie `.quiz-container`, `.download-area` und dem `<aside>`-Tag vor der Textextraktion.
+*   **Strukturerhalt:** Block-Elemente (`p`, `h`, `li`) werden nun mit Zeilenumbrüchen (`\n`) zusammengefügt, um die logische Gliederung des Textes für das Satz-Alignment zu erhalten.
+*   **Root-Filter:** Expliziter Ausschluss der Startseiten-URLs (`/es/`) aus der Alignment-Liste.
+*   **Ergebnis:** Ein Korpus von 15 hochqualitativen Paaren mit einer deutlichen Längendifferenz (Durchschnitt: 345 LS-Tokens vs. 821 AS-Tokens).
+
+---
+
+## 9. Architektur der Korpus-Scraper (Allgemein)
