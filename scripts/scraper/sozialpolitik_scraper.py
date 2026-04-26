@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import json
 import re
 import time
+import os
 from urllib.parse import urljoin
 
 def count_tokens(text):
@@ -51,10 +52,15 @@ def get_ls_articles_from_sitemap(sitemap_url):
 
     for a in soup.find_all('a', href=True):
         href = a['href']
-        if href.startswith('/es/') and not any(ex in href for ex in exclude) and href != '/es/':
-            # Remove hash anchors
-            if '#' in href:
-                href = href.split('#')[0]
+        # Remove hash anchors
+        if '#' in href:
+            href = href.split('#')[0]
+            
+        # Standardize and check for LS links, excluding root /es/
+        is_ls = href.startswith('/es/') or href == '/es'
+        is_root = href.rstrip('/') == '/es'
+        
+        if is_ls and not is_root and not any(ex in href for ex in exclude):
             ls_urls.append(urljoin("https://www.sozialpolitik.com", href))
             
     return list(set(ls_urls))
@@ -64,22 +70,31 @@ def extract_sp_content(soup):
     # Main content is in <main>
     main_content = soup.find('main')
     
+    if not main_content:
+        return ""
+
+    # Remove boilerplate elements
+    for boilerplate in main_content.select('.quiz-container, .quiz-wrapper, .download-area, .box-grey, aside, .sidebar-right, .info-box'):
+        boilerplate.decompose()
+    
     texts = []
-    if main_content:
-        # Get paragraphs, list items, and headings
-        # Exclude navigation elements if they are inside main
-        for tag in main_content.find_all(['p', 'li', 'h1', 'h2', 'h3']):
-            # Skip language switchers
-            if 'header-navigation-point' in (tag.get('class') or []) or tag.find_parent(class_='header-navigation-point'):
-                continue
-            if 'underline easy' in (tag.get('class') or []) or tag.find_parent(class_='underline'):
-                continue
-            
-            text = tag.get_text(separator=" ", strip=True)
-            if text:
-                texts.append(text)
+    # Get paragraphs, list items, and headings
+    for tag in main_content.find_all(['p', 'li', 'h1', 'h2', 'h3']):
+        # Skip language switchers
+        if 'header-navigation-point' in (tag.get('class') or []) or tag.find_parent(class_='header-navigation-point'):
+            continue
+        if 'underline easy' in (tag.get('class') or []) or tag.find_parent(class_='underline'):
+            continue
+        
+        text = tag.get_text(separator=" ", strip=True)
+        if text:
+            texts.append(text)
                 
-    return " ".join(texts)
+    # Join with newlines to preserve structure
+    content = "\n".join(texts)
+    # Clean up multiple newlines
+    content = re.sub(r'\n+', '\n', content).strip()
+    return content
 
 def extract_as_link_and_content(ls_url):
     """Finds the AS link and extracts content."""
@@ -164,7 +179,8 @@ def main():
         "pairs": aligned_pairs
     }
 
-    output_file = "sozialpolitik_aligned_urls.json"
+    output_file = os.path.join("results", "aligned_urls", "sozialpolitik_aligned_urls.json")
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=4)
 
