@@ -1,0 +1,264 @@
+{
+    "summary": {
+        "total_ls_articles_scanned": 42,
+        "aligned_pairs_count": 42,
+        "total_ls_tokens": 26467,
+        "total_as_tokens": 51142,
+        "average_ls_tokens": 630.1666666666666,
+        "average_as_tokens": 1217.6666666666667
+    },
+    "pairs": [
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/ehefaehigkeitszeugnis-ausstellung-beantragen?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/ehefaehigkeitszeugnis-ausstellung-beantragen",
+            "ls_tokens": 533,
+            "as_tokens": 1227
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/wohnen/foerderung-und-wohnungshilfe/seniorenmietwohnungen?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/wohnen/foerderung-und-wohnungshilfe/seniorenmietwohnungen",
+            "ls_tokens": 242,
+            "as_tokens": 226
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/die-beauftragte-fuer-menschen-mit-behinderung/inklusion-teilhabe?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/die-beauftragte-fuer-menschen-mit-behinderung/inklusion-teilhabe",
+            "ls_tokens": 678,
+            "as_tokens": 507
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/sport/sportprogramme/bewegt-und-aktiv?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/sport/sportprogramme/bewegt-und-aktiv",
+            "ls_tokens": 725,
+            "as_tokens": 897
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/gesundheit/infektionsschutz/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/gesundheit/infektionsschutz/",
+            "ls_tokens": 343,
+            "as_tokens": 209
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/ehenamen-bestimmen?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/ehenamen-bestimmen",
+            "ls_tokens": 551,
+            "as_tokens": 1220
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/eingliederungshilfe-fuer-menschen-mit-behinderung?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/eingliederungshilfe-fuer-menschen-mit-behinderung",
+            "ls_tokens": 782,
+            "as_tokens": 537
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/wege-in-die-arbeit/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/wege-in-die-arbeit/",
+            "ls_tokens": 2197,
+            "as_tokens": 2809
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/personalausweis-beantragen-erstmalig-oder-nach-ablauf?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/personalausweis-beantragen-erstmalig-oder-nach-ablauf",
+            "ls_tokens": 1266,
+            "as_tokens": 3875
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/personalausweis-ausstellung-wegen-namensaenderung-beantragen-heirat-oder-scheidung-?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/personalausweis-ausstellung-wegen-namensaenderung-beantragen-heirat-oder-scheidung-",
+            "ls_tokens": 782,
+            "as_tokens": 3530
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/soziales/soziale-leistungen/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/soziales/soziale-leistungen/",
+            "ls_tokens": 827,
+            "as_tokens": 648
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/wohnsitz-anmelden-als-hauptwohnsitz?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/wohnsitz-anmelden-als-hauptwohnsitz",
+            "ls_tokens": 964,
+            "as_tokens": 3701
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/reisepass-beantragen-erstmalig-oder-nach-ablauf?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/reisepass-beantragen-erstmalig-oder-nach-ablauf",
+            "ls_tokens": 1069,
+            "as_tokens": 3620
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/die-beauftragte-fuer-menschen-mit-behinderung?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/die-beauftragte-fuer-menschen-mit-behinderung",
+            "ls_tokens": 755,
+            "as_tokens": 586
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/beratungsangebote-fuer-menschen-mit-behinderung/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/beratungsangebote-fuer-menschen-mit-behinderung/",
+            "ls_tokens": 644,
+            "as_tokens": 1607
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/chancengleichheit/hilfe-bei-gewalt/gewalt-in-haeuslicher-pflege?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/chancengleichheit/hilfe-bei-gewalt/gewalt-in-haeuslicher-pflege",
+            "ls_tokens": 526,
+            "as_tokens": 281
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/service/behoerdennummer-115/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/service/behoerdennummer-115/",
+            "ls_tokens": 415,
+            "as_tokens": 266
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/politik-von-menschen-mit-behinderung/beirat-inklusion?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/politik-von-menschen-mit-behinderung/beirat-inklusion",
+            "ls_tokens": 271,
+            "as_tokens": 202
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/soziales/sozialplanung/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/soziales/sozialplanung/",
+            "ls_tokens": 337,
+            "as_tokens": 2592
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/lebenspartnerschaft-umwandlung-in-eine-ehe-beantragen?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/lebenspartnerschaft-umwandlung-in-eine-ehe-beantragen",
+            "ls_tokens": 432,
+            "as_tokens": 1212
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/gesundheit/gesundheitsberatung/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/gesundheit/gesundheitsberatung/",
+            "ls_tokens": 169,
+            "as_tokens": 235
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/senioren/gesund-aelter-werden?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/senioren/gesund-aelter-werden",
+            "ls_tokens": 830,
+            "as_tokens": 681
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/wohnen/foerderung-und-wohnungshilfe/sozialmietwohnungen?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/wohnen/foerderung-und-wohnungshilfe/sozialmietwohnungen",
+            "ls_tokens": 560,
+            "as_tokens": 460
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/gesundheit/vorsorge/suchtpraevention?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/gesundheit/vorsorge/suchtpraevention",
+            "ls_tokens": 746,
+            "as_tokens": 680
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/gesundheit/vorsorge/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/gesundheit/vorsorge/",
+            "ls_tokens": 175,
+            "as_tokens": 165
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/schwerbehinderten-ausweis-beantragen?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/schwerbehinderten-ausweis-beantragen",
+            "ls_tokens": 751,
+            "as_tokens": 386
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/reisepass-beantragen-vorlaeufig?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/reisepass-beantragen-vorlaeufig",
+            "ls_tokens": 424,
+            "as_tokens": 3492
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/senioren/buergerservice-leben-im-alter?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/senioren/buergerservice-leben-im-alter",
+            "ls_tokens": 441,
+            "as_tokens": 829
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/politik-von-menschen-mit-behinderung/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/menschen-mit-behinderung/politik-von-menschen-mit-behinderung/",
+            "ls_tokens": 435,
+            "as_tokens": 310
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/wohnsitz-anmelden-durch-den-wohnungsgeber-bescheinigung-vom-wohnungsgeber-?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/wohnsitz-anmelden-durch-den-wohnungsgeber-bescheinigung-vom-wohnungsgeber-",
+            "ls_tokens": 553,
+            "as_tokens": 3385
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/soziales/beratung-und-hilfe/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/soziales/beratung-und-hilfe/",
+            "ls_tokens": 794,
+            "as_tokens": 947
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/arbeit/arbeitsuchende/hilfe-beim-wiedereinstieg?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/arbeit/arbeitsuchende/hilfe-beim-wiedereinstieg",
+            "ls_tokens": 666,
+            "as_tokens": 447
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/gesundheit/vorsorge/impfungen?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/gesundheit/vorsorge/impfungen",
+            "ls_tokens": 630,
+            "as_tokens": 1299
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/heiraten/eheschliessung?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/heiraten/eheschliessung",
+            "ls_tokens": 266,
+            "as_tokens": 1043
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leichte-sprache-index?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leichte-sprache-index",
+            "ls_tokens": 295,
+            "as_tokens": 295
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/eheschliessung-anmelden?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/eheschliessung-anmelden",
+            "ls_tokens": 1141,
+            "as_tokens": 1612
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/wohnberechtigungsschein-beantragen?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/wohnberechtigungsschein-beantragen",
+            "ls_tokens": 674,
+            "as_tokens": 615
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/buergerinnen-und-buerger/senioren/beratung-und-angebote?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/buergerinnen-und-buerger/senioren/beratung-und-angebote",
+            "ls_tokens": 188,
+            "as_tokens": 151
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/soziales/generationenhaus?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/soziales/generationenhaus",
+            "ls_tokens": 308,
+            "as_tokens": 362
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/gesundheit/umweltmedizin/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/gesundheit/umweltmedizin/",
+            "ls_tokens": 523,
+            "as_tokens": 371
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/leben/soziales/beratung-und-hilfe/rechtliche-betreuung/?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/leben/soziales/beratung-und-hilfe/rechtliche-betreuung/",
+            "ls_tokens": 685,
+            "as_tokens": 369
+        },
+        {
+            "ls_url": "https://www.stuttgart.de/organigramm/leistungen/wohnsitz-ummelden-innerhalb-von-stuttgart?sp%3Aout=easy",
+            "as_url": "https://www.stuttgart.de/organigramm/leistungen/wohnsitz-ummelden-innerhalb-von-stuttgart",
+            "ls_tokens": 874,
+            "as_tokens": 3256
+        }
+    ]
+}
