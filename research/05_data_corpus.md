@@ -187,4 +187,9 @@ Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
 
 ---
 
-## 10. Architektur der Korpus-Scraper (Allgemein)
+## Next Steps
+
+1.  **Apotheken Umschau:** Untersuchung, warum bei dieser Quelle so wenige URLs erfolgreich aligned werden konnten (Ursachenforschung für niedrige Alignment-Rate).
+2.  **Längen-Verhältnisse:** Analyse der Diskrepanzen zwischen Leichter Sprache (LS) und Alltagssprache (AS) über verschiedene Quellen hinweg. Warum haben einige Quellen systematisch mehr LS-Tokens als AS-Tokens und andere umgekehrt?
+3.  **Historische Daten-Akquise:** Evaluierung der Wayback Machine, um eine breitere Abdeckung von Artikeln aus verschiedenen Zeiträumen (früher und heute) zu erreichen und so das Korpus zu vergrößern.
+4. **Initial Test mit Model:** 
