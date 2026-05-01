@@ -18,9 +18,24 @@ Das Ziel dieser Woche ist es, den Korpus quantitativ und qualitativ zu verbreite
 
 ## Potenzielle neue Quellen (Longlist)
 
-| Quelle | URL | Typ |
-| :--- | :--- | :--- |
-| Stuttgart | https://www.stuttgart.de/ | Stadtportal |
+| Bundesland | URL (Land) | Landeshauptstadt | URL (Stadt) |
+| :--- | :--- | :--- | :--- |
+| Baden-Württemberg | [baden-wuerttemberg.de](https://www.baden-wuerttemberg.de/) | Stuttgart | [stuttgart.de](https://www.stuttgart.de/) |
+| Bayern | [bayern.de](https://www.bayern.de/) | München | [muenchen.de](https://www.muenchen.de/) |
+| Berlin | [berlin.de](https://www.berlin.de/) | - | - |
+| Brandenburg | [brandenburg.de](https://www.brandenburg.de/) | Potsdam | [potsdam.de](https://www.potsdam.de/) |
+| Bremen | [bremen.de](https://www.bremen.de/) | - | - |
+| Hamburg | [hamburg.de](https://www.hamburg.de/) | - | - |
+| Hessen | [hessen.de](https://www.hessen.de/) | Wiesbaden | [wiesbaden.de](https://www.wiesbaden.de/) |
+| Mecklenburg-Vorpommern | [mecklenburg-vorpommern.de](https://www.mecklenburg-vorpommern.de/) | Schwerin | [schwerin.de](https://www.schwerin.de/) |
+| Niedersachsen | [niedersachsen.de](https://www.niedersachsen.de/) | Hannover | [hannover.de](https://www.hannover.de/) |
+| Nordrhein-Westfalen | [land.nrw](https://www.land.nrw/) | Düsseldorf | [duesseldorf.de](https://www.duesseldorf.de/) |
+| Rheinland-Pfalz | [rlp.de](https://www.rlp.de/) | Mainz | [mainz.de](https://www.mainz.de/) |
+| Saarland | [saarland.de](https://www.saarland.de/) | Saarbrücken | [saarbruecken.de](https://www.saarbruecken.de/) |
+| Sachsen | [sachsen.de](https://www.sachsen.de/) | Dresden | [dresden.de](https://www.dresden.de/) |
+| Sachsen-Anhalt | [sachsen-anhalt.de](https://www.sachsen-anhalt.de/) | Magdeburg | [magdeburg.de](https://www.magdeburg.de/) |
+| Schleswig-Holstein | [schleswig-holstein.de](https://www.schleswig-holstein.de/) | Kiel | [kiel.de](https://www.kiel.de/) |
+| Thüringen | [thueringen.de](https://www.thueringen.de/) | Erfurt | [erfurt.de](https://www.erfurt.de/) |
 
 ---
 
