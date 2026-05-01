@@ -116,6 +116,20 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **AS:** [Der Senat](https://www.hamburg.de/politik-und-verwaltung/senat/senat-236762)
     *   **LS:** [Was ist der Senat?](https://www.hamburg.de/barrierefrei/leichte-sprache/politik/ls-der-senat-576194)
 
+### ✅ Stuttgart.de
+*   **Status:** `Sehr gut geeignet`
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery:** Start auf der Übersichtsseite [`stuttgart.de/leichte-sprache-index`](https://www.stuttgart.de/leichte-sprache-index). Extraktion aller Links, deren Text auf `(Leichte Sprache)` endet.
+    2.  **Alignment (Duale Strategie):**
+        *   **URL-Logik (Primär):** Die AS-Version ist in der Regel identisch mit der LS-URL, jedoch ohne den Query-Parameter `?sp:out=easy` (bzw. `?sp%3Aout=easy`).
+        *   **Link-Logik (Sekundär/Verifikation):** In jedem LS-Artikel findet sich ein Link mit dem Attribut `aria-label="Artikel in Alltags-Sprache"` (Klasse `.SP-Link`), der direkt auf die AS-Version verweist. Umgekehrt findet sich auf AS-Seiten ein entsprechender Link zur Leichten Sprache.
+    3.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Der Hauptinhalt wird aus dem `<main>`-Tag extrahiert.
+        *   **Bereinigung:** Entfernen von Funktionselementen wie `.SP-Intro__tools` (Sprachwechsler-Box) und `.SP-Linklist` (verwandte Links), um die Token-Zählung nicht zu verfälschen.
+*   **Beispielpaar:**
+    *   **AS:** [Personalausweis beantragen](https://www.stuttgart.de/organigramm/leistungen/personalausweis-beantragen-erstmalig-oder-nach-ablauf)
+    *   **LS:** [Personalausweis beantragen (LS)](https://www.stuttgart.de/organigramm/leistungen/personalausweis-beantragen-erstmalig-oder-nach-ablauf?sp%3Aout=easy)
+
 ---
 
 ## 2. Strukturelle & Inhalts-basierte Verknüpfung
