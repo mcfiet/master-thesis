@@ -59,13 +59,20 @@ def get_stuttgart_ls_articles(base_url):
     soup = BeautifulSoup(response.text, 'html.parser')
     ls_links = []
     
-    # Links usually end with (Leichte Sprache)
-    links = soup.find_all('a', string=lambda text: text and '(Leichte Sprache)' in text)
+    # Links are in SP-LinkList items and contain the text "(Leichte Sprache)"
+    # The text is often nested in spans like <span class="SP-Link__title">
+    links = soup.find_all('a', class_='SP-Link')
     for link in links:
-        href = link.get('href')
-        if href:
-            full_url = urljoin("https://www.stuttgart.de", href)
-            ls_links.append(full_url)
+        text = link.get_text(separator=" ", strip=True)
+        if '(Leichte Sprache)' in text:
+            href = link.get('href')
+            if href:
+                # Handle cases where href is just "?sp:out=easy" or similar
+                if href.startswith('?'):
+                    full_url = urljoin(base_url, href)
+                else:
+                    full_url = urljoin("https://www.stuttgart.de", href)
+                ls_links.append(full_url)
     
     return list(set(ls_links))
 
@@ -97,6 +104,7 @@ def main():
     total_as_tokens = 0
     pair_count = 0
     
+    # Limit for testing if needed, but here we go for all
     for ls_url in ls_urls:
         as_url = derive_as_url(ls_url)
         print(f"Processing: {ls_url} -> {as_url}")
