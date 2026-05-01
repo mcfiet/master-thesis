@@ -34,17 +34,56 @@ def extract_stuttgart_content(soup):
     if not main_content:
         return ""
 
-    # Remove non-content elements
-    for el in main_content.select('.SP-Intro__tools, .SP-Linklist, nav, footer, script, style'):
-        el.decompose()
+    # Remove known boilerplate containers
+    boilerplate_selectors = [
+        '.SP-Intro__tools', 
+        '.SP-LinkList', 
+        '.SP-ContentFooter',
+        '.SP-Share',
+        '.SP-SocialMedia',
+        '.SP-JumboButton__container',
+        '.SP-LastUpdatedTimestamp',
+        'nav', 
+        'footer', 
+        'script', 
+        'style',
+        'aside'
+    ]
+    for selector in boilerplate_selectors:
+        for el in main_content.select(selector):
+            el.decompose()
 
     texts = []
     # Focus on paragraphs, list items, and headings
     content_tags = main_content.find_all(['p', 'li', 'h1', 'h2', 'h3'])
+    
+    # Phrases to filter out or ignore
+    skip_phrases = [
+        "Seite teilen",
+        "Das könnte Sie auch interessieren",
+        "Übersetzt und geprüft vom",
+        "Büro für Leichte Sprache",
+        "Öffnet in einem neuen Tab",
+        "PDF -Datei",
+        "Stand:"
+    ]
+
     for tag in content_tags:
         text = tag.get_text(separator=" ", strip=True)
         if text:
-            texts.append(text)
+            # Check if text block should be skipped entirely
+            if any(text.startswith(p) for p in ["Das könnte Sie auch interessieren", "Seite teilen", "Stand:"]):
+                continue
+            
+            # Remove specific unwanted substrings
+            for phrase in skip_phrases:
+                text = text.replace(phrase, "").strip()
+            
+            # Basic cleanup of remaining text
+            text = re.sub(r'\s+', ' ', text).strip()
+            
+            if text and len(text) > 2: # Avoid tiny fragments
+                texts.append(text)
             
     return " ".join(texts)
 
