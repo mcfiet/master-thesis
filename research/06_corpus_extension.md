@@ -70,3 +70,35 @@ In dieser Sektion werden die Ergebnisse für die neu erschlossenen Quellen detai
 #### Beispielpaar
 *   **AS:** [Reisepass beantragen](https://www.stuttgart.de/organigramm/leistungen/reisepass-beantragen-erstmalig-oder-nach-ablauf)
 *   **LS:** [Reisepass beantragen (LS)](https://www.stuttgart.de/organigramm/leistungen/reisepass-beantragen-erstmalig-oder-nach-ablauf?sp%3Aout=easy)
+
+### 2. Wiesbaden.de
+
+#### Status & Statistiken
+*   **Skripte:** `scraper/wiesbaden_scraper.py` (Alignment) & `corpus_scrapers/wiesbaden_scraper.py` (Extraktion)
+*   **Ergebnis:** 41 Artikel-Paare nach Bereinigung (ursprünglich 44).
+*   **Token-Verteilung:**
+    *   Gesamt LS: 7.010 Tokens (Ø 171 pro Artikel)
+    *   Gesamt AS: 10.100 Tokens (Ø 246 pro Artikel)
+    *   Verhältnis (LS/AS): ~0,69
+
+#### Strategie (Übersicht & Alignment)
+1.  **Discovery:** Ähnlich wie bei Stuttgart (beide Städte nutzen offenbar das gleiche CMS/System), erfolgt das Alignment durch Anhängen oder Entfernen des Query-Parameters `?sp:easylanguage=1` (bzw. `?sp%3Aeasylanguage=1`).
+2.  **Content-Extraktion:** Extraktion zielt auf den Hauptcontainer (`article#SP-Content` oder `div.SP-Content__body`), unter Beibehaltung von Headern, Absätzen und Listen.
+
+#### Herausforderungen & Verbesserungen beim Scraper
+*   **UI-Rauschen:** Das initial generierte Corpus wies zahlreiche UI-Fragmente ("(Öffnet in einem neuen Tab)", Navigations- und Service-Links wie "Zum Fahrplan" oder "Routenplaner öffnen") auf. 
+*   **"Stubs" und leere Seiten:** Einige LS-Seiten enthielten so gut wie keinen Text (z.B. nur 2 bis 10 Wörter), während die dazugehörigen AS-Seiten extrem ausführlich waren.
+*   **Lösung:** Der Extraktor wurde deutlich verschärft:
+    *   Es wurde ein **Quality Filter** eingeführt: Nur Paare mit mindestens 40 Token auf der LS-Seite werden gespeichert.
+    *   Spezifische Blacklists für Navigationsphrasen wurden eingebaut und CSS-Klassen (`.SP-Link--simple-language`, `.SP-Navigation`) gezielt entfernt.
+    *   Das Resultat ist ein formal sehr sauberes Corpus ohne störendes Boilerplate.
+
+#### Strukturelle Probleme (Korpus-Qualität)
+Trotz des erfolgreichen Scrapings und der tiefen Bereinigung hat die manuelle Inspektion **gravierende strukturelle Probleme auf Seiten des Wiesbaden-Portals** offengelegt, die das Corpus für das Training eines KI-Modells weitestgehend unbrauchbar machen:
+*   **Mangelndes Alignment / Themenabweichung:** Die Redaktion pflegt unter der LS-URL oft Inhalte, die **nichts oder nur peripher** mit der Original-URL zu tun haben. Es handelt sich oft nicht um Text-zu-Text-Übersetzungen.
+    *   *Beispiel 1:* Auf der LS-Seite geht es um den *ÖKOPROFIT-Klub* für Unternehmen, auf der AS-Seite um ein *Energieeffizienz-Netzwerk*.
+    *   *Beispiel 2:* Die LS-Seite erklärt generisch den *Waldnaturschutz*, während die AS-Seite die historische Entwicklung (*Wachstum des Waldes seit dem 19. Jahrhundert*) behandelt.
+    *   *Beispiel 3:* Ein LS-Text erklärt anschaulich den Begriff *Smart City*, der AS-Text ist hingegen lediglich eine *Pressemitteilung zu einer Poster-Kampagne*.
+*   **CMS Mapping-Fehler:** In einigen Fällen führt die LS-URL zu völlig falschen Inhalten (z.B. Murnau-Filmtheater LS-Seite enthält den Text über die Caligari FilmBühne).
+
+**Fazit:** Der Scraper extrahiert technisch perfekt, aber die Ausgangsdaten von `wiesbaden.de` sind semantisch nicht parallel. Ein Modell würde hier fälschlicherweise lernen, dass "Leichte Sprache" bedeutet, über inhaltlich völlig andere Fakten zu sprechen. Dieser Teilkorpus sollte bei der Modell-Trainingsphase mit großer Vorsicht genossen oder gänzlich ausgeschlossen werden.
