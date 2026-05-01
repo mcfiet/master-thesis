@@ -130,6 +130,20 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **AS:** [Personalausweis beantragen](https://www.stuttgart.de/organigramm/leistungen/personalausweis-beantragen-erstmalig-oder-nach-ablauf)
     *   **LS:** [Personalausweis beantragen (LS)](https://www.stuttgart.de/organigramm/leistungen/personalausweis-beantragen-erstmalig-oder-nach-ablauf?sp%3Aout=easy)
 
+### ✅ Wiesbaden.de
+*   **Status:** `Sehr gut geeignet` (Umfangreich, technischer Switch)
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery (Sitemap-Crawling):** Da kein zentraler Index für Leichte Sprache existiert, nutzt der Scraper die Sitemaps (`sitemap.xml`).
+    2.  **Filterung:** Aus den ca. 60 Sub-Sitemaps werden nur deutsche Basis-URLs extrahiert (ca. 9.000 URLs). Fremdsprachige Pfade (z.B. `/en/`, `/fr/`, `/ar/`) werden ignoriert.
+    3.  **Discovery (Toggle-Check):** Jede gefilterte URL wird asynchron geladen und auf das Vorhandensein des "Leichte Sprache"-Schalters geprüft (Selektor: `a.SP-Link--simple-language` oder Link mit Parameter `easylanguage=1`).
+    4.  **Alignment:** Die LS-Version wird durch den URL-Parameter `?sp:easylanguage=1` aufgerufen. Das Skript speichert das Paar aus Original-URL und LS-URL.
+    5.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Der Text wird aus `article#SP-Content` oder `div.SP-Content__body` extrahiert (relevante Tags: `h1`, `h2`, `h3`, `p`, `li`).
+        *   **Bereinigung:** Entfernung von Flyouts, Datenschutz-Barrieren (`.SP-PrivacyBarrier`), Bookmark-Boxen und Navigations-Pfaden, um Rauschen zu minimieren.
+*   **Beispielpaar:**
+    *   **AS:** [Digitaler Zwilling Wiesbaden](https://www.wiesbaden.de/rathaus/smart-city/digitaler-zwilling)
+    *   **LS:** [Digitaler Zwilling (LS)](https://www.wiesbaden.de/rathaus/smart-city/digitaler-zwilling?sp%3Aeasylanguage=1)
+
 ---
 
 ## 2. Strukturelle & Inhalts-basierte Verknüpfung
