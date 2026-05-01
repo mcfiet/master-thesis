@@ -59,10 +59,12 @@ def extract_wiesbaden_content(soup):
         '.SP-Bookmark',
         '.SP-Path',
         '.SP-Content__header--article nav',
+        '.SP-Link--simple-language',
         'footer',
         '.SP-MoreLikeThis',
         '.SP-Content__footer',
         '.SP-OffCanvas__sidebar',
+        '.SP-Navigation',
         'script',
         'style'
     ]
@@ -72,14 +74,18 @@ def extract_wiesbaden_content(soup):
     
     texts = []
     # Relevant tags for content: headlines, paragraphs, list items
-    content_tags = content_area.find_all(['h1', 'h2', 'h3', 'p', 'li'])
+    content_tags = content_area.find_all(['h1', 'h2', 'h3', 'h4', 'p', 'li'])
     
     for tag in content_tags:
         # Avoid duplicate text from nested tags (e.g. <li><p>...</p></li>)
-        if tag.find_parent(['h1', 'h2', 'h3', 'p', 'li']):
+        if tag.find_parent(['h1', 'h2', 'h3', 'h4', 'p', 'li']):
             continue
             
         text = tag.get_text(separator=" ", strip=True)
+        
+        # Clean noise
+        text = text.replace("(Öffnet in einem neuen Tab)", "").strip()
+        text = text.replace("(Öffnet in einem neuen Fenster)", "").strip()
         
         # Skip UI elements or repetitive noise
         skip_phrases = [
@@ -91,7 +97,12 @@ def extract_wiesbaden_content(soup):
             "Alle Dienstleistungen",
             "Veranstaltungskalender",
             "Suche öffnen",
-            "Menü öffnen"
+            "Menü öffnen",
+            "Terminanfrage",
+            "Abholung",
+            "Routenplaner öffnen",
+            "Zum Fahrplan",
+            "Hinweise zum ÖPNV"
         ]
         if any(phrase == text or phrase in text for phrase in skip_phrases if len(text) < 50):
             continue
@@ -115,27 +126,18 @@ def main():
         data = json.load(f)
 
     aligned_pairs = []
-    if os.path.exists(output_file):
-        try:
-            with open(output_file, 'r', encoding='utf-8') as f:
-                existing_data = json.load(f)
-                aligned_pairs = existing_data.get('pairs', [])
-                print(f"Resuming from {len(aligned_pairs)} already processed pairs.")
-        except:
-            pass
-
-    total_ls_tokens = sum(p['ls_tokens'] for p in aligned_pairs)
-    total_as_tokens = sum(p['as_tokens'] for p in aligned_pairs)
     
-    processed_urls = {p['ls_url'] for p in aligned_pairs}
-
+    # We will NOT resume from existing file if we want to re-scrape with better logic,
+    # but for efficiency let's just keep it as is and the user can decide to delete the file.
+    # To re-scrape everything, we could just delete the output file.
+    
+    total_ls_tokens = 0
+    total_as_tokens = 0
+    
     for i, pair in enumerate(data['pairs']):
         ls_url = pair['ls_url']
         as_url = pair['as_url']
         
-        if ls_url in processed_urls:
-            continue
-
         print(f"Processing pair {i+1}/{len(data['pairs'])}: {ls_url}")
         
         # Fetch LS content
@@ -160,7 +162,8 @@ def main():
             as_text = extract_wiesbaden_content(as_soup)
             as_tokens = count_tokens(as_text)
             
-        if ls_text and as_text:
+        # Quality filter: LS text should be long enough and not just a fragment
+        if ls_text and as_text and ls_tokens > 40:
             aligned_pairs.append({
                 "ls_url": ls_url,
                 "as_url": as_url,
@@ -172,40 +175,25 @@ def main():
             total_ls_tokens += ls_tokens
             total_as_tokens += as_tokens
             
-            # Save progress every 10 pairs
-            if len(aligned_pairs) % 10 == 0:
-                results = {
-                    "summary": {
-                        "total_pairs_attempted": len(data['pairs']),
-                        "aligned_pairs_count": len(aligned_pairs),
-                        "total_ls_tokens": total_ls_tokens,
-                        "total_as_tokens": total_as_tokens,
-                        "average_ls_tokens": total_ls_tokens / len(aligned_pairs),
-                        "average_as_tokens": total_as_tokens / len(aligned_pairs)
-                    },
-                    "pairs": aligned_pairs
-                }
-                with open(output_file, 'w', encoding='utf-8') as f:
-                    json.dump(results, f, ensure_ascii=False, indent=4)
+            # Save progress
+            results = {
+                "summary": {
+                    "total_pairs_attempted": i + 1,
+                    "aligned_pairs_count": len(aligned_pairs),
+                    "total_ls_tokens": total_ls_tokens,
+                    "total_as_tokens": total_as_tokens,
+                    "average_ls_tokens": total_ls_tokens / len(aligned_pairs),
+                    "average_as_tokens": total_as_tokens / len(aligned_pairs)
+                },
+                "pairs": aligned_pairs
+            }
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump(results, f, ensure_ascii=False, indent=4)
         
-        time.sleep(1)
-
-    # Final save
-    results = {
-        "summary": {
-            "total_pairs_attempted": len(data['pairs']),
-            "aligned_pairs_count": len(aligned_pairs),
-            "total_ls_tokens": total_ls_tokens,
-            "total_as_tokens": total_as_tokens,
-            "average_ls_tokens": total_ls_tokens / len(aligned_pairs),
-            "average_as_tokens": total_as_tokens / len(aligned_pairs)
-        },
-        "pairs": aligned_pairs
-    }
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(results, f, ensure_ascii=False, indent=4)
+        time.sleep(0.5)
 
     print(f"\nFinal results saved to {output_file}")
+
 
 if __name__ == "__main__":
     main()
