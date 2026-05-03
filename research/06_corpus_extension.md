@@ -103,6 +103,29 @@ Trotz des erfolgreichen Scrapings und der tiefen Bereinigung hat die manuelle In
 
 **Fazit:** Der Scraper extrahiert technisch perfekt, aber die Ausgangsdaten von `wiesbaden.de` sind semantisch nicht parallel. Ein Modell würde hier fälschlicherweise lernen, dass "Leichte Sprache" bedeutet, über inhaltlich völlig andere Fakten zu sprechen. Dieser Teilkorpus sollte bei der Modell-Trainingsphase mit großer Vorsicht genossen oder gänzlich ausgeschlossen werden.
 
+### 3. Hannover.de
+
+#### Status & Statistiken
+*   **Skripte:** `scraper/hannover_scraper.py` (Alignment) & `corpus_scrapers/hannover_scraper.py` (Extraktion)
+*   **Ergebnis:** 846 valide Artikel-Paare.
+*   **Token-Verteilung:**
+    *   Gesamt LS: 473.305 Tokens (Ø 559 pro Artikel)
+    *   Gesamt AS: 400.422 Tokens (Ø 473 pro Artikel)
+    *   Verhältnis (LS/AS): ~1,18 (LS-Texte sind oft länger, da mehr erklärender Kontext hinzugefügt wird)
+
+#### Rechtlicher Hintergrund (Niedersachsen)
+Die Bereitstellung von Inhalten in Leichter Sprache auf `hannover.de` ist stark durch das **Niedersächsische Behindertengleichstellungsgesetz (NBGG)** geprägt. Speziell **§ 9a NBGG** (in Verbindung mit der NBITVO) verpflichtet öffentliche Stellen in Niedersachsen zur Barrierefreiheit und dazu, wesentliche Informationen sowie Navigationshinweise in Leichter Sprache bereitzustellen. Im Gegensatz zu vielen anderen Behörden geht Hannover jedoch weit über das gesetzliche Minimum hinaus und übersetzt regelmäßig aktuelle Nachrichten und Serviceinformationen.
+
+#### Strategie (Übersicht & Alignment)
+1.  **Discovery (Rekursives Crawling):** Da die offiziellen XML-Sitemaps von hannover.de unvollständig waren und die LS-Artikel nicht erfassten, wurde eine rekursive Crawling-Strategie implementiert. Ausgehend von der Startseite `https://www.hannover.de/Leichte-Sprache` sammelt der Scraper systematisch alle internen Links innerhalb des `/Leichte-Sprache`-Pfades.
+2.  **Alignment (Canonical-Link-Extraktion):** Ein struktureller Glücksfall auf der Website: Die Artikel im LS-Bereich enthalten verlässliche `<link rel="canonical">`-Tags, die direkt auf die alltagssprachliche Originalversion (`AS-URL`) verweisen. Der URL-Ausrichter besucht die LS-Seite, liest den Canonical-Tag aus und speichert das Paar, sofern der Link nicht in den LS-Bereich zurückführt.
+
+#### Herausforderungen & Verbesserungen
+*   **Mediopunkt-Nutzung:** Die LS-Texte auf hannover.de nutzen sehr konsequent den Mediopunkt (`∙`) zur Silbentrennung (z. B. `Bewohner∙park∙plätze`). Dies ist ein wichtiges Stilmittel der Leichten Sprache und wurde bei der Extraktion strikt beibehalten, da es wertvolle linguistische Merkmale für das Modelltraining liefert.
+*   **Boilerplate und Rauschen:** Nach einem ersten Extraktionsdurchlauf zeigte eine Korpus-Analyse, dass die Daten extrem mit Boilerplate kontaminiert waren.
+    *   *Problem:* Wiederkehrende Phrasen wie "Zur Seite in Alltagssprache", "Weitere Informationen in Leichter Sprache" oder "Auf dieser Seite erfahren Sie:" tauchten in fast jedem Textpaar auf. Dies hätte zu starkem Rauschen und Überanpassung (Overfitting) beim Modelltraining geführt.
+    *   *Lösung:* Der Extraktor (`corpus_scrapers/hannover_scraper.py`) wurde mit einer umfassenden Blacklist-Filterung versehen. Durch String-Matching wurden diese Metatexte sowie UI-Elemente ("Drucken", "E-Mail") konsequent herausgefiltert. Nach dem Neuschreiben des Korpus stieg die semantische Qualität der Daten signifikant an.
+
 ---
 
 ## Zentrale Erkenntnis: Gesetzliche Verpflichtungen vs. Korpus-Realität
