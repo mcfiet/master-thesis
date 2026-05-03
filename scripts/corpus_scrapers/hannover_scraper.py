@@ -85,7 +85,11 @@ def extract_hannover_content(soup):
             "Vorlesen",
             "E-Mail",
             "Drucken",
-            "Diese Nachricht in Leichter Sprache ist vom"
+            "Diese Nachricht in Leichter Sprache ist vom",
+            "Zur Seite in Alltagssprache",
+            "Zur Seite in Leichter Sprache",
+            "Weitere Informationen in Leichter Sprache",
+            "Auf dieser Seite erfahren Sie:"
         ]
         if any(phrase == text or phrase in text for phrase in skip_phrases if len(text) < 60):
             continue
