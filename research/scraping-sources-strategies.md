@@ -130,6 +130,19 @@ Diese Quellen sind am verlässlichsten, da die Version in Leichter Sprache (LS) 
     *   **AS:** [Personalausweis beantragen](https://www.stuttgart.de/organigramm/leistungen/personalausweis-beantragen-erstmalig-oder-nach-ablauf)
     *   **LS:** [Personalausweis beantragen (LS)](https://www.stuttgart.de/organigramm/leistungen/personalausweis-beantragen-erstmalig-oder-nach-ablauf?sp%3Aout=easy)
 
+### ✅ Hannover.de
+*   **Status:** `Sehr gut geeignet` (Sehr großes Artikelvolumen, vorbildliches Canonical-Alignment)
+*   **Strategie (Übersicht & Alignment):**
+    1.  **Discovery (Rekursives Crawling):** Da die offiziellen XML-Sitemaps der Stadt Hannover unvollständig sind und die Artikel in Leichter Sprache nicht auflisten, wird ein rekursiver Crawler eingesetzt. Ausgehend von der Startseite `/Leichte-Sprache` sammelt er systematisch alle internen Links innerhalb dieses Verzeichnisses.
+    2.  **Alignment (Canonical Link):** Die Website nutzt ein technisch sehr sauberes Setup: Jeder LS-Artikel besitzt im HTML-Kopf einen `<link rel="canonical" href="...">` Tag. Dieser verweist **direkt auf die Originalversion in Alltagssprache**. Das Skript extrahiert diesen Link und ordnet die Artikelpaare so automatisch einander zu (sofern der Canonical-Link nicht auf eine andere LS-Seite verweist).
+    3.  **Content-Extraktion & Token-Zählung:**
+        *   **Selektoren:** Der relevante Fließtext befindet sich meist in `article.content-detail` oder `div.ezlandingpage-field` (Tags: `h1`, `h2`, `h3`, `p`, `li`).
+        *   **Bereinigung (Boilerplate):** Hannover integriert auf LS-Seiten extrem viele Standardfloskeln. Ein reiner Tag-Filter reicht hier nicht aus. Das Extraktionsskript muss gezielt nach Phrasen suchen und die Textzeilen verwerfen, wenn sie "Zur Seite in Alltagssprache", "Weitere Informationen in Leichter Sprache", "Auf dieser Seite erfahren Sie:" oder reine UI-Hinweise ("Drucken", "E-Mail") enthalten.
+        *   **Linguistische Besonderheit:** Die Redaktion nutzt sehr konsequent den **Mediopunkt (`∙`)** zur Trennung von Komposita (z. B. `Bewohner∙park∙plätze`). Dieser wird in den extrahierten Texten absichtlich belassen.
+*   **Beispielpaar:**
+    *   **AS:** [Kommunalwahlen 2026 in der Region Hannover](https://www.hannover.de/Leben-in-der-Region-Hannover/Politik/Wahlen-Statistik/Kommunalwahlen-2026-in-der-Region-Hannover)
+    *   **LS:** [Kommunal∙wahlen 2026 in der Region Hannover](https://www.hannover.de/Leichte-Sprache/Hannover-und-Region/Politik/Wahlen/Kommunal%E2%88%99wahlen-2026-in-der-Region-Hannover)
+
 ### ✅ Wiesbaden.de
 *   **Status:** `Sehr gut geeignet` (Umfangreich, technischer Switch)
 *   **Strategie (Übersicht & Alignment):**
