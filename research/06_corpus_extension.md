@@ -102,3 +102,25 @@ Trotz des erfolgreichen Scrapings und der tiefen Bereinigung hat die manuelle In
 *   **CMS Mapping-Fehler:** In einigen Fällen führt die LS-URL zu völlig falschen Inhalten (z.B. Murnau-Filmtheater LS-Seite enthält den Text über die Caligari FilmBühne).
 
 **Fazit:** Der Scraper extrahiert technisch perfekt, aber die Ausgangsdaten von `wiesbaden.de` sind semantisch nicht parallel. Ein Modell würde hier fälschlicherweise lernen, dass "Leichte Sprache" bedeutet, über inhaltlich völlig andere Fakten zu sprechen. Dieser Teilkorpus sollte bei der Modell-Trainingsphase mit großer Vorsicht genossen oder gänzlich ausgeschlossen werden.
+
+---
+
+## Zentrale Erkenntnis: Gesetzliche Verpflichtungen vs. Korpus-Realität
+
+Im Zuge der Recherche zu den Portal-Strukturen von öffentlichen Stellen wurde deutlich, warum ein Großteil der Behörden-Websites zwar einen Bereich für "Leichte Sprache" besitzt, sich dort aber meist keine 1:1 übersetzten Artikel oder Blogposts für ein Parallelkorpus finden lassen.
+
+### Rechtlicher Hintergrund (BITV 2.0 & BGG)
+Die Verpflichtung zur Barrierefreiheit für öffentliche Stellen in Deutschland ist im **Behindertengleichstellungsgesetz (BGG)** und der **Barrierefreie-Informationstechnik-Verordnung (BITV 2.0)** verankert:
+
+*   **[BITV 2.0 § 4 i.V.m. Anlage 2](https://www.gesetze-im-internet.de/bitv_2_0/__4.html):** Öffentliche Stellen sind verpflichtet, auf der Startseite ihrer Website Links zu folgenden Informationen in Leichter Sprache bereitzustellen:
+    1.  **Wesentliche Inhalte:** Informationen über die Aufgaben und Angebote der Behörde.
+    2.  **Navigation:** Erläuterungen zur Nutzung der Website.
+    3.  **Erklärung zur Barrierefreiheit:** Informationen zum Stand der Barrierefreiheit, dem **Feedback-Mechanismus** (Möglichkeit zur Meldung von Mängeln) sowie Hinweise auf das **Schlichtungsverfahren**.
+*   **Rechtswidrigkeit:** Eine Behörde handelt bereits dann rechtswidrig, wenn diese spezifischen Einstiegsinformationen nicht in Leichter Sprache vorhanden sind.
+*   **Keine Vollübersetzungspflicht:** Wichtig für die Korpus-Erstellung ist die Erkenntnis, dass das Gesetz **keine Pflicht zur vollständigen Übersetzung** aller Inhalte (z.B. tägliche News, Fachartikel, Archiv-Inhalte) in Leichte Sprache vorsieht. Es ist lediglich gefordert, Informationen "vermehrt" in Leichter Sprache bereitzustellen (§ 11 BGG).
+
+### Implikationen für die Forschung
+Diese gesetzliche "Minimallösung" erklärt eine wesentliche Herausforderung bei der Datensatz-Erstellung:
+1.  **Minimaler Erfüllungsgrad:** Ein Großteil der Behörden-Websites setzt exakt nur die gesetzlich geforderten Basistexte um (Einstiegsseite, Erklärung der Navigation und Barrierefreiheit).
+2.  **Fehlendes 1:1 Alignment:** Es gibt auf den allermeisten dieser Seiten keine 1:1-Übersetzungen von tagesaktuellen Artikeln, Pressemitteilungen oder Blog-Posts. Selbst wenn ein "Leichte Sprache"-Button global im Website-Header verankert ist, führt dieser beim Klicken auf regulären Unterseiten oft nur zurück auf die immer gleiche, generische Übersichtsseite.
+3.  **Quellenauswahl:** Für den Aufbau eines hochwertigen Parallelkorpus müssen Portale identifiziert werden, die proaktiv und deutlich über das gesetzliche Minimum hinausgehen (z.B. Nachrichtenseiten wie `mdr.de` oder Städte mit dedizierten LS-Redaktionen wie `hamburg.de` oder `stuttgart.de`). Ein rein automatisches Crawling von Standard-Behördenseiten führt meist ins Leere, da schlichtweg keine Text-Paare existieren.
