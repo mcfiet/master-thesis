@@ -216,13 +216,17 @@ Not every article in standard language is translated into Easy Language, but  ev
 
 ---
 
-mdr.de  (normal german)
+<!-- _class: image-caption -->
+
+### mdr.de  (normal german)
 
 ![](img_pptx_extract/ppt/media/image3.png "Google Shape;121;p22")
 
 ---
 
-mdr.de  (simple german)
+<!-- _class: image-caption -->
+
+### mdr.de  (simple german)
 
 ![](img_pptx_extract/ppt/media/image1.png "Google Shape;128;p23")
 
@@ -339,7 +343,13 @@ Analysis:  Investigating provided crawler scripts and alignment logic.
 
 Key Insight:  The project moves away from generic scraping toward source-specific extraction heuristics to ensure high-quality sentence alignment.
 
-### Extraction Strategies (Part I) 
+---
+
+<!-- _class: split -->
+
+### Extraction Strategies
+
+<div class="column-left">
 
 Apotheken Umschau:  Targeting specific link titles (title=\"hier\") for back-references.
 
@@ -351,11 +361,17 @@ Sozialpolitik.com:  Filtering for links with the class underline easy and specif
 
 \<a href=\"/es/die-arbeits-welt\" hreflang=\"de-DE\" class=\"underline easy\"\>Leichte Sprache\</a\>
 
----
+</div>
+
+<div class="column-right">
 
 ![](img_pptx_extract/ppt/media/image8.png "Google Shape;199;p33")
 
-### E xtraction Strategies (Part II) 
+</div>
+
+---
+
+### Extraction Strategies
 
 Brand Eins:  Unique case where both languages exist on the same URL; differentiation achieved through CSS color coding (Red text = Easy Language).
 
