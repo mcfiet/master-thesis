@@ -261,9 +261,9 @@ While the URLs for the blog posts differ, there is a **button** on each page tha
 
 At Mitteldeutscher Rundfunk, the links aren't embedded in the URL, but the user guidance within the text is excellent. 
 
-Below every article in Easy Language, there is a  direct link  to its counterpart in standard language and  vice versa.  
+Below every article in Easy Language, there is a **direct link** to its counterpart in standard language and **vice versa**.  
 
-Not every article in standard language is translated into Easy Language, but  every article in Easy Language is translated into standard language  (as verified by random sampling).
+Not every article in standard language is translated into Easy Language, but **every article in Easy Language is translated into standard language** (as verified by random sampling).
 
 ---
 
@@ -287,29 +287,29 @@ Not every article in standard language is translated into Easy Language, but  ev
 
 Unfortunately, Tagesschau stands out negatively when it comes to integrating standard and simplified language, as it lacks a user-friendly and systematic structure:
 
--  Lack of links:  There is no button or direct link within the articles to easily switch back and forth between the different language levels.
+- **Lack of links:** There is no button or direct link within the articles to easily switch back and forth between the different language levels.
 
--  Inconsistent URL structure:  While the basic structure of the URLs appears well-thought-out, in practice the articles are named inconsistently. There is no reliable pattern (such as a fixed prefix), making a systematic or even automated mapping of the texts impossible.
+- **Inconsistent URL structure:** While the basic structure of the URLs appears well-thought-out, in practice the articles are named inconsistently. There is no reliable pattern (such as a fixed prefix), making a systematic or even automated mapping of the texts impossible.
 
--  High manual effort:  To find parallel texts, the only option is a time-consuming manual search for the semantically matching counterpart.
+- **High manual effort:** To find parallel texts, the only option is a time-consuming manual search for the semantically matching counterpart.
 
--  Significant reduction in content:  Even if you have found the corresponding pair of articles, a direct text comparison is difficult because the version in Easy Language has been drastically shortened and greatly simplified in terms of content.
+- **Significant reduction in content:** Even if you have found the corresponding pair of articles, a direct text comparison is difficult because the version in Easy Language has been drastically shortened and greatly simplified in terms of content.
 
 ---
 
 ### Next Steps 
 
-Researching additional sources:  Searching for other news portals or official government websites (e.g., bpb.de) that systematically provide LS texts.
+**Researching additional sources:** Searching for other news portals or official government websites (e.g., bpb.de) that systematically provide LS texts.
 
-Quantification of sources:  Determining the approximate number of available article pairs on  mdr.de  and  sozialpolitik.com .
+**Quantification of sources:** Determining the approximate number of available article pairs on  mdr.de  and  sozialpolitik.com .
 
 \_\_\_\_\_\_\_\_
 
-Scraper development:  Creating a prototype for the automated extraction of articles from sozialpolitik.com (using URL logic).
+**Scraper development:** Creating a prototype for the automated extraction of articles from sozialpolitik.com (using URL logic).
 
-MDR crawler:  Investigation into whether the links between LS and standard language on mdr.de can be systematically crawled.
+**MDR crawler:** Investigation into whether the links between LS and standard language on mdr.de can be systematically crawled.
 
-Matching strategy for Tagesschau:  Evaluation of whether semantic similarity analyses (e.g., via embeddings) can be used to automatically establish the missing links in Tagesschau.
+**Matching strategy for Tagesschau:** Evaluation of whether semantic similarity analyses (e.g., via embeddings) can be used to automatically establish the missing links in Tagesschau.
 
 ---
 <!-- _class: section-header -->
@@ -320,31 +320,31 @@ Matching strategy for Tagesschau:  Evaluation of whether semantic similarity ana
 
 ### Evaluation of institutional and governmental websites. 
 
-Observations:  Significant availability of \"Easy Language\" (Leichte Sprache) sections, but alignment Issue.
+**Observations:** Significant availability of \"Easy Language\" (Leichte Sprache) sections, but alignment Issue.
 
-Alignment Issue:  Most institutional pages provide summaries or simplified overviews rather than 1:1 translations of standard articles.
+**Alignment Issue:** Most institutional pages provide summaries or simplified overviews rather than 1:1 translations of standard articles.
 
-Terminological Inconsistency:  Frequent overlap and confusion between \"Plain Language\" (Einfache Sprache) and \"Easy Language.\"
+**Terminological Inconsistency:** Frequent overlap and confusion between \"Plain Language\" (Einfache Sprache) and \"Easy Language.\"
 
 ---
 
 ### Saarländischer Rundfunk (SR) 
 
-Problem:  Standard language content is often video/audio (broadcast format), while the Easy Language version is a brief text summary.
+**Problem:** Standard language content is often video/audio (broadcast format), while the Easy Language version is a brief text summary.
 
-Impact:  Automated 1:1 alignment is difficult due to the format mismatch.
+**Impact:** Automated 1:1 alignment is difficult due to the format mismatch.
 
-Technical Workaround:  Using metadata (Open Graph/OG-Images) to verify if two different formats refer to the same news event + Date of Publishment
+**Technical Workaround:** Using metadata (Open Graph/OG-Images) to verify if two different formats refer to the same news event + Date of Publishment
 
 ---
 
 ### Media Portals with High Alignment Potential 
 
-MDR (Mitteldeutscher Rundfunk):  High suitability for scraping due to clear XML sitemaps and explicit \"linking mechanisms\" in the HTML structure.
+**MDR (Mitteldeutscher Rundfunk):** High suitability for scraping due to clear XML sitemaps and explicit \"linking mechanisms\" in the HTML structure.
 
-taz:  Alignment is present but less systematic; links are often embedded manually in italicized paragraphs at the end of articles with word  "hier" .
+**taz:** Alignment is present but less systematic; links are often embedded manually in italicized paragraphs at the end of articles with word  "hier" .
 
-Conclusion:  Media portals show significantly higher potential for 1:1 alignment than administrative/government portals.
+**Conclusion:** Media portals show significantly higher potential for 1:1 alignment than administrative/government portals.
 
 ---
 <!-- _class: split -->
@@ -359,14 +359,14 @@ Conclusion:  Media portals show significantly higher potential for 1:1 alignment
 
 <div class="column-right">
 
-Objective: Establishing a "Ground Truth" for specific terminology.
+**Objective:** Establishing a "Ground Truth" for specific terminology.
 
 Resources Analyzed: 
 
 - **Hurraki**: A specialized Wiki for Easy Language.
 - **Nachrichtenleicht**: A dictionary section providing definitions for complex terms.
 
-Benefit: These provide direct 1:1 word/phrase mappings, essential for terminological consistency.
+**Benefit:** These provide direct 1:1 word/phrase mappings, essential for terminological consistency.
 
 
 </div>
@@ -375,25 +375,23 @@ Benefit: These provide direct 1:1 word/phrase mappings, essential for terminolog
 
 ### Literature Review: Existing Corpora (Status 2023) 
 
-Analysis of Klaper et al. (2013)
+**Analysis of Klaper et al. (2013)**
 
-Pros:  High-quality 1:1 alignment; approx. 70,000 tokens.
+**Pros:** High-quality 1:1 alignment; approx. 70,000 tokens.
 
-Cons:  \"Source decay\"---many URLs from 2013 are no longer active.
+**Cons:** \"Source decay\"---many URLs from 2013 are no longer active.
 
-Next Step:  Evaluating the reconstruction of this corpus using the Wayback Machine (Internet Archive).
+**Next Step:** Evaluating the reconstruction of this corpus using the Wayback Machine (Internet Archive).
 
 ---
 
 ### Literature Review: Existing Corpora (Status 2023) 
 
----
+**A New Aligned Simple German Corpus (ACL 2023)**
 
-A New Aligned Simple German Corpus (ACL 2023)
+**Analysis:** Investigating provided crawler scripts and alignment logic.
 
-Analysis:  Investigating provided crawler scripts and alignment logic.
-
-Key Insight:  The project moves away from generic scraping toward source-specific extraction heuristics to ensure high-quality sentence alignment.
+**Key Insight:** The project moves away from generic scraping toward source-specific extraction heuristics to ensure high-quality sentence alignment.
 
 ---
 
@@ -429,25 +427,25 @@ Key Insight:  The project moves away from generic scraping toward source-specifi
 
 ### Extraction Strategies
 
-Brand Eins:  Unique case where both languages exist on the same URL; differentiation achieved through CSS color coding (Red text = Easy Language).
+**Brand Eins:** Unique case where both languages exist on the same URL; differentiation achieved through CSS color coding (Red text = Easy Language).
 
-Stadt Köln:  Using exact string matching for navigational links (\"Diese Seite in Alltags-Sprache lesen\").
+**Stadt Köln:** Using exact string matching for navigational links (\"Diese Seite in Alltags-Sprache lesen\").
 
-Summary:  Technical research confirms a \"one-size-fits-all\" scraper is ineffective; custom logic for each domain is required.
+**Summary:** Technical research confirms a \"one-size-fits-all\" scraper is ineffective; custom logic for each domain is required.
 
 ---
 
 ### Conclusion & Next Steps 
 
-Current Activity:  Development of a quantification script to scan identified sources and calculate current token counts.
+**Current Activity:** Development of a quantification script to scan identified sources and calculate current token counts.
 
-Pipeline Integration:  These counting scripts serve as \"pre-scrapers\" to validate data density before full extraction.
+**Pipeline Integration:** These counting scripts serve as \"pre-scrapers\" to validate data density before full extraction.
 
-Literature & Expansion:  Systematic review of remaining papers from the \"Existing Corpora (Status 2023)\" list.
+**Literature & Expansion:** Systematic review of remaining papers from the \"Existing Corpora (Status 2023)\" list.
 
 Identification  of additional  sources  and site-specific  scraping  mechanisms.
 
-Goal:  Adaptation of the Toborek et al. crawler logic to the newly identified structures (MDR, taz, etc.).
+**Goal:** Adaptation of the Toborek et al. crawler logic to the newly identified structures (MDR, taz, etc.).
 
 ---
 <!-- _class: section-header -->
@@ -458,35 +456,35 @@ Goal:  Adaptation of the Toborek et al. crawler logic to the newly identified st
 
 ### Initial Scraping for Token Count 
 
-Goal:  Create a diverse, multi-domain corpus exceeding current benchmarks in quality and thematic breadth.
+**Goal:** Create a diverse, multi-domain corpus exceeding current benchmarks in quality and thematic breadth.
 
-The Pipeline:
+**The Pipeline:**
 
-Discovery:  Crawling target websites for \"Simple Language\" (LS) sections.
+**Discovery:** Crawling target websites for \"Simple Language\" (LS) sections.
 
-Alignment:  Matching LS articles to their \"Standard Language\" (AS) originals.
+**Alignment:** Matching LS articles to their \"Standard Language\" (AS) originals.
 
-Extraction:  Pulling raw content for initial analysis.
+**Extraction:** Pulling raw content for initial analysis.
 
-Target Scope:  News, Health, Administration, Social Policy, and Economy.
+**Target Scope:** News, Health, Administration, Social Policy, and Economy.
 
 ---
 
 ### Results: Media & News 
 
-MDR  (Mitteldeutscher Rundfunk):
+**MDR**  (Mitteldeutscher Rundfunk):
 
 298 LS articles scanned → 242 successfully aligned.
 
 Largest news source in the corpus (\~300k tokens total).
 
-taz  (die tageszeitung):
+**taz** (die tageszeitung):
 
 Small but high-quality subset (7 pairs aligned).
 
 Challenge: One LS text often summarizes multiple AS articles.
 
-Brand Eins :
+**Brand Eins:**
 
 90 articles scanned → 34 pairs aligned.
 
@@ -496,19 +494,19 @@ Focus on economic and social narratives.
 
 ### Results: Public Sector & Administration 
 
-Hamburg.de:
+**Hamburg.de:**
 
 156 articles scanned → 155 initial pairs.
 
 Broad coverage of city services and regulations.
 
-Stadt Köln :
+**Stadt Köln:**
 
 95 articles scanned → 57 pairs aligned.
 
 Historical data recovered from archives.
 
-Behindertenbeauftragter:
+**Behindertenbeauftragter:**
 
 95 articles scanned → 73 pairs aligned.
 
@@ -518,19 +516,19 @@ Policy-focused content with technical terminology.
 
 ### Results: Specialized Topics 
 
-Apotheken Umschau  (Health/Medical):
+**Apotheken Umschau** (Health/Medical):
 
 484 articles scanned → 161 pairs aligned.
 
 Critical source for medical term simplification.
 
-Sozialpolitik.com :
+**Sozialpolitik.com:**
 
 22 articles → 22 pairs (100% success rate).
 
 Educational content on the German social system.
 
-Lebenshilfe Main-Taunus :
+**Lebenshilfe Main-Taunus:**
 
 59 articles scanned → 46 pairs aligned.
 
@@ -539,8 +537,6 @@ Community-level communication and event reporting.
 ---
 
 ### Global Scraping Statistics 
-
----
 
 Metric                       Result
   ---------------------------- ----------
@@ -552,6 +548,8 @@ Metric                       Result
   Length Ratio (AS:LS)         1.65 : 1
 
 Tokens: words and punctuation
+
+---
 
 ### Findings & Lessons Learned 
 
