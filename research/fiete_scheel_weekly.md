@@ -179,11 +179,28 @@ style: |
     box-sizing: border-box;
     overflow: hidden;
   }
+  section.image-caption table {
+    margin: 0;
+    margin-right: 240px; /* Avoid logo */
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
   section.image-caption img {
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
     margin: 0;
+  }
+
+  /* Layout: Kleiner, unauffälliger Hinweis (z.B. für Quellen oder Anmerkungen) */
+  section .hint {
+    font-size: 14px;
+    color: #888;
+    margin-top: 10px;
+    font-style: italic;
+    flex-grow: 0 !important;
+    display: block !important;
   }
 
 ---
@@ -538,14 +555,14 @@ Community-level communication and event reporting.
 
 ### Global Scraping Statistics 
 
-Metric                       Result
-  ---------------------------- ----------
-  Total Scanned LS Articles    1,347
-  Successfully Aligned Pairs   797
-  T otal Tokens (Simple)       411,540
-  Total Tokens (Standard)      676,903
-  Average Success Rate         \~59%
-  Length Ratio (AS:LS)         1.65 : 1
+| Metric | Result |
+|---|---|
+| Total Scanned LS Articles | 1,347 |
+| Successfully Aligned Pairs | 797 |
+| Total Tokens (Simple) | 411,540 |
+| Total Tokens (Standard) | 676,903 |
+| Average Success Rate | ~59% |
+| Length Ratio (AS:LS) | 1.65 : 1 |
 
 Tokens: words and punctuation
 
@@ -553,11 +570,11 @@ Tokens: words and punctuation
 
 ### Findings & Lessons Learned 
 
-Content Divergence:  Standard articles are significantly longer, suggesting that simplification involves heavy summarization, not just sentence splitting.
+**Content Divergence:** Standard articles are significantly longer, suggesting that simplification involves heavy summarization, not just sentence splitting.
 
-Alignment Gaps:  41% of simple language articles lack a direct 1:1 standard counterpart on the same site.
+**Alignment Gaps:** 41% of simple language articles lack a direct 1:1 standard counterpart on the same site.
 
-Scale:  With 797 pairs, the new corpus is already larger than most existing document-aligned German datasets.
+**Scale:** With 797 pairs, the new corpus is already larger than most existing document-aligned German datasets.
 
 ---
 <!-- _class: section-header -->
@@ -568,7 +585,7 @@ Scale:  With 797 pairs, the new corpus is already larger than most existing docu
 
 ### Focus: From Quantity to Quality 
 
-The Noise Problem:  Raw scraping produced significant \"boilerplate\" (menus, ads, legal footers).
+**The Noise Problem:** Raw scraping produced significant \"boilerplate\" (menus, ads, legal footers).
 
 Implement source-specific minimal scripts to ensure that the tokens in the dataset are strictly editorial content (not menus, ads etc.).
 
@@ -576,118 +593,118 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ### Case Study: Apotheken Umschau 
 
-Issue:  Figcaptions (\"The image shows\...\"), internal table of contents (TOC), and \"Sign up now\" banners were polluting the text.
+**Issue:** Figcaptions (\"The image shows\...\"), internal table of contents (TOC), and \"Sign up now\" banners were polluting the text.
 
-Solution:
+**Solution:**
 
-Decomposition:  Stripped \<figcaption\>, \<figure\>, and .copyright elements.
+**Decomposition:** Stripped \<figcaption\>, \<figure\>, and .copyright elements.
 
-TOC Filter:  Identified and removed \<ul\> blocks containing only internal anchor links.
+**TOC Filter:** Identified and removed \<ul\> blocks containing only internal anchor links.
 
-Blacklist:  Regex filters for \"Das Bild zeigt\" and registration prompts. (extend in future)
+**Blacklist:** Regex filters for \"Das Bild zeigt\" and registration prompts. (extend in future)
 
 ---
 
 ### Case Study: Brand Eins 
 
-Issue:  AS and LS content lived in the same HTML blocks; simple paragraph splitting failed due to irregular formatting.
+**Issue:** AS and LS content lived in the same HTML blocks; simple paragraph splitting failed due to irregular formatting.
 
-Solution:
+**Solution:**
 
-Deep-Color Inspection:  Scraper now analyzes inline CSS for the red color codes (#ff0000) used by Brand Eins to highlight simple language.
+**Deep-Color Inspection:** Scraper now analyzes inline CSS for the red color codes (#ff0000) used by Brand Eins to highlight simple language.
 
-Tag-Based Extraction:  Using \<strong\> and span-styles as semantic markers for language levels rather than just structure.
+**Tag-Based Extraction:** Using \<strong\> and span-styles as semantic markers for language levels rather than just structure.
 
 ---
 
 ### Case Study: Hamburg.de 
 
-Issue:  Many articles were machine-translated (MT), marked by a \"Computer has translated this\" disclaimer. These are unsuitable for a gold-standard corpus.
+**Issue:** Many articles were machine-translated (MT), marked by a \"Computer has translated this\" disclaimer. These are unsuitable for a gold-standard corpus.
 
-Solution:
+**Solution:**
 
-MT-Detection:  Automated scanning for MT-disclaimers; immediate exclusion of affected pairs.
+**MT-Detection:** Automated scanning for MT-disclaimers; immediate exclusion of affected pairs.
 
-Precision Alignment:  Restricted search for AS-links to the official .km1-language-bar, reducing \"Ghost Alignments\" from 155 down to 57 high-quality pairs.
+**Precision Alignment:** Restricted search for AS-links to the official .km1-language-bar, reducing \"Ghost Alignments\" from 155 down to 57 high-quality pairs.
 
 ---
 
 ### Case Study: MDR 
 
-Issue:  \"The Echo Effect\" --- Nested \<div\> and \<p\> tags caused the same text to be extracted twice.
+**Issue:** \"The Echo Effect\" - Nested `<div\>` and `<p\>` tags caused the same text to be extracted twice.
 
-Solution:
+**Solution:**
 
-Parent-Check Algorithm:  Elements are only extracted if none of their ancestors are already in the extraction list.
+**Parent-Check Algorithm:** Elements are only extracted if none of their ancestors are already in the extraction list.
 
-Idea: Length-Ratio Filter:  Pairs with a ratio \> 5.0 (e.g., a Live-Ticker vs. a short summary) are automatically discarded as \"Unbalanced.\"
+**Idea: Length-Ratio Filter:** Pairs with a ratio \> 5.0 (e.g., a Live-Ticker vs. a short summary) are automatically discarded as \"Unbalanced.\"
 
 ---
 
 ### Case Study: Archival Sources 
 
-Cities of Cologne & Main-Taunus:
+**Cities of Cologne & Main-Taunus:**
 
-Encoding Issues:  Resolved \"Umlaut\" errors (e.g., kÃ¶nnen) by forcing response.apparent_encoding.
+**Encoding Issues:** Resolved \"Umlaut\" errors (e.g., kÃ¶nnen) by forcing response.apparent_encoding.
 
-Redundancy:  Content hashing introduced to prevent duplicate articles caused by multiple URL parameters (m-20, m-79) pointing to the same archive snapshot.
+**Redundancy:** Content hashing introduced to prevent duplicate articles caused by multiple URL parameters (m-20, m-79) pointing to the same archive snapshot.
 
-Truncation:  Automatically cutting off repetitive contact blocks (\"Ansprechpartner:\", \"Telefon:\").
+**Truncation:** Automatically cutting off repetitive contact blocks (\"Ansprechpartner:\", \"Telefon:\").
 
 ---
 
 ### Automated Data Cleaning Pipeline 
 
-HTML De-cluttering:  Remove non-article tags (nav, aside, footer).
+**HTML De-cluttering:** Remove non-article tags (nav, aside, footer).
 
-Structural Extraction:  Map headers, lists, and paragraphs with proper spacing (\\n).
+**Structural Extraction:** Map headers, lists, and paragraphs with proper spacing (\\n).
 
-Regex Filtering:  Strip author credits, donation calls (taz), and radio-station promos (MDR).
+**Regex Filtering:** Strip author credits, donation calls (taz), and radio-station promos (MDR).
 
-Identity Filter:  Compare LS and AS strings; discard pairs where the content is identical (common in news sites).
+**Identity Filter:** Compare LS and AS strings; discard pairs where the content is identical (common in news sites).
 
-Deduplication:  Hash-based check for uniqueness across the entire corpus.
+**Deduplication:** Hash-based check for uniqueness across the entire corpus.
 
 ---
 
 ### Resulting Quality Improvement 
 
-Cleaner Data:  Average noise reduction of 15-20% per article.
+**Cleaner Data:** Average noise reduction of 15-20% per article.
 
-Better Alignment:  Improved thematic coherence by filtering out \"Hub-pages\" and \"Tag-overviews.\"
+**Better Alignment:** Improved thematic coherence by filtering out \"Hub-pages\" and \"Tag-overviews.\"
 
-Final Count:  A refined, manually verified collection of \~600-700 high-quality pairs (post-filtering).
-
----
-
-### Slide 40
+**Final Count:** A refined, manually verified collection of \~600-700 high-quality pairs (post-filtering).
 
 ---
 
-Source                    LS Tokens   AS Tokens   Total
-  ------------------------- ----------- ----------- ---------
-  apotheken                 147,539     249,790     397,329
-  behindertenbeauftragter   27,822      34,113      61,935
-  brandeins                 7,275       7,423       14,698
-  hamburg                   44,358      40,063      84,421
-  koeln                     40,868      24,182      65,050
-  main_taunus               7,289       6,715       14,004
-  mdr                       70,761      100,608     171,369
-  sozialpolitik             6,654       14,651      21,305
-  taz                       4,589       8,027       12,616
-  TOTAL                     357,155     485,572     842,727
+### Zwischenergebnis Corpus
 
-Summary of tokens (words and punctuation)
+| Source | LS Tokens | AS Tokens | Total |
+|---|---|---|---|
+| apotheken | 147,539 | 249,790 | 397,329 |
+| behindertenbeauftragter | 27,822 | 34,113 | 61,935 |
+| brandeins | 7,275 | 7,423 | 14,698 |
+| hamburg | 44,358 | 40,063 | 84,421 |
+| koeln | 40,868 | 24,182 | 65,050 |
+| main_taunus | 7,289 | 6,715 | 14,004 |
+| mdr | 70,761 | 100,608 | 171,369 |
+| sozialpolitik | 6,654 | 14,651 | 21,305 |
+| taz | 4,589 | 8,027 | 12,616 |
+| **TOTAL** | **357,155** | **485,572** | **842,727** |
+
+<p class="hint">Summary of tokens (words and punctuation)</p>
+
+---
 
 ### Next Steps 
 
-Apotheken Umschau:  Investigation into why so few URLs from this source could be successfully aligned (root cause analysis for low alignment rate).
+**Apotheken Umschau:** Investigation into why so few URLs from this source could be successfully aligned (root cause analysis for low alignment rate).
 
-Length Ratios:  Analysis of discrepancies between Plain Language (PL) and Everyday Language (EL) across various sources. Why do some sources systematically have more PL tokens than EL tokens, and others the reverse?
+**Length Ratios:** Analysis of discrepancies between Plain Language (PL) and Everyday Language (EL) across various sources. Why do some sources systematically have more PL tokens than EL tokens, and others the reverse?
 
-Historical data acquisition:  Evaluation of the Wayback Machine to achieve broader coverage of articles from different time periods (past and present) and thus expand the corpus.
+**Historical data acquisition:** Evaluation of the Wayback Machine to achieve broader coverage of articles from different time periods (past and present) and thus expand the corpus.
 
-Template Script:  Because of redundant code, build a template script with core functionalities
+**Template Script:** Because of redundant code, build a template script with core functionalities
 
 ---
 <!-- _class: section-header -->
@@ -751,7 +768,7 @@ Why do many government sites offer so little parallel data?
 
 ---
 
-## Current Status (Metrics)
+### Current Status (Metrics)
 
 | Source | Pairs | Words (LS) | Words (AS) | Tokens (LS) | Tokens (AS) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -765,25 +782,12 @@ Why do many government sites offer so little parallel data?
 | **Wiesbaden** | 41 | 7,138 | 10,127 | 13,808 | 23,332 |
 | **Total** | **1,533** | **773,726** | **863,331** | **1,468,345** | **1,868,994** |
 
-<div class="footnote"><i>Tokens counted using the tiktoken tokenizer library (<code>cl100k_base</code>).</i></div>
+<p class="hint">Tokens counted using the <code>tiktoken</code> library with the <code>cl100k_base</code> encoding.</p>
 
 ---
 
 ## Next Steps
 
 1.  **Finalize Extraction:** Complete final sources.
-2.  **(Ongoing):** Find more sources systematic.
-3.  **Train first model:** Train first model to see some first results.
-**Stuttgart** | 42 | 23,653 | 46,060 | 45,202 | 106,629 |
-| **Wiesbaden** | 41 | 7,138 | 10,127 | 13,808 | 23,332 |
-| **Total** | **1,533** | **773,726** | **863,331** | **1,468,345** | **1,868,994** |
-
-<div class="footnote"><i>Tokens counted using the tiktoken tokenizer library (<code>cl100k_base</code>).</i></div>
-
----
-
-## Next Steps
-
-1.  **Finalize Extraction:** Complete final sources.
-2.  **(Ongoing):** Find more sources systematic.
+2.  **(Ongoing):** Find more sources systematically.
 3.  **Train first model:** Train first model to see some first results.
