@@ -156,7 +156,15 @@ style: |
   /* Layout: Bildunterschrift */
   section.image-caption {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  section.image-caption h3 {
+    position: static;
+    width: 100%;
+    margin: 0;
+    padding-top: 20px; /* Space between image and heading */
   }
   section.image-caption p {
     flex-grow: 1;
@@ -165,7 +173,7 @@ style: |
     justify-content: flex-start; /* Align Left */
     align-items: flex-start; /* Align Top */
     margin: 0;
-    height: 100%;
+    width: 100%;
     overflow: hidden;
   }
   section.image-caption img {
