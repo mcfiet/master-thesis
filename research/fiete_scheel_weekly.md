@@ -172,10 +172,10 @@ style: |
     min-height: 0; /* Allow p to shrink */
     display: flex;
     justify-content: flex-start; /* Align Left */
-    align-items: flex-start; /* Align Top */
+    align-items: flex-end; /* Align bottom */
     margin: 0;
     width: 100%;
-    padding-right: 300px;
+    padding-right: 240px;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -225,7 +225,7 @@ Lack of robust, data-driven methods for distinguishing between standard and simp
 
 ### Data Research
 
-Problem:
+**Problem:**
 
 It is often very difficult to find exact parallel texts (such as news articles or blog posts) on the internet that are written in standard language (or "complex language") and simple language, and that can be systematically matched with one another.
 
@@ -235,9 +235,9 @@ It is often very difficult to find exact parallel texts (such as news articles o
 
 Here, the blog posts have the same title in both language versions. 
 
-The "Easy Language" version is easy to identify and access, as the URL simply has the  prefix  "ls-" added to the beginning. 
+The "Easy Language" version is easy to identify and access, as the URL simply has the  **prefix**  "ls-" added to the beginning. 
 
-While the URLs for the blog posts differ, there is a  button  on each page that allows you to  switch between "Easy Language" and "Standard Language."
+While the URLs for the blog posts differ, there is a **button** on each page that allows you to **switch between "Easy Language" and "Standard Language."**
 
 ---
 
