@@ -115,20 +115,20 @@ style: |
     justify-content: flex-start;
   }
 
-  /* Handle images nested in paragraphs (Marp standard) */
+  /* Handle paragraphs in split layout */
   section.split div p {
+    display: block;
+    height: auto;
+    margin: 0 0 20px 0; /* Default margin for text paragraphs */
+  }
+
+  /* Specialized handling for image-only paragraphs in split layout */
+  section.split div p:has(img) {
     margin: 0;
     display: flex;
     justify-content: flex-start;
     height: 100%;
     min-height: 0;
-  }
-  
-  /* Ensure text paragraphs in the left column render normally */
-  section.split div p {
-    display: block;
-    height: auto;
-    margin-bottom: 20px;
   }
 
   section.split img {
