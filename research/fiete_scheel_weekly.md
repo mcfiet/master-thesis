@@ -123,8 +123,8 @@ style: |
     order: 1;
     flex-grow: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start; /* Align Left */
+    align-items: flex-end; /* Align Bottom */
     margin: 0;
     height: 100%;
     overflow: hidden;
@@ -622,7 +622,7 @@ Template Script:  Because of redundant code, build a template script with core f
 ---
 <!-- _class: section-header -->
 
-# Week 6
+## Week 6
 
 ---
 
