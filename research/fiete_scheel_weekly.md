@@ -159,6 +159,7 @@ style: |
     flex-direction: column-reverse;
     justify-content: flex-start;
     align-items: flex-start;
+    padding-top: 40px;
   }
   section.image-caption h3 {
     position: static;
@@ -174,6 +175,8 @@ style: |
     align-items: flex-start; /* Align Top */
     margin: 0;
     width: 100%;
+    padding-right: 300px;
+    box-sizing: border-box;
     overflow: hidden;
   }
   section.image-caption img {
@@ -211,7 +214,7 @@ Lack of robust, data-driven methods for distinguishing between standard and simp
 
 ### Components of this work
 
-![](img_pptx_extract/ppt/media/image6.png "Google Shape;71;p15")
+![](img/presentation/components_of_this_work.jpeg)
 
 ---
 <!-- _class: section-header -->
