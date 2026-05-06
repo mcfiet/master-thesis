@@ -180,6 +180,7 @@ style: |
     max-height: 100%;
     max-width: 100%;
     object-fit: contain;
+    margin: 0;
   }
 
 ---
@@ -194,15 +195,15 @@ Fiete Scheel
 
 ### Automated Translation into Simple German 
 
-Language as a barrier:  Complex texts exclude people from information and social participation.
+**Language as a barrier:**  Complex texts exclude people from information and social participation.
 
-High effort:  To date, the creation of simple german texts has been almost exclusively manual and time-consuming.
+**High effort:**  To date, the creation of simple german texts has been almost exclusively manual and time-consuming.
 
-Research gap:
+**Research gap:**
 
 Lack of robust, data-driven methods for distinguishing between standard and simple language in German.
 
-Lack of automated metrics  for the qualitative assessment of simplifications.
+**Lack of automated metrics**  for the qualitative assessment of simplifications.
 
 ---
 
