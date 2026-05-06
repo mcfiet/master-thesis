@@ -8,10 +8,13 @@ style: |
     font-family: 'Arial', sans-serif; 
     color: #555; 
     font-size: 24px;
-    padding: 60px 260px 60px 40px; /* Global right padding creates the Dead Zone */
+    padding: 180px 40px 80px 40px; /* Increased Header and Footer Deadzones */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
   
-  /* Logo Oben Rechts (auf ::before verschoben, da Marp ::after für Pagination nutzt) */
+  /* Logo Oben Rechts */
   section::before {
     content: '';
     position: absolute;
@@ -47,20 +50,34 @@ style: |
   }
 
   h3 {
+    position: absolute;
+    top: 50px;
+    left: 40px;
+    width: calc(100% - 320px);
     font-size: 36px;
-    margin-bottom: 20px;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  /* Global Image Constraint: Ensure images never exceed the content area */
+  section img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
   }
 
   /* Reset für zentrierte Layouts, da diese mittig stehen sollen */
   section.title, section.section-header, section.big-number {
-    padding-right: 40px;
+    padding: 100px 40px;
+    justify-content: center;
   }
 
   table { font-size: 18px; }
 
   /* Layout: Titelfolie */
   section.title {
-    justify-content: center;
     text-align: center;
   }
   section.title h1 {
@@ -70,7 +87,6 @@ style: |
 
   /* Layout: Abschnittsüberschrift */
   section.section-header {
-    justify-content: center;
     background-color: #f4f7f6;
     text-align: center;
   }
@@ -80,23 +96,51 @@ style: |
     padding-bottom: 10px;
   }
 
-  /* Layout: Zwei Spalten */
+  /* Layout: Zwei Spalten (Flexbox for better height control) */
   section.split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 
-      "header header"
-      "left right";
-    gap: 20px;
+    flex-direction: row !important; /* Force row layout */
+    gap: 40px;
+    align-items: stretch;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 0;
+    box-sizing: border-box;
   }
-  section.split h2 { grid-area: header; }
-  section.split .column-left { grid-area: left; }
-  section.split .column-right { grid-area: right; }
+  section.split > div {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Handle images nested in paragraphs (Marp standard) */
+  section.split div p {
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    min-height: 0;
+  }
+  
+  /* Ensure text paragraphs in the left column render normally */
+  section.split div p {
+    display: block;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  section.split img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
 
   /* Layout: Große Zahl */
   section.big-number {
-    justify-content: center;
     text-align: center;
   }
   section.big-number h1 {
@@ -114,17 +158,12 @@ style: |
     display: flex;
     flex-direction: column;
   }
-  section.image-caption h3 {
-    order: 2;
-    margin: 0;
-    padding-top: 20px;
-  }
   section.image-caption p {
-    order: 1;
     flex-grow: 1;
+    min-height: 0; /* Allow p to shrink */
     display: flex;
     justify-content: flex-start; /* Align Left */
-    align-items: flex-end; /* Align Bottom */
+    align-items: flex-start; /* Align Top */
     margin: 0;
     height: 100%;
     overflow: hidden;
@@ -298,9 +337,15 @@ Conclusion:  Media portals show significantly higher potential for 1:1 alignment
 ---
 <!-- _class: split -->
 
+### Terminological Anchors: Dictionaries 
+
 <div class="column-left">
 
-### Terminological Anchors: Dictionaries 
+![Image](img_pptx_extract/ppt/media/image7.png)
+
+</div>
+
+<div class="column-right">
 
 Objective: Establishing a "Ground Truth" for specific terminology.
 
@@ -311,11 +356,6 @@ Resources Analyzed:
 
 Benefit: These provide direct 1:1 word/phrase mappings, essential for terminological consistency.
 
-</div>
-
-<div class="column-right">
-
-![Image](img_pptx_extract/ppt/media/image7.png)
 
 </div>
 
@@ -347,19 +387,23 @@ Key Insight:  The project moves away from generic scraping toward source-specifi
 
 <!-- _class: split -->
 
-### Extraction Strategies
-
 <div class="column-left">
 
-Apotheken Umschau:  Targeting specific link titles (title=\"hier\") for back-references.
+### Extraction Strategies
 
-Behindertenbeauftragter:  Identifying language switches via specific CSS class patterns (c-language-switch).
+**Apotheken Umschau:**  Targeting specific link titles `title="hier"` for back-references.
 
-Sozialpolitik.com:  Filtering for links with the class underline easy and specific hreflang attributes. ( https://www.sozialpolitik.com/ es /die-arbeits-welt )
+**Behindertenbeauftragter:**  Identifying language switches via CSS class patterns `.c-language-switch`.
 
-\<a href=\"/arbeitswelt-von-morgen\" hreflang=\"de-DE\" class=\"underline easy\"\>Standardsprache\</a\>
+**Sozialpolitik.com:**  Filtering for links with the class `underline easy` and specific `hreflang` attributes.
 
-\<a href=\"/es/die-arbeits-welt\" hreflang=\"de-DE\" class=\"underline easy\"\>Leichte Sprache\</a\>
+```html
+<a href="/es/die-arbeits-welt" 
+   hreflang="de-DE" 
+   class="underline easy">
+   Leichte Sprache
+</a>
+```
 
 </div>
 
@@ -708,6 +752,19 @@ Why do many government sites offer so little parallel data?
 | **Week 06 Additions** | | | | | |
 | **Hannover** | 808 | 458,621 | 405,321 | 872,291 | 871,830 |
 | **Stuttgart** | 42 | 23,653 | 46,060 | 45,202 | 106,629 |
+| **Wiesbaden** | 41 | 7,138 | 10,127 | 13,808 | 23,332 |
+| **Total** | **1,533** | **773,726** | **863,331** | **1,468,345** | **1,868,994** |
+
+<div class="footnote"><i>Tokens counted using the tiktoken tokenizer library (<code>cl100k_base</code>).</i></div>
+
+---
+
+## Next Steps
+
+1.  **Finalize Extraction:** Complete final sources.
+2.  **(Ongoing):** Find more sources systematic.
+3.  **Train first model:** Train first model to see some first results.
+**Stuttgart** | 42 | 23,653 | 46,060 | 45,202 | 106,629 |
 | **Wiesbaden** | 41 | 7,138 | 10,127 | 13,808 | 23,332 |
 | **Total** | **1,533** | **773,726** | **863,331** | **1,468,345** | **1,868,994** |
 
