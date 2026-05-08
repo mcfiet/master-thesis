@@ -147,3 +147,10 @@ Diese gesetzliche "Minimallösung" erklärt eine wesentliche Herausforderung bei
 1.  **Minimaler Erfüllungsgrad:** Ein Großteil der Behörden-Websites setzt exakt nur die gesetzlich geforderten Basistexte um (Einstiegsseite, Erklärung der Navigation und Barrierefreiheit).
 2.  **Fehlendes 1:1 Alignment:** Es gibt auf den allermeisten dieser Seiten keine 1:1-Übersetzungen von tagesaktuellen Artikeln, Pressemitteilungen oder Blog-Posts. Selbst wenn ein "Leichte Sprache"-Button global im Website-Header verankert ist, führt dieser beim Klicken auf regulären Unterseiten oft nur zurück auf die immer gleiche, generische Übersichtsseite.
 3.  **Quellenauswahl:** Für den Aufbau eines hochwertigen Parallelkorpus müssen Portale identifiziert werden, die proaktiv und deutlich über das gesetzliche Minimum hinausgehen (z.B. Nachrichtenseiten wie `mdr.de` oder Städte mit dedizierten LS-Redaktionen wie `hamburg.de` oder `stuttgart.de`). Ein rein automatisches Crawling von Standard-Behördenseiten führt meist ins Leere, da schlichtweg keine Text-Paare existieren.
+
+
+## Nächste Schritte:
+
+1. Datensatz deskriptiv beschreiben (genaue Datensatzanalyse)
+2. mit z.B. Bert alignment checken
+3. Zweitprüfer kontakieren: Peter John
