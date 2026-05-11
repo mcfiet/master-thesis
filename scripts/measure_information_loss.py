@@ -21,6 +21,11 @@ def load_models():
     print(f"Loading SentenceTransformer model: {SBERT_MODEL}")
     sbert = SentenceTransformer(SBERT_MODEL)
     
+    # Increase maximum sequence length to prevent truncation of long articles
+    # The default for MiniLM is 128, which truncates ~75% of our corpus.
+    sbert.max_seq_length = 512 
+    print(f"SBERT max_seq_length set to: {sbert.max_seq_length}")
+    
     return nlp, sbert
 
 def get_entities(doc):
