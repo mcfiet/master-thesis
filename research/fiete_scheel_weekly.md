@@ -791,3 +791,112 @@ Why do many government sites offer so little parallel data?
 1.  **Finalize Extraction:** Complete final sources.
 2.  **(Ongoing):** Find more sources systematically.
 3.  **Train first model:** Train first model to see some first results.
+
+---
+<!-- _class: section-header -->
+
+## Week 7 
+
+---
+
+### Weekly Focus: Measuring Information Loss
+
+*   **Hypothesis:** Texts in Easy Language (LS) don't just simplify syntax; they lose significant, concrete information compared to Standard Language (AS), even when they are longer due to explanations.
+*   **Goal:** Move beyond token counts and develop a multi-dimensional NLP methodology to quantify this information loss.
+*   **Corpus:** Analysis executed across the entire aligned dataset (1,501 article pairs).
+
+---
+
+### Methodology: Similarity
+
+**1. Semantic Similarity (Embeddings)**
+*   **Tool:** Sentence-BERT (`paraphrase-multilingual-MiniLM-L12-v2`).
+*   **How:** Convert AS and LS texts into 300-dimensional vectors and calculate Cosine Similarity.
+*   **Why:** Captures whether the "core message" remains, even if heavily paraphrased.
+
+<!-- 
+
+- spaCy bietet mittlerweile auch Modelle an, die auf Transformern (wie RoBERTa) basieren (diese enden dann meistens auf _trf, z.B. de_dep_news_trf) 
+
+-->
+
+---
+
+### Methodology
+
+**2. Fact Retention via NER Recall**
+*   **Tool:** `spaCy` (`de_core_news_lg`).
+*   **How:** Extract entities (Persons, Locations, Organizations) from AS and check if they survive in LS.
+*   **Why:** Measures hard information loss. If names and places vanish, factual detail is lost or is being described differently.
+
+**3. Linguistic & Syntactic Metrics**
+*   **Tool:** `spaCy` POS-Tagging.
+*   **How:** Analyze Lexical Density, Average Sentence Length, and Part-of-Speech (POS) shifts (e.g., ratio of Adjectives, Conjunctions).
+*   **Why:** Reveals *how* the simplification is achieved structurally (e.g., dropping conjunctions implies loss of subordinate clauses / hypotaxis).
+
+---
+
+### Key Finding 1: Massive Loss of Factual Entities
+
+**Observation:** Across almost all sources, the **NER Recall is extremely low (Ø ~15-25%)**.
+
+*   This means roughly 80% of specific entities (names, locations, dates) mentioned in the Standard Language text do *not* appear in the Easy Language version.
+*   **Conclusion:** LS achieves simplification primarily by omitting specific facts and generalizing content, confirming a massive factual information loss.
+
+---
+
+<!-- _class: split -->
+
+### Key Finding 2: Token Expansion vs. Semantic Shift
+
+<div class="column-left">
+
+**Observation:** In municipal sources like **Hannover** (Ratio: 1.89) and **Köln** (Ratio: 1.83), the LS texts are nearly twice as long as the AS texts. 
+
+*   *Why?* Complex terms are replaced with lengthy, multi-sentence explanations.
+*   *Result:* Despite being longer, the semantic similarity drops to ~0.70. The text explains more, but delivers less original detail.
+
+</div>
+
+<div class="column-right">
+
+![Semantic Similarity](img/analysis/semantic_similarity_by_source.png)
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### Key Finding 3: Structural Simplification (POS)
+
+<div class="column-left">
+
+**Observation:** Clear shifts in word classes.
+
+*   **Conjunctions:** Significant decrease in LS. This is a strong quantitative indicator for the shift from Hypotaxis (complex sentences) to Parataxis (simple main clauses).
+*   **Adjectives:** Frequently reduced to keep sentences basic.
+
+</div>
+
+<div class="column-right">
+
+![POS Distribution](img/analysis/pos_distribution_comparison.png)
+
+</div>
+
+---
+
+### Summary of Analysis Results
+
+| Source | Token Ratio (LS/AS) | NER Recall | Sem. Similarity (SBERT) |
+| :--- | :---: | :---: | :---: |
+| **apotheken** | 0.98 | 0.09 | 0.64 |
+| **behindertenbeauftragter** | 0.91 | 0.30 | 0.75 |
+| **hannover** | **1.89** | 0.25 | 0.71 |
+| **koeln** | 1.83 | 0.20 | 0.68 |
+| **mdr** | 0.85 | 0.22 | 0.73 |
+| **stuttgart** | 0.97 | 0.24 | **0.90** |
+| **sozialpolitik** | 0.46 | 0.10 | 0.71 |
+
+<p class="hint">Extract of the full analysis results across 1,501 pairs.</p>
