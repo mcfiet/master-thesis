@@ -75,3 +75,22 @@ Die Analyse der Wortarten zeigt systematische Muster:
 
 ## 4. Fazit der Analyse
 Die Annahme, dass LS-Texte weniger Informationen enthalten, konnte empirisch bestätigt werden – insbesondere bei konkreten Fakten (Entitäten). Die Längenreduktion ist jedoch nicht universell; in vielen Fällen (kommunale Webseiten) führt das Bedürfnis nach Erklärung zu längeren Texten in LS, die dennoch weniger spezifische Details (Fakten) enthalten als das AS-Original.
+
+
+
+## Next Steps
+
+- NER nicht nur AS in LS sondern auch von LS -> AS um zu schauen ob der gleiche Verlust vorliegt (These: Kein Informationsverlust, nur anders beschrieben)
+
+- SBERT Input begrenzt (Standard: 128 Tokens). Input erhöhen.
+
+- NER vlt auch mit Input Maximum? -> erhöhen
+
+- Extreme in Similarity manuell reinschauen bevor löschen (vlt kein Informationsverlust)
+
+- Ratio höher = Similarity höher?
+
+- Meeting mit Herr John und Marc ausmachen zur Themenvorstellung
+
+
+Thesisfrage: Entwicklung domänenspezifischer Datensätze und automatisierter Evaluationsmetriken für ein Framework zur neuronalen Textvereinfachung in Leichte Sprache
