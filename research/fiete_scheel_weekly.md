@@ -811,14 +811,10 @@ Why do many government sites offer so little parallel data?
 
 **1. Semantic Similarity (Embeddings)**
 *   **Tool:** Sentence-BERT (`paraphrase-multilingual-MiniLM-L12-v2`).
-*   **How:** Convert AS and LS texts into 300-dimensional vectors and calculate Cosine Similarity.
+*   **How:** Calculate Cosine Similarity from AS and LS texts.
 *   **Why:** Captures whether the "core message" remains, even if heavily paraphrased.
 
-<!-- 
 
-- spaCy bietet mittlerweile auch Modelle an, die auf Transformern (wie RoBERTa) basieren (diese enden dann meistens auf _trf, z.B. de_dep_news_trf) 
-
--->
 
 ---
 
@@ -833,6 +829,12 @@ Why do many government sites offer so little parallel data?
 *   **Tool:** `spaCy` POS-Tagging.
 *   **How:** Analyze Lexical Density, Average Sentence Length, and Part-of-Speech (POS) shifts (e.g., ratio of Adjectives, Conjunctions).
 *   **Why:** Reveals *how* the simplification is achieved structurally (e.g., dropping conjunctions implies loss of subordinate clauses / hypotaxis).
+
+<!-- 
+
+- spaCy bietet mittlerweile auch Modelle an, die auf Transformern (wie RoBERTa) basieren (diese enden dann meistens auf _trf, z.B. de_dep_news_trf) 
+
+-->
 
 ---
 
@@ -851,7 +853,7 @@ Why do many government sites offer so little parallel data?
 
 <div class="column-left">
 
-**Observation:** In municipal sources like **Hannover** (Ratio: 1.89) and **Köln** (Ratio: 1.83), the LS texts are nearly twice as long as the AS texts. 
+**Observation:** In some sources like **Hannover** (Ratio: 1.89) and **Köln** (Ratio: 1.83), the LS texts are nearly twice as long as the AS texts. 
 
 *   *Why?* Complex terms are replaced with lengthy, multi-sentence explanations.
 *   *Result:* Despite being longer, the semantic similarity drops to ~0.70. The text explains more, but delivers less original detail.
@@ -872,10 +874,11 @@ Why do many government sites offer so little parallel data?
 
 <div class="column-left">
 
-**Observation:** Clear shifts in word classes.
+**Observation:** Clear shifts in word classes between complex and simple language.
 
-*   **Conjunctions:** Significant decrease in LS. This is a strong quantitative indicator for the shift from Hypotaxis (complex sentences) to Parataxis (simple main clauses).
-*   **Adjectives:** Frequently reduced to keep sentences basic.
+*   **Conjunctions & Adjectives:** Significant decrease in **simple** language.
+*   **Verbs vs. Nouns:** **Simple** language uses more Verbs and fewer Nouns.
+*   **Stylistic Shift:** This confirms a transition from **complex** to **simple** style, which is easier to process.
 
 </div>
 
@@ -900,3 +903,42 @@ Why do many government sites offer so little parallel data?
 | **sozialpolitik** | 0.46 | 0.10 | 0.71 |
 
 <p class="hint">Extract of the full analysis results across 1,501 pairs.</p>
+
+---
+
+### Mögliche Titelvarianten & Forschungsfokus
+
+1.  **Allgemein & Flexibel:**
+    *   *Automatisierte Textvereinfachung für Leichte Sprache: Ein Framework zur datengestützten Modellierung und Evaluation*
+2.  **Ausgewogen & Methodisch:**
+    *   *Neuronale Textvereinfachung in Leichte Sprache: Entwicklung domänenspezifischer Datensätze und automatisierter Bewertungsmetriken*
+3.  **Spezifisch & Technisch:**
+    *   *Optimierung der maschinellen Übersetzung in Leichte Sprache: Aufbau eines Gold-Standard-Korpus und Training von Reward-Modellen zur qualitativen Modellsteuerung*
+
+---
+
+<!-- _class: split -->
+
+### Next Steps
+
+<div class="column-left">
+
+**Track 1: Corpus Optimization**
+
+*   **Outlier Removal:** Filtering out extreme alignment outliers (e.g., highly skewed token ratios or extremely low semantic similarity).
+*   **Data Cleaning & Review:** Systematic review and refinement of the existing dataset based on the newly gathered metrics and statistics.
+*   **Expansion:** Continuous sourcing of new portals and evaluation of historical Wayback Machine data.
+
+</div>
+
+<div class="column-right">
+
+**Track 2: Metric Model Training**
+
+*   **Training Set Construction:** Converting the refined parallel corpus into a training dataset for classification and regression tasks.
+*   **Model Selection:** Evaluating modern transformer architectures (e.g., Cross-Encoders) specifically for German language level detection.
+*   **Baseline Establishment:** Training a first version of the metric to achieve a robust baseline for distinguishing between AS and LS.
+*   **Feature Integration:** Incorporating semantic similarity and information retention into the scoring mechanism.
+
+</div>
+
