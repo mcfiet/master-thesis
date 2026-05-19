@@ -92,5 +92,17 @@ Die Annahme, dass LS-Texte weniger Informationen enthalten, konnte empirisch bes
 
 - Meeting mit Herr John und Marc ausmachen zur Themenvorstellung
 
+1. Bidirektionale NER-Analyse: Wir messen zusätzlich den Recall von LS zu AS (Wie viele Fakten aus dem
+  Leichte-Sprache-Text sind im Original vorhanden?), um zu prüfen, ob LS wirklich keine neuen Fakten hinzufügt.
+
+2. Korrelationsanalyse (Token-Ratio vs. Similarity): Wir ergänzen das Auswertungsskript, um statistisch zu prüfen, ob
+  längere LS-Texte auch semantisch näher am Original sind.
+
+3. Manuelle Auditierung der Extremwerte: Wir lassen das Skript die 5 Artikelpaare mit der höchsten und der
+  niedrigsten Similarity (oder Anomalien beim NER) als JSON/Text ausgeben, damit wir diese manuell sichten können.
+  
+4. NER Input Maximum: SpaCy hat standardmäßig ein sehr hohes Limit (1.000.000 Zeichen), ich werde aber
+  sicherheitshalber im Skript hinterlegen, dass extrem lange Texte nicht abgeschnitten werden.
+
 
 Thesisfrage: Entwicklung domänenspezifischer Datensätze und automatisierter Evaluationsmetriken für ein Framework zur neuronalen Textvereinfachung in Leichte Sprache
