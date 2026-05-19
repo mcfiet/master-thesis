@@ -91,7 +91,31 @@ Um einen sauberen Vergleich zwischen den Modellen und den Auswirkungen der Textl
 2. **Modell-Vergleich:** Die Basis-Ähnlichkeitswerte des Jina-Modells sind leicht anders skaliert als beim MiniLM-Modell, die Trends sind jedoch absolut identisch. Der Einsatz des 8192-Token-Limits stellt nun sicher, dass auch sehr lange Artikel (wie von der Apotheken Umschau) zu 100% ohne Informationsverlust durch Abschneiden (Truncation) in die Vektorberechnung einfließen.
 3. **Ausreißer Stuttgart:** Bei Stuttgart sinkt die Ähnlichkeit bei Betrachtung des vollen Kontexts leicht ab. Dies könnte an sehr langen, aber strukturell stark unterschiedlichen Dokumentenanhängen liegen.
 
-### 3.2 Bidirektionale NER-Analyse (Erfindet LS Fakten?)
+### 3.2 Modell-Vergleich: MiniLM vs. Jina (128 & 512 Tokens)
+
+Um sicherzustellen, dass die Wahl des Modells keine systematischen Verzerrungen einführt, vergleichen wir die semantischen Ähnlichkeitswerte des ursprünglichen Modells (`paraphrase-multilingual-MiniLM-L12-v2`) mit dem neuen Modell (`jina-embeddings-v2-base-de`) bei identischen Token-Limits (128 und 512).
+
+| Quelle | MiniLM (128) | Jina (128) | | MiniLM (512) | Jina (512) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **apotheken** | 0.636 | 0.688 | | **0.894** | 0.800 |
+| **behindertenbeauftragter**| 0.746 | 0.756 | | 0.761 | **0.793** |
+| **brandeins** | **0.637** | 0.549 | | **0.698** | 0.599 |
+| **hamburg** | 0.665 | **0.690** | | **0.804** | 0.790 |
+| **hannover** | 0.706 | **0.742** | | 0.776 | **0.807** |
+| **koeln** | 0.684 | 0.693 | | **0.833** | 0.782 |
+| **main_taunus** | 0.762 | 0.763 | | 0.727 | **0.794** |
+| **mdr** | 0.733 | 0.731 | | 0.766 | **0.784** |
+| **sozialpolitik** | **0.706** | 0.694 | | **0.850** | 0.760 |
+| **stuttgart** | **0.896** | 0.884 | | 0.856 | **0.884** |
+| **wiesbaden** | 0.750 | 0.754 | | 0.642 | **0.777** |
+
+**Interpretation des Modell-Vergleichs:**
+- **Gleiche Trends:** Beide Modelle zeigen mehrheitlich denselben Trend: Eine Erhöhung des Kontexts von 128 auf 512 Tokens führt zu einer höheren gemessenen Ähnlichkeit.
+- **Stabilität des Jina-Modells:** Bei einigen Quellen zeigte das MiniLM-Modell bei längeren Texten einen plötzlichen Abfall der Ähnlichkeit (z.B. Wiesbaden: von 0.750 auf 0.642; Main-Taunus: 0.762 auf 0.727). Das Jina-Modell erweist sich hier als stabiler (Wiesbaden steigt sogar leicht auf 0.777). Dies liegt vermutlich an der robusteren "Attention"-Mechanik (ALiBi) des Jina-Modells bei längeren Sequenzen.
+- **Unterschiedliche Baselines:** Die absoluten Werte unterscheiden sich leicht. MiniLM tendiert bei sehr langen Erklärtexten (wie *sozialpolitik* oder *apotheken*) bei 512 Tokens zu extrem hohen Werten (>0.85), während Jina hier etwas konservativer bewertet (~0.76 - 0.80). 
+- **Fazit:** Das Jina-Modell ist eine valide und für unsere Zwecke (lange Texte) besser geeignete Alternative. Die generelle Aussagekraft (dass LS-Texte semantisch sehr nah am AS-Original bleiben) wird durch das neue Modell vollumfänglich bestätigt.
+
+### 3.3 Bidirektionale NER-Analyse (Erfindet LS Fakten?)
 Bisher haben wir gemessen, wie viele Fakten (Entitäten) aus dem Original in der Leichten Sprache erhalten bleiben (AS -> LS Recall: ~15-20%). Nun haben wir zusätzlich gemessen, wie viele Fakten aus der Leichten Sprache auch im Original stehen (**LS -> AS Recall**).
 
 | Quelle | AS -> LS Recall (Faktenerhalt) | LS -> AS Recall (Faktentreue) |
@@ -113,7 +137,7 @@ Bisher haben wir gemessen, wie viele Fakten (Entitäten) aus dem Original in der
 - **Warum ist das so?** Es deutet darauf hin, dass Leichte Sprache nicht primär "neue Fakten" erfindet, sondern Konzepte extrem umschreibt und Eigennamen durch erklärende Substantive ersetzt, die von SpaCy als neue Entitäten klassifiziert werden (z. B. "Bundesagentur für Arbeit" wird zu "Agentur für Arbeit" oder "Arbeits·amt").
 - Bei kommunalen Webseiten (Hannover, Köln) liegt die Faktentreue (LS->AS) sogar noch *unter* dem Faktenerhalt (AS->LS). Dies stützt die These, dass LS hier sehr stark elaboriert und kontextualisiert.
 
-### 3.3 Korrelationsanalyse: Token-Ratio vs. Similarity
+### 3.4 Korrelationsanalyse: Token-Ratio vs. Similarity
 Die statistische Überprüfung ergab eine Korrelation (Pearson) zwischen der **Token-Ratio** (Längenverhältnis) und der **semantischen Ähnlichkeit (512 Tokens)** von **`r = -0.098`**.
 
 **Bedeutung:** Es gibt **keinen signifikanten linearen Zusammenhang** zwischen der Länge eines LS-Textes und seiner semantischen Ähnlichkeit zum Original. Ein Text, der in Leichter Sprache stark verlängert wird (z.B. doppelt so lang wie das Original), transportiert die "Kernbotschaft" (gemessen via Embeddings) nicht automatisch besser oder schlechter als ein Text, der stark gekürzt wurde. Die Art der Übersetzung (Erklärung vs. Auslassung) scheint wichtiger zu sein als die reine Wortanzahl.
