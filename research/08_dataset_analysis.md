@@ -67,29 +67,59 @@ Obwohl die **semantische Ähnlichkeit** durch die Einbeziehung von mehr Kontext 
 
 ## 3. Geplante Erweiterungen & Validierungsschritte (Update)
 
-### 2.1 Optimierung der Semantischen Ähnlichkeit
-- **Anpassung:** Umgehung des Token-Limits durch Zerlegung der Artikel in Sätze (Sentence Splitting).
-- **Methode:** Berechnung der Embeddings für jeden Satz einzeln und anschließende Mittelwertbildung (Mean Pooling) über den gesamten Artikel.
-- **Ziel:** Erfassung der semantischen Ähnlichkeit über die volle Textlänge.
+### 3.1 Optimierung der Semantischen Ähnlichkeit (Jina Model)
+Um das Problem der abgeschnittenen Texte (Truncation) final zu lösen, wurde das Standard-SBERT-Modell (`paraphrase-multilingual-MiniLM-L12-v2`, max 512 Tokens) durch das Modell **`jinaai/jina-embeddings-v2-base-de`** ersetzt. Dieses Modell ist nativ für die deutsche Sprache optimiert und unterstützt eine Sequenzlänge von bis zu **8192 Tokens**. 
 
-### 2.2 Bidirektionale NER-Analyse
-- **Hypothese:** Der Informationsverlust ist eine Einbahnstraße (AS -> LS).
-- **Test:** Durchführung der NER-Analyse in beide Richtungen:
-    1. **AS -> LS (Recall):** Wie viele Fakten bleiben erhalten? (Bisheriger Stand: ~20%).
-    2. **LS -> AS:** Sind alle Informationen aus dem LS-Text auch im AS-Text enthalten? 
-- **Ziel:** Bestätigung, dass LS-Texte zwar Informationen weglassen, aber keine *neuen* (fiktiven) Fakten hinzufügen, die nicht im Original stehen.
+Um einen sauberen Vergleich zwischen den Modellen und den Auswirkungen der Textlänge zu ziehen, wurde die Kosinus-Ähnlichkeit mit dem Jina-Modell dreistufig gemessen: bei einem Limit von 128 Tokens, 512 Tokens und der vollen Textlänge (max. 8192 Tokens).
 
-### 2.3 Manuelle Auditierung der Extremwerte
-- **Fokus:** Analyse von Artikelpaaren mit extrem niedriger oder extrem hoher semantischer Ähnlichkeit.
-- **Prüfung:** Handelt es sich um echte inhaltliche Abweichungen oder um Fehler im Scraping/Alignment?
-- **Ziel:** Bereinigung des Korpus von "Noise" vor der Modelltrainingsphase.
+| Quelle | Jina Similarity (128 Tokens) | Jina Similarity (512 Tokens) | Jina Similarity (Full Context / 8192) | Differenz (128 vs Full) |
+| :--- | :---: | :---: | :---: | :---: |
+| **apotheken** | 0.688 | 0.800 | **0.836** | +0.148 |
+| **behindertenbeauftragter**| 0.756 | 0.793 | **0.804** | +0.048 |
+| **brandeins** | 0.549 | 0.599 | **0.600** | +0.051 |
+| **hamburg** | 0.690 | 0.790 | **0.815** | +0.125 |
+| **hannover** | 0.742 | 0.807 | **0.828** | +0.086 |
+| **koeln** | 0.693 | 0.782 | **0.829** | +0.136 |
+| **main_taunus** | 0.763 | 0.794 | **0.795** | +0.032 |
+| **mdr** | 0.731 | 0.784 | **0.787** | +0.056 |
+| **sozialpolitik** | 0.694 | 0.760 | **0.772** | +0.078 |
+| **stuttgart** | 0.884 | **0.884** | 0.821 | -0.063 |
+| **wiesbaden** | 0.754 | 0.777 | **0.775** | +0.021 |
 
-### 2.4 Korrelationsanalyse: Token-Ratio vs. Similarity
-- **Fragestellung:** Führt eine höhere Token-Ratio (mehr Erklärungen in LS) zwangsläufig zu einer höheren semantischen Ähnlichkeit zum Original?
-- **Ziel:** Verständnis der Balance zwischen Vereinfachung (Kürzung) und Elaboration (Erklärung).
+**Erkenntnisse aus dem Jina-Modell:**
+1. **Konsistente Steigerung:** Genau wie beim MiniLM-Modell führt die Einbeziehung von mehr Text (512 und 8192 Tokens) zu einer höheren gemessenen Ähnlichkeit. Dies bestätigt die Hypothese, dass die Einleitungen von LS-Texten oft stark modifiziert sind, der Hauptteil sich aber näher am Original bewegt.
+2. **Modell-Vergleich:** Die Basis-Ähnlichkeitswerte des Jina-Modells sind leicht anders skaliert als beim MiniLM-Modell, die Trends sind jedoch absolut identisch. Der Einsatz des 8192-Token-Limits stellt nun sicher, dass auch sehr lange Artikel (wie von der Apotheken Umschau) zu 100% ohne Informationsverlust durch Abschneiden (Truncation) in die Vektorberechnung einfließen.
+3. **Ausreißer Stuttgart:** Bei Stuttgart sinkt die Ähnlichkeit bei Betrachtung des vollen Kontexts leicht ab. Dies könnte an sehr langen, aber strukturell stark unterschiedlichen Dokumentenanhängen liegen.
 
-## 3. Zeitplan & Organisation
-- [ ] Implementierung der verbesserten Metriken (Satzweises SBERT & Bidirektionales NER).
-- [ ] Durchführung der re-evaluierten Analyse über das gesamte Korpus.
-- [ ] Manueller Check der Top/Bottom 5% Ähnlichkeits-Ausreißer.
+### 3.2 Bidirektionale NER-Analyse (Erfindet LS Fakten?)
+Bisher haben wir gemessen, wie viele Fakten (Entitäten) aus dem Original in der Leichten Sprache erhalten bleiben (AS -> LS Recall: ~15-20%). Nun haben wir zusätzlich gemessen, wie viele Fakten aus der Leichten Sprache auch im Original stehen (**LS -> AS Recall**).
+
+| Quelle | AS -> LS Recall (Faktenerhalt) | LS -> AS Recall (Faktentreue) |
+| :--- | :---: | :---: |
+| **apotheken** | 0.087 | 0.150 |
+| **behindertenbeauftragter**| 0.302 | 0.374 |
+| **brandeins** | 0.120 | 0.217 |
+| **hamburg** | 0.149 | 0.114 |
+| **hannover** | 0.250 | 0.200 |
+| **koeln** | 0.201 | 0.108 |
+| **main_taunus** | 0.333 | 0.238 |
+| **mdr** | 0.220 | 0.293 |
+| **sozialpolitik** | 0.100 | 0.234 |
+| **stuttgart** | 0.243 | 0.190 |
+| **wiesbaden** | 0.219 | 0.380 |
+
+**Interpretation:**
+- Der **LS -> AS Recall** ist durchweg ebenfalls niedrig. Das bedeutet: In den LS-Texten tauchen viele Entitäten (Namen, Orte, Organisationen) auf, die vom NER-Modell im Originaltext *nicht* (oder nicht in dieser Form) gefunden wurden.
+- **Warum ist das so?** Es deutet darauf hin, dass Leichte Sprache nicht primär "neue Fakten" erfindet, sondern Konzepte extrem umschreibt und Eigennamen durch erklärende Substantive ersetzt, die von SpaCy als neue Entitäten klassifiziert werden (z. B. "Bundesagentur für Arbeit" wird zu "Agentur für Arbeit" oder "Arbeits·amt").
+- Bei kommunalen Webseiten (Hannover, Köln) liegt die Faktentreue (LS->AS) sogar noch *unter* dem Faktenerhalt (AS->LS). Dies stützt die These, dass LS hier sehr stark elaboriert und kontextualisiert.
+
+### 3.3 Korrelationsanalyse: Token-Ratio vs. Similarity
+Die statistische Überprüfung ergab eine Korrelation (Pearson) zwischen der **Token-Ratio** (Längenverhältnis) und der **semantischen Ähnlichkeit (512 Tokens)** von **`r = -0.098`**.
+
+**Bedeutung:** Es gibt **keinen signifikanten linearen Zusammenhang** zwischen der Länge eines LS-Textes und seiner semantischen Ähnlichkeit zum Original. Ein Text, der in Leichter Sprache stark verlängert wird (z.B. doppelt so lang wie das Original), transportiert die "Kernbotschaft" (gemessen via Embeddings) nicht automatisch besser oder schlechter als ein Text, der stark gekürzt wurde. Die Art der Übersetzung (Erklärung vs. Auslassung) scheint wichtiger zu sein als die reine Wortanzahl.
+
+## 4. Zeitplan & Organisation
+- [x] Implementierung der verbesserten Metriken (Jina 8192 Tokens & Bidirektionales NER).
+- [x] Durchführung der re-evaluierten Analyse über das gesamte Korpus.
+- [ ] Manueller Check der Top/Bottom 5% Ähnlichkeits-Ausreißer (`results/similarity_extremes.json`).
 - [ ] Vorbereitung der Ergebnisse für das Treffen mit den Betreuern.

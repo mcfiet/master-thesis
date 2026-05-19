@@ -100,9 +100,11 @@ Die Annahme, dass LS-Texte weniger Informationen enthalten, konnte empirisch bes
 
 3. Manuelle Auditierung der Extremwerte: Wir lassen das Skript die 5 Artikelpaare mit der höchsten und der
   niedrigsten Similarity (oder Anomalien beim NER) als JSON/Text ausgeben, damit wir diese manuell sichten können.
-  
+
 4. NER Input Maximum: SpaCy hat standardmäßig ein sehr hohes Limit (1.000.000 Zeichen), ich werde aber
   sicherheitshalber im Skript hinterlegen, dass extrem lange Texte nicht abgeschnitten werden.
+
+5. SBERT Input Tokens erhöhen: Erst auf die verfügbaren 512 Tokens gehen. Dann `jinaai/jina-embeddings-v2-base-de` verwenden, welches 8192 Kontext Länge unterstützt. Davon dann aber nochmal Test mit 512 und 128 Tokens als Vergleich zum MiniLM machen, damit schauen kann wie sehr oder ob die sich unterscheiden von der Bewertung her. `T-Systems-onsite/german-roberta-sentence-transformer-v2` geht nicht weil es auch nur 512 max Tokens hat. Kann man aber vlt auch noch einmal als Vergleich machen.
 
 
 Thesisfrage: Entwicklung domänenspezifischer Datensätze und automatisierter Evaluationsmetriken für ein Framework zur neuronalen Textvereinfachung in Leichte Sprache
