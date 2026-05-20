@@ -3,9 +3,12 @@
 ## 1. Status Quo und Problemstellung
 Die initiale Analyse in `07_dataset_analysis.md` hat einen signifikanten Informationsverlust in Leichter Sprache (LS) aufgezeigt, insbesondere beim Erhalt von benannten Entitäten (NER Recall). Um diese Ergebnisse zu validieren und die Qualität der Metriken zu erhöhen, müssen technische Limitierungen der bisherigen Pipeline adressiert werden.
 
-### 1.1 Limitation der SBERT-Sequenzlänge
 ### 1.1 Limitation der SBERT-Sequenzlänge & Coverage
 Eine statistische Auswertung der Token-Anzahl im aktuellen Korpus hat ergeben, dass die anfängliche semantische Ähnlichkeitsanalyse unvollständig war. SBERT (MiniLM) hat ein Standardlimit von 128 Tokens, das wir im ersten Schritt auf 512 Tokens erhöht haben.
+
+![Verteilung der Artikellängen](img/analysis/article_length_distribution.png)
+
+Das obige Histogramm zeigt deutlich, warum die Standardlimits problematisch sind. Ein Großteil der Artikel (sowohl in Alltags- als auch in Leichter Sprache) überschreitet das Limit von 128 Tokens bei weitem. Selbst bei 512 Tokens wird noch ein erheblicher Teil der Texte abgeschnitten. Auffällig ist zudem, dass Artikel in Leichter Sprache im Durchschnitt kürzer sind als ihre Pendants in Alltagssprache, was den typischen Kürzungs- und Vereinfachungsstrategien entspricht.
 
 **Coverage-Analyse (Vergleich der Limits):**
 
