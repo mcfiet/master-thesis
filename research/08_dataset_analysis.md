@@ -142,6 +142,43 @@ Die statistische Überprüfung ergab eine Korrelation (Pearson) zwischen der **T
 
 **Bedeutung:** Es gibt **keinen signifikanten linearen Zusammenhang** zwischen der Länge eines LS-Textes und seiner semantischen Ähnlichkeit zum Original. Ein Text, der in Leichter Sprache stark verlängert wird (z.B. doppelt so lang wie das Original), transportiert die "Kernbotschaft" (gemessen via Embeddings) nicht automatisch besser oder schlechter als ein Text, der stark gekürzt wurde. Die Art der Übersetzung (Erklärung vs. Auslassung) scheint wichtiger zu sein als die reine Wortanzahl.
 
+### 3.5 Manuelle Auditierung der Extremwerte & Korpus-Bereinigung
+
+Um sicherzustellen, dass die gemessenen Ähnlichkeitswerte tatsächlich auf sprachliche Vereinfachung und nicht auf technische Fehler zurückzuführen sind, wurden die fünf Artikelpaare mit der niedrigsten und der höchsten semantischen Ähnlichkeit (basierend auf dem Jina-Modell, 512 Tokens) manuell geprüft (`results/similarity_extremes.json`).
+
+**Erkenntnisse der Extremwerte (Low Similarity):**
+- **Alignment-Fehler:** Werte unter 0.4 deuten fast immer auf Fehler beim Scraping oder URL-Alignment hin. Ein Beispiel aus der *Apotheken Umschau*: Ein AS-Artikel über den "Amsler-Gitter Netzhaut-Check" wurde fälschlicherweise mit einem LS-Artikel über "Altersbedingte Makula-Degeneration" aligniert. Obwohl beide das Auge behandeln, sind es inhaltlich völlig verschiedene Texte (Ähnlichkeit: 0.27).
+- **Extreme Kürzung (Teaser):** Bei *brand eins* bestand der "Leichte Sprache"-Text teilweise nur aus einem einzigen Satz (z. B. "Niemand hat uns dazu gezwungen. Mai 2022.") gegenüber einem vollen AS-Artikel (Ähnlichkeit: 0.13).
+
+**Erkenntnisse der Extremwerte (High Similarity):**
+- **Identische Texte (Similarity = 1.0):** Bei einigen Paaren (z. B. aus Köln und Stuttgart) lag die Ähnlichkeit bei exakt 1.0. Die Prüfung ergab, dass hier in beiden Versionen identischer Text ausgespielt wurde (teilweise kurze Link-Listen oder Menü-Strukturen, die fälschlicherweise als Artikelinhalt extrahiert wurden).
+
+**Auswirkung auf das Korpus (Bereinigungs-Strategie):**
+Um das Dataset für ein späteres Modelltraining oder tiefergehende Evaluierungen nutzbar zu machen, müssen diese technischen Ausreißer gefiltert werden. Ein Modell würde sonst "lernen", Artikel in völlig andere Themen umzuwandeln oder komplett zu löschen.
+
+Wir schlagen folgenden Filter vor:
+- **Untere Grenze:** `Semantic Similarity < 0.6` (Entfernt Alignment-Fehler und radikale Teaser-Kürzungen).
+- **Obere Grenze:** `Semantic Similarity > 0.98` (Entfernt identische Texte, bei denen keine Übersetzung stattgefunden hat).
+
+**Auswirkung auf die Datensatz-Größe & Tokens:**
+Nach Anwendung des Filters (Similarity zwischen 0.6 und 0.98) ergibt sich folgende Reduktion des Datensatzes:
+
+| Metrik | Unbereinigt | Bereinigt (Sim 0.6 - 0.98) | Erhalt in % |
+| :--- | :--- | :--- | :--- |
+| **Artikelpaare** | 1.526 | 1.459 | 95,61 % |
+| **AS Tokens (Gesamt)** | 1.005.254 | 956.814 | 95,18 % |
+| **LS Tokens (Gesamt)** | 934.880 | 900.913 | 96,37 % |
+
+**Fazit zur Bereinigung:**
+Der Verlust an reinen Trainingsdaten (Tokens) durch diese Bereinigung ist minimal (< 5 %). Gleichzeitig wird jedoch das meiste "Rauschen" (Alignment-Fehler, extreme Kürzungen und komplett identische Texte) entfernt. Dies erhöht die Qualität des Datensatzes (Signal-to-Noise Ratio) für ein eventuelles Modelltraining erheblich.
+
+### 3.6 Linguistische Verschiebungen (Satzlänge & Konjunktionen)
+
+Neben der Semantik und den Entitäten wurden auch klassische linguistische Merkmale über das gesamte Korpus (N=1.526) gemessen. Die Vorgaben der Leichten Sprache (kurze Sätze, Parataxe statt Hypotaxe) spiegeln sich deutlich in den Daten wider:
+
+- **Satzlänge:** Die durchschnittliche Satzlänge in der Alltagssprache beträgt im Korpus **15,6 Tokens** pro Satz. In der Leichten Sprache sinkt dieser Wert drastisch auf **9,1 Tokens** pro Satz (eine Reduktion um ca. 42 %). Quellen wie *brand eins* zeigen sogar eine Halbierung von 20 auf 7 Tokens pro Satz.
+- **Konjunktionen:** Der Anteil der Konjunktionen (Bindewörter, die oft für Nebensätze genutzt werden) sinkt von **4,6 %** in AS auf **3,0 %** in LS. Dies ist ein harter quantitativer Indikator dafür, dass komplexe Nebensatzkonstruktionen (Hypotaxen) durch einfache Hauptsatzreihen (Parataxen) ersetzt wurden.
+
 ## 4. Zeitplan & Organisation
 - [x] Implementierung der verbesserten Metriken (Jina 8192 Tokens & Bidirektionales NER).
 - [x] Durchführung der re-evaluierten Analyse über das gesamte Korpus.
