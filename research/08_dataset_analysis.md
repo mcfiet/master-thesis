@@ -72,6 +72,9 @@ Um das Problem der abgeschnittenen Texte (Truncation) final zu lösen, wurde das
 
 Um einen sauberen Vergleich zwischen den Modellen und den Auswirkungen der Textlänge zu ziehen, wurde die Kosinus-Ähnlichkeit mit dem Jina-Modell dreistufig gemessen: bei einem Limit von 128 Tokens, 512 Tokens und der vollen Textlänge (max. 8192 Tokens).
 
+![Einfluss der Kontextlänge auf Semantische Ähnlichkeit](../research/img/analysis/jina_context_comparison.png)
+*Abbildung: Einfluss der Kontextlänge (128 vs 512 vs 8192 Tokens) auf die gemessene semantische Ähnlichkeit.*
+
 | Quelle | Jina Similarity (128 Tokens) | Jina Similarity (512 Tokens) | Jina Similarity (Full Context / 8192) | Differenz (128 vs Full) |
 | :--- | :---: | :---: | :---: | :---: |
 | **apotheken** | 0.688 | 0.800 | **0.836** | +0.148 |
@@ -118,6 +121,9 @@ Um sicherzustellen, dass die Wahl des Modells keine systematischen Verzerrungen 
 ### 3.3 Bidirektionale NER-Analyse (Erfindet LS Fakten?)
 Bisher haben wir gemessen, wie viele Fakten (Entitäten) aus dem Original in der Leichten Sprache erhalten bleiben (AS -> LS Recall: ~15-20%). Nun haben wir zusätzlich gemessen, wie viele Fakten aus der Leichten Sprache auch im Original stehen (**LS -> AS Recall**).
 
+![Bidirektionales NER](../research/img/analysis/bidirectional_ner_comparison.png)
+*Abbildung: Vergleich zwischen Faktenerhalt (AS->LS) und Faktentreue (LS->AS) über verschiedene Quellen.*
+
 | Quelle | AS -> LS Recall (Faktenerhalt) | LS -> AS Recall (Faktentreue) |
 | :--- | :---: | :---: |
 | **apotheken** | 0.087 | 0.150 |
@@ -140,6 +146,9 @@ Bisher haben wir gemessen, wie viele Fakten (Entitäten) aus dem Original in der
 ### 3.4 Korrelationsanalyse: Token-Ratio vs. Similarity
 Die statistische Überprüfung ergab eine Korrelation (Pearson) zwischen der **Token-Ratio** (Längenverhältnis) und der **semantischen Ähnlichkeit (512 Tokens)** von **`r = -0.098`**.
 
+![Korrelation Token-Ratio vs Similarity](../research/img/analysis/token_ratio_vs_similarity_scatter.png)
+*Abbildung: Fehlende Korrelation zwischen Längenverhältnis und Semantischer Ähnlichkeit.*
+
 **Bedeutung:** Es gibt **keinen signifikanten linearen Zusammenhang** zwischen der Länge eines LS-Textes und seiner semantischen Ähnlichkeit zum Original. Ein Text, der in Leichter Sprache stark verlängert wird (z.B. doppelt so lang wie das Original), transportiert die "Kernbotschaft" (gemessen via Embeddings) nicht automatisch besser oder schlechter als ein Text, der stark gekürzt wurde. Die Art der Übersetzung (Erklärung vs. Auslassung) scheint wichtiger zu sein als die reine Wortanzahl.
 
 ### 3.5 Manuelle Auditierung der Extremwerte & Korpus-Bereinigung
@@ -160,6 +169,9 @@ Wir schlagen folgenden Filter vor:
 - **Untere Grenze:** `Semantic Similarity < 0.6` (Entfernt Alignment-Fehler und radikale Teaser-Kürzungen).
 - **Obere Grenze:** `Semantic Similarity > 0.98` (Entfernt identische Texte, bei denen keine Übersetzung stattgefunden hat).
 
+![Histogramm der Ähnlichkeitsverteilung](../research/img/analysis/similarity_distribution_hist.png)
+*Abbildung: Verteilung der semantischen Ähnlichkeit im gesamten Korpus mit markierten Filtergrenzen.*
+
 **Auswirkung auf die Datensatz-Größe & Tokens:**
 Nach Anwendung des Filters (Similarity zwischen 0.6 und 0.98) ergibt sich folgende Reduktion des Datensatzes:
 
@@ -176,7 +188,14 @@ Der Verlust an reinen Trainingsdaten (Tokens) durch diese Bereinigung ist minima
 
 Neben der Semantik und den Entitäten wurden auch klassische linguistische Merkmale über das gesamte Korpus (N=1.526) gemessen. Die Vorgaben der Leichten Sprache (kurze Sätze, Parataxe statt Hypotaxe) spiegeln sich deutlich in den Daten wider:
 
+![Vergleich der Satzlängen](../research/img/analysis/sentence_length_comparison_bar.png)
+*Abbildung: Durchschnittliche Tokens pro Satz in AS und LS aufgeteilt nach Quelle.*
+
 - **Satzlänge:** Die durchschnittliche Satzlänge in der Alltagssprache beträgt im Korpus **15,6 Tokens** pro Satz. In der Leichten Sprache sinkt dieser Wert drastisch auf **9,1 Tokens** pro Satz (eine Reduktion um ca. 42 %). Quellen wie *brand eins* zeigen sogar eine Halbierung von 20 auf 7 Tokens pro Satz.
+
+![Vergleich der Wortarten](../research/img/analysis/pos_distribution_bar.png)
+*Abbildung: Veränderung der Wortarten-Verteilung (Part-of-Speech) im Korpus.*
+
 - **Konjunktionen:** Der Anteil der Konjunktionen (Bindewörter, die oft für Nebensätze genutzt werden) sinkt von **4,6 %** in AS auf **3,0 %** in LS. Dies ist ein harter quantitativer Indikator dafür, dass komplexe Nebensatzkonstruktionen (Hypotaxen) durch einfache Hauptsatzreihen (Parataxen) ersetzt wurden.
 
 ## 4. Zeitplan & Organisation

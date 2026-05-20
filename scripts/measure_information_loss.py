@@ -106,11 +106,10 @@ def analyze_corpus():
             
             # Semantic Similarity (Jina Model at different sequence lengths)
             
-            # 1. Full Context (8192) - Skipped to save time, we already computed this
-            # sbert.max_seq_length = 8192
-            # embeddings_full = sbert.encode([as_text, ls_text], batch_size=1, convert_to_tensor=True)
-            # sim_8192 = util.cos_sim(embeddings_full[0], embeddings_full[1]).item()
-            sim_8192 = None
+            # 1. Full Context (8192)
+            sbert.max_seq_length = 8192
+            embeddings_full = sbert.encode([as_text, ls_text], batch_size=1, convert_to_tensor=True)
+            sim_8192 = util.cos_sim(embeddings_full[0], embeddings_full[1]).item()
             
             # 2. Context 512
             sbert.max_seq_length = 512
