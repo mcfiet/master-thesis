@@ -154,7 +154,7 @@ def create_visualizations(plots_to_run):
         length_df = df[['as_tokens', 'ls_tokens']].melt(var_name='Sprache', value_name='Token-Anzahl')
         length_df['Sprache'] = length_df['Sprache'].map({'as_tokens': 'Alltagssprache', 'ls_tokens': 'Leichte Sprache'})
         
-        sns.histplot(data=length_df, x='Token-Anzahl', hue='Sprache', kde=True, bins=50, element="step", common_norm=False)
+        ax = sns.histplot(data=length_df, x='Token-Anzahl', hue='Sprache', kde=True, bins=50, element="step", common_norm=False)
         
         # Add SBERT limits for context
         plt.axvline(128, color='red', linestyle='--', label='SBERT Limit (128)')
@@ -163,7 +163,19 @@ def create_visualizations(plots_to_run):
         plt.title('Verteilung der Artikellängen (Token-Anzahl)')
         plt.xlabel('Anzahl Tokens')
         plt.ylabel('Anzahl Artikel')
-        plt.legend()
+        
+        # Merge legends to include both histplot labels and SBERT limit lines
+        h_lines, l_lines = ax.get_legend_handles_labels()
+        if ax.legend_:
+            try:
+                h_sb = ax.legend_.legend_handles
+            except AttributeError:
+                h_sb = ax.legend_.legendHandles
+            l_sb = [t.get_text() for t in ax.legend_.texts]
+            ax.legend(h_sb + h_lines, l_sb + l_lines)
+        else:
+            plt.legend()
+            
         plt.xlim(0, 3000) # Limit x-axis for better visibility of the bulk of articles
         plt.tight_layout()
         plt.savefig(os.path.join(OUTPUT_DIR, 'article_length_distribution.png'))
