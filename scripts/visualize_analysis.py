@@ -77,10 +77,13 @@ def create_visualizations(plots_to_run):
         print("Generating Token Ratio vs Semantic Similarity...")
         # 3. Token Ratio vs Semantic Similarity
         plt.figure(figsize=(10, 6))
-        sns.regplot(data=df, x='token_ratio', y='semantic_similarity_512', scatter_kws={'alpha':0.3}, line_kws={'color':'red'})
-        plt.title('Korrelation: Token-Verhältnis vs. Semantische Ähnlichkeit')
+        # Filter extreme outliers to make the plot readable (most data is < 5)
+        df_filtered = df[df['token_ratio'] <= 5]
+        sns.regplot(data=df_filtered, x='token_ratio', y='semantic_similarity_512', scatter_kws={'alpha':0.3}, line_kws={'color':'red'})
+        plt.title('Korrelation: Token-Verhältnis vs. Semantische Ähnlichkeit (Zoom)')
         plt.xlabel('Token Ratio (LS / AS)')
         plt.ylabel('Semantische Ähnlichkeit (Jina 512)')
+        plt.xlim(0, 5)  # Restrict x-axis to zoom in on the cluster
         plt.tight_layout()
         plt.savefig(os.path.join(OUTPUT_DIR, 'token_ratio_vs_similarity_scatter.png'))
         plt.close()

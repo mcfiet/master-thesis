@@ -917,28 +917,190 @@ Why do many government sites offer so little parallel data?
 
 ---
 
+<!-- _class: section-header -->
+
+## Week 8 
+
+---
+
+### Corpus Analysis
+
+*   **Problem:** Initial SBERT analysis (Week 7) was limited to **128 tokens**, resulting in >90% of articles being truncated.
+*   **Goal:** Increase model coverage and validate if semantic similarity holds across full-length articles.
+*   **Methodology Update:**
+    *   Scale up to **512 tokens** (MiniLM limit).
+    *   Introduction of **Jina Embeddings v2** (8192 tokens) for 100% coverage.
+    *   **Bidirectional NER:** Analysis of "Faktentreue" (LS -> AS).
+
+---
+<!-- _class: image-caption -->
+
+### Article Length Distribution
+
+![Verteilung der Artikellängen](img/analysis/article_length_distribution.png)
+
+---
+
+### SBERT Limitation & Coverage Analysis
+
+A statistical review of token counts revealed that the 128-token limit was capturing primarily "teasers" or "introductions," which often contain boilerplate or navigation instructions in LS.
+
+| Coverage | AS (Limit: 128) | LS (Limit: 128) | AS (Limit: 512) | LS (Limit: 512) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Fully Captured** | 9.4 % | 5.1 % | **56.9 %** | **52.9 %** |
+| **Truncated** | 90.6 % | 94.9 % | **43.1 %** | **47.1 %** |
+
+**Lesson Learned:** Even at 512 tokens, nearly half of the corpus is cut off. This necessitated the switch to a long-context model (Jina) to ensure total information retention during analysis.
+
+---
+
+### Optimized Analysis: 128 vs. 512 Tokens
+
+Increasing the context window significantly changed the measured similarity for most sources.
+
+| Source | Sim (128 Tokens) | Sim (512 Tokens) | Difference |
+| :--- | :---: | :---: | :---: |
+| **apotheken** | 0.636 | **0.894** | +0.258 |
+| **hamburg** | 0.665 | **0.804** | +0.139 |
+| **koeln** | 0.684 | **0.833** | +0.149 |
+| **sozialpolitik** | 0.706 | **0.850** | +0.144 |
+| **wiesbaden** | **0.750** | 0.642 | -0.108 |
+
+**Interpretation:** For long texts (Apotheken, Köln), similarity rises with context. For others (Wiesbaden), it drops, indicating that while introductions are aligned, the core content diverges significantly.
+
+---
 <!-- _class: split -->
 
-### Next Steps
+### Model Comparison: MiniLM vs. Jina (128 & 512 Tokens)
 
 <div class="column-left">
 
-**Track 1: Corpus Optimization**
+To ensure the model choice introduces no bias, we compared the original model (`MiniLM`) with the new one (`jina-embeddings-v2-base-de`) at identical limits.
 
-*   **Outlier Removal:** Filtering out extreme alignment outliers (e.g., highly skewed token ratios or extremely low semantic similarity).
-*   **Data Cleaning & Review:** Systematic review and refinement of the existing dataset based on the newly gathered metrics and statistics.
-*   **Expansion:** Continuous sourcing of new portals and evaluation of historical Wayback Machine data.
+
+**Conclusion:** 
+- **Same Trends:** Higher context equals higher similarity in both.
+- **Stability:** Jina is more stable with longer texts (e.g., Wiesbaden doesn't drop abruptly). It validates that LS stays semantically close to AS.
 
 </div>
 
 <div class="column-right">
 
-**Track 2: Metric Model Training**
-
-*   **Training Set Construction:** Converting the refined parallel corpus into a training dataset for classification and regression tasks.
-*   **Model Selection:** Evaluating modern transformer architectures (e.g., Cross-Encoders) specifically for German language level detection.
-*   **Baseline Establishment:** Training a first version of the metric to achieve a robust baseline for distinguishing between AS and LS.
-*   **Feature Integration:** Incorporating semantic similarity and information retention into the scoring mechanism.
+| Source | MiniLM (128) | Jina (128) | MiniLM (512) | Jina (512) |
+| :--- | :---: | :---: | :---: | :---: |
+| **apotheken** | 0.636 | 0.688 | **0.894** | 0.800 |
+| **behindertenbeauftragter**| 0.746 | 0.756 | 0.761 | **0.793** |
+| **brandeins** | **0.637** | 0.549 | **0.698** | 0.599 |
+| **hamburg** | 0.665 | **0.690** | **0.804** | 0.790 |
+| **hannover** | 0.706 | **0.742** | 0.776 | **0.807** |
+| **koeln** | 0.684 | 0.693 | **0.833** | 0.782 |
+| **main_taunus** | 0.762 | 0.763 | 0.727 | **0.794** |
+| **mdr** | 0.733 | 0.731 | 0.766 | **0.784** |
+| **sozialpolitik** | **0.706** | 0.694 | **0.850** | 0.760 |
+| **stuttgart** | **0.896** | 0.884 | 0.856 | **0.884** |
+| **wiesbaden** | 0.750 | 0.754 | 0.642 | **0.777** |
 
 </div>
+
+
+
+---
+
+### Solving Truncation: The Jina Model (8192 Tokens)
+
+| Source | Jina (128 Tokens) | Jina (512 Tokens) | Jina (Full / 8192) |
+| :--- | :---: | :---: | :---: |
+| **apotheken** | 0.688 | 0.800 | **0.836** |
+| **behindertenbeauftragter** | 0.756 | 0.793 | **0.804** |
+| **hannover** | 0.742 | 0.807 | **0.828** |
+| **koeln** | 0.693 | 0.782 | **0.829** |
+| **stuttgart** | **0.884** | 0.884 | 0.821 |
+
+---
+
+<!-- _class: image-caption -->
+
+### Solving Truncation: The Jina Model (8192 Tokens)
+
+![Einfluss der Kontextlänge auf Semantische Ähnlichkeit](img/analysis/jina_context_comparison.png)
+
+---
+
+<!-- _class: split -->
+
+### Bidirectional NER: Does LS "Invent" Facts?
+
+<div class="column-left">
+
+We measured not just what survives (AS -> LS), but also if LS introduces new entities (LS -> AS).
+
+**Finding:** Both metrics are low. LS doesn't necessarily invent facts, but it rephrases entities into common nouns (e.g., "Arbeitsagentur" -> "Amt"), which current NER models fail to align.
+
+</div>
+
+<div class="column-right">
+
+![Bidirektionales NER](img/analysis/bidirectional_ner_comparison.png)
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### Correlation: Token-Ratio vs. Similarity
+
+<div class="column-left">
+
+**Finding:** No significant linear correlation between text length expansion and semantic similarity.
+
+Longer explanations in LS don't automatically guarantee higher semantic proximity to the original.
+
+</div>
+
+<div class="column-right">
+
+![Korrelation Token-Ratio vs Similarity](img/analysis/token_ratio_vs_similarity_scatter.png)
+
+</div>
+
+---
+
+<!-- _class: image-caption -->
+
+### Manual Audit & Corpus Cleaning
+
+![Histogramm der Ähnlichkeitsverteilung](img/analysis/similarity_distribution_hist.png)
+
+
+---
+
+<!-- _class: split -->
+
+### Linguistic Shifts: Sentence Length
+
+<div class="column-left">
+
+Analysis of 1,526 pairs confirms structural simplification.
+
+*   **Sentence Length:** Dropped from **15.6 tokens** (AS) to **9.1 tokens** (LS) – a 42% reduction.
+*   **Impact:** Drastic reduction in cognitive load per processing unit.
+
+</div>
+
+<div class="column-right">
+
+![Vergleich der Satzlängen](img/analysis/sentence_length_comparison_bar.png)
+
+</div>
+
+---
+
+### Next Steps
+
+1.  **Dataset Cleaning:** Apply the 0.6 - 0.98 similarity filter to create the "Gold Standard" training corpus. Also look for all other extremes like ratio too high etc.
+
+**Thesis-Titel**
+
+Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für ein Framework zur neuronalen Textvereinfachung in Leichte Sprache
 
