@@ -92,6 +92,10 @@ def analyze_corpus():
         
         for pair in tqdm(pairs):
             as_text = pair.get("as_text", "")
+            # Support plural format (1-to-N alignment) for TAZ etc.
+            if not as_text and "as_texts" in pair:
+                as_text = "\n\n".join(pair["as_texts"])
+                
             ls_text = pair.get("ls_text", "")
             
             if not as_text or not ls_text:
@@ -199,4 +203,13 @@ def analyze_corpus():
         json.dump(all_results, f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_dir', default="results/corpus")
+    parser.add_argument('--output_csv', default="results/information_loss_analysis.csv")
+    args = parser.parse_args()
+    
+    CORPUS_DIR = args.input_dir
+    OUTPUT_CSV = args.output_csv
+    
     analyze_corpus()

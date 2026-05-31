@@ -5,12 +5,11 @@ import seaborn as sns
 import os
 
 # Configuration
-INPUT_CSV = "results/information_loss_analysis.csv"
-OUTPUT_DIR = "research/img/analysis"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-def create_visualizations(plots_to_run):
-    df = pd.read_csv(INPUT_CSV)
+def create_visualizations(plots_to_run, output_dir="research/img/analysis", input_csv="results/information_loss_analysis.csv"):
+    df = pd.read_csv(input_csv)
+    
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
     
     # Set style
     sns.set_theme(style="whitegrid")
@@ -39,7 +38,7 @@ def create_visualizations(plots_to_run):
         plt.ylabel('Cosine Similarity')
         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.tight_layout()
-        plt.savefig(os.path.join(OUTPUT_DIR, 'jina_context_comparison.png'))
+        plt.savefig(os.path.join(output_dir, 'jina_context_comparison.png'))
         plt.close()
 
     if 'semantic_sim_8192' in plots_to_run or 'all' in plots_to_run:
@@ -52,7 +51,7 @@ def create_visualizations(plots_to_run):
             plt.title('Semantische Ähnlichkeit nach Quelle (Jina 8192 Tokens)')
             plt.ylabel('Cosine Similarity (SBERT)')
             plt.tight_layout()
-            plt.savefig(os.path.join(OUTPUT_DIR, 'semantic_similarity_8192.png'))
+            plt.savefig(os.path.join(output_dir, 'semantic_similarity_8192.png'))
             plt.close()
 
     if 'bidirectional_ner' in plots_to_run or 'all' in plots_to_run:
@@ -70,7 +69,7 @@ def create_visualizations(plots_to_run):
         plt.ylabel('Recall Rate')
         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.tight_layout()
-        plt.savefig(os.path.join(OUTPUT_DIR, 'bidirectional_ner_comparison.png'))
+        plt.savefig(os.path.join(output_dir, 'bidirectional_ner_comparison.png'))
         plt.close()
 
     if 'token_ratio_sim' in plots_to_run or 'all' in plots_to_run:
@@ -85,7 +84,7 @@ def create_visualizations(plots_to_run):
         plt.ylabel('Semantische Ähnlichkeit (Jina 512)')
         plt.xlim(0, 5)  # Restrict x-axis to zoom in on the cluster
         plt.tight_layout()
-        plt.savefig(os.path.join(OUTPUT_DIR, 'token_ratio_vs_similarity_scatter.png'))
+        plt.savefig(os.path.join(output_dir, 'token_ratio_vs_similarity_scatter.png'))
         plt.close()
 
     if 'sim_hist' in plots_to_run or 'all' in plots_to_run:
@@ -100,7 +99,7 @@ def create_visualizations(plots_to_run):
         plt.ylabel('Anzahl Artikelpaare')
         plt.legend()
         plt.tight_layout()
-        plt.savefig(os.path.join(OUTPUT_DIR, 'similarity_distribution_hist.png'))
+        plt.savefig(os.path.join(output_dir, 'similarity_distribution_hist.png'))
         plt.close()
 
     if 'sent_len' in plots_to_run or 'all' in plots_to_run:
@@ -120,7 +119,7 @@ def create_visualizations(plots_to_run):
         plt.ylabel('Tokens pro Satz')
         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.tight_layout()
-        plt.savefig(os.path.join(OUTPUT_DIR, 'sentence_length_comparison_bar.png'))
+        plt.savefig(os.path.join(output_dir, 'sentence_length_comparison_bar.png'))
         plt.close()
 
     if 'pos_dist' in plots_to_run or 'all' in plots_to_run:
@@ -142,7 +141,7 @@ def create_visualizations(plots_to_run):
         plt.title('Durchschnittliche Wortarten-Verteilung (Gesamtes Korpus)')
         plt.ylabel('Anteil an allen Tokens')
         plt.tight_layout()
-        plt.savefig(os.path.join(OUTPUT_DIR, 'pos_distribution_bar.png'))
+        plt.savefig(os.path.join(output_dir, 'pos_distribution_bar.png'))
         plt.close()
 
     if 'article_len_dist' in plots_to_run or 'all' in plots_to_run:
@@ -181,10 +180,10 @@ def create_visualizations(plots_to_run):
             
         plt.xlim(0, 3000) # Limit x-axis for better visibility of the bulk of articles
         plt.tight_layout()
-        plt.savefig(os.path.join(OUTPUT_DIR, 'article_length_distribution.png'))
+        plt.savefig(os.path.join(output_dir, 'article_length_distribution.png'))
         plt.close()
 
-    print(f"Visualizations updated and saved to {OUTPUT_DIR}")
+    print(f"Visualizations updated and saved to {output_dir}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate visualizations for dataset analysis.")
@@ -205,6 +204,18 @@ if __name__ == "__main__":
         ],
         help="List of plots to generate. 'all' generates everything."
     )
+    parser.add_argument(
+        '--output_dir',
+        type=str,
+        default="research/img/analysis",
+        help="Directory to save the plots."
+    )
+    parser.add_argument(
+        '--input_csv',
+        type=str,
+        default="results/information_loss_analysis.csv",
+        help="Path to the input CSV file."
+    )
     args = parser.parse_args()
     
-    create_visualizations(args.plots)
+    create_visualizations(args.plots, output_dir=args.output_dir, input_csv=args.input_csv)

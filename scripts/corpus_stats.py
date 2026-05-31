@@ -22,8 +22,7 @@ def count_sentences(text):
     sentences = re.split(r'[.!?](?:\s+|$)|(?:\n\s*\n)', text)
     return len([s for s in sentences if s.strip()])
 
-def analyze_corpus():
-    corpus_dir = "results/corpus"
+def analyze_corpus(corpus_dir="results/corpus", output_path="research/corpus_statistics.md"):
     files = glob.glob(os.path.join(corpus_dir, "*_articles.json"))
     
     overall_stats = {
@@ -121,7 +120,6 @@ def analyze_corpus():
     md_content.append(f"| **TOTAL** | **{pairs_o}** | **{ls_o['words']}** | **{as_o['words']}** | **{ls_o['tokens']}** | **{as_o['tokens']}** | **{ls_o['sentences']}** | **{as_o['sentences']}** | **{len(ls_o['vocab'])}** | **{len(as_o['vocab'])}** | **{ls_ttr_o}** | **{as_ttr_o}** | **{ls_ws_o}** | **{as_ws_o}** |")
 
     # Write to file
-    output_path = "research/corpus_statistics.md"
     try:
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write('\n'.join(md_content) + '\n')
@@ -130,4 +128,10 @@ def analyze_corpus():
         print(f"Error writing to {output_path}: {e}")
 
 if __name__ == "__main__":
-    analyze_corpus()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_dir', default="results/corpus")
+    parser.add_argument('--output_file', default="research/corpus_statistics.md")
+    args = parser.parse_args()
+    
+    analyze_corpus(corpus_dir=args.input_dir, output_path=args.output_file)
