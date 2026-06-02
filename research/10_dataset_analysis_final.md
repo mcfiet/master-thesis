@@ -51,5 +51,29 @@ Basierend auf der initialen Analyse wurden Filterkriterien definiert, um die Qua
 ### 5.2 Effekt der Bereinigung
 Durch die Bereinigung wurden **55 Artikelpaare** entfernt. Dies reduziert das Rauschen im Datensatz (v.a. Teaser-Leichen), ohne die wertvolle Domänen-Abdeckung (z.B. Hannover mit über 750 Artikeln) nennenswert zu verringern.
 
-## 6. Fazit
-Der finale Datensatz (Version 3) umfasst **1.471 validierte Paare** mit insgesamt ca. **1,88 Mio. Tokens**. Die konsequente Nutzung von Long-Context Embeddings (Jina 8192) zur Validierung stellt sicher, dass die Alignments auch bei sehr langen Quelltexten inhaltlich korrekt sind. Damit liegt eine hochwertige Datenbasis für das Training von Simplification-Modellen vor.
+## 6. Artefakte und Rauschen im Datensatz (Noise Analysis)
+Trotz der Bereinigung nach Ähnlichkeits-Scores verbleiben in einigen Quellen strukturelle Artefakte, die aus dem Scraping-Prozess oder der ursprünglichen Webseiten-Struktur resultieren.
+
+### 6.1 Brand Eins: Metadaten-Konkatenation
+Besonders bei der Quelle **Brand Eins** fällt auf, dass Titel, Datum und teilweise Autorennamen am Anfang des LS-Textes ohne Trennzeichen zusammengeführt wurden.
+*   **Beispiel:** `"Sie werden mit falschem Käse betrogen März 2023.Holger Fr Parmesan ist ein Käse..."`
+*   **Problem:** Dies führt zu unnatürlichen Satzanfängen und erschwert das Training von Generierungs-Modellen, da das Modell lernen könnte, Metadaten in den Text zu integrieren. Zusätzlich fehlen oft Leerzeichen nach Satzzeichen (z.B. `"Digitalisierung.Wir"`).
+
+### 6.2 MDR: Quellenverweise und Radio-Metadaten
+Viele Texte des **MDR** enthalten am Ende standardisierte Verweise auf die "schwere Sprache" oder Radio-Sendezeiten.
+*   **Beispiel:** `"Über dieses Thema berichtet der MDR auch in schwerer Sprache: MDR THÜRINGEN - Das Radio | 01. April 2026 | 19:00 Uhr"`
+*   **Problem:** Diese Sätze sind für die eigentliche Vereinfachung irrelevant und stellen Rauschen dar, das bei einer automatischen Evaluierung den Score verfälschen könnte.
+
+### 6.3 Hamburg & Stuttgart: Redundante Header und Footer
+In diesen Quellen finden sich häufig Kontaktinformationen oder wiederholte Titelzeilen innerhalb des Textes.
+*   **Hamburg:** Wiederholung von Büroadressen am Textende oder doppelte Footer-Blöcke.
+*   **Stuttgart:** Doppelte Titelzeilen (z.B. `"Lebenspartnerschaft - Umwandlung in eine Ehe beantragen Umwandlung in eine Ehe beantragen"`).
+
+### 6.4 TAZ: Verwaiste Bildunterschriften
+In einigen TAZ-Artikeln sind Bildunterschriften in den Fließtext gerutscht, ohne dass das Bild vorhanden ist (z.B. `"Das ist Baris Kul vor seinem Laden:"`).
+
+### 6.5 Systematische Merkmale: Mediopunkt und Trennungen
+Ein domänenspezifisches Merkmal ist die Verwendung des **Mediopunkts** (`·`) zur Silbentrennung (insb. Hannover, Hamburg, Wiesbaden). Während dies für die Zielgruppe der Leichten Sprache korrekt ist, muss es bei der Tokenisierung und dem Training berücksichtigt werden (Vokabular-Erweiterung oder Normalisierung).
+
+## 7. Fazit
+Der finale Datensatz (Version 3) umfasst **1.471 validierte Paare** mit insgesamt ca. **1,88 Mio. Tokens**. Die konsequente Nutzung von Long-Context Embeddings (Jina 8192) zur Validierung stellt sicher, dass die Alignments auch bei sehr langen Quelltexten inhaltlich korrekt sind. Dennoch zeigt die Artefakt-Analyse, dass für ein optimales Modelltraining eine weitere, quellspezifische Nachbereinigung (Regex-Filter für Metadaten) empfehlenswert ist.
