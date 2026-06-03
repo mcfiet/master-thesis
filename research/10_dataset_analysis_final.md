@@ -76,4 +76,16 @@ In einigen TAZ-Artikeln sind Bildunterschriften in den Fließtext gerutscht, ohn
 Ein domänenspezifisches Merkmal ist die Verwendung des **Mediopunkts** (`·`) zur Silbentrennung (insb. Hannover, Hamburg, Wiesbaden). Während dies für die Zielgruppe der Leichten Sprache korrekt ist, muss es bei der Tokenisierung und dem Training berücksichtigt werden (Vokabular-Erweiterung oder Normalisierung).
 
 ## 7. Fazit
-Der finale Datensatz (Version 3) umfasst **1.471 validierte Paare** mit insgesamt ca. **1,88 Mio. Tokens**. Die konsequente Nutzung von Long-Context Embeddings (Jina 8192) zur Validierung stellt sicher, dass die Alignments auch bei sehr langen Quelltexten inhaltlich korrekt sind. Dennoch zeigt die Artefakt-Analyse, dass für ein optimales Modelltraining eine weitere, quellspezifische Nachbereinigung (Regex-Filter für Metadaten) empfehlenswert ist.
+Der finale Datensatz (Version 3) umfasst **1.471 validierte Paare** mit insgesamt ca. **1,88 Mio. Tokens**. Durch die konsequente Nutzung von Long-Context Embeddings (Jina 8192) wurde eine hohe Alignment-Qualität sichergestellt.
+
+Zusätzlich wurde eine **automatisierte Nachbereinigung (Post-Cleaning)** implementiert, die:
+*   Strukturelle Metadaten und Autorennamen bei Brand Eins entfernt hat.
+*   Systematische Boilerplate-Footer beim MDR eliminiert hat.
+*   Die Lesbarkeit durch Korrektur fehlender Leerzeichen verbessert hat.
+*   Den Mediopunkt (`·`) zur Silbentrennung normalisiert (entfernt) hat, um die Kompatibilität mit Standard-Tokenisatoren zu gewährleisten.
+
+Damit liegt eine hochreine und inhaltlich konsistente Datenbasis vor, die unmittelbar für das Training von Simplification-Modellen genutzt werden kann. Der bereinigte Korpus befindet sich in `results/corpus_final/`.
+
+
+- Schauen in weiweit sich die Texte unterscheiden die verschiedene Ratios haben
+- Beim Trainieren verschieden Datensatzgrößen testen: 0.7-0.98, 0.8-0.98 0.9-0.98. Schauen ob es das Training verbessert mit besser semantisch aligned Daten
