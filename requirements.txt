@@ -6,3 +6,7 @@ tqdm
 pandas
 matplotlib
 seaborn
+torch
+scikit-learn
+scipy
+numpy
