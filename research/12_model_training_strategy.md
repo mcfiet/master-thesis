@@ -44,9 +44,24 @@ Wir werden weiterhin **`paraphrase-multilingual-MiniLM-L12-v2`** als primäres B
 ### 2.2 Sekundäre Baseline: BiLSTM
 Eine einfache bidirektionale LSTM wird als leichtgewichtige Baseline dienen, um zu überprüfen, ob die Transformer-Architektur für die spezifische Komplexität unseres Korpus notwendig ist.
 
-## 3. Trainingskonfiguration
+## 3. Trainingskonfigurationen
 
-Für die ersten Trainingsläufe werden wir die erfolgreichsten Hyperparameter aus der Forschung übernehmen:
+Um optimale Ergebnisse zu erzielen, unterscheiden wir in der Konfiguration zwischen der BiLSTM-Baseline und dem späteren SBERT Fine-Tuning.
+
+### 3.1 Konfiguration: BiLSTM-Baseline (verwendet für 99% BAcc)
+
+| Parameter | Wert |
+| :--- | :--- |
+| **Optimizer** | AdamW |
+| **Lernrate** | $1 \times 10^{-3}$ |
+| **Weight Decay** | 0,01 |
+| **Batch Size** | 32 |
+| **Max Epochs** | 30 |
+| **Early Stopping Patience** | 7 |
+| **Dropout** | 0,4 |
+| **Max Seq Len** | 512 (Artikel) / 100 (Sätze) |
+
+### 3.2 Ziel-Konfiguration: SBERT Fine-Tuning
 
 | Parameter | Wert |
 | :--- | :--- |
@@ -54,10 +69,10 @@ Für die ersten Trainingsläufe werden wir die erfolgreichsten Hyperparameter au
 | **Lernrate** | $5 \times 10^{-5}$ |
 | **Weight Decay** | 0,01 |
 | **Batch Size** | 32 |
-| **Max Epochen** | 30 (mit Early Stopping) |
-| **Early Stopping Patience** | 3 - 5 |
-| **LoRA Konfig (falls genutzt)** | r=50, alpha=32, dropout=0,0 |
-| **LoRA Target Modules** | query, key, value, dense, proj |
+| **Max Epochs** | 10 - 20 |
+| **Early Stopping Patience** | 3 |
+| **LoRA Konfig (optional)** | r=50, alpha=32 |
+| **Max Seq Len** | 512 |
 
 ## 4. Ausführungsplan
 
@@ -84,3 +99,56 @@ Im ersten Durchlauf wurde die BiLSTM-Baseline auf dem aktuell vorliegenden Korpu
 ### 5.2 Einordnung
 Die Ergebnisse übertreffen die Baseline aus dem `genai-project` (86,3 %) deutlich. Dies liegt vermutlich an der höheren Qualität und dem größeren Umfang des bereinigten Korpus. Eine Balanced Accuracy von über 94 % zeigt, dass die sprachlichen Unterschiede (Satzlänge, Wortwahl, Struktur) zwischen Normaler und Leichter Sprache im vorliegenden Datensatz sehr markant sind und sich bereits mit einfachen sequenziellen Modellen zuverlässig klassifizieren lassen.
 
+## 6. Satz-Level Klassifikation und Similarity-Analyse
+
+Zunächst wurde untersucht, wie gut die Klassifikation auf Basis einzelner Sätze funktioniert. Dies ermöglichte eine feingliedrige Analyse des Einflusses der Alignment-Qualität (Similarity) auf die Modellgüte.
+
+### 6.1 Ergebnisse der Satz-Filterung
+
+| Similarity Bereich | Artikelpaare | Sätze (balanciert) | Balanced Accuracy |
+| :--- | :---: | :---: | :---: |
+| 0,60 - 0,98 | 1474 | ~29.700 | 92,48 % |
+| 0,70 - 0,98 | 1362 | ~27.700 | 92,43 % |
+| **0,80 - 0,98** | **1032** | **~21.400** | **92,99 %** |
+| 0,90 - 0,98 | 213 | ~4.800 | 90,55 % |
+
+*Hinweis: Der Bereich wurde bei 0,98 gedeckelt, um identische Artikelpaare (Dubletten) auszuschließen.*
+
+### 6.2 Analyse der Satz-Ebene
+Die Satz-Ebene lieferte die erste wichtige Erkenntnis: Der Bereich **0,80 - 0,98** ist der qualitative "Sweet Spot". Trotz der hohen Genauigkeit von ~93 % zeigten sich jedoch Grenzen bei sehr kurzen oder isolierten Sätzen, denen der stilistische Kontext fehlte.
+
+## 7. Aufbauend: Artikel-Level Klassifikation
+
+Aufbauend auf der Erkenntnis, dass der Bereich 0,80 - 0,98 die beste Datenbasis darstellt, wurde untersucht, ob die Einbeziehung des gesamten Artikel-Kontexts (bis zu 512 Tokens) die Unterscheidungskraft weiter schärft.
+
+### 7.1 Ergebnisse der Artikel-Klassifikation
+
+| Similarity Bereich | Artikel (gesamt) | Balanced Accuracy |
+| :--- | :---: | :---: |
+| 0,60 - 0,98 | 2944 | 95,93 % |
+| 0,70 - 0,98 | 2720 | 97,30 % |
+| **0,80 - 0,98** | **2060** | **99,03 %** |
+| 0,90 - 0,98 | 426 | 98,44 % |
+
+### 7.2 Interpretation der Steigerung
+Der Sprung von **93 % auf 99 %** Balanced Accuracy im optimalen Bereich bestätigt, dass die Klassifikation von "Leichter Sprache" eine holistische Aufgabe ist. Während einzelne Sätze bereits starke Signale liefern, summieren sich die stilistischen Merkmale auf Artikel-Ebene zu einer nahezu fehlerfreien Vorhersage auf.
+
+## 8. Fazit für die weitere Modellentwicklung
+
+Die Experimente zeigen konsistent, dass der Similarity-Bereich **0,80 - 0,98** die qualitativ hochwertigste Basis für das Training darstellt. Während die Satz-Ebene für granulare Analysen nützlich ist, bietet die Artikel-Ebene eine nahezu fehlerfreie Klassifikation.
+
+**Nächster Schritt:** 
+
+- Test Set bauen / analysieren von Lebenshilfe Kiel (In früheren Projekten ist da die Acc abgefallen)
+- BiLSTM mit höherer Input Größe trainieren lassen (aktuell 512 Tokens, weil gebräuchlich)
+- Transformer basierte Encoder verwenden, mit denen sich dann größere Input Lengths abbildern lassen (512 to 8,192 tokens)
+
+**Fragen**
+
+- Wörter die weniger als 3 mal vorkommen raus um rauschen zu verhindern. macht das sinn?
+
+Wenn seltene Wörter zu <unk> umgewandelt werden, kann das Modell lernen: "Ein Text mit vielen <unk>-Tokens ist wahrscheinlich Alltagssprache". Das <unk>-Token selbst wird also zu einem nützlichen Feature für den Klassifikator, um die Komplexität eines Artikels zu bewerten.
+
+- 
+
+Moving-Average Type-Token Ratio

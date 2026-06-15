@@ -1104,3 +1104,107 @@ Analysis of 1,526 pairs confirms structural simplification.
 
 Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für ein Framework zur neuronalen Textvereinfachung in Leichte Sprache
 
+---
+<!-- _class: section-header -->
+
+## Week 11
+
+---
+
+### Lexical Diversity (Type-Token-Ratio)
+
+**Average Reduction:** The lexical variety in LS is reduced by an average of **13.6 %** compared to AS.
+*   **Averages:** AS (0.778) vs. LS (0.672).
+*   **Top Simplifiers:** *Hannover* (0.656) and *Hamburg* (0.658) show the most rigorous vocabulary reduction.
+*   **Journalistic LS:** The *taz* (0.742) maintains the highest lexical diversity, indicating a "higher-level" Easy Language.
+
+---
+
+<!-- _class: split -->
+
+### Visualization of Lexical Diversity
+
+<div class="column-left">
+
+![MATTR Vergleich](img/analysis/ttr_mattr_comparison.png)
+
+*Comparison of lexical diversity (MATTR) by source.*
+
+</div>
+
+<div class="column-right">
+
+![TTR vs Length Scatter](img/analysis/ttr_vs_length_scatter.png)
+
+*TTR relative to text length (log-scale) with regression lines.*
+
+</div>
+
+---
+<!-- _class: section-header -->
+
+## Week 12
+
+---
+
+### Model Training Strategy
+
+**Goal:** Establish a baseline for binary classification (Normal vs. Easy German) and identify optimal data filters.
+
+*   **First Step: Baseline:** Bi-directional LSTM (BiLSTM) for lightweight comparison.
+
+---
+
+### Sentence-Level Classification
+
+
+| Similarity Range | Balanced Accuracy |
+| :--- | :---: |
+| 0.60 - 0.98 | 92.48 % |
+| 0.70 - 0.98 | 92.43 % |
+| **0.80 - 0.98** | **92.99 %** |
+| 0.90 - 0.98 | 90.55 % |
+
+*The range 0.80 - 0.98 provides the best balance between data volume and semantic alignment.*
+
+---
+
+### Article-Level Classification
+
+Does full context (up to 512 tokens) improve the distinction?
+
+| Similarity Range | Balanced Accuracy |
+| :--- | :---: |
+| 0.60 - 0.98 | 95.93 % |
+| 0.70 - 0.98 | 97.30 % |
+| **0.80 - 0.98** | **99.03 %** |
+| 0.90 - 0.98 | 98.44 % |
+
+**Finding:** The jump from **93 % (sentence)** to **99 % (article)** confirms that "Easy Language" is a holistic stylistic phenomenon that becomes nearly perfectly distinguishable at the document level.
+
+---
+
+### Training Configuration (BiLSTM)
+
+The following hyperparameters were used to achieve the baseline performance (99% BAcc):
+
+| Parameter | Value |
+| :--- | :--- |
+| **Optimizer** | AdamW |
+| **Learning Rate** | $10^{-3}$ |
+| **Weight Decay** | 0.01 |
+| **Batch Size** | 32 |
+| **Max Epochs** | 30 |
+| **Early Stopping Patience** | 7 |
+| **Dropout** | 0,4 |
+| **Max Seq Len** | 512 (Articles) |
+
+---
+
+### Next Steps & Research Questions
+
+1.  **Out-of-Domain Validation:** Testing the models on external data (e.g., Lebenshilfe Kiel) to check for over-fitting on governmental styles.
+2. **Hyperparameter Testing** Change hyperparameters systematicly to find the best setup
+2.  **Long-Context Transformers:** Exploring models that can process up to 8,192 tokens to capture very long administrative articles without truncation.
+3.  **Vocabulary Pruning:** Investigating if removing rare words (< 3 occurrences) improves the classifier by forcing it to focus on common simplification patterns.
+
