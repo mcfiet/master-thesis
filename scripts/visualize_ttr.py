@@ -35,11 +35,11 @@ def visualize_ttr(csv_path, output_dir):
     plt.figure(figsize=(10, 7))
     
     # Scatter for AS
-    sns.regplot(data=df, x='as_tokens', y='as_ttr', scatter_kws={'alpha':0.3}, 
-                label='Standard (AS)', color='blue', x_ci=None)
+    sns.scatterplot(data=df, x='as_tokens', y='as_ttr', alpha=0.3, 
+                label='Standard (AS)', color='blue')
     # Scatter for LS
-    sns.regplot(data=df, x='ls_tokens', y='ls_ttr', scatter_kws={'alpha':0.3}, 
-                label='Leicht (LS)', color='orange', x_ci=None)
+    sns.scatterplot(data=df, x='ls_tokens', y='ls_ttr', alpha=0.3, 
+                label='Leicht (LS)', color='orange')
     
     plt.xscale('log') # Log scale since token counts vary wildly
     plt.xlabel('Anzahl Tokens (log-Skala)')
