@@ -38,7 +38,10 @@ Das beste existierende Modell (`lstm_article_sim_0.80_to_0.98.pt`) wurde ohne je
 - **Avg LS Wiener:** 7.55 (Entspricht ca. 7.-8. Klasse; Zielwert LS eigentlich < 6)
 - **Avg AS Wiener:** 11.23 (Entspricht Gymnasialniveau)
 
-### 4. Interpretation und Diskussion der Ergebnisse
+### 4. Ausschluss von Layout-Biases (Absatz-Kontrollexperiment)
+Ein potentieller Bias könnte darin bestehen, dass das Modell lernt, Leichte Sprache primär an der hohen Frequenz von Absätzen (kürzere Abschnitte, häufigere Zeilenumbrüche) zu erkennen. Dies wurde empirisch überprüft, indem eine absatzfreie Kontrollversion des Datensatzes (`lebenshilfe_dataset_no_paragraphs.json`) evaluiert wurde. Die Klassifikationsergebnisse und Konfidenzwerte blieben zu 100 % identisch (0 Abweichungen bei allen 98 Vergleichen). Dies lässt sich auch theoretisch begründen: Im Preprocessing des Tokenizers (`spacy.blank("de")`) werden sämtliche Whitespace-Tokens (`is_space`) herausgefiltert. Das BiLSTM erhält somit nur eine flache Wortsequenz. Ein Layout-Overfitting bezüglich der Absatzstruktur ist somit ausgeschlossen.
+
+### 5. Interpretation und Diskussion der Ergebnisse
 Das Ergebnis belegt eine herausragende Generalisierungsfähigkeit des Modells. 
 
 **Vermeidung von Data Leakage:**
