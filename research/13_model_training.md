@@ -64,7 +64,39 @@ Viele juristische Fachbegriffe (z.B. in JVA-Hausordnungen) aus dem Lebenshilfe-S
 
 **Mögliche Lücken / Biases (Diskussionspunkte für die Thesis):**
 1. **Typografische Marker:** Leichte Sprache verwendet häufig Mediopunkte (`∙`) oder Bindestriche zur Silbentrennung (z.B. `Bewohner∙park∙zone`). Tokenizer behandeln diese oft als separate Token. Dies führt zu einer künstlich erhöhten Anzahl von "kurzen Wörtern" im Vektor. Das Modell könnte gelernt haben, dieses rein typografische Merkmal als starken Indikator für LS zu werten, was linguistisch nicht falsch, aber ein "Shortcut" (Bias) ist.
-2. **Dokumentenlänge als Signal:** Obwohl die Sequenzen auf 512 Token begrenzt und mit Padding aufgefüllt wurden, sind LS-Texte durch starke inhaltliche Zusammenfassungen (Informationsverlust) generell kürzer. Dieser Bias wurde durch die Längen-Limitierung im Modell gemindert, sollte aber bei der Evaluation auf Artikel-Ebene immer mitbedacht werden.
+2. **Dokumentenlänge als Signal:** Obwohl die Sequenzen auf 512 Token begrenzt und mit Padding aufgefüllt wurden, sind LS-Texte durch starke inhaltliche Zusammenfassungen (Informationsverlust) generell kürzer. Dieser potenzielle Bias wurde in einem dedizierten Kontrollexperiment detailliert analysiert (siehe Kapitel 6).
+
+### 6. Empirischer Ausschluss von Längen-Biases (Length-Bias-Kontrollexperiment)
+
+Da Leichte-Sprache-Texte (LS) durch Zusammenfassungen und Vereinfachungen naturgemäß kürzer sind als ihre alltagssprachlichen (AS) Originale, besteht das theoretische Risiko, dass der Klassifikator primär die Textlänge (bzw. den Anteil an Padding-Nullen im Input-Vektor) als Shortcut ("Abkürzung") zum Lösen der Aufgabe erlernt hat. Zur empirischen Überprüfung dieses Bias wurden drei Kontrolltests auf den 98 Lebenshilfe-Texten durchgeführt.
+
+#### Experiment A: Korrelationsanalyse (Textlänge vs. Modellkonfidenz)
+Es wurde untersucht, ob die Vorhersagewahrscheinlichkeit des Modells systematisch mit der Länge der Artikel korreliert.
+- **Pearson-Korrelationskoeffizient:** $r = 0.1730$ ($p \approx 0.088$, statistisch nicht signifikant)
+- **Spearman-Rangkorrelation:** $\rho = 0.2437$ ($p \approx 0.015$, sehr schwache Monotonie)
+
+Dies zeigt, dass die Zuversicht des Modells nicht linear oder systematisch von der Dokumentenlänge abhängt.
+
+![Zusammenhang Textlänge vs. Modellkonfidenz](img/length_bias_scatter.png)
+
+*Abbildung 1: Scatter-Plot der Textlängen (Wörter) gegen die vorhergesagte LS-Wahrscheinlichkeit. Die Trennung erfolgt horizontal entlang der Entscheidungsgrenze unabhängig von der Wortanzahl.*
+
+#### Experiment B: Dummy-Text-Test (Konstanter Token-Test)
+Um den Einfluss der Wortanzahl/Paddingstruktur isoliert zu testen, wurden alle Wörter der Artikel durch ein neutrales Zeichen (den Punkt `.`) ersetzt. Die Original-Artikel-Wortanzahlen wurden exakt beibehalten.
+- **Balanced Accuracy auf Dummy-Texten:** **$50.00\,\%$** (das Modell klassifiziert alle Dokumente stur als LS).
+
+Ohne den semantischen und grammatikalischen Gehalt der echten Wörter verliert das Modell jegliche Unterscheidungsfähigkeit. Dies beweist, dass das Modell keine Klassifikationsmuster gelernt hat, die ausschließlich auf Längen- oder Padding-Eigenschaften basieren.
+
+#### Experiment C: Festlängen-Evaluation (Slicing)
+Zur vollständigen Eliminierung jeglicher Längendifferenzen wurden alle Texte im Testdatensatz auf eine feste Token-Länge abgeschnitten (Slicing auf exakt die ersten $50$ und $100$ Token). Alle Inputs besitzen in diesem Szenario die exakt gleiche Länge und das exakt gleiche Padding-Muster.
+- **Genauigkeit bei exakt 100 Token:** **$87.76\,\%$** Balanced Accuracy (gegenüber $90.82\,\%$ bei voller Artikellänge).
+- **Genauigkeit bei exakt 50 Token:** **$69.39\,\%$** Balanced Accuracy (Abfall durch reduzierten Satzkontext).
+
+Selbst ohne jegliche Längenvarianz kann das Modell auf Basis der ersten 100 Wörter mit sehr hoher Genauigkeit klassifizieren. Dies belegt, dass echte stilistische, lexikalische und syntaktische Repräsentationen für die Klassifikationsentscheidung genutzt werden.
+
+![Balanced Accuracy bei Längenshifting und Inhaltsentzug](img/length_bias_accuracies.png)
+
+*Abbildung 2: Vergleich der Balanced Accuracy über die verschiedenen Längenshifting-Szenarien und den Dummy-Text-Kontrolltest.*
 
 **Fazit:**
-Die Evaluation bestätigt die Verwendbarkeit eines maschinell und unsauber gecrawlten Web-Korpus zum Training robuster Klassifikatoren für Leichte Sprache. Das Modell ist in der Lage, professionelle, händisch erstellte Übersetzungen mit hoher Präzision zu identifizieren.
+Die Evaluation bestätigt die Verwendbarkeit eines maschinell und unsauber gecrawlten Web-Korpus zum Training robuster Klassifikatoren für Leichte Sprache. Das Modell ist in der Lage, professionelle, händisch erstellte Übersetzungen mit hoher Präzision zu identifizieren. Ein Längen-Overfitting ist empirisch ausgeschlossen; das Modell klassifiziert auf Basis echter linguistischer Stylistik.
