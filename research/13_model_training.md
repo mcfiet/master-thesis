@@ -24,19 +24,31 @@ Das Setup umfasste:
 - **Lesbarkeits-Metriken:** Zur Verifizierung der Modellvorhersagen durch linguistische Standardverfahren wurden Flesch Reading Ease (FRE) und die Wiener Sachtextformel integriert.
 
 ### 3. Testergebnisse (Zero-Shot Generalization)
-Das beste existierende Modell (`lstm_article_sim_0.80_to_0.98.pt`) wurde ohne jegliches Fine-Tuning auf den 98 Lebenshilfe-Texten angewendet.
+Wir haben zwei BiLSTM-Modelle (trainiert auf dem Similarity-Sweet-Spot `0.80 bis 0.98`) auf dem Lebenshilfe-Datensatz (98 Texte, 49 Paare) ohne Fine-Tuning evaluiert:
 
-**Klassifikations-Metriken:**
-- **Overall Accuracy:** 90.82% (89 von 98 Texten korrekt klassifiziert)
-- **Balanced Accuracy:** 90.82%
-- **Perfect Pair Match:** 81.6% (40 von 49 Textpaaren wurden einwandfrei unterschieden; d.h. LS als "Simple" UND das zugehörige AS-Original als "Normal" erkannt).
+1. **Artikel-Level Modell (`lstm_article_sim_0.80_to_0.98.pt`)**
+2. **Satz-Level Modell (`lstm_baseline_sim_0.80_to_0.98.pt`)** mit Aggregation auf Artikelebene per Majority Vote (Mehrheitsentscheidung der Sätze).
+
+#### 3.1 Klassifikations-Metriken im Vergleich
+
+| Metrik | Artikel-Level Modell | Satz-Level Modell (Aggregiert) | Satz-Level Modell (Satz-Ebene) |
+| :--- | :---: | :---: | :---: |
+| **Overall Accuracy** | 90.82% | **97.96%** | 77.74% |
+| **Balanced Accuracy** | 90.82% | **97.96%** | 79.71% |
+| **Perfect Pair Match** | 81.63% (40/49) | **95.92%** (47/49) | - |
+| **LS correct (Simple)** | 93.88% (46/49) | **97.96%** (48/49) | 76.02% (5877/7731) |
+| **AS correct (Normal)** | 87.76% (43/49) | **97.96%** (48/49) | 83.41% (1961/2351) |
+
+#### 3.2 Interpretation der Ergebnisse
+* **Überlegene Performance durch Aggregation:** Das Satz-Level Modell erzielt auf Satzebene zwar nur ~77.74% Genauigkeit (da einzelne Sätze oft isoliert schwerer einzustufen sind), übertrifft das Artikel-Level Modell nach Aggregierung (Majority Vote) auf Artikelebene jedoch deutlich. Mit **97.96% Balanced Accuracy** und einem fast perfekten **Perfect Pair Match von 95.92%** (47 von 49 Paaren korrekt zugeordnet) erweist es sich als extrem robust.
+* **Fehleranalyse:** Auf Artikelebene wurden beim Satz-Level Modell lediglich 2 von 98 Dokumenten falsch klassifiziert (1 AS-Text als Simple, 1 LS-Text als Normal). 
 
 **Validierung durch klassische Lesbarkeitsmetriken (Readability):**
 - **Avg LS Flesch:** 66.40 (Zielwert für Leichte Sprache > 80; dennoch deutlich im lesbaren Bereich)
 - **Avg AS Flesch:** 43.29 (Formal/Schwer verständlich)
 - **Flesch Gap:** 23.11 Punkte Differenz zwischen AS und LS.
-- **Avg LS Wiener:** 7.55 (Entspricht ca. 7.-8. Klasse; Zielwert LS eigentlich < 6)
-- **Avg AS Wiener:** 11.23 (Entspricht Gymnasialniveau)
+- **Avg LS Wiener:** 5.19 (Entspricht ca. 5. Klasse; Zielwert LS eigentlich < 6)
+- **Avg AS Wiener:** 9.07 (Entspricht ca. 9. Klasse)
 
 ### 4. Ausschluss von Layout-Biases (Absatz-Kontrollexperiment)
 Ein potentieller Bias könnte darin bestehen, dass das Modell lernt, Leichte Sprache primär an der hohen Frequenz von Absätzen (kürzere Abschnitte, häufigere Zeilenumbrüche) zu erkennen. Dies wurde empirisch überprüft, indem eine absatzfreie Kontrollversion des Datensatzes (`lebenshilfe_dataset_no_paragraphs.json`) evaluiert wurde. Die Klassifikationsergebnisse und Konfidenzwerte blieben zu 100 % identisch (0 Abweichungen bei allen 98 Vergleichen). Dies lässt sich auch theoretisch begründen: Im Preprocessing des Tokenizers (`spacy.blank("de")`) werden sämtliche Whitespace-Tokens (`is_space`) herausgefiltert. Das BiLSTM erhält somit nur eine flache Wortsequenz. Ein Layout-Overfitting bezüglich der Absatzstruktur ist somit ausgeschlossen.
