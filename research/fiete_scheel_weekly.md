@@ -13,7 +13,7 @@ style: |
     flex-direction: column;
     justify-content: flex-start;
   }
-  
+
   /* Logo Oben Rechts */
   section::before {
     content: '';
@@ -202,28 +202,27 @@ style: |
     flex-grow: 0 !important;
     display: block !important;
   }
-
 ---
 
 <!-- _class: title -->
 
-# Master Thesis 
+# Master Thesis
 
 Fiete Scheel
 
 ---
 
-### Automated Translation into Simple German 
+### Automated Translation into Simple German
 
-**Language as a barrier:**  Complex texts exclude people from information and social participation.
+**Language as a barrier:** Complex texts exclude people from information and social participation.
 
-**High effort:**  To date, the creation of simple german texts has been almost exclusively manual and time-consuming.
+**High effort:** To date, the creation of simple german texts has been almost exclusively manual and time-consuming.
 
 **Research gap:**
 
 Lack of robust, data-driven methods for distinguishing between standard and simple language in German.
 
-**Lack of automated metrics**  for the qualitative assessment of simplifications.
+**Lack of automated metrics** for the qualitative assessment of simplifications.
 
 ---
 
@@ -234,9 +233,10 @@ Lack of robust, data-driven methods for distinguishing between standard and simp
 ![](img/presentation/components_of_this_work.jpeg)
 
 ---
+
 <!-- _class: section-header -->
 
-## Week 1 
+## Week 1
 
 ---
 
@@ -248,11 +248,11 @@ It is often very difficult to find exact parallel texts (such as news articles o
 
 ---
 
-### sozialpolitik.com  (Sloution with URL) 
+### sozialpolitik.com (Sloution with URL)
 
-Here, the blog posts have the same title in both language versions. 
+Here, the blog posts have the same title in both language versions.
 
-The "Easy Language" version is easy to identify and access, as the URL simply has the  **prefix**  "ls-" added to the beginning. 
+The "Easy Language" version is easy to identify and access, as the URL simply has the **prefix** "ls-" added to the beginning.
 
 While the URLs for the blog posts differ, there is a **button** on each page that allows you to **switch between "Easy Language" and "Standard Language."**
 
@@ -260,7 +260,7 @@ While the URLs for the blog posts differ, there is a **button** on each page tha
 
 <!-- _class: image-caption -->
 
-### sozialpolitik.com  (normal german)
+### sozialpolitik.com (normal german)
 
 ![](img_pptx_extract/ppt/media/image4.png)
 
@@ -268,17 +268,17 @@ While the URLs for the blog posts differ, there is a **button** on each page tha
 
 <!-- _class: image-caption -->
 
-### sozialpolitik.com  (simple german)
+### sozialpolitik.com (simple german)
 
 ![](img_pptx_extract/ppt/media/image5.png)
 
 ---
 
-### mdr.de 
+### mdr.de
 
-At Mitteldeutscher Rundfunk, the links aren't embedded in the URL, but the user guidance within the text is excellent. 
+At Mitteldeutscher Rundfunk, the links aren't embedded in the URL, but the user guidance within the text is excellent.
 
-Below every article in Easy Language, there is a **direct link** to its counterpart in standard language and **vice versa**.  
+Below every article in Easy Language, there is a **direct link** to its counterpart in standard language and **vice versa**.
 
 Not every article in standard language is translated into Easy Language, but **every article in Easy Language is translated into standard language** (as verified by random sampling).
 
@@ -286,7 +286,7 @@ Not every article in standard language is translated into Easy Language, but **e
 
 <!-- _class: image-caption -->
 
-### mdr.de  (normal german)
+### mdr.de (normal german)
 
 ![](img_pptx_extract/ppt/media/image3.png "Google Shape;121;p22")
 
@@ -294,13 +294,13 @@ Not every article in standard language is translated into Easy Language, but **e
 
 <!-- _class: image-caption -->
 
-### mdr.de  (simple german)
+### mdr.de (simple german)
 
 ![](img_pptx_extract/ppt/media/image1.png "Google Shape;128;p23")
 
 ---
 
-### tagesschau.de 
+### tagesschau.de
 
 Unfortunately, Tagesschau stands out negatively when it comes to integrating standard and simplified language, as it lacks a user-friendly and systematic structure:
 
@@ -314,11 +314,11 @@ Unfortunately, Tagesschau stands out negatively when it comes to integrating sta
 
 ---
 
-### Next Steps 
+### Next Steps
 
 **Researching additional sources:** Searching for other news portals or official government websites (e.g., bpb.de) that systematically provide LS texts.
 
-**Quantification of sources:** Determining the approximate number of available article pairs on  mdr.de  and  sozialpolitik.com .
+**Quantification of sources:** Determining the approximate number of available article pairs on mdr.de and sozialpolitik.com .
 
 \_\_\_\_\_\_\_\_
 
@@ -329,13 +329,14 @@ Unfortunately, Tagesschau stands out negatively when it comes to integrating sta
 **Matching strategy for Tagesschau:** Evaluation of whether semantic similarity analyses (e.g., via embeddings) can be used to automatically establish the missing links in Tagesschau.
 
 ---
+
 <!-- _class: section-header -->
 
-## Week 2-3 
+## Week 2-3
 
 ---
 
-### Evaluation of institutional and governmental websites. 
+### Evaluation of institutional and governmental websites.
 
 **Observations:** Significant availability of \"Easy Language\" (Leichte Sprache) sections, but alignment Issue.
 
@@ -345,7 +346,7 @@ Unfortunately, Tagesschau stands out negatively when it comes to integrating sta
 
 ---
 
-### Saarländischer Rundfunk (SR) 
+### Saarländischer Rundfunk (SR)
 
 **Problem:** Standard language content is often video/audio (broadcast format), while the Easy Language version is a brief text summary.
 
@@ -355,18 +356,19 @@ Unfortunately, Tagesschau stands out negatively when it comes to integrating sta
 
 ---
 
-### Media Portals with High Alignment Potential 
+### Media Portals with High Alignment Potential
 
 **MDR (Mitteldeutscher Rundfunk):** High suitability for scraping due to clear XML sitemaps and explicit \"linking mechanisms\" in the HTML structure.
 
-**taz:** Alignment is present but less systematic; links are often embedded manually in italicized paragraphs at the end of articles with word  "hier" .
+**taz:** Alignment is present but less systematic; links are often embedded manually in italicized paragraphs at the end of articles with word "hier" .
 
 **Conclusion:** Media portals show significantly higher potential for 1:1 alignment than administrative/government portals.
 
 ---
+
 <!-- _class: split -->
 
-### Terminological Anchors: Dictionaries 
+### Terminological Anchors: Dictionaries
 
 <div class="column-left">
 
@@ -378,19 +380,18 @@ Unfortunately, Tagesschau stands out negatively when it comes to integrating sta
 
 **Objective:** Establishing a "Ground Truth" for specific terminology.
 
-Resources Analyzed: 
+Resources Analyzed:
 
 - **Hurraki**: A specialized Wiki for Easy Language.
 - **Nachrichtenleicht**: A dictionary section providing definitions for complex terms.
 
 **Benefit:** These provide direct 1:1 word/phrase mappings, essential for terminological consistency.
 
-
 </div>
 
 ---
 
-### Literature Review: Existing Corpora (Status 2023) 
+### Literature Review: Existing Corpora (Status 2023)
 
 **Analysis of Klaper et al. (2013)**
 
@@ -402,7 +403,7 @@ Resources Analyzed:
 
 ---
 
-### Literature Review: Existing Corpora (Status 2023) 
+### Literature Review: Existing Corpora (Status 2023)
 
 **A New Aligned Simple German Corpus (ACL 2023)**
 
@@ -418,17 +419,15 @@ Resources Analyzed:
 
 ### Extraction Strategies
 
-**Apotheken Umschau:**  Targeting specific link titles `title="hier"` for back-references.
+**Apotheken Umschau:** Targeting specific link titles `title="hier"` for back-references.
 
-**Behindertenbeauftragter:**  Identifying language switches via CSS class patterns `.c-language-switch`.
+**Behindertenbeauftragter:** Identifying language switches via CSS class patterns `.c-language-switch`.
 
-**Sozialpolitik.com:**  Filtering for links with the class `underline easy` and specific `hreflang` attributes.
+**Sozialpolitik.com:** Filtering for links with the class `underline easy` and specific `hreflang` attributes.
 
 ```html
-<a href="/es/die-arbeits-welt" 
-   hreflang="de-DE" 
-   class="underline easy">
-   Leichte Sprache
+<a href="/es/die-arbeits-welt" hreflang="de-DE" class="underline easy">
+  Leichte Sprache
 </a>
 ```
 
@@ -452,7 +451,7 @@ Resources Analyzed:
 
 ---
 
-### Conclusion & Next Steps 
+### Conclusion & Next Steps
 
 **Current Activity:** Development of a quantification script to scan identified sources and calculate current token counts.
 
@@ -460,18 +459,19 @@ Resources Analyzed:
 
 **Literature & Expansion:** Systematic review of remaining papers from the \"Existing Corpora (Status 2023)\" list.
 
-Identification  of additional  sources  and site-specific  scraping  mechanisms.
+Identification of additional sources and site-specific scraping mechanisms.
 
 **Goal:** Adaptation of the Toborek et al. crawler logic to the newly identified structures (MDR, taz, etc.).
 
 ---
+
 <!-- _class: section-header -->
 
-## Week 4 
+## Week 4
 
 ---
 
-### Initial Scraping for Token Count 
+### Initial Scraping for Token Count
 
 **Goal:** Create a diverse, multi-domain corpus exceeding current benchmarks in quality and thematic breadth.
 
@@ -487,9 +487,9 @@ Identification  of additional  sources  and site-specific  scraping  mechanisms.
 
 ---
 
-### Results: Media & News 
+### Results: Media & News
 
-**MDR**  (Mitteldeutscher Rundfunk):
+**MDR** (Mitteldeutscher Rundfunk):
 
 298 LS articles scanned → 242 successfully aligned.
 
@@ -509,7 +509,7 @@ Focus on economic and social narratives.
 
 ---
 
-### Results: Public Sector & Administration 
+### Results: Public Sector & Administration
 
 **Hamburg.de:**
 
@@ -531,7 +531,7 @@ Policy-focused content with technical terminology.
 
 ---
 
-### Results: Specialized Topics 
+### Results: Specialized Topics
 
 **Apotheken Umschau** (Health/Medical):
 
@@ -553,22 +553,22 @@ Community-level communication and event reporting.
 
 ---
 
-### Global Scraping Statistics 
+### Global Scraping Statistics
 
-| Metric | Result |
-|---|---|
-| Total Scanned LS Articles | 1,347 |
-| Successfully Aligned Pairs | 797 |
-| Total Tokens (Simple) | 411,540 |
-| Total Tokens (Standard) | 676,903 |
-| Average Success Rate | ~59% |
-| Length Ratio (AS:LS) | 1.65 : 1 |
+| Metric                     | Result   |
+| -------------------------- | -------- |
+| Total Scanned LS Articles  | 1,347    |
+| Successfully Aligned Pairs | 797      |
+| Total Tokens (Simple)      | 411,540  |
+| Total Tokens (Standard)    | 676,903  |
+| Average Success Rate       | ~59%     |
+| Length Ratio (AS:LS)       | 1.65 : 1 |
 
 Tokens: words and punctuation
 
 ---
 
-### Findings & Lessons Learned 
+### Findings & Lessons Learned
 
 **Content Divergence:** Standard articles are significantly longer, suggesting that simplification involves heavy summarization, not just sentence splitting.
 
@@ -577,13 +577,14 @@ Tokens: words and punctuation
 **Scale:** With 797 pairs, the new corpus is already larger than most existing document-aligned German datasets.
 
 ---
+
 <!-- _class: section-header -->
 
-## Week 5 
+## Week 5
 
 ---
 
-### Focus: From Quantity to Quality 
+### Focus: From Quantity to Quality
 
 **The Noise Problem:** Raw scraping produced significant \"boilerplate\" (menus, ads, legal footers).
 
@@ -591,7 +592,7 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ---
 
-### Case Study: Apotheken Umschau 
+### Case Study: Apotheken Umschau
 
 **Issue:** Figcaptions (\"The image shows\...\"), internal table of contents (TOC), and \"Sign up now\" banners were polluting the text.
 
@@ -605,7 +606,7 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ---
 
-### Case Study: Brand Eins 
+### Case Study: Brand Eins
 
 **Issue:** AS and LS content lived in the same HTML blocks; simple paragraph splitting failed due to irregular formatting.
 
@@ -617,7 +618,7 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ---
 
-### Case Study: Hamburg.de 
+### Case Study: Hamburg.de
 
 **Issue:** Many articles were machine-translated (MT), marked by a \"Computer has translated this\" disclaimer. These are unsuitable for a gold-standard corpus.
 
@@ -629,7 +630,7 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ---
 
-### Case Study: MDR 
+### Case Study: MDR
 
 **Issue:** \"The Echo Effect\" - Nested `<div\>` and `<p\>` tags caused the same text to be extracted twice.
 
@@ -641,7 +642,7 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ---
 
-### Case Study: Archival Sources 
+### Case Study: Archival Sources
 
 **Cities of Cologne & Main-Taunus:**
 
@@ -653,7 +654,7 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ---
 
-### Automated Data Cleaning Pipeline 
+### Automated Data Cleaning Pipeline
 
 **HTML De-cluttering:** Remove non-article tags (nav, aside, footer).
 
@@ -667,7 +668,7 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ---
 
-### Resulting Quality Improvement 
+### Resulting Quality Improvement
 
 **Cleaner Data:** Average noise reduction of 15-20% per article.
 
@@ -679,24 +680,24 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ### Zwischenergebnis Corpus
 
-| Source | LS Tokens | AS Tokens | Total |
-|---|---|---|---|
-| apotheken | 147,539 | 249,790 | 397,329 |
-| behindertenbeauftragter | 27,822 | 34,113 | 61,935 |
-| brandeins | 7,275 | 7,423 | 14,698 |
-| hamburg | 44,358 | 40,063 | 84,421 |
-| koeln | 40,868 | 24,182 | 65,050 |
-| main_taunus | 7,289 | 6,715 | 14,004 |
-| mdr | 70,761 | 100,608 | 171,369 |
-| sozialpolitik | 6,654 | 14,651 | 21,305 |
-| taz | 4,589 | 8,027 | 12,616 |
-| **TOTAL** | **357,155** | **485,572** | **842,727** |
+| Source                  | LS Tokens   | AS Tokens   | Total       |
+| ----------------------- | ----------- | ----------- | ----------- |
+| apotheken               | 147,539     | 249,790     | 397,329     |
+| behindertenbeauftragter | 27,822      | 34,113      | 61,935      |
+| brandeins               | 7,275       | 7,423       | 14,698      |
+| hamburg                 | 44,358      | 40,063      | 84,421      |
+| koeln                   | 40,868      | 24,182      | 65,050      |
+| main_taunus             | 7,289       | 6,715       | 14,004      |
+| mdr                     | 70,761      | 100,608     | 171,369     |
+| sozialpolitik           | 6,654       | 14,651      | 21,305      |
+| taz                     | 4,589       | 8,027       | 12,616      |
+| **TOTAL**               | **357,155** | **485,572** | **842,727** |
 
 <p class="hint">Summary of tokens (words and punctuation)</p>
 
 ---
 
-### Next Steps 
+### Next Steps
 
 **Apotheken Umschau:** Investigation into why so few URLs from this source could be successfully aligned (root cause analysis for low alignment rate).
 
@@ -707,6 +708,7 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 **Template Script:** Because of redundant code, build a template script with core functionalities
 
 ---
+
 <!-- _class: section-header -->
 
 ## Week 6
@@ -715,11 +717,11 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 
 ## Weekly Focus: City and State Portals
 
-*   **Strategy:** Systematic review of states and state capital portals (Stuttgart, Wiesbaden, Hannover).
-*   **Findings:**
-    *   High variance in the implementation of legal accessibility requirements.
-    *   Hannover identified as the absolute "top performer".
-    * All sites have the same entrypoint page for "Leichte Sprache"
+- **Strategy:** Systematic review of states and state capital portals (Stuttgart, Wiesbaden, Hannover).
+- **Findings:**
+  - High variance in the implementation of legal accessibility requirements.
+  - Hannover identified as the absolute "top performer".
+  - All sites have the same entrypoint page for "Leichte Sprache"
 
 ---
 
@@ -728,59 +730,61 @@ Implement source-specific minimal scripts to ensure that the tokens in the datas
 Why do many government sites offer so little parallel data?
 
 1.  **BITV 2.0 Minimum Solution:** The law only requires LS for:
-    *   Essential tasks (homepage)
-    *   Navigation & Accessibility statements
+    - Essential tasks (homepage)
+    - Navigation & Accessibility statements
 2.  **No Full-Text Obligation:** News or technical articles do not legally have to be translated.
 
 ---
 
 ## Case Study: Hannover.de (The Gold Standard)
 
-*   **Scale:** Over 800 article pairs – the largest single source in the corpus.
-*   **Technical Features:**
-    *   **Alignment:** URL logic - the AS version is primarily derived by removing the query parameter `?sp:out=easy` (or `?sp%3Aout=easy`) from the LS URL.
-    *   **Quality:** High coherence between Easy-to-Read (LS) and Standard Language (AS).
+- **Scale:** Over 800 article pairs – the largest single source in the corpus.
+- **Technical Features:**
+  - **Alignment:** URL logic - the AS version is primarily derived by removing the query parameter `?sp:out=easy` (or `?sp%3Aout=easy`) from the LS URL.
+  - **Quality:** High coherence between Easy-to-Read (LS) and Standard Language (AS).
 
 ---
 
 ## Technical Challenges: Surgical Cleaning
 
 **Problem:** Standard extraction yields 10-20% boilerplate noise.
-*   *UI Fragments:* "Print page", "In sign language", "Send email".
-*   *Navigation:* "Back to overview", "Related topics".
+
+- _UI Fragments:_ "Print page", "In sign language", "Send email".
+- _Navigation:_ "Back to overview", "Related topics".
 
 **Solution:**
-*   Implementation of CSS blacklists (decomposition of containers like `.SP-Tools`, `.header-ls`).
-*   Regex-based filtering of repetitive standard sentences.
-*   **Result:** Significant increase in token precision and cleaner vocabulary statistics.
+
+- Implementation of CSS blacklists (decomposition of containers like `.SP-Tools`, `.header-ls`).
+- Regex-based filtering of repetitive standard sentences.
+- **Result:** Significant increase in token precision and cleaner vocabulary statistics.
 
 ---
-
 
 ## Problem: Wiesbaden Alignment
 
 **Insight:** Technical alignment does not equal semantic alignment.
-*   **Symptom:** URL parameters suggest a translation, but content varies significantly.
-*   **Examples:**
-    *   AS: History of the city forest vs. LS: General forest rules.
-    *   AS: Press release on a poster campaign vs. LS: Explanation of "Smart City".
-*   **Action:** Introduction of a manual audit step before the model training phase. Wiesbaden data may be excluded.
+
+- **Symptom:** URL parameters suggest a translation, but content varies significantly.
+- **Examples:**
+  - AS: History of the city forest vs. LS: General forest rules.
+  - AS: Press release on a poster campaign vs. LS: Explanation of "Smart City".
+- **Action:** Introduction of a manual audit step before the model training phase. Wiesbaden data may be excluded.
 
 ---
 
 ### Current Status (Metrics)
 
-| Source | Pairs | Words (LS) | Words (AS) | Tokens (LS) | Tokens (AS) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **(...)** | 189 | 72,816 | 79,585 | 135,484 | 168,489 |
-| MDR (prev.) | 235 | 53,869 | 83,487 | 98,780 | 173,765 |
-| Apotheken (prev.) | 161 | 123,505 | 205,063 | 241,325 | 451,812 |
-| Hamburg (prev.) | 57 | 34,124 | 33,688 | 61,455 | 73,137 |
-| **Week 06 Additions** | | | | | |
-| **Hannover** | 808 | 458,621 | 405,321 | 872,291 | 871,830 |
-| **Stuttgart** | 42 | 23,653 | 46,060 | 45,202 | 106,629 |
-| **Wiesbaden** | 41 | 7,138 | 10,127 | 13,808 | 23,332 |
-| **Total** | **1,533** | **773,726** | **863,331** | **1,468,345** | **1,868,994** |
+| Source                |   Pairs   | Words (LS)  | Words (AS)  |  Tokens (LS)  |  Tokens (AS)  |
+| :-------------------- | :-------: | :---------: | :---------: | :-----------: | :-----------: |
+| **(...)**             |    189    |   72,816    |   79,585    |    135,484    |    168,489    |
+| MDR (prev.)           |    235    |   53,869    |   83,487    |    98,780     |    173,765    |
+| Apotheken (prev.)     |    161    |   123,505   |   205,063   |    241,325    |    451,812    |
+| Hamburg (prev.)       |    57     |   34,124    |   33,688    |    61,455     |    73,137     |
+| **Week 06 Additions** |           |             |             |               |               |
+| **Hannover**          |    808    |   458,621   |   405,321   |    872,291    |    871,830    |
+| **Stuttgart**         |    42     |   23,653    |   46,060    |    45,202     |    106,629    |
+| **Wiesbaden**         |    41     |    7,138    |   10,127    |    13,808     |    23,332     |
+| **Total**             | **1,533** | **773,726** | **863,331** | **1,468,345** | **1,868,994** |
 
 <p class="hint">Tokens counted using the <code>tiktoken</code> library with the <code>cl100k_base</code> encoding.</p>
 
@@ -793,46 +797,48 @@ Why do many government sites offer so little parallel data?
 3.  **Train first model:** Train first model to see some first results.
 
 ---
+
 <!-- _class: section-header -->
 
-## Week 7 
+## Week 7
 
 ---
 
 ### Weekly Focus: Measuring Information Loss
 
-*   **Hypothesis:** Texts in Easy Language (LS) don't just simplify syntax; they lose significant, concrete information compared to Standard Language (AS), even when they are longer due to explanations.
-*   **Goal:** Move beyond token counts and develop a multi-dimensional NLP methodology to quantify this information loss.
-*   **Corpus:** Analysis executed across the entire aligned dataset (1,501 article pairs).
+- **Hypothesis:** Texts in Easy Language (LS) don't just simplify syntax; they lose significant, concrete information compared to Standard Language (AS), even when they are longer due to explanations.
+- **Goal:** Move beyond token counts and develop a multi-dimensional NLP methodology to quantify this information loss.
+- **Corpus:** Analysis executed across the entire aligned dataset (1,501 article pairs).
 
 ---
 
 ### Methodology: Similarity
 
 **1. Semantic Similarity (Embeddings)**
-*   **Tool:** Sentence-BERT (`paraphrase-multilingual-MiniLM-L12-v2`).
-*   **How:** Calculate Cosine Similarity from AS and LS texts.
-*   **Why:** Captures whether the "core message" remains, even if heavily paraphrased.
 
-
+- **Tool:** Sentence-BERT (`paraphrase-multilingual-MiniLM-L12-v2`).
+- **How:** Calculate Cosine Similarity from AS and LS texts.
+- **Why:** Captures whether the "core message" remains, even if heavily paraphrased.
 
 ---
 
 ### Methodology
 
 **2. Fact Retention via NER Recall**
-*   **Tool:** `spaCy` (`de_core_news_lg`).
-*   **How:** Extract entities (Persons, Locations, Organizations) from AS and check if they survive in LS.
-*   **Why:** Measures hard information loss. If names and places vanish, factual detail is lost or is being described differently.
+
+- **Tool:** `spaCy` (`de_core_news_lg`).
+- **How:** Extract entities (Persons, Locations, Organizations) from AS and check if they survive in LS.
+- **Why:** Measures hard information loss. If names and places vanish, factual detail is lost or is being described differently.
 
 **3. Linguistic & Syntactic Metrics**
-*   **Tool:** `spaCy` POS-Tagging.
-*   **How:** Analyze Lexical Density, Average Sentence Length, and Part-of-Speech (POS) shifts (e.g., ratio of Adjectives, Conjunctions).
-*   **Why:** Reveals *how* the simplification is achieved structurally (e.g., dropping conjunctions implies loss of subordinate clauses / hypotaxis).
 
-<!-- 
+- **Tool:** `spaCy` POS-Tagging.
+- **How:** Analyze Lexical Density, Average Sentence Length, and Part-of-Speech (POS) shifts (e.g., ratio of Adjectives, Conjunctions).
+- **Why:** Reveals _how_ the simplification is achieved structurally (e.g., dropping conjunctions implies loss of subordinate clauses / hypotaxis).
 
-- spaCy bietet mittlerweile auch Modelle an, die auf Transformern (wie RoBERTa) basieren (diese enden dann meistens auf _trf, z.B. de_dep_news_trf) 
+<!--
+
+- spaCy bietet mittlerweile auch Modelle an, die auf Transformern (wie RoBERTa) basieren (diese enden dann meistens auf _trf, z.B. de_dep_news_trf)
 
 -->
 
@@ -842,8 +848,8 @@ Why do many government sites offer so little parallel data?
 
 **Observation:** Across almost all sources, the **NER Recall is extremely low (Ø ~15-25%)**.
 
-*   This means roughly 80% of specific entities (names, locations, dates) mentioned in the Standard Language text do *not* appear in the Easy Language version.
-*   **Conclusion:** LS achieves simplification primarily by omitting specific facts and generalizing content, confirming a massive factual information loss.
+- This means roughly 80% of specific entities (names, locations, dates) mentioned in the Standard Language text do _not_ appear in the Easy Language version.
+- **Conclusion:** LS achieves simplification primarily by omitting specific facts and generalizing content, confirming a massive factual information loss.
 
 ---
 
@@ -853,10 +859,10 @@ Why do many government sites offer so little parallel data?
 
 <div class="column-left">
 
-**Observation:** In some sources like **Hannover** (Ratio: 1.89) and **Köln** (Ratio: 1.83), the LS texts are nearly twice as long as the AS texts. 
+**Observation:** In some sources like **Hannover** (Ratio: 1.89) and **Köln** (Ratio: 1.83), the LS texts are nearly twice as long as the AS texts.
 
-*   *Why?* Complex terms are replaced with lengthy, multi-sentence explanations.
-*   *Result:* Despite being longer, the semantic similarity drops to ~0.70. The text explains more, but delivers less original detail.
+- _Why?_ Complex terms are replaced with lengthy, multi-sentence explanations.
+- _Result:_ Despite being longer, the semantic similarity drops to ~0.70. The text explains more, but delivers less original detail.
 
 </div>
 
@@ -876,9 +882,9 @@ Why do many government sites offer so little parallel data?
 
 **Observation:** Clear shifts in word classes between complex and simple language.
 
-*   **Conjunctions & Adjectives:** Significant decrease in **simple** language.
-*   **Verbs vs. Nouns:** **Simple** language uses more Verbs and fewer Nouns.
-*   **Stylistic Shift:** This confirms a transition from **complex** to **simple** style, which is easier to process.
+- **Conjunctions & Adjectives:** Significant decrease in **simple** language.
+- **Verbs vs. Nouns:** **Simple** language uses more Verbs and fewer Nouns.
+- **Stylistic Shift:** This confirms a transition from **complex** to **simple** style, which is easier to process.
 
 </div>
 
@@ -892,15 +898,15 @@ Why do many government sites offer so little parallel data?
 
 ### Summary of Analysis Results
 
-| Source | Token Ratio (LS/AS) | NER Recall | Sem. Similarity (SBERT) |
-| :--- | :---: | :---: | :---: |
-| **apotheken** | 0.98 | 0.09 | 0.64 |
-| **behindertenbeauftragter** | 0.91 | 0.30 | 0.75 |
-| **hannover** | **1.89** | 0.25 | 0.71 |
-| **koeln** | 1.83 | 0.20 | 0.68 |
-| **mdr** | 0.85 | 0.22 | 0.73 |
-| **stuttgart** | 0.97 | 0.24 | **0.90** |
-| **sozialpolitik** | 0.46 | 0.10 | 0.71 |
+| Source                      | Token Ratio (LS/AS) | NER Recall | Sem. Similarity (SBERT) |
+| :-------------------------- | :-----------------: | :--------: | :---------------------: |
+| **apotheken**               |        0.98         |    0.09    |          0.64           |
+| **behindertenbeauftragter** |        0.91         |    0.30    |          0.75           |
+| **hannover**                |      **1.89**       |    0.25    |          0.71           |
+| **koeln**                   |        1.83         |    0.20    |          0.68           |
+| **mdr**                     |        0.85         |    0.22    |          0.73           |
+| **stuttgart**               |        0.97         |    0.24    |        **0.90**         |
+| **sozialpolitik**           |        0.46         |    0.10    |          0.71           |
 
 <p class="hint">Extract of the full analysis results across 1,501 pairs.</p>
 
@@ -909,30 +915,31 @@ Why do many government sites offer so little parallel data?
 ### Mögliche Titelvarianten & Forschungsfokus
 
 1.  **Allgemein & Flexibel:**
-    *   *Automatisierte Textvereinfachung für Leichte Sprache: Ein Framework zur datengestützten Modellierung und Evaluation*
+    - _Automatisierte Textvereinfachung für Leichte Sprache: Ein Framework zur datengestützten Modellierung und Evaluation_
 2.  **Ausgewogen & Methodisch:**
-    *   *Neuronale Textvereinfachung in Leichte Sprache: Entwicklung domänenspezifischer Datensätze und automatisierter Bewertungsmetriken*
+    - _Neuronale Textvereinfachung in Leichte Sprache: Entwicklung domänenspezifischer Datensätze und automatisierter Bewertungsmetriken_
 3.  **Spezifisch & Technisch:**
-    *   *Optimierung der maschinellen Übersetzung in Leichte Sprache: Aufbau eines Gold-Standard-Korpus und Training von Reward-Modellen zur qualitativen Modellsteuerung*
+    - _Optimierung der maschinellen Übersetzung in Leichte Sprache: Aufbau eines Gold-Standard-Korpus und Training von Reward-Modellen zur qualitativen Modellsteuerung_
 
 ---
 
 <!-- _class: section-header -->
 
-## Week 8 
+## Week 8
 
 ---
 
 ### Corpus Analysis
 
-*   **Problem:** Initial SBERT analysis (Week 7) was limited to **128 tokens**, resulting in >90% of articles being truncated.
-*   **Goal:** Increase model coverage and validate if semantic similarity holds across full-length articles.
-*   **Methodology Update:**
-    *   Scale up to **512 tokens** (MiniLM limit).
-    *   Introduction of **Jina Embeddings v2** (8192 tokens) for 100% coverage.
-    *   **Bidirectional NER:** Analysis of "Faktentreue" (LS -> AS).
+- **Problem:** Initial SBERT analysis (Week 7) was limited to **128 tokens**, resulting in >90% of articles being truncated.
+- **Goal:** Increase model coverage and validate if semantic similarity holds across full-length articles.
+- **Methodology Update:**
+  - Scale up to **512 tokens** (MiniLM limit).
+  - Introduction of **Jina Embeddings v2** (8192 tokens) for 100% coverage.
+  - **Bidirectional NER:** Analysis of "Faktentreue" (LS -> AS).
 
 ---
+
 <!-- _class: image-caption -->
 
 ### Article Length Distribution
@@ -945,10 +952,10 @@ Why do many government sites offer so little parallel data?
 
 A statistical review of token counts revealed that the 128-token limit was capturing primarily "teasers" or "introductions," which often contain boilerplate or navigation instructions in LS.
 
-| Coverage | AS (Limit: 128) | LS (Limit: 128) | AS (Limit: 512) | LS (Limit: 512) |
-| :--- | :---: | :---: | :---: | :---: |
-| **Fully Captured** | 9.4 % | 5.1 % | **56.9 %** | **52.9 %** |
-| **Truncated** | 90.6 % | 94.9 % | **43.1 %** | **47.1 %** |
+| Coverage           | AS (Limit: 128) | LS (Limit: 128) | AS (Limit: 512) | LS (Limit: 512) |
+| :----------------- | :-------------: | :-------------: | :-------------: | :-------------: |
+| **Fully Captured** |      9.4 %      |      5.1 %      |   **56.9 %**    |   **52.9 %**    |
+| **Truncated**      |     90.6 %      |     94.9 %      |   **43.1 %**    |   **47.1 %**    |
 
 **Lesson Learned:** Even at 512 tokens, nearly half of the corpus is cut off. This necessitated the switch to a long-context model (Jina) to ensure total information retention during analysis.
 
@@ -958,17 +965,18 @@ A statistical review of token counts revealed that the 128-token limit was captu
 
 Increasing the context window significantly changed the measured similarity for most sources.
 
-| Source | Sim (128 Tokens) | Sim (512 Tokens) | Difference |
-| :--- | :---: | :---: | :---: |
-| **apotheken** | 0.636 | **0.894** | +0.258 |
-| **hamburg** | 0.665 | **0.804** | +0.139 |
-| **koeln** | 0.684 | **0.833** | +0.149 |
-| **sozialpolitik** | 0.706 | **0.850** | +0.144 |
-| **wiesbaden** | **0.750** | 0.642 | -0.108 |
+| Source            | Sim (128 Tokens) | Sim (512 Tokens) | Difference |
+| :---------------- | :--------------: | :--------------: | :--------: |
+| **apotheken**     |      0.636       |    **0.894**     |   +0.258   |
+| **hamburg**       |      0.665       |    **0.804**     |   +0.139   |
+| **koeln**         |      0.684       |    **0.833**     |   +0.149   |
+| **sozialpolitik** |      0.706       |    **0.850**     |   +0.144   |
+| **wiesbaden**     |    **0.750**     |      0.642       |   -0.108   |
 
 **Interpretation:** For long texts (Apotheken, Köln), similarity rises with context. For others (Wiesbaden), it drops, indicating that while introductions are aligned, the core content diverges significantly.
 
 ---
+
 <!-- _class: split -->
 
 ### Model Comparison: MiniLM vs. Jina (128 & 512 Tokens)
@@ -977,8 +985,8 @@ Increasing the context window significantly changed the measured similarity for 
 
 To ensure the model choice introduces no bias, we compared the original model (`MiniLM`) with the new one (`jina-embeddings-v2-base-de`) at identical limits.
 
+**Conclusion:**
 
-**Conclusion:** 
 - **Same Trends:** Higher context equals higher similarity in both.
 - **Stability:** Jina is more stable with longer texts (e.g., Wiesbaden doesn't drop abruptly). It validates that LS stays semantically close to AS.
 
@@ -986,35 +994,33 @@ To ensure the model choice introduces no bias, we compared the original model (`
 
 <div class="column-right">
 
-| Source | MiniLM (128) | Jina (128) | MiniLM (512) | Jina (512) |
-| :--- | :---: | :---: | :---: | :---: |
-| **apotheken** | 0.636 | 0.688 | **0.894** | 0.800 |
-| **behindertenbeauftragter**| 0.746 | 0.756 | 0.761 | **0.793** |
-| **brandeins** | **0.637** | 0.549 | **0.698** | 0.599 |
-| **hamburg** | 0.665 | **0.690** | **0.804** | 0.790 |
-| **hannover** | 0.706 | **0.742** | 0.776 | **0.807** |
-| **koeln** | 0.684 | 0.693 | **0.833** | 0.782 |
-| **main_taunus** | 0.762 | 0.763 | 0.727 | **0.794** |
-| **mdr** | 0.733 | 0.731 | 0.766 | **0.784** |
-| **sozialpolitik** | **0.706** | 0.694 | **0.850** | 0.760 |
-| **stuttgart** | **0.896** | 0.884 | 0.856 | **0.884** |
-| **wiesbaden** | 0.750 | 0.754 | 0.642 | **0.777** |
+| Source                      | MiniLM (128) | Jina (128) | MiniLM (512) | Jina (512) |
+| :-------------------------- | :----------: | :--------: | :----------: | :--------: |
+| **apotheken**               |    0.636     |   0.688    |  **0.894**   |   0.800    |
+| **behindertenbeauftragter** |    0.746     |   0.756    |    0.761     | **0.793**  |
+| **brandeins**               |  **0.637**   |   0.549    |  **0.698**   |   0.599    |
+| **hamburg**                 |    0.665     | **0.690**  |  **0.804**   |   0.790    |
+| **hannover**                |    0.706     | **0.742**  |    0.776     | **0.807**  |
+| **koeln**                   |    0.684     |   0.693    |  **0.833**   |   0.782    |
+| **main_taunus**             |    0.762     |   0.763    |    0.727     | **0.794**  |
+| **mdr**                     |    0.733     |   0.731    |    0.766     | **0.784**  |
+| **sozialpolitik**           |  **0.706**   |   0.694    |  **0.850**   |   0.760    |
+| **stuttgart**               |  **0.896**   |   0.884    |    0.856     | **0.884**  |
+| **wiesbaden**               |    0.750     |   0.754    |    0.642     | **0.777**  |
 
 </div>
-
-
 
 ---
 
 ### Solving Truncation: The Jina Model (8192 Tokens)
 
-| Source | Jina (128 Tokens) | Jina (512 Tokens) | Jina (Full / 8192) |
-| :--- | :---: | :---: | :---: |
-| **apotheken** | 0.688 | 0.800 | **0.836** |
-| **behindertenbeauftragter** | 0.756 | 0.793 | **0.804** |
-| **hannover** | 0.742 | 0.807 | **0.828** |
-| **koeln** | 0.693 | 0.782 | **0.829** |
-| **stuttgart** | **0.884** | 0.884 | 0.821 |
+| Source                      | Jina (128 Tokens) | Jina (512 Tokens) | Jina (Full / 8192) |
+| :-------------------------- | :---------------: | :---------------: | :----------------: |
+| **apotheken**               |       0.688       |       0.800       |     **0.836**      |
+| **behindertenbeauftragter** |       0.756       |       0.793       |     **0.804**      |
+| **hannover**                |       0.742       |       0.807       |     **0.828**      |
+| **koeln**                   |       0.693       |       0.782       |     **0.829**      |
+| **stuttgart**               |     **0.884**     |       0.884       |       0.821        |
 
 ---
 
@@ -1072,7 +1078,6 @@ Longer explanations in LS don't automatically guarantee higher semantic proximit
 
 ![Histogramm der Ähnlichkeitsverteilung](img/analysis/similarity_distribution_hist.png)
 
-
 ---
 
 <!-- _class: split -->
@@ -1083,8 +1088,8 @@ Longer explanations in LS don't automatically guarantee higher semantic proximit
 
 Analysis of 1,526 pairs confirms structural simplification.
 
-*   **Sentence Length:** Dropped from **15.6 tokens** (AS) to **9.1 tokens** (LS) – a 42% reduction.
-*   **Impact:** Drastic reduction in cognitive load per processing unit.
+- **Sentence Length:** Dropped from **15.6 tokens** (AS) to **9.1 tokens** (LS) – a 42% reduction.
+- **Impact:** Drastic reduction in cognitive load per processing unit.
 
 </div>
 
@@ -1105,6 +1110,7 @@ Analysis of 1,526 pairs confirms structural simplification.
 Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für ein Framework zur neuronalen Textvereinfachung in Leichte Sprache
 
 ---
+
 <!-- _class: section-header -->
 
 ## Week 11
@@ -1114,9 +1120,10 @@ Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für
 ### Lexical Diversity (Type-Token-Ratio)
 
 **Average Reduction:** The lexical variety in LS is reduced by an average of **13.6 %** compared to AS.
-*   **Averages:** AS (0.778) vs. LS (0.672).
-*   **Top Simplifiers:** *Hannover* (0.656) and *Hamburg* (0.658) show the most rigorous vocabulary reduction.
-*   **Journalistic LS:** The *taz* (0.742) maintains the highest lexical diversity, indicating a "higher-level" Easy Language.
+
+- **Averages:** AS (0.778) vs. LS (0.672).
+- **Top Simplifiers:** _Hannover_ (0.656) and _Hamburg_ (0.658) show the most rigorous vocabulary reduction.
+- **Journalistic LS:** The _taz_ (0.742) maintains the highest lexical diversity, indicating a "higher-level" Easy Language.
 
 ---
 
@@ -1128,7 +1135,7 @@ Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für
 
 ![MATTR Vergleich](img/analysis/ttr_mattr_comparison.png)
 
-*Comparison of lexical diversity (MATTR) by source.*
+_Comparison of lexical diversity (MATTR) by source._
 
 </div>
 
@@ -1136,11 +1143,12 @@ Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für
 
 ![TTR vs Length Scatter](img/analysis/ttr_vs_length_scatter.png)
 
-*TTR relative to text length (log-scale) with regression lines.*
+_TTR relative to text length (log-scale) with regression lines._
 
 </div>
 
 ---
+
 <!-- _class: section-header -->
 
 ## Week 12
@@ -1151,21 +1159,20 @@ Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für
 
 **Goal:** Establish a baseline for binary classification (Normal vs. Easy German) and identify optimal data filters.
 
-*   **First Step: Baseline:** Bi-directional LSTM (BiLSTM) for lightweight comparison.
+- **First Step: Baseline:** Bi-directional LSTM (BiLSTM) for lightweight comparison.
 
 ---
 
 ### Sentence-Level Classification
 
-
 | Similarity Range | Balanced Accuracy |
-| :--- | :---: |
-| 0.60 - 0.98 | 92.48 % |
-| 0.70 - 0.98 | 92.43 % |
-| **0.80 - 0.98** | **92.99 %** |
-| 0.90 - 0.98 | 90.55 % |
+| :--------------- | :---------------: |
+| 0.60 - 0.98      |      92.48 %      |
+| 0.70 - 0.98      |      92.43 %      |
+| **0.80 - 0.98**  |    **92.99 %**    |
+| 0.90 - 0.98      |      90.55 %      |
 
-*The range 0.80 - 0.98 provides the best balance between data volume and semantic alignment.*
+_The range 0.80 - 0.98 provides the best balance between data volume and semantic alignment._
 
 ---
 
@@ -1174,11 +1181,11 @@ Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für
 Does full context (up to 512 tokens) improve the distinction?
 
 | Similarity Range | Balanced Accuracy |
-| :--- | :---: |
-| 0.60 - 0.98 | 95.93 % |
-| 0.70 - 0.98 | 97.30 % |
-| **0.80 - 0.98** | **99.03 %** |
-| 0.90 - 0.98 | 98.44 % |
+| :--------------- | :---------------: |
+| 0.60 - 0.98      |      95.93 %      |
+| 0.70 - 0.98      |      97.30 %      |
+| **0.80 - 0.98**  |    **99.03 %**    |
+| 0.90 - 0.98      |      98.44 %      |
 
 **Finding:** The jump from **93 % (sentence)** to **99 % (article)** confirms that "Easy Language" is a holistic stylistic phenomenon that becomes nearly perfectly distinguishable at the document level.
 
@@ -1188,23 +1195,98 @@ Does full context (up to 512 tokens) improve the distinction?
 
 The following hyperparameters were used to achieve the baseline performance (99% BAcc):
 
-| Parameter | Value |
-| :--- | :--- |
-| **Optimizer** | AdamW |
-| **Learning Rate** | $10^{-3}$ |
-| **Weight Decay** | 0.01 |
-| **Batch Size** | 32 |
-| **Max Epochs** | 30 |
-| **Early Stopping Patience** | 7 |
-| **Dropout** | 0,4 |
-| **Max Seq Len** | 512 (Articles) |
+| Parameter                   | Value          |
+| :-------------------------- | :------------- |
+| **Optimizer**               | AdamW          |
+| **Learning Rate**           | $10^{-3}$      |
+| **Weight Decay**            | 0.01           |
+| **Batch Size**              | 32             |
+| **Max Epochs**              | 30             |
+| **Early Stopping Patience** | 7              |
+| **Dropout**                 | 0,4            |
+| **Max Seq Len**             | 512 (Articles) |
 
 ---
 
 ### Next Steps & Research Questions
 
 1.  **Out-of-Domain Validation:** Testing the models on external data (e.g., Lebenshilfe Kiel) to check for over-fitting on governmental styles.
-2. **Hyperparameter Testing** Change hyperparameters systematicly to find the best setup
-2.  **Long-Context Transformers:** Exploring models that can process up to 8,192 tokens to capture very long administrative articles without truncation.
-3.  **Vocabulary Pruning:** Investigating if removing rare words (< 3 occurrences) improves the classifier by forcing it to focus on common simplification patterns.
+2.  **Hyperparameter Testing** Change hyperparameters systematicly to find the best setup
+3.  **Long-Context Transformers:** Exploring models that can process up to 8,192 tokens to capture very long administrative articles without truncation.
+4.  **Vocabulary Pruning:** Investigating if removing rare words (< 3 occurrences) improves the classifier by forcing it to focus on common simplification patterns.
 
+---
+
+<!-- _class: section-header -->
+
+## Week 13
+
+---
+
+### Some Thougts...
+
+- **Paragraph Control Experiment:**
+  - filtered a paragraph-free version of the dataset (`lebenshilfe_dataset_no_paragraphs.json`).
+  - with `spaCy` we can filter out all whitespace tokens.
+- **Vulnerability to Data Leakage Avoided:**
+  - Training data (governmental and news portals) and test data (internal documents, house rules, statutes from _Lebenshilfe_) are completely disjoint.
+  - An out-of-domain accuracy of >90% proves the BiLSTM captures genuine linguistic patterns of Easy Language rather than source-specific formatting.
+- **Vocabulary Robustness:**
+  - Many specialized legal or administrative terms were absent from the training corpus and thus masked as `<unk>` (unknown tokens - freq <= 3).
+  - The model successfully classifies despite this, demonstrating reliance on structural features (sentence length, conjunctions, syntactic simplicity) rather than rote-memorizing vocabulary.
+
+---
+
+<!-- _class: split -->
+
+### Content vs. Length Controls
+
+<div class="column-left">
+
+**Dummy Content Test**
+
+- All words replaced by a neutral token (`.`), preserving original text lengths and padding patterns.
+- **Balanced Accuracy:** **50.0%** (classifies all as LS).
+
+**Constant-Length Slicing**
+
+- All texts sliced to exactly 50 or 100 tokens, eliminating all length variance.
+
+</div>
+
+<div class="column-right">
+
+![Comparison of balanced accuracy across scenarios](img/length_bias_accuracies.png)
+
+</div>
+
+---
+
+### Weekly Focus: Out-of-Domain Evaluation (Lebenshilfe)
+
+- **Objective:** Verify the generalization capability of the BiLSTM classifier on a completely independent, unpublished dataset from _Lebenshilfe_.
+- **Source Data:** 98 unstructured text documents (`.docx`, `.doc`, `.odt`, `.rtf`) containing manual translations into Easy Language (LS) and their everyday language (AS) counterparts.
+- **Result:** A cleaned JSON dataset with **49 verified AS-LS article pairs** (98 documents total).
+
+---
+
+### Out-of-Domain Classification Performance
+
+We evaluated the BiLSTM models (trained on the similarity sweet spot `0.80 - 0.98`) on the 98 _Lebenshilfe_ texts without fine-tuning:
+
+| Metric                  | Article-Level Model | Sentence-Level Model (Aggregated) | Sentence-Level Model (Sentence-Level) |
+| :---------------------- | :-----------------: | :-------------------------------: | :-----------------------------------: |
+| **Balanced Accuracy**   |       90.82%        |            **97.96%**             |                79.71%                 |
+| **LS Correct (Simple)** |   93.88% (46/49)    |        **97.96%** (48/49)         |          76.02% (5877/7731)           |
+| **AS Correct (Normal)** |   87.76% (43/49)    |        **97.96%** (48/49)         |          83.41% (1961/2351)           |
+
+<p class="hint">Sentence-level aggregation is performed via majority voting on the sentences of each article.</p>
+
+---
+
+### Next Steps & Future Work
+
+- **Regression:**
+  - _Concept:_ Map the degree of simplification between standard (AS) and simple language (LS) texts.
+  - _Variant 1 (Mix-Up):_ Create artificial mixed sentences of equal length from LS and AS to study step-wise transition boundaries.
+  - _Variant 2 (LLM-in-the-Loop):_ Feed AS and LS text pairs into LLMs as input to predict and measure progression levels between different simplification stages.
