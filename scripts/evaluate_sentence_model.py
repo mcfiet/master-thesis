@@ -4,6 +4,7 @@ import pandas as pd
 import json
 import os
 import spacy
+import random
 from collections import Counter
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, balanced_accuracy_score, accuracy_score
@@ -34,7 +35,6 @@ class BiLSTMClassifier(nn.Module):
     def forward(self, x):
         embedded = self.dropout(self.embedding(x))
         _, (hidden, _) = self.lstm(embedded)
-        # Concatenate the final forward and backward hidden states
         hidden = torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim=1)
         return self.fc(self.dropout(hidden))
 
@@ -59,10 +59,9 @@ class Vocab:
         return [self.stoi.get(t, self.stoi["<unk>"]) for t in tokens]
 
 def build_original_vocab():
-    print(f"Reconstructing vocab from {VOCAB_SOURCE_CSV}...")
+    print(f"Reconstructing training vocab from {VOCAB_SOURCE_CSV}...")
     df = pd.read_csv(VOCAB_SOURCE_CSV)
     
-    # Filter by similarity
     mask = (df["semantic_similarity_8192"] >= VOCAB_SIM_RANGE[0]) & (df["semantic_similarity_8192"] <= VOCAB_SIM_RANGE[1])
     df_filtered = df[mask]
     
@@ -71,7 +70,7 @@ def build_original_vocab():
     
     nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer"])
     
-    for _, row in tqdm(df_filtered.iterrows(), total=len(df_filtered), desc="Reconstructing sentences for vocab"):
+    for _, row in tqdm(df_filtered.iterrows(), total=len(df_filtered), desc="Vocab reconstruction"):
         ls_text = str(row["ls_text"])
         as_text = str(row["as_text"])
         
@@ -91,8 +90,7 @@ def build_original_vocab():
                 
     # Balance classes
     min_len = min(len(ls_sentences), len(as_sentences))
-    import random
-    random.seed(42) # Ensure reproducible class balancing
+    random.seed(42)
     random.shuffle(ls_sentences)
     random.shuffle(as_sentences)
     ls_sentences = ls_sentences[:min_len]
@@ -116,6 +114,9 @@ def main():
     model.eval()
     print("Model loaded successfully.")
     
+    if not os.path.exists(DATASET_PATH):
+        raise FileNotFoundError(f"Dataset path not found: {DATASET_PATH}")
+
     with open(DATASET_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
         
@@ -159,17 +160,15 @@ def main():
                 as_preds.append(pred)
                 as_probs.append(prob)
                 
-        # Handle cases where no valid sentences were extracted
+        # Fallback for empty results
         if not ls_preds:
             ls_preds, ls_probs = [0], [0.5]
         if not as_preds:
             as_preds, as_probs = [0], [0.5]
             
-        # Majority vote aggregation
+        # Aggregation
         ls_pred_maj = 1 if np.mean(ls_preds) > 0.5 else 0
         as_pred_maj = 1 if np.mean(as_preds) > 0.5 else 0
-        
-        # Average confidence aggregation
         ls_avg_prob = np.mean(ls_probs)
         as_avg_prob = np.mean(as_probs)
         
@@ -177,9 +176,9 @@ def main():
             "LS_ID": item.get("ls_filename", "N/A"),
             "AS_ID": item.get("as_filename", "N/A"),
             "LS_Sents_Count": len(ls_preds),
-            "LS_Sents_Correct": sum(ls_preds), # True label is 1, so count of 1s
+            "LS_Sents_Correct": sum(ls_preds),
             "AS_Sents_Count": len(as_preds),
-            "AS_Sents_Correct": len(as_preds) - sum(as_preds), # True label is 0, so count of 0s
+            "AS_Sents_Correct": len(as_preds) - sum(as_preds),
             "LS_Pred": "Simple" if ls_pred_maj == 1 else "Normal",
             "LS_Conf": ls_avg_prob if ls_pred_maj == 1 else 1 - ls_avg_prob,
             "AS_Pred": "Simple" if as_pred_maj == 1 else "Normal",
@@ -195,9 +194,8 @@ def main():
 
     df_res = pd.DataFrame(results)
     
-    # Sentence-level metrics calculation
-    all_ls_preds = []
-    all_as_preds = []
+    # Sentence level calculations
+    all_ls_preds, all_as_preds = [], []
     for r in results:
         all_ls_preds.extend(r["LS_Sents_Preds"])
         all_as_preds.extend(r["AS_Sents_Preds"])
@@ -208,7 +206,7 @@ def main():
     sent_acc = accuracy_score(y_true_sents, y_pred_sents)
     sent_bacc = balanced_accuracy_score(y_true_sents, y_pred_sents)
     
-    # Article-level aggregated metrics calculation
+    # Article level calculations (aggregated)
     y_true_art = [1] * len(df_res) + [0] * len(df_res)
     y_pred_art = list(df_res["LS_Pred"].map({"Simple": 1, "Normal": 0})) + list(df_res["AS_Pred"].map({"Simple": 1, "Normal": 0}))
     
@@ -230,12 +228,12 @@ def main():
     print("="*50)
     print(f"Overall Accuracy: {art_acc*100:.2f}%")
     print(f"Balanced Accuracy: {art_bacc*100:.2f}%")
-    print(f"Perfect Pair Match: {df_res['Correct'].sum()} / {len(df_res)} ({df_res['Correct'].mean()*100:.2f}%) - (Both LS & AS correct)")
+    print(f"Perfect Pair Match: {df_res['Correct'].sum()} / {len(df_res)} ({df_res['Correct'].mean()*100:.2f}%)")
     print(f"LS articles correctly identified as Simple: {df_res[df_res['LS_Pred']=='Simple'].shape[0]} / {len(df_res)} ({df_res[df_res['LS_Pred']=='Simple'].shape[0]/len(df_res)*100:.2f}%)")
     print(f"AS articles correctly identified as Normal: {df_res[df_res['AS_Pred']=='Normal'].shape[0]} / {len(df_res)} ({df_res[df_res['AS_Pred']=='Normal'].shape[0]/len(df_res)*100:.2f}%)")
     
     print("\n" + "="*50)
-    print(" READABILITY METRICS (Text-Level)")
+    print(" READABILITY METRICS")
     print("="*50)
     print(f"Avg LS Flesch: {df_res['LS_Flesch'].mean():.2f} (Higher = Easier, target LS: >80)")
     print(f"Avg AS Flesch: {df_res['AS_Flesch'].mean():.2f}")
