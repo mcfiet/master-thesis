@@ -262,7 +262,7 @@ While the URLs for the blog posts differ, there is a **button** on each page tha
 
 ### sozialpolitik.com (normal german)
 
-![](img_pptx_extract/ppt/media/image4.png)
+![](img/presentation/image4.png)
 
 ---
 
@@ -270,7 +270,7 @@ While the URLs for the blog posts differ, there is a **button** on each page tha
 
 ### sozialpolitik.com (simple german)
 
-![](img_pptx_extract/ppt/media/image5.png)
+![](img/presentation/image5.png)
 
 ---
 
@@ -288,7 +288,7 @@ Not every article in standard language is translated into Easy Language, but **e
 
 ### mdr.de (normal german)
 
-![](img_pptx_extract/ppt/media/image3.png "Google Shape;121;p22")
+![](img/presentation/image3.png "Google Shape;121;p22")
 
 ---
 
@@ -296,7 +296,7 @@ Not every article in standard language is translated into Easy Language, but **e
 
 ### mdr.de (simple german)
 
-![](img_pptx_extract/ppt/media/image1.png "Google Shape;128;p23")
+![](img/presentation/image1.png "Google Shape;128;p23")
 
 ---
 
@@ -372,7 +372,7 @@ Unfortunately, Tagesschau stands out negatively when it comes to integrating sta
 
 <div class="column-left">
 
-![Image](img_pptx_extract/ppt/media/image7.png)
+![Image](img/presentation/image7.png)
 
 </div>
 
@@ -435,7 +435,7 @@ Resources Analyzed:
 
 <div class="column-right">
 
-![](img_pptx_extract/ppt/media/image8.png "Google Shape;199;p33")
+![](img/presentation/image8.png "Google Shape;199;p33")
 
 </div>
 
