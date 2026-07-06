@@ -1290,3 +1290,136 @@ We evaluated the BiLSTM models (trained on the similarity sweet spot `0.80 - 0.9
   - _Concept:_ Map the degree of simplification between standard (AS) and simple language (LS) texts.
   - _Variant 1 (Mix-Up):_ Create artificial mixed sentences of equal length from LS and AS to study step-wise transition boundaries.
   - _Variant 2 (LLM-in-the-Loop):_ Feed AS and LS text pairs into LLMs as input to predict and measure progression levels between different simplification stages.
+
+---
+
+<!-- _class: section-header -->
+
+## Week 14
+
+---
+
+### Weekly Focus: Implementing the Regression Model
+
+- **Variant 1 (Mix-Up):** Create artificial mixed sentences of equal length from LS and AS to study step-wise transition boundaries.
+- **Variant 2 (LLM-in-the-Loop):** Feed AS and LS text pairs into LLMs as input to predict and measure progression levels between different simplification stages.
+
+---
+
+### Variant 2: LLM-based Generation of Synthetic Intermediate Steps
+
+- **Objective:** Establish a pipeline for generating progressive intermediate steps of text simplification between everyday language (AS) and Easy Language (LS) using LLMs.
+- **Implementation:** Created a dedicated text generation script.
+  - **Inputs:** Paired articles from the Lebenshilfe dataset.
+  - **Outputs:** Progressively simplified versions stored incrementally in a new JSON dataset.
+  - **Configurable Steps:** Supported generation of any float steps between `0.0` (LS) and `1.0` (AS), defaulting to `0.25`, `0.50`, and `0.75`.
+  - **Features:** Robust resume functionality (detects existing output and skips completed steps), input limit option, and post-processing/cleaning of LLM output.
+
+---
+
+### Test Run & Lessons Learned (Ollama & Remote Endpoint)
+
+- **Local Execution:** local execution using Ollama and Llama 3.
+- **Remote Execution:** Server can be pinged successfully, but the model itself cannot be invoked.
+- **Key Issues Identified:**
+  1. **Model Chatty Prefixes:** LLMs frequently prepend introductory text (e.g., _"Hier ist der Text..."_), necessitating an enhanced post-processing script logic.
+  2. **Layout Loss:** Easy Language formatting (line breaks, bullets) was lost in lower intermediate steps (e.g., `0.25`), requiring prompt refinement.
+
+---
+
+### Implementation Design for Variant 1 (Mix-Up)
+
+**Approach B (Sentence-Level Mixup):**
+Build paragraphs mixing AS and LS sentences (e.g. 50% LS sentences, 50% AS sentences for step `0.50`).
+
+- **Question:** Which sentences should be selected to ensure the content still makes sense?
+
+---
+
+<!-- _class: section-header -->
+
+## Week 15
+
+---
+
+### Weekly Focus: Implementing & Evaluating the Regression Setup
+
+- **Goal:** Realization of the regression approaches (Mix-Up and LLM-based synthetic steps) to predict continuous complexity scores $\lambda \in [0.0, 1.0]$.
+- **Approach 1 (Sentence-Level Mix-Up):** Implementation of the sentence-blending logic (First Variant), generation of training paragraphs, and analysis of target distribution.
+- **Approach 2 (LLM Step Generation):** Running step-wise text generation, resolving LLM formatting/prefix issues, and performing dataset alignment cleanup.
+
+---
+
+### Approach 2: LLM Step Generation Execution
+
+- **Pipeline Run:** Executed `generate_synthetic_regression_steps.py` on the remote GPU server (`FlensGen-GPT-OSS120B` model via VPN) and locally (LLaMA 3 via Ollama).
+  **Remote Execution:** Server can be pinged successfully, but the model itself cannot be invoked.
+
+---
+
+<!-- _class: split -->
+
+### Approach 1: Mix-Up (First Variant)
+
+<div class="column-left">
+
+**First Variant Implementation:**
+
+- Sentence-level segmentation of parallel articles (LS & AS) using `spaCy`.
+- Slices of randomly selected contiguous sentence ranges extracted independently from LS and AS and shuffled to build a paragraph.
+- **Regression Target:** Calculated dynamically as the character length ratio of the LS portion to the total paragraph length.
+- **Alternative Concept (Variant 2):** If the resulting target distribution of the first variant is not uniform enough for the regression model, a target $\lambda \sim U(0.0, 1.0)$ can be pre-sampled and sentence counts calculated accordingly.
+
+</div>
+
+<div class="column-right">
+
+**Pseudocode (First Variant):**
+
+```python
+# Segment sentences
+sents_ls = sentencize(ls_text)
+sents_as = sentencize(as_text)
+
+# Slice random contiguous blocks
+start_ls, end_ls = rand_range(len(sents_ls))
+start_as, end_as = rand_range(len(sents_as))
+sample_ls = sents_ls[start_ls:end_ls]
+sample_as = sents_as[start_as:end_as]
+
+# Shuffle and calculate target
+mixed = shuffle(sample_ls + sample_as)
+target = char_len(sample_ls) / (
+    char_len(sample_ls) + char_len(sample_as)
+)
+```
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### Target Distribution of the First Mix-Up Variant
+
+<div class="column-left">
+
+- **First Variant Distribution:**
+  - The target distribution (peaking at 0.5 and near the boundaries) is usable for training, as the regression model should be robust enough.
+- **Backup Concept (Variant 2):**
+  - Should the target distribution of the first variant lead to imprecise predictions at the extremes, Variant 2 is available as a backup concept where a uniformly distributed $\lambda \sim U(0.0, 1.0)$ is pre-sampled.
+
+</div>
+
+<div class="column-right">
+
+![First Variant Distribution](img/analysis/mixup_first_variant_distribution.png)
+
+</div>
+
+---
+
+### Next Steps & Research Questions
+
+1.  **Regression Training:** Implement model training based on the Mix-Up dataloaders.
+2.  **Remote Model Access:** Resolve the remote GPU server model invocation issue (server is pingable, but API does not return completions).
