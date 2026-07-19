@@ -1423,3 +1423,128 @@ target = char_len(sample_ls) / (
 
 1.  **Regression Training:** Implement model training based on the Mix-Up dataloaders.
 2.  **Remote Model Access:** Resolve the remote GPU server model invocation issue (server is pingable, but API does not return completions).
+
+---
+
+<!-- _class: section-header -->
+
+## Week 16
+
+---
+
+### Weekly Focus: Regression Training & Mix-Up Evaluation
+
+- **Goal:** Train the regression model on the sentence-level Mix-Up approach.
+- **Mix-Up Data Inspection:** Analyzed blended paragraph structure and manually checked calculated target values.
+- **Model Stabilization:** Moved from an initial unstable setup (non-deterministic) to a fully converged, deterministic training pipeline.
+
+---
+
+### Mix-Up Paragraph Generation & Target
+
+- **DataLoader Logic:** Randomly extracts contiguous blocks from the Easy Language (LS) and Standard Language (AS) versions of an article, shuffles them, and computes the target.
+- **Target ($\lambda$) Definition:** Character length ratio of the LS portion:
+  $$\lambda = \frac{\text{Length}(LS)}{\text{Length}(LS) + \text{Length}(AS)}$$
+- **Linguistic Coherence:** Shuffling destroys logical paragraph coherence, which prevents the model from overfitting on semantic cues and forces it to focus strictly on sentence and stylistic complexity.
+
+---
+
+<!-- _class: split -->
+
+### Mix-Up Paragraph Example
+
+<div class="column-left">
+
+**Source Sentences (German Extrakt):**
+
+- **Easy German (LS)** ($n = 2$):
+  - _"Die Beauftragten der Bundes-Regierung für die Belange von Menschen mit Behinderungen..."_
+  - _"Was macht der Behindertenbeauftragte..."_
+- **Standard German (AS)** ($n = 5$):
+  - _"Inhaltsverzeichnis Video: Was macht..."_
+  - _"zum Download: Video: Was macht..."_
+  - _"Gesetzlicher Auftrag..."_
+
+</div>
+
+<div class="column-right">
+
+**Blended & Shuffled Paragraph:**
+
+> Die Beauftragten der Bundes-Regierung... zum Download: Video... Gesetzlicher Auftrag... Was macht der Behindertenbeauftragte... Inhaltsverzeichnis Video...
+
+**Computed Regression Target ($\lambda$):**
+$$\lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)} \approx 0.2087$$
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### Initial Setup & Failure Mode (On-the-Fly Shuffling)
+
+<div class="column-left">
+
+**BiLSTM Regressor Setup:**
+
+- Embedding & Hidden Dim: 128, Dropout: 0.3, MSE Loss.
+- Blending performed **on-the-fly** during `__getitem__`.
+
+**Problem & Diagnostic:**
+
+- Val MSE: `0.0655`, Val MAE: `0.2099` (deceptive).
+- **Diagnosis:** Shuffling on-the-fly made the validation set non-deterministic every epoch.
+- **Prediction Collapse:** Lacking a persistent sequence structure, the model predicted the mean ($\approx 0.45$).
+
+</div>
+
+<div class="column-right">
+
+![Initial Scatterplot](img/analysis/mixup_initial_scatterplot.png)
+
+</div>
+
+---
+
+### Solution: Deterministic & Pre-Generated Datasets
+
+- **Pre-generation:** The mixed paragraphs are generated once during dataset initialization rather than on-the-fly.
+- **Reproducibility:** Seeded random generator (`42` for train, `99` for validation) ensures identical samples across all epochs.
+- **Data Augmentation:**
+  - **Train:** 10 fixed mixes per article pair $\rightarrow$ **9,280 samples**.
+  - **Validation:** 2 fixed mixes per article pair $\rightarrow$ **208 samples**.
+
+---
+
+<!-- _class: split -->
+
+### Final Results
+
+<div class="column-left">
+
+**Results at Epoch 23 (Early Stopping at 28):**
+
+- **Validation MSE:** **0.0335** (halved from 0.0655)
+- **Validation MAE:** **0.1195** (halved from 0.2099)
+
+**Interpretation:**
+
+- **Continuous Curve:** Predictions align more with the diagonal $y = x$.
+- **Extremes Accuracy:** Clean AS ($\lambda=0$) and LS ($\lambda=1$) are predicted with high confidence near their true values.
+
+</div>
+
+<div class="column-right">
+
+![Final Scatterplot](img/analysis/mixup_final_scatterplot.png)
+
+</div>
+
+---
+
+### Next Steps
+
+1. **Evaluate on Lebenshilfe dataset:** We should get only extremes?
+
+2. **Evaluate LLM-Generated Levels (Approach 2):** Run the trained Mix-Up BiLSTM model on the synthetic LLM text stages (`0.25`, `0.50`, `0.75`) to assess if the predicted complexity aligns with prompt instructions.
