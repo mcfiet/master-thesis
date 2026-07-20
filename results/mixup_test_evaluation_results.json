@@ -1,0 +1,92 @@
+{
+  "test_binary": [
+    {
+      "Model": "Variante A (Statisch)",
+      "mean_lambda_ls": 0.751129150390625,
+      "mean_lambda_as": 0.3053796887397766,
+      "accuracy": 0.892128279883382,
+      "balanced_accuracy": 0.8909181843267108,
+      "mae": 0.27374789118766785
+    },
+    {
+      "Model": "Variante B (Dynamisch)",
+      "mean_lambda_ls": 0.6555445790290833,
+      "mean_lambda_as": 0.44441041350364685,
+      "accuracy": 0.8221574344023324,
+      "balanced_accuracy": 0.8185189017660044,
+      "mae": 0.38845887780189514
+    },
+    {
+      "Model": "Variante C (Hybrid)",
+      "mean_lambda_ls": 0.7745603919029236,
+      "mean_lambda_as": 0.16697899997234344,
+      "accuracy": 0.9300291545189504,
+      "balanced_accuracy": 0.9367929083885209,
+      "mae": 0.19970329105854034
+    },
+    {
+      "Model": "Variante D (Hybrid + Cyclic)",
+      "mean_lambda_ls": 0.7016504406929016,
+      "mean_lambda_as": 0.32421252131462097,
+      "accuracy": 0.8775510204081632,
+      "balanced_accuracy": 0.8722406181015452,
+      "mae": 0.3097352981567383
+    }
+  ],
+  "test_regression": [
+    {
+      "Model": "Variante A (Statisch)",
+      "test_mse": 0.04035572701935919,
+      "test_mae": 0.159306046002425
+    },
+    {
+      "Model": "Variante B (Dynamisch)",
+      "test_mse": 0.05642870543032732,
+      "test_mae": 0.19579893667089215
+    },
+    {
+      "Model": "Variante C (Hybrid)",
+      "test_mse": 0.03585815542363987,
+      "test_mae": 0.14276610067331572
+    },
+    {
+      "Model": "Variante D (Hybrid + Cyclic)",
+      "test_mse": 0.05425767480097522,
+      "test_mae": 0.18750814151237993
+    }
+  ],
+  "lebenshilfe_binary": [
+    {
+      "Model": "Variante A (Statisch)",
+      "mean_lambda_ls": 0.6507824063301086,
+      "mean_lambda_as": 0.2406412661075592,
+      "accuracy": 0.8177150192554558,
+      "balanced_accuracy": 0.8464081661092531,
+      "mae": 0.3075433671474457
+    },
+    {
+      "Model": "Variante B (Dynamisch)",
+      "mean_lambda_ls": 0.5758724212646484,
+      "mean_lambda_as": 0.3870086371898651,
+      "accuracy": 0.7291399229781772,
+      "balanced_accuracy": 0.7764248885172798,
+      "mae": 0.4098803699016571
+    },
+    {
+      "Model": "Variante C (Hybrid)",
+      "mean_lambda_ls": 0.6629936695098877,
+      "mean_lambda_as": 0.13540644943714142,
+      "accuracy": 0.8189987163029525,
+      "balanced_accuracy": 0.8506027034559643,
+      "mae": 0.25962725281715393
+    },
+    {
+      "Model": "Variante D (Hybrid + Cyclic)",
+      "mean_lambda_ls": 0.48569023609161377,
+      "mean_lambda_as": 0.23032927513122559,
+      "accuracy": 0.7150192554557124,
+      "balanced_accuracy": 0.7662277034559644,
+      "mae": 0.4053107798099518
+    }
+  ]
+}
