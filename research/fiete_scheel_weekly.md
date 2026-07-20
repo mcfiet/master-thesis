@@ -1548,3 +1548,100 @@ $$\lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)} \
 1. **Evaluate on Lebenshilfe dataset:** We should get only extremes?
 
 2. **Evaluate LLM-Generated Levels (Approach 2):** Run the trained Mix-Up BiLSTM model on the synthetic LLM text stages (`0.25`, `0.50`, `0.75`) to assess if the predicted complexity aligns with prompt instructions.
+
+---
+
+<!-- _class: section-header -->
+
+## Week 17
+
+---
+
+### MixUp-Regressoren: Die 4 Trainings-Varianten (A & B)
+
+- **Variante A: Statische Vormischung** (`3_mixup_dataloader_test.ipynb`)
+  - *Konzept:* Satzmischungen und Shuffling werden einmalig bei der Dataset-Initialisierung generiert.
+  - *Vorteil:* Sehr stabile Anfangskonvergenz aufgrund geringer Trainingsvarianz.
+  - *Nachteil:* Erhöhte Overfitting-Gefahr, da das Modell keine neuen Satzkombinationen über die Epochen hinweg sieht.
+- **Variante B: Dynamisches Mischen** (`3_mixup_dataloader_test_getitem.ipynb`)
+  - *Konzept:* Zufälliges Shuffling und Mischen der Sätze on-the-fly in `__getitem__`.
+  - *Vorteil:* Maximale Varianz verhindert Overfitting und verbessert die Generalisierung.
+  - *Nachteil:* Schlechte/langsame Anfangskonvergenz durch unruhige Gradienten (hohe Varianz).
+
+---
+
+### MixUp-Regressoren: Die 4 Trainings-Varianten (C & D)
+
+- **Variante C: Hybrid-Lösung** (`3_mixup_dataloader_test_hybrid.ipynb`)
+  - *Konzept:* Kombination aus statisch und dynamisch. Die Wahrscheinlichkeit für dynamisches Mischen $p_{dynamic}$ steigt linear über die Epochen von $0.0$ auf $1.0$.
+  - *Vorteil:* Stabile Anfangskonvergenz gepaart mit hoher Varianz in der Spätphase.
+- **Variante D: Hybrid-Lösung + Zyklische LR** (`3_mixup_dataloader_test_hybrid_cyclic.ipynb`)
+  - *Konzept:* Basiert auf der Hybrid-Lösung (Variante C), führt jedoch einen zyklischen Learning-Rate-Scheduler (`CosineAnnealingWarmRestarts`) ein.
+  - *Vorteil:* Warm Restarts helfen dem Optimizer, sich auf die Gradientenänderungen beim Übergang zu dynamischen Daten einzustellen und aus lokalen Minima auszubrechen.
+
+---
+
+### Evaluation auf dem Lebenshilfe-Testset
+
+| Modell | Ø $\lambda$ (LS) | Ø $\lambda$ (AS) | Acc (0.5) | Balanced Acc | MAE (1/0) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **A (Statisch)** | 0.6518 | 0.1176 | 87.16% | 89.20% | 0.2597 |
+| **B (Dynamisch)** | 0.5516 | 0.2811 | 77.41% | 81.48% | 0.3842 |
+| **C (Hybrid)** | 0.6315 | 0.1323 | 83.18% | 85.98% | 0.2779 |
+| **D (Hybrid + Cyclic)** | **0.7554** | **0.1051** | **91.78%** | **92.83%** | **0.1911** |
+
+- **Beste Ergebnisse:** Variante D (Hybrid + Cyclic) dominiert in allen Metriken.
+- **Schlechteste Ergebnisse:** Variante B (Dynamisch) hat Schwierigkeiten, stabile Repräsentationen zu lernen.
+
+---
+
+<!-- _class: split -->
+
+### Analyse der Lebenshilfe-KDE-Plots
+
+<div class="column-left">
+
+- **Hohe Konfidenz bei Alltagssprache (AS):**
+  - Scharfe, hohe Peaks nahe $0.0$ (blaue Kurve).
+  - AS besitzt starke "Smoking Guns" (Komposita, Nebensätze, Passiv), die das Modell leicht identifizieren kann.
+- **Höhere Varianz bei Einfacher Sprache (LS):**
+  - Flachere und breitere Verteilung (grüne Kurve).
+  - LS zeichnet sich primär durch die *Abwesenheit* von Komplexität aus. Das Signal ist "weicher".
+
+</div>
+
+<div class="column-right">
+
+![KDE-Plots Vergleich](img/analysis/mixup_distribution_comparison_plot.png)
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### Trainingstargets vs. Vorhersage-Verteilung
+
+<div class="column-left">
+
+- **Orange gestrichelte Kurve:** Repräsentiert die Verteilung der Trainings-Targets.
+- **Uniforme Verteilung:** Das Modell wird im Training fast gleichmäßig mit allen Mischungsverhältnissen konfrontiert.
+- **Generalisierung:** Trotz des Trainings auf kontinuierlichen Mischungen sagen die Modelle bei reinen Texten (LS / AS) sehr präzise Werte nahe $1.0$ und $0.0$ voraus.
+- **Vorteil Warm Restarts:** Variante D verschiebt den LS-Peak am stärksten nach rechts ($\approx 0.85$).
+
+</div>
+
+<div class="column-right">
+
+![Targets Vergleich](img/analysis/mixup_distribution_with_targets.png)
+
+</div>
+
+---
+
+### Zukünftige Optimierungsschritte (Backlog)
+
+- **Lebenshilfe Evaluation:**
+  - Testen des trainierten Regressors auf dem externen Lebenshilfe-Testset (`results/lebenshilfe_dataset_no_paragraphs.json`), um die Zuverlässigkeit auf absatzfreien Reinklassen-Texten zu prüfen.
+- **Evaluation von LLM-generierten Stufen:**
+  - Testen der Vorhersagen auf den synthetischen Textstufen (`0.25`, `0.50`, `0.75`), um zu validieren, ob die Komplexitätsvorhersagen mit den Prompt-Instruktionen korrelieren.
