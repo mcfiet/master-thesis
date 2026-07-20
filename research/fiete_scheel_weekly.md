@@ -1570,6 +1570,14 @@ $$\lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)} \
 
 ---
 
+<!-- _class: image-caption -->
+
+### MixUp Regressors: Training & Validation Loss Curves
+
+![Loss Curves Comparison](img/analysis/mixup_training_losses_comparison.png)
+
+---
+
 ### Evaluation on the Lebenshilfe Test Set
 
 | Model                   | Ø $\lambda$ (LS) | Ø $\lambda$ (AS) | Acc (0.5)  | Balanced Acc | MAE (1/0)  |
@@ -1584,53 +1592,17 @@ $$\lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)} \
 
 ---
 
-<!-- _class: split -->
+<!-- _class: image-caption -->
 
 ### Analysis of the Lebenshilfe KDE Plots
 
-<div class="column-left">
-
-- **High Confidence in Everyday Language (AS):**
-  - Sharp, high peaks close to $0.0$ (blue curve).
-  - AS features explicit complexity markers (compounds, subclauses, passive voice) that act as strong "smoking guns" for the model.
-- **Higher Variance in Simple Language (LS):**
-  - Flatter and wider distribution (green curve).
-  - LS is primarily defined by the *absence* of complexity, resulting in a "softer" signal.
-
-</div>
-
-<div class="column-right">
-
-![KDE Plots Comparison](img/analysis/mixup_distribution_comparison_plot.png)
-
-</div>
-
----
-
-<!-- _class: split -->
-
-### Training Targets vs. Prediction Distribution
-
-<div class="column-left">
-
-- **Orange Dashed Curve:** Represents the distribution of the training targets.
-- **Uniform Distribution:** The model is exposed to all mixing ratios almost equally during training.
-- **Generalization:** Despite being trained on continuous mixtures, the models accurately predict values close to $1.0$ and $0.0$ for pure texts (LS / AS).
-- **Cyclic LR Advantage:** Variant D shifts the LS peak the furthest to the right ($\approx 0.85$).
-
-</div>
-
-<div class="column-right">
-
 ![Targets Comparison](img/analysis/mixup_distribution_with_targets.png)
-
-</div>
 
 ---
 
 ### Future Optimization Steps (Backlog)
 
-- **Lebenshilfe Evaluation:**
-  - Test the trained regressor on the external paragraph-free Lebenshilfe test set (`results/lebenshilfe_dataset_no_paragraphs.json`) to verify reliability on pure-class texts.
-- **Evaluate LLM-Generated Levels:**
-  - Test the predictions on synthetic text stages (`0.25`, `0.50`, `0.75`) to validate if predicted complexity scores correlate with prompt instructions.
+- **Train with LLM-Generated Levels:**
+  - Train the model on synthetic text stages (`0.25`, `0.50`, `0.75`).
+- **Variant B with Cyclic LR:**
+  - Train the purely dynamic mixing model (Variant B) using a cyclic learning rate scheduler (e.g., Cosine Annealing with Warm Restarts) to see if periodic momentum helps it escape local minima and overcome its initial convergence plateau.
