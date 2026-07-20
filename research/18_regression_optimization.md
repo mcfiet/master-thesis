@@ -1,0 +1,5 @@
+- **Train with LLM-Generated Levels:**
+  - Train the model on synthetic text stages (`0.25`, `0.50`, `0.75`).
+- **Variant B with Cyclic LR:**
+  - Train the purely dynamic mixing model (Variant B) using a cyclic learning rate scheduler (e.g., Cosine Annealing with Warm Restarts) to see if periodic momentum helps it escape local minima and overcome its initial convergence plateau.
+- **Evaluation on Test Dataset**: Insteaad of binary Lebenshilfe Dataset use test split of the dataset and see if the results we got still holds.
