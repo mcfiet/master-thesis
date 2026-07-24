@@ -3,8 +3,35 @@
 ## 1. Training mit LLM-generierten Sprachstufen
 * Trainieren des Modells auf synthetischen Textstufen (`0.25`, `0.50`, `0.75`).
 
-## 2. Variante B mit zyklischer Lernrate (Cyclic LR)
-* Trainieren des rein dynamischen Mischmodells (Variante B) mit einem zyklischen Learning-Rate-Scheduler (z. B. `CosineAnnealingWarmRestarts`), um zu prüfen, ob periodisches Momentum hilft, lokalen Minima zu entkommen und das anfängliche Konvergenzplateau zu überwinden.
+## 2. Variante B mit zyklischer Lernrate (Cyclic LR) (Erledigt)
+* **Notebook:** `notebooks/3_mixup_dataloader_test_getitem_cyclic.ipynb`
+* **Modellgewichte:** `results/bilstm_mixup_regression_getitem_cyclic.pt`
+
+### 2.1. Grafische Auswertung & Detail-Analyse
+
+![Trainingsverlauf Variante B (Dynamisch + Cyclic LR)](img/analysis/mixup_getitem_cyclic_loss_curve.png)
+*Abbildung 2.1: Trainings- und Validierungs-Loss (MSE) über 25 Epochen mit CosineAnnealingWarmRestarts.*
+
+![Scatterplot Echte vs. Vorhergesagte Targets](img/analysis/mixup_getitem_cyclic_scatterplot.png)
+*Abbildung 2.2: Scatterplot der echten vs. vorhergesagten Lambda-Werte auf den Validierungsdaten.*
+
+### 2.2. Detaillierte Befunde & Korrektur der Analyse
+
+1. **Instabilität des Trainingsverlaufs (Loss-Kurve):**
+   * **Starke Oszillation des Validierungs-Loss:** Während der Trainings-Loss (blau) kontinuierlich von 0,085 auf ~0,049 sinkt, schwankt der Validierungs-Loss (orange) extrem stark zwischen **0,057 und 0,090**.
+   * **Wirkung der Restarts:** Die zyklischen Restarts (`CosineAnnealingWarmRestarts` mit `T_0=10`) erzeugen zwar punktuell tiefe Dips im Val-Loss (z. B. Epoche 15 mit MSE = 0,0505), das Modell stabilisiert sich jedoch zu keinem Zeitpunkt. Sobald die Lernrate im nächsten Zyklus wieder ansteigt, schlägt der Val-Loss sofort wieder massiv nach oben aus (z. B. Epoche 22 mit MSE = 0,090).
+
+2. **Fehlende Regressions-Kontinuität (Scatterplot):**
+   * **Keine Konvergenz zur Hauptdiagonalen ($y = x$):** Der Scatterplot zeigt drastisch, dass das Modell keine stetige Regressionsgerade lernt. Die Punkte streuen nicht gleichmäßig um die rote Zielgerade, sondern bilden eine verzerrte, bimodal geteilte Verteilung.
+   * **Starke Stauchung an den Rändern:**
+     * Für reine Alltagssprache ($\lambda = 0,0$) sagt das Modell Werte zwischen $0,28$ und $0,42$ voraus – der Nullpunkt wird nicht erreicht.
+     * Für reine Leichte Sprache ($\lambda = 1,0$) liegen die Vorhersagen weit gestreut zwischen $0,36$ und $0,81$ – der Maximalwert 1,0 wird verfehlt.
+   * **Bimodale Clusterbildung im Mittelbereich:** Für kontinuierliche Mischwerte ($\lambda \in [0,2; 0,8]$) spaltet sich die Modellvorhersage im Wesentlichen in zwei horizontale Bänder auf: ein unteres Band um $\lambda \approx 0,30 - 0,38$ und ein oberes Band um $\lambda \approx 0,70 - 0,80$.
+
+3. **Korrigiertes Gesamtfazit zu Variante B:**
+   * Auch wenn der minimal gemessene Val-Loss zahlenmäßig leicht besser erscheint als beim Standard-Variante-B-Training (0,0505 vs. 0,0758), belegt die visuelle Verteilungsanalyse eindeutig: **Variante B fasst auch mit zyklischer Lernrate im Training NICHT richtig Fuß.**
+   * **Ursache:** Durch die rein stochastische Generierung neuer Slices in jedem `__getitem__`-Zugriff fehlen dem Dataloader feste, verlässliche Ankerpunkte im Batch. Der Regressor lernt somit keinen stetigen Komplexitätsgradienten, sondern driftet in zwei grobe Komplexitäts-Cluster ab.
+   * **Bestätigung des Hybrid-Ansatzes:** Dieses Verhalten liefert den methodischen Beweis dafür, warum **Variante D (Hybrid + Cyclic LR)** zwingend notwendig ist: Erst die Verankerung statisch prä-generierter Paare zusammen mit dynamischen Stichproben erlaubt es dem Modell, eine präzise, stetige Regressionsfunktion über das gesamte Komplexitätsspektrum auszubilden.
 
 ## 3. Evaluation auf dem Test-Split & Lebenshilfe-Datensatz (Erledigt)
 

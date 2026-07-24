@@ -34,6 +34,12 @@ Dieses Notebook dient dem Testen und Visualisieren eines **Mixup-Verfahrens** f�
   - Der Start- und Endbereich der Slices wird stochastisch und unabhängig gewählt.
   - Die Ziel-Komplexität (Target) wird dynamisch berechnet als Verhältnis der Zeichenanzahl des LS-Anteils zur Gesamtanzahl an Zeichen im gemischten Absatz.
   - Das Notebook visualisiert die resultierenden Ziel-Verteilungen (Histogramme) für verschiedene Misch-Varianten, um sicherzustellen, dass die Verteilung der Trainingswerte gleichmäßig abgedeckt ist.
+* **Notebook-Varianten für MixUp-Regression:**
+  - `3_mixup_dataloader_test.ipynb`: Variante A (Statisch prä-generierte Mischungen).
+  - `3_mixup_dataloader_test_getitem.ipynb`: Variante B (Rein dynamische Generierung on-the-fly in `__getitem__`).
+  - `3_mixup_dataloader_test_getitem_cyclic.ipynb`: **Variante B (Dynamisch + Cyclic LR)** – Verwendet den rein dynamischen `__getitem__`-Dataloader mit einem `CosineAnnealingWarmRestarts` Learning-Rate-Scheduler zur Vermeidung lokaler Minima.
+  - `3_mixup_dataloader_test_hybrid.ipynb`: Variante C (Hybrid aus statischen & dynamischen Samples).
+  - `3_mixup_dataloader_test_hybrid_cyclic.ipynb`: Variante D (Hybrid + Cyclic LR).
 
 ### 4. Length-Bias-Überprüfung (`check_length_bias.ipynb`)
 Dieses Notebook führt empirische Experimente durch, um zu prüfen, ob der Artikel-Klassifikator echte linguistische Strukturen lernt oder lediglich auf die Textlänge (Längen-Shortcut / Padding-Bias) optimiert.
