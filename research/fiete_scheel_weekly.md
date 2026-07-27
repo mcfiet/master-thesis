@@ -890,7 +890,7 @@ Why do many government sites offer so little parallel data?
 
 <div class="column-right">
 
-![POS Distribution](img/analysis/pos_distribution_comparison.png)
+![POS Distribution](img/analysis/pos_distribution_bar.png)
 
 </div>
 
@@ -1606,3 +1606,283 @@ $$\lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)} \
   - Train the model on synthetic text stages (`0.25`, `0.50`, `0.75`).
 - **Variant B with Cyclic LR:**
   - Train the purely dynamic mixing model (Variant B) using a cyclic learning rate scheduler (e.g., Cosine Annealing with Warm Restarts) to see if periodic momentum helps it escape local minima and overcome its initial convergence plateau.
+
+---
+
+<!-- _class: section-header -->
+
+## Week 18
+
+---
+
+### Weekly Focus: MixUp Optimization, Thesis Summary & Translation Model Planning
+
+- **1. MixUp Regressor Optimization & Evaluation:** Cyclic LR evaluation on Variant B, diagnostic error analysis, and complete In-Domain & Out-of-Domain (Lebenshilfe) performance comparison across all 4 variants (MixUp & Non-MixUp).
+- **2. Master Thesis Status Summary & Overall Architecture:** High-Level Overview for status quo.
+- **3. Planning Translation Model (Step 3):** Model selection (Seq2Seq vs. Causal LLMs) and reward guided training.
+
+---
+
+<!-- _class: section-header -->
+
+## Part 1: MixUp Regressor Optimization & Evaluation
+
+---
+
+<!-- _class: split -->
+
+### 1.1 MixUp Variant B + Cyclic LR: Loss & Scatterplot Analysis
+
+<div class="column-left">
+
+![Loss Curve Variant B Cyclic](img/analysis/mixup_getitem_cyclic_loss_curve.png)
+
+</div>
+
+<div class="column-right">
+
+![Scatterplot Variant B Cyclic](img/analysis/mixup_getitem_cyclic_scatterplot.png)
+
+</div>
+
+---
+
+### 1.2 In-Domain Evaluation (Test-Split)
+
+#### A. Continuous MixUp Regression (MixUp Evaluation)
+
+| Model Variant                   |  Test MSE  |  Test MAE  |
+| :------------------------------ | :--------: | :--------: |
+| **Variant A (Static)**          |   0.0383   |   0.1557   |
+| **Variant B (Dynamic)**         |   0.0758   |   0.2264   |
+| **Variant D (Hybrid + Cyclic)** | **0.0241** | **0.1027** |
+
+#### B. Binary Classification on Pure Sentences (Non-MixUp Evaluation: LS = 1.0, AS = 0.0)
+
+| Model Variant                   | Ø $\lambda_{LS}$ | Ø $\lambda_{AS}$ | Accuracy (0.5) | Balanced Acc | MAE (Target 1/0) |
+| :------------------------------ | :--------------: | :--------------: | :------------: | :----------: | :--------------: |
+| **Variant A (Static)**          |      0.7596      |      0.2680      |     91.55%     |    91.46%    |      0.2526      |
+| **Variant B (Dynamic)**         |      0.6138      |      0.3312      |     80.17%     |    79.53%    |      0.3620      |
+| **Variant D (Hybrid + Cyclic)** |    **0.9007**    |    **0.1382**    |   **95.92%**   |  **95.93%**  |    **0.1164**    |
+
+---
+
+### 1.3 Out-of-Domain Evaluation (Lebenshilfe Dataset)
+
+#### A. Continuous MixUp Regression (MixUp Evaluation)
+
+| Model Variant                   |   LH MSE   |   LH MAE   |
+| :------------------------------ | :--------: | :--------: |
+| **Variant A (Static)**          |   0.0725   |   0.2111   |
+| **Variant B (Dynamic)**         |   0.0766   |   0.2212   |
+| **Variant D (Hybrid + Cyclic)** | **0.0739** | **0.2087** |
+
+#### B. Binary Classification on Pure Sentences (Non-MixUp Evaluation: LS = 1.0, AS = 0.0)
+
+| Model Variant                   | Ø $\lambda_{LS}$ | Ø $\lambda_{AS}$ | Accuracy (0.5) | Balanced Acc | MAE (Target 1/0) |
+| :------------------------------ | :--------------: | :--------------: | :------------: | :----------: | :--------------: |
+| **Variant A (Static)**          |      0.6533      |      0.1958      |     82.67%     |    85.75%    |      0.2888      |
+| **Variant B (Dynamic)**         |      0.6241      |      0.2766      |     87.42%     |    86.32%    |      0.3378      |
+| **Variant D (Hybrid + Cyclic)** |    **0.7293**    |    **0.0957**    |   **87.29%**   |  **89.37%**  |    **0.2036**    |
+
+---
+
+<!-- _class: split -->
+
+### 1.4 In-Domain Test-Split Scatterplots: Non-MixUp vs. MixUp
+
+<div class="column-left">
+
+**Binary Classification (Non-MixUp: Pure Sentences):**
+
+![Test Classification Scatter](img/analysis/mixup_test_classification_scatterplot.png)
+
+</div>
+
+<div class="column-right">
+
+**Continuous Regression (MixUp Blends):**
+
+![Test Regression Scatter](img/analysis/mixup_test_regression_scatterplot.png)
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### 1.5 In-Domain Test-Split Density Distributions
+
+<div class="column-left">
+
+**Binary Classification (Non-MixUp: Pure Sentences):**
+
+![Test Target KDE](img/analysis/mixup_test_distribution_with_targets.png)
+
+</div>
+
+<div class="column-right">
+
+**Continuous Regression (MixUp Blends):**
+
+![Test Regression KDE](img/analysis/mixup_test_regression_kde.png)
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### 1.6 Out-of-Domain Lebenshilfe Scatterplots: Non-MixUp vs. MixUp
+
+<div class="column-left">
+
+**Binary Classification (Non-MixUp: Pure Sentences):**
+
+![LH Classification Scatter](img/analysis/mixup_lh_classification_scatterplot.png)
+
+</div>
+
+<div class="column-right">
+
+**Continuous Regression (MixUp Blends):**
+
+![LH Regression Scatter](img/analysis/mixup_lh_regression_scatterplot.png)
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### 1.7 Out-of-Domain Lebenshilfe Density Distributions
+
+<div class="column-left">
+
+**Binary Classification (Non-MixUp: Pure Sentences):**
+
+![LH Target KDE](img/analysis/mixup_distribution_with_targets.png)
+
+</div>
+
+<div class="column-right">
+
+**Continuous Regression (MixUp Blends):**
+
+![LH Regression KDE](img/analysis/mixup_lh_regression_kde.png)
+
+</div>
+
+---
+
+<!-- _class: section-header -->
+
+## Part 2: Thesis Status Summary & Big Picture
+
+---
+
+### 2.1 Big Picture: 3-Step Master Thesis Architecture
+
+![Master Thesis Architecture height:390px](img/analysis/thesis_architecture_mermaid.svg)
+
+---
+
+<!-- _class: split -->
+
+### 2.2 Step 1 Status: Data Corpus & Quality Assurance
+
+<div class="column-left">
+
+**Corpus Statistics (Final Cleaned State):**
+
+- **1,471** verified article pairs across 11 sources.
+- **1.43M Easy German Tokens** vs. **1.78M Standard German Tokens**.
+- **91,103 LS Sentences** vs. **54,256 AS Sentences**.
+
+**Quality Assurance Pipeline:**
+
+- **Long-Context Alignment:** `jina-embeddings-v2-base-de` (8,192 token window) for section-level matching.
+- **Similarity Sweet-Spot:** Filtered range $0.80 \le \text{Similarity} \le 0.98$.
+
+</div>
+
+<div class="column-right">
+
+| Top Sources                 |   Pairs   |  Tokens (LS)  |  Tokens (AS)  |
+| :-------------------------- | :-------: | :-----------: | :-----------: |
+| **Hannover.de**             |    796    |    861,967    |    858,086    |
+| **MDR**                     |    227    |    94,976     |    168,440    |
+| **Apotheken Umschau**       |    157    |    234,608    |    443,722    |
+| **Hamburg.de**              |    56     |    61,204     |    66,977     |
+| **Behindertenbeauftragter** |    51     |    38,724     |    44,725     |
+| **Wiesbaden.de**            |    41     |    13,808     |    23,332     |
+| **Lebenshilfe (Test)**      |    34     |     9,974     |    11,037     |
+| **TOTAL (Final)**           | **1,471** | **1,429,433** | **1.781.714** |
+
+</div>
+
+---
+
+### 2.3 Step 2 Status: Classification & MixUp Regression
+
+**1. Binary Classification Baseline Models**
+
+| Model Architecture              |  Scope / Aggregation   | In-Domain BAcc | Out-of-Domain BAcc (LH) |
+| :------------------------------ | :--------------------: | :------------: | :---------------------: |
+| **Sentence BiLSTM (Maj. Vote)** | **Sentence → Article** |   **99.68%**   |       **96.94%**        |
+| **Article BiLSTM Baseline**     |  Article (512 tokens)  |     99.03%     |         90.82%          |
+| **Sentence BiLSTM (Raw)**       |    Single Sentence     |     92.99%     |         78.76%          |
+
+**2. Continuous MixUp Regressor Variants**
+
+| Model Variant | Training Strategy       |  Test MSE  |  Test MAE  | In-Domain BAcc | Out-of-Domain BAcc (LH) |
+| :------------ | :---------------------- | :--------: | :--------: | :------------: | :---------------------: |
+| **Variant A** | Static (Pre-mixed)      |   0.0383   |   0.1557   |     91.46%     |         85.75%          |
+| **Variant B** | Dynamic (`__getitem__`) |   0.0758   |   0.2264   |     79.53%     |         86.32%          |
+| **Variant C** | Hybrid Schedule         |   0.0267   |   0.1158   |     95.22%     |         85.10%          |
+| **Variant D** | **Hybrid + Cyclic LR**  | **0.0241** | **0.1027** |   **95.93%**   |       **89.37%**        |
+
+---
+
+### 2.4 Project Progress & Milestone Dashboard
+
+| Milestone                             |     Status      | Key Metrics & Achievements                    |
+| :------------------------------------ | :-------------: | :-------------------------------------------- |
+| **1. Web Crawling & Corpus Building** |  **Completed**  | 1,471 Pairs, 1.43M Tokens, 11 Sources         |
+| **2. Quality & Embedding Alignment**  |  **Completed**  | Jina-Embeddings-v2 (8k), Similarity 0.80–0.98 |
+| **3. BiLSTM Classifier Baseline**     |  **Completed**  | 99.68% Balanced Accuracy (Majority Vote)      |
+| **4. Continuous MixUp Regressor**     |  **Completed**  | MSE 0.0241, MAE 0.1027 (Variant D)            |
+| **5. Synthetic LLM Levels Eval**      | **In Progress** | Ollama / FlensGen-GPT Evaluation              |
+| **7. Translation**                    |  **Planning**   | mBART-50 & LLaMA-3-8B (LoRA/QLoRA) & Reward   |
+
+---
+
+<!-- _class: section-header -->
+
+## Part 3: Planning Translation Model (Step 3)
+
+---
+
+### 3.1 Step 3: Model Architectures & Approaches
+
+**A. Sequence-to-Sequence (Encoder-Decoder)**
+
+- **Models:** `mBART-50` (`facebook/mbart-large-50`), `mt5` (`google/mt5-base` / `mt5-large`).
+
+**B. Causal LLMs (Decoder-Only via LoRA / QLoRA)**
+
+- **Models:** `LLaMA-3-8B-Instruct`, `Mistral-7B-v0.3`, `Qwen2.5-7B`.
+
+**Metric Models as Reward Function**
+
+- Reinforcement Learning / Direct Preference Optimization / Metric Guidance
+
+---
+
+### Open Questions & Discussion
+
+- **Reward Function:**
+  - Proceed with a metric model (the best one) as the reward function?
+
+- **Dataset Usage:**
+  - Is it valid to train/evaluate multiple models (metric & translation models) on the same dataset?
