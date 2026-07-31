@@ -6,7 +6,22 @@ tqdm
 pandas
 matplotlib
 seaborn
-torch
 scikit-learn
 scipy
 numpy
+
+# Jupyter Server integration
+ipykernel
+
+# Hugging Face & Tokenizer support
+transformers
+sentence-transformers
+sentencepiece
+protobuf
+huggingface_hub
+
+# PyTorch with CUDA 12.1 support (for Windows/Linux GPU acceleration)
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch
+torchvision
+torchaudio
