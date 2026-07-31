@@ -1,0 +1,3 @@
+- sequence-to-sequence model braucht bei reinforcement learning vlt nicht beide Texte, sondern nur einen Text zum Übersetzen
+- loesung fuer vpn problem bei llm zwischensteps: per vpn auf ein linux gerät und von da aus die api ansprechen.
+- einfach bestes regression model als reward funktion
