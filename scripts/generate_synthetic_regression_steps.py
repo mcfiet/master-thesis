@@ -187,7 +187,69 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 def get_key(item: Dict[str, Any]) -> tuple:
-    return (item.get("ls_filename"), item.get("as_filename"))
+    ls_id = item.get("ls_filename") or item.get("ls_url") or item.get("id")
+    as_urls = item.get("as_urls")
+    as_id = item.get("as_filename") or item.get("as_url") or (as_urls[0] if isinstance(as_urls, list) and as_urls else None)
+    if ls_id is None and "ls_text" in item:
+        # Fallback to hash of ls_text if no filename/url is available
+        ls_id = str(hash(item["ls_text"][:100]))
+    return (ls_id, as_id)
+
+def load_dataset(input_path: Path) -> List[Dict[str, Any]]:
+    items = []
+
+    def extract_pairs(data: Any) -> List[Dict[str, Any]]:
+        extracted = []
+        if isinstance(data, list):
+            for elem in data:
+                extracted.extend(extract_pairs(elem))
+        elif isinstance(data, dict):
+            if "pairs" in data and isinstance(data["pairs"], list):
+                for p in data["pairs"]:
+                    if isinstance(p, dict):
+                        p_copy = p.copy()
+                        if "source" not in p_copy and "source" in data:
+                            p_copy["source"] = data["source"]
+                        extracted.append(p_copy)
+            elif "ls_text" in data:
+                extracted.append(data)
+        return extracted
+
+    if input_path.is_dir():
+        for json_file in sorted(input_path.glob("*.json")):
+            try:
+                with open(json_file, "r", encoding="utf-8") as f:
+                    content = json.load(f)
+                    items.extend(extract_pairs(content))
+            except Exception as e:
+                print(f"[warn] Failed to read {json_file}: {e}")
+    elif input_path.is_file():
+        with open(input_path, "r", encoding="utf-8") as f:
+            content = json.load(f)
+            items = extract_pairs(content)
+    else:
+        raise ValueError(f"Input path {input_path} does not exist.")
+
+    # Normalize text fields for each item
+    normalized_items = []
+    for item in items:
+        item_copy = item.copy()
+        ls_text = item_copy.get("ls_text", "")
+        as_text = item_copy.get("as_text", "")
+        if not as_text and "as_texts" in item_copy:
+            as_texts = item_copy["as_texts"]
+            if isinstance(as_texts, list) and as_texts:
+                as_text = "\n\n".join(as_texts)
+            elif isinstance(as_texts, str):
+                as_text = as_texts
+
+        item_copy["ls_text"] = ls_text
+        item_copy["as_text"] = as_text
+
+        if ls_text and as_text:
+            normalized_items.append(item_copy)
+
+    return normalized_items
 
 def load_existing_results(path: Path) -> Dict[tuple, Dict[str, Any]]:
     if not path.exists():
@@ -223,11 +285,10 @@ def main():
 
     # Load input dataset
     if not args.input.exists():
-        print(f"[error] Input file {args.input} does not exist.")
+        print(f"[error] Input path {args.input} does not exist.")
         return
 
-    with open(args.input, "r", encoding="utf-8") as f:
-        input_data = json.load(f)
+    input_data = load_dataset(args.input)
 
     if args.limit:
         input_data = input_data[:args.limit]
