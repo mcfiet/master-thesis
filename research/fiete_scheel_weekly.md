@@ -1886,3 +1886,264 @@ $$\lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)} \
 
 - **Dataset Usage:**
   - Is it valid to train/evaluate multiple models (metric & translation models) on the same dataset?
+
+---
+
+<!-- _class: section-header -->
+
+## Woche 19
+
+---
+
+### Fokus der Woche: Thesis-Struktur, Evaluation des synthetischen Regressors & SFT des Übersetzungsmodells
+
+- **1. Master-Thesis-Struktur:** Gesamtübersicht der Kapitel 1-7.
+- **2. Synthetische LLM-basierte Regression vs. MixUp:** Evaluation auf dem Lebenshilfe (LH)-Datensatz, Diskussion über Datenvielfalt/-volumen sowie Analyse der Kontext-/Inputlänge (Jina-Kontextvergleich & Artikellängenverteilung).
+- **3. Übersetzungsmodell (Schritt 3):** Supervised Fine-Tuning (SFT)-Pipeline, Visualisierung der DPO-Architektur/des Workflows (Schritt 1 als vortrainiertes mt5 gestrichen) und DPO-Trainingsfortschritt.
+
+---
+
+<!-- _class: section-header -->
+
+## Part 1: Master Thesis Structure Outline
+
+---
+
+<!-- _class: split -->
+
+### 1.1 Thesis Structure: Chapters 1-4
+
+<div class="column-left">
+
+**1. Einleitung**
+
+- 1.1 Problemstellung & Motivation (Barrierefreiheit)
+- 1.2 Zielsetzung & Forschungsfragen
+- 1.3 Aufbau (Drei-Stufen-Pipeline)
+
+**2. Stand der Forschung**
+
+- 2.1 Leichte Sprache (Regeln, Zielgruppen)
+- 2.2 MT & Textvereinfachung (Seq2Seq, LLMs)
+- 2.3 Evaluierungsansätze (Metriken, DPO)
+
+</div>
+
+<div class="column-right">
+
+**3. Themenblock 1: Korpus-Erstellung**
+
+- 3.1 Multi-Quellen-Crawling (11-Quellen-Korpus)
+- 3.2 Alignment & Das 1:n-Problem (Satz/Absatz)
+- 3.3 Quality Assurance (Similarity Sweet-Spot)
+- 3.4 Datenbereinigung & Normalisierung
+- 3.5 Korpus-Statistiken (Diversität, TTR)
+
+**4. Themenblock 2: Metrik**
+
+- 4.1 Klassifikationsmodelle (BiLSTM vs. SBERT)
+- 4.2 Out-of-Domain-Generalisierung & Bias
+- 4.3 Continuous MixUp Regression
+- 4.4 Evaluierung synthetischer Sprachstufen
+
+</div>
+
+---
+
+### 1.2 Thesis Structure: Chapters 5-6
+
+**5. Themenblock 3: Übersetzung & Reward-Guided Fine-Tuning**
+
+- 5.1 Datenvorbereitung & Trainings-Splits (Gefilterter Sweet-Spot, Block-basiert)
+- 5.2 Supervised Fine-Tuning (SFT) (mt5 / Mistral/LLaMA)
+- 5.3 Reward-Guided Optimization (RLHF / DPO via MixUp-Regressor Reward)
+- 5.4 Mehrdimensionale Evaluierung (Regelkonformität, NLI/NER Faktentreue)
+
+**6. Diskussion & Gesamtevaluation**
+
+- 6.1 Inhaltssynthese der drei Themenblöcke
+- 6.2 Stärken, Grenzen & Systemrestriktionen
+- 6.3 Beantwortung der Forschungsfragen
+
+---
+
+### 1.3 Thesis Structure: Chapter 7
+
+**7. Fazit & Ausblick**
+
+- 7.1 Zusammenfassung der Kernergebnisse
+- 7.2 Ausblick & Zukünftige Arbeiten
+
+---
+
+<!-- _class: section-header -->
+
+## Teil 2: MixUp vs. Synthetischer Regressor
+
+---
+
+### 2.1 Synthetische Datengenerierung & Modelltraining
+
+- **Ziel:** Generierung semantisch konsistenter und grammatikalisch flüssiger Zwischenstufen (`0.25`, `0.50`, `0.75`) mit `FlensGen-GPT-OSS-120B`.
+- **Erzeugte Datensätze:**
+  - **LH-Eval:** `lebenshilfe_dataset_with_steps.json` (245 Samples)
+  - **Haupt-Korpus:** `corpus_final_with_steps.json` (7.380 Samples)
+- **Modelltraining:**
+  - Trainierte `BiLSTMRegressor` auf ausgeflachten Text-Target-Paaren.
+  - Validation MSE erreichte Minimum von **`0.0401`** in Epoche 9.
+
+---
+
+<!-- _class: split -->
+
+### 2.2 Lernkurve: Synthetischer BiLSTM Regressor
+
+![Lernkurve Synthetisch](img/analysis/synthetic_bilstm_learning_curve.png)
+
+---
+
+### 2.3 Systematischer Vergleich: MixUp vs. Synthetisches LLM-Modell
+
+Evaluation auf dem exakt selben Test-Set (Lebenshilfe mit 5 Stufen):
+
+| Metrik  | MixUp-Modell (Variante D) | Synthetisches LLM-Modell | Gewinn durch Synthetik-Ansatz |
+| :------ | :-----------------------: | :----------------------: | :---------------------------: |
+| **MSE** |         `0.1388`          |       **`0.0786`**       |          **-43,4 %**          |
+| **MAE** |         `0.3079`          |       **`0.1816`**       |          **-41,0 %**          |
+
+**Bias?**
+
+---
+
+<!-- _class: split -->
+
+### 2.4 Boxplot- & Regressions-Vergleich
+
+![Boxplot Vergleich](img/analysis/compare_boxplots_mixup_vs_synthetic.png)
+
+---
+
+### 2.5 Diskussion: MixUp vs. Synthetische Daten
+
+- **Fairness der Evaluation:**
+  - Die Evaluation auf dem Lebenshilfe (LH) Testset mit synthetischen Schritten ist für das Synthetik-Modell besonders vorteilhaft. Grund hierfür ist, dass dieses Testset nach demselben Prinzip/Ablauf wie die Trainingsdaten des synthetischen Metrik-Modells generiert wurde.
+- **Datenvolumen & Vielfalt:**
+  - Führt der Synthetik-Ansatz durch die Zwischenschritte zu mehr Daten als MixUp?
+
+---
+
+### 2.6 Input-Längen-Problematik bei Metrik-Modellen
+
+- **Das Problem:** Bei den Metrik-Modellen sind die ursprünglichen Artikel häufig länger als das maximale Input-Limit des Embedding-Modells.
+- **Ist das ein kritisches Problem?**
+  - Vermutlich **nicht**, da eine Komplexitätsmetrik vor allem Satzstruktur und syntaktische Muster lernen soll, welche über den gesamten Artikel hinweg meist hinreichend konstant und homogen sind.
+- **Einfluss der Kontextlänge (Jina Embeddings):**
+  - Tests mit verschiedenen Kontextlängen bei Jina Embeddings zeigten: Die Leistung steigt mit mehr Kontextlänge zwar leicht an, stagniert aber frühzeitig.
+
+---
+
+<!-- _class: split -->
+
+### 2.7 Visualisierung: Kontextlänge & Längenverteilung
+
+<div class="column-left">
+
+**Längenverteilung der Artikel:**
+
+![Artikellängenverteilung](img/analysis/article_length_distribution.png)
+
+</div>
+
+<div class="column-right">
+
+**Jina-Kontextvergleich:**
+
+![Jina-Kontextvergleich](img/analysis/jina_context_comparison.png)
+
+</div>
+
+---
+
+<!-- _class: section-header -->
+
+## Teil 3: Übersetzungsmodell: Seq2Seq SFT & DPO
+
+---
+
+<!-- _class: split -->
+
+### 3.4 DPO-Workflow (Direct Preference Optimization)
+
+<div class="column-left">
+
+- **Schritt 1 (Pre-training):**
+  - Ist im mt5-Basismodell bereits abgeschlossen und nicht Teil dieser Arbeit.
+- **Schritt 2 (SFT):**
+  - Supervised Fine-Tuning des Basismodells auf den ausgerichteten Absatzpaaren.
+- **Schritt 3 (DPO):**
+  - Direkte Optimierung des Modells anhand der Präferenzdaten, bewertet durch das Metrik-Modell als Reward.
+
+</div>
+
+<div class="column-right">
+
+![DPO Workflow](img/presentation/dpo_diagram_modified.jpg)
+
+<p class="hint">Quelle: <a href="https://medium.com/@lmpo/direct-preference-optimization-a-novel-approach-to-language-model-alignment-1f829d4ac306">Medium</a></p>
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### 3.1 Pipeline-Design & Trainingsschritte
+
+<div class="column-left">
+
+- **Basismodell:** `google/mt5-small` (~300M Parameter).
+- **Trainingsdaten:** 1.471 ausgerichtete Absatzpaare (85 % Train / 15 % Val).
+- **Out-of-Domain-Test:** LH-Datensatz
+- **Phase 1:** Supervised Fine-Tuning (SFT) mittels standardmäßigem Cross-Entropy-Loss.
+- **Phase 2 & 3:** Generierung von Kandidaten und Bewertung über einen kombinierten (Composite) Reward:
+  $$R = 0.5 \cdot R_{\text{style}} + 0.5 \cdot R_{\text{sem}}$$
+- **Phase 4:** Direct Preference Optimization (DPO).
+- **Problem mit den Inputlängen?**
+
+</div>
+
+<div class="column-right">
+
+![Übersetzungspipeline height:380px](img/analysis/translation_pipeline_mermaid.svg)
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### 3.2 SFT-Loss-Kurven (Overfitting-Check)
+
+<div class="column-left">
+
+- **Trainingsverlauf über 10 Epochen:**
+  - Sehr steiler Abfall des Loss-Werts in den ersten beiden Epochen.
+- **Validation Loss:**
+  - **Kein Overfitting:** Die Validation-Loss-Werte steigen noch nicht wieder an, es könnten also noch mehr Epochen trainiert werden.
+
+</div>
+
+<div class="column-right">
+
+![SFT-Loss-Kurven](img/analysis/sft_loss_curves.png)
+
+</div>
+
+---
+
+### 3.3 DPO-Trainingsstatus
+
+- **Optimierungen gegen GPU-VRAM OOM (8 GB VRAM):**
+  1. Offloading von SBERT und BiLSTM-Regressor auf die **CPU** (VRAM-Ersparnis >1 GB).
+  2. Reduktion der DPO-Batch-Größe auf `batch_size = 2`.
+- **Status:** DPO-Training läuft aktuell. Ergebnisse des Tunings und der finalen Übersetzungsevaluierung folgen im nächsten Meilenstein.
