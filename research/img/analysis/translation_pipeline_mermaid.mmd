@@ -1,0 +1,14 @@
+graph TD
+    A[AS/LS Absatz-Paare] --> B(Phase 1: Supervised Fine-Tuning SFT)
+    B --> C{SFT Baseline Modell}
+    C --> D(Phase 2: Kandidaten-Generierung)
+    D --> E(Phase 3: Composite Reward Scoring)
+    E --> F(Phase 4: Direct Preference Optimization DPO)
+    F --> G[DPO Finales Übersetzungsmodell]
+    
+    subgraph Reward Scoring
+        E1[MixUp Regressor R_style]
+        E2[SBERT Cosine R_sem]
+        E1 & E2 --> E3[Composite Reward: 0.5*R_style + 0.5*R_sem]
+    end
+    E3 --> E
