@@ -19,9 +19,19 @@ sentence-transformers
 sentencepiece
 protobuf
 huggingface_hub
+tiktoken
+
+# LLM APIs
+openai
+
+# File parsing (docx, rtf, odt)
+python-docx
+striprtf
+odfpy
 
 # PyTorch with CUDA 12.1 support (for Windows/Linux GPU acceleration)
 --extra-index-url https://download.pytorch.org/whl/cu121
 torch
 torchvision
 torchaudio
+
