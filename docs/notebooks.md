@@ -9,11 +9,11 @@ Diese Dokumentation beschreibt die Jupyter Notebooks im Ordner `notebooks/` sowi
 ### 1. Satz-Klassifikator trainieren (`1_train_sentence_model.ipynb`)
 Dieses Notebook trainiert ein rekurrentes neuronales Netz (Bidirectional LSTM) auf **Satzebene**, um zwischen alltagssprachlichen (AS) und leichtsprachlichen (LS) Sätzen zu klassifizieren.
 * **Wesentliche Schritte:**
-  1. **Daten laden & filtern:** Liest `results/information_loss_analysis_cleaned.csv` und filtert nach einem konfigurierbaren Bereich semantischer Ähnlichkeit (z.B. $0.8 \leq \text{Similarity} \leq 0.98$), um qualitativ schlechte Alignments auszuschließen.
+  1. **Daten laden & filtern:** Liest `data/analysis/information_loss_analysis_cleaned.csv` und filtert nach einem konfigurierbaren Bereich semantischer Ähnlichkeit (z.B. $0.8 \leq \text{Similarity} \leq 0.98$), um qualitativ schlechte Alignments auszuschließen.
   2. **Tokenisierung & Satzsplitting:** Zerlegt Artikel mittels SpaCy in Sätze und extrahiert Wörter (unter Filterung von Satzlängen $< 3$).
   3. **Klassen-Balancierung:** Da LS-Texte oft in deutlich mehr Sätze aufgeteilt sind als AS-Texte, führt das Notebook ein Random Under-Sampling auf Satzebene durch, um eine 50:50-Verteilung zu erzielen.
   4. **Modellarchitektur:** Definiert ein `BiLSTMClassifier` mit einem Embedding-Layer, einem bidirektionalen LSTM-Layer, Dropout ($0.3$) und einem finalen fully-connected Layer zur binären Klassifikation.
-  5. **Training & Validierung:** Trainiert das Modell über 20 Epochen unter Speicherung des besten Validierungs-Modells (`results/lstm_baseline_sim_0.80_to_0.98.pt`).
+  5. **Training & Validierung:** Trainiert das Modell über 20 Epochen unter Speicherung des besten Validierungs-Modells (`results/models/lstm_baseline_sim_0.80_to_0.98.pt`).
   6. **Metriken:** Berechnet Genauigkeit, Balanced Accuracy, F1-Score und gibt eine Konfusionsmatrix aus.
 
 ### 2. Artikel-Klassifikator trainieren (`2_train_article_model.ipynb`)
@@ -21,7 +21,7 @@ Dieses Notebook trainiert ein BiLSTM auf **Artikelebene**, um ganze Texte als Al
 * **Wesentliche Unterschiede zum Satz-Klassifikator:**
   - Höheres Sequenzlimit (`MAX_SEQ_LEN = 512` statt 100), um ganze Artikel abzudecken.
   - Kleinere Batch-Größe (`BATCH_SIZE = 32` statt 64) zur Vermeidung von Out-of-Memory-Fehlern.
-  - Das Modell wird über 30 Epochen trainiert und speichert das Ergebnis als `results/lstm_article_sim_0.80_to_0.98.pt`.
+  - Das Modell wird über 30 Epochen trainiert und speichert das Ergebnis als `results/models/lstm_article_sim_0.80_to_0.98.pt`.
   - Untersucht die Leistung bei der Vorhersage ganzer Textblöcke.
 
 ### 3. Mixup-Dataloader & Verteilungstest (`3_mixup_dataloader_test.ipynb`)

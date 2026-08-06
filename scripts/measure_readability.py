@@ -40,8 +40,8 @@ def calculate_metrics(text):
     }
 
 def main():
-    input_dir = "results/corpus_final"
-    output_file = "results/readability_analysis.csv"
+    input_dir = "data/corpus/final"
+    output_file = "data/analysis/readability_analysis.csv"
     
     # Ensure results directory exists
     os.makedirs("results", exist_ok=True)

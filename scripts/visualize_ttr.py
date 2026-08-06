@@ -69,6 +69,6 @@ def visualize_ttr(csv_path, output_dir):
     print(f"Reduktion: {((overall_as - overall_ls) / overall_as * 100):.1f}%")
 
 if __name__ == "__main__":
-    CSV_PATH = "results/ttr_analysis.csv"
+    CSV_PATH = "data/analysis/ttr_analysis.csv"
     OUTPUT_DIR = "research/img/analysis"
     visualize_ttr(CSV_PATH, OUTPUT_DIR)

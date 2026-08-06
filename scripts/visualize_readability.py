@@ -4,7 +4,7 @@ import seaborn as sns
 import os
 
 def main():
-    input_file = "results/readability_analysis.csv"
+    input_file = "data/analysis/readability_analysis.csv"
     if not os.path.exists(input_file):
         print(f"Error: {input_file} not found. Run measure_readability.py first.")
         return

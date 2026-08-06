@@ -4,9 +4,9 @@ import pandas as pd
 from tqdm import tqdm
 
 # Configuration
-ANALYSIS_CSV = "results/information_loss_analysis_cleaned.csv"
-SOURCE_DIR = "results/corpus"
-OUTPUT_DIR = "results/corpus_cleaned"
+ANALYSIS_CSV = "data/analysis/information_loss_analysis_cleaned.csv"
+SOURCE_DIR = "data/corpus/raw"
+OUTPUT_DIR = "data/corpus/cleaned"
 SIM_MIN = 0.60
 SIM_MAX = 0.99
 MIN_LS_TOKENS = 10

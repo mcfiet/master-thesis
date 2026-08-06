@@ -7,7 +7,7 @@
 ## 2. Variante B mit zyklischer Lernrate (Cyclic LR)
 
 - **Notebook:** `notebooks/3_mixup_dataloader_test_getitem_cyclic.ipynb`
-- **Modellgewichte:** `results/bilstm_mixup_regression_getitem_cyclic.pt`
+- **Modellgewichte:** `results/models/bilstm_mixup_regression_getitem_cyclic.pt`
 
 ### 2.1. Grafische Auswertung & Detail-Analyse
 

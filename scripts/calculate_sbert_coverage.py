@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Konfiguration
-INPUT_CSV = "results/information_loss_analysis.csv"
+INPUT_CSV = "data/analysis/information_loss_analysis.csv"
 MAX_SBERT_LENGTH = 512
 
 def calculate_coverage_stats():

@@ -56,7 +56,7 @@ _Hinweis:_ Hierfür muss die VPN-Verbindung (Cisco AnyConnect) aktiv sein, da di
 
 ## Ergebnisse des Testlaufs (Ollama / LLaMA 3)
 
-Wir haben das Skript für einen Testlauf gestartet. Das Skript hat erfolgreich die drei Stufen `0.25`, `0.50` und `0.75` generiert und in [lebenshilfe_dataset_with_steps.json](file:///Users/fietescheel/Documents/Master%20Thesis/results/lebenshilfe_dataset_with_steps.json) eingetragen.
+Wir haben das Skript für einen Testlauf gestartet. Das Skript hat erfolgreich die drei Stufen `0.25`, `0.50` und `0.75` generiert und in [lebenshilfe_dataset_with_steps.json](file:///Users/fietescheel/Documents/Master%20Thesis/data/lebenshilfe/lebenshilfe_dataset_with_steps.json) eingetragen.
 
 ### Auszug der generierten Stufen für den ersten Artikel:
 

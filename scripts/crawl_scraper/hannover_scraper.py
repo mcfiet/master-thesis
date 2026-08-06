@@ -62,7 +62,7 @@ def crawl_hannover():
     queue = [base_url]
     aligned_pairs = []
     
-    output_file = "results/aligned_urls/hannover_aligned_urls.json"
+    output_file = "data/corpus/aligned_urls/hannover_aligned_urls.json"
     import os
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     

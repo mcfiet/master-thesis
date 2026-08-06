@@ -13,9 +13,9 @@ import numpy as np
 from tqdm import tqdm
 
 # --- CONFIGURATION ---
-DATASET_PATH = "results/lebenshilfe_dataset_no_paragraphs.json" 
-MODEL_PATH = "results/lstm_baseline_sim_0.80_to_0.98.pt"
-VOCAB_SOURCE_CSV = "results/information_loss_analysis_cleaned.csv"
+DATASET_PATH = "data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json" 
+MODEL_PATH = "results/models/lstm_baseline_sim_0.80_to_0.98.pt"
+VOCAB_SOURCE_CSV = "data/analysis/information_loss_analysis_cleaned.csv"
 VOCAB_SIM_RANGE = (0.8, 0.98)
 
 MAX_SEQ_LEN = 100

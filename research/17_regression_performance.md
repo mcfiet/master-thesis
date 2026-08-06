@@ -51,4 +51,4 @@ Bei der Evaluation der vier Modelle auf dem ungesehenen Lebenshilfe-Testset fall
 ---
 
 ### Zukünftige Optimierungsschritte (Backlog)
-* **Lebenshilfe Evaluation:** Testen des trainierten Regressors auf dem externen Lebenshilfe-Testset (`results/lebenshilfe_dataset_no_paragraphs.json`), um zu sehen, ob das Modell auf reiner Einfacher Sprache ($\lambda \approx 1.0$) und Alltagssprache ($\lambda \approx 0.0$) verlässliche Ergebnisse liefert.
+* **Lebenshilfe Evaluation:** Testen des trainierten Regressors auf dem externen Lebenshilfe-Testset (`data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json`), um zu sehen, ob das Modell auf reiner Einfacher Sprache ($\lambda \approx 1.0$) und Alltagssprache ($\lambda \approx 0.0$) verlässliche Ergebnisse liefert.

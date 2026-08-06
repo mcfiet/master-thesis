@@ -116,13 +116,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--input",
         type=Path,
-        default=Path("results/lebenshilfe_dataset.json"),
+        default=Path("data/lebenshilfe/lebenshilfe_dataset.json"),
         help="Input JSON file containing paired LS and AS articles.",
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("results/lebenshilfe_dataset_with_steps.json"),
+        default=Path("data/lebenshilfe/lebenshilfe_dataset_with_steps.json"),
         help="Output JSON file with intermediate generated steps.",
     )
     parser.add_argument(

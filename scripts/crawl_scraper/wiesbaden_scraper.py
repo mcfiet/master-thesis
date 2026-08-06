@@ -93,7 +93,7 @@ def check_for_ls_toggle(url):
 
 def main():
     sitemap_index = "https://www.wiesbaden.de/sitemap.xml"
-    output_file = "results/aligned_urls/wiesbaden_aligned_urls.json"
+    output_file = "data/corpus/aligned_urls/wiesbaden_aligned_urls.json"
     import os
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
 

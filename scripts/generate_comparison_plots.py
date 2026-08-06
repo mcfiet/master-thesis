@@ -14,11 +14,11 @@ from scipy.stats import pearsonr, spearmanr
 sns.set_theme(style="whitegrid")
 
 # Paths
-LH_WITH_STEPS_PATH = "results/lebenshilfe_dataset_with_steps.json"
-MIXUP_MODEL_PATH = "results/bilstm_mixup_regression_hybrid_cyclic.pt"
-MIXUP_VOCAB_PATH = "results/mixup_vocab.json"
-SYNTHETIC_MODEL_PATH = "results/bilstm_synthetic_regression.pt"
-SYNTHETIC_VOCAB_PATH = "results/synthetic_vocab.json"
+LH_WITH_STEPS_PATH = "data/lebenshilfe/lebenshilfe_dataset_with_steps.json"
+MIXUP_MODEL_PATH = "results/models/bilstm_mixup_regression_hybrid_cyclic.pt"
+MIXUP_VOCAB_PATH = "data/vocabs/mixup_vocab.json"
+SYNTHETIC_MODEL_PATH = "results/models/bilstm_synthetic_regression.pt"
+SYNTHETIC_VOCAB_PATH = "data/vocabs/synthetic_vocab.json"
 IMG_DIR = "research/img/analysis"
 
 os.makedirs(IMG_DIR, exist_ok=True)

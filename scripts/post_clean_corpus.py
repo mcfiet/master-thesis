@@ -4,8 +4,8 @@ import re
 from tqdm import tqdm
 
 # Configuration
-INPUT_DIR = "results/corpus_cleaned"
-OUTPUT_DIR = "results/corpus_final"
+INPUT_DIR = "data/corpus/cleaned"
+OUTPUT_DIR = "data/corpus/final"
 
 MONTHS = r"(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)"
 

@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # Paths
-INPUT_CSV = "results/information_loss_analysis.csv"
-OUTPUT_MD = "results/outlier_review.md"
+INPUT_CSV = "data/analysis/information_loss_analysis.csv"
+OUTPUT_MD = "results/reports/outlier_review.md"
 
 def generate_report():
     if not os.path.exists(INPUT_CSV):

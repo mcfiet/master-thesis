@@ -11,8 +11,8 @@ Für die Generierung semantisch konsistenter und grammatikalisch flüssiger Zwis
 * **Modell:** `FlensGen-GPT-OSS-120B` (über VPN-Zugang)
 * **Ziel-Stufen:** `0.25` (Nahe an Leichter Sprache), `0.50` (Einfache Sprache), `0.75` (Nahe an Alltagssprache)
 * **Erzeugte Datensätze:**
-  1. **Lebenshilfe-Evaluierungsset:** [`lebenshilfe_dataset_with_steps.json`](file:///Users/fietescheel/Documents/Master%20Thesis/results/lebenshilfe_dataset_with_steps.json) (49 Artikelpaare $\times$ 5 Stufen = 245 Samples)
-  2. **Haupt-Trainingskorpus (Web-Daten):** [`corpus_final_with_steps.json`](file:///Users/fietescheel/Documents/Master%20Thesis/results/corpus_final_with_steps.json) (1.476 Artikelpaare $\times$ 5 Stufen = 7.380 Samples)
+  1. **Lebenshilfe-Evaluierungsset:** [`lebenshilfe_dataset_with_steps.json`](file:///Users/fietescheel/Documents/Master%20Thesis/data/lebenshilfe/lebenshilfe_dataset_with_steps.json) (49 Artikelpaare $\times$ 5 Stufen = 245 Samples)
+  2. **Haupt-Trainingskorpus (Web-Daten):** [`corpus_final_with_steps.json`](file:///Users/fietescheel/Documents/Master%20Thesis/data/corpus/final_with_steps.json) (1.476 Artikelpaare $\times$ 5 Stufen = 7.380 Samples)
 
 ---
 

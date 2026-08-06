@@ -156,7 +156,7 @@ Die statistische Überprüfung ergab eine Korrelation (Pearson) zwischen der **T
 
 ### 3.5 Manuelle Auditierung der Extremwerte & Korpus-Bereinigung
 
-Um sicherzustellen, dass die gemessenen Ähnlichkeitswerte tatsächlich auf sprachliche Vereinfachung und nicht auf technische Fehler zurückzuführen sind, wurden die fünf Artikelpaare mit der niedrigsten und der höchsten semantischen Ähnlichkeit (basierend auf dem Jina-Modell, 512 Tokens) manuell geprüft (`results/similarity_extremes.json`).
+Um sicherzustellen, dass die gemessenen Ähnlichkeitswerte tatsächlich auf sprachliche Vereinfachung und nicht auf technische Fehler zurückzuführen sind, wurden die fünf Artikelpaare mit der niedrigsten und der höchsten semantischen Ähnlichkeit (basierend auf dem Jina-Modell, 512 Tokens) manuell geprüft (`data/analysis/similarity_extremes.json`).
 
 **Erkenntnisse der Extremwerte (Low Similarity):**
 - **Alignment-Fehler:** Werte unter 0.4 deuten fast immer auf Fehler beim Scraping oder URL-Alignment hin. Ein Beispiel aus der *Apotheken Umschau*: Ein AS-Artikel über den "Amsler-Gitter Netzhaut-Check" wurde fälschlicherweise mit einem LS-Artikel über "Altersbedingte Makula-Degeneration" aligniert. Obwohl beide das Auge behandeln, sind es inhaltlich völlig verschiedene Texte (Ähnlichkeit: 0.27).
@@ -204,5 +204,5 @@ Neben der Semantik und den Entitäten wurden auch klassische linguistische Merkm
 ## 4. Zeitplan & Organisation
 - [x] Implementierung der verbesserten Metriken (Jina 8192 Tokens & Bidirektionales NER).
 - [x] Durchführung der re-evaluierten Analyse über das gesamte Korpus.
-- [ ] Manueller Check der Top/Bottom 5% Ähnlichkeits-Ausreißer (`results/similarity_extremes.json`).
+- [ ] Manueller Check der Top/Bottom 5% Ähnlichkeits-Ausreißer (`data/analysis/similarity_extremes.json`).
 - [ ] Vorbereitung der Ergebnisse für das Treffen mit den Betreuern.

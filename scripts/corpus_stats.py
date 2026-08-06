@@ -22,7 +22,7 @@ def count_sentences(text):
     sentences = re.split(r'[.!?](?:\s+|$)|(?:\n\s*\n)', text)
     return len([s for s in sentences if s.strip()])
 
-def analyze_corpus(corpus_dir="results/corpus", output_path="research/corpus_statistics.md"):
+def analyze_corpus(corpus_dir="data/corpus/raw", output_path="research/corpus_statistics.md"):
     files = glob.glob(os.path.join(corpus_dir, "*_articles.json"))
     
     overall_stats = {
@@ -130,7 +130,7 @@ def analyze_corpus(corpus_dir="results/corpus", output_path="research/corpus_sta
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_dir', default="results/corpus")
+    parser.add_argument('--input_dir', default="data/corpus/raw")
     parser.add_argument('--output_file', default="research/corpus_statistics.md")
     args = parser.parse_args()
     

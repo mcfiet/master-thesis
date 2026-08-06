@@ -84,7 +84,7 @@ Zusätzlich wurde eine **automatisierte Nachbereinigung (Post-Cleaning)** implem
 *   Die Lesbarkeit durch Korrektur fehlender Leerzeichen verbessert hat.
 *   Den Mediopunkt (`·`) zur Silbentrennung normalisiert (entfernt) hat, um die Kompatibilität mit Standard-Tokenisatoren zu gewährleisten.
 
-Damit liegt eine hochreine und inhaltlich konsistente Datenbasis vor, die unmittelbar für das Training von Simplification-Modellen genutzt werden kann. Der bereinigte Korpus befindet sich in `results/corpus_final/`.
+Damit liegt eine hochreine und inhaltlich konsistente Datenbasis vor, die unmittelbar für das Training von Simplification-Modellen genutzt werden kann. Der bereinigte Korpus befindet sich in `data/corpus/final/`.
 
 
 - Schauen in weiweit sich die Texte unterscheiden die verschiedene Ratios haben

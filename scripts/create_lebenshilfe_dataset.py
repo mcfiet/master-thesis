@@ -38,7 +38,7 @@ def extract_text(file_path):
         print(f"Error extracting {file_path}: {e}")
         return ""
 
-base_dir = 'data/texts_lebenshilfe'
+base_dir = 'data/lebenshilfe/texts_lebenshilfe'
 ls_dir = os.path.join(base_dir, 'ls')
 as_dir = os.path.join(base_dir, 'as')
 
@@ -137,7 +137,7 @@ for ls_f in ls_files:
                 "as_text": as_text
             })
 
-output_file = 'results/lebenshilfe_dataset.json'
+output_file = 'data/lebenshilfe/lebenshilfe_dataset.json'
 with open(output_file, 'w', encoding='utf-8') as f:
     json.dump(dataset, f, ensure_ascii=False, indent=2)
 

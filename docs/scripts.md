@@ -10,7 +10,7 @@ Die Web-Scraper arbeiten in einer zweistufigen Pipeline, um ein paralleles Korpu
 
 ### Stufe 1: Crawling & URL-Alignment (`scripts/crawl_scraper/`)
 Die Skripte in diesem Verzeichnis scannen die Ziel-Webseiten nach Artikeln in Leichter Sprache (LS) und suchen über Sprachwechsler oder Beitragslinks nach dem alltagssprachlichen Original (AS).
-* **Ausgabe:** `results/aligned_urls/<quelle>_aligned_urls.json`
+* **Ausgabe:** `data/corpus/aligned_urls/<quelle>_aligned_urls.json`
 * **Skripte:**
   - `apotheken_scraper.py`
   - `behindertenbeauftragter_scraper.py`
@@ -31,8 +31,8 @@ Die Skripte in diesem Verzeichnis scannen die Ziel-Webseiten nach Artikeln in Le
 
 ### Stufe 2: Content-Extraktion (`scripts/corpus_scrapers/`)
 Diese Skripte lesen die aus Stufe 1 generierten URL-Paare ein, laden die Webseiten herunter, extrahieren den bereinigten Fließtext (ohne Werbung, Header, Navigation, Sidebars und Footer) und zählen die Token.
-* **Eingabe:** `results/aligned_urls/<quelle>_aligned_urls.json`
-* **Ausgabe:** `results/corpus/<quelle>_articles.json`
+* **Eingabe:** `data/corpus/aligned_urls/<quelle>_aligned_urls.json`
+* **Ausgabe:** `data/corpus/raw/<quelle>_articles.json`
 * **Skripte:** Analog zur Stufe 1 benannt (z.B. `apotheken_scraper.py`).
 * **Ausführungsbeispiel:**
   ```bash
@@ -46,12 +46,12 @@ Diese Skripte lesen die aus Stufe 1 generierten URL-Paare ein, laden die Webseit
 ### `create_lebenshilfe_dataset.py`
 Verarbeitet lokale Dokumentdateien (`.docx`, `.rtf`, `.odt`) der Organisation *Lebenshilfe*.
 * **Funktionsweise:**
-  1. Liest Dokumente aus `data/texts_lebenshilfe/as` und `data/texts_lebenshilfe/ls`.
+  1. Liest Dokumente aus `data/lebenshilfe/texts_lebenshilfe/as` und `data/lebenshilfe/texts_lebenshilfe/ls`.
   2. Normalisiert Dateinamen zur automatischen Paarbildung.
   3. Nutzt eine manuelle Zuordnungsliste (`manual_matches`) für Dokumente mit stark abweichenden Dateinamen.
   4. Extrahiert den Text (RTF wird zu Text konvertiert, ODT und DOCX parst das Skript strukturiert).
-* **Eingabe-Verzeichnisse:** `data/texts_lebenshilfe/ls` und `data/texts_lebenshilfe/as`
-* **Ausgabe-Datei:** `results/lebenshilfe_dataset.json`
+* **Eingabe-Verzeichnisse:** `data/lebenshilfe/texts_lebenshilfe/ls` und `data/lebenshilfe/texts_lebenshilfe/as`
+* **Ausgabe-Datei:** `data/lebenshilfe/lebenshilfe_dataset.json`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/create_lebenshilfe_dataset.py
@@ -67,8 +67,8 @@ Filtert den Korpus, um Rauschen (schlecht gemappte Artikel, Platzhalter) zu elim
   - Semantische Ähnlichkeit (Jina 8192) zwischen $0.60$ und $0.99$.
   - Die leichtsprachliche Version muss mindestens 10 Wörter lang sein.
   - Ausschluss von "Lorem Ipsum"-Testtexten.
-* **Eingabe:** `results/information_loss_analysis_cleaned.csv` & `results/corpus/`
-* **Ausgabe:** `results/corpus_cleaned/` (enthält gefilterte `<quelle>_articles.json`)
+* **Eingabe:** `data/analysis/information_loss_analysis_cleaned.csv` & `data/corpus/raw/`
+* **Ausgabe:** `data/corpus/cleaned/` (enthält gefilterte `<quelle>_articles.json`)
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/clean_corpus.py
@@ -81,8 +81,8 @@ Führt kosmetische Bereinigungen und quellenspezifische Korrekturen am gefiltert
   - *BrandEins*: Entfernt Autorennamen und Datumszeilen am Textanfang (z.B. "März 2023.").
   - *MDR*: Entfernt Boilerplate-Footer ("Über dieses Thema berichtet der MDR auch...").
   - *Taz*: Entfernt verwaiste Bildunterschriften.
-* **Eingabe:** `results/corpus_cleaned/`
-* **Ausgabe:** `results/corpus_final/`
+* **Eingabe:** `data/corpus/cleaned/`
+* **Ausgabe:** `data/corpus/final/`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/post_clean_corpus.py
@@ -102,18 +102,18 @@ Berechnet semantische Ähnlichkeit und Named Entity Recognition (NER) Recall zwi
   - NER Recall AS $\to$ LS (Faktenerhalt) und LS $\to$ AS (Faktentreue).
   - POS-Ratios (Verhältnis von Nomen, Adjektiven, Verben, Konjunktionen).
 * **Argumente:**
-  - `--input_dir`: Standard: `results/corpus`
-  - `--output_csv`: Standard: `results/information_loss_analysis.csv`
+  - `--input_dir`: Standard: `data/corpus/raw`
+  - `--output_csv`: Standard: `data/analysis/information_loss_analysis.csv`
 * **Befehl (für finalen Korpus):**
   ```bash
   .venv/bin/python scripts/measure_information_loss.py \
-      --input_dir results/corpus_final \
-      --output_csv results/information_loss_analysis_cleaned.csv
+      --input_dir data/corpus/final \
+      --output_csv data/analysis/information_loss_analysis_cleaned.csv
   ```
 
 ### `info_loss_stats.py`
 Gibt statistische Kennzahlen (Mean, Median, Standardabweichung, Min/Max) der Tokenlängen aus.
-* **Eingabe:** `results/information_loss_analysis.csv`
+* **Eingabe:** `data/analysis/information_loss_analysis.csv`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/info_loss_stats.py
@@ -121,7 +121,7 @@ Gibt statistische Kennzahlen (Mean, Median, Standardabweichung, Min/Max) der Tok
 
 ### `calculate_sbert_coverage.py`
 Prüft, wie viele Artikel über das SBERT-Tokenlimit (512) hinausgehen und abgeschnitten werden würden.
-* **Eingabe:** `results/information_loss_analysis.csv`
+* **Eingabe:** `data/analysis/information_loss_analysis.csv`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/calculate_sbert_coverage.py
@@ -129,7 +129,7 @@ Prüft, wie viele Artikel über das SBERT-Tokenlimit (512) hinausgehen und abges
 
 ### `count_total_tokens.py`
 Zählt linguistische Tokens (mittels Regex `\w+|[^\w\s]`) über alle Roh-JSONs im Korpus.
-* **Eingabe:** `results/corpus/*.json`
+* **Eingabe:** `data/corpus/raw/*.json`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/count_total_tokens.py
@@ -137,8 +137,8 @@ Zählt linguistische Tokens (mittels Regex `\w+|[^\w\s]`) über alle Roh-JSONs i
 
 ### `generate_review_report.py`
 Erstellt einen Markdown-Report über Artikelpaare mit extremer semantischer Ähnlichkeit ($<0.6$ oder $>0.98$) zur manuellen Inspektion.
-* **Eingabe:** `results/information_loss_analysis.csv`
-* **Ausgabe:** `results/outlier_review.md`
+* **Eingabe:** `data/analysis/information_loss_analysis.csv`
+* **Ausgabe:** `results/reports/outlier_review.md`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/generate_review_report.py
@@ -151,19 +151,19 @@ Erstellt einen Markdown-Report über Artikelpaare mit extremer semantischer Ähn
 ### `corpus_stats.py`
 Generiert zusammenfassende Metriken für alle Quellen (Vocab-Größe, Token/Satz-Verhältnisse etc.).
 * **Argumente:**
-  - `--input_dir`: Standard: `results/corpus`
+  - `--input_dir`: Standard: `data/corpus/raw`
   - `--output_file`: Standard: `research/corpus_statistics.md`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/corpus_stats.py \
-      --input_dir results/corpus_final \
+      --input_dir data/corpus/final \
       --output_file research/corpus_statistics_cleaned.md
   ```
 
 ### `measure_readability.py`
 Errechnet Lesbarkeitsindizes für Deutsch (Flesch Reading Ease via Amstad-Formel, Wiener Sachtextformel, LIX).
-* **Eingabe-Pfad:** `results/corpus_final`
-* **Ausgabe-Pfad:** `results/readability_analysis.csv`
+* **Eingabe-Pfad:** `data/corpus/final`
+* **Ausgabe-Pfad:** `data/analysis/readability_analysis.csv`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/measure_readability.py
@@ -171,8 +171,8 @@ Errechnet Lesbarkeitsindizes für Deutsch (Flesch Reading Ease via Amstad-Formel
 
 ### `measure_ttr.py`
 Berechnet Type-Token-Ratio (TTR) und Moving Average Type-Token-Ratio (MATTR, Window=50) auf lemmatisierten Wörtern (ohne Satzzeichen).
-* **Eingabe-Pfad:** `results/corpus_final`
-* **Ausgabe-Pfad:** `results/ttr_analysis.csv`
+* **Eingabe-Pfad:** `data/corpus/final`
+* **Ausgabe-Pfad:** `data/analysis/ttr_analysis.csv`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/measure_ttr.py
@@ -186,8 +186,8 @@ Die Skripte prüfen die Performance trainierter PyTorch BiLSTM-Klassifikatoren (
 
 ### `evaluate_article_model.py`
 Prüft das Artikel-Klassifikationsmodell auf der Lebenshilfe-Testmenge.
-* **Eingabe-Datensatz:** `results/lebenshilfe_dataset_no_paragraphs.json`
-* **Modell-Pfad:** `results/lstm_article_sim_0.80_to_0.98.pt`
+* **Eingabe-Datensatz:** `data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json`
+* **Modell-Pfad:** `results/models/lstm_article_sim_0.80_to_0.98.pt`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/evaluate_article_model.py
@@ -195,8 +195,8 @@ Prüft das Artikel-Klassifikationsmodell auf der Lebenshilfe-Testmenge.
 
 ### `evaluate_sentence_model.py`
 Prüft den Klassifikator auf Satzebene.
-* **Eingabe-Datensatz:** `results/lebenshilfe_dataset_no_paragraphs.json`
-* **Modell-Pfad:** `results/lstm_baseline_sim_0.80_to_0.98.pt`
+* **Eingabe-Datensatz:** `data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json`
+* **Modell-Pfad:** `results/models/lstm_baseline_sim_0.80_to_0.98.pt`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/evaluate_sentence_model.py
@@ -216,8 +216,8 @@ Prüft den Klassifikator auf Satzebene.
 ### `generate_synthetic_regression_steps.py`
 Generiert Zwischenstufen (Standard: `0.25, 0.50, 0.75`) zwischen Leichter Sprache ($0.0$) und Alltagssprache ($1.0$) über ein OpenAI-kompatibles LLM API-Interface. Inkrementelles Schreiben verhindert Datenverluste bei Verbindungsabbrüchen.
 * **Argumente:**
-  * `--input`: Pfad zur Quelldatei (Standard: `results/lebenshilfe_dataset.json`)
-  * `--output`: Pfad zur Zieldatei (Standard: `results/lebenshilfe_dataset_with_steps.json`)
+  * `--input`: Pfad zur Quelldatei (Standard: `data/lebenshilfe/lebenshilfe_dataset.json`)
+  * `--output`: Pfad zur Zieldatei (Standard: `data/lebenshilfe/lebenshilfe_dataset_with_steps.json`)
   * `--url`: API-Endpunkt (Erforderlich)
   * `--model`: Name des LLMs (optional)
   * `--token`: Bearer Token zur Authentifizierung (optional)

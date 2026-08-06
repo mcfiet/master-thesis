@@ -192,7 +192,7 @@ def main():
         "pairs": aligned_pairs
     }
 
-    output_file = "results/aligned_urls/stuttgart_aligned_urls.json"
+    output_file = "data/corpus/aligned_urls/stuttgart_aligned_urls.json"
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=4)

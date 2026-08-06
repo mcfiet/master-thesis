@@ -14,7 +14,7 @@ Nach dem Training des BiLSTM-Klassifikators auf dem automatisiert erstellten Web
 Die Ausgangsdaten bestanden aus 98 unstrukturierten Textdokumenten (Word-Dateien `.docx`, `.doc`, sowie `.odt` und `.rtf`), die manuelle Übersetzungen in Leichte Sprache (LS) und deren alltagssprachliche (AS) Originale enthielten. 
 - **Sortierung & Zuordnung:** Durch ein automatisiertes Python-Skript (`create_lebenshilfe_dataset.py`) wurden die Dateinamen normalisiert (Entfernung von Tags wie "ILS", "Prüfer", "AD001"), um die zusammengehörigen AS- und LS-Paare zu matchen. Einige Paare mit stark abweichenden Dateinamen wurden manuell gemappt.
 - **Textextraktion:** Der Rohtext wurde mittels `pandoc` sowie python-spezifischer Bibliotheken (`python-docx`, `odfpy`, `striprtf`) aus den Dokumenten extrahiert.
-- **Ergebnis:** Es entstand ein bereinigter JSON-Datensatz (`results/lebenshilfe_dataset.json`) mit **49 verifizierten AS-LS-Artikelpaaren**.
+- **Ergebnis:** Es entstand ein bereinigter JSON-Datensatz (`data/lebenshilfe/lebenshilfe_dataset.json`) mit **49 verifizierten AS-LS-Artikelpaaren**.
 
 ### 2. Entwicklung einer universellen Evaluations-Pipeline
 Um dieses (und zukünftige) Datensätze zu testen, wurde ein generisches Jupyter Notebook (`notebooks/evaluate_model_on_dataset.ipynb`) erstellt.

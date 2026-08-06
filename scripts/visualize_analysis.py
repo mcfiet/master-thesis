@@ -5,7 +5,7 @@ import seaborn as sns
 import os
 
 # Configuration
-def create_visualizations(plots_to_run, output_dir="research/img/analysis", input_csv="results/information_loss_analysis.csv"):
+def create_visualizations(plots_to_run, output_dir="research/img/analysis", input_csv="data/analysis/information_loss_analysis.csv"):
     df = pd.read_csv(input_csv)
     
     # Ensure output directory exists
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--input_csv',
         type=str,
-        default="results/information_loss_analysis.csv",
+        default="data/analysis/information_loss_analysis.csv",
         help="Path to the input CSV file."
     )
     args = parser.parse_args()

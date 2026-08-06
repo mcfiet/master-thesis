@@ -5,8 +5,8 @@ Dieses Dokument dokumentiert die Erstellung des Text-Korpus für die Masterarbei
 ## Methodik
 
 Der Aufbau des Korpus erfolgte in zwei Hauptphasen:
-1.  **Alignment-Phase:** Identifizierung von URL-Paaren (Leichte Sprache <-> Alltagssprache) und Speicherung in `results/aligned_urls/`.
-2.  **Extraktions-Phase:** Gezielter Download der Inhalte basierend auf den URL-Paaren und Speicherung der bereinigten Texte in `results/corpus/`.
+1.  **Alignment-Phase:** Identifizierung von URL-Paaren (Leichte Sprache <-> Alltagssprache) und Speicherung in `data/corpus/aligned_urls/`.
+2.  **Extraktions-Phase:** Gezielter Download der Inhalte basierend auf den URL-Paaren und Speicherung der bereinigten Texte in `data/corpus/raw/`.
 
 ---
 

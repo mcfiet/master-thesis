@@ -8,10 +8,10 @@ import torch
 from collections import Counter
 
 # Configuration
-CORPUS_DIR = "results/corpus"
-OUTPUT_CSV = "results/information_loss_analysis.csv"
-OUTPUT_JSON = "results/information_loss_details.json"
-OUTPUT_EXTREMES = "results/similarity_extremes.json"
+CORPUS_DIR = "data/corpus/raw"
+OUTPUT_CSV = "data/analysis/information_loss_analysis.csv"
+OUTPUT_JSON = "data/analysis/information_loss_details.json"
+OUTPUT_EXTREMES = "data/analysis/similarity_extremes.json"
 SPACY_MODEL = "de_core_news_lg"
 SBERT_MODEL = "jinaai/jina-embeddings-v2-base-de"
 
@@ -205,8 +205,8 @@ def analyze_corpus():
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_dir', default="results/corpus")
-    parser.add_argument('--output_csv', default="results/information_loss_analysis.csv")
+    parser.add_argument('--input_dir', default="data/corpus/raw")
+    parser.add_argument('--output_csv', default="data/analysis/information_loss_analysis.csv")
     args = parser.parse_args()
     
     CORPUS_DIR = args.input_dir

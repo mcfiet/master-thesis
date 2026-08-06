@@ -10,9 +10,9 @@ Die Übersetzungs-Pipeline kombiniert ein Sequence-to-Sequence (Encoder-Decoder)
 
 ### A. Architektur & Datensatz
 - **Basismodell:** `google/mt5-small` (~300M Parameter) als recheneffizienter Proof-of-Concept.
-- **Trainingsdaten:** 1.471 aligned Absatz-Paare aus `results/corpus_final/`.
+- **Trainingsdaten:** 1.471 aligned Absatz-Paare aus `data/corpus/final/`.
   * *Split:* 85% Train (1.250 Paare) | 15% Validation (221 Paare).
-- **Out-of-Domain Testdatensatz:** Unabhängiger Lebenshilfe-Datensatz (`results/lebenshilfe_dataset.json`, 49 Artikel-Paare).
+- **Out-of-Domain Testdatensatz:** Unabhängiger Lebenshilfe-Datensatz (`data/lebenshilfe/lebenshilfe_dataset.json`, 49 Artikel-Paare).
 
 ### B. Trainingsphasen
 ```mermaid
@@ -80,7 +80,7 @@ Das Modell wird auf dem unabhängigen Out-of-Domain Lebenshilfe-Datensatz (49 Ar
 
 ## 3. Aktueller Entwicklungsstand (DPO)
 
-* Das SFT-Modell wurde nach 5 Epochen erfolgreich trainiert und als `../../results/best_sft_model_temp.pt` gesichert.
+* Das SFT-Modell wurde nach 5 Epochen erfolgreich trainiert und als `../../results/models/best_sft_model_temp.pt` gesichert.
 * Um CUDA Out of Memory (OOM) Errors auf der GPU (8 GB VRAM) zu verhindern, wird die DPO-Pipeline wie folgt optimiert:
   1. Offloading von SBERT und BiLSTM-Regressor auf die **CPU** (VRAM-Ersparnis: >1 GB).
   2. Absenken der Batch-Größe des DPO-Loaders auf `batch_size = 2`.

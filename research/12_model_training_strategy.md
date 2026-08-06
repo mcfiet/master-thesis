@@ -76,7 +76,7 @@ Um optimale Ergebnisse zu erzielen, unterscheiden wir in der Konfiguration zwisc
 
 ## 4. Ausführungsplan
 
-1.  **Datenvorbereitung:** Konvertierung des ausgerichteten Korpus (`results/corpus_final/`) in einen balancierten binären Klassifikationsdatensatz.
+1.  **Datenvorbereitung:** Konvertierung des ausgerichteten Korpus (`data/corpus/final/`) in einen balancierten binären Klassifikationsdatensatz.
 2.  **Baseline-Lauf:** Training der BiLSTM, um eine Untergrenze für die Performance festzulegen.
 3.  **Vollständiges Fine-Tuning:** Durchführung eines vollständigen Fine-Tunings von SBERT auf dem zusammengeführten Korpus.
 4.  **Evaluierung:** Verwendung von Balanced Accuracy, F1-Score und qualitativer Analyse von Fehlklassifikationen zur Bewertung der Modellleistung.
@@ -84,7 +84,7 @@ Um optimale Ergebnisse zu erzielen, unterscheiden wir in der Konfiguration zwisc
 
 ## 5. Erste Ergebnisse (Master-Thesis Korpus)
 
-Im ersten Durchlauf wurde die BiLSTM-Baseline auf dem aktuell vorliegenden Korpus (`results/corpus_final/`) trainiert, um eine empirische Basislinie für diese spezifischen Daten zu erhalten.
+Im ersten Durchlauf wurde die BiLSTM-Baseline auf dem aktuell vorliegenden Korpus (`data/corpus/final/`) trainiert, um eine empirische Basislinie für diese spezifischen Daten zu erhalten.
 
 ### 5.1 BiLSTM Baseline Ergebnisse
 
