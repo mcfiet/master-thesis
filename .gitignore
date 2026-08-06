@@ -29,3 +29,11 @@ ENV/
 # Python cache
 **/__pycache__/
 *.py[cod]
+
+
+# Lebenshilfe datasets and raw files
+data/lebenshilfe/
+data/texts_lebenshilfe/
+results/lebenshilfe_dataset.json
+results/lebenshilfe_dataset_no_paragraphs.json
+results/lebenshilfe_dataset_with_steps.json
