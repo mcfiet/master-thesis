@@ -12,6 +12,7 @@ numpy
 
 # Jupyter Server integration
 ipykernel
+ipywidgets
 
 # Hugging Face & Tokenizer support
 transformers
