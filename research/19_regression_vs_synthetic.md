@@ -6,7 +6,7 @@ In dieser Woche wurde die synthetische Generierung kontinuierlicher Sprachkomple
 
 ## 1. Synthetische Datengenerierung (LLM-Stufen)
 
-Für die Generierung semantisch konsistenter und grammatikalisch flüssiger Zwischenstufen wurde das Skript [`generate_synthetic_regression_steps.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/generate_synthetic_regression_steps.py) auf dem remote GPU-Server ausgeführt.
+Für die Generierung semantisch konsistenter und grammatikalisch flüssiger Zwischenstufen wurde das Skript [`generate_synthetic_regression_steps.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/modeling/generate_synthetic_regression_steps.py) auf dem remote GPU-Server ausgeführt.
 
 * **Modell:** `FlensGen-GPT-OSS-120B` (über VPN-Zugang)
 * **Ziel-Stufen:** `0.25` (Nahe an Leichter Sprache), `0.50` (Einfache Sprache), `0.75` (Nahe an Alltagssprache)

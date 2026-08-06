@@ -6,7 +6,7 @@
 
 ## 2. Metriken und Methodik
 
-Um den Informationsverlust strukturiert und mehrdimensional messbar zu machen, haben wir drei verschiedene NLP-Ansätze in unserem Analyse-Skript (`scripts/measure_information_loss.py`) implementiert. Hier wird genau erklärt, warum wir diese Ansätze gewählt haben und wie sie technisch umgesetzt wurden.
+Um den Informationsverlust strukturiert und mehrdimensional messbar zu machen, haben wir drei verschiedene NLP-Ansätze in unserem Analyse-Skript (`scripts/evaluation/measure_information_loss.py`) implementiert. Hier wird genau erklärt, warum wir diese Ansätze gewählt haben und wie sie technisch umgesetzt wurden.
 
 ### 2.1 Faktenerhalt via Named Entity Recognition (NER) Overlap
 - **Warum:** Leichte Sprache tendiert dazu, Details wie spezifische Namen, Orte oder konkrete Daten wegzulassen oder stark zu verallgemeinern. Die Messung von benannten Entitäten gibt uns eine harte, quantifizierbare Metrik für den Erhalt von "konkreten Fakten". Ein Text, der zwar den groben Sinn bewahrt, aber alle Eigennamen und Zahlen verliert, hat einen hohen Informationsverlust erlitten.

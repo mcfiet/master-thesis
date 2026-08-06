@@ -35,11 +35,11 @@ Das Skript wird über die virtuelle Python-Umgebung ausgeführt.
    ```
 3. Testlauf mit 1 Artikel durchführen:
    ```bash
-   .venv/bin/python scripts/generate_synthetic_regression_steps.py --url http://localhost:11434/v1/chat/completions --model llama3 --limit 1
+   .venv/bin/python scripts/modeling/generate_synthetic_regression_steps.py --url http://localhost:11434/v1/chat/completions --model llama3 --limit 1
    ```
 4. Gesamten Durchlauf starten:
    ```bash
-   .venv/bin/python scripts/generate_synthetic_regression_steps.py --url http://localhost:11434/v1/chat/completions --model llama3
+   .venv/bin/python scripts/modeling/generate_synthetic_regression_steps.py --url http://localhost:11434/v1/chat/completions --model llama3
    ```
 
 #### Remote-Ausführung (auf dem GPU-Server):
@@ -47,7 +47,7 @@ Das Skript wird über die virtuelle Python-Umgebung ausgeführt.
 Für die Ausführung mit dem großen Modell `FlensGen-GPT-OSS120B` auf dem Server:
 
 ```bash
-.venv/bin/python scripts/generate_synthetic_regression_steps.py --url http://193.175.188.202:8000/v1/chat/completions --model "FlensGen-GPT-OSS120B"
+.venv/bin/python scripts/modeling/generate_synthetic_regression_steps.py --url http://193.175.188.202:8000/v1/chat/completions --model "FlensGen-GPT-OSS120B"
 ```
 
 _Hinweis:_ Hierfür muss die VPN-Verbindung (Cisco AnyConnect) aktiv sein, da die IP-Adresse `193.175.188.202` im Hochschulnetzwerk liegt und von außen geblockt wird.
@@ -76,7 +76,7 @@ Bei der Auswertung des ersten Testlaufs sind folgende Punkte aufgefallen:
 1. **Mismatched Dataset-Paare in den Quelldaten (Kritisch):**
    - _Beobachtung:_ Der erste Artikel im Datensatz verknüpft fälschlicherweise das Dokument `ILS_CAU_Geologiemuseum` (Leichte Sprache) mit der Pressemitteilung `20241106-PM-Aktionstag-CAU und StK` (Alltagssprache).
    - _Problem:_ Das LLM erhält zwei völlig unterschiedliche Themen und entscheidet sich meist dafür, nur das AS-Thema (Inklusion) zu vereinfachen, wodurch der LS-Vergleichstext ignoriert wird.
-   - _Lösung:_ Die manuellen Zuordnungen in `scripts/create_lebenshilfe_dataset.py` (Zeile 67ff) müssen bereinigt und korrigiert werden.
+   - _Lösung:_ Die manuellen Zuordnungen in `scripts/preprocessing/create_lebenshilfe_dataset.py` (Zeile 67ff) müssen bereinigt und korrigiert werden.
 
 2. **Einleitende Floskeln des LLMs filtern:**
    - _Beobachtung:_ Das LLM fügt trotz gegenteiliger Instruktion am Anfang des Texts Sätze wie _"Hier ist der Text in Leichter Sprache auf der Ziel-Stufe 0.25:"_ hinzu.

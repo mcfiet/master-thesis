@@ -85,7 +85,7 @@ def analyze_corpus(corpus_dir="data/corpus/raw", output_path="research/corpus_st
     md_content = [
         "# Corpus Statistics Overview",
         "",
-        "Diese Datei wird automatisch durch das Skript `scripts/corpus_stats.py` generiert. Sie enthält die zusammenfassenden Statistiken für alle Quellen im Korpus, aufgeschlüsselt nach Leichter Sprache (LS) und Alltagssprache (AS).",
+        "Diese Datei wird automatisch durch das Skript `scripts/evaluation/corpus_stats.py` generiert. Sie enthält die zusammenfassenden Statistiken für alle Quellen im Korpus, aufgeschlüsselt nach Leichter Sprache (LS) und Alltagssprache (AS).",
         "Die Spalte 'Tokens' verwendet nun `tiktoken` (cl100k_base), was der tatsächlichen Token-Anzahl für LLMs (z.B. GPT-4) entspricht.",
         "",
         "| Source | Pairs | Words (LS) | Words (AS) | Tokens (LS) | Tokens (AS) | Sentences (LS) | Sentences (AS) | Vocab (LS) | Vocab (AS) | TTR (LS) | TTR (AS) | W/S (LS) | W/S (AS) |",

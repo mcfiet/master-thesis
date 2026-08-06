@@ -26,9 +26,12 @@ Das Projekt ist wie folgt organisiert:
 │   ├── scripts.md                 # Detaillierte Dokumentation aller Python-Skripte
 │   └── notebooks.md               # Detaillierte Dokumentation aller Jupyter Notebooks
 ├── scripts/
-│   ├── crawl_scraper/            # Stufe 1: Crawler zur URL-Findung und -Paarung
-│   ├── corpus_scrapers/          # Stufe 2: Scraper zum Herunterladen & Extrahieren von Texten
-│   └── *.py                      # Python-Skripte für Bereinigung, Metriken und Evaluierung
+│   ├── data_collection/          # Stufe 1 & 2: Crawler und Content-Extraction
+│   ├── preprocessing/            # Datenbereinigung und Datensatzerstellung
+│   ├── evaluation/               # Linguistische & semantische Metriken
+│   ├── modeling/                 # LLM-Synthese & Modellklassifikation
+│   ├── visualization/            # Generierung von Abbildungen
+│   └── README.md                 # Dokumentation der Skripte und Pipeline
 ├── results/
 │   ├── aligned_urls/             # Gefundene URL-Paare der Webseiten (.json)
 │   ├── corpus/                   # Roh-Scraping-Ergebnisse pro Quelle (.json)
@@ -88,15 +91,15 @@ Die Verarbeitung und Evaluierung der Daten läuft in mehreren aufeinanderfolgend
 
 ```mermaid
 graph TD
-    A[Stufe 1: crawl_scraper] -->|Findet URL-Paare| B[Stufe 2: corpus_scrapers]
+    A[data_collection/crawl_scraper] -->|Findet URL-Paare| B[data_collection/corpus_scrapers]
     B -->|Roh-Artikel extrahieren| C[data/corpus/raw/]
-    D[create_lebenshilfe_dataset.py] -->|Extrahiert lokale Docs| E[data/lebenshilfe/lebenshilfe_dataset.json]
-    C -->|Semantic Similarity berechnen| F[measure_information_loss.py]
-    F -->|Filterung auf Basis der Ähnlichkeit| G[clean_corpus.py]
-    G -->|Entfernung von Syllable-Separators & Boilerplate| H[post_clean_corpus.py]
+    D[preprocessing/create_lebenshilfe_dataset.py] -->|Extrahiert lokale Docs| E[data/lebenshilfe/lebenshilfe_dataset.json]
+    C -->|Semantic Similarity berechnen| F[evaluation/measure_information_loss.py]
+    F -->|Filterung auf Basis der Ähnlichkeit| G[preprocessing/clean_corpus.py]
+    G -->|Entfernung von Syllable-Separators & Boilerplate| H[preprocessing/post_clean_corpus.py]
     H -->|Endergebnis: finaler Korpus| I[data/corpus/final/]
-    I -->|Berechnung von Metriken| J[measure_readability.py & measure_ttr.py]
-    J -->|Generierung von Diagrammen| K[visualize_analysis.py / visualize_readability.py / visualize_ttr.py]
+    I -->|Berechnung von Metriken| J[evaluation/measure_readability.py & measure_ttr.py]
+    J -->|Generierung von Diagrammen| K[visualization/visualize_analysis.py / visualize_readability.py / visualize_ttr.py]
 ```
 
 ---
@@ -109,137 +112,137 @@ Führe alle Befehle aus dem Hauptverzeichnis des Projekts aus. Wenn die virtuell
 
 Die Erstellung des parallelen Web-Korpus erfolgt in zwei Schritten für jede der 12 Quellen (Apotheken, Behindertenbeauftragter, BrandEins, Hamburg, Hannover, Köln, Main-Taunus, MDR, Sozialpolitik, Stuttgart, Taz, Wiesbaden):
 
-#### Stufe 1: URL Alignment (`scripts/crawl_scraper/`)
-Sucht auf den Webseiten nach Artikeln in Leichter Sprache (LS) und versucht, die entsprechende alltagssprachliche (AS) Version zu finden. Speichert die URL-Paare in `data/corpus/aligned_urls/<quelle>_aligned_urls.json`.
+#### Stufe 1: URL Alignment (`scripts/data_collection/crawl_scraper/`)
+Sucht auf den Webseiten nach Artikeln in Leichter Sprache (LS) und versucht, die entsprechende alltagssprachliche (AS) version zu finden. Speichert die URL-Paare in `data/corpus/aligned_urls/<quelle>_aligned_urls.json`.
 * **Beispiel-Befehl:**
   ```bash
-  .venv/bin/python scripts/crawl_scraper/apotheken_scraper.py
+  .venv/bin/python scripts/data_collection/crawl_scraper/apotheken_scraper.py
   ```
 
-#### Stufe 2: Content Extraction (`scripts/corpus_scrapers/`)
+#### Stufe 2: Content Extraction (`scripts/data_collection/corpus_scrapers/`)
 Liest die URL-Paare ein, lädt den HTML-Inhalt herunter, extrahiert den Fließtext (ohne Navigation/Footer) und zählt die Token. Speichert die Ergebnisse in `data/corpus/raw/<quelle>_articles.json`.
 * **Beispiel-Befehl:**
   ```bash
-  .venv/bin/python scripts/corpus_scrapers/apotheken_scraper.py
+  .venv/bin/python scripts/data_collection/corpus_scrapers/apotheken_scraper.py
   ```
 
 ---
 
 ### 2. Lokale Datensatzerstellung
 
-#### `create_lebenshilfe_dataset.py`
+#### `scripts/preprocessing/create_lebenshilfe_dataset.py`
 Sammelt Dokumente im Format `.docx`, `.rtf` und `.odt` aus `data/lebenshilfe/texts_lebenshilfe/as` und `data/lebenshilfe/texts_lebenshilfe/ls`, führt ein Alignment auf Basis von Dateinamen oder manuell definierten Mappings durch und speichert das Ergebnis.
 * **Input:** `data/lebenshilfe/texts_lebenshilfe/`
 * **Output:** `data/lebenshilfe/lebenshilfe_dataset.json`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/create_lebenshilfe_dataset.py
+  .venv/bin/python scripts/preprocessing/create_lebenshilfe_dataset.py
   ```
 
 ---
 
 ### 3. Datenbereinigung & Post-Processing
 
-#### `clean_corpus.py`
+#### `scripts/preprocessing/clean_corpus.py`
 Filtert den Roh-Korpus auf Basis der semantischen Ähnlichkeit (Jina 8192 score), der minimalen Token-Anzahl und filtert Platzhalter (Lorem Ipsum) aus.
 * **Filterregeln:** Ähnlichkeit $0.60 \leq \text{Sim} \leq 0.99$, Mindestlänge LS-Artikel: 10 Tokens.
 * **Input:** `data/analysis/information_loss_analysis_cleaned.csv` & `data/corpus/raw/`
 * **Output:** `data/corpus/cleaned/`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/clean_corpus.py
+  .venv/bin/python scripts/preprocessing/clean_corpus.py
   ```
 
-#### `post_clean_corpus.py`
+#### `scripts/preprocessing/post_clean_corpus.py`
 Führt quellenspezifische Textreinigungen durch (Entfernen von Mediopunkten `·`, Beseitigung von Datums- und Autorenzeilen bei *BrandEins*, Entfernen von Standard-Boilerplates bei *MDR* und *TAZ*).
 * **Input:** `data/corpus/cleaned/`
 * **Output:** `data/corpus/final/`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/post_clean_corpus.py
+  .venv/bin/python scripts/preprocessing/post_clean_corpus.py
   ```
 
 ---
 
 ### 4. Analyse von Informationsverlust & Ähnlichkeit
 
-#### `measure_information_loss.py`
+#### `scripts/evaluation/measure_information_loss.py`
 Nutzt ein deutsches SBERT-Modell (`jinaai/jina-embeddings-v2-base-de` mit 8192 Tokens Kontext) und SpaCy (`de_core_news_lg`), um die semantische Ähnlichkeit (Cosine Similarity) sowie bidirektionale Named Entity Recognition (NER) Recall-Werte zu berechnen.
 * **Argumente:**
   * `--input_dir`: Pfad zum Eingabeverzeichnis (Standard: `data/corpus/raw`)
   * `--output_csv`: Pfad für die Ergebnis-Tabelle (Standard: `data/analysis/information_loss_analysis.csv`)
 * **Befehl (für Rohdaten):**
   ```bash
-  .venv/bin/python scripts/measure_information_loss.py --input_dir data/corpus/raw --output_csv data/analysis/information_loss_analysis.csv
+  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/raw --output_csv data/analysis/information_loss_analysis.csv
   ```
 * **Befehl (für finalen Korpus):**
   ```bash
-  .venv/bin/python scripts/measure_information_loss.py --input_dir data/corpus/final --output_csv data/analysis/information_loss_analysis_cleaned.csv
+  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/final --output_csv data/analysis/information_loss_analysis_cleaned.csv
   ```
 
-#### `info_loss_stats.py`
+#### `scripts/evaluation/info_loss_stats.py`
 Gibt eine Zusammenfassung der Token-Statistiken (AS vs. LS) aus und vergleicht Mittelwert, Standardabweichung und Perzentile.
 * **Input:** `data/analysis/information_loss_analysis.csv`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/info_loss_stats.py
+  .venv/bin/python scripts/evaluation/info_loss_stats.py
   ```
 
-#### `calculate_sbert_coverage.py`
+#### `scripts/evaluation/calculate_sbert_coverage.py`
 Analysiert, wie viel Prozent des Textkorpus bei einer maximalen SBERT-Kontextlänge (z.B. 512 Tokens) vollständig erfasst oder abgeschnitten werden.
 * **Input:** `data/analysis/information_loss_analysis.csv`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/calculate_sbert_coverage.py
+  .venv/bin/python scripts/evaluation/calculate_sbert_coverage.py
   ```
 
-#### `count_total_tokens.py`
+#### `scripts/evaluation/count_total_tokens.py`
 Zählt die linguistischen Tokens (Wörter und Satzzeichen separat) über alle Rohdateien im Korpus und gibt eine tabellarische Zusammenfassung aus.
 * **Input:** `data/corpus/raw/*.json`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/count_total_tokens.py
+  .venv/bin/python scripts/evaluation/count_total_tokens.py
   ```
 
-#### `generate_review_report.py`
+#### `scripts/visualization/generate_review_report.py`
 Findet extreme Artikelpaare (Ähnlichkeit $< 0.6$ oder $> 0.98$) für ein manuelles Audit. So werden fehlerhafte Alignments (zu niedrige Ähnlichkeit) oder identische, nicht-übersetzte Texte (zu hohe Ähnlichkeit) leicht identifizierbar.
 * **Input:** `data/analysis/information_loss_analysis.csv`
 * **Output:** `results/reports/outlier_review.md`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/generate_review_report.py
+  .venv/bin/python scripts/visualization/generate_review_report.py
   ```
 
 ---
 
 ### 5. Qualitätsmetriken & Lesbarkeit
 
-#### `corpus_stats.py`
+#### `scripts/evaluation/corpus_stats.py`
 Generiert eine Markdown-Tabelle aller Quellen mit Paaren, Wörtern, Tokens (via `tiktoken`), Sätzen, Vokabulargrößen, Type-Token-Ratio (TTR) sowie Wörtern pro Satz.
 * **Argumente:**
   * `--input_dir`: Eingabepfad (Standard: `data/corpus/raw`)
   * `--output_file`: Ausgabepfad (Standard: `research/corpus_statistics.md`)
 * **Befehl (für finalen Korpus):**
   ```bash
-  .venv/bin/python scripts/corpus_stats.py --input_dir data/corpus/final --output_file research/corpus_statistics_cleaned.md
+  .venv/bin/python scripts/evaluation/corpus_stats.py --input_dir data/corpus/final --output_file research/corpus_statistics_cleaned.md
   ```
 
-#### `measure_readability.py`
+#### `scripts/evaluation/measure_readability.py`
 Analysiert die Lesbarkeit von alltagssprachlichen und leichtsprachlichen Texten anhand des Flesch Reading Ease (Amstad-Formel für Deutsch), der Wiener Sachtextformel und des LIX-Indexes.
 * **Input:** `data/corpus/final/`
 * **Output:** `data/analysis/readability_analysis.csv`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/measure_readability.py
+  .venv/bin/python scripts/evaluation/measure_readability.py
   ```
 
-#### `measure_ttr.py`
+#### `scripts/evaluation/measure_ttr.py`
 Berechnet die lexikalische Vielfalt mithilfe der klassischen Type-Token-Ratio (TTR) sowie der Moving Average Type-Token-Ratio (MATTR, Window=50) auf Basis lemmatisierter Wörter.
 * **Input:** `data/corpus/final/`
 * **Output:** `data/analysis/ttr_analysis.csv`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/measure_ttr.py
+  .venv/bin/python scripts/evaluation/measure_ttr.py
   ```
 
 ---
@@ -248,32 +251,32 @@ Berechnet die lexikalische Vielfalt mithilfe der klassischen Type-Token-Ratio (T
 
 Diese Skripte evaluieren trainierte Klassifikationsmodelle (BiLSTM), die darauf trainiert wurden, Alltagssprache (Klasse 0) von Leichter Sprache (Klasse 1) zu unterscheiden.
 
-#### `evaluate_article_model.py`
+#### `scripts/modeling/evaluate_article_model.py`
 Evaluiert das Artikel-Klassifikationsmodell auf dem Lebenshilfe-Testdatensatz.
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/evaluate_article_model.py
+  .venv/bin/python scripts/modeling/evaluate_article_model.py
   ```
 
-#### `evaluate_sentence_model.py`
+#### `scripts/modeling/evaluate_sentence_model.py`
 Evaluiert das Satz-Klassifikationsmodell auf dem Lebenshilfe-Testdatensatz auf Satzebene.
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/evaluate_sentence_model.py
+  .venv/bin/python scripts/modeling/evaluate_sentence_model.py
   ```
 
-#### `check_length_bias.py`
+#### `scripts/modeling/check_length_bias.py`
 Prüft, ob das Klassifikationsmodell einen systematischen Fehler (Bias) bezüglich der Textlänge aufweist – also längere Texte automatisch als alltagssprachlich und kürzere als leichtsprachlich einstuft.
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/check_length_bias.py
+  .venv/bin/python scripts/modeling/check_length_bias.py
   ```
 
 ---
 
 ### 7. Synthetische Datengenerierung (LLM)
 
-#### `generate_synthetic_regression_steps.py`
+#### `scripts/modeling/generate_synthetic_regression_steps.py`
 Generiert künstliche Zwischenstufen der Komplexität (z. B. 0.25, 0.50, 0.75) zwischen Leichter Sprache (0.0) und Alltagssprache (1.0) über eine OpenAI-kompatible API. Unterstützt inkrementelles Speichern und Fortsetzen.
 * **Argumente:**
   * `--input`: Eingabedatei mit Artikelpaaren (Standard: `data/lebenshilfe/lebenshilfe_dataset.json`)
@@ -285,7 +288,7 @@ Generiert künstliche Zwischenstufen der Komplexität (z. B. 0.25, 0.50, 0.75) z
   * `--limit`: Anzahl der zu verarbeitenden Artikel (hilfreich für Tests)
 * **Befehl (Beispiel):**
   ```bash
-  .venv/bin/python scripts/generate_synthetic_regression_steps.py \
+  .venv/bin/python scripts/modeling/generate_synthetic_regression_steps.py \
       --url http://193.175.180.196:8000/v1/chat/completions \
       --limit 1 \
       --token RrI6y403jAlUm8v \
@@ -298,23 +301,23 @@ Generiert künstliche Zwischenstufen der Komplexität (z. B. 0.25, 0.50, 0.75) z
 
 Generiert aus den CSV-Ergebnisdateien aussagekräftige Grafiken und Diagramme für die Arbeit und speichert sie im Ordner `research/img/analysis/`.
 
-#### `visualize_analysis.py`
+#### `scripts/visualization/visualize_analysis.py`
 Generiert Diagramme zur semantischen Ähnlichkeit, dem Einfluss der SBERT-Kontextlänge sowie NER-Vergleiche und Längenverteilungen.
 * **Befehl (alle Grafiken):**
   ```bash
-  .venv/bin/python scripts/visualize_analysis.py --plots all
+  .venv/bin/python scripts/visualization/visualize_analysis.py --plots all
   ```
 
-#### `visualize_readability.py`
+#### `scripts/visualization/visualize_readability.py`
 Erzeugt Vergleichs-Boxplots und Violinen-Diagramme für die Lesbarkeitsmetriken (Flesch, Wiener Sachtextformel, LIX) und aktualisiert den Bericht `research/readability_summary.md`.
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/visualize_readability.py
+  .venv/bin/python scripts/visualization/visualize_readability.py
   ```
 
-#### `visualize_ttr.py`
+#### `scripts/visualization/visualize_ttr.py`
 Visualisiert die Type-Token-Ratio-Analysen und MATTR-Mittelwerte der verschiedenen Quellen.
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/visualize_ttr.py
+  .venv/bin/python scripts/visualization/visualize_ttr.py
   ```
