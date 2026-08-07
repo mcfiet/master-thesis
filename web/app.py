@@ -1,4 +1,13 @@
 import os
+
+# Set working directory to repository root
+while not os.path.exists(".git"):
+    parent = os.path.dirname(os.getcwd())
+    if parent == os.getcwd():
+        break
+    os.chdir("..")
+print("FastAPI working directory set to:", os.getcwd())
+
 import json
 import torch
 import torch.nn as nn
@@ -67,12 +76,12 @@ tokenizers = {
 
 # Default Paths (from notebooks)
 PATHS = {
-    "mixup_model": "results/models/bilstm_mixup_regression_hybrid_cyclic.pt",
+    "mixup_model": "results/models/07-08/bilstm_mixup_regression_hybrid_cyclic.pt",
     "mixup_vocab": "data/vocabs/mixup_vocab.json",
-    "synthetic_model": "results/models/bilstm_synthetic_regression.pt",
+    "synthetic_model": "results/models/07-08/bilstm_synthetic_regression.pt",
     "synthetic_vocab": "data/vocabs/synthetic_vocab.json",
-    "translation_mixup": "results/models/seq2seq_dpo_mixup_translation_model",
-    "translation_synthetic": "results/models/seq2seq_dpo_synthetic_translation_model",
+    "translation_mixup": "results/models/07-08/seq2seq_dpo_mixup_translation_model",
+    "translation_synthetic": "results/models/07-08/seq2seq_dpo_synthetic_exact_translation_model",
     "translation_fallback": "facebook/mbart-large-50"
 }
 
@@ -235,7 +244,7 @@ def translate_text(req: TranslateRequest):
     with torch.no_grad():
         generated_ids = model.generate(
             **inputs,
-            max_length=256,
+            max_length=512,
             num_beams=4,
             length_penalty=1.0,
             repetition_penalty=2.5,
@@ -250,6 +259,16 @@ def translate_text(req: TranslateRequest):
     prefix = "Übersetze in Leichte Sprache: "
     if translated_text.startswith(prefix):
         translated_text = translated_text[len(prefix):]
+    
+    # Strip echoed source text if present
+    cleaned_req_text = req.text.strip()
+    if translated_text.startswith(cleaned_req_text):
+        translated_text = translated_text[len(cleaned_req_text):].strip()
+    elif translated_text.startswith(cleaned_req_text[:50]):  # fallback for partially truncated echoes
+        # Find where the echoed part ends and the translation begins
+        # Often the translation starts with a question like 'Was' or a new simple sentence
+        # Let's see if we can find a sensible boundary or just strip up to the length of the source text if it's mostly similar
+        pass
     
     # Calculate simplicity before and after
     source_mixup = predict_simplicity(req.text, "mixup")
