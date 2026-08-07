@@ -81,7 +81,7 @@ PATHS = {
     "synthetic_model": "results/models/07-08/bilstm_synthetic_regression.pt",
     "synthetic_vocab": "data/vocabs/synthetic_vocab.json",
     "translation_mixup": "results/models/07-08/seq2seq_dpo_mixup_translation_model",
-    "translation_synthetic": "results/models/07-08/seq2seq_dpo_synthetic_exact_translation_model",
+    "translation_synthetic": "results/models/07-08-03/seq2seq_dpo_synthetic_exact_translation_model_only_reward_model",
     "translation_fallback": "facebook/mbart-large-50"
 }
 
