@@ -1891,15 +1891,15 @@ $$\lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)} \
 
 <!-- _class: section-header -->
 
-## Woche 19
+## Week 19
 
 ---
 
-### Fokus der Woche: Thesis-Struktur, Evaluation des synthetischen Regressors & SFT des Übersetzungsmodells
+### Weekly Focus: Thesis Structure, Evaluation of the Synthetic Regressor & SFT of the Translation Model
 
-- **1. Master-Thesis-Struktur:** Gesamtübersicht der Kapitel 1-7.
-- **2. Synthetische LLM-basierte Regression vs. MixUp:** Evaluation auf dem Lebenshilfe (LH)-Datensatz, Diskussion über Datenvielfalt/-volumen sowie Analyse der Kontext-/Inputlänge (Jina-Kontextvergleich & Artikellängenverteilung).
-- **3. Übersetzungsmodell (Schritt 3):** Supervised Fine-Tuning (SFT)-Pipeline, Visualisierung der DPO-Architektur/des Workflows (Schritt 1 als vortrainiertes mt5 gestrichen) und DPO-Trainingsfortschritt.
+- **1. Master Thesis Structure:** Overall overview of Chapters 1-7.
+- **2. Synthetic LLM-based Regression vs. MixUp:** Evaluation on the Lebenshilfe (LH) dataset, discussion on data diversity/volume, and analysis of context/input length (Jina context comparison & article length distribution).
+- **3. Translation Model (Step 3):** Supervised Fine-Tuning (SFT) pipeline, visualization of the DPO architecture/workflow (Step 1 as pretrained mt5 removed) and DPO training progress.
 
 ---
 
@@ -1978,38 +1978,38 @@ $$\lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)} \
 
 <!-- _class: section-header -->
 
-## Teil 2: MixUp vs. Synthetischer Regressor
+## Part 2: MixUp vs. Synthetic Regressor
 
 ---
 
-### 2.1 Synthetische Datengenerierung & Modelltraining
+### 2.1 Synthetic Data Generation & Model Training
 
-- **Ziel:** Generierung semantisch konsistenter und grammatikalisch flüssiger Zwischenstufen (`0.25`, `0.50`, `0.75`) mit `FlensGen-GPT-OSS-120B`.
-- **Erzeugte Datensätze:**
-  - **LH-Eval:** `lebenshilfe_dataset_with_steps.json` (245 Samples)
-  - **Haupt-Korpus:** `corpus_final_with_steps.json` (7.380 Samples)
-- **Modelltraining:**
-  - Trainierte `BiLSTMRegressor` auf ausgeflachten Text-Target-Paaren.
-  - Validation MSE erreichte Minimum von **`0.0401`** in Epoche 9.
+- **Goal:** Generation of semantically consistent and grammatically fluent intermediate steps (`0.25`, `0.50`, `0.75`) with `FlensGen-GPT-OSS-120B`.
+- **Generated Datasets:**
+  - **LH-Eval:** `lebenshilfe_dataset_with_steps.json` (245 samples)
+  - **Main Corpus:** `corpus_final_with_steps.json` (7,380 samples)
+- **Model Training:**
+  - Trained `BiLSTMRegressor` on flattened text-target pairs.
+  - Validation MSE reached a minimum of **`0.0401`** in epoch 9.
 
 ---
 
 <!-- _class: split -->
 
-### 2.2 Lernkurve: Synthetischer BiLSTM Regressor
+### 2.2 Learning Curve: Synthetic BiLSTM Regressor
 
-![Lernkurve Synthetisch](img/analysis/synthetic_bilstm_learning_curve.png)
+![Learning Curve Synthetic](img/analysis/synthetic_bilstm_learning_curve.png)
 
 ---
 
-### 2.3 Systematischer Vergleich: MixUp vs. Synthetisches LLM-Modell
+### 2.3 Systematic Comparison: MixUp vs. Synthetic LLM Model
 
-Evaluation auf dem exakt selben Test-Set (Lebenshilfe mit 5 Stufen):
+Evaluation on the exact same test set (Lebenshilfe with 5 levels):
 
-| Metrik  | MixUp-Modell (Variante D) | Synthetisches LLM-Modell | Gewinn durch Synthetik-Ansatz |
-| :------ | :-----------------------: | :----------------------: | :---------------------------: |
-| **MSE** |         `0.1388`          |       **`0.0786`**       |          **-43,4 %**          |
-| **MAE** |         `0.3079`          |       **`0.1816`**       |          **-41,0 %**          |
+| Metric  | MixUp Model (Variant D) | Synthetic LLM Model | Gain from Synthetic Approach |
+| :------ | :---------------------: | :-----------------: | :--------------------------: |
+| **MSE** |        `0.1388`         |    **`0.0786`**     |         **-43.4 %**          |
+| **MAE** |        `0.3079`         |    **`0.1816`**     |         **-41.0 %**          |
 
 **Bias?**
 
@@ -2017,48 +2017,48 @@ Evaluation auf dem exakt selben Test-Set (Lebenshilfe mit 5 Stufen):
 
 <!-- _class: split -->
 
-### 2.4 Boxplot- & Regressions-Vergleich
+### 2.4 Boxplot & Regression Comparison
 
-![Boxplot Vergleich](img/analysis/compare_boxplots_mixup_vs_synthetic.png)
-
----
-
-### 2.5 Diskussion: MixUp vs. Synthetische Daten
-
-- **Fairness der Evaluation:**
-  - Die Evaluation auf dem Lebenshilfe (LH) Testset mit synthetischen Schritten ist für das Synthetik-Modell besonders vorteilhaft. Grund hierfür ist, dass dieses Testset nach demselben Prinzip/Ablauf wie die Trainingsdaten des synthetischen Metrik-Modells generiert wurde.
-- **Datenvolumen & Vielfalt:**
-  - Führt der Synthetik-Ansatz durch die Zwischenschritte zu mehr Daten als MixUp?
+![Boxplot Comparison](img/analysis/compare_boxplots_mixup_vs_synthetic.png)
 
 ---
 
-### 2.6 Input-Längen-Problematik bei Metrik-Modellen
+### 2.5 Discussion: MixUp vs. Synthetic Data
 
-- **Das Problem:** Bei den Metrik-Modellen sind die ursprünglichen Artikel häufig länger als das maximale Input-Limit des Embedding-Modells.
-- **Ist das ein kritisches Problem?**
-  - Vermutlich **nicht**, da eine Komplexitätsmetrik vor allem Satzstruktur und syntaktische Muster lernen soll, welche über den gesamten Artikel hinweg meist hinreichend konstant und homogen sind.
-- **Einfluss der Kontextlänge (Jina Embeddings):**
-  - Tests mit verschiedenen Kontextlängen bei Jina Embeddings zeigten: Die Leistung steigt mit mehr Kontextlänge zwar leicht an, stagniert aber frühzeitig.
+- **Evaluation Fairness:**
+  - Evaluating on the Lebenshilfe (LH) test set with synthetic steps is highly advantageous for the synthetic model. This is because this test set was generated using the same principle/process as the training data of the synthetic metric model.
+- **Data Volume & Diversity:**
+  - Does the synthetic approach lead to more data than MixUp through the intermediate steps?
+
+---
+
+### 2.6 Input Length Issues with Metric Models
+
+- **The Problem:** In the metric models, the original articles are often longer than the maximum input limit of the embedding model.
+- **Is this a critical issue?**
+  - Probably **not**, since a complexity metric is primarily supposed to learn sentence structure and syntactic patterns, which are usually sufficiently constant and homogeneous across the entire article.
+- **Influence of Context Length (Jina Embeddings):**
+  - Tests with different context lengths for Jina Embeddings showed: while performance increases slightly with greater context length, it saturates early.
 
 ---
 
 <!-- _class: split -->
 
-### 2.7 Visualisierung: Kontextlänge & Längenverteilung
+### 2.7 Visualization: Context Length & Length Distribution
 
 <div class="column-left">
 
-**Längenverteilung der Artikel:**
+**Length Distribution of Articles:**
 
-![Artikellängenverteilung](img/analysis/article_length_distribution.png)
+![Article Length Distribution](img/analysis/article_length_distribution.png)
 
 </div>
 
 <div class="column-right">
 
-**Jina-Kontextvergleich:**
+**Jina Context Comparison:**
 
-![Jina-Kontextvergleich](img/analysis/jina_context_comparison.png)
+![Jina Context Comparison](img/analysis/jina_context_comparison.png)
 
 </div>
 
@@ -2066,22 +2066,22 @@ Evaluation auf dem exakt selben Test-Set (Lebenshilfe mit 5 Stufen):
 
 <!-- _class: section-header -->
 
-## Teil 3: Übersetzungsmodell: Seq2Seq SFT & DPO
+## Part 3: Translation Model: Seq2Seq SFT & DPO
 
 ---
 
 <!-- _class: split -->
 
-### 3.4 DPO-Workflow (Direct Preference Optimization)
+### 3.4 DPO Workflow (Direct Preference Optimization)
 
 <div class="column-left">
 
-- **Schritt 1 (Pre-training):**
-  - Ist im mt5-Basismodell bereits abgeschlossen und nicht Teil dieser Arbeit.
-- **Schritt 2 (SFT):**
-  - Supervised Fine-Tuning des Basismodells auf den ausgerichteten Absatzpaaren.
-- **Schritt 3 (DPO):**
-  - Direkte Optimierung des Modells anhand der Präferenzdaten, bewertet durch das Metrik-Modell als Reward.
+- **Step 1 (Pre-training):**
+  - Already completed in the mt5 base model and is not part of this work.
+- **Step 2 (SFT):**
+  - Supervised Fine-Tuning of the base model on aligned paragraph pairs.
+- **Step 3 (DPO):**
+  - Direct optimization of the model based on preference data, evaluated by the metric model as a reward.
 
 </div>
 
@@ -2089,7 +2089,7 @@ Evaluation auf dem exakt selben Test-Set (Lebenshilfe mit 5 Stufen):
 
 ![DPO Workflow](img/presentation/dpo_diagram_modified.jpg)
 
-<p class="hint">Quelle: <a href="https://medium.com/@lmpo/direct-preference-optimization-a-novel-approach-to-language-model-alignment-1f829d4ac306">Medium</a></p>
+<p class="hint">Source: <a href="https://medium.com/@lmpo/direct-preference-optimization-a-novel-approach-to-language-model-alignment-1f829d4ac306">Medium</a></p>
 
 </div>
 
@@ -2097,24 +2097,24 @@ Evaluation auf dem exakt selben Test-Set (Lebenshilfe mit 5 Stufen):
 
 <!-- _class: split -->
 
-### 3.1 Pipeline-Design & Trainingsschritte
+### 3.1 Pipeline Design & Training Steps
 
 <div class="column-left">
 
-- **Basismodell:** `google/mt5-small` (~300M Parameter).
-- **Trainingsdaten:** 1.471 ausgerichtete Absatzpaare (85 % Train / 15 % Val).
-- **Out-of-Domain-Test:** LH-Datensatz
-- **Phase 1:** Supervised Fine-Tuning (SFT) mittels standardmäßigem Cross-Entropy-Loss.
-- **Phase 2 & 3:** Generierung von Kandidaten und Bewertung über einen kombinierten (Composite) Reward:
+- **Base Model:** `google/mt5-small` (~300M parameters).
+- **Training Data:** 1,471 aligned paragraph pairs (85% Train / 15% Val).
+- **Out-of-Domain Test:** LH dataset.
+- **Phase 1:** Supervised Fine-Tuning (SFT) using standard Cross-Entropy Loss.
+- **Phases 2 & 3:** Candidate generation and evaluation via a combined (Composite) Reward:
   $$R = 0.5 \cdot R_{\text{style}} + 0.5 \cdot R_{\text{sem}}$$
 - **Phase 4:** Direct Preference Optimization (DPO).
-- **Problem mit den Inputlängen?**
+- **Issue with input lengths?**
 
 </div>
 
 <div class="column-right">
 
-![Übersetzungspipeline height:380px](img/analysis/translation_pipeline_mermaid.svg)
+![Translation Pipeline height:380px](img/analysis/translation_pipeline_mermaid.svg)
 
 </div>
 
@@ -2122,28 +2122,28 @@ Evaluation auf dem exakt selben Test-Set (Lebenshilfe mit 5 Stufen):
 
 <!-- _class: split -->
 
-### 3.2 SFT-Loss-Kurven (Overfitting-Check)
+### 3.2 SFT Loss Curves (Overfitting Check)
 
 <div class="column-left">
 
-- **Trainingsverlauf über 10 Epochen:**
-  - Sehr steiler Abfall des Loss-Werts in den ersten beiden Epochen.
+- **Training Progress over 10 Epochs:**
+  - Very steep drop in loss values in the first two epochs.
 - **Validation Loss:**
-  - **Kein Overfitting:** Die Validation-Loss-Werte steigen noch nicht wieder an, es könnten also noch mehr Epochen trainiert werden.
+  - **No Overfitting:** Validation loss values are not yet rising again, so more epochs could still be trained.
 
 </div>
 
 <div class="column-right">
 
-![SFT-Loss-Kurven](img/analysis/sft_loss_curves.png)
+![SFT Loss Curves](img/analysis/sft_loss_curves.png)
 
 </div>
 
 ---
 
-### 3.3 DPO-Trainingsstatus
+### 3.3 DPO Training Status
 
-- **Optimierungen gegen GPU-VRAM OOM (8 GB VRAM):**
-  1. Offloading von SBERT und BiLSTM-Regressor auf die **CPU** (VRAM-Ersparnis >1 GB).
-  2. Reduktion der DPO-Batch-Größe auf `batch_size = 2`.
-- **Status:** DPO-Training läuft aktuell. Ergebnisse des Tunings und der finalen Übersetzungsevaluierung folgen im nächsten Meilenstein.
+- **Optimizations against GPU VRAM OOM (8 GB VRAM):**
+  1. Offloading of SBERT and BiLSTM regressor to the **CPU** (VRAM saving >1 GB).
+  2. Reduction of the DPO batch size to `batch_size = 2`.
+- **Status:** DPO training is currently running. Results of the tuning and the final translation evaluation will follow in the next milestone.
