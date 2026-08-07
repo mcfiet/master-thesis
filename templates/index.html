@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cockpit: Leichte Sprache Translation & Rating</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090a10;
+            --bg-card: rgba(22, 24, 40, 0.6);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --primary: #8b5cf6;
+            --primary-glow: rgba(139, 92, 246, 0.4);
+            --secondary: #ec4899;
+            --secondary-glow: rgba(236, 72, 153, 0.4);
+            --accent-cyan: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(9, 10, 16, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section h1 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: #fff;
+            -webkit-text-fill-color: initial;
+        }
+
+        .status-container {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-dot.active {
+            background-color: var(--success);
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        .status-dot.inactive {
+            background-color: var(--error);
+            box-shadow: 0 0 8px var(--error);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1400px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(139, 92, 246, 0.2);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.75rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 180px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .character-counter {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+            color: #fff;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            font-family: var(--font-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--primary-glow);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+        }
+
+        .selector-box {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem;
+            border-radius: 10px;
+            gap: 0.2rem;
+            width: fit-content;
+        }
+
+        .selector-option {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+
+        .selector-option.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .result-container {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .simplicity-gauge-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .gauge-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.25rem;
+            border-radius: 12px;
+            width: 48%;
+            text-align: center;
+        }
+
+        .circular-progress {
+            position: relative;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0deg, rgba(255, 255, 255, 0.05) 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 1s ease;
+        }
+
+        .circular-progress::before {
+            content: "";
+            position: absolute;
+            height: 84px;
+            width: 84px;
+            border-radius: 50%;
+            background-color: #111322;
+        }
+
+        .progress-value {
+            position: relative;
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .gauge-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .text-stats {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .text-stats span strong {
+            color: var(--text-primary);
+        }
+
+        .translation-compare {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .compare-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .compare-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .compare-box.active {
+            color: var(--text-primary);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .compare-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            width: fit-content;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-as {
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .badge-ls {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .delta-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .comparison-bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-bar-title {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .bar-container {
+            height: 12px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            position: relative;
+        }
+
+        .bar-source {
+            height: 100%;
+            background: var(--accent-cyan);
+            transition: width 0.5s ease;
+        }
+
+        .bar-delta {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.5s ease;
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-section">
+            <h1>Masterarbeit <span class="logo-badge">Cockpit</span></h1>
+        </div>
+        <div class="status-container">
+            <div class="status-item">
+                <span class="status-dot" id="status-mixup"></span>
+                <span>MixUp Regressor</span>
+            </div>
+            <div class="status-item">
+                <span class="status-dot" id="status-synthetic"></span>
+                <span>Synthetic Regressor</span>
+            </div>
+            <div class="status-item" id="device-badge">
+                <span style="font-weight:600;">Device:</span> <span id="device-name">CPU</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Evaluation Section -->
+        <div class="glass-card">
+            <h2>Linguistische Bewertung</h2>
+            <div class="input-group">
+                <label for="eval-input">Text zur Bewertung eingeben</label>
+                <textarea id="eval-input" placeholder="Geben Sie hier Ihren alltagssprachlichen oder leichtsprachlichen Text ein..."></textarea>
+                <div class="character-counter"><span id="char-count">0</span> Zeichen</div>
+            </div>
+            <div class="action-bar">
+                <button class="btn" id="btn-evaluate">
+                    <span>Text Bewerten</span>
+                </button>
+            </div>
+
+            <div class="result-container" id="eval-result" style="display: none;">
+                <h3 style="font-size: 0.95rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">Ergebnis der Einfachheits-Bewertung</h3>
+                <div class="simplicity-gauge-wrapper">
+                    <div class="gauge-card">
+                        <div class="circular-progress" id="progress-mixup">
+                            <span class="progress-value" id="val-mixup">0%</span>
+                        </div>
+                        <div class="gauge-title">MixUp-Modell</div>
+                    </div>
+                    <div class="gauge-card">
+                        <div class="circular-progress" id="progress-synthetic">
+                            <span class="progress-value" id="val-synthetic">0%</span>
+                        </div>
+                        <div class="gauge-title">Synthetisches Modell</div>
+                    </div>
+                </div>
+                <div class="text-stats">
+                    <span>Sätze: <strong id="stat-sents">0</strong></span>
+                    <span>Wörter: <strong id="stat-words">0</strong></span>
+                    <span>Ø Satzlänge: <strong id="stat-len">0</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Translation Section -->
+        <div class="glass-card">
+            <h2>Übersetzung in Leichte Sprache</h2>
+            <div class="input-group">
+                <label for="translate-input">Quelltext (Alltagssprache)</label>
+                <textarea id="translate-input" placeholder="Geben Sie hier den zu übersetzenden Text ein..."></textarea>
+            </div>
+            
+            <div class="action-bar" style="justify-content: space-between;">
+                <div class="input-group" style="flex-direction: row; align-items: center; gap: 1rem;">
+                    <label>Modellausrichtung:</label>
+                    <div class="selector-box">
+                        <div class="selector-option active" id="opt-mixup" onclick="selectModel('mixup')">MixUp Reward</div>
+                        <div class="selector-option" id="opt-synthetic" onclick="selectModel('synthetic')">Synthetic Reward</div>
+                    </div>
+                </div>
+                <button class="btn" id="btn-translate">
+                    <span>Übersetzen</span>
+                </button>
+            </div>
+
+            <!-- Loader -->
+            <div id="translate-loader" style="display:none; text-align:center; padding: 2rem;">
+                <div class="loading-spinner"></div>
+                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">Übersetzung wird generiert. Dies kann einen Moment dauern...</p>
+            </div>
+
+            <!-- Translation Results -->
+            <div class="translation-compare" id="translate-result" style="display:none;">
+                <div class="compare-row">
+                    <div class="compare-box">
+                        <div class="compare-badge badge-as">Alltagssprache</div>
+                        <div id="display-source"></div>
+                    </div>
+                    <div class="compare-box active">
+                        <div class="compare-badge badge-ls">Leichte Sprache</div>
+                        <div id="display-target" style="font-weight: 500;"></div>
+                    </div>
+                </div>
+
+                <!-- Simplicity Increase Bar -->
+                <div class="comparison-bar-wrapper">
+                    <div class="comparison-bar-title">
+                        <span>Erhöhung der Einfachheit (Modell: <span id="used-model-name"></span>)</span>
+                        <span class="delta-badge" id="delta-value">+0%</span>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-source" id="bar-source" style="width: 0%;"></div>
+                        <div class="bar-delta" id="bar-delta" style="width: 0%;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                        <span>Vorher: <strong id="source-score-pct">0%</strong></span>
+                        <span>Nachher: <strong id="target-score-pct">0%</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Master Thesis © 2026. Automatische Übersetzung und semantische Bewertung.</p>
+    </footer>
+
+    <script>
+        // Global State
+        let selectedModelType = 'mixup';
+
+        // Elements
+        const evalInput = document.getElementById('eval-input');
+        const charCount = document.getElementById('char-count');
+        const btnEvaluate = document.getElementById('btn-evaluate');
+        const evalResult = document.getElementById('eval-result');
+        const valMixup = document.getElementById('val-mixup');
+        const valSynthetic = document.getElementById('val-synthetic');
+        const progressMixup = document.getElementById('progress-mixup');
+        const progressSynthetic = document.getElementById('progress-synthetic');
+        
+        const translateInput = document.getElementById('translate-input');
+        const btnTranslate = document.getElementById('btn-translate');
+        const translateLoader = document.getElementById('translate-loader');
+        const translateResult = document.getElementById('translate-result');
+        const displaySource = document.getElementById('display-source');
+        const displayTarget = document.getElementById('display-target');
+        const usedModelName = document.getElementById('used-model-name');
+        const deltaValue = document.getElementById('delta-value');
+        const barSource = document.getElementById('bar-source');
+        const barDelta = document.getElementById('bar-delta');
+        const sourceScorePct = document.getElementById('source-score-pct');
+        const targetScorePct = document.getElementById('target-score-pct');
+
+        // Character counter
+        evalInput.addEventListener('input', () => {
+            charCount.textContent = evalInput.value.length;
+        });
+
+        // Model selector logic
+        function selectModel(type) {
+            selectedModelType = type;
+            document.getElementById('opt-mixup').classList.toggle('active', type === 'mixup');
+            document.getElementById('opt-synthetic').classList.toggle('active', type === 'synthetic');
+        }
+
+        // Fetch model status on startup
+        async function fetchStatus() {
+            try {
+                const res = await fetch('/api/status');
+                const data = await res.json();
+                
+                // Set status dots
+                const dotMixup = document.getElementById('status-mixup');
+                dotMixup.className = 'status-dot ' + (data.mixup_regressor.loaded ? 'active' : 'inactive');
+                
+                const dotSynthetic = document.getElementById('status-synthetic');
+                dotSynthetic.className = 'status-dot ' + (data.synthetic_regressor.loaded ? 'active' : 'inactive');
+                
+                // Device name
+                document.getElementById('device-name').textContent = data.device.toUpperCase();
+            } catch (err) {
+                console.error("Failed to fetch status:", err);
+            }
+        }
+
+        // Evaluate button handler
+        btnEvaluate.addEventListener('click', async () => {
+            const text = evalInput.value.trim();
+            if (!text) return;
+            
+            btnEvaluate.disabled = true;
+            btnEvaluate.innerHTML = '<div class="loading-spinner" style="width:14px; height:14px;"></div> <span style="margin-left: 5px;">Wird berechnet...</span>';
+            
+            try {
+                const res = await fetch('/api/evaluate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text })
+                });
+                
+                const data = await res.json();
+                
+                // Update stats
+                document.getElementById('stat-sents').textContent = data.stats.sentence_count;
+                document.getElementById('stat-words').textContent = data.stats.token_count;
+                document.getElementById('stat-len').textContent = data.stats.avg_sentence_length;
+                
+                // Update Gauges
+                const mixPct = Math.round(data.mixup_score * 100);
+                const synPct = Math.round(data.synthetic_score * 100);
+                
+                valMixup.textContent = mixPct + '%';
+                progressMixup.style.background = `conic-gradient(var(--primary) ${mixPct * 3.6}deg, rgba(255, 255, 255, 0.05) 0deg)`;
+                
+                valSynthetic.textContent = synPct + '%';
+                progressSynthetic.style.background = `conic-gradient(var(--accent-cyan) ${synPct * 3.6}deg, rgba(255, 255, 255, 0.05) 0deg)`;
+                
+                evalResult.style.display = 'flex';
+            } catch (err) {
+                console.error("Error evaluating:", err);
+            } finally {
+                btnEvaluate.disabled = false;
+                btnEvaluate.textContent = 'Text Bewerten';
+            }
+        });
+
+        // Translate button handler
+        btnTranslate.addEventListener('click', async () => {
+            const text = translateInput.value.trim();
+            if (!text) return;
+            
+            btnTranslate.disabled = true;
+            translateResult.style.display = 'none';
+            translateLoader.style.display = 'block';
+            
+            try {
+                const res = await fetch('/api/translate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text, model_type: selectedModelType })
+                });
+                
+                const data = await res.json();
+                
+                // Display translation
+                displaySource.textContent = text;
+                displayTarget.textContent = data.translation;
+                
+                // Get chosen simplicity metric based on selected selector model
+                const sScore = data.source_simplicity[selectedModelType];
+                const tScore = data.target_simplicity[selectedModelType];
+                
+                const sPct = Math.round(sScore * 100);
+                const tPct = Math.round(tScore * 100);
+                const delta = tPct - sPct;
+                
+                usedModelName.textContent = selectedModelType === 'mixup' ? 'MixUp' : 'Synthetic';
+                sourceScorePct.textContent = sPct + '%';
+                targetScorePct.textContent = tPct + '%';
+                
+                deltaValue.textContent = (delta >= 0 ? '+' : '') + delta + '%';
+                
+                barSource.style.width = sPct + '%';
+                barDelta.style.width = Math.max(0, delta) + '%';
+                
+                translateLoader.style.display = 'none';
+                translateResult.style.display = 'flex';
+            } catch (err) {
+                console.error("Error translating:", err);
+                translateLoader.style.display = 'none';
+            } finally {
+                btnTranslate.disabled = false;
+            }
+        });
+
+        // Initialize status on load
+        fetchStatus();
+    </script>
+</body>
+</html>
