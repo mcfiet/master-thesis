@@ -151,11 +151,8 @@ def predict_simplicity(text: str, model_type: str) -> float:
     with torch.no_grad():
         score = model(inp_tensor).item()
         
-    # Mixup outputs simplicity directly (1.0 = LS, 0.0 = AS), so return score.
-    # Synthetic outputs complexity (1.0 = AS, 0.0 = LS), so simplicity is 1.0 - score.
-    if model_type == "mixup":
-        return score
-    return 1.0 - score
+    # Both models now output simplicity directly (1.0 = LS, 0.0 = AS)
+    return score
 
 # Startup event
 @app.on_event("startup")
