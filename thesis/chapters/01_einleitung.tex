@@ -1,0 +1,65 @@
+\section{Problemstellung \& Motivation}
+\label{sec:problemstellung_motivation}
+
+\begin{tcolorbox}[boxrule=0pt,sharp corners,enhanced,borderline west={2pt}{0pt}{blue}]
+    \textbf{Für manche eine optionale Lesehilfe, für andere der einzige Zugang zu gesellschaftlicher Teilhabe.}
+\end{tcolorbox}
+
+Beim Thema Barrierefreiheit denken viele an physische Barrieren wie Rampen, Aufzüge oder automatische Türen. Durch die Digitalisierung und die Verlagerung von Dienstleistungen und Informationen ins Internet ist es damit jedoch nicht mehr getan. Barrierefreie Gestaltung betrifft zunehmend digitale Räume und insbesondere die Sprache, in der Informationen bereitgestellt werden.
+
+Menschen mit kognitiven Einschränkungen, Lernschwierigkeiten, geringer Lese- und Schreibkompetenz oder Deutsch als Zweitsprache werden durch komplexe Texte, bürokratische Fachsprache und verschachtelte Satzstrukturen vom Zugang zu grundlegenden Informationen und Dienstleistungen ausgeschlossen. Das Konzept der \textit{Leichten Sprache} (LS) bietet hierfür ein klar reglementiertes Regelwerk, um Texte durch Vereinfachung des Vokabulars und der Syntax verständlich zu machen. 
+
+Mit dem Inkrafttreten des Barrierefreiheitsstärkungsgesetzes (BFSG) in Deutschland sowie europäischen Richtlinien (wie der Web-Accessibility-Directive) wächst der rechtliche Druck auf öffentliche und private Akteure, Informationen auch in Leichter Sprache anzubieten. Die manuelle Übersetzung von Alltagssprache (AS) in Leichte Sprache (LS) durch menschliche Übersetzer ist jedoch extrem zeitintensiv, kostspielig und durch einen Mangel an Fachkräften limitiert.
+
+Hieraus ergibt sich ein dringender Forschungs- und Entwicklungsbedarf im Bereich der maschinellen Textvereinfachung. Bisherige neuronale Übersetzungsmodelle scheitern jedoch häufig an den spezifischen syntaktischen und strukturellen Besonderheiten der Leichten Sprache oder leiden unter dem Mangel an qualitativ hochwertigen, parallelen Trainingsdaten. Es bedarf daher systematischer Ansätze zur automatisierten Erstellung paralleler Korpora, robuster Metriken zur Komplexitätsbewertung und optimierter Trainingsstrategien.
+
+\section{Zielsetzung \& Forschungsfragen}
+\label{sec:zielsetzung_forschungsfragen}
+
+Ziel dieser Arbeit ist die Entwicklung, Optimierung und Evaluierung eines methodischen Frameworks zur automatisierten Übersetzung deutscher Alltagssprache in Leichte Sprache. Dies umfasst den gesamten Prozess von der automatisierten Datenakquise über die Bewertung von Sprachkomplexität bis hin zum Training und der Optimierung generativer Sprachmodelle.
+
+Im Zentrum dieser Arbeit steht die folgende übergreifende Leitfrage:
+
+\begin{tcolorbox}[boxrule=0pt,sharp corners,enhanced,borderline west={2pt}{0pt}{blue}]
+    \textbf{\large Wie lässt sich die automatische Übersetzung in Leichte Sprache (LS) durch die Kombination aus semantisch optimierten Korpora, strukturellen Klassifikatoren und zielgerichteten Trainingsstrategien systematisch verbessern und evaluieren?}
+\end{tcolorbox}
+
+Zur Beantwortung dieser Leitfrage werden drei zentrale Forschungsbereiche (Themenblöcke) untersucht:
+
+\begin{enumerate}
+    \item \textbf{Datenbasis \& Alignment (Themenblock 1):}
+    \begin{itemize}
+        \item \textit{FF 2.1:} Wie stark beeinträchtigt das 1:n-Satzalignment das Training von Sequenz-zu-Sequenz-Modellen und kann ein absatzweises Alignment semantische Einheiten besser wahren?
+        \item \textit{FF 2.2 \& 2.3:} Welcher Filterbereich der Kosinus-Ähnlichkeit bei parallelen Textpaaren liefert den qualitativen "`Sweet Spot"' für das Modelltraining und inwiefern helfen Long-Context Embeddings bei der Rauschreduktion?
+    \end{itemize}
+    
+    \item \textbf{Klassifikation \& Sprachkomplexität (Themenblock 2):}
+    \begin{itemize}
+        \item \textit{FF 3.1 \& 3.2:} Lässt sich Sprachkomplexität besser auf Satz- oder Dokumentenebene klassifizieren und wie gut generalisieren diese Klassifikatoren auf unabhängige, proprietäre Testdaten?
+        \item \textit{FF 3.3:} Wie lassen sich systematische Shortcuts (Längen-, Layout- und typografische Biases) in den Klassifikationsmodellen empirisch ausschließen?
+    \end{itemize}
+
+    \item \textbf{Übersetzung \& Reward-Guided Fine-Tuning (Themenblock 3):}
+    \begin{itemize}
+        \item \textit{FF 5.3 \& 5.4:} Inwiefern verbessert ein mit Reinforcement Learning (DPO) optimiertes Übersetzungsmodell unter Nutzung eines Komplexitätsklassifikators als Reward-Funktion die Einhaltung formaler Regeln im Vergleich zu reinem Supervised Fine-Tuning (SFT)?
+    \end{itemize}
+\end{enumerate}
+
+\section{Aufbau der Arbeit}
+\label{sec:aufbau_der_arbeit}
+
+Die vorliegende Arbeit folgt einer logischen Struktur, die sich an den drei Säulen des entwickelten Übersetzungssystems orientiert:
+
+\begin{itemize}
+    \item \textbf{Kapitel 2 (Theoretical Background \& Stand der Forschung)} legt das theoretische Fundament. Es erörtert die sprachlichen Regeln der Leichten Sprache, den aktuellen Stand der maschinellen Übersetzung (Seq2Seq, LLMs, LoRA-Tuning) sowie Methoden zur automatisierten Evaluation.
+    
+    \item \textbf{Kapitel 3 (Datenbasis \& Korpus-Erstellung)} beschreibt die erste Stufe der Pipeline. Im Fokus steht das Crawling paralleler Texte, die Behandlung des 1:n-Alignment-Problems und die qualitative Filterung mittels semantischer Embeddings.
+    
+    \item \textbf{Kapitel 4 (Metrik \& Bewerten von Sprachkomplexität)} widmet sich der zweiten Stufe: der Entwicklung von Klassifikationsmodellen (BiLSTM vs. SBERT) und dem Entwurf einer \textit{Continuous MixUp Regression} zur stufenlosen Komplexitätsbewertung.
+    
+    \item \textbf{Kapitel 5 (Modellierung der Übersetzung \& Fine-Tuning)} stellt das eigentliche Übersetzungsmodell vor. Hierbei werden die Implementierung des Supervised Fine-Tunings (SFT) sowie das Reward-Guided Fine-Tuning (DPO) zur Regeleinhaltung evaluiert.
+    
+    \item \textbf{Kapitel 6 (Diskussion \& Gesamtevaluation)} führt die Ergebnisse der drei Stufen zusammen, beantwortet systematisch die aufgeworfenen Forschungsfragen und beleuchtet kritisch die Systemrestriktionen sowie Fragen zur Faktentreue.
+    
+    \item \textbf{Kapitel 7 (Fazit \& Ausblick)} fasst die Kernergebnisse der Arbeit zusammen und gibt einen Ausblick auf zukünftige Forschungsarbeiten und praktische Anwendungsfelder.
+\end{itemize}

@@ -1,0 +1,53 @@
+\documentclass[a4paper, ngerman, 12pt]{scrreprt}
+
+\input{options/packages.tex}
+
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\providecommand{\apashortdash}{-}
+
+\input{options/code.tex}
+
+\addbibresource{bibliography.bib}
+
+
+\begin{document}
+
+\title{Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für ein Framework zur neuronalen Textvereinfachung in leichte Sprache} % Title
+\author{Fiete Scheel} % Author
+\date{\today} % Date
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+% \chapter{Basic Elemente}
+% \input{chapters/example_chapter.tex}
+
+\chapter{Einleitung}
+\input{chapters/01_einleitung.tex}
+
+\chapter{Theoretical Background \& Stand der Forschung}
+\input{chapters/02_background.tex}
+
+\chapter{Themenblock 1: Datenbasis \& Korpus-Erstellung}
+\input{chapters/03_datenbasis.tex}
+
+\chapter{Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}
+\input{chapters/04_metrik.tex}
+
+\chapter{Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}
+\input{chapters/05_modellierung.tex}
+
+\chapter{Diskussion \& Gesamtevaluation}
+\input{chapters/06_diskussion.tex}
+
+\chapter{Fazit \& Ausblick}
+\input{chapters/07_fazit.tex}
+
+
+\printbibliography
+
+\input{chapters/99_appendix.tex}
+
+\end{document}
