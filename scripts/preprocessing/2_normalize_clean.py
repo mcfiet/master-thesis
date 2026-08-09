@@ -48,13 +48,85 @@ def clean_taz(text):
     text = re.sub(r'Das ist [A-ZÄÖÜ][a-z]+(\s[A-ZÄÖÜ][a-z]+)? vor seinem Laden:(\s)?', '', text)
     return text.strip()
 
+def clean_apotheken(text):
+    """
+    Removes typical apotheken website boilerplate & Hildesheim university signatures.
+    Only targets specific footer boilerplate structures to avoid over-cleaning.
+    """
+    # Remove search tool & question boilerplates: "Welche Frage zu... Unser Tool durchsucht unsere Artikel..."
+    text = re.sub(r'Welche Frage zu.*?Unser Tool durchsucht unsere Artikel.*?(\s\w+)?$', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'MEHR ANZEIGEN\s+\w+$', '', text, flags=re.IGNORECASE)
+    
+    # Remove Hildesheim Forschungsstelle credits (only as full credits paragraph, not single words)
+    text = re.sub(r'Die Texte haben wir zusammen mit der Forschungsstelle Leichte Sprache geschrieben.*?Universität Hildesheim(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    
+    # Remove the specific link warning block (only when it contains the link warning context)
+    text = re.sub(r'Wo bekommen Sie noch mehr Informationen\?\s*', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Hier finden Sie mehr Informationen über.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Achtung\s*:\s*Dieser Link führt aus unserem Einfache-Sprache-Angebot heraus.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Die Informationen sind dann nicht mehr in Einfacher Sprache.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Sie wollen noch mehr über.*?lesen\?.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    
+    # Remove standard physician consultation advice (only as a complete disclaimer paragraph)
+    text = re.sub(r'Achtung:\s*In diesem Text finden Sie nur allgemeine Informationen.*?Rufen Sie in der Arztpraxis an(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Wichtig:\s*Sie möchten Heilpflanzen gegen Ihre Beschwerden nehmen.*?In der Apotheke erfahren Sie.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+
+    # Clean double whitespaces and strip
+    return re.sub(r'\s+', ' ', text).strip()
+
+def clean_taz_hamburg_credits(text):
+    """
+    Removes specific translator, writer, and checker credits (e.g. from TAZ leicht or Hamburg).
+    """
+    # Remove TAZ translator signature
+    text = re.sub(r'Übertragung in Leichte Sprache von:.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Prüfung von:.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Erschienen am:\s*\d+\.\s*[A-Za-z]+\s+\d{4}', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Die Infos in diesem leichten Text kommen aus.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+
+    # Remove Hamburg / Lisi GmbH credits
+    text = re.sub(r'.*?haben den Text geschrieben und gelesen.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'.*?haben den Text geprüft.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'.*?hat die Bilder gemalt.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Der Text ist geschrieben und geprüft nach den Regeln von.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Der Text ist vom Büro für Leichte Sprache.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+
+    return re.sub(r'\s+', ' ', text).strip()
+
+def clean_hannover(text):
+    """
+    Removes Hanover boilerplate lines.
+    """
+    # Remove 'Klicken Sie' links and references
+    text = re.sub(r'Klicken Sie hier.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Hier finden Sie.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Mehr Informationen in Alltagssprache.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Achtung:.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    
+    return re.sub(r'\s+', ' ', text).strip()
+
+def clean_stuttgart_koeln(text):
+    """
+    Removes signature credits, illustrators and translators from Stuttgart and Cologne articles.
+    """
+    # Remove Stefan Albers illustrator signatures
+    text = re.sub(r'Die Bilder im Text sind von.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Illustrator Stefan Albers.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Atelier Fleetinsel.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    
+    # Remove Inclusion Europe logo information
+    text = re.sub(r'© European Easy-to-Read Logo.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Mehr Informationen im Internet unter.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'Internetseite von Inclusion Europe.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+
+    return re.sub(r'\s+', ' ', text).strip()
+
 def clean_stuttgart(text):
     """
     Cleans Stuttgart specific artifacts like repeated titles.
     """
-    # Example: "Lebenspartnerschaft - Umwandlung in eine Ehe beantragen Umwandlung in eine Ehe beantragen"
-    # This is harder to catch without knowing the exact repetition, but we can try to find identical consecutive phrases.
-    # For now, let's keep it simple and target common duplicates if possible.
+    # First apply general illustrator signatures
+    text = clean_stuttgart_koeln(text)
     return text
 
 def normalize_mediopunkt(text):
@@ -94,6 +166,17 @@ def post_clean_corpus():
                 ls_text = clean_mdr(ls_text)
             elif source == "taz":
                 ls_text = clean_taz(ls_text)
+                ls_text = clean_taz_hamburg_credits(ls_text)
+            elif source == "hamburg":
+                ls_text = clean_taz_hamburg_credits(ls_text)
+            elif source == "apotheken":
+                ls_text = clean_apotheken(ls_text)
+            elif source == "hannover":
+                ls_text = clean_hannover(ls_text)
+            elif source == "stuttgart":
+                ls_text = clean_stuttgart(ls_text)
+            elif source == "koeln":
+                ls_text = clean_stuttgart_koeln(ls_text)
             
             pair["ls_text"] = ls_text
             
