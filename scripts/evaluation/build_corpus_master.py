@@ -14,6 +14,18 @@ import json
 import glob
 import re
 import argparse
+import sys
+import types
+
+# Hack to prevent ModuleNotFoundError: No module named 'transformers.onnx' in newer transformers versions
+try:
+    import transformers.onnx
+except ModuleNotFoundError:
+    import sys
+    mock_onnx = types.ModuleType("transformers.onnx")
+    mock_onnx.OnnxConfig = object
+    sys.modules["transformers.onnx"] = mock_onnx
+
 import pandas as pd
 import spacy
 import textstat
@@ -116,7 +128,24 @@ def main():
 
     # 1. Load Models
     print(f"Loading SpaCy model: {args.spacy_model}...")
-    nlp = spacy.load(args.spacy_model)
+    try:
+        nlp = spacy.load(args.spacy_model)
+    except OSError:
+        print(f"Warning: Could not load '{args.spacy_model}'. Trying fallback models...")
+        fallback_models = ["de_core_news_md", "de_core_news_sm"]
+        nlp = None
+        for model in fallback_models:
+            try:
+                print(f"Trying to load {model}...")
+                nlp = spacy.load(model)
+                print(f"Successfully loaded {model} as fallback.")
+                break
+            except OSError:
+                continue
+        if nlp is None:
+            print(f"\nError: Could not load any German SpaCy model ({args.spacy_model} or fallbacks).")
+            print("Please download a model using: python -m spacy download de_core_news_lg (oder de_core_news_sm)")
+            return
     nlp.max_length = 2000000
     
     print(f"Loading SentenceTransformer: {args.sbert_model}...")

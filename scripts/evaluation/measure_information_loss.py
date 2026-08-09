@@ -2,6 +2,17 @@ import json
 import os
 import pandas as pd
 import spacy
+import sys
+import types
+
+# Hack to prevent ModuleNotFoundError: No module named 'transformers.onnx' in newer transformers versions
+try:
+    import transformers.onnx
+except ModuleNotFoundError:
+    mock_onnx = types.ModuleType("transformers.onnx")
+    mock_onnx.OnnxConfig = object
+    sys.modules["transformers.onnx"] = mock_onnx
+
 from sentence_transformers import SentenceTransformer, util
 from tqdm import tqdm
 import torch
