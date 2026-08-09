@@ -5,8 +5,8 @@ from tqdm import tqdm
 
 # Configuration
 ANALYSIS_CSV = "data/analysis/information_loss_analysis_cleaned.csv"
-SOURCE_DIR = "data/corpus/raw"
-OUTPUT_DIR = "data/corpus/cleaned"
+SOURCE_DIR = "data/corpus/2_raw_scraped"
+OUTPUT_DIR = "data/corpus/3_filtered_similarity"
 SIM_MIN = 0.60
 SIM_MAX = 0.99
 MIN_LS_TOKENS = 10

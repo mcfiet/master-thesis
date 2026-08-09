@@ -3,7 +3,7 @@ import os
 import glob
 
 def summarize():
-    corpus_dir = "data/corpus/raw"
+    corpus_dir = "data/corpus/2_raw_scraped"
     files = glob.glob(os.path.join(corpus_dir, "*_articles.json"))
     
     total_pairs = 0

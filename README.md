@@ -1,8 +1,8 @@
-# Master Thesis: Automatische Übersetzung in Leichte Sprache
+# Masterarbeit: Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für ein Framework zur neuronalen Textvereinfachung in leichte Sprache
 
-Dieses Repository enthält den Quellcode, die Web-Scraper, die Analyse-Tools sowie die Machine-Learning-Pipelines für die Masterarbeit **"Automatische Übersetzung in Leichte Sprache"**.
+Dieses Repository enthält den Quellcode, die Web-Scraper, die Analyse-Tools, die Machine-Learning-Pipelines, die Web-Applikation (FastAPI/Next.js) sowie die LaTeX-Dokumentation für die Masterarbeit von **Fiete Scheel**.
 
-Das Ziel dieser Arbeit ist die Entwicklung und Evaluierung eines Übersetzungssystems, das deutsche Alltagssprache (AS) in Leichte Sprache (LS) übersetzt. Der Fokus liegt dabei auf der Erstellung eines robusten, parallelen Textkorpus, der SBERT-basierten Bewertung semantischer Ähnlichkeit zur Qualitätsmessung und der anschließenden Optimierung von Übersetzungsmodellen.
+Das Ziel dieser Arbeit ist die Entwicklung und Evaluierung eines Übersetzungssystems, das deutsche Alltagssprache (AS) in Leichte Sprache (LS) übersetzt. Der Fokus liegt dabei auf der Erstellung eines robusten, parallelen Textkorpus, der SBERT-basierten Bewertung semantischer Ähnlichkeit zur Qualitätsmessung, der anschließenden Optimierung von Übersetzungsmodellen mittels Reward-Guided Fine-Tuning und der Evaluation durch spezialisierte Klassifikations- und Regressormodelle.
 
 ---
 
@@ -10,8 +10,11 @@ Das Ziel dieser Arbeit ist die Entwicklung und Evaluierung eines Übersetzungssy
 1. [Projektstruktur](#projektstruktur)
 2. [Installation & Setup](#installation--setup)
 3. [Die Daten- & Analyse-Pipeline](#die-daten---analyse-pipeline)
-4. [Detaillierte Skript-Referenz](docs/scripts.md) (Zusammenfassung siehe [unten](#detaillierte-skript-referenz))
-5. [Notebook-Referenz](docs/notebooks.md) (Zusammenfassung siehe [unten](#notebook-referenz))
+4. [Web-Applikation (Frontend & Backend)](#web-applikation-frontend--backend)
+5. [Masterarbeit (LaTeX-Dokumentation)](#masterarbeit-latex-dokumentation)
+6. [Detaillierte Skript-Referenz](docs/scripts.md) (Zusammenfassung siehe [unten](#detaillierte-skript-referenz))
+7. [Notebook-Referenz](docs/notebooks.md) (Zusammenfassung siehe [unten](#notebook-referenz))
+8. [Remote Jupyter Server](#remote-jupyter-server)
 
 ---
 
@@ -37,13 +40,21 @@ Das Projekt ist wie folgt organisiert:
 │   ├── corpus/                   # Roh-Scraping-Ergebnisse pro Quelle (.json)
 │   ├── corpus_cleaned/           # Gefilterte Artikelpaare (.json)
 │   ├── corpus_final/             # Post-prozessierte & bereinigte Artikelpaare (.json)
-│   ├── *.csv / *.json            # Analyseergebnisse, Metriken und Trainingsdaten
-│   └── *.pt                      # Trainierte PyTorch-Modelle (LSTM etc.)
+│   ├── models/                   # Trainierte Modelle (LSTM, Seq2Seq DPO)
+│   └── *.csv / *.json            # Analyseergebnisse, Metriken und Trainingsdaten
 ├── notebooks/
 │   └── *.ipynb                   # Jupyter Notebooks für Modelltraining & Experimente
 ├── research/
 │   ├── img/analysis/             # Generierte Abbildungen und Grafiken
 │   └── *.md                      # Analyseberichte, Statistiken und Zusammenfassungen
+├── thesis/
+│   ├── chapters/                 # Die Kapitel der Arbeit (Latex)
+│   ├── options/                  # Konfigurationsdateien und Packages
+│   ├── main.tex                  # Haupt-Dokument der Masterarbeit
+│   └── bibliography.bib          # Literaturverzeichnis
+├── web/
+│   ├── app.py                    # FastAPI-Backend für Text-Evaluation & Übersetzung
+│   └── frontend/                 # Next.js-Frontend für die interaktive Nutzung
 └── requirements.txt              # Python-Abhängigkeiten
 ```
 
@@ -72,6 +83,11 @@ Installiere die benötigten Python-Pakete:
 pip install -r requirements.txt
 ```
 
+Für die Web-Applikation werden zusätzlich `fastapi` und `uvicorn` benötigt:
+```bash
+pip install fastapi uvicorn pydantic
+```
+
 ### 3. SpaCy Sprachmodelle herunterladen
 Das Projekt nutzt SpaCy zur linguistischen Analyse und Named Entity Recognition (NER). Installiere die deutschen Sprachmodelle:
 
@@ -92,14 +108,73 @@ Die Verarbeitung und Evaluierung der Daten läuft in mehreren aufeinanderfolgend
 ```mermaid
 graph TD
     A[data_collection/crawl_scraper] -->|Findet URL-Paare| B[data_collection/corpus_scrapers]
-    B -->|Roh-Artikel extrahieren| C[data/corpus/raw/]
+    B -->|Roh-Artikel extrahieren| C[data/corpus/2_raw_scraped/]
     D[preprocessing/create_lebenshilfe_dataset.py] -->|Extrahiert lokale Docs| E[data/lebenshilfe/lebenshilfe_dataset.json]
     C -->|Semantic Similarity berechnen| F[evaluation/measure_information_loss.py]
     F -->|Filterung auf Basis der Ähnlichkeit| G[preprocessing/clean_corpus.py]
     G -->|Entfernung von Syllable-Separators & Boilerplate| H[preprocessing/post_clean_corpus.py]
-    H -->|Endergebnis: finaler Korpus| I[data/corpus/final/]
+    H -->|Endergebnis: finaler Korpus| I[data/corpus/4_normalized_clean/]
     I -->|Berechnung von Metriken| J[evaluation/measure_readability.py & measure_ttr.py]
     J -->|Generierung von Diagrammen| K[visualization/visualize_analysis.py / visualize_readability.py / visualize_ttr.py]
+```
+
+---
+
+## Web-Applikation (Frontend & Backend)
+
+Die Web-Applikation bietet eine intuitive Schnittstelle, um Texte bezüglich ihrer sprachlichen Komplexität zu evaluieren und diese mithilfe der feingetunten Modelle in Leichte Sprache zu übersetzen.
+
+### 1. FastAPI-Backend starten
+Das Backend lädt die trainierten Regressor-Modelle (MixUp & Synthetic) sowie die Übersetzungsmodelle und stellt entsprechende API-Endpunkte zur Verfügung.
+
+```bash
+# Aus dem Hauptverzeichnis ausführen
+uvicorn web.app:app --host 127.0.0.1 --port 8000 --reload
+```
+
+- **API-Status:** `http://127.0.0.1:8000/api/status`
+- **Evaluation:** `/api/evaluate` (Berechnet Einfachheits-Scores)
+- **Übersetzung:** `/api/translate` (Übersetzt AS in LS)
+
+### 2. Next.js-Frontend starten
+Das moderne UI ermöglicht die Eingabe von Alltagssprache, zeigt die berechneten Komplexitätsmetriken und liefert die Übersetzung.
+
+```bash
+cd web/frontend
+npm install
+npm run dev
+```
+Das Frontend ist anschließend unter `http://localhost:3000` erreichbar.
+
+---
+
+## Masterarbeit (LaTeX-Dokumentation)
+
+Die schriftliche Ausarbeitung der Arbeit befindet sich im Ordner `thesis/` und basiert auf der Dokumentenklasse `scrreprt` (KOMA-Script).
+
+### Kapitelstruktur
+- `chapters/01_einleitung.tex` - Einleitung
+- `chapters/02_background.tex` - Theoretical Background & Stand der Forschung
+- `chapters/03_datenbasis.tex` - Themenblock 1: Datenbasis & Korpus-Erstellung
+- `chapters/04_metrik.tex` - Themenblock 2: Metrik & Bewerten von Sprachkomplexität
+- `chapters/05_modellierung.tex` - Themenblock 3: Modellierung der Übersetzung & Reward-Guided Fine-Tuning
+- `chapters/06_diskussion.tex` - Diskussion & Gesamtevaluation
+- `chapters/07_fazit.tex` - Fazit & Ausblick
+- `chapters/99_appendix.tex` - Anhang
+
+### Kompilieren der Arbeit
+Das Dokument verwendet `biber` als Literatur-Backend. Stelle sicher, dass TeX Live oder eine andere LaTeX-Distribution installiert ist.
+
+```bash
+cd thesis
+# Kompilieren mit latexmk (empfohlen)
+latexmk -pdf main.tex
+
+# Alternativ manuell kompilieren:
+pdflatex main.tex
+biber main
+pdflatex main.tex
+pdflatex main.tex
 ```
 
 ---
@@ -113,14 +188,14 @@ Führe alle Befehle aus dem Hauptverzeichnis des Projekts aus. Wenn die virtuell
 Die Erstellung des parallelen Web-Korpus erfolgt in zwei Schritten für jede der 12 Quellen (Apotheken, Behindertenbeauftragter, BrandEins, Hamburg, Hannover, Köln, Main-Taunus, MDR, Sozialpolitik, Stuttgart, Taz, Wiesbaden):
 
 #### Stufe 1: URL Alignment (`scripts/data_collection/crawl_scraper/`)
-Sucht auf den Webseiten nach Artikeln in Leichter Sprache (LS) und versucht, die entsprechende alltagssprachliche (AS) version zu finden. Speichert die URL-Paare in `data/corpus/aligned_urls/<quelle>_aligned_urls.json`.
+Sucht auf den Webseiten nach Artikeln in Leichter Sprache (LS) und versucht, die entsprechende alltagssprachliche (AS) version zu finden. Speichert die URL-Paare in `data/corpus/1_aligned_urls/<quelle>_aligned_urls.json`.
 * **Beispiel-Befehl:**
   ```bash
   .venv/bin/python scripts/data_collection/crawl_scraper/apotheken_scraper.py
   ```
 
 #### Stufe 2: Content Extraction (`scripts/data_collection/corpus_scrapers/`)
-Liest die URL-Paare ein, lädt den HTML-Inhalt herunter, extrahiert den Fließtext (ohne Navigation/Footer) und zählt die Token. Speichert die Ergebnisse in `data/corpus/raw/<quelle>_articles.json`.
+Liest die URL-Paare ein, lädt den HTML-Inhalt herunter, extrahiert den Fließtext (ohne Navigation/Footer) und zählt die Token. Speichert die Ergebnisse in `data/corpus/2_raw_scraped/<quelle>_articles.json`.
 * **Beispiel-Befehl:**
   ```bash
   .venv/bin/python scripts/data_collection/corpus_scrapers/apotheken_scraper.py
@@ -146,8 +221,8 @@ Sammelt Dokumente im Format `.docx`, `.rtf` und `.odt` aus `data/lebenshilfe/tex
 #### `scripts/preprocessing/clean_corpus.py`
 Filtert den Roh-Korpus auf Basis der semantischen Ähnlichkeit (Jina 8192 score), der minimalen Token-Anzahl und filtert Platzhalter (Lorem Ipsum) aus.
 * **Filterregeln:** Ähnlichkeit $0.60 \leq \text{Sim} \leq 0.99$, Mindestlänge LS-Artikel: 10 Tokens.
-* **Input:** `data/analysis/information_loss_analysis_cleaned.csv` & `data/corpus/raw/`
-* **Output:** `data/corpus/cleaned/`
+* **Input:** `data/analysis/information_loss_analysis_cleaned.csv` & `data/corpus/2_raw_scraped/`
+* **Output:** `data/corpus/3_filtered_similarity/`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/preprocessing/clean_corpus.py
@@ -155,8 +230,8 @@ Filtert den Roh-Korpus auf Basis der semantischen Ähnlichkeit (Jina 8192 score)
 
 #### `scripts/preprocessing/post_clean_corpus.py`
 Führt quellenspezifische Textreinigungen durch (Entfernen von Mediopunkten `·`, Beseitigung von Datums- und Autorenzeilen bei *BrandEins*, Entfernen von Standard-Boilerplates bei *MDR* und *TAZ*).
-* **Input:** `data/corpus/cleaned/`
-* **Output:** `data/corpus/final/`
+* **Input:** `data/corpus/3_filtered_similarity/`
+* **Output:** `data/corpus/4_normalized_clean/`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/preprocessing/post_clean_corpus.py
@@ -169,15 +244,15 @@ Führt quellenspezifische Textreinigungen durch (Entfernen von Mediopunkten `·`
 #### `scripts/evaluation/measure_information_loss.py`
 Nutzt ein deutsches SBERT-Modell (`jinaai/jina-embeddings-v2-base-de` mit 8192 Tokens Kontext) und SpaCy (`de_core_news_lg`), um die semantische Ähnlichkeit (Cosine Similarity) sowie bidirektionale Named Entity Recognition (NER) Recall-Werte zu berechnen.
 * **Argumente:**
-  * `--input_dir`: Pfad zum Eingabeverzeichnis (Standard: `data/corpus/raw`)
+  * `--input_dir`: Pfad zum Eingabeverzeichnis (Standard: `data/corpus/2_raw_scraped`)
   * `--output_csv`: Pfad für die Ergebnis-Tabelle (Standard: `data/analysis/information_loss_analysis.csv`)
 * **Befehl (für Rohdaten):**
   ```bash
-  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/raw --output_csv data/analysis/information_loss_analysis.csv
+  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/2_raw_scraped --output_csv data/analysis/information_loss_analysis.csv
   ```
 * **Befehl (für finalen Korpus):**
   ```bash
-  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/final --output_csv data/analysis/information_loss_analysis_cleaned.csv
+  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/4_normalized_clean --output_csv data/analysis/information_loss_analysis_cleaned.csv
   ```
 
 #### `scripts/evaluation/info_loss_stats.py`
@@ -198,7 +273,7 @@ Analysiert, wie viel Prozent des Textkorpus bei einer maximalen SBERT-Kontextlä
 
 #### `scripts/evaluation/count_total_tokens.py`
 Zählt die linguistischen Tokens (Wörter und Satzzeichen separat) über alle Rohdateien im Korpus und gibt eine tabellarische Zusammenfassung aus.
-* **Input:** `data/corpus/raw/*.json`
+* **Input:** `data/corpus/2_raw_scraped/*.json`
 * **Befehl:**
   ```bash
   .venv/bin/python scripts/evaluation/count_total_tokens.py
@@ -220,16 +295,16 @@ Findet extreme Artikelpaare (Ähnlichkeit $< 0.6$ oder $> 0.98$) für ein manuel
 #### `scripts/evaluation/corpus_stats.py`
 Generiert eine Markdown-Tabelle aller Quellen mit Paaren, Wörtern, Tokens (via `tiktoken`), Sätzen, Vokabulargrößen, Type-Token-Ratio (TTR) sowie Wörtern pro Satz.
 * **Argumente:**
-  * `--input_dir`: Eingabepfad (Standard: `data/corpus/raw`)
+  * `--input_dir`: Eingabepfad (Standard: `data/corpus/2_raw_scraped`)
   * `--output_file`: Ausgabepfad (Standard: `research/corpus_statistics.md`)
 * **Befehl (für finalen Korpus):**
   ```bash
-  .venv/bin/python scripts/evaluation/corpus_stats.py --input_dir data/corpus/final --output_file research/corpus_statistics_cleaned.md
+  .venv/bin/python scripts/evaluation/corpus_stats.py --input_dir data/corpus/4_normalized_clean --output_file research/corpus_statistics_cleaned.md
   ```
 
 #### `scripts/evaluation/measure_readability.py`
 Analysiert die Lesbarkeit von alltagssprachlichen und leichtsprachlichen Texten anhand des Flesch Reading Ease (Amstad-Formel für Deutsch), der Wiener Sachtextformel und des LIX-Indexes.
-* **Input:** `data/corpus/final/`
+* **Input:** `data/corpus/4_normalized_clean/`
 * **Output:** `data/analysis/readability_analysis.csv`
 * **Befehl:**
   ```bash
@@ -238,7 +313,7 @@ Analysiert die Lesbarkeit von alltagssprachlichen und leichtsprachlichen Texten 
 
 #### `scripts/evaluation/measure_ttr.py`
 Berechnet die lexikalische Vielfalt mithilfe der klassischen Type-Token-Ratio (TTR) sowie der Moving Average Type-Token-Ratio (MATTR, Window=50) auf Basis lemmatisierter Wörter.
-* **Input:** `data/corpus/final/`
+* **Input:** `data/corpus/4_normalized_clean/`
 * **Output:** `data/analysis/ttr_analysis.csv`
 * **Befehl:**
   ```bash
@@ -321,3 +396,10 @@ Visualisiert die Type-Token-Ratio-Analysen und MATTR-Mittelwerte der verschieden
   ```bash
   .venv/bin/python scripts/visualization/visualize_ttr.py
   ```
+
+---
+
+## Remote Jupyter Server
+
+Ausführliche Details zum Ausführen von Jupyter-Notebooks auf GPU-Servern oder Remote-Windows-Maschinen sowie zur Behebung von CUDA-Treiber-Fehlern findest du im separaten Guide:
+👉 [run_jupyter_server.md](file:///Users/fietescheel/Documents/Master%20Thesis/run_jupyter_server.md)

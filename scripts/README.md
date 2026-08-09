@@ -75,7 +75,7 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
 ### 3. Evaluierung & Metriken (`evaluation/`)
 * **Semantische Ähnlichkeit & NER Recall:**
   ```bash
-  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/final --output_csv data/analysis/information_loss_analysis_cleaned.csv
+  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/4_normalized_clean --output_csv data/analysis/information_loss_analysis_cleaned.csv
   ```
 * **Lesbarkeits-Indizes (Flesch, Wiener Sachtextformel, LIX):**
   ```bash

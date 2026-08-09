@@ -37,7 +37,7 @@ FALLBACK_GLOSSARY = {
     "behinderungen": "Körperliche oder geistige Einschränkungen."
 }
 
-def extract_top_words(corpus_dir="data/corpus/final", num_words=100):
+def extract_top_words(corpus_dir="data/corpus/4_normalized_clean", num_words=100):
     print("Analysiere Korpus im Ordner:", corpus_dir)
     json_files = glob.glob(os.path.join(corpus_dir, "*.json"))
     word_counts = Counter()

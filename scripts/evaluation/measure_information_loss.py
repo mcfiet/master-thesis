@@ -8,7 +8,7 @@ import torch
 from collections import Counter
 
 # Configuration
-CORPUS_DIR = "data/corpus/raw"
+CORPUS_DIR = "data/corpus/2_raw_scraped"
 OUTPUT_CSV = "data/analysis/information_loss_analysis.csv"
 OUTPUT_JSON = "data/analysis/information_loss_details.json"
 OUTPUT_EXTREMES = "data/analysis/similarity_extremes.json"

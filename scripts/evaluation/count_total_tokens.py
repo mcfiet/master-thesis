@@ -16,7 +16,7 @@ def linguistic_tokenize(text):
     return re.findall(token_pattern, text)
 
 def count_corpus_tokens():
-    corpus_path = "data/corpus/raw/*.json"
+    corpus_path = "data/corpus/2_raw_scraped/*.json"
     files = glob.glob(corpus_path)
     
     if not files:

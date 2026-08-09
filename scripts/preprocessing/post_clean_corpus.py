@@ -4,8 +4,8 @@ import re
 from tqdm import tqdm
 
 # Configuration
-INPUT_DIR = "data/corpus/cleaned"
-OUTPUT_DIR = "data/corpus/final"
+INPUT_DIR = "data/corpus/3_filtered_similarity"
+OUTPUT_DIR = "data/corpus/4_normalized_clean"
 
 MONTHS = r"(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)"
 

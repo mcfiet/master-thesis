@@ -98,6 +98,6 @@ def process_corpus(input_dir, output_file):
     print(f"Analysis saved to {output_file}")
 
 if __name__ == "__main__":
-    INPUT_DIR = "data/corpus/final"
+    INPUT_DIR = "data/corpus/4_normalized_clean"
     OUTPUT_FILE = "data/analysis/ttr_analysis.csv"
     process_corpus(INPUT_DIR, OUTPUT_FILE)

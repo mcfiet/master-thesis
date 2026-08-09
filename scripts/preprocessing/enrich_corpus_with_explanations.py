@@ -20,7 +20,7 @@ def load_glossary(path="data/vocabs/hurraki_glossary.json"):
 def clean_word(word):
     return word.lower().strip("()\"'„“»«-.,?!;:")
 
-def enrich_corpus(glossary, input_dir="data/corpus/final", output_dir="data/corpus/enriched"):
+def enrich_corpus(glossary, input_dir="data/corpus/4_normalized_clean", output_dir="data/corpus/5_glossary_enriched"):
     os.makedirs(output_dir, exist_ok=True)
     json_files = glob.glob(os.path.join(input_dir, "*.json"))
     

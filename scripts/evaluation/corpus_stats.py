@@ -22,7 +22,7 @@ def count_sentences(text):
     sentences = re.split(r'[.!?](?:\s+|$)|(?:\n\s*\n)', text)
     return len([s for s in sentences if s.strip()])
 
-def analyze_corpus(corpus_dir="data/corpus/raw", output_path="research/corpus_statistics.md"):
+def analyze_corpus(corpus_dir="data/corpus/2_raw_scraped", output_path="research/corpus_statistics.md"):
     files = glob.glob(os.path.join(corpus_dir, "*_articles.json"))
     
     overall_stats = {

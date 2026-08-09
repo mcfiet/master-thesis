@@ -40,7 +40,7 @@ def calculate_metrics(text):
     }
 
 def main():
-    input_dir = "data/corpus/final"
+    input_dir = "data/corpus/4_normalized_clean"
     output_file = "data/analysis/readability_analysis.csv"
     
     # Ensure results directory exists
