@@ -92,6 +92,20 @@ Führt kosmetische Bereinigungen und quellenspezifische Korrekturen am gefiltert
 
 ## 4. Analyse von Informationsverlust & Ähnlichkeit
 
+### `scripts/evaluation/build_corpus_master.py`
+Erstellt eine konsolidierte Master-CSV-Datei aus einem Verzeichnis von JSON-Artikelpaaren. Berechnet alle Ähnlichkeits-, Lesbarkeits- und Diversitätsmetriken in einem einzigen Durchlauf.
+* **Argumente:**
+  - `--input_dir`: Pfad zum Eingabeordner mit JSON-Dateien (Standard: `data/corpus/4_normalized_clean`)
+  - `--output_csv`: Pfad zur Ausgabedatei (Standard: `data/analysis/corpus_master.csv`)
+  - `--sbert_model`: Verwendetes SBERT-Modell (Standard: `jinaai/jina-embeddings-v2-base-de`)
+  - `--spacy_model`: Verwendetes SpaCy-Modell (Standard: `de_core_news_lg`)
+* **Befehl:**
+  ```bash
+  .venv/bin/python scripts/evaluation/build_corpus_master.py \
+      --input_dir data/corpus/4_normalized_clean \
+      --output_csv data/analysis/corpus_master.csv
+  ```
+
 ### `scripts/evaluation/measure_information_loss.py`
 Berechnet semantische Ähnlichkeit und Named Entity Recognition (NER) Recall zwischen AS und LS.
 * **Modelle:**

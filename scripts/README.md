@@ -22,6 +22,7 @@ scripts/
 │   ├── 3_build_glossary.py
 │   └── 4_enrich_glossary.py
 ├── evaluation/                # Schritt 3: Berechnung linguistischer & semantischer Metriken
+│   ├── build_corpus_master.py # Führt alle Metriken in einer Master-CSV zusammen
 │   ├── measure_information_loss.py
 │   ├── info_loss_stats.py
 │   ├── calculate_sbert_coverage.py
@@ -98,6 +99,10 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
 * **Zusammenfassende Statistiken:**
   ```bash
   .venv/bin/python scripts/evaluation/summarize_corpus.py
+  ```
+* **Master-CSV erstellen (Konsolidiert alle Metriken):**
+  ```bash
+  .venv/bin/python scripts/evaluation/build_corpus_master.py --input_dir data/corpus/4_normalized_clean --output_csv data/analysis/corpus_master.csv
   ```
 
 ### 4. Modellierung & LLM-Synthese (`modeling/`)
