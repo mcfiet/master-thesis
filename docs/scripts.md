@@ -43,7 +43,7 @@ Diese Skripte lesen die aus Stufe 1 generierten URL-Paare ein, laden die Webseit
 
 ## 2. Lokale Datensatzerstellung
 
-### `scripts/preprocessing/create_lebenshilfe_dataset.py`
+### `scripts/preprocessing/0_create_lebenshilfe_dataset.py`
 Verarbeitet lokale Dokumentdateien (`.docx`, `.rtf`, `.odt`) der Organisation *Lebenshilfe*.
 * **Funktionsweise:**
   1. Liest Dokumente aus `data/lebenshilfe/texts_lebenshilfe/as` und `data/lebenshilfe/texts_lebenshilfe/ls`.
@@ -54,38 +54,38 @@ Verarbeitet lokale Dokumentdateien (`.docx`, `.rtf`, `.odt`) der Organisation *L
 * **Ausgabe-Datei:** `data/lebenshilfe/lebenshilfe_dataset.json`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/preprocessing/create_lebenshilfe_dataset.py
+  .venv/bin/python scripts/preprocessing/0_create_lebenshilfe_dataset.py
   ```
 
 ---
 
 ## 3. Datenbereinigung & Post-Processing
 
-### `scripts/preprocessing/clean_corpus.py`
+### `scripts/preprocessing/1_filter_similarity.py`
 Filtert den Korpus, um Rauschen (schlecht gemappte Artikel, Platzhalter) zu eliminieren.
 * **Filterbedingungen:**
   - Semantische Ähnlichkeit (Jina 8192) zwischen $0.60$ und $0.99$.
   - Die leichtsprachliche Version muss mindestens 10 Wörter lang sein.
   - Ausschluss von "Lorem Ipsum"-Testtexten.
-* **Eingabe:** `data/analysis/information_loss_analysis_cleaned.csv` & `data/corpus/raw/`
-* **Ausgabe:** `data/corpus/cleaned/` (enthält gefilterte `<quelle>_articles.json`)
+* **Eingabe:** `data/analysis/information_loss_analysis_cleaned.csv` & `data/corpus/2_raw_scraped/`
+* **Ausgabe:** `data/corpus/3_filtered_similarity/` (enthält gefilterte `<quelle>_articles.json`)
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/preprocessing/clean_corpus.py
+  .venv/bin/python scripts/preprocessing/1_filter_similarity.py
   ```
 
-### `scripts/preprocessing/post_clean_corpus.py`
+### `scripts/preprocessing/2_normalize_clean.py`
 Führt kosmetische Bereinigungen und quellenspezifische Korrekturen am gefilterten Korpus durch.
 * **Reinigungs-Schritte:**
   - Entfernen des Syllable-Separators (Mediopunkt `·` oder `∙`) in LS und AS.
   - *BrandEins*: Entfernt Autorennamen und Datumszeilen am Textanfang (z.B. "März 2023.").
   - *MDR*: Entfernt Boilerplate-Footer ("Über dieses Thema berichtet der MDR auch...").
   - *Taz*: Entfernt verwaiste Bildunterschriften.
-* **Eingabe:** `data/corpus/cleaned/`
-* **Ausgabe:** `data/corpus/final/`
+* **Eingabe:** `data/corpus/3_filtered_similarity/`
+* **Ausgabe:** `data/corpus/4_normalized_clean/`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/preprocessing/post_clean_corpus.py
+  .venv/bin/python scripts/preprocessing/2_normalize_clean.py
   ```
 
 ---

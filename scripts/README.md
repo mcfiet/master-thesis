@@ -16,9 +16,11 @@ scripts/
 │   ├── crawl_scraper/         # Stufe 1: Crawler zur URL-Findung und -Paarung
 │   └── corpus_scrapers/       # Stufe 2: Scraper zum Extrahieren von Texten
 ├── preprocessing/             # Schritt 2: Filterung, Bereinigung und lokale Datensatzerstellung
-│   ├── create_lebenshilfe_dataset.py
-│   ├── clean_corpus.py
-│   └── post_clean_corpus.py
+│   ├── 0_create_lebenshilfe_dataset.py
+│   ├── 1_filter_similarity.py
+│   ├── 2_normalize_clean.py
+│   ├── 3_build_glossary.py
+│   └── 4_enrich_glossary.py
 ├── evaluation/                # Schritt 3: Berechnung linguistischer & semantischer Metriken
 │   ├── measure_information_loss.py
 │   ├── info_loss_stats.py
@@ -61,15 +63,23 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
 ### 2. Vorverarbeitung & Bereinigung (`preprocessing/`)
 * **Lokaler Datensatz (Lebenshilfe):**
   ```bash
-  .venv/bin/python scripts/preprocessing/create_lebenshilfe_dataset.py
+  .venv/bin/python scripts/preprocessing/0_create_lebenshilfe_dataset.py
   ```
-* **Korpus-Bereinigung:** Filterung basierend auf minimaler Länge und semantischer Ähnlichkeit ($0.60 \leq \text{Sim} \leq 0.99$).
+* **Korpus-Bereinigung (Filterung):** Filterung basierend auf minimaler Länge und semantischer Ähnlichkeit ($0.60 \leq \text{Sim} \leq 0.99$).
   ```bash
-  .venv/bin/python scripts/preprocessing/clean_corpus.py
+  .venv/bin/python scripts/preprocessing/1_filter_similarity.py
   ```
-* **Post-Processing:** Quellenspezifische Korrekturen (z.B. Mediopunkt-Entfernung).
+* **Post-Processing (Normalisierung):** Quellenspezifische Korrekturen (z.B. Mediopunkt-Entfernung).
   ```bash
-  .venv/bin/python scripts/preprocessing/post_clean_corpus.py
+  .venv/bin/python scripts/preprocessing/2_normalize_clean.py
+  ```
+* **Glossar aufbauen:** Erstellt ein Vokabular aus dem Korpus via Hurraki API.
+  ```bash
+  .venv/bin/python scripts/preprocessing/3_build_glossary.py
+  ```
+* **Glossar-Augmentierung:** Reichert das Korpus mit Begriffserklärungen an.
+  ```bash
+  .venv/bin/python scripts/preprocessing/4_enrich_glossary.py
   ```
 
 ### 3. Evaluierung & Metriken (`evaluation/`)

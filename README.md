@@ -109,10 +109,10 @@ Die Verarbeitung und Evaluierung der Daten läuft in mehreren aufeinanderfolgend
 graph TD
     A[data_collection/crawl_scraper] -->|Findet URL-Paare| B[data_collection/corpus_scrapers]
     B -->|Roh-Artikel extrahieren| C[data/corpus/2_raw_scraped/]
-    D[preprocessing/create_lebenshilfe_dataset.py] -->|Extrahiert lokale Docs| E[data/lebenshilfe/lebenshilfe_dataset.json]
+    D[preprocessing/0_create_lebenshilfe_dataset.py] -->|Extrahiert lokale Docs| E[data/lebenshilfe/lebenshilfe_dataset.json]
     C -->|Semantic Similarity berechnen| F[evaluation/measure_information_loss.py]
-    F -->|Filterung auf Basis der Ähnlichkeit| G[preprocessing/clean_corpus.py]
-    G -->|Entfernung von Syllable-Separators & Boilerplate| H[preprocessing/post_clean_corpus.py]
+    F -->|Filterung auf Basis der Ähnlichkeit| G[preprocessing/1_filter_similarity.py]
+    G -->|Entfernung von Syllable-Separators & Boilerplate| H[preprocessing/2_normalize_clean.py]
     H -->|Endergebnis: finaler Korpus| I[data/corpus/4_normalized_clean/]
     I -->|Berechnung von Metriken| J[evaluation/measure_readability.py & measure_ttr.py]
     J -->|Generierung von Diagrammen| K[visualization/visualize_analysis.py / visualize_readability.py / visualize_ttr.py]
@@ -205,36 +205,36 @@ Liest die URL-Paare ein, lädt den HTML-Inhalt herunter, extrahiert den Fließte
 
 ### 2. Lokale Datensatzerstellung
 
-#### `scripts/preprocessing/create_lebenshilfe_dataset.py`
+#### `scripts/preprocessing/0_create_lebenshilfe_dataset.py`
 Sammelt Dokumente im Format `.docx`, `.rtf` und `.odt` aus `data/lebenshilfe/texts_lebenshilfe/as` und `data/lebenshilfe/texts_lebenshilfe/ls`, führt ein Alignment auf Basis von Dateinamen oder manuell definierten Mappings durch und speichert das Ergebnis.
 * **Input:** `data/lebenshilfe/texts_lebenshilfe/`
 * **Output:** `data/lebenshilfe/lebenshilfe_dataset.json`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/preprocessing/create_lebenshilfe_dataset.py
+  .venv/bin/python scripts/preprocessing/0_create_lebenshilfe_dataset.py
   ```
 
 ---
 
 ### 3. Datenbereinigung & Post-Processing
 
-#### `scripts/preprocessing/clean_corpus.py`
+#### `scripts/preprocessing/1_filter_similarity.py`
 Filtert den Roh-Korpus auf Basis der semantischen Ähnlichkeit (Jina 8192 score), der minimalen Token-Anzahl und filtert Platzhalter (Lorem Ipsum) aus.
 * **Filterregeln:** Ähnlichkeit $0.60 \leq \text{Sim} \leq 0.99$, Mindestlänge LS-Artikel: 10 Tokens.
 * **Input:** `data/analysis/information_loss_analysis_cleaned.csv` & `data/corpus/2_raw_scraped/`
 * **Output:** `data/corpus/3_filtered_similarity/`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/preprocessing/clean_corpus.py
+  .venv/bin/python scripts/preprocessing/1_filter_similarity.py
   ```
 
-#### `scripts/preprocessing/post_clean_corpus.py`
+#### `scripts/preprocessing/2_normalize_clean.py`
 Führt quellenspezifische Textreinigungen durch (Entfernen von Mediopunkten `·`, Beseitigung von Datums- und Autorenzeilen bei *BrandEins*, Entfernen von Standard-Boilerplates bei *MDR* und *TAZ*).
 * **Input:** `data/corpus/3_filtered_similarity/`
 * **Output:** `data/corpus/4_normalized_clean/`
 * **Befehl:**
   ```bash
-  .venv/bin/python scripts/preprocessing/post_clean_corpus.py
+  .venv/bin/python scripts/preprocessing/2_normalize_clean.py
   ```
 
 ---
