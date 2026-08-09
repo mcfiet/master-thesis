@@ -2143,7 +2143,245 @@ Evaluation on the exact same test set (Lebenshilfe with 5 levels):
 
 ### 3.3 DPO Training Status
 
-- **Optimizations against GPU VRAM OOM (8 GB VRAM):**
-  1. Offloading of SBERT and BiLSTM regressor to the **CPU** (VRAM saving >1 GB).
-  2. Reduction of the DPO batch size to `batch_size = 2`.
 - **Status:** DPO training is currently running. Results of the tuning and the final translation evaluation will follow in the next milestone.
+
+---
+
+<!-- _class: section-header -->
+
+## Week 20
+
+---
+
+### Weekly Focus: Metrics Bias, Master Corpus Consolidation, SFT vs. DPO Comparison & Web App Setup
+
+- **1. Evaluation Metrics & Bias Analysis:** Length/boilerplate bias checks on simplicity scores, MixUp vs. Synthetic simplicity metrics, and similarity to traditional readability formulas.
+- **2. Master Corpus Consolidation & Diagnostics:** Transition to a unified master pipeline, boilerplate cleaning analysis (before vs. after), and diagnostics insights.
+- **3. SFT vs. DPO Comparison:** Metrics comparison table, visual analysis of evaluation, and qualitative translation sample comparison.
+- **4. DPO Model Variant Comparison:** Comparison of different DPO tuning runs (trainer vs non-trainer, enriched datasets).
+- **5. Web Application Setup:** Flask backend and Next.js frontend consolidation under web folder, model integration, and output simplification scale.
+
+---
+
+<!-- _class: section-header -->
+
+## Part 1: Evaluation Metrics & Bias Analysis
+
+---
+
+<!-- _class: split -->
+
+### 1.1 Length Bias & Similarity Investigations
+
+<div class="column-left">
+
+**Length / Boilerplate Bias Check:**
+- **Goal:** Investigate if simplicity classifiers (reward models) possess a length bias (classifying shorter sentences as "simpler" regardless of semantic complexity).
+- **Method:** Synthetically inflated sentences with empty boilerplate phrases.
+- **Findings:** Some metric models show sensitivity to sequence length. Quantified this bias to prevent reward hacking during DPO alignment.
+
+</div>
+
+<div class="column-right">
+
+**Metric Similarity & Correlation:**
+- **Goal:** Verify correlation between neural simplicity scores and classical readability indices (e.g., Flesch Reading Ease, Wiener Sachtextformel).
+- **Findings:** Strong correlation found, but neural classifiers show significantly higher robustness for modern structures and idiomatic expressions.
+
+</div>
+
+---
+
+### 1.2 Simplicity Metrics: MixUp vs. Synthetic Approach
+
+- **Cross-Evaluation Setup:**
+  - Both simplicity metric models (trained via the MixUp approach and the Synthetic approach respectively) were cross-evaluated on both target datasets (LLM-generated levels and Sentence-MixUp) to analyze generalization and cross-validate their simplicity estimation capabilities.
+- **Performance Characteristics:**
+  - The model trained with the **Synthetic Approach** performs exceptionally well on the LLM-generated levels (same domain as its training dataset).
+  - The model trained with the **MixUp Approach** exhibits superior robustness and lower error metrics when evaluated on the Sentence-MixUp dataset.
+
+---
+
+<!-- _class: split -->
+
+### 1.3 Evaluation on LLM-generated Levels
+
+<div class="column-left">
+
+| Metric           | MixUp Approach (Variant D) | Synthetic Approach |
+| :--------------- | :------------------------: | :----------------: |
+| **MSE**          |           0.1388           |     **0.0786**     |
+| **MAE**          |           0.3079           |     **0.1816**     |
+| **Pearson r**    |           0.6626           |     **0.7412**     |
+| **Spearman rho** |           0.5885           |     **0.7391**     |
+
+</div>
+
+<div class="column-right">
+
+![LLM-generated Levels Comparison height:380px](img/analysis/boxplot_llm_stufen.png)
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### 1.4 Evaluation on Sentence-MixUp Dataset
+
+<div class="column-left">
+
+| Metric           | MixUp Approach (Variant D) | Synthetic Approach |
+| :--------------- | :------------------------: | :----------------: |
+| **MSE**          |         **0.0892**         |       0.1162       |
+| **MAE**          |         **0.2302**         |       0.2629       |
+| **Pearson r**    |         **0.6939**         |       0.5979       |
+| **Spearman rho** |         **0.7045**         |       0.5917       |
+
+</div>
+
+<div class="column-right">
+
+![Sentence-MixUp Comparison height:380px](img/analysis/boxplot_sentence_mixup.png)
+
+</div>
+
+---
+
+<!-- _class: section-header -->
+
+## Part 2: Master Corpus Consolidation & Diagnostics
+
+---
+
+<!-- _class: split -->
+
+### 2.1 Unified Master Pipeline
+
+<div class="column-left">
+
+- **Consolidation:**
+  - Replaced fragmented scripts with a single unified master script.
+- **Key Pipeline Features:**
+  - **Data Alignment:** Loads cleaned sentence/paragraph pairs.
+  - **Semantic Similarity:** Jina embeddings (8192 context window) via cosine similarity.
+  - **Bi-directional NER Recall:** model for AS -> LS (info loss) and LS -> AS (hallucination checks).
+
+</div>
+
+<div class="column-right">
+
+- **Readability Scores:**
+  - Integrates Flesch, Wiener Sachtextformel (WSTF), and LIX.
+- **Lexical Diversity:**
+  - Type-Token-Ratio (TTR) and Moving Average TTR (MATTR-50) to offset text length biases.
+- **Information Loss & Outliers:**
+  - Tracks Part-of-Speech (POS) shifts and detects outliers (noise filtering).
+
+</div>
+
+---
+
+### 2.2 Boilerplate Analysis: Occurrence Before Cleaning
+
+![Boilerplate Occurrence Before Cleaning height:420px](img/analysis/boilerplate_before_cleaning.png)
+
+---
+
+### 2.3 Boilerplate Analysis: Occurrence After Cleaning
+
+![Boilerplate Occurrence After Cleaning height:420px](img/analysis/boilerplate_after_cleaning.png)
+
+---
+
+<!-- _class: split -->
+
+### 2.4 Corpus Diagnostics & Insights
+
+<div class="column-left">
+
+**NER & POS Analysis:**
+
+- Named entities are preserved in **over 80%** of simplified target sentences.
+- Target texts (LS) exhibit significantly reduced lexical density (noun/verb distributions) and shorter sentences.
+- Overall results indicate high alignment quality and clean datasets.
+
+</div>
+
+<div class="column-right">
+
+![Width:380px](img/analysis/bidirectional_ner_comparison.png)
+
+</div>
+
+---
+
+<!-- _class: section-header -->
+
+## Part 3: SFT vs. DPO Comparison
+
+---
+
+### 3.1 Metrics Comparison: SFT vs. DPO
+
+| Model                                  | Ø Simplicity (R_style) | Ø Sem-Sim to AS (R_sem) | Ø Sem-Sim to LS Reference | Ø Composite Reward (0.5/0.5) |
+| :------------------------------------- | :--------------------: | :---------------------: | :-----------------------: | :--------------------------: |
+| **SFT Model (Base)**                   |         0.9061         |         0.8681          |          0.8368           |            0.8871            |
+| **DPO Model (w_style=1.0, w_sem=0.0)** |         0.9345         |         0.8689          |          0.8383           |            0.9017            |
+
+---
+
+### 3.2 SFT vs. DPO Metrics Visualization
+
+![SFT vs DPO Comparison height:420px](img/analysis/sft_vs_dpo_comparison.png)
+
+---
+
+<!-- _class: section-header -->
+
+## Part 4: DPO Model Variant Comparison
+
+---
+
+### 4.1 DPO Model Variant Comparison
+
+| Model Variant                                | Ø Simplicity ($R_{\text{style}}$) | Ø Sem-Sim to AS ($R_{\text{sem}}$) | Ø Sem-Sim to LS Reference | Ø Composite Reward (0.5/0.5) |
+| :------------------------------------------- | :-------------------------------: | :--------------------------------: | :-----------------------: | :--------------------------: |
+| **1_dpo_w05_w05_final (Non-Trainer)**        |              0.8422               |               0.8733               |          0.8334           |            0.8577            |
+| **1_dpo_w05_w05_final_trainer (Trainer)**    |              0.7491               |               0.8867               |          0.8418           |            0.8179            |
+| **2_dpo_w10_w00_final (Non-Trainer)**        |              0.9345               |               0.8689               |          0.8383           |            0.9017            |
+| **2_dpo_w10_w00_final_trainer (Trainer)**    |              0.6182               |               0.8938               |          0.8401           |            0.7560            |
+| **3_dpo_w05_w05_enriched (Non-Trainer)**     |              0.7769               |               0.9058               |          0.8551           |            0.8413            |
+| **3_dpo_w05_w05_enriched_trainer (Trainer)** |              0.7774               |               0.8920               |          0.8370           |            0.8347            |
+
+---
+
+<!-- _class: section-header -->
+
+## Part 5: Web Application Setup & Model Integration
+
+---
+
+<!-- _class: split -->
+
+### 5.1 System Restructuring & Frontend Integration
+
+<div class="column-left">
+
+**Technical Integration:**
+
+- Consolidated both frontend and backend directories under the unified web folder.
+- **Backend:** Flask-API loads the translation model and exposes generation endpoints.
+- **Frontend:** Built a modern Next.js interface providing real-time interactive translation utilities.
+
+</div>
+
+<div class="column-right">
+
+**Interface Features:**
+
+- **Standardized Complexity Scale:** Translated outputs are mapped to a [0.0, 1.0] range (with 1.0 representing maximum simplicity).
+- **Interactive Control:** Allows users to adjust generation parameters (e.g., beam search width, repetition penalty) dynamically.
+- Dev server runs locally via standard execution commands for Flask backend and Next.js frontend.
+
+</div>
