@@ -97,6 +97,9 @@ def clean_hannover(text):
     """
     Removes Hanover boilerplate lines.
     """
+    # Remove specific theme selection bias phrase
+    text = re.sub(r'Sie interessieren sich für ein bestimmtes Thema\?\s*Dann klicken Sie auf ein Feld\.?', '', text)
+    
     # Remove 'Klicken Sie' links and references
     text = re.sub(r'Klicken Sie hier.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
     text = re.sub(r'Hier finden Sie.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
