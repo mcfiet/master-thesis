@@ -1,12 +1,33 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Auto-generated from notebooks/translation/dpo_comparison/2_dpo_w10_w00_filtered.ipynb
-
-import matplotlib
-matplotlib.use('Agg')
-
+import os
 # ==============================================================================
-# CODE CELL 1
+# LOGGING SETUP (Redirect stdout and stderr to terminal and log file)
+# ==============================================================================
+import sys
+import datetime
+
+log_dir = "results/logs"
+os.makedirs(log_dir, exist_ok=True)
+script_name = os.path.basename(__file__).replace(".py", "")
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
+
+class Logger(object):
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log = open(filename, "w", encoding="utf-8")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+        self.log.flush()
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
+sys.stdout = Logger(log_file)
+sys.stderr = sys.stdout
+print(f"Log file initialized at: {log_file}")
 # ==============================================================================
 import os
 import sys
@@ -21,32 +42,40 @@ while not os.path.exists(".git"):
 print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 # ==============================================================================
-# CODE CELL 2
+# ZENTRALE KONFIGURATION & PARAMS (Passed via Command Line)
 # ==============================================================================
-# ==============================================================================
-# ZENTRALE KONFIGURATION & PARAMS (Hier anpassen)
-# ==============================================================================
-LH_DATASET_PATH = "data/lebenshilfe/lebenshilfe_dataset.json"
-CORPUS_CSV_PATH = "data/analysis/corpus_master.csv"
-OUTPUT_DIR = "results/models/seq2seq_dpo_w10_w00_filtered"
-SFT_MODEL_TEMP_PATH = "results/models/best_sft_w10_w00_filtered_temp.pt"
-SYNTHETIC_MODEL_PATH = "results/models/bilstm_synthetic_regression.pt"
-SYNTHETIC_VOCAB_PATH = "data/vocabs/synthetic_vocab.json"
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--lh_dataset_path', required=True)
+parser.add_argument('--corpus_csv_path', required=True)
+parser.add_argument('--output_dir', required=True)
+parser.add_argument('--sft_model_temp_path', required=True)
+parser.add_argument('--synthetic_model_path', required=True)
+parser.add_argument('--synthetic_vocab_path', required=True)
+parser.add_argument('--min_sim', type=float, required=True)
+parser.add_argument('--max_sim', type=float, required=True)
+parser.add_argument('--w_style', type=float, required=True)
+parser.add_argument('--w_sem', type=float, required=True)
+parser.add_argument('--max_source_len', type=int, required=True)
+parser.add_argument('--max_target_len', type=int, required=True)
+parser.add_argument('--model_name', required=True)
+args = parser.parse_args()
 
-MIN_SIM = 0.80
-MAX_SIM = 0.98
+LH_DATASET_PATH = args.lh_dataset_path
+CORPUS_CSV_PATH = args.corpus_csv_path
+OUTPUT_DIR = args.output_dir
+SFT_MODEL_TEMP_PATH = args.sft_model_temp_path
+SYNTHETIC_MODEL_PATH = args.synthetic_model_path
+SYNTHETIC_VOCAB_PATH = args.synthetic_vocab_path
+MIN_SIM = args.min_sim
+MAX_SIM = args.max_sim
+W_STYLE = args.w_style
+W_SEM = args.w_sem
+MAX_SOURCE_LEN = args.max_source_len
+MAX_TARGET_LEN = args.max_target_len
+MODEL_NAME = args.model_name
 
-W_STYLE = 1.0
-W_SEM = 0.0
 
-MAX_SOURCE_LEN = 256
-MAX_TARGET_LEN = 256
-MODEL_NAME = "facebook/mbart-large-50"
-
-
-# ==============================================================================
-# CODE CELL 3
-# ==============================================================================
 import torch
 print("CUDA verfügbar:", torch.cuda.is_available())
 print("Device Name:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "Keine GPU")
@@ -73,9 +102,6 @@ def set_seed(seed=42):
 set_seed(42)
 
 
-# ==============================================================================
-# CODE CELL 4
-# ==============================================================================
 import os
 import json
 import glob
@@ -83,7 +109,7 @@ import random
 import numpy as np
 import pandas as pd
 from collections import Counter
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 import torch
@@ -109,9 +135,6 @@ else:
 
 print(f"Nutze Device: {DEVICE}")
 
-# ==============================================================================
-# CODE CELL 5
-# ==============================================================================
 import os
 import glob
 
@@ -134,11 +157,31 @@ for pfad in pfade_zum_testen:
     anzahl_dateien = len(glob.glob(os.path.join(pfad, "*.json"))) if existiert else 0
     print(f"Pfad '{pfad}': Existiert = {existiert}, JSON-Dateien = {anzahl_dateien}")
 
-# ==============================================================================
-# CODE CELL 6
-# ==============================================================================
 def load_filtered_corpus(csv_path=CORPUS_CSV_PATH, min_sim=MIN_SIM, max_sim=MAX_SIM):
     import pandas as pd
+    import json
+    json_path = csv_path.replace(".csv", ".json")
+    if os.path.exists(json_path):
+        print(f"Lade Datensatz aus JSON: {json_path}")
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        pairs = []
+        for row in data:
+            sim = row.get("semantic_similarity_8192")
+            if sim is not None and min_sim <= sim <= max_sim:
+                as_text = str(row.get("as_text") or "").strip()
+                ls_text = str(row.get("ls_text") or "").strip()
+                if as_text and ls_text:
+                    pairs.append({
+                        "source": row.get("source"),
+                        "as_text": as_text,
+                        "ls_text": ls_text
+                    })
+        print(f"Gesamtpaare in JSON: {len(data)}")
+        print(f"Paare nach Filterung ({min_sim} <= Sim <= {max_sim}): {len(pairs)}")
+        return pairs
+
+    print(f"Lade Datensatz aus CSV: {csv_path}")
     df = pd.read_csv(csv_path)
     filtered_df = df[
         (df["semantic_similarity_8192"] >= min_sim) & 
@@ -171,9 +214,6 @@ val_data = all_pairs[split_idx:]
 print(f"Trainingsdaten: {len(train_data)} Paare | Validierungsdaten: {len(val_data)} Paare")
 
 
-# ==============================================================================
-# CODE CELL 7
-# ==============================================================================
 # Optionen: "google/mt5-small", "google/mt5-base", "facebook/mbart-large-50"
 # MODEL_NAME = "facebook/mbart-large-50"  # -> Zentral oben definiert
 # MAX_SOURCE_LEN = 256  # -> Zentral oben definiert
@@ -189,16 +229,9 @@ if "mbart" in MODEL_NAME.lower():
 
 print("Modell & Tokenizer erfolgreich geladen!")
 
-# ==============================================================================
-# CODE CELL 8
-# ==============================================================================
 # seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH))
 # print("Erfolgreich SFT-Modellgewichte von Festplatte geladen!")
 
-
-# ==============================================================================
-# CODE CELL 9
-# ==============================================================================
 class TranslationDataset(Dataset):
     def __init__(self, data, tokenizer, max_src_len=256, max_tgt_len=256):
         self.data = data
@@ -238,121 +271,18 @@ train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=4, shuffle=False)
 print(f"DataLoader erstellt: {len(train_loader)} Batches (Train), {len(val_loader)} Batches (Val).")
 
-# ==============================================================================
-# CODE CELL 10
-# ==============================================================================
-def train_sft_epoch(model, dataloader, optimizer, scheduler, accumulation_steps=4):
-    model.train()
-    total_loss = 0.0
-    optimizer.zero_grad()  # Gradienten zu Beginn der Epoche nullen
-    
-    for batch_idx, batch in enumerate(tqdm(dataloader, desc="SFT Training")):
-        input_ids = batch["input_ids"].to(DEVICE)
-        attention_mask = batch["attention_mask"].to(DEVICE)
-        labels = batch["labels"].to(DEVICE)
-        
-        # Loss berechnen und durch die Anzahl der Akkumulationsschritte teilen
-        outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
-        loss = outputs.loss / accumulation_steps
-        loss.backward()
-        
-        # Nur alle 'accumulation_steps' (4) Batches den Optimierungsschritt machen
-        if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(dataloader):
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            optimizer.step()
-            scheduler.step()
-            optimizer.zero_grad()  # Gradienten nach dem Schritt wieder zurücksetzen
-            
-        total_loss += loss.item() * accumulation_steps
-        
-    return total_loss / len(dataloader)
-
-def validate_sft_epoch(model, dataloader):
-    model.eval()
-    total_loss = 0.0
-    with torch.no_grad():
-        for batch in tqdm(dataloader, desc="SFT Validation"):
-            input_ids = batch["input_ids"].to(DEVICE)
-            attention_mask = batch["attention_mask"].to(DEVICE)
-            labels = batch["labels"].to(DEVICE)
-            
-            with torch.amp.autocast('cuda', dtype=torch.bfloat16):
-                outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
-                loss = outputs.loss
-                
-            total_loss += outputs.loss.item()
-            
-    return total_loss / len(dataloader)
-
-NUM_EPOCHS = 20
-patience = 5
-best_val_loss = float('inf')
-epochs_no_improve = 0
-history = {"train_loss": [], "val_loss": []}
-
-optimizer = AdamW(seq2seq_model.parameters(), lr=1e-5)
-scheduler = get_linear_schedule_with_warmup(
-    optimizer, 
-    num_warmup_steps=150, 
-    num_training_steps=len(train_loader) * NUM_EPOCHS
-)
-
-print("Starte SFT Training mit Validation und Early Stopping...")
-for epoch in range(NUM_EPOCHS):
-    print(f"\n--- Epoche {epoch + 1}/{NUM_EPOCHS} ---")
-    
-    # Train und Val Losses berechnen
-    sft_loss = train_sft_epoch(seq2seq_model, train_loader, optimizer, scheduler)
-    val_loss = validate_sft_epoch(seq2seq_model, val_loader)
-    
-    history["train_loss"].append(sft_loss)
-    history["val_loss"].append(val_loss)
-    
-    print(f"Epoche {epoch + 1} | Train Loss: {sft_loss:.4f} | Val Loss: {val_loss:.4f}")
-    
-    # Early Stopping und Model Saving Check
-    if val_loss < best_val_loss:
-        best_val_loss = val_loss
-        epochs_no_improve = 0
-        # Bestes Modell zwischenspeichern
-        torch.save(seq2seq_model.state_dict(), SFT_MODEL_TEMP_PATH)
-        print("-> Neues bestes Modell gespeichert.")
-    else:
-        epochs_no_improve += 1
-        if epochs_no_improve >= patience:
-            print(f"Early Stopping getriggert! Keine Verbesserung des Val Loss seit {patience} Epochen.")
-            # Lade beste Gewichte wieder
-            seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH))
-            break
-
+# Lade die trainierten SFT Gewichte direkt von Festplatte
 if os.path.exists(SFT_MODEL_TEMP_PATH):
-    seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH))
-    print("Die besten SFT-Gewichte wurden erfolgreich geladen!")
+    seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH, map_location=DEVICE))
+    print("Erfolgreich SFT-Modellgewichte von Festplatte geladen:", SFT_MODEL_TEMP_PATH)
+else:
+    raise FileNotFoundError(f"SFT-Modell unter {SFT_MODEL_TEMP_PATH} nicht gefunden! Bitte führe zuerst das SFT-Notebook aus.")
 
+# import os
+# print("Aktuelles Arbeitsverzeichnis des Notebooks:", os.getcwd())
+# print("Existiert der Ordner 'results'?", os.path.exists("./results"))
+# print("Inhalt von 'results':", os.listdir("./results") if os.path.exists("./results") else "Ordner nicht da")
 
-# Visualisierung der SFT Loss-Kurven
-plt.figure(figsize=(8, 5))
-plt.plot(range(1, len(history["train_loss"]) + 1), history["train_loss"], marker='o', label='Train Loss')
-plt.plot(range(1, len(history["val_loss"]) + 1), history["val_loss"], marker='s', label='Validation Loss')
-plt.title("SFT Loss Kurven (Overfitting-Check)")
-plt.xlabel("Epoche")
-plt.ylabel("Cross Entropy Loss")
-plt.legend()
-plt.grid(True)
-plt.show()
-
-
-# ==============================================================================
-# CODE CELL 11
-# ==============================================================================
-import os
-print("Aktuelles Arbeitsverzeichnis des Notebooks:", os.getcwd())
-print("Existiert der Ordner 'results'?", os.path.exists("./results"))
-print("Inhalt von 'results':", os.listdir("./results") if os.path.exists("./results") else "Ordner nicht da")
-
-# ==============================================================================
-# CODE CELL 12
-# ==============================================================================
 # 4.1 BiLSTM Regressor & Vocab laden
 class BiLSTMRegressor(nn.Module):
     def __init__(self, vocab_size, embed_dim=128, hidden_dim=128, dropout=0.3):
@@ -404,9 +334,6 @@ def predict_simplicity_score(texts):
         scores.append(score)
     return np.array(scores)
 
-# ==============================================================================
-# CODE CELL 13
-# ==============================================================================
 # 4.2 SBERT Semantic Similarity Model laden
 SBERT_MODEL_NAME = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
 print(f"Lade SBERT Modell: {SBERT_MODEL_NAME}...")
@@ -418,9 +345,6 @@ def predict_semantic_similarity(source_texts, generated_texts):
     cosine_sims = util.cos_sim(emb_src, emb_gen).diagonal().cpu().numpy()
     return cosine_sims
 
-# ==============================================================================
-# CODE CELL 14
-# ==============================================================================
 # 4.3 Composite Reward Evaluator
 class CompositeRewardEvaluator:
     def __init__(self, w_style=0.5, w_sem=0.5):
@@ -438,9 +362,6 @@ class CompositeRewardEvaluator:
 reward_evaluator = CompositeRewardEvaluator(w_style=W_STYLE, w_sem=W_SEM)
 
 
-# ==============================================================================
-# CODE CELL 15
-# ==============================================================================
 def generate_candidates(model, tokenizer, source_texts, num_return_sequences=2):
     model.eval()
     prompt_texts = ["Übersetze in Leichte Sprache: " + text for text in source_texts]
@@ -476,7 +397,7 @@ def generate_candidates(model, tokenizer, source_texts, num_return_sequences=2):
         candidates.append(cands)
     return candidates
 
-def compute_dpo_loss(model, ref_model, tokenizer, src_texts, chosen_texts, rejected_texts, beta=0.1):
+def compute_dpo_loss(model, ref_model, tokenizer, src_texts, chosen_texts, rejected_texts, beta=0.3):
     model.train()
     ref_model.eval()
     
@@ -552,9 +473,6 @@ ref_model.eval()
 
 dpo_optimizer = AdamW(seq2seq_model.parameters(), lr=1e-6)
 
-# ==============================================================================
-# CODE CELL 16
-# ==============================================================================
 DPO_EPOCHS = 2
 dpo_history = []
 
@@ -644,12 +562,9 @@ ax2.legend()
 ax2.grid(True)
 
 plt.tight_layout()
-plt.show()
+# plt.show()
 
 
-# ==============================================================================
-# CODE CELL 17
-# ==============================================================================
 # OUTPUT_DIR = "results/models/seq2seq_dpo_translation_model"  # -> Zentral oben definiert
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -657,9 +572,6 @@ seq2seq_model.save_pretrained(OUTPUT_DIR)
 tokenizer.save_pretrained(OUTPUT_DIR)
 print(f"Modell und Tokenizer erfolgreich gespeichert unter: {OUTPUT_DIR}")
 
-# ==============================================================================
-# CODE CELL 18
-# ==============================================================================
 # 7.1 Lebenshilfe-Datensatz laden
 # LH_DATASET_PATH = "data/lebenshilfe/lebenshilfe_dataset.json"  # -> Zentral oben definiert
 with open(LH_DATASET_PATH, "r", encoding="utf-8") as f:
@@ -667,9 +579,6 @@ with open(LH_DATASET_PATH, "r", encoding="utf-8") as f:
 
 print(f"Lebenshilfe Datensatz geladen: {len(lh_data)} Artikel-Paare.")
 
-# ==============================================================================
-# CODE CELL 19
-# ==============================================================================
 # 7.2 Übersetzen & Metriken berechnen
 def evaluate_on_lebenshilfe(model, tokenizer, lh_data, reward_evaluator, max_samples=49):
     model.eval()
@@ -720,9 +629,6 @@ def evaluate_on_lebenshilfe(model, tokenizer, lh_data, reward_evaluator, max_sam
 
 lh_eval_df = evaluate_on_lebenshilfe(seq2seq_model, tokenizer, lh_data, reward_evaluator)
 
-# ==============================================================================
-# CODE CELL 20
-# ==============================================================================
 # 7.3 Statistische Übersicht & Qualitatives Stichproben-Audit
 display(lh_eval_df[["synthetic_simplicity_score", "sbert_sim_to_as", "sbert_sim_to_ref", "composite_reward"]].describe())
 
@@ -734,9 +640,6 @@ for idx, row in lh_eval_df.head(3).iterrows():
     print(f"Modell-Übers.: {row['model_translation']}")
     print(f"Scores: Style={row['synthetic_simplicity_score']:.3f} | Sim(AS)={row['sbert_sim_to_as']:.3f} | Sim(Ref)={row['sbert_sim_to_ref']:.3f}")
 
-# ==============================================================================
-# CODE CELL 21
-# ==============================================================================
 # 7.4 Visualisierung der Metrik-Verteilungen auf dem Lebenshilfe-Set
 plt.figure(figsize=(10, 5))
 plt.hist(lh_eval_df["synthetic_simplicity_score"], bins=15, alpha=0.6, label="Synthetic Einfachheit ($R_{style}$)", color="blue")
@@ -747,5 +650,5 @@ plt.xlabel("Score")
 plt.ylabel("Anzahl Artikel")
 plt.legend()
 plt.grid(True, linestyle="--", alpha=0.5)
-plt.show()
+# plt.show()
 

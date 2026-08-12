@@ -226,6 +226,11 @@ def main():
     os.makedirs(os.path.dirname(args.output_csv), exist_ok=True)
     df.to_csv(args.output_csv, index=False, encoding="utf-8")
     print(f"Master CSV successfully saved with {len(df)} pairs to: {args.output_csv}")
+    
+    # Save as JSON as well
+    output_json = args.output_csv.replace(".csv", ".json")
+    df.to_json(output_json, orient="records", force_ascii=False, indent=2)
+    print(f"Master JSON successfully saved with {len(df)} pairs to: {output_json}")
 
 if __name__ == "__main__":
     main()

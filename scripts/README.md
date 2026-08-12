@@ -15,14 +15,16 @@ scripts/
 ├── data_collection/           # Schritt 1: Web-Scraping und URL-Alignment
 │   ├── crawl_scraper/         # Stufe 1: Crawler zur URL-Findung und -Paarung
 │   └── corpus_scrapers/       # Stufe 2: Scraper zum Extrahieren von Texten
-├── preprocessing/             # Schritt 2: Filterung, Bereinigung und lokale Datensatzerstellung
+├── preprocessing/             # Schritt 2: Filterung, Bereinigung, lokale Datensatzerstellung, Master-CSV & Synthetische Daten
 │   ├── 0_create_lebenshilfe_dataset.py
 │   ├── 1_filter_similarity.py
 │   ├── 2_normalize_clean.py
+│   ├── 2b_clean_lebenshilfe.py # Bereinigt Unterschriften, Prüfer-Hinweise und Metadaten-Rauschen aus Lebenshilfe
 │   ├── 3_build_glossary.py
-│   └── 4_enrich_glossary.py
-├── evaluation/                # Schritt 3: Berechnung linguistischer & semantischer Metriken
-│   ├── build_corpus_master.py # Führt alle Metriken in einer Master-CSV zusammen
+│   ├── 4_enrich_glossary.py
+│   ├── 5_build_corpus_master.py # Erstellt die Master-CSV & JSON (Training- & Evaluierungsgrundlage)
+│   └── 6_generate_synthetic_steps.py # Generiert Komplexitäts-Zwischenstufen via LLM API
+├── evaluation/                # Schritt 3: Berechnung linguistischer & semantischer Metriken zur Korpusanalyse
 │   ├── measure_information_loss.py
 │   ├── info_loss_stats.py
 │   ├── calculate_sbert_coverage.py
@@ -30,8 +32,13 @@ scripts/
 │   ├── summarize_corpus.py
 │   ├── measure_readability.py
 │   └── measure_ttr.py
-├── modeling/                  # Schritt 4: LLM-Generierung und Klassifikatorentraining/Evaluierung
-│   ├── generate_synthetic_regression_steps.py
+├── modeling/                  # Schritt 4: Modelltraining und Evaluierung
+│   ├── 1_binary_train_sentence_model.py # Trainiert Satz-Klassifikator
+│   ├── 2_binary_train_article_model.py  # Trainiert Artikel-Klassifikator
+│   ├── 3_regression_train_mixup.py      # Trainiert MixUp-Regressor (Style-Score)
+│   ├── 4_regression_train_synthetic.py  # Trainiert Synthetischen Regressor (Style-Score)
+│   ├── 5_train_sft.py                   # Trainiert SFT-Modell (Übersetzung)
+│   ├── 6_train_dpo.py                   # Trainiert DPO-Modell (Alignierung)
 │   ├── evaluate_article_model.py
 │   ├── evaluate_sentence_model.py
 │   ├── check_length_bias.py
@@ -61,12 +68,16 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
   .venv/bin/python scripts/data_collection/corpus_scrapers/apotheken_scraper.py
   ```
 
-### 2. Vorverarbeitung & Bereinigung (`preprocessing/`)
-* **Lokaler Datensatz (Lebenshilfe):**
+### 2. Vorverarbeitung & Datensatzerstellung (`preprocessing/`)
+* **Lokaler Datensatz (Lebenshilfe) erstellen:** Verarbeitet lokale Dokumentdateien (`.docx`, `.rtf`, `.odt`) der Organisation *Lebenshilfe*.
   ```bash
   .venv/bin/python scripts/preprocessing/0_create_lebenshilfe_dataset.py
   ```
-* **Korpus-Bereinigung (Filterung):** Filterung basierend auf minimaler Länge und semantischer Ähnlichkeit ($0.60 \leq \text{Sim} \leq 0.99$).
+* **Lebenshilfe-Bereinigung:** Bereinigt den Lebenshilfe-Datensatz (entfernt Unterschriften, Prüfer-Hinweise und Metadaten-Rauschen).
+  ```bash
+  .venv/bin/python scripts/preprocessing/2b_clean_lebenshilfe.py
+  ```
+* **Korpus-Bereinigung (Filterung):** Filterung basierend auf minimaler Länge und semantischer Ähnlichkeit ($0.60 \leq \text{Sim} \leq 0.99$) aus den Analysedaten.
   ```bash
   .venv/bin/python scripts/preprocessing/1_filter_similarity.py
   ```
@@ -82,11 +93,33 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
   ```bash
   .venv/bin/python scripts/preprocessing/4_enrich_glossary.py
   ```
+* **Master-CSV & JSON erstellen:** Berechnet alle Ähnlichkeits-, Lesbarkeits- und Diversitätsmetriken in einem einzigen Durchlauf. Es werden parallel eine `.csv` (für Datenanalysen) und eine `.json` (für robusteres Modelltraining) erstellt.
+  ```bash
+  .venv/bin/python scripts/preprocessing/5_build_corpus_master.py \
+      --input_dir data/corpus/4_normalized_clean \
+      --output_csv data/analysis/corpus_master.csv
+  ```
+* **Synthetische Datengenerierung via LLM-API:** Generiert Zwischenstufen (Standard: `0.25, 0.50, 0.75`) zwischen Alltagssprache ($0.0$) und Leichter Sprache ($1.0$) über ein OpenAI-kompatibles LLM API-Interface.
+  ```bash
+  # 1. Für den Lebenshilfe-Datensatz:
+  .venv/bin/python scripts/preprocessing/6_generate_synthetic_steps.py \
+      --input data/lebenshilfe/lebenshilfe_dataset_clean.json \
+      --output data/lebenshilfe/lebenshilfe_dataset_with_steps.json \
+      --url <API_URL> --token <TOKEN> --model "FlensGen-GPT-OSS120B"
+
+  # 2. Für das Hauptkorpus (aus dem Master-JSON):
+  .venv/bin/python scripts/preprocessing/6_generate_synthetic_steps.py \
+      --input data/analysis/corpus_master.json \
+      --output data/corpus/corpus_master_with_steps.json \
+      --url <API_URL> --token <TOKEN> --model "FlensGen-GPT-OSS120B"
+  ```
 
 ### 3. Evaluierung & Metriken (`evaluation/`)
 * **Semantische Ähnlichkeit & NER Recall:**
   ```bash
-  .venv/bin/python scripts/evaluation/measure_information_loss.py --input_dir data/corpus/4_normalized_clean --output_csv data/analysis/information_loss_analysis_cleaned.csv
+  .venv/bin/python scripts/evaluation/measure_information_loss.py \
+      --input_dir data/corpus/final \
+      --output_csv data/analysis/information_loss_analysis_cleaned.csv
   ```
 * **Lesbarkeits-Indizes (Flesch, Wiener Sachtextformel, LIX):**
   ```bash
@@ -100,20 +133,63 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
   ```bash
   .venv/bin/python scripts/evaluation/summarize_corpus.py
   ```
-* **Master-CSV erstellen (Konsolidiert alle Metriken):**
-  ```bash
-  .venv/bin/python scripts/evaluation/build_corpus_master.py --input_dir data/corpus/4_normalized_clean --output_csv data/analysis/corpus_master.csv
-  ```
 
-### 4. Modellierung & LLM-Synthese (`modeling/`)
-* **Synthetische Datengenerierung via LLM-API:**
+### 4. Modellierung & Training (`modeling/`)
+
+Trainiert Klassifikatoren, Regressoren sowie Übersetzungs- und DPO-Modelle. Alle Parameter müssen per CLI-Argument übergeben werden. Ausgaben werden live auf der Konsole ausgegeben und in `results/logs/` mitgeschrieben.
+
+* **Satz-Klassifikator (BiLSTM):**
   ```bash
-  .venv/bin/python scripts/modeling/generate_synthetic_regression_steps.py --url <API_URL> --token <TOKEN>
+  .venv/bin/python scripts/modeling/1_binary_train_sentence_model.py \
+      --csv_path data/analysis/corpus_master.csv \
+      --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
+      --batch_size 64 --embedding_dim 128 --epochs 20 --hidden_dim 128 \
+      --lr 0.001 --max_seq_len 100 --max_sim 0.98 --min_sent_len 3 --min_sim 0.8
   ```
-* **Modellevaluierung (LSTM-Klassifikatoren):**
+* **Artikel-Klassifikator (BiLSTM):**
   ```bash
-  .venv/bin/python scripts/modeling/evaluate_article_model.py
-  .venv/bin/python scripts/modeling/evaluate_sentence_model.py
+  .venv/bin/python scripts/modeling/2_binary_train_article_model.py \
+      --csv_path data/analysis/corpus_master.csv \
+      --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
+      --batch_size 32 --embedding_dim 128 --epochs 30 --hidden_dim 128 \
+      --lr 0.001 --max_seq_len 512 --max_sim 0.98 --min_sim 0.8
+  ```
+* **MixUp-Regressor (Style-Score):**
+  ```bash
+  .venv/bin/python scripts/modeling/3_regression_train_mixup.py \
+      --csv_path data/analysis/corpus_master.csv \
+      --batch_size 64 --embedding_dim 128 --epochs 40 --hidden_dim 128 \
+      --lr 0.001 --max_sim 0.98 --min_sim 0.8 --max_seq_len 256
+  ```
+* **Synthetischer Regressor (Style-Score):**
+  ```bash
+  .venv/bin/python scripts/modeling/4_regression_train_synthetic.py \
+      --corpus_with_steps_path data/corpus/corpus_master_with_steps.json \
+      --lh_with_steps_path data/lebenshilfe/lebenshilfe_dataset_with_steps.json \
+      --model_save_path results/models/bilstm_synthetic_regression.pt \
+      --vocab_save_path data/vocabs/synthetic_vocab.json \
+      --epochs 15 --max_seq_len 256
+  ```
+* **Supervised Fine-Tuning (SFT Übersetzungsmodell):**
+  ```bash
+  .venv/bin/python scripts/modeling/5_train_sft.py \
+      --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
+      --corpus_csv_path data/analysis/corpus_master.csv \
+      --sft_model_temp_path results/models/2_sft.pt \
+      --min_sim 0.70 --max_sim 0.98 --max_source_len 256 --max_target_len 256 \
+      --model_name facebook/mbart-large-50
+  ```
+* **Direct Preference Optimization (DPO Ausrichtung):**
+  ```bash
+  .venv/bin/python scripts/modeling/6_train_dpo.py \
+      --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
+      --corpus_csv_path data/analysis/corpus_master.csv \
+      --output_dir results/models/seq2seq_dpo \
+      --sft_model_temp_path results/models/2_sft.pt \
+      --synthetic_model_path results/models/bilstm_synthetic_regression.pt \
+      --synthetic_vocab_path data/vocabs/synthetic_vocab.json \
+      --min_sim 0.80 --max_sim 0.98 --w_style 0.5 --w_sem 0.5 \
+      --max_source_len 256 --max_target_len 256 --model_name facebook/mbart-large-50
   ```
 
 ### 5. Visualisierung (`visualization/`)
@@ -124,4 +200,8 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
 * **Boxplots & Verteilungen zur Lesbarkeit & Diversität:**
   ```bash
   .venv/bin/python scripts/visualization/visualize_readability.py
+  ```
+* **Type-Token-Ratio (TTR) visualisieren:**
+  ```bash
+  .venv/bin/python scripts/visualization/visualize_ttr.py
   ```

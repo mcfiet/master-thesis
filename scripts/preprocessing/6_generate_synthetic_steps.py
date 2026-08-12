@@ -20,15 +20,15 @@ import requests
 
 SYSTEM_PROMPT = """Du bist ein Experte für die deutsche Sprache und Textvereinfachung.
 Dir wird ein Artikel in zwei verschiedenen Schwierigkeitsgraden vorgelegt:
-1. Leichte Sprache (LS / Stufe 0.0): Extrem vereinfacht, kurze Sätze, sehr einfache Satzstruktur, oft mit Zeilenumbrüchen nach jedem Satzteil, geringe Wortkomplexität, keine Fremdwörter, Fachbegriffe werden direkt erklärt.
-2. Alltagssprache (AS / Stufe 1.0): Der normale Originaltext, komplexer Satzbau, reichhaltiger Wortschatz, Nebensätze, Passiv- und Genitivkonstruktionen, Fachbegriffe.
+1. Leichte Sprache (LS / Stufe 1.0): Extrem vereinfacht, kurze Sätze, sehr einfache Satzstruktur, oft mit Zeilenumbrüchen nach jedem Satzteil, geringe Wortkomplexität, keine Fremdwörter, Fachbegriffe werden direkt erklärt.
+2. Alltagssprache (AS / Stufe 0.0): Der normale Originaltext, komplexer Satzbau, reichhaltiger Wortschatz, Nebensätze, Passiv- und Genitivkonstruktionen, Fachbegriffe.
 
 Deine Aufgabe ist es, eine neue Version dieses Artikels zu schreiben, die sprachlich präzise auf einer bestimmten Stufe zwischen diesen beiden Versionen liegt.
-Die Skala reicht von 0.0 (Leichte Sprache) bis 1.0 (Alltagssprache).
+Die Skala reicht von 0.0 (Alltagssprache) bis 1.0 (Leichte Sprache).
 Dir wird ein bestimmter Zielwert (z.B. 0.25, 0.50, 0.75) vorgegeben.
 
 Richtlinien für die Stufen:
-- Stufe 0.25 (Nahe an Leichter Sprache):
+- Stufe 0.75 (Nahe an Leichter Sprache):
   - Der Text soll sehr leicht verständlich sein.
   - Verwende überwiegend einfache Sätze, aber du darfst einzelne einfache Nebensätze (z. B. mit "weil", "wenn", "dass") einbauen.
   - Der Wortschatz darf minimal anspruchsvoller sein als in der LS-Version (z. B. geläufige Wörter anstelle von extremen Umschreibungen), aber vermeide Fremdwörter.
@@ -41,7 +41,7 @@ Richtlinien für die Stufen:
   - Der Wortschatz ist alltäglich, ohne extreme Fach- oder Fremdwörter.
   - Der Text fließt natürlicher als Leichte Sprache, behält aber die gute Verständlichkeit bei.
 
-- Stufe 0.75 (Nahe an Alltagssprache):
+- Stufe 0.25 (Nahe an Alltagssprache):
   - Der Text ist nur leicht vereinfacht im Vergleich zur AS-Version.
   - Schachtelsätze werden weitgehend in zwei separate Sätze aufgeteilt.
   - Schwierige Fachbegriffe oder Fremdwörter werden entweder vermieden, durch geläufigere Wörter ersetzt oder im Satz kurz erklärt.
@@ -56,8 +56,8 @@ Wichtige Regeln:
 def build_prompt(ls_text: str, as_text: str, target_level: float) -> str:
     return (
         f"Hier sind die beiden Versionen des Artikels:\n\n"
-        f"### Version 1: Leichte Sprache (LS / Stufe 0.0):\n{ls_text.strip()}\n\n"
-        f"### Version 2: Alltagssprache (AS / Stufe 1.0):\n{as_text.strip()}\n\n"
+        f"### Version 1: Leichte Sprache (LS / Stufe 1.0):\n{ls_text.strip()}\n\n"
+        f"### Version 2: Alltagssprache (AS / Stufe 0.0):\n{as_text.strip()}\n\n"
         f"### Ziel-Stufe: {target_level:.2f}\n\n"
         f"Erstelle nun den Text, der genau auf der Ziel-Stufe {target_level:.2f} liegt. "
         f"Befolge alle stilistischen Richtlinien für diese Stufe. Antworte nur mit dem generierten Text."
