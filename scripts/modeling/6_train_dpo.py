@@ -73,7 +73,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--lh_dataset_path', required=True)
 parser.add_argument('--corpus_csv_path', required=True)
 parser.add_argument('--output_dir', required=True)
-parser.add_argument('--sft_model_temp_path', required=True)
+parser.add_argument('--sft_model_path', required=True)
 parser.add_argument('--synthetic_model_path', required=True)
 parser.add_argument('--synthetic_vocab_path', required=True)
 parser.add_argument('--min_sim', type=float, required=True)
@@ -88,7 +88,7 @@ args = parser.parse_args()
 LH_DATASET_PATH = args.lh_dataset_path
 CORPUS_CSV_PATH = args.corpus_csv_path
 OUTPUT_DIR = args.output_dir
-SFT_MODEL_TEMP_PATH = args.sft_model_temp_path
+SFT_MODEL_PATH = args.sft_model_path
 SYNTHETIC_MODEL_PATH = args.synthetic_model_path
 SYNTHETIC_VOCAB_PATH = args.synthetic_vocab_path
 MIN_SIM = args.min_sim
@@ -203,11 +203,11 @@ class TranslationDataset(Dataset):
             "raw_ls": item["ls_text"]
         }
 
-if os.path.exists(SFT_MODEL_TEMP_PATH):
-    seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH, map_location=DEVICE))
-    print("Erfolgreich SFT-Modellgewichte von Festplatte geladen:", SFT_MODEL_TEMP_PATH)
+if os.path.exists(SFT_MODEL_PATH):
+    seq2seq_model.load_state_dict(torch.load(SFT_MODEL_PATH, map_location=DEVICE))
+    print("Erfolgreich SFT-Modellgewichte von Festplatte geladen:", SFT_MODEL_PATH)
 else:
-    raise FileNotFoundError(f"SFT-Modell unter {SFT_MODEL_TEMP_PATH} nicht gefunden! Bitte führe zuerst das SFT Training aus.")
+    raise FileNotFoundError(f"SFT-Modell unter {SFT_MODEL_PATH} nicht gefunden! Bitte führe zuerst das SFT Training aus.")
 
 # ==============================================================================
 # REWARD MODELS SETUP

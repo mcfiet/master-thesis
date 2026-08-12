@@ -69,7 +69,7 @@ set_seed(42)
 parser = argparse.ArgumentParser()
 parser.add_argument('--lh_dataset_path', required=True)
 parser.add_argument('--corpus_csv_path', required=True)
-parser.add_argument('--sft_model_temp_path', required=True)
+parser.add_argument('--sft_model_path', required=True)
 parser.add_argument('--min_sim', type=float, required=True)
 parser.add_argument('--max_sim', type=float, required=True)
 parser.add_argument('--max_source_len', type=int, required=True)
@@ -79,7 +79,7 @@ args = parser.parse_args()
 
 LH_DATASET_PATH = args.lh_dataset_path
 CORPUS_CSV_PATH = args.corpus_csv_path
-SFT_MODEL_TEMP_PATH = args.sft_model_temp_path
+SFT_MODEL_PATH = args.sft_model_path
 MIN_SIM = args.min_sim
 MAX_SIM = args.max_sim
 MAX_SOURCE_LEN = args.max_source_len
@@ -155,8 +155,8 @@ if "mbart" in MODEL_NAME.lower():
     tokenizer.src_lang = "de_DE"
     tokenizer.tgt_lang = "de_DE"
 
-if os.path.exists(SFT_MODEL_TEMP_PATH):
-    state_dict = torch.load(SFT_MODEL_TEMP_PATH, map_location=DEVICE)
+if os.path.exists(SFT_MODEL_PATH):
+    state_dict = torch.load(SFT_MODEL_PATH, map_location=DEVICE)
     seq2seq_model.load_state_dict(state_dict)
     print("Erfolgreich SFT-Modellgewichte von Festplatte geladen!")
 
@@ -272,17 +272,17 @@ for epoch in range(NUM_EPOCHS):
     if val_loss < best_val_loss:
         best_val_loss = val_loss
         epochs_no_improve = 0
-        torch.save(seq2seq_model.state_dict(), SFT_MODEL_TEMP_PATH)
+        torch.save(seq2seq_model.state_dict(), SFT_MODEL_PATH)
         print("-> Neues bestes Modell gespeichert.")
     else:
         epochs_no_improve += 1
         if epochs_no_improve >= patience:
             print(f"Early Stopping getriggert! Keine Verbesserung des Val Loss seit {patience} Epochen.")
-            seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH))
+            seq2seq_model.load_state_dict(torch.load(SFT_MODEL_PATH))
             break
 
-if os.path.exists(SFT_MODEL_TEMP_PATH):
-    seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH))
+if os.path.exists(SFT_MODEL_PATH):
+    seq2seq_model.load_state_dict(torch.load(SFT_MODEL_PATH))
     print("Die besten SFT-Gewichte wurden erfolgreich geladen!")
 
 # Save SFT Loss Curves
