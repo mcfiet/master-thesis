@@ -169,6 +169,10 @@ def analyze_corpus():
             all_results.append(res)
             
     # Save results
+    output_dir = os.path.dirname(OUTPUT_CSV)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        
     df = pd.DataFrame(all_results)
     df.to_csv(OUTPUT_CSV, index=False)
     

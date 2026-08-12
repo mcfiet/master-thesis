@@ -2,9 +2,14 @@ import json
 import os
 import re
 
-INPUT_FILE = "data/lebenshilfe/lebenshilfe_dataset.json"
-OUTPUT_FILE = "data/lebenshilfe/lebenshilfe_dataset_clean.json"
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--input_file', required=True)
+parser.add_argument('--output_file', required=True)
+args = parser.parse_args()
 
+INPUT_FILE = args.input_file
+OUTPUT_FILE = args.output_file
 # List of filenames or keywords to identify form/consent/list documents that should be excluded completely
 EXCLUDE_FILENAMES = {
     # Questionnaire/Surveys

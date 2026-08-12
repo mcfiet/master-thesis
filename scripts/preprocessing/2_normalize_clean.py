@@ -3,9 +3,15 @@ import os
 import re
 from tqdm import tqdm
 
-# Configuration
-INPUT_DIR = "data/corpus/3_filtered_similarity"
-OUTPUT_DIR = "data/corpus/4_normalized_clean"
+# Configuration (Passed via Command Line)
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--input_dir", required=True)
+parser.add_argument("--output_dir", required=True)
+args = parser.parse_args()
+
+INPUT_DIR = args.input_dir
+OUTPUT_DIR = args.output_dir
 
 MONTHS = r"(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)"
 

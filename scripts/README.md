@@ -75,15 +75,23 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
   ```
 * **Lebenshilfe-Bereinigung:** Bereinigt den Lebenshilfe-Datensatz (entfernt Unterschriften, Prüfer-Hinweise und Metadaten-Rauschen).
   ```bash
-  .venv/bin/python scripts/preprocessing/2b_clean_lebenshilfe.py
+  .venv/bin/python scripts/preprocessing/2b_clean_lebenshilfe.py \
+      --input_file data/lebenshilfe/lebenshilfe_dataset.json \
+      --output_file data/lebenshilfe/lebenshilfe_dataset_clean.json
   ```
 * **Korpus-Bereinigung (Filterung):** Filterung basierend auf minimaler Länge und semantischer Ähnlichkeit ($0.60 \leq \text{Sim} \leq 0.99$) aus den Analysedaten.
   ```bash
-  .venv/bin/python scripts/preprocessing/1_filter_similarity.py
+  .venv/bin/python scripts/preprocessing/1_filter_similarity.py \
+      --analysis_csv data/analysis/information_loss_analysis_cleaned.csv \
+      --source_dir data/corpus/2_raw_scraped \
+      --output_dir data/corpus/3_filtered_similarity \
+      --sim_min 0.60 --sim_max 0.99 --min_ls_tokens 10
   ```
 * **Post-Processing (Normalisierung):** Quellenspezifische Korrekturen (z.B. Mediopunkt-Entfernung).
   ```bash
-  .venv/bin/python scripts/preprocessing/2_normalize_clean.py
+  .venv/bin/python scripts/preprocessing/2_normalize_clean.py \
+      --input_dir data/corpus/3_filtered_similarity \
+      --output_dir data/corpus/4_normalized_clean
   ```
 * **Glossar aufbauen:** Erstellt ein Vokabular aus dem Korpus via Hurraki API.
   ```bash
@@ -118,7 +126,7 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
 * **Semantische Ähnlichkeit & NER Recall:**
   ```bash
   .venv/bin/python scripts/evaluation/measure_information_loss.py \
-      --input_dir data/corpus/final \
+      --input_dir data/corpus/2_raw_scraped \
       --output_csv data/analysis/information_loss_analysis_cleaned.csv
   ```
 * **Lesbarkeits-Indizes (Flesch, Wiener Sachtextformel, LIX):**
@@ -137,6 +145,11 @@ Führe alle Befehle aus dem **Hauptverzeichnis** (Repository-Root) aus.
 ### 4. Modellierung & Training (`modeling/`)
 
 Trainiert Klassifikatoren, Regressoren sowie Übersetzungs- und DPO-Modelle. Alle Parameter müssen per CLI-Argument übergeben werden. Ausgaben werden live auf der Konsole ausgegeben und in `results/logs/` mitgeschrieben.
+
+> [!NOTE]
+> **Hardware-Ressourcen (CPU vs. GPU):**
+> * **CPU-freundlich (GPU optional):** Die Metrik-Skripte (1, 2, 3 und 4) basieren auf kompakten BiLSTM-Netzen. Sie können problemlos auf der CPU trainiert werden.
+> * **GPU zwingend erforderlich (GPU Mandatory):** Die Übersetzungs- und DPO-Skripte (5 und 6) trainieren bzw. tunen das große Transformer-Modell `mBART-large-50` (über 1 Mrd. Parameter). Ein Training auf der CPU führt aufgrund von Speichermangel und extrem langsamer Rechengeschwindigkeit zu Abbruch oder Nicht-Machbarkeit.
 
 * **Satz-Klassifikator (BiLSTM):**
   ```bash

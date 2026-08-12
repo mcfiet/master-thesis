@@ -3,13 +3,23 @@ import os
 import pandas as pd
 from tqdm import tqdm
 
-# Configuration
-ANALYSIS_CSV = "data/analysis/information_loss_analysis_cleaned.csv"
-SOURCE_DIR = "data/corpus/2_raw_scraped"
-OUTPUT_DIR = "data/corpus/3_filtered_similarity"
-SIM_MIN = 0.60
-SIM_MAX = 0.99
-MIN_LS_TOKENS = 10
+# Configuration (Passed via Command Line)
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--analysis_csv", required=True)
+parser.add_argument("--source_dir", required=True)
+parser.add_argument("--output_dir", required=True)
+parser.add_argument("--sim_min", type=float, required=True)
+parser.add_argument("--sim_max", type=float, required=True)
+parser.add_argument("--min_ls_tokens", type=int, required=True)
+args = parser.parse_args()
+
+ANALYSIS_CSV = args.analysis_csv
+SOURCE_DIR = args.source_dir
+OUTPUT_DIR = args.output_dir
+SIM_MIN = args.sim_min
+SIM_MAX = args.sim_max
+MIN_LS_TOKENS = args.min_ls_tokens
 
 def clean_corpus():
     # 1. Load Analysis Results

@@ -11,6 +11,10 @@ interface StatusData {
     mixup_exists: boolean;
     synthetic: string;
     synthetic_exists: boolean;
+    mixup_sft: string;
+    mixup_sft_exists: boolean;
+    synthetic_sft: string;
+    synthetic_sft_exists: boolean;
   };
 }
 
@@ -42,6 +46,7 @@ export default function Home() {
 
   const [translateText, setTranslateText] = useState("");
   const [selectedModel, setSelectedModel] = useState<"mixup" | "synthetic">("mixup");
+  const [selectedTuning, setSelectedTuning] = useState<"dpo" | "sft">("dpo");
   const [translationResult, setTranslationResult] = useState<TranslateResult | null>(null);
   const [loadingTranslate, setLoadingTranslate] = useState(false);
 
@@ -76,14 +81,24 @@ export default function Home() {
         }
 
         if (data.translation_paths.mixup_exists) {
-          addLog("✅ MixUp Übersetzungsmodell gefunden.");
+          addLog("✅ MixUp-DPO Übersetzungsmodell gefunden.");
         } else {
-          addLog(`⚠️ MixUp Übersetzungsmodell fehlt unter '${data.translation_paths.mixup}'`);
+          addLog(`⚠️ MixUp-DPO Übersetzungsmodell fehlt unter '${data.translation_paths.mixup}'`);
+        }
+        if (data.translation_paths.mixup_sft_exists) {
+          addLog("✅ MixUp-SFT Übersetzungsmodell gefunden.");
+        } else {
+          addLog(`⚠️ MixUp-SFT Übersetzungsmodell (.pt) fehlt unter '${data.translation_paths.mixup_sft}'`);
         }
         if (data.translation_paths.synthetic_exists) {
-          addLog("✅ Synthetic Übersetzungsmodell gefunden.");
+          addLog("✅ Synthetic-DPO Übersetzungsmodell gefunden.");
         } else {
-          addLog(`⚠️ Synthetic Übersetzungsmodell fehlt unter '${data.translation_paths.synthetic}'`);
+          addLog(`⚠️ Synthetic-DPO Übersetzungsmodell fehlt unter '${data.translation_paths.synthetic}'`);
+        }
+        if (data.translation_paths.synthetic_sft_exists) {
+          addLog("✅ Synthetic-SFT Übersetzungsmodell gefunden.");
+        } else {
+          addLog(`⚠️ Synthetic-SFT Übersetzungsmodell (.pt) fehlt unter '${data.translation_paths.synthetic_sft}'`);
         }
       }
     } catch (err) {
@@ -121,12 +136,13 @@ export default function Home() {
     if (!translateText.trim()) return;
     setLoadingTranslate(true);
     setTranslationResult(null);
-    addLog(`Starte Übersetzung mit ${selectedModel === "mixup" ? "MixUp-DPO" : "Synthetic-DPO"} Modell...`);
+    const modelName = `${selectedModel === "mixup" ? "MixUp" : "Synthetic"}-${selectedTuning.toUpperCase()}`;
+    addLog(`Starte Übersetzung mit ${modelName} Modell...`);
     try {
       const res = await fetch("http://localhost:8000/api/translate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: translateText, model_type: selectedModel }),
+        body: JSON.stringify({ text: translateText, model_type: selectedModel, tuning_type: selectedTuning }),
       });
       if (res.ok) {
         const data = await res.json();
@@ -153,8 +169,8 @@ export default function Home() {
   const delta = targetSimp - sourceSimp;
 
   const modelExists = selectedModel === "mixup" 
-    ? status?.translation_paths.mixup_exists 
-    : status?.translation_paths.synthetic_exists;
+    ? (selectedTuning === "dpo" ? status?.translation_paths.mixup_exists : status?.translation_paths.mixup_sft_exists)
+    : (selectedTuning === "dpo" ? status?.translation_paths.synthetic_exists : status?.translation_paths.synthetic_sft_exists);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -301,55 +317,84 @@ export default function Home() {
               />
             </div>
             
-            <div className="flex justify-between items-center gap-4 flex-wrap">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Ausrichtung:</span>
-                <div className="flex bg-slate-100 border border-slate-250 p-1 rounded-lg gap-1">
-                  <button
-                    onClick={() => setSelectedModel("mixup")}
-                    className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-                      selectedModel === "mixup" ? "bg-[#6366f1] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    MixUp Reward
-                  </button>
-                  <button
-                    onClick={() => setSelectedModel("synthetic")}
-                    className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
-                      selectedModel === "synthetic" ? "bg-[#6366f1] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    Synthetic Reward
-                  </button>
+            <div className="flex flex-col gap-4 py-2 border-y border-slate-100 my-2">
+              <div className="flex justify-between items-center gap-4 flex-wrap">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Ausrichtung:</span>
+                  <div className="flex bg-slate-100 border border-slate-250 p-1 rounded-lg gap-1">
+                    <button
+                      onClick={() => setSelectedModel("mixup")}
+                      className={`px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                        selectedModel === "mixup" ? "bg-[#6366f1] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      MixUp Reward
+                    </button>
+                    <button
+                      onClick={() => setSelectedModel("synthetic")}
+                      className={`px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                        selectedModel === "synthetic" ? "bg-[#6366f1] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      Synthetic Reward
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Modell-Typ:</span>
+                  <div className="flex bg-slate-100 border border-slate-250 p-1 rounded-lg gap-1">
+                    <button
+                      onClick={() => setSelectedTuning("dpo")}
+                      className={`px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                        selectedTuning === "dpo" ? "bg-[#6366f1] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      DPO
+                    </button>
+                    <button
+                      onClick={() => setSelectedTuning("sft")}
+                      className={`px-3 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                        selectedTuning === "sft" ? "bg-[#6366f1] text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      SFT
+                    </button>
+                  </div>
                 </div>
               </div>
-              <button
-                onClick={handleTranslate}
-                disabled={loadingTranslate || !translateText.trim() || !modelExists}
-                className={`px-5 py-2.5 font-semibold text-sm rounded-lg shadow-sm hover:shadow transition-all flex items-center gap-2 ${
-                  modelExists 
-                    ? "bg-[#6366f1] hover:bg-[#4f46e5] text-white" 
-                    : "bg-slate-200 text-slate-400 cursor-not-allowed"
-                }`}
-              >
-                {loadingTranslate ? (
-                  <>
-                    <div className="loading-spinner h-3.5 w-3.5 border-indigo-200 border-t-white" />
-                    <span>Übersetzen...</span>
-                  </>
-                ) : (
-                  <span>Übersetzen</span>
-                )}
-              </button>
+
+              <div className="flex justify-end">
+                <button
+                  onClick={handleTranslate}
+                  disabled={loadingTranslate || !translateText.trim() || !modelExists}
+                  className={`px-5 py-2.5 font-semibold text-sm rounded-lg shadow-sm hover:shadow transition-all flex items-center gap-2 cursor-pointer ${
+                    modelExists 
+                      ? "bg-[#6366f1] hover:bg-[#4f46e5] text-white" 
+                      : "bg-slate-200 text-slate-400 cursor-not-allowed"
+                  }`}
+                >
+                  {loadingTranslate ? (
+                    <>
+                      <div className="loading-spinner h-3.5 w-3.5 border-indigo-200 border-t-white" />
+                      <span>Übersetzen...</span>
+                    </>
+                  ) : (
+                    <span>Übersetzen</span>
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Model Status Message */}
             {!modelExists && status && (
               <div className="bg-[#ef4444]/5 border border-[#ef4444]/20 p-4 rounded-xl text-xs text-[#ef4444] font-medium leading-relaxed">
-                ⚠️ Übersetzung deaktiviert: Das ausgewählte feingetunte Modell wurde auf dem System nicht gefunden.
-                Legen Sie den Ordner mit den Modellgewichten unter 
+                ⚠️ Übersetzung deaktiviert: Das ausgewählte Modell ({selectedModel === "mixup" ? "MixUp" : "Synthetic"}-{selectedTuning.toUpperCase()}) wurde auf dem System nicht gefunden.
+                Legen Sie die Modellgewichte unter 
                 <code className="bg-slate-100 border border-slate-200 px-1 py-0.5 rounded mx-1 text-slate-800">
-                  {selectedModel === "mixup" ? status.translation_paths.mixup : status.translation_paths.synthetic}
+                  {selectedModel === "mixup" 
+                    ? (selectedTuning === "dpo" ? status.translation_paths.mixup : status.translation_paths.mixup_sft)
+                    : (selectedTuning === "dpo" ? status.translation_paths.synthetic : status.translation_paths.synthetic_sft)}
                 </code> 
                 ab, um die Übersetzung zu aktivieren.
               </div>
