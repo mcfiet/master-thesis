@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import argparse
 from docx import Document
 from striprtf.striprtf import rtf_to_text
 from odf import text, teletype
@@ -38,7 +39,11 @@ def extract_text(file_path):
         print(f"Error extracting {file_path}: {e}")
         return ""
 
-base_dir = 'data/lebenshilfe/texts_lebenshilfe'
+parser = argparse.ArgumentParser(description="Create Lebenshilfe dataset")
+parser.add_argument("--data-dir", type=str, default="data/texts_lebenshilfe", help="Path to texts_lebenshilfe folder")
+args = parser.parse_args()
+
+base_dir = args.data_dir
 ls_dir = os.path.join(base_dir, 'ls')
 as_dir = os.path.join(base_dir, 'as')
 
