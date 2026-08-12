@@ -1,13 +1,33 @@
 import os
-# ==============================================================================
-# LOGGING SETUP (Redirect stdout and stderr to terminal and log file)
-# ==============================================================================
 import sys
 import datetime
+import random
+import json
+import argparse
+import copy
+import gc
+import numpy as np
+import pandas as pd
+import spacy
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.data import Dataset, DataLoader
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, get_linear_schedule_with_warmup
+from torch.optim import AdamW
+from sentence_transformers import SentenceTransformer, util
+import matplotlib.pyplot as plt
+from tqdm import tqdm
 
+# ==============================================================================
+# LOGGING & DIRECTORY SETUP
+# ==============================================================================
 log_dir = "results/logs"
+plot_dir = "results/plots"
 os.makedirs(log_dir, exist_ok=True)
 os.makedirs("results/models", exist_ok=True)
+os.makedirs(plot_dir, exist_ok=True)
+
 script_name = os.path.basename(__file__).replace(".py", "")
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
@@ -29,17 +49,26 @@ class Logger(object):
 sys.stdout = Logger(log_file)
 sys.stderr = sys.stdout
 print(f"Log file initialized at: {log_file}")
-# ==============================================================================
-import os
-import sys
-
-# Arbeitsverzeichnis wird beibehalten, Pfade werden normal relativ angegeben
 print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 # ==============================================================================
-# ZENTRALE KONFIGURATION & PARAMS (Passed via Command Line)
+# SEED CONFIGURATION
 # ==============================================================================
-import argparse
+def set_seed(seed=42):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    print(f"Globaler Seed auf {seed} gesetzt.")
+
+set_seed(42)
+
+# ==============================================================================
+# ZENTRALE KONFIGURATION & PARAMS
+# ==============================================================================
 parser = argparse.ArgumentParser()
 parser.add_argument('--lh_dataset_path', required=True)
 parser.add_argument('--corpus_csv_path', required=True)
@@ -70,91 +99,13 @@ MAX_SOURCE_LEN = args.max_source_len
 MAX_TARGET_LEN = args.max_target_len
 MODEL_NAME = args.model_name
 
-
-import torch
-print("CUDA verfügbar:", torch.cuda.is_available())
-print("Device Name:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "Keine GPU")
-
-import os
-print("Aktuelles Arbeitsverzeichnis von Python:", os.getcwd())
-print("Existiert der data-Ordner hier?", os.path.exists("data"))
-print("Existiert der data-Ordner eine Ebene höher?", os.path.exists("../data"))
-
-# Set seed for reproducibility
-def set_seed(seed=42):
-    import random
-    import numpy as np
-    import torch
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
-    print(f"Globaler Seed auf {seed} gesetzt.")
-
-set_seed(42)
-
-
-import os
-import json
-import glob
-import random
-import numpy as np
-import pandas as pd
-from collections import Counter
-from tqdm import tqdm
-import matplotlib.pyplot as plt
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
-
-import spacy
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, get_linear_schedule_with_warmup
-from torch.optim import AdamW
-from sentence_transformers import SentenceTransformer, util
-
-print(torch.__version__)
-
-
-# Device Configuration
-if torch.cuda.is_available():
-    DEVICE = torch.device("cuda")
-elif torch.backends.mps.is_available():
-    DEVICE = torch.device("mps")
-else:
-    DEVICE = torch.device("cpu")
-
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu"))
 print(f"Nutze Device: {DEVICE}")
 
-import os
-import glob
-
-# 1. Wo sind wir gerade?
-print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
-
-# 2. Was liegt in diesem Arbeitsverzeichnis?
-print("Dateien hier:", os.listdir("."))
-
-# 3. Teste verschiedene Pfade zu 'data/corpus/final'
-pfade_zum_testen = [
-    "data/corpus/final",
-    "data/corpus/final",
-    "data/corpus/final",
-    "C:/Users/fiete/git/master/data/corpus/final" # Absoluter Pfad
-]
-
-for pfad in pfade_zum_testen:
-    existiert = os.path.exists(pfad)
-    anzahl_dateien = len(glob.glob(os.path.join(pfad, "*.json"))) if existiert else 0
-    print(f"Pfad '{pfad}': Existiert = {existiert}, JSON-Dateien = {anzahl_dateien}")
-
+# ==============================================================================
+# DATA LOADING & SPLITTING
+# ==============================================================================
 def load_filtered_corpus(csv_path=CORPUS_CSV_PATH, min_sim=MIN_SIM, max_sim=MAX_SIM):
-    import pandas as pd
-    import json
     json_path = csv_path.replace(".csv", ".json")
     if os.path.exists(json_path):
         print(f"Lade Datensatz aus JSON: {json_path}")
@@ -200,20 +151,15 @@ def load_filtered_corpus(csv_path=CORPUS_CSV_PATH, min_sim=MIN_SIM, max_sim=MAX_
 all_pairs = load_filtered_corpus(min_sim=MIN_SIM, max_sim=MAX_SIM)
 print(f"Gesamtzahl geladener Artikel-Paare: {len(all_pairs)}")
 
-# Split in Train (85%), Val (15%)
-set_seed(42)
 random.shuffle(all_pairs)
 split_idx = int(0.85 * len(all_pairs))
 train_data = all_pairs[:split_idx]
 val_data = all_pairs[split_idx:]
 print(f"Trainingsdaten: {len(train_data)} Paare | Validierungsdaten: {len(val_data)} Paare")
 
-
-# Optionen: "google/mt5-small", "google/mt5-base", "facebook/mbart-large-50"
-# MODEL_NAME = "facebook/mbart-large-50"  # -> Zentral oben definiert
-# MAX_SOURCE_LEN = 256  # -> Zentral oben definiert
-# MAX_TARGET_LEN = 256  # -> Zentral oben definiert
-
+# ==============================================================================
+# MODEL & TOKENIZER SETUP
+# ==============================================================================
 print(f"Lade Tokenizer & Modell: {MODEL_NAME}...")
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=False)
 seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME).to(DEVICE)
@@ -222,11 +168,9 @@ if "mbart" in MODEL_NAME.lower():
     tokenizer.src_lang = "de_DE"
     tokenizer.tgt_lang = "de_DE"
 
-print("Modell & Tokenizer erfolgreich geladen!")
-
-# seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH))
-# print("Erfolgreich SFT-Modellgewichte von Festplatte geladen!")
-
+# ==============================================================================
+# DATASET DEFINITION
+# ==============================================================================
 class TranslationDataset(Dataset):
     def __init__(self, data, tokenizer, max_src_len=256, max_tgt_len=256):
         self.data = data
@@ -259,26 +203,15 @@ class TranslationDataset(Dataset):
             "raw_ls": item["ls_text"]
         }
 
-train_dataset = TranslationDataset(train_data, tokenizer, MAX_SOURCE_LEN, MAX_TARGET_LEN)
-val_dataset = TranslationDataset(val_data, tokenizer, MAX_SOURCE_LEN, MAX_TARGET_LEN)
-
-train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True)
-val_loader = DataLoader(val_dataset, batch_size=4, shuffle=False)
-print(f"DataLoader erstellt: {len(train_loader)} Batches (Train), {len(val_loader)} Batches (Val).")
-
-# Lade die trainierten SFT Gewichte direkt von Festplatte
 if os.path.exists(SFT_MODEL_TEMP_PATH):
     seq2seq_model.load_state_dict(torch.load(SFT_MODEL_TEMP_PATH, map_location=DEVICE))
     print("Erfolgreich SFT-Modellgewichte von Festplatte geladen:", SFT_MODEL_TEMP_PATH)
 else:
-    raise FileNotFoundError(f"SFT-Modell unter {SFT_MODEL_TEMP_PATH} nicht gefunden! Bitte führe zuerst das SFT-Notebook aus.")
+    raise FileNotFoundError(f"SFT-Modell unter {SFT_MODEL_TEMP_PATH} nicht gefunden! Bitte führe zuerst das SFT Training aus.")
 
-# import os
-# print("Aktuelles Arbeitsverzeichnis des Notebooks:", os.getcwd())
-# print("Existiert der Ordner 'results'?", os.path.exists("./results"))
-# print("Inhalt von 'results':", os.listdir("./results") if os.path.exists("./results") else "Ordner nicht da")
-
-# 4.1 BiLSTM Regressor & Vocab laden
+# ==============================================================================
+# REWARD MODELS SETUP
+# ==============================================================================
 class BiLSTMRegressor(nn.Module):
     def __init__(self, vocab_size, embed_dim=128, hidden_dim=128, dropout=0.3):
         super(BiLSTMRegressor, self).__init__()
@@ -295,9 +228,6 @@ class BiLSTMRegressor(nn.Module):
         out = self.fc(self.dropout(hidden))
         return self.sigmoid(out)
 
-# SYNTHETIC_MODEL_PATH = "results/models/bilstm_synthetic_regression.pt"  # -> Zentral oben definiert
-# SYNTHETIC_VOCAB_PATH = "data/vocabs/synthetic_vocab.json"  # -> Zentral oben definiert
-
 with open(SYNTHETIC_VOCAB_PATH, "r", encoding="utf-8") as f:
     vocab_data = json.load(f)
     synthetic_stoi = vocab_data.get("stoi", vocab_data)
@@ -305,7 +235,6 @@ with open(SYNTHETIC_VOCAB_PATH, "r", encoding="utf-8") as f:
 bilstm_model = BiLSTMRegressor(len(synthetic_stoi), embed_dim=128, hidden_dim=128)
 if os.path.exists(SYNTHETIC_MODEL_PATH):
     bilstm_model.load_state_dict(torch.load(SYNTHETIC_MODEL_PATH, map_location="cpu"))
-    bilstm_model.to("cpu")
     bilstm_model.eval()
     print(f"BiLSTM Synthetic Regressor erfolgreich geladen von {SYNTHETIC_MODEL_PATH}")
 else:
@@ -325,11 +254,9 @@ def predict_simplicity_score(texts):
         inp_tensor = torch.tensor([indices], dtype=torch.long, device="cpu")
         with torch.no_grad():
             score = bilstm_model(inp_tensor).item()
-        # Das synthetische Modell gibt jetzt direkt Einfachheit (1.0 = LS) aus
         scores.append(score)
     return np.array(scores)
 
-# 4.2 SBERT Semantic Similarity Model laden
 SBERT_MODEL_NAME = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
 print(f"Lade SBERT Modell: {SBERT_MODEL_NAME}...")
 sbert_model = SentenceTransformer(SBERT_MODEL_NAME, device="cpu")
@@ -340,23 +267,23 @@ def predict_semantic_similarity(source_texts, generated_texts):
     cosine_sims = util.cos_sim(emb_src, emb_gen).diagonal().cpu().numpy()
     return cosine_sims
 
-# 4.3 Composite Reward Evaluator
 class CompositeRewardEvaluator:
     def __init__(self, w_style=0.5, w_sem=0.5):
         self.w_style = w_style
         self.w_sem = w_sem
         
     def compute_reward(self, source_texts, generated_texts):
-        r_style = predict_simplicity_score(generated_texts) # [0, 1]
-        r_sem = predict_semantic_similarity(source_texts, generated_texts) # [-1, 1]
+        r_style = predict_simplicity_score(generated_texts)
+        r_sem = predict_semantic_similarity(source_texts, generated_texts)
         r_sem_norm = np.clip((r_sem + 1.0) / 2.0, 0.0, 1.0)
-        
         total_reward = self.w_style * r_style + self.w_sem * r_sem_norm
         return total_reward, r_style, r_sem_norm
 
 reward_evaluator = CompositeRewardEvaluator(w_style=W_STYLE, w_sem=W_SEM)
 
-
+# ==============================================================================
+# DPO TRAINING FUNCTIONS
+# ==============================================================================
 def generate_candidates(model, tokenizer, source_texts, num_return_sequences=2):
     model.eval()
     prompt_texts = ["Übersetze in Leichte Sprache: " + text for text in source_texts]
@@ -367,7 +294,7 @@ def generate_candidates(model, tokenizer, source_texts, num_return_sequences=2):
             input_ids=inputs["input_ids"],
             attention_mask=inputs["attention_mask"],
             max_length=MAX_TARGET_LEN,
-            do_sample=True,             # Wichtig für mehrere Sequenzen!
+            do_sample=True,
             top_k=50,
             top_p=0.92,
             temperature=0.8,
@@ -375,18 +302,14 @@ def generate_candidates(model, tokenizer, source_texts, num_return_sequences=2):
         )
         
     decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-    
-    # Sicherstellen, dass wir genau B * N Sequenzen haben
     expected_len = len(source_texts) * num_return_sequences
     if len(decoded) < expected_len:
         print(f"Warnung: Generierte Sequenzen ({len(decoded)}) weichen von Erwartung ({expected_len}) ab!")
-        # Auffüllen mit leeren Strings, um IndexError zu verhindern
         decoded += [""] * (expected_len - len(decoded))
         
     candidates = []
     for i in range(len(source_texts)):
         cands = decoded[i * num_return_sequences : (i + 1) * num_return_sequences]
-        # Absicherung: Falls cands unvollständig ist
         while len(cands) < num_return_sequences:
             cands.append("")
         candidates.append(cands)
@@ -401,10 +324,7 @@ def compute_dpo_loss(model, ref_model, tokenizer, src_texts, chosen_texts, rejec
     chosen_enc = tokenizer(chosen_texts, padding=True, truncation=True, max_length=MAX_TARGET_LEN, return_tensors="pt").to(DEVICE)
     rejected_enc = tokenizer(rejected_texts, padding=True, truncation=True, max_length=MAX_TARGET_LEN, return_tensors="pt").to(DEVICE)
     
-    # Nutze Autocast (bfloat16 oder float16) zur Speicherersparnis
-    # Falls deine Grafikkarte älter ist und kein bfloat16 unterstützt, nimm torch.float16
     with torch.amp.autocast('cuda', dtype=torch.bfloat16):
-        # 1. Referenzmodell-Werte berechnen und direkt als Float extrahieren
         with torch.no_grad():
             ref_chosen_loss = ref_model(
                 input_ids=inputs["input_ids"], 
@@ -420,7 +340,6 @@ def compute_dpo_loss(model, ref_model, tokenizer, src_texts, chosen_texts, rejec
             
         ref_logratios = -ref_chosen_loss + ref_rejected_loss
         
-        # 2. Policy-Modell (aktives Modell) berechnen
         out_chosen = model(
             input_ids=inputs["input_ids"], 
             attention_mask=inputs["attention_mask"], 
@@ -437,37 +356,20 @@ def compute_dpo_loss(model, ref_model, tokenizer, src_texts, chosen_texts, rejec
         
         pi_logratios = -pi_chosen_loss + pi_rejected_loss
         
-        # 3. DPO-Loss berechnen
         logits = pi_logratios - ref_logratios
         dpo_loss = -torch.nn.functional.logsigmoid(beta * logits).mean()
         
     return dpo_loss
 
-
-import copy
-import gc
-import torch
-
-# Lösche den alten SFT-Optimierer, Scheduler und Loader
-if 'optimizer' in globals():
-    del optimizer
-if 'scheduler' in globals():
-    del scheduler
-if 'train_loader' in globals():
-    del train_loader
-if 'val_loader' in globals():
-    del val_loader
-
-# Garbage Collector ausführen und PyTorch-Speicher freigeben
-gc.collect()
-torch.cuda.empty_cache()
+# ==============================================================================
+# DPO TRAINING LOOP
+# ==============================================================================
 ref_model = copy.deepcopy(seq2seq_model).to(DEVICE)
 for param in ref_model.parameters():
     param.requires_grad = False
 ref_model.eval()
 
 dpo_optimizer = AdamW(seq2seq_model.parameters(), lr=1e-6)
-
 DPO_EPOCHS = 2
 dpo_history = []
 
@@ -477,7 +379,6 @@ for epoch in range(1, DPO_EPOCHS + 1):
     epoch_style_rewards = []
     epoch_sem_rewards = []
     
-    # Subset der Trainingsdaten für DPO, um das Generieren von Kandidaten zu beschleunigen
     dpo_loader = DataLoader(
         TranslationDataset(train_data, tokenizer, MAX_SOURCE_LEN, MAX_TARGET_LEN), 
         batch_size=4, 
@@ -487,13 +388,10 @@ for epoch in range(1, DPO_EPOCHS + 1):
     for batch in tqdm(dpo_loader, desc=f"DPO Epoch {epoch}/{DPO_EPOCHS}"):
         src_texts = batch["raw_as"]
         
-        # 1. Kandidaten generieren
         candidates = generate_candidates(seq2seq_model, tokenizer, src_texts, num_return_sequences=2)
-        
         chosen_list = []
         rejected_list = []
         
-        # 2. Pairwise Rewards bestimmen
         for src, cands in zip(src_texts, candidates):
             r1, st1, sem1 = reward_evaluator.compute_reward([src], [cands[0]])
             r2, st2, sem2 = reward_evaluator.compute_reward([src], [cands[1]])
@@ -509,7 +407,6 @@ for epoch in range(1, DPO_EPOCHS + 1):
                 epoch_style_rewards.append(st2[0])
                 epoch_sem_rewards.append(sem2[0])
                 
-        # 3. DPO Loss berechnen & Optimieren
         dpo_loss = compute_dpo_loss(seq2seq_model, ref_model, tokenizer, src_texts, chosen_list, rejected_list)
         dpo_optimizer.zero_grad()
         dpo_loss.backward()
@@ -517,7 +414,6 @@ for epoch in range(1, DPO_EPOCHS + 1):
         
         epoch_dpo_loss += dpo_loss.item()
         
-    # Protokollierung der Epochen-Ergebnisse
     avg_loss = epoch_dpo_loss / len(dpo_loader)
     avg_style = np.mean(epoch_style_rewards)
     avg_sem = np.mean(epoch_sem_rewards)
@@ -534,7 +430,7 @@ for epoch in range(1, DPO_EPOCHS + 1):
     print(f"Ø Style Reward:    {avg_style:.4f}")
     print(f"Ø Semantic Reward: {avg_sem:.4f}\n")
 
-# Visualisierung des DPO Trainingsverlaufs
+# Save DPO History Plot
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 epochs = [h["epoch"] for h in dpo_history]
 losses = [h["loss"] for h in dpo_history]
@@ -557,93 +453,94 @@ ax2.legend()
 ax2.grid(True)
 
 plt.tight_layout()
-# plt.show()
+plt.savefig(os.path.join(plot_dir, "dpo_training_history.png"))
+plt.close()
 
-
-# OUTPUT_DIR = "results/models/seq2seq_dpo_translation_model"  # -> Zentral oben definiert
+# Save final model
 os.makedirs(OUTPUT_DIR, exist_ok=True)
-
 seq2seq_model.save_pretrained(OUTPUT_DIR)
 tokenizer.save_pretrained(OUTPUT_DIR)
 print(f"Modell und Tokenizer erfolgreich gespeichert unter: {OUTPUT_DIR}")
 
-# 7.1 Lebenshilfe-Datensatz laden
-# LH_DATASET_PATH = "data/lebenshilfe/lebenshilfe_dataset.json"  # -> Zentral oben definiert
-with open(LH_DATASET_PATH, "r", encoding="utf-8") as f:
-    lh_data = json.load(f)
+# ==============================================================================
+# EVALUATION ON LEBENSHILFE DATASET
+# ==============================================================================
+if not os.path.exists(LH_DATASET_PATH):
+    print(f"Lebenshilfe dataset not found at {LH_DATASET_PATH}. Skipping evaluation.")
+else:
+    with open(LH_DATASET_PATH, "r", encoding="utf-8") as f:
+        lh_data = json.load(f)
 
-print(f"Lebenshilfe Datensatz geladen: {len(lh_data)} Artikel-Paare.")
+    print(f"Lebenshilfe Datensatz geladen: {len(lh_data)} Artikel-Paare.")
 
-# 7.2 Übersetzen & Metriken berechnen
-def evaluate_on_lebenshilfe(model, tokenizer, lh_data, reward_evaluator, max_samples=49):
-    model.eval()
-    as_texts = [item["as_text"] for item in lh_data[:max_samples]]
-    ls_ref_texts = [item["ls_text"] for item in lh_data[:max_samples]]
-    
-    batch_size = 16
-    gen_texts = []
-    for i in tqdm(range(0, len(as_texts), batch_size), desc="Übersetze Lebenshilfe Datensatz"):
-        batch_src = as_texts[i:i+batch_size]
-        prompts = ["Übersetze in Leichte Sprache: " + t for t in batch_src]
-        inputs = tokenizer(prompts, padding=True, truncation=True, max_length=MAX_SOURCE_LEN, return_tensors="pt").to(DEVICE)
-        with torch.no_grad():
+    def evaluate_on_lebenshilfe(model, tokenizer, lh_data, reward_evaluator, max_samples=49):
+        model.eval()
+        as_texts = [item["as_text"] for item in lh_data[:max_samples]]
+        ls_ref_texts = [item["ls_text"] for item in lh_data[:max_samples]]
+        
+        batch_size = 16
+        gen_texts = []
+        for i in tqdm(range(0, len(as_texts), batch_size), desc="Übersetze Lebenshilfe Datensatz"):
+            batch_src = as_texts[i:i+batch_size]
+            prompts = ["Übersetze in Leichte Sprache: " + t for t in batch_src]
+            inputs = tokenizer(prompts, padding=True, truncation=True, max_length=MAX_SOURCE_LEN, return_tensors="pt").to(DEVICE)
+            with torch.no_grad():
                 outputs = model.generate(
                     input_ids=inputs["input_ids"],
                     attention_mask=inputs["attention_mask"],
                     max_length=MAX_TARGET_LEN,
-                    num_beams=4,                 # Erhöht die Suchtiefe
-                    repetition_penalty=2.5,      # Bestraft wiederholte Tokens hart
-                    no_repeat_ngram_size=3,      # Verbietet Wiederholung von 3er-Wortfolgen
+                    num_beams=4,
+                    repetition_penalty=2.5,
+                    no_repeat_ngram_size=3,
                     early_stopping=True
                 )
-        decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-        gen_texts.extend(decoded)
+            decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
+            gen_texts.extend(decoded)
+            
+        tot_reward, r_style, r_sem = reward_evaluator.compute_reward(as_texts, gen_texts)
+        sim_to_ref = predict_semantic_similarity(ls_ref_texts, gen_texts)
+        sim_to_ref_norm = np.clip((sim_to_ref + 1.0) / 2.0, 0.0, 1.0)
         
-    tot_reward, r_style, r_sem = reward_evaluator.compute_reward(as_texts, gen_texts)
-    sim_to_ref = predict_semantic_similarity(ls_ref_texts, gen_texts)
-    sim_to_ref_norm = np.clip((sim_to_ref + 1.0) / 2.0, 0.0, 1.0)
-    
-    df_res = pd.DataFrame({
-        "as_text": as_texts,
-        "ls_reference": ls_ref_texts,
-        "model_translation": gen_texts,
-        "synthetic_simplicity_score": r_style,
-        "sbert_sim_to_as": r_sem,
-        "sbert_sim_to_ref": sim_to_ref_norm,
-        "composite_reward": tot_reward
-    })
-    
-    print("\n=================== EVALUIERUNGSERGEBNISSE (LEBENSHILFE) ===================")
-    print(f"Ø Synthetic-Einfachheits-Score (R_style):       {r_style.mean():.4f} ± {r_style.std():.4f}")
-    print(f"Ø SBERT-Ähnlichkeit zur AS-Quelle (R_sem):   {r_sem.mean():.4f} ± {r_sem.std():.4f}")
-    print(f"Ø SBERT-Ähnlichkeit zu echter LS-Referenz:  {sim_to_ref_norm.mean():.4f} ± {sim_to_ref_norm.std():.4f}")
-    print(f"Ø Composite Reward:                        {tot_reward.mean():.4f} ± {tot_reward.std():.4f}")
-    print("========================================================================\n")
-    
-    return df_res
+        df_res = pd.DataFrame({
+            "as_text": as_texts,
+            "ls_reference": ls_ref_texts,
+            "model_translation": gen_texts,
+            "synthetic_simplicity_score": r_style,
+            "sbert_sim_to_as": r_sem,
+            "sbert_sim_to_ref": sim_to_ref_norm,
+            "composite_reward": tot_reward
+        })
+        
+        print("\n=================== EVALUIERUNGSERGEBNISSE (LEBENSHILFE) ===================")
+        print(f"Ø Synthetic-Einfachheits-Score (R_style):       {r_style.mean():.4f} ± {r_style.std():.4f}")
+        print(f"Ø SBERT-Ähnlichkeit zur AS-Quelle (R_sem):   {r_sem.mean():.4f} ± {r_sem.std():.4f}")
+        print(f"Ø SBERT-Ähnlichkeit zu echter LS-Referenz:  {sim_to_ref_norm.mean():.4f} ± {sim_to_ref_norm.std():.4f}")
+        print(f"Ø Composite Reward:                        {tot_reward.mean():.4f} ± {tot_reward.std():.4f}")
+        print("========================================================================\n")
+        
+        return df_res
 
-lh_eval_df = evaluate_on_lebenshilfe(seq2seq_model, tokenizer, lh_data, reward_evaluator)
+    lh_eval_df = evaluate_on_lebenshilfe(seq2seq_model, tokenizer, lh_data, reward_evaluator)
 
-# 7.3 Statistische Übersicht & Qualitatives Stichproben-Audit
-display(lh_eval_df[["synthetic_simplicity_score", "sbert_sim_to_as", "sbert_sim_to_ref", "composite_reward"]].describe())
+    print(lh_eval_df[["synthetic_simplicity_score", "sbert_sim_to_as", "sbert_sim_to_ref", "composite_reward"]].describe())
 
-print("\n--- QUALITATIVE STICHPROBEN (LEBENSHILFE TESTSET) ---")
-for idx, row in lh_eval_df.head(3).iterrows():
-    print(f"\n[Artikel {idx + 1}]")
-    print(f"AS-Quelle:     {row['as_text'][:130]}...")
-    print(f"LS-Referenz:   {row['ls_reference'][:130]}...")
-    print(f"Modell-Übers.: {row['model_translation']}")
-    print(f"Scores: Style={row['synthetic_simplicity_score']:.3f} | Sim(AS)={row['sbert_sim_to_as']:.3f} | Sim(Ref)={row['sbert_sim_to_ref']:.3f}")
+    print("\n--- QUALITATIVE STICHPROBEN (LEBENSHILFE TESTSET) ---")
+    for idx, row in lh_eval_df.head(3).iterrows():
+        print(f"\n[Artikel {idx + 1}]")
+        print(f"AS-Quelle:     {row['as_text'][:130]}...")
+        print(f"LS-Referenz:   {row['ls_reference'][:130]}...")
+        print(f"Modell-Übers.: {row['model_translation']}")
+        print(f"Scores: Style={row['synthetic_simplicity_score']:.3f} | Sim(AS)={row['sbert_sim_to_as']:.3f} | Sim(Ref)={row['sbert_sim_to_ref']:.3f}")
 
-# 7.4 Visualisierung der Metrik-Verteilungen auf dem Lebenshilfe-Set
-plt.figure(figsize=(10, 5))
-plt.hist(lh_eval_df["synthetic_simplicity_score"], bins=15, alpha=0.6, label="Synthetic Einfachheit ($R_{style}$)", color="blue")
-plt.hist(lh_eval_df["sbert_sim_to_as"], bins=15, alpha=0.6, label="SBERT Ähnlichkeit zur AS ($R_{sem}$)", color="green")
-plt.hist(lh_eval_df["sbert_sim_to_ref"], bins=15, alpha=0.6, label="SBERT Ähnlichkeit zu LS-Referenz", color="orange")
-plt.title("Metrik-Verteilung auf dem Lebenshilfe-Testdatensatz (Out-of-Domain)")
-plt.xlabel("Score")
-plt.ylabel("Anzahl Artikel")
-plt.legend()
-plt.grid(True, linestyle="--", alpha=0.5)
-# plt.show()
-
+    # Plot metrics distributions
+    plt.figure(figsize=(10, 5))
+    plt.hist(lh_eval_df["synthetic_simplicity_score"], bins=15, alpha=0.6, label="Synthetic Einfachheit ($R_{style}$)", color="blue")
+    plt.hist(lh_eval_df["sbert_sim_to_as"], bins=15, alpha=0.6, label="SBERT Ähnlichkeit zur AS ($R_{sem}$)", color="green")
+    plt.hist(lh_eval_df["sbert_sim_to_ref"], bins=15, alpha=0.6, label="SBERT Ähnlichkeit zu LS-Referenz", color="orange")
+    plt.title("Metrik-Verteilung auf dem Lebenshilfe-Testdatensatz (Out-of-Domain)")
+    plt.xlabel("Score")
+    plt.ylabel("Anzahl Artikel")
+    plt.legend()
+    plt.grid(True, linestyle="--", alpha=0.5)
+    plt.savefig(os.path.join(plot_dir, "dpo_lh_metrics_distribution.png"))
+    plt.close()

@@ -1,13 +1,35 @@
 import os
-# ==============================================================================
-# LOGGING SETUP (Redirect stdout and stderr to terminal and log file)
-# ==============================================================================
 import sys
 import datetime
+import random
+import argparse
+import numpy as np
+import pandas as pd
+import spacy
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+from collections import Counter
+from tqdm import tqdm
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import balanced_accuracy_score, classification_report, confusion_matrix, accuracy_score
+import matplotlib.pyplot as plt
+import seaborn as sns
+import textstat
+import json
 
+# ==============================================================================
+# LOGGING & DIRECTORY SETUP
+# ==============================================================================
 log_dir = "results/logs"
+plot_dir = "results/plots"
+report_dir = "results/reports"
 os.makedirs(log_dir, exist_ok=True)
 os.makedirs("results/models", exist_ok=True)
+os.makedirs(plot_dir, exist_ok=True)
+os.makedirs(report_dir, exist_ok=True)
+
 script_name = os.path.basename(__file__).replace(".py", "")
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
@@ -29,17 +51,26 @@ class Logger(object):
 sys.stdout = Logger(log_file)
 sys.stderr = sys.stdout
 print(f"Log file initialized at: {log_file}")
-# ==============================================================================
-import os
-import sys
-
-# Arbeitsverzeichnis wird beibehalten, Pfade werden normal relativ angegeben
 print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 # ==============================================================================
-# ZENTRALE KONFIGURATION & PARAMS (Passed via Command Line)
+# SEED CONFIGURATION
 # ==============================================================================
-import argparse
+def set_seed(seed=42):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    print(f"Globaler Seed auf {seed} gesetzt.")
+
+set_seed(42)
+
+# ==============================================================================
+# ZENTRALE KONFIGURATION & PARAMS
+# ==============================================================================
 parser = argparse.ArgumentParser()
 parser.add_argument('--csv_path', required=True)
 parser.add_argument('--lh_dataset_path', required=True)
@@ -66,55 +97,12 @@ MAX_SIM = args.max_sim
 MIN_SENT_LEN = args.min_sent_len
 MIN_SIM = args.min_sim
 
-
-import pandas as pd
-import random
-import torch
-import torch.nn as nn
-import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
-from collections import Counter
-import spacy
-from tqdm import tqdm
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import balanced_accuracy_score, classification_report, confusion_matrix
-import numpy as np
-import os
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# --- CONFIGURATION ---
-# CSV_PATH = "data/analysis/information_loss_analysis_cleaned.csv"  # -> Zentral oben definiert
-# MIN_SIM = 0.8  # Mindest-Ähnlichkeit  # -> Zentral oben definiert
-# MAX_SIM = 0.98 # Maximal-Ähnlichkeit  # -> Zentral oben definiert
-
-# MAX_SEQ_LEN = 512  # Längere Sequenzlänge für ganze Artikel  # -> Zentral oben definiert
-# BATCH_SIZE = 32    # Reduzierte Batch-Größe für längere Sequenzen  # -> Zentral oben definiert
-# EMBEDDING_DIM = 128  # -> Zentral oben definiert
-# HIDDEN_DIM = 128  # -> Zentral oben definiert
-# EPOCHS = 30  # -> Zentral oben definiert
-# LR = 1e-3  # -> Zentral oben definiert
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 print(f"Using device: {DEVICE}")
 
-# Set seed for reproducibility
-def set_seed(seed=42):
-    import random
-    import numpy as np
-    import torch
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
-    print(f"Globaler Seed auf {seed} gesetzt.")
-
-set_seed(42)
-
-
+# ==============================================================================
+# DATA LOADING & FILTERING
+# ==============================================================================
 def load_article_data(min_sim, max_sim):
     print(f"Loading article data from {CSV_PATH} with {min_sim} <= similarity <= {max_sim}...")
     if not os.path.exists(CSV_PATH):
@@ -122,7 +110,6 @@ def load_article_data(min_sim, max_sim):
         
     df = pd.read_csv(CSV_PATH)
     
-    # Filter by similarity
     mask = (df["semantic_similarity_8192"] >= min_sim) & (df["semantic_similarity_8192"] <= max_sim)
     df_filtered = df[mask]
     
@@ -130,25 +117,21 @@ def load_article_data(min_sim, max_sim):
     
     X = []
     y = []
-    
-    # Einfacher Blank-Tokenizer für schnelles Tokenisieren
     nlp = spacy.blank("de")
     
     for _, row in tqdm(df_filtered.iterrows(), total=len(df_filtered), desc="Tokenizing articles"):
         ls_text = str(row["ls_text"])
         as_text = str(row["as_text"])
         
-        # Process LS article
         ls_tokens = [t.text.lower() for t in nlp(ls_text) if not t.is_space]
         if len(ls_tokens) >= 10:
             X.append(ls_tokens)
-            y.append(1) # Leichte Sprache
+            y.append(1)
             
-        # Process AS article
         as_tokens = [t.text.lower() for t in nlp(as_text) if not t.is_space]
         if len(as_tokens) >= 10:
             X.append(as_tokens)
-            y.append(0) # Alltags-Sprache
+            y.append(0)
     
     print(f"Total articles loaded: {len(X)} ({y.count(1)} LS, {y.count(0)} AS)")
     
@@ -159,6 +142,9 @@ def load_article_data(min_sim, max_sim):
 
 X, y = load_article_data(MIN_SIM, MAX_SIM)
 
+# ==============================================================================
+# VOCABULARY & DATASET DEFINITIONS
+# ==============================================================================
 class Vocab:
     def __init__(self, sentences, max_size=25000, min_freq=3):
         counter = Counter()
@@ -192,6 +178,9 @@ class ArticleDataset(Dataset):
         padded = encoded + [0] * (self.max_len - len(encoded))
         return torch.tensor(padded, dtype=torch.long), torch.tensor(self.y[idx], dtype=torch.float)
 
+# ==============================================================================
+# MODEL ARCHITECTURE
+# ==============================================================================
 class BiLSTMClassifier(nn.Module):
     def __init__(self, vocab_size, embed_dim, hidden_dim):
         super().__init__()
@@ -206,15 +195,12 @@ class BiLSTMClassifier(nn.Module):
         hidden = torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim=1)
         return self.fc(self.dropout(hidden))
 
-# Splits erstellen (85% Train/Val, 15% Test)
 X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.15, random_state=42, stratify=y)
 X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test_size=0.15, random_state=42, stratify=y_train_val)
 
-# Vokabular aufbauen
 vocab = Vocab(X_train)
 print(f"Vocab size: {len(vocab)}")
 
-# Dataloaders erstellen
 train_ds = ArticleDataset(X_train, y_train, vocab, MAX_SEQ_LEN)
 val_ds = ArticleDataset(X_val, y_val, vocab, MAX_SEQ_LEN)
 test_ds = ArticleDataset(X_test, y_test, vocab, MAX_SEQ_LEN)
@@ -230,10 +216,12 @@ criterion = nn.BCEWithLogitsLoss()
 best_val_acc = 0
 patience = 7  
 counter = 0
-
 model_save_path = f"results/models/lstm_article_sim_{MIN_SIM:.2f}_to_{MAX_SIM:.2f}.pt"
 history = {'train_loss': [], 'val_loss': [], 'val_bacc': []}
 
+# ==============================================================================
+# TRAINING LOOP
+# ==============================================================================
 for epoch in range(EPOCHS):
     model.train()
     epoch_loss = 0
@@ -245,7 +233,6 @@ for epoch in range(EPOCHS):
         optimizer.step()
         epoch_loss += loss.item()
         
-    # Validation
     model.eval()
     preds, targets = [], []
     val_epoch_loss = 0
@@ -274,9 +261,10 @@ for epoch in range(EPOCHS):
             print("Early stopping triggered.")
             break
 
-
+# ==============================================================================
+# EVALUATION & PLOTTING
+# ==============================================================================
 fig, ax1 = plt.subplots(figsize=(10, 5))
-
 color = 'tab:red'
 ax1.set_xlabel('Epochs')
 ax1.set_ylabel('Loss', color=color)
@@ -294,8 +282,8 @@ ax2.legend(loc='upper right')
 
 plt.title(f'Training Progress (Article Level - Similarity Range: {MIN_SIM} - {MAX_SIM})')
 fig.tight_layout()  
-# plt.show()
-
+plt.savefig(os.path.join(plot_dir, "article_model_training_progress.png"))
+plt.close()
 
 print("\nEvaluating on Test Set...")
 if os.path.exists(model_save_path):
@@ -319,29 +307,30 @@ sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=["Normal", "Simpl
 plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix')
-# plt.show()
+plt.savefig(os.path.join(plot_dir, "article_model_confusion_matrix.png"))
+plt.close()
 
-# Zusammenfassung speichern
-with open("results/reports/article_experiments_summary.csv", "a") as f:
+# Save experiments summary
+summary_csv = os.path.join(report_dir, "article_experiments_summary.csv")
+write_header = not os.path.exists(summary_csv)
+with open(summary_csv, "a") as f:
+    if write_header:
+        f.write("min_sim,max_sim,num_samples,balanced_accuracy\n")
     f.write(f"{MIN_SIM},{MAX_SIM},{len(X)},{bacc:.4f}\n")
 
-
-import json
-import spacy
-nlp = spacy.blank('de')
-import textstat
-from sklearn.metrics import accuracy_score, balanced_accuracy_score, classification_report
-
-# LH_DATASET_PATH = "data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json"  # -> Zentral oben definiert
-
+# ==============================================================================
+# LEBENSHILFE EVALUATION
+# ==============================================================================
 if not os.path.exists(LH_DATASET_PATH):
     print(f"Lebenshilfe dataset not found at {LH_DATASET_PATH}")
 else:
     with open(LH_DATASET_PATH, "r", encoding="utf-8") as f:
         lh_data = json.load(f)
         
+    nlp_lh = spacy.blank('de')
+
     def predict_lh_article(text):
-        tokens = [t.text.lower() for t in nlp(text) if not t.is_space]
+        tokens = [t.text.lower() for t in nlp_lh(text) if not t.is_space]
         encoded = vocab.encode(tokens)[:MAX_SEQ_LEN]
         padded = encoded + [0] * (MAX_SEQ_LEN - len(encoded))
         tensor = torch.tensor([padded], dtype=torch.long).to(DEVICE)
@@ -371,7 +360,6 @@ else:
             "Correct": (ls_pred == 1 and as_pred == 0)
         })
 
-    # Metriken berechnen
     df_lh = pd.DataFrame(lh_results)
     lh_y_true = [1] * len(df_lh) + [0] * len(df_lh)
     lh_y_pred = list(df_lh["LS_Pred"].map({"Simple": 1, "Normal": 0})) + list(df_lh["AS_Pred"].map({"Simple": 1, "Normal": 0}))
@@ -386,4 +374,3 @@ else:
     print(f"Perfect Pair Match: {df_lh['Correct'].sum()} / {len(df_lh)} ({df_lh['Correct'].mean()*100:.1f}%) - (Both LS & AS correct)")
     print(f"Avg LS Flesch: {df_lh['LS_Flesch'].mean():.2f} (AS: {df_lh['AS_Flesch'].mean():.2f})")
     print(f"Avg LS Wiener: {df_lh['LS_Wiener'].mean():.2f} (AS: {df_lh['AS_Wiener'].mean():.2f})")
-

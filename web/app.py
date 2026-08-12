@@ -1,12 +1,6 @@
 import os
 
-# Set working directory to repository root
-while not os.path.exists(".git"):
-    parent = os.path.dirname(os.getcwd())
-    if parent == os.getcwd():
-        break
-    os.chdir("..")
-print("FastAPI working directory set to:", os.getcwd())
+# Arbeitsverzeichnis wird beibehalten, Pfade werden normal relativ angegeben
 
 import json
 import torch

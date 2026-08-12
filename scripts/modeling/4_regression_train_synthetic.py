@@ -1,13 +1,30 @@
 import os
-# ==============================================================================
-# LOGGING SETUP (Redirect stdout and stderr to terminal and log file)
-# ==============================================================================
 import sys
 import datetime
+import random
+import json
+import argparse
+import numpy as np
+import pandas as pd
+import spacy
+import torch
+import torch.nn as nn
+from torch.utils.data import Dataset, DataLoader
+from tqdm import tqdm
+from collections import Counter
+from scipy.stats import pearsonr, spearmanr
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+# ==============================================================================
+# LOGGING SETUP
+# ==============================================================================
 log_dir = "results/logs"
+plot_dir = "results/plots"
 os.makedirs(log_dir, exist_ok=True)
 os.makedirs("results/models", exist_ok=True)
+os.makedirs(plot_dir, exist_ok=True)
+
 script_name = os.path.basename(__file__).replace(".py", "")
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
@@ -29,22 +46,12 @@ class Logger(object):
 sys.stdout = Logger(log_file)
 sys.stderr = sys.stdout
 print(f"Log file initialized at: {log_file}")
-# ==============================================================================
-import os
-import sys
-
-# Arbeitsverzeichnis wird beibehalten, Pfade werden normal relativ angegeben
 print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
-import torch
-print("CUDA verfügbar:", torch.cuda.is_available())
-print("Device Name:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "Keine GPU")
-
-# Set seed for reproducibility
+# ==============================================================================
+# SEED CONFIGURATION
+# ==============================================================================
 def set_seed(seed=42):
-    import random
-    import numpy as np
-    import torch
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -56,11 +63,9 @@ def set_seed(seed=42):
 
 set_seed(42)
 
-
 # ==============================================================================
-# ZENTRALE KONFIGURATION & PARAMS (Passed via Command Line)
+# ZENTRALE KONFIGURATION & PARAMS
 # ==============================================================================
-import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--corpus_with_steps_path', required=True)
 parser.add_argument('--lh_with_steps_path', required=True)
@@ -77,37 +82,12 @@ VOCAB_SAVE_PATH = args.vocab_save_path
 EPOCHS = args.epochs
 MAX_SEQ_LEN = args.max_seq_len
 
-
-import json
-import os
-import random
-import numpy as np
-import pandas as pd
-import torch
-import torch.nn as nn
-import spacy
-import matplotlib.pyplot as plt
-import seaborn as sns
-from torch.utils.data import Dataset, DataLoader
-from tqdm import tqdm
-from collections import Counter
-from scipy.stats import pearsonr, spearmanr
-
-# Reproduzierbarkeit
-SEED = 42
-set_seed(SEED)
-np.random.seed(SEED)
-torch.manual_seed(SEED)
-
-# Pfade
-# CORPUS_WITH_STEPS_PATH = "data/corpus/corpus_master_with_steps.json"  # -> Zentral oben definiert
-# LH_WITH_STEPS_PATH = "data/lebenshilfe/lebenshilfe_dataset_with_steps.json"  # -> Zentral oben definiert
-# MODEL_SAVE_PATH = "results/models/bilstm_synthetic_regression.pt"  # -> Zentral oben definiert
-# VOCAB_SAVE_PATH = "data/vocabs/synthetic_vocab.json"  # -> Zentral oben definiert
-
 device = torch.device("cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu"))
 print(f"Nutze Device: {device}")
 
+# ==============================================================================
+# DATA LOADING & FLAT SAMPLING
+# ==============================================================================
 def load_flattened_samples(json_path):
     if not os.path.exists(json_path):
         raise FileNotFoundError(f"Datei nicht gefunden: {json_path}")
@@ -145,11 +125,13 @@ raw_samples, raw_articles = load_flattened_samples(CORPUS_WITH_STEPS_PATH)
 print(f"Anzahl geladener Artikel: {len(raw_articles)}")
 print(f"Anzahl ausgeflachter Text-Samples: {len(raw_samples)}")
 
-# Verteilung der Stufen anzeigen
 stage_counts = Counter(s["stage"] for s in raw_samples)
 for stage, count in sorted(stage_counts.items()):
     print(f"  Stufe {stage}: {count} Samples")
 
+# ==============================================================================
+# VOCABULARY SETUP
+# ==============================================================================
 nlp = spacy.blank("de")
 
 def build_vocab(samples, min_freq=2):
@@ -168,11 +150,14 @@ def build_vocab(samples, min_freq=2):
 vocab = build_vocab(raw_samples, min_freq=2)
 print(f"Vokabulargröße: {len(vocab)} Wörter")
 
-# Vokabular abspeichern
+os.makedirs(os.path.dirname(VOCAB_SAVE_PATH), exist_ok=True)
 with open(VOCAB_SAVE_PATH, "w", encoding="utf-8") as f:
     json.dump(vocab, f, ensure_ascii=False, indent=2)
 print(f"Vokabular gespeichert unter: {VOCAB_SAVE_PATH}")
 
+# ==============================================================================
+# PYTORCH DATASET & DATALOADER
+# ==============================================================================
 class SyntheticStepDataset(Dataset):
     def __init__(self, samples, vocab, nlp_spacy, max_len=MAX_SEQ_LEN):
         self.samples = samples
@@ -196,12 +181,10 @@ class SyntheticStepDataset(Dataset):
 
 def pad_collate_fn(batch):
     sequences, targets = zip(*batch)
-    lengths = [len(seq) for seq in sequences]
     padded_seqs = torch.nn.utils.rnn.pad_sequence(sequences, batch_first=True, padding_value=0)
     targets = torch.tensor(targets, dtype=torch.float32)
     return padded_seqs, targets
 
-# Split auf Artikel-Ebene (80% Train, 20% Val)
 unique_art_ids = list(set(s["article_id"] for s in raw_samples))
 random.shuffle(unique_art_ids)
 split_idx = int(0.8 * len(unique_art_ids))
@@ -220,6 +203,9 @@ val_ds = SyntheticStepDataset(val_samples, vocab, nlp, max_len=MAX_SEQ_LEN)
 train_loader = DataLoader(train_ds, batch_size=32, shuffle=True, collate_fn=pad_collate_fn)
 val_loader = DataLoader(val_ds, batch_size=32, shuffle=False, collate_fn=pad_collate_fn)
 
+# ==============================================================================
+# MODEL ARCHITECTURE
+# ==============================================================================
 class BiLSTMRegressor(nn.Module):
     def __init__(self, vocab_size, embed_dim=128, hidden_dim=128, dropout=0.3):
         super(BiLSTMRegressor, self).__init__()
@@ -243,13 +229,14 @@ criterion = nn.MSELoss()
 optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=15)
 
-# EPOCHS = 15  # -> Zentral oben definiert
+# ==============================================================================
+# TRAINING LOOP
+# ==============================================================================
 best_val_loss = float("inf")
 train_losses = []
 val_losses = []
 
 for epoch in range(1, EPOCHS + 1):
-    # Train-Schleife
     model.train()
     total_train_loss = 0.0
     for x_batch, y_batch in train_loader:
@@ -264,7 +251,6 @@ for epoch in range(1, EPOCHS + 1):
     avg_train_loss = total_train_loss / len(train_ds)
     train_losses.append(avg_train_loss)
     
-    # Val-Schleife
     model.eval()
     total_val_loss = 0.0
     with torch.no_grad():
@@ -287,6 +273,9 @@ for epoch in range(1, EPOCHS + 1):
         
     print(f"Epoche {epoch:02d}/{EPOCHS:02d} | Train MSE: {avg_train_loss:.4f} | Val MSE: {avg_val_loss:.4f}{saved_str}")
 
+# ==============================================================================
+# EVALUATION & PLOTTING
+# ==============================================================================
 plt.figure(figsize=(8, 5))
 plt.plot(range(1, EPOCHS + 1), train_losses, label="Train MSE Loss", marker="o")
 plt.plot(range(1, EPOCHS + 1), val_losses, label="Val MSE Loss", marker="s")
@@ -295,9 +284,10 @@ plt.xlabel("Epoche")
 plt.ylabel("MSE Loss")
 plt.legend()
 plt.grid(True, linestyle="--", alpha=0.6)
-# plt.show()
+plt.savefig(os.path.join(plot_dir, "synthetic_training_loss.png"))
+plt.close()
 
-# Bestes Modell laden
+# Load best model and evaluate on out-of-domain Lebenshilfe set
 model.load_state_dict(torch.load(MODEL_SAVE_PATH, map_location=device))
 model.eval()
 
@@ -345,5 +335,5 @@ plt.title("Vorhergesagte Komplexitäts-Scores auf den Lebenshilfe-Synthetik-Stuf
 plt.xlabel("Vorgegebene Zielstufe (LLM)")
 plt.ylabel("Modellvorhersage (BiLSTM Regressor)")
 plt.grid(True, linestyle="--", alpha=0.5)
-# plt.show()
-
+plt.savefig(os.path.join(plot_dir, "synthetic_eval_boxplot.png"))
+plt.close()
