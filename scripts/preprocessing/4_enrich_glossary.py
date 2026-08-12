@@ -3,12 +3,7 @@ import glob
 import json
 import re
 
-# Set working directory to repository root
-while not os.path.exists(".git"):
-    parent = os.path.dirname(os.getcwd())
-    if parent == os.getcwd():
-        break
-    os.chdir("..")
+# Arbeitsverzeichnis wird beibehalten, Pfade werden normal relativ angegeben
 
 def load_glossary(path="data/vocabs/hurraki_glossary.json"):
     if not os.path.exists(path):

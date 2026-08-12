@@ -7,6 +7,7 @@ import datetime
 
 log_dir = "results/logs"
 os.makedirs(log_dir, exist_ok=True)
+os.makedirs("results/models", exist_ok=True)
 script_name = os.path.basename(__file__).replace(".py", "")
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
@@ -32,13 +33,7 @@ print(f"Log file initialized at: {log_file}")
 import os
 import sys
 
-# Arbeitsverzeichnis auf das Root-Verzeichnis des Repositories setzen
-while not os.path.exists(".git"):
-    parent = os.path.dirname(os.getcwd())
-    if parent == os.getcwd():  # System-Root erreicht, Abbruch
-        break
-    os.chdir("..")
-
+# Arbeitsverzeichnis wird beibehalten, Pfade werden normal relativ angegeben
 print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 # ==============================================================================

@@ -6,12 +6,7 @@ import urllib.parse
 import time
 from collections import Counter
 
-# Set working directory to repository root
-while not os.path.exists(".git"):
-    parent = os.path.dirname(os.getcwd())
-    if parent == os.getcwd():
-        break
-    os.chdir("..")
+# Arbeitsverzeichnis wird beibehalten, Pfade werden normal relativ angegeben
 
 # Define fallback glossary for words that are not on Hurraki or fail to fetch
 FALLBACK_GLOSSARY = {

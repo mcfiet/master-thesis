@@ -113,12 +113,12 @@ Führe diese Skripte in der angegebenen Reihenfolge aus:
 .venv/bin/python scripts/preprocessing/6_generate_synthetic_steps.py \
     --input data/lebenshilfe/lebenshilfe_dataset_clean.json \
     --output data/lebenshilfe/lebenshilfe_dataset_with_steps.json \
-    --url <API_URL> --token <TOKEN> --model "FlensGen-GPT-OSS120B"
+    --url <API_URL> --token <TOKEN> --model "FlensGen-GPT-OSS-120B"
 
 .venv/bin/python scripts/preprocessing/6_generate_synthetic_steps.py \
     --input data/analysis/corpus_master.json \
     --output data/corpus/corpus_master_with_steps.json \
-    --url <API_URL> --token <TOKEN> --model "FlensGen-GPT-OSS120B"
+    --url <API_URL> --token <TOKEN> --model "FlensGen-GPT-OSS-120B"
 ```
 
 ---

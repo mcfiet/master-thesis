@@ -69,7 +69,7 @@ Ansatz 2 nutzt LLMs, um semantisch konsistente und stilistisch saubere Texte auf
 Das Skript `generate_synthetic_regression_steps.py` wurde auf zwei Plattformen getestet und ausgeführt:
 
 1. **Lokal (Ollama):** Erfolgreicher Testlauf mit `LLaMA 3` (8B) via `localhost:11434` zur Verifizierung der JSON-Ausgabestruktur.
-2. **Server (GPU):** Ausführung mit dem 120B-Modell `FlensGen-GPT-OSS120B` via HTTP-Endpunkt (`193.175.188.202:8000`), um eine höhere sprachliche Qualität und Konsistenz zu erreichen. Hierzu musste die Cisco AnyConnect VPN-Verbindung aktiv sein.
+2. **Server (GPU):** Ausführung mit dem 120B-Modell `FlensGen-GPT-OSS-120B` via HTTP-Endpunkt (`193.175.188.202:8000`), um eine höhere sprachliche Qualität und Konsistenz zu erreichen. Hierzu musste die Cisco AnyConnect VPN-Verbindung aktiv sein.
 
 ### Technische Anpassungen & Lessons Learned
 

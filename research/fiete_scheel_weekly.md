@@ -1352,7 +1352,7 @@ Build paragraphs mixing AS and LS sentences (e.g. 50% LS sentences, 50% AS sente
 
 ### Approach 2: LLM Step Generation Execution
 
-- **Pipeline Run:** Executed `generate_synthetic_regression_steps.py` on the remote GPU server (`FlensGen-GPT-OSS120B` model via VPN) and locally (LLaMA 3 via Ollama).
+- **Pipeline Run:** Executed `generate_synthetic_regression_steps.py` on the remote GPU server (`FlensGen-GPT-OSS-120B` model via VPN) and locally (LLaMA 3 via Ollama).
   **Remote Execution:** Server can be pinged successfully, but the model itself cannot be invoked.
 
 ---
@@ -2176,6 +2176,7 @@ Evaluation on the exact same test set (Lebenshilfe with 5 levels):
 <div class="column-left">
 
 **Length / Boilerplate Bias Check:**
+
 - **Goal:** Investigate if simplicity classifiers (reward models) possess a length bias (classifying shorter sentences as "simpler" regardless of semantic complexity).
 - **Method:** Synthetically inflated sentences with empty boilerplate phrases.
 - **Findings:** Some metric models show sensitivity to sequence length. Quantified this bias to prevent reward hacking during DPO alignment.
@@ -2185,6 +2186,7 @@ Evaluation on the exact same test set (Lebenshilfe with 5 levels):
 <div class="column-right">
 
 **Metric Similarity & Correlation:**
+
 - **Goal:** Verify correlation between neural simplicity scores and classical readability indices (e.g., Flesch Reading Ease, Wiener Sachtextformel).
 - **Findings:** Strong correlation found, but neural classifiers show significantly higher robustness for modern structures and idiomatic expressions.
 

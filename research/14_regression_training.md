@@ -44,10 +44,10 @@ Das Skript wird über die virtuelle Python-Umgebung ausgeführt.
 
 #### Remote-Ausführung (auf dem GPU-Server):
 
-Für die Ausführung mit dem großen Modell `FlensGen-GPT-OSS120B` auf dem Server:
+Für die Ausführung mit dem großen Modell `FlensGen-GPT-OSS-120B` auf dem Server:
 
 ```bash
-.venv/bin/python scripts/modeling/generate_synthetic_regression_steps.py --url http://193.175.188.202:8000/v1/chat/completions --model "FlensGen-GPT-OSS120B"
+.venv/bin/python scripts/modeling/generate_synthetic_regression_steps.py --url http://193.175.188.202:8000/v1/chat/completions --model "FlensGen-GPT-OSS-120B"
 ```
 
 _Hinweis:_ Hierfür muss die VPN-Verbindung (Cisco AnyConnect) aktiv sein, da die IP-Adresse `193.175.188.202` im Hochschulnetzwerk liegt und von außen geblockt wird.
