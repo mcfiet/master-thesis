@@ -5,7 +5,7 @@ import re
 INPUT_FILE = "data/lebenshilfe/lebenshilfe_dataset.json"
 OUTPUT_FILE = "data/lebenshilfe/lebenshilfe_dataset_clean.json"
 
-# List of filenames or keywords to identify form/consent documents that should be excluded completely
+# List of filenames or keywords to identify form/consent/list documents that should be excluded completely
 EXCLUDE_FILENAMES = {
     # Questionnaire/Surveys
     "ILS KIWA_Bedarfsumfrage AD002 Prüfer.docx",
@@ -13,6 +13,8 @@ EXCLUDE_FILENAMES = {
     "ILS07 Einwilligung KS DS001 Prüfer.docx",
     "ILS08 BwH Entbindung Schweigepflicht AD002 prüfen.docx",
     "ILS09 BwH Einverständniserklärung AD001 prüfen.docx",
+    # Pure bullet point lists / Glossaries
+    "ILS Anlage Resozialisierung Hausordungung HL AD001.docx",
 }
 
 # Regex definitions to clean Lebenshilfe signatures, credits, illustrators and formatting noise
@@ -45,6 +47,10 @@ def clean_text(text):
     if not text:
         return ""
     
+    # Strip Table of Contents (TOC) at the start of Tablet manual
+    # Looks like lines containing a tab character followed by a page number (e.g., "Handbuch ...\t1")
+    text = re.sub(r'(?m)^.*?\t\d+\s*$', '', text)
+    
     # Normalize syllable separators (Mediopoints)
     text = text.replace('·', '').replace('∙', '')
     
@@ -64,6 +70,11 @@ def clean_text(text):
     text = re.sub(r'[ \t]+', ' ', text)
     # Collapse multiple newlines into max 2 newlines (paragraph separation)
     text = re.sub(r'\n\s*\n', '\n\n', text)
+    
+    # Clean trailing signature leftovers like "V."
+    text = text.strip()
+    text = re.sub(r'\n+V\.$', '', text)
+    text = re.sub(r'\n+V\n+V\.$', '', text)
     
     return text.strip()
 
