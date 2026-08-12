@@ -57,32 +57,27 @@ try:
     nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer"])
 except Exception:
     nlp = None
-
 # Global Model & Vocab holders
 models = {
     "mixup_regressor": None,
-    "synthetic_regressor": None,
-    "translation_mixup": None,
-    "translation_synthetic": None
+    "synthetic_regressor": None
 }
 vocabs = {
     "mixup": None,
     "synthetic": None
 }
-tokenizers = {
-    "mixup": None,
-    "synthetic": None
-}
+tokenizers = {}
 
 # Default Paths (from notebooks)
 PATHS = {
-    "mixup_model": "results/models/07-08/bilstm_mixup_regression_hybrid_cyclic.pt",
+    "mixup_model": "results/models/bilstm_mixup_regression_hybrid_cyclic.pt",
     "mixup_vocab": "data/vocabs/mixup_vocab.json",
-    "synthetic_model": "results/models/07-08/bilstm_synthetic_regression.pt",
+    "synthetic_model": "results/models/bilstm_synthetic_regression.pt",
     "synthetic_vocab": "data/vocabs/synthetic_vocab.json",
-    "translation_mixup": "results/models/07-08/seq2seq_dpo_mixup_translation_model",
-    "translation_synthetic": "results/models/07-08-03/seq2seq_dpo_synthetic_exact_translation_model_only_reward_model",
-    "translation_fallback": "facebook/mbart-large-50"
+    "translation_mixup": "results/models/seq2seq_dpo_mixup_translation_model",
+    "translation_synthetic": "results/models/seq2seq_dpo_w05_w05_b05_filtered",
+    "mixup_sft": "results/models/best_sft_mixup_model_temp.pt",
+    "synthetic_sft": "results/models/2_sft_filtered.pt"
 }
 
 def load_vocab(path):
@@ -97,11 +92,12 @@ def load_vocab(path):
 # Load Regressor Models on startup
 def init_regressors():
     # Mixup
+    mixup_model_path = PATHS["mixup_model"]
     vocab_mixup = load_vocab(PATHS["mixup_vocab"])
-    if vocab_mixup and os.path.exists(PATHS["mixup_model"]):
+    if vocab_mixup and os.path.exists(mixup_model_path):
         vocabs["mixup"] = vocab_mixup
         model = BiLSTMRegressor(len(vocab_mixup))
-        model.load_state_dict(torch.load(PATHS["mixup_model"], map_location=DEVICE))
+        model.load_state_dict(torch.load(mixup_model_path, map_location=DEVICE))
         model.to(DEVICE)
         model.eval()
         models["mixup_regressor"] = model
@@ -123,22 +119,35 @@ def init_regressors():
         print("Synthetic Regressor loading failed (missing file/vocab).")
 
 # Lazy-load translation models to save startup memory/time
-def get_translation_model(model_type: str):
-    custom_path = PATHS["translation_mixup"] if model_type == "mixup" else PATHS["translation_synthetic"]
-    
+def get_translation_model(model_type: str, tuning_type: str = "dpo"):
+    if tuning_type == "sft":
+        custom_path = PATHS["mixup_sft"] if model_type == "mixup" else PATHS["synthetic_sft"]
+    else:
+        custom_path = PATHS["translation_mixup"] if model_type == "mixup" else PATHS["translation_synthetic"]
+        
     if not os.path.exists(custom_path):
-        raise FileNotFoundError(f"Das feingetunte Modell unter '{custom_path}' wurde nicht gefunden.")
+        raise FileNotFoundError(f"Das Modell unter '{custom_path}' wurde nicht gefunden.")
+        
+    model_key = f"translation_{model_type}_{tuning_type}"
+    tokenizer_key = f"{model_type}_{tuning_type}"
     
-    model_key = f"translation_{model_type}"
-    tokenizer_key = model_type
-    
-    if models[model_key] is None:
-        print(f"Loading translation model for {model_type} from {custom_path}...")
-        tokenizers[tokenizer_key] = AutoTokenizer.from_pretrained(PATHS["translation_fallback"], use_fast=False)
-        tokenizers[tokenizer_key].src_lang = "de_DE"
-        tokenizers[tokenizer_key].tgt_lang = "de_DE"
-        models[model_key] = AutoModelForSeq2SeqLM.from_pretrained(custom_path).to(DEVICE)
-        models[model_key].eval()
+    if models.get(model_key) is None:
+        print(f"Loading translation model for {model_type} ({tuning_type}) from {custom_path}...")
+        from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
+        
+        if tuning_type == "sft":
+            # SFT models are stored as weights only (.pt files)
+            tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50")
+            model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50").to(DEVICE)
+            model.load_state_dict(torch.load(custom_path, map_location=DEVICE))
+        else:
+            # DPO models are full HF model directories
+            tokenizer = MBart50TokenizerFast.from_pretrained(custom_path)
+            model = MBartForConditionalGeneration.from_pretrained(custom_path).to(DEVICE)
+            
+        model.eval()
+        models[model_key] = model
+        tokenizers[tokenizer_key] = tokenizer
         
     return models[model_key], tokenizers[tokenizer_key], custom_path
 
@@ -175,16 +184,21 @@ class EvaluateRequest(BaseModel):
 class TranslateRequest(BaseModel):
     text: str
     model_type: str  # "mixup" or "synthetic"
+    tuning_type: Optional[str] = "dpo"  # "dpo" or "sft"
 
 @app.get("/api/status")
 def get_status():
+    mixup_model_exists = os.path.exists(PATHS["mixup_model"])
+    mixup_trans_exists = os.path.exists(PATHS["translation_mixup"])
+    synthetic_sft_exists = os.path.exists(PATHS["synthetic_sft"])
+    
     return {
         "device": str(DEVICE),
         "mixup_regressor": {
             "loaded": models["mixup_regressor"] is not None,
             "model_path": PATHS["mixup_model"],
             "vocab_path": PATHS["mixup_vocab"],
-            "exists": os.path.exists(PATHS["mixup_model"]) and os.path.exists(PATHS["mixup_vocab"])
+            "exists": mixup_model_exists and os.path.exists(PATHS["mixup_vocab"])
         },
         "synthetic_regressor": {
             "loaded": models["synthetic_regressor"] is not None,
@@ -194,9 +208,13 @@ def get_status():
         },
         "translation_paths": {
             "mixup": PATHS["translation_mixup"],
-            "mixup_exists": os.path.exists(PATHS["translation_mixup"]),
+            "mixup_exists": mixup_trans_exists,
             "synthetic": PATHS["translation_synthetic"],
-            "synthetic_exists": os.path.exists(PATHS["translation_synthetic"])
+            "synthetic_exists": os.path.exists(PATHS["translation_synthetic"]),
+            "mixup_sft": PATHS["mixup_sft"],
+            "mixup_sft_exists": os.path.exists(PATHS["mixup_sft"]),
+            "synthetic_sft": PATHS["synthetic_sft"],
+            "synthetic_sft_exists": synthetic_sft_exists
         }
     }
 
@@ -228,47 +246,31 @@ def translate_text(req: TranslateRequest):
         raise HTTPException(status_code=400, detail="Text cannot be empty.")
     if req.model_type not in ["mixup", "synthetic"]:
         raise HTTPException(status_code=400, detail="Invalid model type. Choose 'mixup' or 'synthetic'.")
+    tuning_type = req.tuning_type or "dpo"
+    if tuning_type not in ["dpo", "sft"]:
+        raise HTTPException(status_code=400, detail="Invalid tuning type. Choose 'dpo' or 'sft'.")
         
     try:
-        model, tokenizer, load_path = get_translation_model(req.model_type)
+        model, tokenizer, load_path = get_translation_model(req.model_type, tuning_type)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to load translation model: {str(e)}")
         
-    # Run translation
+    # Run translation (matching the notebook evaluation prompt and settings exactly)
     prompt = "Übersetze in Leichte Sprache: " + req.text
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=256).to(DEVICE)
     
-    # Get target language token ID for mBART
-    forced_bos_token_id = tokenizer.lang_code_to_id["de_DE"]
-    
     with torch.no_grad():
         generated_ids = model.generate(
-            **inputs,
-            max_length=512,
+            input_ids=inputs["input_ids"],
+            attention_mask=inputs["attention_mask"],
+            max_length=256,
             num_beams=4,
-            length_penalty=1.0,
             repetition_penalty=2.5,
             no_repeat_ngram_size=3,
-            early_stopping=True,
-            forced_bos_token_id=forced_bos_token_id
+            early_stopping=True
         )
         
     translated_text = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
-    
-    # Strip the prompt prefix if it was echoed by the model
-    prefix = "Übersetze in Leichte Sprache: "
-    if translated_text.startswith(prefix):
-        translated_text = translated_text[len(prefix):]
-    
-    # Strip echoed source text if present
-    cleaned_req_text = req.text.strip()
-    if translated_text.startswith(cleaned_req_text):
-        translated_text = translated_text[len(cleaned_req_text):].strip()
-    elif translated_text.startswith(cleaned_req_text[:50]):  # fallback for partially truncated echoes
-        # Find where the echoed part ends and the translation begins
-        # Often the translation starts with a question like 'Was' or a new simple sentence
-        # Let's see if we can find a sensible boundary or just strip up to the length of the source text if it's mostly similar
-        pass
     
     # Calculate simplicity before and after
     source_mixup = predict_simplicity(req.text, "mixup")
