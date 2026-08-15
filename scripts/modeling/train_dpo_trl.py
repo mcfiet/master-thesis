@@ -497,6 +497,13 @@ def load_and_prepare_dataset(args: argparse.Namespace) -> DatasetDict:
 
 
 # ---------------------------------------------------------------------------
+# Ensure LoRA / PEFT classes report is_encoder_decoder for Seq2Seq Models
+# ---------------------------------------------------------------------------
+LoraConfig.is_encoder_decoder = True
+PeftModel.is_encoder_decoder = True
+
+
+# ---------------------------------------------------------------------------
 # Model and Tokenizer Initialization
 # ---------------------------------------------------------------------------
 def setup_model_and_tokenizer(args: argparse.Namespace):
@@ -597,16 +604,7 @@ def setup_model_and_tokenizer(args: argparse.Namespace):
             bias="none",
             task_type=task_type,
         )
-        model = get_peft_model(model, peft_config)
-        # Ensure is_encoder_decoder is explicitly preserved on PeftModel and its sub-configs
-        setattr(model.config, "is_encoder_decoder", is_seq2seq)
-        setattr(model, "is_encoder_decoder", is_seq2seq)
-        if hasattr(model, "base_model") and hasattr(model.base_model, "config"):
-            setattr(model.base_model.config, "is_encoder_decoder", is_seq2seq)
-        if hasattr(model, "peft_config"):
-            for adapter_cfg in model.peft_config.values():
-                setattr(adapter_cfg, "is_encoder_decoder", is_seq2seq)
-        logger.info("Successfully initialized and attached LoRA adapters to Seq2Seq model.")
+        setattr(peft_config, "is_encoder_decoder", is_seq2seq)
 
     return model, ref_model, tokenizer, peft_config, is_seq2seq
 
@@ -728,7 +726,7 @@ def main():
         "args": dpo_config,
         "train_dataset": train_dataset,
         "eval_dataset": eval_dataset,
-        "peft_config": None if args.use_peft else peft_config,
+        "peft_config": peft_config,
         "is_encoder_decoder": is_enc_dec,
     }
 
