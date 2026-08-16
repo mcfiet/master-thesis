@@ -78,6 +78,7 @@ parser.add_argument('--lr', type=float, required=True)
 parser.add_argument('--max_sim', type=float, required=True)
 parser.add_argument('--min_sim', type=float, required=True)
 parser.add_argument('--max_seq_len', type=int, required=True)
+parser.add_argument('--model_save_path', default="results/models/bilstm_mixup_regression.pt")
 parser.add_argument('--vocab_save_path', default="data/vocabs/mixup_vocab.json")
 args = parser.parse_args()
 
@@ -90,6 +91,7 @@ LR = args.lr
 MAX_SIM = args.max_sim
 MIN_SIM = args.min_sim
 MAX_SEQ_LEN = args.max_seq_len
+MODEL_SAVE_PATH = args.model_save_path
 VOCAB_SAVE_PATH = args.vocab_save_path
 
 # ==============================================================================
@@ -365,8 +367,8 @@ for epoch in range(EPOCHS):
     
     if epoch_val_loss < best_val_loss:
         best_val_loss = epoch_val_loss
-        torch.save(model.state_dict(), "results/models/bilstm_mixup_regression_hybrid_cyclic.pt")
-        print("=> Modell gespeichert (bester Val Loss)")
+        torch.save(model.state_dict(), MODEL_SAVE_PATH)
+        print(f"=> Modell gespeichert (bester Val Loss) unter {MODEL_SAVE_PATH}")
         counter = 0
     else:
         counter += 1
@@ -391,7 +393,7 @@ plt.savefig(os.path.join(plot_dir, "mixup_training_loss.png"))
 plt.close()
 
 # Load best model and evaluate
-model.load_state_dict(torch.load("results/models/bilstm_mixup_regression_hybrid_cyclic.pt", map_location=DEVICE))
+model.load_state_dict(torch.load(MODEL_SAVE_PATH, map_location=DEVICE))
 model.eval()
 val_preds = []
 val_targets = []

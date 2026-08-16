@@ -24,11 +24,14 @@ Alle Skripte befinden sich in diesem Ordner (`scripts/sbatch/run_pipeline/`) und
 | **12** | [`12_generate_synthetic_steps_corpus.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/12_generate_synthetic_steps_corpus.sh) | `12_generate_synthetic_steps_corpus` | CPU (4 Cores, 16GB) | 12h | Synthetische Stufen für Web-Korpus via LLM |
 | **13** | [`13_train_sentence_classifier.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/13_train_sentence_classifier.sh) | `13_train_sentence_classifier` | GPU (MIG 24GB) | 4h | BiLSTM Satz-Klassifikator trainieren |
 | **14** | [`14_train_article_classifier.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/14_train_article_classifier.sh) | `14_train_article_classifier` | GPU (MIG 24GB) | 4h | BiLSTM Artikel-Klassifikator trainieren |
-| **15** | [`15_train_mixup_regressor.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/15_train_mixup_regressor.sh) | `15_train_mixup_regressor` | GPU (MIG 24GB) | 4h | BiLSTM MixUp-Regressor trainieren |
-| **16** | [`16_train_synthetic_regressor.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/16_train_synthetic_regressor.sh) | `16_train_synthetic_regressor` | GPU (MIG 24GB) | 4h | BiLSTM Synthetischer Regressor trainieren |
-| **17** | [`17_train_sft.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/17_train_sft.sh) | `17_train_sft` | GPU (Volle 96GB) | 12h | mBART-50 SFT Übersetzungsmodell trainieren |
-| **18** | [`18_generate_dpo_dataset.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/18_generate_dpo_dataset.sh) | `18_generate_dpo_dataset` | GPU (Volle 96GB) | 12h | DPO Präferenzpaare offline sampeln & scoren |
-| **19** | [`19_train_dpo.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/19_train_dpo.sh) | `19_train_dpo` | GPU (Volle 96GB) | 12h | Seq2Seq LoRA DPO Training |
+| **15a** | [`15a_train_mixup_regressor.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/15a_train_mixup_regressor.sh) | `15a_train_mixup_regressor` | GPU (MIG 24GB) | 4h | BiLSTM MixUp-Regressor Reward-Modell trainieren |
+| **15b** | [`15b_train_synthetic_regressor.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/15b_train_synthetic_regressor.sh) | `15b_train_synthetic_regressor` | GPU (MIG 24GB) | 4h | BiLSTM Synthetischer Regressor Reward-Modell trainieren |
+| **16a** | [`16a_train_sft_mixup.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/16a_train_sft_mixup.sh) | `16a_train_sft_mixup` | GPU (Volle 96GB) | 12h | mBART-50 SFT Training (Eval mit MixUp Reward-Modell) |
+| **16b** | [`16b_train_sft_synthetic.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/16b_train_sft_synthetic.sh) | `16b_train_sft_synthetic` | GPU (Volle 96GB) | 12h | mBART-50 SFT Training (Eval mit Synthetic Reward-Modell) |
+| **17a** | [`17a_generate_dpo_dataset_mixup.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/17a_generate_dpo_dataset_mixup.sh) | `17a_generate_dpo_dataset_mixup` | GPU (Volle 96GB) | 12h | DPO-Paare offline erzeugen mit MixUp Reward-Modell |
+| **17b** | [`17b_generate_dpo_dataset_synthetic.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/17b_generate_dpo_dataset_synthetic.sh) | `17b_generate_dpo_dataset_synthetic` | GPU (Volle 96GB) | 12h | DPO-Paare offline erzeugen mit Synthetic Reward-Modell |
+| **18a** | [`18a_train_dpo_mixup.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/18a_train_dpo_mixup.sh) | `18a_train_dpo_mixup` | GPU (Volle 96GB) | 12h | Seq2Seq LoRA DPO Training (MixUp Daten) |
+| **18b** | [`18b_train_dpo_synthetic.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/run_pipeline/18b_train_dpo_synthetic.sh) | `18b_train_dpo_synthetic` | GPU (Volle 96GB) | 12h | Seq2Seq LoRA DPO Training (Synthetic Daten) |
 
 ---
 
@@ -36,7 +39,7 @@ Alle Skripte befinden sich in diesem Ordner (`scripts/sbatch/run_pipeline/`) und
 
 ```bash
 # Beispiel: Einen einzelnen Schritt einreichen
-sbatch scripts/sbatch/run_pipeline/17_train_sft.sh
+sbatch scripts/sbatch/run_pipeline/16a_train_sft_mixup.sh
 
 # Status der Warteschlange überprüfen
 squeue -u $USER

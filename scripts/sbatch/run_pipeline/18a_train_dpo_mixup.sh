@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=19_train_dpo
+#SBATCH --job-name=18a_train_dpo_mixup
 #SBATCH --partition=research
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
@@ -8,9 +8,9 @@
 
 srun python scripts/modeling/train_dpo.py \
     --model_name_or_path "results/models/sft" \
-    --train_file "data/dpo_preference_pairs.jsonl" \
-    --eval_file "data/dpo_preference_pairs_eval.jsonl" \
-    --output_dir "results/models/dpo_trained_model" \
+    --train_file "data/dpo_preference_pairs_mixup.jsonl" \
+    --eval_file "data/dpo_preference_pairs_mixup_eval.jsonl" \
+    --output_dir "results/models/dpo_mixup" \
     --use_peft \
     --lora_r 16 \
     --lora_alpha 32 \

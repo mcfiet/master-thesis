@@ -305,7 +305,7 @@ plt.close()
 # ==============================================================================
 # ARTICLE-LEVEL EVALUATION (Majority Vote)
 # ==============================================================================
-df_eval_art = pd.read_csv("data/analysis/information_loss_analysis_cleaned.csv")
+df_eval_art = pd.read_csv(CSV_PATH)
 mask_art = (df_eval_art["semantic_similarity_8192"] >= MIN_SIM) & (df_eval_art["semantic_similarity_8192"] <= MAX_SIM)
 df_filtered_art = df_eval_art[mask_art].copy()
 

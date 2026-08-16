@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=18_generate_dpo_dataset
+#SBATCH --job-name=17a_generate_dpo_dataset_mixup
 #SBATCH --partition=research
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
@@ -14,10 +14,10 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --prompt_prefix "" \
     --num_candidates 5 \
     --temperature 0.8 \
-    --reward_model_path "results/models/bilstm_synthetic_regression.pt" \
-    --reward_vocab_path "data/vocabs/synthetic_vocab.json" \
+    --reward_model_path "results/models/bilstm_mixup_regression.pt" \
+    --reward_vocab_path "data/vocabs/mixup_vocab.json" \
     --w_style 0.5 \
     --w_sem 0.5 \
     --min_score_margin 0.05 \
-    --output_file "data/dpo_preference_pairs.jsonl" \
+    --output_file "data/dpo_preference_pairs_mixup.jsonl" \
     --val_split_ratio 0.15
