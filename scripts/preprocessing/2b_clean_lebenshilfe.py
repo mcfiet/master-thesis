@@ -12,14 +12,29 @@ INPUT_FILE = args.input_file
 OUTPUT_FILE = args.output_file
 # List of filenames or keywords to identify form/consent/list documents that should be excluded completely
 EXCLUDE_FILENAMES = {
-    # Questionnaire/Surveys
+    # 1. Questionnaires / Surveys
     "ILS KIWA_Bedarfsumfrage AD002 Prüfer.docx",
-    # Consent / Release of confidentiality forms
+    
+    # 2. Consent / Release of confidentiality forms
     "ILS07 Einwilligung KS DS001 Prüfer.docx",
     "ILS08 BwH Entbindung Schweigepflicht AD002 prüfen.docx",
     "ILS09 BwH Einverständniserklärung AD001 prüfen.docx",
-    # Pure bullet point lists / Glossaries
+    
+    # 3. Pure bullet point lists / Glossaries / Appendices
     "ILS Anlage Resozialisierung Hausordungung HL AD001.docx",
+    
+    # 4. Content / Topic Mismatches (differing subjects between AS and LS)
+    "ILS_CAU_Geologiemuseum AD002 Prüfer Mail.docx",  # LS is Geology Museum, AS is Inclusion Action Day PM
+    "07 ÖPNV ILS_AD001 Prüfer.docx",                  # LS is Public Transit, AS source contains Land-use plan
+    
+    # 5. Extreme Length Asymmetry & Multi-Chapter Manuals
+    "ILS Texte MiPi Tablet-Führerschein.docx",        # LS is 10k-word full manual vs 500-word AS intro
+    "ILS IIB_MD-Stendal_Textteil_5 001 geprüft.docx", # LS is 511 words vs 73 words AS (7:1 ratio)
+    "16 Beirat Senioren ILS_AD001 Prüfer.docx",       # LS is 209 words vs 1019 words generic AS text
+    
+    # 6. Non-article / Administrative Formats
+    "ILS FRAGEN Podium - Parlamentarischer Abend - AD001.docx", # Panel discussion questions / cue sheet
+    "ILS_Impressum ZuMiNET LS.docx",                            # Web Impressum / Legal notice
 }
 
 # Regex definitions to clean Lebenshilfe signatures, credits, illustrators and formatting noise
