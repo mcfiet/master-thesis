@@ -48,6 +48,60 @@ CLEANING_PATTERNS = [
     (r'(?i)Mehr Informationen im Internet unter:.*?Inclusion Europe.*?(\.|$)', ''),
 ]
 
+# Punctuation and continuation definitions for smart sentence reconstruction
+END_PUNCT = ('.', '!', '?', ':', ';', '…', '“', '\"', '”', '»', '«', ')', '–', '-', ',')
+CONTINUATION_ENDINGS = {
+    'und', 'oder', 'sowie', 'sowohl', 'weder', 'noch', 'aber', 'denn', 'weil', 'dass', 'daß', 'wenn', 'als', 'ob', 'obwohl', 'damit', 'wie',
+    'für', 'in', 'im', 'von', 'vom', 'mit', 'zu', 'zur', 'zum', 'auf', 'aus', 'über', 'unter', 'nach', 'bei', 'beim', 'an', 'am', 'vor', 'durch', 'gegen', 'ohne', 'um', 'seit', 'ab', 'bis', 'zwischen', 'hinter', 'neben',
+    'der', 'die', 'das', 'des', 'dem', 'den', 'ein', 'eine', 'einer', 'eines', 'einem', 'einen', 'ihr', 'ihre', 'ihrer', 'ihrem', 'ihren', 'sein', 'seine', 'seiner', 'seinem', 'seinen', 'mein', 'meine', 'dein', 'deine', 'unser', 'unsere', 'euer', 'eure',
+    'ist', 'sind', 'war', 'waren', 'wird', 'werden', 'wurde', 'wurden', 'hat', 'haben', 'hatte', 'hatten', 'heißt', 'heißen', 'gibt', 'bedeutet', 'gehört', 'gehören', 'kann', 'können', 'muss', 'müssen', 'soll', 'sollen', 'darf', 'dürfen', 'will', 'wollen',
+    'auch', 'nicht', 'sehr', 'zum beispiel', 'z. b.', 'z.b.', 'wie zum beispiel'
+}
+
+def smart_reconstruct_lines(text):
+    if not text:
+        return ""
+    lines = [l.strip() for l in text.split('\n') if l.strip()]
+    if not lines:
+        return ""
+        
+    result = []
+    for i, line in enumerate(lines):
+        if i == len(lines) - 1:
+            if not line.endswith(END_PUNCT):
+                line += '.'
+            result.append(line)
+            break
+            
+        next_line = lines[i + 1]
+        
+        # 1. Line already ends with punctuation
+        if line.endswith(END_PUNCT):
+            result.append(line)
+            continue
+            
+        # 2. Line continues on next line:
+        # a) Next line starts with lowercase letter
+        # b) Current line ends with a continuation token (conjunction, preposition, auxiliary verb, etc.)
+        words = line.lower().split()
+        last_word = words[-1] if words else ''
+        last_two = ' '.join(words[-2:]) if len(words) >= 2 else ''
+        if (next_line and next_line[0].islower()) or last_word in CONTINUATION_ENDINGS or last_two in CONTINUATION_ENDINGS:
+            result.append(line)
+            continue
+            
+        # 3. Independent heading, list item, or sentence missing terminal punctuation -> append '.'
+        result.append(line + '.')
+        
+    joined = ' '.join(result)
+    joined = re.sub(r'\s+', ' ', joined).strip()
+    joined = re.sub(r'\.\s*\.', '.', joined)
+    joined = re.sub(r':\.', ':', joined)
+    joined = re.sub(r',\.', '.', joined)
+    joined = re.sub(r'\?\.', '?', joined)
+    joined = re.sub(r'!\.', '!', joined)
+    return joined
+
 def clean_text(text):
     if not text:
         return ""
@@ -71,15 +125,13 @@ def clean_text(text):
     # Remove table-of-contents line artifacts with trailing tab/spaces and page numbers (e.g. "Handbuch ... 1")
     text = re.sub(r'.*?\t\d+\n', '', text)
     
-    # Standardize whitespace
-    text = re.sub(r'[ \t]+', ' ', text)
-    # Collapse multiple newlines into max 2 newlines (paragraph separation)
-    text = re.sub(r'\n\s*\n', '\n\n', text)
-    
     # Clean trailing signature leftovers like "V."
     text = text.strip()
     text = re.sub(r'\n+V\.$', '', text)
     text = re.sub(r'\n+V\n+V\.$', '', text)
+    
+    # Smart line joining and punctuation reconstruction
+    text = smart_reconstruct_lines(text)
     
     return text.strip()
 
