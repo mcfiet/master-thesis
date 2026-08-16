@@ -4,6 +4,76 @@ Diese Anleitung beschreibt alle Schritte, um die Daten- und Modellierungs-Pipeli
 
 ---
 
+## 0. Vorbereitung & Synchronisation auf den HPC-Server (rsync)
+
+Um die Pipeline auf dem Server auszuführen, müssen **nur die Basisdateien und Rohdaten** übertragen werden. Alle weiteren Zwischenkorpora und Modelle werden durch die aufeinander aufbauenden SBATCH-Skripte automatisch erzeugt.
+
+Hierfür gibt es zwei Szenarien:
+- **Szenario A (Vollständige Pipeline):** Scraping wird auf dem HPC ausgeführt (Schritt 1 & 2).
+- **Szenario B (Scraping überspringen):** Die bereits lokal vorhandenen Rohtexte (`data/corpus/2_raw_scraped/`) werden direkt mitkopiert und die Pipeline startet bei Schritt 3 bzw. Schritt 5.
+
+---
+
+### 0.1 Dateien übertragen (Szenario A: Scraping neu ausführen)
+
+```bash
+# 1. Pipeline-Skripte (inkl. scripts/sbatch/run_pipeline) & Konfiguration
+rsync -avz ./scripts/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/scripts/
+rsync -avz ./requirements.txt fisc4884@hpc3.hs-flensburg.de:~/master-thesis/requirements.txt
+
+# 2. Lokale Rohdaten (Lebenshilfe-Dokumente)
+rsync -avz ./data/texts_lebenshilfe/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/data/texts_lebenshilfe/
+```
+
+---
+
+### 0.2 Dateien übertragen (Szenario B: Scraping überspringen & Rohtexte mitnehmen)
+
+Wenn du das Scraping der Webseiten überspringen möchtest, übertrage zusätzlich den Ordner mit den bereits extrahierten Rohtexten (`2_raw_scraped`):
+
+```bash
+# 1. Pipeline-Skripte (inkl. scripts/sbatch/run_pipeline) & Konfiguration
+rsync -avz ./scripts/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/scripts/
+rsync -avz ./requirements.txt fisc4884@hpc3.hs-flensburg.de:~/master-thesis/requirements.txt
+
+# 2. Lokale Lebenshilfe-Rohdokumente
+rsync -avz ./data/texts_lebenshilfe/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/data/texts_lebenshilfe/
+
+# 3. Bereits vorhandene Web-Rohtexte (Schritt 1 überspringen)
+rsync -avz ./data/corpus/2_raw_scraped/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/data/corpus/2_raw_scraped/
+
+# (Optional: Bereits vorhandene URL-Alignments)
+rsync -avz ./data/corpus/1_aligned_urls/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/data/corpus/1_aligned_urls/
+```
+
+> **Alternativer All-in-One Befehl für Szenario B (Scraping überspringen):**
+> ```bash
+> rsync -avz \
+>   --exclude='.venv' \
+>   --exclude='.git' \
+>   --exclude='.DS_Store' \
+>   --exclude='results' \
+>   --exclude='data/corpus/3_*' \
+>   --exclude='data/corpus/4_*' \
+>   --exclude='data/corpus/5_*' \
+>   --exclude='data/corpus/*with_steps*' \
+>   --exclude='data/analysis' \
+>   --exclude='data/lebenshilfe' \
+>   ./ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/
+> ```
+
+---
+
+### 0.3 Basis-Ordnerstruktur auf dem Server anlegen
+
+Logge dich auf dem Server ein und erstelle die benötigten Zielverzeichnisse:
+
+```bash
+ssh fisc4884@hpc3.hs-flensburg.de "mkdir -p ~/master-thesis/data/{corpus,lebenshilfe,analysis,vocabs} ~/master-thesis/results/{models,logs,plots}"
+```
+
+---
+
 ## 1. Setup & Installation (Python Environment)
 
 ### 1.1 Virtuelle Umgebung erstellen und aktivieren
@@ -175,10 +245,10 @@ Das Training des mBART-50 Transformers (über 1 Mrd. Parameter) benötigt zwinge
 # 5. Supervised Fine-Tuning (SFT Übersetzungsmodell - 30 Epochen mit Early Stopping)
 # [GPU Mandatory]
 .venv/bin/python scripts/modeling/train_sft.py \
-    --lh_dataset_path "data/new_pipeline/lebenshilfe/lebenshilfe_dataset.json" \
-    --corpus_path "data/new_pipeline/analysis/corpus_master.json" \
-    --output_dir "results/models/new_pipeline/sft" \
-    --min_sim 0.7 \
+    --lh_dataset_path "data/lebenshilfe/lebenshilfe_dataset_clean.json" \
+    --corpus_path "data/analysis/corpus_master.json" \
+    --output_dir "results/models/sft" \
+    --min_sim 0.70 \
     --max_sim 0.98 \
     --max_source_len 256 \
     --max_target_len 256 \
@@ -187,7 +257,7 @@ Das Training des mBART-50 Transformers (über 1 Mrd. Parameter) benötigt zwinge
     --accumulation_steps 2 \
     --epochs 30 \
     --lr 1e-5 \
-    --warmup_ratio 0.1 \
+    --warmup_ratio 0.10 \
     --patience 5 \
     --reward_model_path "results/models/bilstm_synthetic_regression.pt" \
     --reward_vocab_path "data/vocabs/synthetic_vocab.json"
@@ -195,10 +265,10 @@ Das Training des mBART-50 Transformers (über 1 Mrd. Parameter) benötigt zwinge
 # 6. DPO-Präferenzdatensatz generieren (Offline Sampling mit Reward-Bewertung)
 # [GPU Mandatory]
 .venv/bin/python scripts/modeling/generate_dpo_dataset.py \
-    --corpus_path "data/new_pipeline/analysis/corpus_master.json" \
-    --min_sim 0.7 \
+    --corpus_path "data/analysis/corpus_master.json" \
+    --min_sim 0.70 \
     --max_sim 0.98 \
-    --sft_model_path "results/models/new_pipeline/sft" \
+    --sft_model_path "results/models/sft" \
     --prompt_prefix "" \
     --num_candidates 5 \
     --temperature 0.8 \
@@ -213,7 +283,7 @@ Das Training des mBART-50 Transformers (über 1 Mrd. Parameter) benötigt zwinge
 # 7. Direct Preference Optimization (Natives PyTorch DPO-Training für Seq2Seq)
 # [GPU Mandatory]
 .venv/bin/python scripts/modeling/train_dpo.py \
-    --model_name_or_path "results/models/new_pipeline/sft" \
+    --model_name_or_path "results/models/sft" \
     --train_file "data/dpo_preference_pairs.jsonl" \
     --eval_file "data/dpo_preference_pairs_eval.jsonl" \
     --output_dir "results/models/dpo_trained_model" \
