@@ -206,7 +206,7 @@ class TranslationDataset(Dataset):
             src_text, max_length=self.max_src_len, padding="max_length", truncation=True, return_tensors="pt"
         )
         labels = self.tokenizer(
-            tgt_text, max_length=self.max_tgt_len, padding="max_length", truncation=True, return_tensors="pt"
+            text_target=tgt_text, max_length=self.max_tgt_len, padding="max_length", truncation=True, return_tensors="pt"
         )["input_ids"]
         
         labels[labels == self.tokenizer.pad_token_id] = -100
@@ -421,16 +421,22 @@ else:
             batch_src = as_texts[i:i+batch_size]
             prompts = [t for t in batch_src]
             inputs = tokenizer(prompts, padding=True, truncation=True, max_length=MAX_SOURCE_LEN, return_tensors="pt").to(DEVICE)
+            gen_kwargs = {
+                "input_ids": inputs["input_ids"],
+                "attention_mask": inputs["attention_mask"],
+                "max_length": MAX_TARGET_LEN,
+                "num_beams": 4,
+                "repetition_penalty": 1.1,
+                "no_repeat_ngram_size": 3,
+                "early_stopping": True
+            }
+            if hasattr(tokenizer, "lang_code_to_id") and "de_DE" in tokenizer.lang_code_to_id:
+                gen_kwargs["forced_bos_token_id"] = tokenizer.lang_code_to_id["de_DE"]
+            elif hasattr(model.config, "forced_bos_token_id") and model.config.forced_bos_token_id is not None:
+                gen_kwargs["forced_bos_token_id"] = model.config.forced_bos_token_id
+
             with torch.no_grad():
-                outputs = model.generate(
-                    input_ids=inputs["input_ids"],
-                    attention_mask=inputs["attention_mask"],
-                    max_length=MAX_TARGET_LEN,
-                    num_beams=4,
-                    repetition_penalty=2.5,
-                    no_repeat_ngram_size=3,
-                    early_stopping=True
-                )
+                outputs = model.generate(**gen_kwargs)
             decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
             gen_texts.extend(decoded)
             

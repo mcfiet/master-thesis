@@ -209,7 +209,7 @@ class DPOPreferenceDataset(Dataset):
 
         # 2. Tokenize Chosen Completion (Decoder)
         chosen_enc = self.tokenizer(
-            chosen,
+            text_target=chosen,
             max_length=self.max_target_len,
             padding="max_length",
             truncation=True,
@@ -220,7 +220,7 @@ class DPOPreferenceDataset(Dataset):
 
         # 3. Tokenize Rejected Completion (Decoder)
         rejected_enc = self.tokenizer(
-            rejected,
+            text_target=rejected,
             max_length=self.max_target_len,
             padding="max_length",
             truncation=True,

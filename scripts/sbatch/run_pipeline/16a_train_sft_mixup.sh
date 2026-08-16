@@ -18,8 +18,8 @@ srun python scripts/modeling/train_sft.py \
     --batch_size 8 \
     --accumulation_steps 2 \
     --epochs 30 \
-    --lr 1e-5 \
+    --lr 3e-5 \
     --warmup_ratio 0.10 \
-    --patience 5 \
+    --patience 8 \
     --reward_model_path "results/models/bilstm_mixup_regression.pt" \
     --reward_vocab_path "data/vocabs/mixup_vocab.json"

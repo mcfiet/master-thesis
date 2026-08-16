@@ -7,4 +7,7 @@
 
 srun python scripts/preprocessing/normalize_clean.py \
     --input_dir data/corpus/3_filtered_similarity \
-    --output_dir data/corpus/4_normalized_clean
+    --output_dir data/corpus/4_normalized_clean \
+    --min_ratio 0.20 \
+    --max_ratio 4.00 \
+    --min_words 30
