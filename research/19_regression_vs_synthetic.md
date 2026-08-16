@@ -41,9 +41,9 @@ Im Notebook [`2_compare_mixup_vs_synthetic.ipynb`](file:///Users/fietescheel/Doc
 
 > [!IMPORTANT]
 > **Skalen-Harmonisierung:**  
-> Da das MixUp-Modell darauf trainiert war, das Verhältnis von Leichter Sprache vorherzusagen ($1.0 = \text{LS}$, $0.0 = \text{AS}$), das synthetische Modell hingegen die Komplexität misst ($0.0 = \text{LS}$, $1.0 = \text{AS}$), wurde die MixUp-Vorhersage auf die Komplexitäts-Skala harmonisiert ($1.0 - \text{Pred}$).
+> Da das MixUp-Modell darauf trainiert war, das Verhältnis von Leichter Sprache vorherzusagen ($1.0 = \text{LS}$, $0.0 = \text{AS}$), das synthetische Modell hingegen die Komplexität misst ($0.0 = \text{LS}$, $1.0 = \text{AS}$), wurde die Vorhersage des synthetischen Modells auf die Einfachheits-Skala harmonisiert ($1.0 - \text{Pred}$).
 
-### Evaluierungsdaten (Harmonisiert auf $0.0 = \text{Leichte Sprache}$ und $1.0 = \text{Alltagssprache}$):
+### Evaluierungsdaten (Harmonisiert auf $1.0 = \text{Leichte Sprache}$ und $0.0 = \text{Alltagssprache}$):
 
 | Metrik | MixUp-Modell (Variante D) | Synthetisches LLM-Modell | Gewinn durch Synthetik-Ansatz |
 | :--- | :---: | :---: | :---: |

@@ -197,20 +197,23 @@ Trainiert Klassifikatoren, Regressoren sowie Übersetzungs- und DPO-Modelle. All
   ```bash
   .venv/bin/python scripts/modeling/5_train_sft.py \
       --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
-      --corpus_csv_path data/analysis/corpus_master.csv \
-      --sft_model_path results/models/2_sft.pt \
+      --corpus_path data/analysis/corpus_master.csv \
       --min_sim 0.70 --max_sim 0.98 --max_source_len 256 --max_target_len 256 \
-      --model_name facebook/mbart-large-50
+      --model_name facebook/mbart-large-50 \
+      --batch_size 8 --epochs 15 --lr 1e-5 --warmup_ratio 0.10 \
+      --patience 5 --seed 42 --val_split 0.15 --output_dir results/models/seq2seq_sft \
+      --reward_model_path results/models/bilstm_synthetic_regression.pt \
+      --reward_vocab_path data/vocabs/synthetic_vocab.json
   ```
 - **Direct Preference Optimization (DPO Ausrichtung):**
   ```bash
   .venv/bin/python scripts/modeling/6_train_dpo.py \
       --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
-      --corpus_csv_path data/analysis/corpus_master.csv \
+      --corpus_path data/analysis/corpus_master.csv \
       --output_dir results/models/seq2seq_dpo \
-      --sft_model_path results/models/2_sft.pt \
-      --synthetic_model_path results/models/bilstm_synthetic_regression.pt \
-      --synthetic_vocab_path data/vocabs/synthetic_vocab.json \
+      --sft_model_dir results/models/seq2seq_sft \
+      --reward_model_path results/models/bilstm_synthetic_regression.pt \
+      --reward_vocab_path data/vocabs/synthetic_vocab.json \
       --min_sim 0.80 --max_sim 0.98 --w_style 0.5 --w_sem 0.5 \
       --max_source_len 256 --max_target_len 256 --model_name facebook/mbart-large-50
   ```

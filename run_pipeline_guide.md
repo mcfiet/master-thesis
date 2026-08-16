@@ -73,10 +73,10 @@ Führe diese Skripte in der angegebenen Reihenfolge aus:
 
 ```bash
 # 1. Lokales Lebenshilfe-Dokumentenkorpus einlesen und JSON erstellen
-.venv/bin/python scripts/preprocessing/0_create_lebenshilfe_dataset.py
+.venv/bin/python scripts/preprocessing/create_lebenshilfe_dataset.py
 
 # 2. Lebenshilfe-Datensatz bereinigen (Metadaten, Prüferhinweise, Signaturen entfernen)
-.venv/bin/python scripts/preprocessing/2b_clean_lebenshilfe.py \
+.venv/bin/python scripts/preprocessing/clean_lebenshilfe.py \
     --input_file data/lebenshilfe/lebenshilfe_dataset.json \
     --output_file data/lebenshilfe/lebenshilfe_dataset_clean.json
 
@@ -86,36 +86,36 @@ Führe diese Skripte in der angegebenen Reihenfolge aus:
     --output_csv data/analysis/information_loss_analysis.csv
 
 # 4. Web-Korpus filtern (Ähnlichkeitsbereich 0.60 bis 0.99, Mindestlänge 10 Wörter)
-.venv/bin/python scripts/preprocessing/1_filter_similarity.py \
+.venv/bin/python scripts/preprocessing/filter_similarity.py \
     --analysis_csv data/analysis/information_loss_analysis.csv \
     --source_dir data/corpus/2_raw_scraped \
     --output_dir data/corpus/3_filtered_similarity \
     --sim_min 0.60 --sim_max 0.99 --min_ls_tokens 10
 
 # 5. Textnormalisierung & Quellenspezifische Bereinigung (z.B. Mediopunkt-Entfernung)
-.venv/bin/python scripts/preprocessing/2_normalize_clean.py \
+.venv/bin/python scripts/preprocessing/normalize_clean.py \
     --input_dir data/corpus/3_filtered_similarity \
     --output_dir data/corpus/4_normalized_clean
 
 # 6. Glossar-Datenbank über Hurraki-API aufbauen
-.venv/bin/python scripts/preprocessing/3_build_glossary.py
+.venv/bin/python scripts/preprocessing/build_glossary.py
 
 # 7. Textkorpus mit Begriffserklärungen anreichern
-.venv/bin/python scripts/preprocessing/4_enrich_glossary.py
+.venv/bin/python scripts/preprocessing/enrich_glossary.py
 
 # 8. Master-CSV und JSON generieren (berechnet Metriken wie Lesbarkeits-Scores und MATTR)
-.venv/bin/python scripts/preprocessing/5_build_corpus_master.py \
+.venv/bin/python scripts/preprocessing/build_corpus_master.py \
     --input_dir data/corpus/4_normalized_clean \
     --output_csv data/analysis/corpus_master.csv
 
 # 9. Synthetische Komplexitäts-Stufen (0.25, 0.50, 0.75) via LLM API erzeugen
 # (Ersetze <API_URL> und <TOKEN> durch deine Verbindungsdaten)
-.venv/bin/python scripts/preprocessing/6_generate_synthetic_steps.py \
+.venv/bin/python scripts/preprocessing/generate_synthetic_steps.py \
     --input data/lebenshilfe/lebenshilfe_dataset_clean.json \
     --output data/lebenshilfe/lebenshilfe_dataset_with_steps.json \
     --url <API_URL> --token <TOKEN> --model "FlensGen-GPT-OSS-120B"
 
-.venv/bin/python scripts/preprocessing/6_generate_synthetic_steps.py \
+.venv/bin/python scripts/preprocessing/generate_synthetic_steps.py \
     --input data/analysis/corpus_master.json \
     --output data/corpus/corpus_master_with_steps.json \
     --url <API_URL> --token <TOKEN> --model "FlensGen-GPT-OSS-120B"
@@ -135,7 +135,7 @@ Diese Modelle sind kompakt und können schnell auf Standard-CPUs trainiert werde
 ```bash
 # 1. Satz-Klassifikator (BiLSTM)
 # [CPU Friendly - GPU Optional]
-.venv/bin/python scripts/modeling/1_binary_train_sentence_model.py \
+.venv/bin/python scripts/modeling/binary_train_sentence_model.py \
     --csv_path data/analysis/corpus_master.csv \
     --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
     --batch_size 64 --embedding_dim 128 --epochs 20 --hidden_dim 128 \
@@ -143,7 +143,7 @@ Diese Modelle sind kompakt und können schnell auf Standard-CPUs trainiert werde
 
 # 2. Artikel-Klassifikator (BiLSTM)
 # [CPU Friendly - GPU Optional]
-.venv/bin/python scripts/modeling/2_binary_train_article_model.py \
+.venv/bin/python scripts/modeling/binary_train_article_model.py \
     --csv_path data/analysis/corpus_master.csv \
     --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
     --batch_size 32 --embedding_dim 128 --epochs 30 --hidden_dim 128 \
@@ -151,14 +151,15 @@ Diese Modelle sind kompakt und können schnell auf Standard-CPUs trainiert werde
 
 # 3. MixUp-Regressor (Style-Score)
 # [CPU Friendly - GPU Optional]
-.venv/bin/python scripts/modeling/3_regression_train_mixup.py \
+.venv/bin/python scripts/modeling/regression_train_mixup.py \
     --csv_path data/analysis/corpus_master.csv \
     --batch_size 64 --embedding_dim 128 --epochs 40 --hidden_dim 128 \
-    --lr 0.001 --max_sim 0.98 --min_sim 0.8 --max_seq_len 256
+    --lr 0.001 --max_sim 0.98 --min_sim 0.8 --max_seq_len 256 \
+    --vocab_save_path data/vocabs/mixup_vocab.json
 
 # 4. Synthetischer Regressor (Style-Score)
 # [CPU Friendly - GPU Optional]
-.venv/bin/python scripts/modeling/4_regression_train_synthetic.py \
+.venv/bin/python scripts/modeling/regression_train_synthetic.py \
     --corpus_with_steps_path data/corpus/corpus_master_with_steps.json \
     --lh_with_steps_path data/lebenshilfe/lebenshilfe_dataset_with_steps.json \
     --model_save_path results/models/bilstm_synthetic_regression.pt \
@@ -168,29 +169,65 @@ Diese Modelle sind kompakt und können schnell auf Standard-CPUs trainiert werde
 
 ### 4.2 Übersetzungs- & DPO-Modelle (GPU zwingend erforderlich)
 
-Das Training des mBART-50 Transformers (über 1 Mrd. Parameter) benötigt zwingend eine CUDA-fähige Grafikkarte:
+Das Training des mBART-50 Transformers (über 1 Mrd. Parameter) benötigt zwingend eine CUDA-fähige Grafikkarte. Die Übersetzungspipeline gliedert sich in 3 aufeinander aufbauende Schritte:
 
 ```bash
-# 5. Supervised Fine-Tuning (SFT Übersetzungsmodell)
+# 5. Supervised Fine-Tuning (SFT Übersetzungsmodell - 30 Epochen mit Early Stopping)
 # [GPU Mandatory]
-.venv/bin/python scripts/modeling/5_train_sft.py \
-    --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
-    --corpus_csv_path data/analysis/corpus_master.csv \
-    --sft_model_path results/models/2_sft.pt \
-    --min_sim 0.70 --max_sim 0.98 --max_source_len 256 --max_target_len 256 \
-    --model_name facebook/mbart-large-50
+.venv/bin/python scripts/modeling/train_sft.py \
+    --lh_dataset_path "data/new_pipeline/lebenshilfe/lebenshilfe_dataset.json" \
+    --corpus_path "data/new_pipeline/analysis/corpus_master.json" \
+    --output_dir "results/models/new_pipeline/sft" \
+    --min_sim 0.7 \
+    --max_sim 0.98 \
+    --max_source_len 256 \
+    --max_target_len 256 \
+    --model_name "facebook/mbart-large-50" \
+    --batch_size 8 \
+    --accumulation_steps 2 \
+    --epochs 30 \
+    --lr 1e-5 \
+    --warmup_ratio 0.1 \
+    --patience 5 \
+    --reward_model_path "results/models/bilstm_synthetic_regression.pt" \
+    --reward_vocab_path "data/vocabs/synthetic_vocab.json"
 
-# 6. Direct Preference Optimization (DPO Alignierung)
+# 6. DPO-Präferenzdatensatz generieren (Offline Sampling mit Reward-Bewertung)
 # [GPU Mandatory]
-.venv/bin/python scripts/modeling/6_train_dpo.py \
-    --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
-    --corpus_csv_path data/analysis/corpus_master.csv \
-    --output_dir results/models/seq2seq_dpo \
-    --sft_model_path results/models/2_sft.pt \
-    --synthetic_model_path results/models/bilstm_synthetic_regression.pt \
-    --synthetic_vocab_path data/vocabs/synthetic_vocab.json \
-    --min_sim 0.80 --max_sim 0.98 --w_style 0.5 --w_sem 0.5 \
-    --max_source_len 256 --max_target_len 256 --model_name facebook/mbart-large-50
+.venv/bin/python scripts/modeling/generate_dpo_dataset.py \
+    --corpus_path "data/new_pipeline/analysis/corpus_master.json" \
+    --min_sim 0.7 \
+    --max_sim 0.98 \
+    --sft_model_path "results/models/new_pipeline/sft" \
+    --prompt_prefix "" \
+    --num_candidates 5 \
+    --temperature 0.8 \
+    --reward_model_path "results/models/bilstm_synthetic_regression.pt" \
+    --reward_vocab_path "data/vocabs/synthetic_vocab.json" \
+    --w_style 0.5 \
+    --w_sem 0.5 \
+    --min_score_margin 0.05 \
+    --output_file "data/dpo_preference_pairs.jsonl" \
+    --val_split_ratio 0.15
+
+# 7. Direct Preference Optimization (Natives PyTorch DPO-Training für Seq2Seq)
+# [GPU Mandatory]
+.venv/bin/python scripts/modeling/train_dpo.py \
+    --model_name_or_path "results/models/new_pipeline/sft" \
+    --train_file "data/dpo_preference_pairs.jsonl" \
+    --eval_file "data/dpo_preference_pairs_eval.jsonl" \
+    --output_dir "results/models/dpo_trained_model" \
+    --use_peft \
+    --lora_r 16 \
+    --lora_alpha 32 \
+    --beta 0.1 \
+    --learning_rate 5e-6 \
+    --epochs 3 \
+    --batch_size 2 \
+    --accumulation_steps 8 \
+    --patience 3 \
+    --max_source_len 256 \
+    --max_target_len 256
 ```
 
 ---

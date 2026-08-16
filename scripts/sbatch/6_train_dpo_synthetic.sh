@@ -10,7 +10,7 @@ srun python scripts/modeling/6_train_dpo.py \
     --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \
     --corpus_path data/analysis/corpus_master.json \
     --output_dir results/models/dpo_synthetic \
-    --sft_model_path results/models/sft.pt \
+    --sft_model_dir results/models/sft \
     --reward_model_path results/models/bilstm_synthetic_regression.pt \
     --reward_vocab_path data/vocabs/synthetic_vocab.json \
     --min_sim 0.70 --max_sim 0.98 --w_style 0.5 --w_sem 0.5 \

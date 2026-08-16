@@ -148,8 +148,11 @@ print(f"Loaded {len(eval_samples)} evaluation samples.")
 preds_mixup, targets_eval = evaluate_model(MIXUP_MODEL_PATH, MIXUP_VOCAB_PATH, eval_samples)
 preds_synthetic, _ = evaluate_model(SYNTHETIC_MODEL_PATH, SYNTHETIC_VOCAB_PATH, eval_samples)
 
-# Harmonize MixUp scale (1.0 - pred)
-preds_mixup = 1.0 - preds_mixup
+# Harmonize scales to Simplicity (1.0 = LS, 0.0 = AS)
+# MixUp is already Simplicity scale (1.0 = LS, 0.0 = AS), so we do not invert it.
+# Synthetic is Complexity scale (0.0 = LS, 1.0 = AS), so we invert it.
+preds_synthetic = 1.0 - preds_synthetic
+targets_eval = 1.0 - targets_eval
 
 # 3. Save Comparison Boxplot Plot
 df_comp = pd.DataFrame({
@@ -160,9 +163,9 @@ df_comp = pd.DataFrame({
 
 plt.figure(figsize=(12, 6))
 sns.boxplot(data=df_comp, x="Zielstufe", y="Vorhergesagter Score", hue="Modell", palette="Set2")
-plt.title("Vergleich der Komplexitäts-Vorhersagen (0.0 = LS, 1.0 = AS)")
+plt.title("Vergleich der Einfachheits-Vorhersagen (1.0 = LS, 0.0 = AS)")
 plt.xlabel("Vorgegebene Zielstufe (LLM)")
-plt.ylabel("Modellvorhersage (BiLSTM Komplexitäts-Score)")
+plt.ylabel("Modellvorhersage (BiLSTM Einfachheits-Score)")
 plt.grid(True, linestyle="--", alpha=0.5)
 plt.legend(title="Modell")
 plt.tight_layout()
@@ -178,12 +181,27 @@ plt.figure(figsize=(10, 6))
 sns.regplot(x=targets_eval, y=preds_mixup, label=f"MixUp (r={r_m:.3f})", scatter_kws={"alpha": 0.3}, line_kws={"color": "red"})
 sns.regplot(x=targets_eval, y=preds_synthetic, label=f"Synthetisch (r={r_s:.3f})", scatter_kws={"alpha": 0.3}, line_kws={"color": "blue"})
 plt.plot([0, 1], [0, 1], "k--", label="Ideale Monotonie (1:1)")
-plt.title("Regressionsvergleich auf den 5 Synthetik-Stufen")
-plt.xlabel("Zielstufe (Ground Truth / LLM Target)")
-plt.ylabel("Vorhergesagter Komplexitäts-Score")
+plt.title("Regressionsvergleich auf den 5 Synthetik-Stufen (Einfachheit)")
+plt.xlabel("Zielstufe (Ground Truth / LLM Target - Einfachheit)")
+plt.ylabel("Vorhergesagter Einfachheits-Score")
 plt.legend()
 plt.grid(True, linestyle="--", alpha=0.5)
 plt.tight_layout()
 plt.savefig(os.path.join(IMG_DIR, "compare_regplot_mixup_vs_synthetic.png"), dpi=300)
 plt.close()
 print("Saved regression plot comparison.")
+
+# 5. Save KDE Density Comparison Plot
+plt.figure(figsize=(10, 5))
+sns.kdeplot(targets_eval, label="Zielstufe (Ground Truth)", fill=True, alpha=0.15, color="gray", linewidth=2)
+sns.kdeplot(preds_mixup, label=f"MixUp-Modell (r={r_m:.3f})", color="red", linewidth=2)
+sns.kdeplot(preds_synthetic, label=f"Synthetisches LLM-Modell (r={r_s:.3f})", color="blue", linewidth=2)
+plt.title("Dichtevergleich (KDE) der Vorhersagen vs. Zielstufe (Einfachheit)")
+plt.xlabel("Einfachheits-Score (1.0 = LS, 0.0 = AS)")
+plt.ylabel("Dichte")
+plt.xlim(-0.1, 1.1)
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(IMG_DIR, "compare_kde_mixup_vs_synthetic.png"), dpi=300)
+plt.close()
+print("Saved KDE comparison plot.")

@@ -209,21 +209,5 @@ def main():
     # Führe numerischen Vorwärtspass für das erste Beispiel durch
     run_forward_loss_comparison(tokenizer, SAMPLE_PAIRS[0])
 
-    print_banner("ZUSAMMENFASSUNG & EMPFEHLUNG FÜR DIE MASTERARBEIT")
-    print(f"""
-{C_BOLD}Erkenntnisse aus der Analyse:{C_RESET}
-1. {C_RED}TRL DPOTrainer Mismatch:{C_RESET} Durch das automatische Anhängen des EOS-Tokens (</s>)
-   beim isolierten Tokenisieren des Prompts glaubt TRL, der Prompt sei N Tokens lang.
-   Beim konkatenierten String steht an Index N-1 jedoch das erste Inhaltswort der Antwort.
-   Dieses Wort wird von TRL fälschlicherweise maskiert und erhält KEINE Gradienten!
-
-2. {C_GREEN}Lösung durch 6_train_dpo.py (Natives PyTorch):{C_RESET}
-   - Prompt geht isoliert in den Encoder (ohne String-Konkatenation).
-   - Chosen & Rejected gehen isoliert als Labels in den Decoder.
-   - 100 % aller Antwort-Tokens (inklusive des Satzanfangs) werden korrekt optimiert.
-   - Vollständige Erhaltung der Encoder-Decoder Cross-Attention-Architektur.
-""")
-    print("=" * 85 + "\n")
-
 if __name__ == "__main__":
     main()
