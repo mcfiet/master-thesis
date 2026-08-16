@@ -101,7 +101,7 @@ def clean_taz_hamburg_credits(text):
 
 def clean_hannover(text):
     """
-    Removes Hanover boilerplate lines.
+    Removes Hanover boilerplate lines, image captions, and icon artifacts.
     """
     # Remove specific theme selection bias phrase
     text = re.sub(r'Sie interessieren sich für ein bestimmtes Thema\?\s*Dann klicken Sie auf ein Feld\.?', '', text)
@@ -111,6 +111,12 @@ def clean_hannover(text):
     text = re.sub(r'Hier finden Sie.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
     text = re.sub(r'Mehr Informationen in Alltagssprache.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
     text = re.sub(r'Achtung:.*?(\.|$)', '', text, flags=re.DOTALL | re.IGNORECASE)
+    
+    # Remove orphaned image caption / icon text artifacts
+    text = re.sub(r'Icon für die Mobilversion.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Regionspräsident Steffen Krach.*?Oberbürgermeister.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Von der [A-Za-zÄÖÜäöüß\-]+straße aus fotografiert:.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Das Team vom [A-Za-z0-9\-]+-Infobus', '', text, flags=re.IGNORECASE)
     
     return re.sub(r'\s+', ' ', text).strip()
 
@@ -150,6 +156,9 @@ def post_clean_corpus():
 
     files = [f for f in os.listdir(INPUT_DIR) if f.endswith(".json")]
     
+    total_input = 0
+    total_output = 0
+    
     for filename in tqdm(files, desc="Post-cleaning corpus"):
         source = filename.replace("_articles.json", "")
         input_path = os.path.join(INPUT_DIR, filename)
@@ -159,16 +168,22 @@ def post_clean_corpus():
             data = json.load(f)
             
         pairs = data.get("pairs", [])
+        total_input += len(pairs)
+        
+        seen_pairs = set()
         cleaned_pairs = []
         
         for pair in pairs:
             # Clean LS text
             ls_text = pair.get("ls_text", "")
+            as_text = pair.get("as_text", "")
             
             # Universal cleaning
             ls_text = normalize_mediopunkt(ls_text)
+            if as_text:
+                as_text = normalize_mediopunkt(as_text)
             
-            # Source specific cleaning
+            # Source specific cleaning for LS
             if source == "brandeins":
                 ls_text = clean_brandeins(ls_text)
             elif source == "mdr":
@@ -187,16 +202,35 @@ def post_clean_corpus():
             elif source == "koeln":
                 ls_text = clean_stuttgart_koeln(ls_text)
             
-            pair["ls_text"] = ls_text
+            # Source specific cleaning for AS where applicable
+            if source == "hannover" and as_text:
+                as_text = clean_hannover(as_text)
             
-            # Also normalize Mediopunkte in AS text for consistency
-            if "as_text" in pair:
-                pair["as_text"] = normalize_mediopunkt(pair["as_text"])
+            # Standardize whitespace
+            ls_text = re.sub(r'\s+', ' ', ls_text).strip()
+            as_text = re.sub(r'\s+', ' ', as_text).strip() if as_text else ""
+            
+            # Filter empty or insufficient texts (< 10 words)
+            if len(ls_text.split()) < 10 or len(as_text.split()) < 10:
+                continue
+                
+            # Deduplication: only keep first unique (ls_text, as_text) pair
+            dedup_key = (ls_text, as_text)
+            if dedup_key in seen_pairs:
+                continue
+            seen_pairs.add(dedup_key)
+            
+            pair["ls_text"] = ls_text
+            pair["as_text"] = as_text
+            
+            # Also normalize Mediopunkte in as_texts list if present
             if "as_texts" in pair:
                 pair["as_texts"] = [normalize_mediopunkt(t) for t in pair["as_texts"]]
                 
             cleaned_pairs.append(pair)
             
+        total_output += len(cleaned_pairs)
+        
         new_data = {
             "source": source,
             "count": len(cleaned_pairs),
