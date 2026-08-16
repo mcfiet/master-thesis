@@ -11,6 +11,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, get_linear_schedule_with_warmup
+from peft import LoraConfig, get_peft_model, TaskType, PeftModel
 from torch.optim import AdamW
 from sentence_transformers import SentenceTransformer, util
 import matplotlib.pyplot as plt
@@ -81,6 +82,11 @@ parser.add_argument('--warmup_ratio', type=float, default=0.10)
 parser.add_argument('--patience', type=int, default=5)
 parser.add_argument('--seed', type=int, default=42)
 parser.add_argument('--val_split', type=float, default=0.15)
+parser.add_argument('--prompt_prefix', default="", help='Task prompt prefix prepended to source text')
+parser.add_argument('--use_peft', '--use_lora', dest='use_peft', action='store_true', default=False, help='Use LoRA / PEFT for SFT training')
+parser.add_argument('--lora_r', type=int, default=16, help='LoRA rank r')
+parser.add_argument('--lora_alpha', type=int, default=32, help='LoRA alpha')
+parser.add_argument('--lora_dropout', type=float, default=0.05, help='LoRA dropout')
 parser.add_argument('--reward_model_path', default=None)
 parser.add_argument('--reward_vocab_path', default=None)
 parser.add_argument('--w_style', type=float, default=0.5)
@@ -104,6 +110,11 @@ WARMUP_RATIO = args.warmup_ratio
 PATIENCE = args.patience
 SEED = args.seed
 VAL_SPLIT = args.val_split
+PROMPT_PREFIX = args.prompt_prefix
+USE_PEFT = args.use_peft
+LORA_R = args.lora_r
+LORA_ALPHA = args.lora_alpha
+LORA_DROPOUT = args.lora_dropout
 REWARD_MODEL_PATH = args.reward_model_path
 REWARD_VOCAB_PATH = args.reward_vocab_path
 W_STYLE = args.w_style
@@ -184,22 +195,36 @@ if "mbart" in MODEL_NAME.lower():
     tokenizer.src_lang = "de_DE"
     tokenizer.tgt_lang = "de_DE"
 
+if USE_PEFT:
+    print(f"Konfiguriere LoRA für Seq2Seq SFT (r={LORA_R}, alpha={LORA_ALPHA}, dropout={LORA_DROPOUT})...")
+    peft_config = LoraConfig(
+        task_type=TaskType.SEQ_2_SEQ_LM,
+        r=LORA_R,
+        lora_alpha=LORA_ALPHA,
+        lora_dropout=LORA_DROPOUT,
+        target_modules=["q_proj", "v_proj", "k_proj", "out_proj", "fc1", "fc2"],
+        bias="none",
+    )
+    seq2seq_model = get_peft_model(seq2seq_model, peft_config)
+    seq2seq_model.print_trainable_parameters()
+
 # ==============================================================================
 # TRANSLATION DATASET & DATALOADER
 # ==============================================================================
 class TranslationDataset(Dataset):
-    def __init__(self, data, tokenizer, max_src_len=256, max_tgt_len=256):
+    def __init__(self, data, tokenizer, max_src_len=256, max_tgt_len=256, prompt_prefix=PROMPT_PREFIX):
         self.data = data
         self.tokenizer = tokenizer
         self.max_src_len = max_src_len
         self.max_tgt_len = max_tgt_len
+        self.prompt_prefix = prompt_prefix
         
     def __len__(self):
         return len(self.data)
     
     def __getitem__(self, idx):
         item = self.data[idx]
-        src_text = item["as_text"]
+        src_text = self.prompt_prefix + item["as_text"]
         tgt_text = item["ls_text"]
         
         inputs = self.tokenizer(
@@ -219,8 +244,8 @@ class TranslationDataset(Dataset):
             "raw_ls": item["ls_text"]
         }
 
-train_dataset = TranslationDataset(train_data, tokenizer, MAX_SOURCE_LEN, MAX_TARGET_LEN)
-val_dataset = TranslationDataset(val_data, tokenizer, MAX_SOURCE_LEN, MAX_TARGET_LEN)
+train_dataset = TranslationDataset(train_data, tokenizer, MAX_SOURCE_LEN, MAX_TARGET_LEN, PROMPT_PREFIX)
+val_dataset = TranslationDataset(val_data, tokenizer, MAX_SOURCE_LEN, MAX_TARGET_LEN, PROMPT_PREFIX)
 
 train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
@@ -229,7 +254,7 @@ print(f"DataLoader erstellt: {len(train_loader)} Batches (Train), {len(val_loade
 # ==============================================================================
 # TRAINING & VALIDATION LOOPS
 # ==============================================================================
-def train_sft_epoch(model, dataloader, optimizer, scheduler, accumulation_steps):
+def train_sft_epoch(model, dataloader, optimizer, scheduler, accumulation_steps=4):
     model.train()
     total_loss = 0.0
     optimizer.zero_grad()
@@ -239,10 +264,8 @@ def train_sft_epoch(model, dataloader, optimizer, scheduler, accumulation_steps)
         attention_mask = batch["attention_mask"].to(DEVICE)
         labels = batch["labels"].to(DEVICE)
         
-        with torch.amp.autocast('cuda', dtype=torch.bfloat16):
-            outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
-            loss = outputs.loss / accumulation_steps
-            
+        outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+        loss = outputs.loss / accumulation_steps
         loss.backward()
         
         if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(dataloader):
@@ -276,9 +299,10 @@ best_val_loss = float('inf')
 epochs_no_improve = 0
 history = {"train_loss": [], "val_loss": []}
 
-optimizer = AdamW(seq2seq_model.parameters(), lr=LR)
+trainable_params = [p for p in seq2seq_model.parameters() if p.requires_grad]
+optimizer = AdamW(trainable_params, lr=LR)
 total_steps = len(train_loader) * NUM_EPOCHS
-warmup_steps = int(WARMUP_RATIO * total_steps)  # Warmup-Schritte basierend auf Parameter
+warmup_steps = int(WARMUP_RATIO * total_steps)
 scheduler = get_linear_schedule_with_warmup(
     optimizer, 
     num_warmup_steps=warmup_steps, 
@@ -308,10 +332,19 @@ for epoch in range(NUM_EPOCHS):
         epochs_no_improve += 1
         if epochs_no_improve >= patience:
             print(f"Early Stopping getriggert! Keine Verbesserung des Val Loss seit {patience} Epochen.")
-            seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(OUTPUT_DIR).to(DEVICE)
             break
 
-if os.path.exists(OUTPUT_DIR) and len(os.listdir(OUTPUT_DIR)) > 0:
+if USE_PEFT:
+    print(f"\nLade bestes LoRA-Modell aus {OUTPUT_DIR} und führe merge_and_unload() durch...")
+    base_model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME).to(DEVICE)
+    peft_model = PeftModel.from_pretrained(base_model, OUTPUT_DIR)
+    merged_model = peft_model.merge_and_unload()
+    merged_model.save_pretrained(OUTPUT_DIR)
+    tokenizer.save_pretrained(OUTPUT_DIR)
+    torch.save(merged_model.state_dict(), os.path.join(OUTPUT_DIR, "sft.pt"))
+    seq2seq_model = merged_model
+    print(f"Erfolgreich gemergtes SFT-Modell unter {OUTPUT_DIR} gespeichert!")
+elif os.path.exists(OUTPUT_DIR) and len(os.listdir(OUTPUT_DIR)) > 0:
     seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(OUTPUT_DIR).to(DEVICE)
     print("Das beste Modell wurde erfolgreich geladen!")
 

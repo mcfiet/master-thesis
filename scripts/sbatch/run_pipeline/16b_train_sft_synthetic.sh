@@ -18,8 +18,12 @@ srun python scripts/modeling/train_sft.py \
     --batch_size 8 \
     --accumulation_steps 2 \
     --epochs 30 \
-    --lr 3e-5 \
+    --lr 1e-4 \
     --warmup_ratio 0.10 \
-    --patience 8 \
+    --patience 10 \
+    --use_peft \
+    --lora_r 16 \
+    --lora_alpha 32 \
+    --lora_dropout 0.05 \
     --reward_model_path "results/models/bilstm_synthetic_regression.pt" \
     --reward_vocab_path "data/vocabs/synthetic_vocab.json"
