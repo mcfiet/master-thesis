@@ -4,7 +4,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --gres=gpu:full:1
+#SBATCH --gres=gpu:mig_24gb:1
 
 srun python scripts/modeling/train_sft.py \
     --lh_dataset_path "data/lebenshilfe/lebenshilfe_dataset_clean.json" \
