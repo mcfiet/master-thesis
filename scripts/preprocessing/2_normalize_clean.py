@@ -5,13 +5,31 @@ from tqdm import tqdm
 
 # Configuration (Passed via Command Line)
 import argparse
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Normalize, deduplicate and filter corpus text pairs.")
 parser.add_argument("--input_dir", required=True)
 parser.add_argument("--output_dir", required=True)
+parser.add_argument("--min_ratio", type=float, default=0.20, help="Minimum LS/AS word length ratio (default: 0.20)")
+parser.add_argument("--max_ratio", type=float, default=4.00, help="Maximum LS/AS word length ratio (default: 4.00)")
+parser.add_argument("--min_words", type=int, default=30, help="Minimum word count per text (default: 30)")
 args = parser.parse_args()
 
 INPUT_DIR = args.input_dir
 OUTPUT_DIR = args.output_dir
+MIN_RATIO = args.min_ratio
+MAX_RATIO = args.max_ratio
+MIN_WORDS = args.min_words
+
+def is_valid_length_ratio(ls_text: str, as_text: str, min_ratio: float = 0.20, max_ratio: float = 4.00, min_words: int = 30) -> bool:
+    """
+    Filters out extreme length ratio outliers and texts with insufficient word count.
+    Prevents pairings of multi-page manuals with short teaser stubs.
+    """
+    ls_len = len(ls_text.split())
+    as_len = len(as_text.split())
+    if ls_len < min_words or as_len < min_words:
+        return False
+    ratio = ls_len / as_len
+    return min_ratio <= ratio <= max_ratio
 
 MONTHS = r"(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)"
 
@@ -210,8 +228,8 @@ def post_clean_corpus():
             ls_text = re.sub(r'\s+', ' ', ls_text).strip()
             as_text = re.sub(r'\s+', ' ', as_text).strip() if as_text else ""
             
-            # Filter empty or insufficient texts (< 10 words)
-            if len(ls_text.split()) < 10 or len(as_text.split()) < 10:
+            # Filter empty, insufficient texts (< MIN_WORDS) or extreme length ratios
+            if not is_valid_length_ratio(ls_text, as_text, MIN_RATIO, MAX_RATIO, MIN_WORDS):
                 continue
                 
             # Deduplication: only keep first unique (ls_text, as_text) pair
