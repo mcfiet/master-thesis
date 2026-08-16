@@ -326,6 +326,10 @@ for epoch in range(NUM_EPOCHS):
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         seq2seq_model.save_pretrained(OUTPUT_DIR)
         tokenizer.save_pretrained(OUTPUT_DIR)
+        if hasattr(seq2seq_model, "config"):
+            seq2seq_model.config.save_pretrained(OUTPUT_DIR)
+        elif hasattr(seq2seq_model, "base_model") and hasattr(seq2seq_model.base_model, "config"):
+            seq2seq_model.base_model.config.save_pretrained(OUTPUT_DIR)
         torch.save(seq2seq_model.state_dict(), os.path.join(OUTPUT_DIR, "sft.pt"))
         print(f"-> Neues bestes Modell (HF-Format & sft.pt) unter {OUTPUT_DIR} gespeichert.")
     else:
