@@ -6,6 +6,7 @@ import argparse
 import numpy as np
 import pandas as pd
 import spacy
+import json
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -77,6 +78,7 @@ parser.add_argument('--lr', type=float, required=True)
 parser.add_argument('--max_sim', type=float, required=True)
 parser.add_argument('--min_sim', type=float, required=True)
 parser.add_argument('--max_seq_len', type=int, required=True)
+parser.add_argument('--vocab_save_path', default="data/vocabs/mixup_vocab.json")
 args = parser.parse_args()
 
 CSV_PATH = args.csv_path
@@ -88,6 +90,7 @@ LR = args.lr
 MAX_SIM = args.max_sim
 MIN_SIM = args.min_sim
 MAX_SEQ_LEN = args.max_seq_len
+VOCAB_SAVE_PATH = args.vocab_save_path
 
 # ==============================================================================
 # DATA LOADING & PREPARATION
@@ -135,6 +138,12 @@ for _, row in tqdm(train_df.iterrows(), total=len(train_df), desc="Vokab-Tokens 
 
 vocab = Vocab(all_train_tokens, max_size=25000, min_freq=2)
 print(f"Vokabular-Größe: {len(vocab)}")
+
+# Vokabular speichern
+os.makedirs(os.path.dirname(VOCAB_SAVE_PATH), exist_ok=True)
+with open(VOCAB_SAVE_PATH, "w", encoding="utf-8") as f:
+    json.dump(vocab.stoi, f, ensure_ascii=False, indent=2)
+print(f"Vokabular gespeichert unter: {VOCAB_SAVE_PATH}")
 
 # ==============================================================================
 # PYTORCH DATASET

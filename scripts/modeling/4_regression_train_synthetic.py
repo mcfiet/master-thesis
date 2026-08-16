@@ -73,6 +73,8 @@ parser.add_argument('--model_save_path', required=True)
 parser.add_argument('--vocab_save_path', required=True)
 parser.add_argument('--epochs', type=int, required=True)
 parser.add_argument('--max_seq_len', type=int, required=True)
+parser.add_argument('--min_sim', type=float, default=None)
+parser.add_argument('--max_sim', type=float, default=None)
 args = parser.parse_args()
 
 CORPUS_WITH_STEPS_PATH = args.corpus_with_steps_path
@@ -81,6 +83,8 @@ MODEL_SAVE_PATH = args.model_save_path
 VOCAB_SAVE_PATH = args.vocab_save_path
 EPOCHS = args.epochs
 MAX_SEQ_LEN = args.max_seq_len
+MIN_SIM = args.min_sim
+MAX_SIM = args.max_sim
 
 device = torch.device("cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu"))
 print(f"Nutze Device: {device}")
@@ -88,7 +92,7 @@ print(f"Nutze Device: {device}")
 # ==============================================================================
 # DATA LOADING & FLAT SAMPLING
 # ==============================================================================
-def load_flattened_samples(json_path):
+def load_flattened_samples(json_path, min_sim=None, max_sim=None):
     if not os.path.exists(json_path):
         raise FileNotFoundError(f"Datei nicht gefunden: {json_path}")
         
@@ -96,7 +100,17 @@ def load_flattened_samples(json_path):
         articles = json.load(f)
         
     samples = []
+    filtered_articles_count = 0
     for art_idx, art in enumerate(articles):
+        sim = art.get("semantic_similarity_8192")
+        if sim is not None:
+            if min_sim is not None and sim < min_sim:
+                filtered_articles_count += 1
+                continue
+            if max_sim is not None and sim > max_sim:
+                filtered_articles_count += 1
+                continue
+                
         ls_text = art.get("ls_text", "").strip()
         as_text = art.get("as_text", "").strip()
         steps = art.get("intermediate_steps", {})
@@ -119,9 +133,11 @@ def load_flattened_samples(json_path):
             except ValueError:
                 continue
                 
+    if filtered_articles_count > 0:
+        print(f"Gefiltert: {filtered_articles_count} Artikel lagen außerhalb des Ähnlichkeitsbereichs.")
     return samples, articles
 
-raw_samples, raw_articles = load_flattened_samples(CORPUS_WITH_STEPS_PATH)
+raw_samples, raw_articles = load_flattened_samples(CORPUS_WITH_STEPS_PATH, min_sim=MIN_SIM, max_sim=MAX_SIM)
 print(f"Anzahl geladener Artikel: {len(raw_articles)}")
 print(f"Anzahl ausgeflachter Text-Samples: {len(raw_samples)}")
 
