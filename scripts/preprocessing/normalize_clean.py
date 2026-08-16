@@ -175,17 +175,27 @@ def clean_navigation_boilerplate(text):
     text = re.sub(r'Ihre Frage wird nicht gespeichert\.\s*(Augen|[A-Za-z]+)?', '', text, flags=re.IGNORECASE)
     
     # 2. Sentences referring to more info / links on this page or external sites
-    text = re.sub(r'Mehr Informationen (über|zu|in Alltagssprache|im Internet).*?(auf dieser Seite|hier|finden Sie|unter).*?(\.|$)', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'Hier (finden|bekommen) Sie (mehr|weitere) Informationen.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Hier (erfahren|lesen|bekommen|finden) Sie (mehr|alles|weitere|etwas).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'(Erfahren|Lesen) Sie mehr (über|zu|zum Thema).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Mehr (Informationen|Infos) (über|zu|in Alltagssprache|im Internet).*?(auf dieser Seite|hier|finden Sie|erfahren Sie|lesen Sie|unter).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Mehr Infos (zu|zur|zum)\s+[\w\-]+:?', '', text, flags=re.IGNORECASE)
     text = re.sub(r'Hier finden Sie (weitere )?Infos.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Hier kommen Sie (zum|zur|zu).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Sprechen Sie uns an!?\s*', '', text, flags=re.IGNORECASE)
     text = re.sub(r'Auf dieser Seite finden Sie (viele |mehr |weitere )?Informationen zum Thema:.*?(\.|$)', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'Weitere Informationen (in Alltagssprache|zum Thema).*?(\.|$)', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'Klicken Sie hier.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Weitere (Informationen|Infos) (in Alltagssprache|zum Thema|über).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    
+    # 3. Link lists & click instructions
+    text = re.sub(r'(\(Alltagssprache\)|\(in Alltagssprache\))', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Einen Link (für|zu).*?(unten|hier).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Links?\s+(Link\s+)?(zum|zur|zu|unter).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'(Wenn Sie.*?online lesen möchten,\s*)?([kK]licken|[tT]ippen) Sie (bitte )?(auf|hier).*?(\.|$)', '', text, flags=re.IGNORECASE)
     text = re.sub(r'Dann finden Sie in dieser Tabelle weitere Informationen.*?(\.|$)', '', text, flags=re.IGNORECASE)
     text = re.sub(r'Achtung:\s*Dieser Link führt.*?(\.|$)', '', text, flags=re.IGNORECASE)
     text = re.sub(r'Die Informationen sind dann nicht mehr in (Einfacher|Leichter) Sprache.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Hier geht es zu.*?(\.|$)', '', text, flags=re.IGNORECASE)
 
-    # 3. Clean up residual double spaces and empty punctuation
+    # 4. Clean up residual double spaces and empty punctuation
     text = re.sub(r'\s+([?.!,;])', r'\1', text)
     return re.sub(r'\s+', ' ', text).strip()
 
