@@ -250,7 +250,7 @@ def translate_text(req: TranslateRequest):
         raise HTTPException(status_code=500, detail=f"Failed to load translation model: {str(e)}")
         
     # Run translation (matching the notebook evaluation prompt and settings exactly)
-    prompt = "Übersetze in Leichte Sprache: " + req.text
+    prompt = req.text
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=256).to(DEVICE)
     
     with torch.no_grad():
@@ -259,7 +259,7 @@ def translate_text(req: TranslateRequest):
             attention_mask=inputs["attention_mask"],
             max_length=256,
             num_beams=4,
-            repetition_penalty=2.5,
+            repetition_penalty=1.2,
             no_repeat_ngram_size=3,
             early_stopping=True
         )

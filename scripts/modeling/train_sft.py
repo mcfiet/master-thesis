@@ -463,7 +463,7 @@ else:
                 "attention_mask": inputs["attention_mask"],
                 "max_length": MAX_TARGET_LEN,
                 "num_beams": 4,
-                "repetition_penalty": 1.1,
+                "repetition_penalty": 1.2,
                 "no_repeat_ngram_size": 3,
                 "early_stopping": True
             }

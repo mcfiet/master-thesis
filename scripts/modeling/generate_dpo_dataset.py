@@ -349,6 +349,7 @@ def generate_candidates_batch(
         "temperature": temperature,
         "top_p": top_p,
         "top_k": top_k,
+        "repetition_penalty": 1.2,
         "num_return_sequences": num_candidates,
         "pad_token_id": tokenizer.pad_token_id,
         "eos_token_id": tokenizer.eos_token_id,
