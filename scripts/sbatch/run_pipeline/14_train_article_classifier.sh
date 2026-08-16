@@ -17,4 +17,6 @@ srun python scripts/modeling/binary_train_article_model.py \
     --max_seq_len 512 \
     --max_sim 0.98 \
     --min_sent_len 3 \
-    --min_sim 0.8
+    --min_sim 0.8 \
+    --model_save_path results/models/bilstm_article_classifier.pt \
+    --vocab_save_path data/vocabs/article_vocab.json

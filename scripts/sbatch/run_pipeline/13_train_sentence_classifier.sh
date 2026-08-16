@@ -17,4 +17,6 @@ srun python scripts/modeling/binary_train_sentence_model.py \
     --max_seq_len 100 \
     --max_sim 0.98 \
     --min_sent_len 3 \
-    --min_sim 0.8
+    --min_sim 0.8 \
+    --model_save_path results/models/bilstm_sentence_classifier.pt \
+    --vocab_save_path data/vocabs/sentence_vocab.json

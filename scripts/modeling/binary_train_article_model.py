@@ -83,6 +83,8 @@ parser.add_argument('--max_seq_len', type=int, required=True)
 parser.add_argument('--max_sim', type=float, required=True)
 parser.add_argument('--min_sent_len', type=int, required=True)
 parser.add_argument('--min_sim', type=float, required=True)
+parser.add_argument('--model_save_path', default="results/models/bilstm_article_classifier.pt")
+parser.add_argument('--vocab_save_path', default="data/vocabs/article_vocab.json")
 args = parser.parse_args()
 
 CSV_PATH = args.csv_path
@@ -96,6 +98,8 @@ MAX_SEQ_LEN = args.max_seq_len
 MAX_SIM = args.max_sim
 MIN_SENT_LEN = args.min_sent_len
 MIN_SIM = args.min_sim
+MODEL_SAVE_PATH = args.model_save_path
+VOCAB_SAVE_PATH = args.vocab_save_path
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {DEVICE}")
@@ -200,6 +204,11 @@ X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test
 
 vocab = Vocab(X_train)
 print(f"Vocab size: {len(vocab)}")
+if VOCAB_SAVE_PATH:
+    os.makedirs(os.path.dirname(os.path.abspath(VOCAB_SAVE_PATH)), exist_ok=True)
+    with open(VOCAB_SAVE_PATH, "w", encoding="utf-8") as f:
+        json.dump({"stoi": vocab.stoi, "itos": vocab.itos}, f, ensure_ascii=False, indent=2)
+    print(f"Vokabular gespeichert unter: {VOCAB_SAVE_PATH}")
 
 train_ds = ArticleDataset(X_train, y_train, vocab, MAX_SEQ_LEN)
 val_ds = ArticleDataset(X_val, y_val, vocab, MAX_SEQ_LEN)
@@ -216,7 +225,7 @@ criterion = nn.BCEWithLogitsLoss()
 best_val_acc = 0
 patience = 7  
 counter = 0
-model_save_path = f"results/models/lstm_article_sim_{MIN_SIM:.2f}_to_{MAX_SIM:.2f}.pt"
+model_save_path = MODEL_SAVE_PATH
 history = {'train_loss': [], 'val_loss': [], 'val_bacc': []}
 
 # ==============================================================================
@@ -253,7 +262,9 @@ for epoch in range(EPOCHS):
     
     if val_acc > best_val_acc:
         best_val_acc = val_acc
+        os.makedirs(os.path.dirname(os.path.abspath(model_save_path)), exist_ok=True)
         torch.save(model.state_dict(), model_save_path)
+        print(f"=> Modell gespeichert (bester Val BAcc: {val_acc:.4f}) unter {model_save_path}")
         counter = 0
     else:
         counter += 1

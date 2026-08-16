@@ -81,6 +81,8 @@ parser.add_argument('--max_seq_len', type=int, required=True)
 parser.add_argument('--max_sim', type=float, required=True)
 parser.add_argument('--min_sent_len', type=int, required=True)
 parser.add_argument('--min_sim', type=float, required=True)
+parser.add_argument('--model_save_path', default="results/models/bilstm_sentence_classifier.pt")
+parser.add_argument('--vocab_save_path', default="data/vocabs/sentence_vocab.json")
 args = parser.parse_args()
 
 CSV_PATH = args.csv_path
@@ -94,6 +96,8 @@ MAX_SEQ_LEN = args.max_seq_len
 MAX_SIM = args.max_sim
 MIN_SENT_LEN = args.min_sent_len
 MIN_SIM = args.min_sim
+MODEL_SAVE_PATH = args.model_save_path
+VOCAB_SAVE_PATH = args.vocab_save_path
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {DEVICE}")
@@ -178,6 +182,12 @@ X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.1,
 X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test_size=0.11, random_state=42, stratify=y_train_val)
 
 vocab = Vocab(X_train)
+if VOCAB_SAVE_PATH:
+    os.makedirs(os.path.dirname(os.path.abspath(VOCAB_SAVE_PATH)), exist_ok=True)
+    with open(VOCAB_SAVE_PATH, "w", encoding="utf-8") as f:
+        json.dump({"stoi": vocab.stoi, "itos": vocab.itos}, f, ensure_ascii=False, indent=2)
+    print(f"Vokabular gespeichert unter: {VOCAB_SAVE_PATH}")
+
 train_ds = SentenceDataset(X_train, y_train, vocab, MAX_SEQ_LEN)
 val_ds = SentenceDataset(X_val, y_val, vocab, MAX_SEQ_LEN)
 test_ds = SentenceDataset(X_test, y_test, vocab, MAX_SEQ_LEN)
@@ -249,7 +259,9 @@ for epoch in range(EPOCHS):
     
     if val_acc > best_val_acc:
         best_val_acc = val_acc
-        torch.save(model.state_dict(), f"results/models/best_model_sim_{MIN_SIM}_{MAX_SIM}.pt")
+        os.makedirs(os.path.dirname(os.path.abspath(MODEL_SAVE_PATH)), exist_ok=True)
+        torch.save(model.state_dict(), MODEL_SAVE_PATH)
+        print(f"=> Modell gespeichert (bester Val BAcc: {val_acc:.4f}) unter {MODEL_SAVE_PATH}")
         counter = 0
     else:
         counter += 1
@@ -280,7 +292,8 @@ plt.savefig(os.path.join(plot_dir, "sentence_model_training_progress.png"))
 plt.close()
 
 # Load best model and run final test set evaluation
-model.load_state_dict(torch.load(f"results/models/best_model_sim_{MIN_SIM}_{MAX_SIM}.pt", map_location=DEVICE))
+if os.path.exists(MODEL_SAVE_PATH):
+    model.load_state_dict(torch.load(MODEL_SAVE_PATH, map_location=DEVICE))
 model.eval()
 test_preds, test_targets = [], []
 with torch.no_grad():
