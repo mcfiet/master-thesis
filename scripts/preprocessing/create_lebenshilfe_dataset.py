@@ -47,27 +47,36 @@ base_dir = args.data_dir
 ls_dir = os.path.join(base_dir, 'ls')
 as_dir = os.path.join(base_dir, 'as')
 
+import unicodedata
+
+def nfc(text):
+    return unicodedata.normalize('NFC', text) if text else ''
+
 def normalize(name):
-    name = os.path.splitext(name)[0]
+    name = nfc(os.path.splitext(name)[0])
     name = re.sub(r'ILS\d*', '', name)
     name = re.sub(r'AD\d*', '', name)
     name = re.sub(r'DS\d*', '', name)
-    name = re.sub(r'Prüfer', '', name)
-    name = re.sub(r'geprüft', '', name)
-    name = re.sub(r'testgelesen', '', name)
-    name = re.sub(r'prüfen', '', name)
+    name = re.sub(r'Prüfer|Prüfer', '', name, flags=re.IGNORECASE)
+    name = re.sub(r'geprüft|geprüft', '', name, flags=re.IGNORECASE)
+    name = re.sub(r'testgelesen', '', name, flags=re.IGNORECASE)
+    name = re.sub(r'prüfen|prüfen', '', name, flags=re.IGNORECASE)
     name = re.sub(r'Leichte Sprache', '', name, flags=re.IGNORECASE)
     name = re.sub(r'leichteSprache', '', name, flags=re.IGNORECASE)
-    name = re.sub(r'ILS', '', name)
+    name = re.sub(r'ILS', '', name, flags=re.IGNORECASE)
     name = name.replace('_', ' ').replace('-', ' ')
     name = re.sub(r'^\d+\s*', '', name)
     name = ' '.join(name.split())
-    return name.lower()
+    return name.lower().strip()
 
-ls_files = [f for f in os.listdir(ls_dir) if os.path.isfile(os.path.join(ls_dir, f))]
-as_files = [f for f in os.listdir(as_dir) if os.path.isfile(os.path.join(as_dir, f))]
+ls_files_raw = [f for f in os.listdir(ls_dir) if os.path.isfile(os.path.join(ls_dir, f))]
+as_files_raw = [f for f in os.listdir(as_dir) if os.path.isfile(os.path.join(as_dir, f))]
 
-as_normalized = {normalize(f): f for f in as_files}
+# Map normalized NFC filename to original disk filename
+ls_files_map = {nfc(f): f for f in ls_files_raw}
+as_files_map = {nfc(f): f for f in as_files_raw}
+
+as_normalized = {normalize(f): f for f in as_files_map.keys()}
 
 manual_matches = [
     ("ILS_CAU_Geologiemuseum AD002 Prüfer Mail.docx", "20241106-PM-Aktionstag-CAU und StK-an PS_neu.docx"),
@@ -107,43 +116,60 @@ manual_matches = [
 ]
 
 dataset = []
-matched_ls = []
-matched_as = []
+matched_ls = set()
+matched_as = set()
 
+# 1. Process manual matches with NFC normalization
 for ls_f, as_f in manual_matches:
-    if ls_f in ls_files and as_f in as_files:
-        ls_text = extract_text(os.path.join(ls_dir, ls_f))
-        as_text = extract_text(os.path.join(as_dir, as_f))
+    ls_n = nfc(ls_f)
+    as_n = nfc(as_f)
+    if ls_n in ls_files_map and as_n in as_files_map:
+        disk_ls = ls_files_map[ls_n]
+        disk_as = as_files_map[as_n]
+        ls_text = extract_text(os.path.join(ls_dir, disk_ls))
+        as_text = extract_text(os.path.join(as_dir, disk_as))
         if ls_text.strip() and as_text.strip():
             dataset.append({
                 "source": "lebenshilfe",
-                "ls_filename": ls_f,
-                "as_filename": as_f,
+                "ls_filename": disk_ls,
+                "as_filename": disk_as,
                 "ls_text": ls_text,
                 "as_text": as_text
             })
-            matched_ls.append(ls_f)
-            matched_as.append(as_f)
+            matched_ls.add(ls_n)
+            matched_as.add(as_n)
 
-for ls_f in ls_files:
-    if ls_f in matched_ls: continue
-    norm_ls = normalize(ls_f)
+# 2. Process automatic matches for remaining files
+for ls_n in ls_files_map.keys():
+    if ls_n in matched_ls:
+        continue
+    norm_ls = normalize(ls_n)
     if norm_ls in as_normalized:
-        as_f = as_normalized[norm_ls]
-        if as_f in matched_as: continue
-        ls_text = extract_text(os.path.join(ls_dir, ls_f))
-        as_text = extract_text(os.path.join(as_dir, as_f))
+        as_n = as_normalized[norm_ls]
+        if as_n in matched_as:
+            continue
+        disk_ls = ls_files_map[ls_n]
+        disk_as = as_files_map[as_n]
+        ls_text = extract_text(os.path.join(ls_dir, disk_ls))
+        as_text = extract_text(os.path.join(as_dir, disk_as))
         if ls_text.strip() and as_text.strip():
             dataset.append({
                 "source": "lebenshilfe",
-                "ls_filename": ls_f,
-                "as_filename": as_f,
+                "ls_filename": disk_ls,
+                "as_filename": disk_as,
                 "ls_text": ls_text,
                 "as_text": as_text
             })
+            matched_ls.add(ls_n)
+            matched_as.add(as_n)
 
-output_file = 'data/lebenshilfe/lebenshilfe_dataset.json'
-with open(output_file, 'w', encoding='utf-8') as f:
-    json.dump(dataset, f, ensure_ascii=False, indent=2)
+output_files = [
+    'data/lebenshilfe/lebenshilfe_dataset.json',
+    'data/new_pipeline/lebenshilfe/lebenshilfe_dataset.json'
+]
 
-print(f"Dataset saved to {output_file} with {len(dataset)} articles.")
+for out_f in output_files:
+    os.makedirs(os.path.dirname(out_f), exist_ok=True)
+    with open(out_f, 'w', encoding='utf-8') as f:
+        json.dump(dataset, f, ensure_ascii=False, indent=2)
+    print(f"Dataset saved to {out_f} with {len(dataset)} articles.")

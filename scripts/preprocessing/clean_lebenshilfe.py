@@ -10,6 +10,8 @@ args = parser.parse_args()
 
 INPUT_FILE = args.input_file
 OUTPUT_FILE = args.output_file
+import unicodedata
+
 # List of filenames or keywords to identify form/consent/list documents that should be excluded completely
 EXCLUDE_FILENAMES = {
     # 1. Questionnaires / Surveys
@@ -36,6 +38,7 @@ EXCLUDE_FILENAMES = {
     "ILS FRAGEN Podium - Parlamentarischer Abend - AD001.docx", # Panel discussion questions / cue sheet
     "ILS_Impressum ZuMiNET LS.docx",                            # Web Impressum / Legal notice
 }
+EXCLUDE_FILENAMES_NFC = {unicodedata.normalize('NFC', f) for f in EXCLUDE_FILENAMES}
 
 # Regex definitions to clean Lebenshilfe signatures, credits, illustrators and formatting noise
 CLEANING_PATTERNS = [
@@ -163,9 +166,10 @@ def clean_dataset():
     
     for item in data:
         ls_file = item.get("ls_filename", "")
+        ls_file_nfc = unicodedata.normalize('NFC', ls_file)
         
         # Check exclusion criteria
-        if ls_file in EXCLUDE_FILENAMES:
+        if ls_file_nfc in EXCLUDE_FILENAMES_NFC or ls_file in EXCLUDE_FILENAMES:
             print(f"Excluding form/questionnaire file: {ls_file}")
             excluded_count += 1
             continue

@@ -6,16 +6,18 @@ Diese Anleitung beschreibt alle Schritte, um die Daten- und Modellierungs-Pipeli
 
 ## 0. Vorbereitung & Synchronisation auf den HPC-Server (rsync)
 
-Um die Pipeline auf dem Server auszuführen, müssen **nur die Basisdateien und Rohdaten** übertragen werden. Alle weiteren Zwischenkorpora und Modelle werden durch die aufeinander aufbauenden SBATCH-Skripte automatisch erzeugt.
-
-Hierfür gibt es zwei Szenarien:
-- **Szenario A (Vollständige Pipeline):** Scraping wird auf dem HPC ausgeführt (Schritt 1 & 2).
-- **Szenario B (Scraping überspringen):** Die bereits lokal vorhandenen Rohtexte (`data/corpus/2_raw_scraped/`) werden direkt mitkopiert und die Pipeline startet bei Schritt 3 bzw. Schritt 5.
+Um die Pipeline auf dem Server auszuführen, müssen **nur die Basisdateien und Rohdaten** übertragen werden. Nicht benötigt werden:
+- Lokale Umgebungen & Bytecode (`.venv`, `__pycache__`, `*.pyc`, `download`)
+- Metadaten & Notizen (`.git`, `.obsidian`, `.DS_Store`, `research`)
+- Lokale Web-App & LaTeX-Arbeit (`web`, `templates`, `thesis`)
+- Bereits existierende Ergebnisse & Logs (`results`, `*.log`, `notebooks`)
+- Generierte Zwischendaten (`data/analysis`, `data/lebenshilfe`, `data/vocabs`, `data/corpus/3_*`, `4_*`, `5_*`), da diese von den SBATCH-Skripten Schritt für Schritt selbst erzeugt werden.
 
 ---
 
-### 0.1 Dateien übertragen (Szenario A: Scraping neu ausführen)
+### 0.1 Modularer Sync (Schritt für Schritt)
 
+#### Szenario A (Komplette Pipeline inkl. neuem Web-Scraping):
 ```bash
 # 1. Pipeline-Skripte (inkl. scripts/sbatch/run_pipeline) & Konfiguration
 rsync -avz ./scripts/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/scripts/
@@ -25,48 +27,80 @@ rsync -avz ./requirements.txt fisc4884@hpc3.hs-flensburg.de:~/master-thesis/requ
 rsync -avz ./data/texts_lebenshilfe/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/data/texts_lebenshilfe/
 ```
 
----
-
-### 0.2 Dateien übertragen (Szenario B: Scraping überspringen & Rohtexte mitnehmen)
-
-Wenn du das Scraping der Webseiten überspringen möchtest, übertrage zusätzlich den Ordner mit den bereits extrahierten Rohtexten (`2_raw_scraped`):
-
+#### Szenario B (Scraping überspringen & vorhandene Web-Rohtexte mitnehmen):
 ```bash
-# 1. Pipeline-Skripte (inkl. scripts/sbatch/run_pipeline) & Konfiguration
+# 1. Pipeline-Skripte & Konfiguration
 rsync -avz ./scripts/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/scripts/
 rsync -avz ./requirements.txt fisc4884@hpc3.hs-flensburg.de:~/master-thesis/requirements.txt
 
 # 2. Lokale Lebenshilfe-Rohdokumente
 rsync -avz ./data/texts_lebenshilfe/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/data/texts_lebenshilfe/
 
-# 3. Bereits vorhandene Web-Rohtexte (Schritt 1 überspringen)
+# 3. Bereits vorhandene Web-Rohtexte (Schritt 1 & 2 überspringen)
 rsync -avz ./data/corpus/2_raw_scraped/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/data/corpus/2_raw_scraped/
-
-# (Optional: Bereits vorhandene URL-Alignments)
 rsync -avz ./data/corpus/1_aligned_urls/ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/data/corpus/1_aligned_urls/
 ```
 
-> **Alternativer All-in-One Befehl für Szenario B (Scraping überspringen):**
-> ```bash
-> rsync -avz \
->   --exclude='.venv' \
->   --exclude='.git' \
->   --exclude='.DS_Store' \
->   --exclude='results' \
->   --exclude='data/corpus/3_*' \
->   --exclude='data/corpus/4_*' \
->   --exclude='data/corpus/5_*' \
->   --exclude='data/corpus/*with_steps*' \
->   --exclude='data/analysis' \
->   --exclude='data/lebenshilfe' \
->   ./ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/
-> ```
+---
+
+### 0.2 All-in-One Befehle (mit vollständigen Ausschlüssen)
+
+#### All-in-One: Szenario A (Komplett neu crawlen)
+```bash
+rsync -avz \
+  --exclude='.venv' \
+  --exclude='download' \
+  --exclude='__pycache__' \
+  --exclude='*.pyc' \
+  --exclude='.git' \
+  --exclude='.obsidian' \
+  --exclude='.DS_Store' \
+  --exclude='web' \
+  --exclude='thesis' \
+  --exclude='templates' \
+  --exclude='research' \
+  --exclude='notebooks' \
+  --exclude='results' \
+  --exclude='*.log' \
+  --exclude='data/corpus' \
+  --exclude='data/analysis' \
+  --exclude='data/lebenshilfe' \
+  --exclude='data/vocabs' \
+  ./ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/
+```
+
+#### All-in-One: Szenario B (Scraping überspringen, Rohtexte behalten)
+```bash
+rsync -avz \
+  --exclude='.venv' \
+  --exclude='download' \
+  --exclude='__pycache__' \
+  --exclude='*.pyc' \
+  --exclude='.git' \
+  --exclude='.obsidian' \
+  --exclude='.DS_Store' \
+  --exclude='web' \
+  --exclude='thesis' \
+  --exclude='templates' \
+  --exclude='research' \
+  --exclude='notebooks' \
+  --exclude='results' \
+  --exclude='*.log' \
+  --exclude='data/corpus/3_*' \
+  --exclude='data/corpus/4_*' \
+  --exclude='data/corpus/5_*' \
+  --exclude='data/corpus/*with_steps*' \
+  --exclude='data/analysis' \
+  --exclude='data/lebenshilfe' \
+  --exclude='data/vocabs' \
+  ./ fisc4884@hpc3.hs-flensburg.de:~/master-thesis/
+```
 
 ---
 
 ### 0.3 Basis-Ordnerstruktur auf dem Server anlegen
 
-Logge dich auf dem Server ein und erstelle die benötigten Zielverzeichnisse:
+Logge dich auf dem Server ein und erstelle die Zielverzeichnisse für die Pipeline-Generierung:
 
 ```bash
 ssh fisc4884@hpc3.hs-flensburg.de "mkdir -p ~/master-thesis/data/{corpus,lebenshilfe,analysis,vocabs} ~/master-thesis/results/{models,logs,plots}"
