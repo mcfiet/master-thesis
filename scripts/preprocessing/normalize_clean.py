@@ -162,6 +162,33 @@ def clean_stuttgart(text):
     text = clean_stuttgart_koeln(text)
     return text
 
+def clean_navigation_boilerplate(text):
+    """
+    Removes cross-source web navigation, link referrals, and SEO search artifacts.
+    """
+    # 1. Question headers asking where to find more info / how to navigate
+    text = re.sub(r'Wo (finde|bekomme) ich (noch |weitere |mehr )?(Informationen|Infos).*?\?', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Sie möchten (noch |weitere |mehr )?(Informationen|Infos).*?\?', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Sie wollen noch mehr (über|zu).*?lesen\??', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Sie interessieren sich für.*?\?(\s*Dann klicken Sie.*?\.)?', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Welche Frage zu.*?haben Sie\?\s*Unser Tool durchsucht unsere Artikel.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Ihre Frage wird nicht gespeichert\.\s*(Augen|[A-Za-z]+)?', '', text, flags=re.IGNORECASE)
+    
+    # 2. Sentences referring to more info / links on this page or external sites
+    text = re.sub(r'Mehr Informationen (über|zu|in Alltagssprache|im Internet).*?(auf dieser Seite|hier|finden Sie|unter).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Hier (finden|bekommen) Sie (mehr|weitere) Informationen.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Hier finden Sie (weitere )?Infos.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Auf dieser Seite finden Sie (viele |mehr |weitere )?Informationen zum Thema:.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Weitere Informationen (in Alltagssprache|zum Thema).*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Klicken Sie hier.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Dann finden Sie in dieser Tabelle weitere Informationen.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Achtung:\s*Dieser Link führt.*?(\.|$)', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'Die Informationen sind dann nicht mehr in (Einfacher|Leichter) Sprache.*?(\.|$)', '', text, flags=re.IGNORECASE)
+
+    # 3. Clean up residual double spaces and empty punctuation
+    text = re.sub(r'\s+([?.!,;])', r'\1', text)
+    return re.sub(r'\s+', ' ', text).strip()
+
 def normalize_mediopunkt(text):
     """
     Removes Mediopunkte used for syllable separation.
@@ -223,6 +250,11 @@ def post_clean_corpus():
             # Source specific cleaning for AS where applicable
             if source == "hannover" and as_text:
                 as_text = clean_hannover(as_text)
+            
+            # Universal navigation & boilerplate removal
+            ls_text = clean_navigation_boilerplate(ls_text)
+            if as_text:
+                as_text = clean_navigation_boilerplate(as_text)
             
             # Standardize whitespace
             ls_text = re.sub(r'\s+', ' ', ls_text).strip()
