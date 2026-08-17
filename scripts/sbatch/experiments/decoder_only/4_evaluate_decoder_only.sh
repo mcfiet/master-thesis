@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH --job-name=4_evaluate_decoder_only
+#SBATCH --partition=research
+#SBATCH --time=04:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --output=results/logs/%x_%j.out
+#SBATCH --error=results/logs/%x_%j.err
+
+echo "=== Starting Decoder-Only Evaluation ==="
+date
+
+# 1. Evaluate SFT Model
+echo "Evaluating SFT Baseline..."
+python scripts/modeling/decoder_only/evaluate_decoder_only.py \
+    --test_data_path "data/corpus/corpus_master_with_steps.json" \
+    --model_path "results/models/decoder_only/sft" \
+    --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --output_file "results/evaluation/eval_sft_decoder_only.csv" \
+    --max_samples 100
+
+# 2. Evaluate DPO Model
+echo "Evaluating DPO Optimized Model..."
+python scripts/modeling/decoder_only/evaluate_decoder_only.py \
+    --test_data_path "data/corpus/corpus_master_with_steps.json" \
+    --model_path "results/models/decoder_only/dpo" \
+    --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --output_file "results/evaluation/eval_dpo_decoder_only.csv" \
+    --max_samples 100
+
+echo "=== Evaluation Complete ==="
+date
