@@ -7,8 +7,8 @@ style: |
   section { 
     font-family: 'Arial', sans-serif; 
     color: #555; 
-    font-size: 24px;
-    padding: 180px 40px 80px 40px; /* Increased Header and Footer Deadzones */
+    font-size: 20px;
+    padding: 150px 40px 65px 40px; /* Balanced Header and Footer Deadzones */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -35,7 +35,7 @@ style: |
     position: absolute;
     bottom: 30px;
     right: 40px;
-    font-size: 18px;
+    font-size: 16px;
     color: #888;
   }
 
@@ -51,10 +51,10 @@ style: |
 
   h3 {
     position: absolute;
-    top: 50px;
+    top: 45px;
     left: 40px;
     width: calc(100% - 320px);
-    font-size: 36px;
+    font-size: 32px;
     margin: 0;
     line-height: 1.2;
   }
@@ -74,7 +74,7 @@ style: |
     justify-content: center;
   }
 
-  table { font-size: 18px; }
+  table { font-size: 16px; }
 
   /* Layout: Titelfolie */
   section.title {
@@ -2387,3 +2387,339 @@ Evaluation on the exact same test set (Lebenshilfe with 5 levels):
 - Dev server runs locally via standard execution commands for Flask backend and Next.js frontend.
 
 </div>
+
+---
+
+<!-- _class: section-header -->
+
+## Week 21
+
+---
+
+### Weekly Focus: Pipeline Automation, Dataset Cleaning, LoRA SFT & Hallucination Mitigation
+
+- **1. End-to-End Pipeline & HPC Automation:** Modular architecture, Slurm batch scheduling, and reproducible cluster workflows.
+- **2. Advanced Dataset Refinement & Boilerplate Elimination:** Dedicated Lebenshilfe cleaner, deduplication, and surgical purge of navigation/SEO boilerplate.
+- **3. LoRA / PEFT Integration for SFT:** Resolving severe full fine-tuning overfitting on mBART-50 (611M parameters) with ~0.25% trainable weights.
+- **4. Decoding Parameter Calibration:** Systematic resolution of repetition loops vs. forced hallucinations via calibrated `repetition_penalty = 1.2`.
+- **5. DPO Tokenizer Alignment & Native Training:** Resolving Seq2Seq padding issues via custom direct preference optimization loop.
+
+---
+
+<!-- _class: section-header -->
+
+## Part 1: Pipeline Modularization & HPC Automation
+
+---
+
+<!-- _class: split -->
+
+### 1.1 Modular Pipeline Architecture & Slurm Jobs
+
+<div class="column-left">
+
+**Pipeline Modularization:**
+
+- Structured all codebase operations into 5 functional stages:
+  - **Data Collection:** Crawlers and content scrapers.
+  - **Preprocessing:** Filtering, normalization, glossaries, master corpus, and synthetic step generation.
+  - **Evaluation:** Information loss, readability, and lexical diversity.
+  - **Modeling:** Binary classifiers, regressors, SFT, and DPO.
+  - **Visualization:** Comparison plots and reporting.
+
+</div>
+
+<div class="column-right">
+
+**HPC / Slurm Integration:**
+
+- Standardized execution via dedicated batch job scripts.
+- Optimized GPU resource allocation using partitioned 24GB MIG instances for efficient cluster scheduling.
+- Established comprehensive cluster execution documentation for reproducible training runs.
+
+</div>
+
+---
+
+<!-- _class: section-header -->
+
+## Part 2: Advanced Dataset Refinement & Boilerplate Purge
+
+---
+
+<!-- _class: split -->
+
+### 2.1 Lebenshilfe Normalization & Duplicate Filtering
+
+<div class="column-left">
+
+**Lebenshilfe Dataset Cleaning:**
+
+- Implemented targeted filtering to remove non-editorial noise:
+  - Auditor review tags (_"Prüfer"_, _"testgelesen"_).
+  - Contact footers, signatures, and document metadata.
+  - Normalized line-break punctuation (`\n.` $\rightarrow$ `. `) to preserve sentence boundaries.
+
+</div>
+
+<div class="column-right">
+
+**Corpus-Wide Filtering:**
+
+- Filtered duplicate article pairs caused by URL parameter aliases (e.g., city archive redundancy).
+- Eliminated extreme length ratio outliers (e.g., short summary vs. entire live ticker) to ensure balanced alignment.
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### 2.2 Surgical Web-Boilerplate Elimination
+
+<div class="column-left">
+
+**The Problem: Recurring End-of-Text Prompts:**
+
+- Scraped texts contained recurring website navigation fragments:
+  - **Apotheken:** _"Wo bekommen Sie noch mehr Informationen?"_ (100% prevalence).
+  - **Hannover:** _"Klicken Sie hier..."_, _"Wo finde ich weitere Infos?"_ (>400 instances).
+  - **Main-Taunus / BB:** _"Hier erfahren Sie mehr..."_, _"Sprechen Sie uns an!"_.
+- Caused the translation model to hallucinate these phrases as closing boilerplate across all outputs.
+
+</div>
+
+<div class="column-right">
+
+**Solution: Navigation Boilerplate Purge:**
+
+- Developed targeted regex and heuristic filter patterns:
+  - Navigational question chains.
+  - Teaser phrases and link references.
+  - Interactive click invitations.
+- Completely eliminated recurring boilerplate noise before model training.
+
+</div>
+
+---
+
+### 2.3 Dataset Statistics Post-Boilerplate Cleaning
+
+| Metric                         |   Raw Scraped Corpus   | Cleaned Master Corpus |    Delta / Reduction     |
+| :----------------------------- | :--------------------: | :-------------------: | :----------------------: |
+| **Total Article Pairs**        |         1,533          |        **917**        |   $-616$ ($-40.2\,\%$)   |
+| **Simple German Words (LS)**   |        773,375         |      **390,922**      | $-382,453$ ($-49.5\,\%$) |
+| **Standard German Words (AS)** |        845,558         |      **514,429**      | $-331,129$ ($-39.2\,\%$) |
+| **Boilerplate Prevalence**     | **61.4 % of articles** |       **0.0 %**       |   **Fully Eliminated**   |
+
+---
+
+<!-- _class: section-header -->
+
+## Part 3: SFT Model Optimization with LoRA (PEFT)
+
+---
+
+### 3.1 Overfitting Challenges in Full Fine-Tuning
+
+**Parameter Disparity:**
+
+- Base translation model: `facebook/mbart-large-50` (611M parameters).
+- Cleaned dataset: 808 pairs (686 Train / 122 Validation).
+- Full parameter fine-tuning led to extreme capacity disparity.
+
+**Observed Symptoms:**
+
+- Validation loss minimum at epoch 7 ($1.94$), diverging to $2.45$ by epoch 15.
+- Premature early stopping prevented learning complex syntactic simplification rules.
+- Simplicity score median dropped from $\sim 0.89$ to $0.498$.
+
+---
+
+<!-- _class: split -->
+
+### 3.2 LoRA Parameter-Efficient Fine-Tuning
+
+<div class="column-left">
+
+**LoRA Implementation:**
+
+- Low-Rank Adaptation freezes base weights and trains low-rank decomposition matrices:
+  $$\Delta W = B \cdot A, \quad A \in \mathbb{R}^{r \times d}, B \in \mathbb{R}^{k \times r}$$
+- **Target Modules:** `q_proj`, `v_proj`, `k_proj`, `out_proj`, `fc1`, `fc2`.
+- **Hyperparameters:** Rank $r=16$, $\alpha=32$, Dropout $0.05$.
+- **Trainable Parameters:** Reduced to **~1.5M ($\approx 0.25\,\%$)**.
+
+</div>
+
+<div class="column-right">
+
+**Training Dynamics & Stability:**
+
+- Enables higher learning rate ($\text{LR} = 1\text{e-}4$).
+- Stable convergence over 30 epochs with $\text{patience} = 10$.
+- Prevents memorization and enforces true syntactic simplification.
+- **Automated Merge:** Merges weights post-training for seamless downstream compatibility with DPO and Web App.
+
+</div>
+
+---
+
+<!-- _class: section-header -->
+
+## Part 4: Decoding Parameters & Hallucination Mitigation
+
+---
+
+<!-- _class: split -->
+
+### 4.1 Empirical Analysis: Repetition Penalty Calibration
+
+<div class="column-left">
+
+**The Dilemma:**
+
+- Short input texts previously caused the model to either loop repetitive words or hallucinate unrelated topics at text endings.
+
+**Systematic Variations:**
+
+- **Penalty = 1.0:** Degenerative n-gram loops (repeating compound words endlessly).
+- **Penalty = 2.5:** Over-penalizes core vocabulary; forces beam search into absurd topics (_"Katzen"_, _"Pflege-Heirat"_).
+- **Penalty = 1.2:** **Optimal Sweet Spot** — fluid, accurate Leichte Sprache, stops cleanly with zero hallucinations.
+
+</div>
+
+<div class="column-right">
+
+**Standardization:**
+
+- Calibrated `repetition_penalty = 1.2` across all inference and training setups:
+  - Supervised Fine-Tuning (SFT).
+  - Preference Dataset Generation.
+  - Direct Preference Optimization (DPO).
+  - Interactive Web Application.
+  - Evaluation & Benchmarking Workflows.
+
+</div>
+
+---
+
+### 4.2 Repetition Penalty: Qualitative Generation Sample
+
+```text
+Input (Standard German):
+"Hunde (Canis lupus familiaris) begleiten den Menschen seit Jahrtausenden und gelten als das älteste domestizierte Haustier. Sie stammen vom Wolf ab und haben sich im Laufe der Zeit perfekt an das Leben mit uns angepasst. Heute sind sie nicht nur beliebte Haustiere, sondern oft vollwertige Familienmitglieder, ausdauernde Arbeitstiere und therapeutische Helfer."
+```
+
+| `repetition_penalty` | Generated Output (Simple German / LS)                                                                                                                                                                                                                                                                                                                                                  | Qualitative Assessment                                                                                                                             |
+| :------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      **`1.0`**       | _"...Hunde sind zum Beispiel: Wolfspudel. Wolfspudel ist ein Tier aus dem Wolfsgebiet. Wolfspudel ist ein Tier aus dem Wolfsgebiet..."_                                                                                                                                                                                                                                                | **Degenerative Loop:** Endless n-gram repetitions.                                                                                                 |
+|      **`2.5`**       | _"Was sind Hunde? Hunde sind Haustiere... Wie kann ich meine Hunde adoptieren? ... Diese Arten heißen zum Beispiel: Katzen. Katzen sind besondere Haustiere... Pflege-Hilfe. Eine Pflege-Heirat..."_                                                                                                                                                                                   | **Forced Hallucinations:** Over-penalization forces beam search into absurd off-topic domains.                                                     |
+|      **`1.2`**       | _"Was sind Hunde? Hunde sind Haustiere. Sie begleiten den Menschen schon seit Jahrtausenden. Hunde gehören zu den ältesten Haustieren. Sie stammen vom Wolf ab und haben sich im Laufe der Zeit perfekt an das Leben mit uns angepasst. Heute sind sie nicht nur beliebte Haustiere, sondern oft vollwertige Familienmitglieder, ausdauernde Arbeitstiere und therapeutische Helfer."_ | **Optimal Output:**<br>• Accurate simplification & explanatory flow.<br>• Full semantic preservation.<br>• Clean termination; zero hallucinations. |
+
+---
+
+<!-- _class: section-header -->
+
+## Part 5: DPO Tokenizer Alignment & Native Training
+
+---
+
+<!-- _class: split -->
+
+### 5.1 Tokenizer Alignment & Dedicated DPO Engine
+
+<div class="column-left">
+
+**Diagnosis of Framework Incompatibilities:**
+
+- Using third-party DPO trainers for `mBART-50` caused severe tokenization and padding discrepancies:
+  - Padding token mismatch between encoder prompt and decoder response.
+  - Incorrect label masking during log-likelihood computation.
+- Diagnosed via dedicated tokenization alignment benchmarks.
+
+</div>
+
+<div class="column-right">
+
+**Native PyTorch DPO Engine:**
+
+- Replaced external framework dependencies with a custom, transparent DPO training loop:
+  $$\mathcal{L}_{\text{DPO}}(\theta; \pi_{\text{ref}}) = -\mathbb{E}\left[\log \sigma\left(\beta \log \frac{\pi_\theta(y_w|x)}{\pi_{\text{ref}}(y_w|x)} - \beta \log \frac{\pi_\theta(y_l|x)}{\pi_{\text{ref}}(y_l|x)}\right)\right]$$
+- Explicit loss masking on response tokens.
+- Reliable convergence and memory-efficient execution on GPU cluster.
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### Plan: Expert Human Evaluation (Lebenshilfe Kiel)
+
+<div class="column-left">
+
+**Expert Collaboration Confirmed:**
+
+- A domain expert from **Lebenshilfe Kiel** has agreed to evaluate translation outputs and metric predictions within our project timeline.
+
+**Blinded Study Design:**
+
+- Construct an anonymized, mixed test set:
+  1. Standard German source texts (AS baseline).
+  2. Model-generated translations (SFT & DPO variants).
+  3. Professional human translations (Gold Reference).
+- The expert evaluates samples blindly without knowing the underlying source/model.
+
+</div>
+
+<div class="column-right">
+
+**Core Objectives & Analysis:**
+
+- **Translation Performance:** Benchmark model outputs directly against human reference translations.
+- **Distinction / Turing Analysis:** Can the expert reliably distinguish model translations from human translations?
+- **Metric Correlation:** Quantify correlation between human ratings and our automated scores (BERTScore & Neural Simplicity Metric).
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### Expert Evaluation: Criteria & Discussion
+
+<div class="column-left">
+
+**Proposed Evaluation Scale (0 – 10):**
+
+- _Harmonized with metric scale [0.0, 1.0]._
+
+1. **Content Preservation (Inhaltlicher Erhalt):**
+   - Are core facts and semantics preserved accurately without distortions or hallucinations? _(Corresponds to BERTScore)_
+2. **Leichte Sprache Compliance (Regelkonformität):**
+   - How well are Leichte Sprache rules applied (syntax, sentence length, vocabulary)? _(Corresponds to Simplicity Metric)_
+
+</div>
+
+<div class="column-right">
+
+**Optional Criterion for Discussion:**
+
+3. **Linguistic Fluency (Sprachliche Qualität):**
+   - Is sentence structure grammatically sound and naturally fluent?
+   - _Question for supervisor:_ Is a separate fluency rating necessary, or is it sufficiently covered by the pre-trained base model & rule compliance?
+
+</div>
+
+---
+
+### Open Questions & Discussion: Thesis Writing
+
+- **Depth of Foundational Explanations (Theoretische Grundlagen):**
+  - How much foundational knowledge should be explained upfront in the thesis?
+  - Where is the right balance between standard NLP fundamentals (Transformer architectures, Seq2Seq, LoRA/PEFT, DPO) and domain-specific rules (Leichte Sprache guidelines)?
+
+- **Structure & Placement of Research Questions (Forschungsfragen):**
+  - Should all detailed sub-questions (e.g., corpus curation, metric modeling, LoRA stability, DPO reward alignment) be explicitly enumerated upfront in the introduction?
+  - Or should the introduction focus on overarching research goals, with specific sub-questions introduced at the beginning of their respective chapters?
