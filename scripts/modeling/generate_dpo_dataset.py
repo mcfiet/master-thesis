@@ -539,6 +539,12 @@ def parse_args() -> argparse.Namespace:
         help="Weight for semantic similarity in composite reward (default: 0.5).",
     )
     reward_group.add_argument(
+        "--reward_max_seq_len",
+        type=int,
+        default=None,
+        help="Max sequence token length for BiLSTM simplicity reward scoring (defaults to max_target_len).",
+    )
+    reward_group.add_argument(
         "--min_score_margin",
         type=float,
         default=0.05,
@@ -602,12 +608,14 @@ def main():
     )
 
     # 3. Load Reward Evaluator
+    reward_max_len = args.reward_max_seq_len if args.reward_max_seq_len is not None else args.max_target_len
     reward_evaluator = CompositeRewardEvaluator(
         reward_model_path=args.reward_model_path,
         reward_vocab_path=args.reward_vocab_path,
         sbert_model_name=args.sbert_model_name,
         w_style=args.w_style,
         w_sem=args.w_sem,
+        max_seq_len=reward_max_len,
         device=device,
     )
 

@@ -89,6 +89,7 @@ parser.add_argument('--lora_alpha', type=int, default=32, help='LoRA alpha')
 parser.add_argument('--lora_dropout', type=float, default=0.05, help='LoRA dropout')
 parser.add_argument('--reward_model_path', default=None)
 parser.add_argument('--reward_vocab_path', default=None)
+parser.add_argument('--reward_max_seq_len', type=int, default=None, help='Max token length for reward model evaluation (defaults to max_target_len)')
 parser.add_argument('--w_style', type=float, default=0.5)
 parser.add_argument('--w_sem', type=float, default=0.5)
 parser.add_argument('--resume_from_checkpoint', action='store_true', default=False, help='Resume training from existing output_dir checkpoint')
@@ -117,6 +118,7 @@ LORA_ALPHA = args.lora_alpha
 LORA_DROPOUT = args.lora_dropout
 REWARD_MODEL_PATH = args.reward_model_path
 REWARD_VOCAB_PATH = args.reward_vocab_path
+REWARD_MAX_SEQ_LEN = args.reward_max_seq_len if args.reward_max_seq_len is not None else MAX_TARGET_LEN
 W_STYLE = args.w_style
 W_SEM = args.w_sem
 
@@ -413,7 +415,7 @@ else:
             for text in texts:
                 doc = nlp(text)
                 tokens = [t.text.lower() for t in doc if not t.is_space]
-                indices = [reward_stoi.get(t, unk_idx) for t in tokens[:150]]
+                indices = [reward_stoi.get(t, unk_idx) for t in tokens[:REWARD_MAX_SEQ_LEN]]
                 if len(indices) == 0:
                     indices = [0]
                 inp_tensor = torch.tensor([indices], dtype=torch.long, device="cpu")

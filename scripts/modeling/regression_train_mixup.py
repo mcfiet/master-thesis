@@ -367,6 +367,7 @@ for epoch in range(EPOCHS):
     
     if epoch_val_loss < best_val_loss:
         best_val_loss = epoch_val_loss
+        os.makedirs(os.path.dirname(os.path.abspath(MODEL_SAVE_PATH)), exist_ok=True)
         torch.save(model.state_dict(), MODEL_SAVE_PATH)
         print(f"=> Modell gespeichert (bester Val Loss) unter {MODEL_SAVE_PATH}")
         counter = 0
