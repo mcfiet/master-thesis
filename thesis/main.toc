@@ -32,8 +32,8 @@
 \contentsline {subsection}{\numberline {7.1}Zusammenfassung der Kernergebnisse}{15}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}Ausblick \& Zukünftige Forschungsarbeiten}{15}{subsection.7.2}%
 \contentsline {section}{\numberline {8}Anhang}{16}{section.8}%
-\contentsline {section}{Glossar}{17}{section*.2}%
-\contentsline {section}{Abbildungsverzeichnis}{18}{section*.3}%
-\contentsline {section}{Tabellenverzeichnis}{19}{section*.5}%
-\contentsline {section}{Literaturverzeichnis}{20}{section*.7}%
+\contentsline {section}{Glossar}{17}{section*.3}%
+\contentsline {section}{Abbildungsverzeichnis}{18}{section*.4}%
+\contentsline {section}{Tabellenverzeichnis}{19}{section*.6}%
+\contentsline {section}{Literaturverzeichnis}{20}{section*.8}%
 \contentsline {section}{\numberline {9}Anhang}{22}{section.9}%

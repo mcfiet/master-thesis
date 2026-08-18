@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1787062633.63204 "main.bcf" "main.bbl" "main" 1787062638.96447 0
-  "Literatur.bib" 1787062590.10121 4681 ad13cb2a6ef8d8ccb3a8d3698811136f ""
-  "main.bcf" 1787062638.86549 135233 db187c4fc52527ce028d2ae6278c2697 "pdflatex"
+["biber main"] 1787064575.98044 "main.bcf" "main.bbl" "main" 1787064869.6823 0
+  "Literatur.bib" 1787062978.58684 4331 ee959d73957a872b4019763c596f6f09 ""
+  "main.bcf" 1787064869.57187 135233 db187c4fc52527ce028d2ae6278c2697 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1787062637.50535 "main.tex" "main.pdf" "main" 1787062638.96474 0
+["pdflatex"] 1787064868.10334 "main.tex" "main.pdf" "main" 1787064869.68259 0
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1741388039 2971 def0b6c1f0b107b3b936def894055589 ""
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1741388039 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/map/fontname/texfonts.map" 1741388039 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -331,20 +331,21 @@
   "5.experimentsAndResults/_experiments.tex" 1787062613.71179 191 380bef739e612fa25af5953ce8c12321 ""
   "6.discussion/discussion.tex" 1787062615.12866 155 1521d4d24b01c2b128d1daf89e247604 ""
   "8.conclusion/conclusion.tex" 1787062616.79648 105 ce0dea3c18585f017b07a01d22f8c64b ""
+  "ai_declaration.tex" 1787064866.74121 2625 1e6227b571ccd3f42465d3783ed38650 ""
   "anhang/anhang.tex" 1787062468.53381 16 5f339988ab9ee69742204718183cdec3 ""
-  "deckblatt.tex" 1787062620.2427 680 1391635f9a542d977b294d220fb5cfba ""
+  "deckblatt.tex" 1787064237.60088 732 58d0132d9fd411110e8a285ec64bba67 ""
   "eigenstaendigkeits.tex" 1787062468.53407 580 9f4243b20eb63d503baa6fc280483737 ""
   "glossary.tex" 1787062468.5342 1461 a52e66cf3f3993b7ef498404e221c919 ""
   "images/HSFL_Logo.pdf" 1787062468.53553 279441 1d1b94d7c6729605999dbc3663d835ff ""
-  "main.aux" 1787062638.85854 11235 732cc0864bf688270c6479198b86e7d1 "pdflatex"
-  "main.bbl" 1787062634.56481 47054 bb3b352a444bb237d36bbcb0d6a13cfb "biber main"
+  "main.aux" 1787064869.5672 11235 aa62c7ea311af02c424beb12f2627f34 "pdflatex"
+  "main.bbl" 1787064576.46918 47054 bb3b352a444bb237d36bbcb0d6a13cfb "biber main"
   "main.gls" 0 -1 0 ""
-  "main.lof" 1787062638.86659 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
-  "main.lot" 1787062638.86661 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
-  "main.out" 1787062638.86314 8684 0d7c733230cc851860a4a0be5960b6e9 "pdflatex"
-  "main.run.xml" 1787062638.86651 2463 ed8bbc7baad1049d9d81ffa6e35194de "pdflatex"
-  "main.tex" 1787062628.01526 2884 46d30ad7750b576a87f401ebc59a0188 ""
-  "main.toc" 1787062638.86658 3665 2379af52df8d1ae594dff4eaf25c56bb "pdflatex"
+  "main.lof" 1787064869.57258 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
+  "main.lot" 1787064869.5726 30 dd9a1bdf2f8dbad8adb0552ea4fb4223 "pdflatex"
+  "main.out" 1787064869.56936 8684 729dad40b701cfebeec3a266305b19f4 "pdflatex"
+  "main.run.xml" 1787064869.5725 2463 ed8bbc7baad1049d9d81ffa6e35194de "pdflatex"
+  "main.tex" 1787064566.3871 2917 4aef3199429b366b2e5294c31e0cb63c ""
+  "main.toc" 1787064869.57257 3665 52b09ca1794f84fd32119c8d5a5e5493 "pdflatex"
   "titlepage.tex" 1787062622.31869 866 696fe63a2da4cebf763dcd8f75853de3 ""
   (generated)
   "main.aux"
