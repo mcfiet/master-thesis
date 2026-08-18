@@ -124,7 +124,11 @@ class CompositeRewardEvaluator:
         self.reward_model.eval()
 
         # Load SBERT
-        self.sbert = SentenceTransformer(sbert_model_name, device=str(self.device))
+        print(f"Loading SBERT model: {sbert_model_name}")
+        self.sbert = SentenceTransformer(sbert_model_name, trust_remote_code=True, device=str(self.device))
+        if "jina" in sbert_model_name.lower():
+            self.sbert.max_seq_length = min(self.max_seq_len, 1024)
+            print(f"Set Jina SBERT max_seq_length to {self.sbert.max_seq_length}")
 
     def _tokenize(self, text: str) -> List[int]:
         tokens = [token.text.lower() for token in self.nlp(text)]
@@ -145,9 +149,10 @@ class CompositeRewardEvaluator:
         return np.atleast_1d(scores)
 
     def predict_similarity(self, source_texts: List[str], cand_texts: List[str]) -> np.ndarray:
-        emb_src = self.sbert.encode(source_texts, convert_to_tensor=True, show_progress_bar=False)
-        emb_cand = self.sbert.encode(cand_texts, convert_to_tensor=True, show_progress_bar=False)
-        sims = util.cos_sim(emb_src, emb_cand).diagonal().cpu().numpy()
+        with torch.inference_mode():
+            emb_src = self.sbert.encode(source_texts, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
+            emb_cand = self.sbert.encode(cand_texts, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
+            sims = util.cos_sim(emb_src, emb_cand).diagonal().cpu().numpy()
         return np.atleast_1d(sims)
 
     def compute_rewards(self, source_texts: List[str], cand_texts: List[str]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -166,18 +171,19 @@ def main():
     parser.add_argument("--corpus_path", default="data/corpus/corpus_master_with_steps.json")
     parser.add_argument("--sft_model_path", required=True, help="Path to trained SFT adapter or checkpoint")
     parser.add_argument("--base_model_name", default="Qwen/Qwen2.5-7B-Instruct")
-    parser.add_argument("--reward_model_path", default="results/models/bilstm_mixup_regression.pt")
-    parser.add_argument("--reward_vocab_path", default="data/vocabs/mixup_vocab.json")
+    parser.add_argument("--reward_model_path", default="results/models/token_length_exp/bilstm_mixup_regression_1000.pt")
+    parser.add_argument("--reward_vocab_path", default="data/token_length_exp/mixup_vocab_1000.json")
+    parser.add_argument("--sbert_model_name", default="jinaai/jina-embeddings-v2-base-de")
     parser.add_argument("--output_file", default="data/dpo/dpo_preference_pairs_decoder_only.jsonl")
     parser.add_argument("--num_candidates", type=int, default=4)
-    parser.add_argument("--min_score_margin", type=float, default=0.10)
-    parser.add_argument("--max_source_len", type=int, default=768)
-    parser.add_argument("--max_target_len", type=int, default=512)
+    parser.add_argument("--min_score_margin", type=float, default=0.05)
+    parser.add_argument("--max_source_len", type=int, default=1000)
+    parser.add_argument("--max_target_len", type=int, default=1000)
     parser.add_argument("--temperature", type=float, default=0.8)
     parser.add_argument("--top_p", type=float, default=0.92)
     parser.add_argument("--batch_size", type=int, default=4)
-    parser.add_argument("--w_style", type=float, default=0.5)
-    parser.add_argument("--w_sem", type=float, default=0.5)
+    parser.add_argument("--w_style", type=float, default=0.7)
+    parser.add_argument("--w_sem", type=float, default=0.3)
     parser.add_argument("--val_split_ratio", type=float, default=0.15)
     parser.add_argument("--max_samples", type=int, default=None)
     parser.add_argument("--seed", type=int, default=42)
@@ -216,6 +222,7 @@ def main():
     evaluator = CompositeRewardEvaluator(
         reward_model_path=args.reward_model_path,
         reward_vocab_path=args.reward_vocab_path,
+        sbert_model_name=args.sbert_model_name,
         w_style=args.w_style,
         w_sem=args.w_sem,
         max_seq_len=args.max_target_len,

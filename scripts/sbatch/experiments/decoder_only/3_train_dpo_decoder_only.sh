@@ -4,11 +4,13 @@
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --gres=gpu:mig_48gb:1
 #SBATCH --output=results/logs/%x_%j.out
 #SBATCH --error=results/logs/%x_%j.err
 
-echo "=== Starting Decoder-Only DPO Training with TRL ==="
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+echo "=== Starting Decoder-Only DPO Training with TRL (48GB GPU) ==="
 date
 
 python scripts/modeling/decoder_only/train_dpo_decoder_only.py \

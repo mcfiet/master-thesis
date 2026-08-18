@@ -4,12 +4,16 @@
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --gres=gpu:mig_48gb:1
 #SBATCH --output=results/logs/%x_%j.out
 #SBATCH --error=results/logs/%x_%j.err
 
-echo "=== Starting Decoder-Only Evaluation ==="
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+echo "=== Starting Decoder-Only Evaluation (48GB GPU, Jina Embeddings) ==="
 date
+
+mkdir -p results/evaluation
 
 # 1. Evaluate SFT Model
 echo "Evaluating SFT Baseline..."
@@ -17,6 +21,8 @@ python scripts/modeling/decoder_only/evaluate_decoder_only.py \
     --test_data_path "data/corpus/corpus_master_with_steps.json" \
     --model_path "results/models/decoder_only/sft" \
     --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --sbert_model "jinaai/jina-embeddings-v2-base-de" \
+    --max_target_len 1000 \
     --output_file "results/evaluation/eval_sft_decoder_only.csv" \
     --max_samples 100
 
@@ -26,6 +32,8 @@ python scripts/modeling/decoder_only/evaluate_decoder_only.py \
     --test_data_path "data/corpus/corpus_master_with_steps.json" \
     --model_path "results/models/decoder_only/dpo" \
     --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --sbert_model "jinaai/jina-embeddings-v2-base-de" \
+    --max_target_len 1000 \
     --output_file "results/evaluation/eval_dpo_decoder_only.csv" \
     --max_samples 100
 

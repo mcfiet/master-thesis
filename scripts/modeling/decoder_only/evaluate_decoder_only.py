@@ -137,9 +137,9 @@ def main():
     parser.add_argument("--base_model_name", default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument("--output_file", default=None)
     parser.add_argument("--max_samples", type=int, default=100)
-    parser.add_argument("--max_target_len", type=int, default=512)
+    parser.add_argument("--max_target_len", type=int, default=1000)
     parser.add_argument("--temperature", type=float, default=0.2)
-    parser.add_argument("--sbert_model", default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
+    parser.add_argument("--sbert_model", default="jinaai/jina-embeddings-v2-base-de")
     args = parser.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -168,7 +168,10 @@ def main():
 
     # 2. Load Evaluators
     rule_analyzer = LeichteSpracheRuleAnalyzer()
-    sbert = SentenceTransformer(args.sbert_model, device=device)
+    sbert = SentenceTransformer(args.sbert_model, trust_remote_code=True, device=device)
+    if "jina" in args.sbert_model.lower():
+        sbert.max_seq_length = min(args.max_target_len, 1024)
+        print(f"Set Jina SBERT max_seq_length to {sbert.max_seq_length}")
 
     # 3. Load Test Data
     with open(args.test_data_path, "r", encoding="utf-8") as f:
