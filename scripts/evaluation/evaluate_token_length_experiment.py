@@ -3,17 +3,25 @@
 =============================================================================
 Comparative Evaluation Script: Token Length Experiment (256 vs. 500 vs. 1000)
 =============================================================================
-Evaluates and benchmarks all trained SFT and DPO models across different
-sequence lengths on a standardized test dataset (Lebenshilfe & Corpus).
+Evaluates and benchmarks:
+  1. Simplicity Regressor Models (BiLSTM 256 vs. 500 vs. 1000 tokens)
+  2. SFT and DPO Seq2Seq Models (mBART-50 256 vs. 500 vs. 1000 tokens)
 
-Metrics computed:
-  1. Simplicity / Style Score (via BiLSTM Mixup Regressors)
-  2. Semantic Preservation to Source AS (SBERT Cosine Similarity)
-  3. Semantic Similarity to Reference LS (SBERT Cosine Similarity)
-  4. Composite Reward (w_style * R_style + w_sem * R_sem)
-  5. Length & Compression Ratio (Output Tokens / Input Tokens)
-  6. Sentence Structure & Truncation Rate (Incomplete sentence endings)
-  7. Lexical Overlap (BLEU, ROUGE-1, ROUGE-2, ROUGE-L)
+Metrics computed for Translation / Generation:
+  - Simplicity / Style Score (via BiLSTM Regressors)
+  - Semantic Preservation to Source AS (SBERT Cosine Similarity)
+  - Semantic Similarity to Reference LS (SBERT Cosine Similarity)
+  - Composite Reward (w_style * R_style + w_sem * R_sem)
+  - Length & Compression Ratio (Output Tokens / Input Tokens)
+  - Sentence Structure & Truncation Rate (Incomplete sentence endings)
+  - Lexical Overlap (BLEU, ROUGE-1, ROUGE-2, ROUGE-L)
+
+Metrics computed for Metric Regressors:
+  - Mean Score on Leichte Sprache (LS) & Alltagssprache (AS)
+  - Separation Margin (Score_LS - Score_AS)
+  - Classification Accuracy (Score_LS > Score_AS)
+  - Length Correlation (Pearson/Spearman correlation between length and score)
+  - Stratified Performance on Short, Medium, and Long Texts
 =============================================================================
 """
 
@@ -30,6 +38,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 import spacy
+from scipy.stats import pearsonr, spearmanr
 from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoConfig
 from peft import PeftModel
@@ -120,7 +129,6 @@ def compute_rouge_l(ref_tokens: List[str], cand_tokens: List[str]) -> Dict[str, 
     if m == 0 or n == 0:
         return {"precision": 0.0, "recall": 0.0, "f1": 0.0}
 
-    # LCS dynamic programming
     dp = [[0] * (n + 1) for _ in range(m + 1)]
     for i in range(1, m + 1):
         for j in range(1, n + 1):
@@ -137,7 +145,130 @@ def compute_rouge_l(ref_tokens: List[str], cand_tokens: List[str]) -> Dict[str, 
 
 
 # ==============================================================================
-# MODEL EVALUATOR
+# METRIC REGRESSOR EVALUATOR
+# ==============================================================================
+def evaluate_metric_models(
+    metric_configs: List[Dict[str, Any]],
+    test_samples: List[Dict[str, Any]],
+    device: torch.device,
+    nlp,
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Evaluates BiLSTM metric models on test pairs (ls_text vs. as_text).
+    """
+    print("\n" + "=" * 70)
+    print("Starte Evaluation der Simplicity-Metrik-Modelle...")
+    print("=" * 70)
+
+    as_texts = [str(item.get("as_text") or "").strip() for item in test_samples]
+    ls_texts = [str(item.get("ls_text") or "").strip() for item in test_samples]
+
+    metric_summaries = []
+    metric_details = []
+
+    for cfg in metric_configs:
+        name = cfg["name"]
+        model_path = cfg["model_path"]
+        vocab_path = cfg["vocab_path"]
+        max_seq_len = cfg["max_seq_len"]
+
+        if not os.path.exists(model_path) or not os.path.exists(vocab_path):
+            print(f"Überspringe Metrik-Modell (Datei fehlt): {name} ({model_path})")
+            continue
+
+        print(f"\n--- Evaluiere Metrik: {name} (max_len={max_seq_len}) ---")
+
+        with open(vocab_path, "r", encoding="utf-8") as f:
+            vocab_data = json.load(f)
+            stoi = vocab_data.get("stoi", vocab_data)
+
+        unk_idx = stoi.get("<unk>") or stoi.get("<UNK>") or 1
+        model = BiLSTMRegressor(vocab_size=len(stoi), embed_dim=128, hidden_dim=128).to(device)
+        model.load_state_dict(torch.load(model_path, map_location=device))
+        model.eval()
+
+        def score_texts(texts: List[str], max_len: int) -> np.ndarray:
+            scores = []
+            for text in texts:
+                doc = nlp(text)
+                tokens = [t.text.lower() for t in doc if not t.is_space]
+                indices = [stoi.get(t, unk_idx) for t in tokens[:max_len]]
+                if len(indices) == 0:
+                    indices = [0]
+                inp = torch.tensor([indices], dtype=torch.long, device=device)
+                with torch.no_grad():
+                    s = model(inp).item()
+                scores.append(s)
+            return np.array(scores)
+
+        scores_ls = score_texts(ls_texts, max_seq_len)
+        scores_as = score_texts(as_texts, max_seq_len)
+
+        margins = scores_ls - scores_as
+        correct_order = scores_ls > scores_as
+        accuracy = float(np.mean(correct_order))
+
+        # Token length correlation
+        ls_lens = [len([t for t in nlp(t_str) if not t.is_space]) for t_str in ls_texts]
+        as_lens = [len([t for t in nlp(t_str) if not t.is_space]) for t_str in as_texts]
+
+        corr_ls, _ = spearmanr(scores_ls, ls_lens) if len(scores_ls) > 1 else (0.0, 0.0)
+        corr_as, _ = spearmanr(scores_as, as_lens) if len(scores_as) > 1 else (0.0, 0.0)
+
+        # Stratified accuracy by length of AS
+        short_mask = np.array(as_lens) < 200
+        med_mask = (np.array(as_lens) >= 200) & (np.array(as_lens) <= 450)
+        long_mask = np.array(as_lens) > 450
+
+        acc_short = float(np.mean(correct_order[short_mask])) if np.sum(short_mask) > 0 else 0.0
+        acc_med = float(np.mean(correct_order[med_mask])) if np.sum(med_mask) > 0 else 0.0
+        acc_long = float(np.mean(correct_order[long_mask])) if np.sum(long_mask) > 0 else 0.0
+
+        margin_short = float(np.mean(margins[short_mask])) if np.sum(short_mask) > 0 else 0.0
+        margin_med = float(np.mean(margins[med_mask])) if np.sum(med_mask) > 0 else 0.0
+        margin_long = float(np.mean(margins[long_mask])) if np.sum(long_mask) > 0 else 0.0
+
+        summary = {
+            "metric_model": name,
+            "max_seq_len": max_seq_len,
+            "mean_score_ls": float(np.mean(scores_ls)),
+            "std_score_ls": float(np.std(scores_ls)),
+            "mean_score_as": float(np.mean(scores_as)),
+            "std_score_as": float(np.std(scores_as)),
+            "separation_margin": float(np.mean(margins)),
+            "accuracy_ls_gt_as": accuracy,
+            "margin_short": margin_short,
+            "margin_med": margin_med,
+            "margin_long": margin_long,
+            "acc_short": acc_short,
+            "acc_med": acc_med,
+            "acc_long": acc_long,
+            "length_corr_ls": float(corr_ls) if not np.isnan(corr_ls) else 0.0,
+            "length_corr_as": float(corr_as) if not np.isnan(corr_as) else 0.0,
+        }
+        metric_summaries.append(summary)
+
+        for i, (as_t, ls_t, s_as, s_ls, m, cor) in enumerate(zip(as_texts, ls_texts, scores_as, scores_ls, margins, correct_order)):
+            metric_details.append({
+                "metric_model": name,
+                "sample_idx": i,
+                "as_text": as_t,
+                "ls_text": ls_t,
+                "as_tokens": as_lens[i],
+                "ls_tokens": ls_lens[i],
+                "score_as": float(s_as),
+                "score_ls": float(s_ls),
+                "margin": float(m),
+                "correct_order": bool(cor),
+            })
+
+    df_metric_summary = pd.DataFrame(metric_summaries)
+    df_metric_details = pd.DataFrame(metric_details)
+    return df_metric_summary, df_metric_details
+
+
+# ==============================================================================
+# SEQ2SEQ MODEL EVALUATOR
 # ==============================================================================
 class TokenLengthEvaluator:
     def __init__(
@@ -195,6 +326,7 @@ class TokenLengthEvaluator:
         test_samples: List[Dict[str, Any]],
         max_source_len: int = 500,
         max_target_len: int = 500,
+        prompt_prefix: str = "",
         batch_size: int = 4,
         w_style: float = 0.5,
         w_sem: float = 0.5,
@@ -203,10 +335,13 @@ class TokenLengthEvaluator:
             print(f"Modell nicht gefunden: {model_name_or_path}")
             return {}, pd.DataFrame()
 
-        print(f"\n--- Evaluiere: {model_name_or_path} (max_len={max_source_len}/{max_target_len}) ---")
+        print(f"\n--- Evaluiere: {model_name_or_path} (max_len={max_source_len}/{max_target_len}, prefix='{prompt_prefix}') ---")
         
         # Load Tokenizer & Model
-        tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, fix_mistral_regex=True)
+        except TypeError:
+            tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
         
         adapter_config_path = os.path.join(model_name_or_path, "adapter_config.json")
         if os.path.exists(adapter_config_path):
@@ -224,7 +359,7 @@ class TokenLengthEvaluator:
         num_batches = (len(as_texts) + batch_size - 1) // batch_size
         for b in tqdm(range(num_batches), desc="Generierung"):
             batch_src = as_texts[b * batch_size : (b + 1) * batch_size]
-            prompts = ["Übersetze in Leichte Sprache: " + t for t in batch_src]
+            prompts = [prompt_prefix + t for t in batch_src]
             inputs = tokenizer(
                 prompts,
                 padding=True,
@@ -346,10 +481,16 @@ def main():
     parser.add_argument("--base_model_name", default="facebook/mbart-large-50")
     parser.add_argument("--reward_model_path", default="results/models/token_length_exp/bilstm_mixup_regression_500.pt")
     parser.add_argument("--reward_vocab_path", default="data/token_length_exp/mixup_vocab_500.json")
+    parser.add_argument("--prompt_prefix", default="", help="Prompt prefix for Seq2Seq inference (default: empty)")
     parser.add_argument("--output_summary", default="results/evaluation/token_length_comparison_summary.csv")
     parser.add_argument("--output_details", default="results/evaluation/token_length_comparison_details.csv")
+    parser.add_argument("--output_metric_summary", default="results/evaluation/token_length_metric_comparison.csv")
+    parser.add_argument("--output_metric_details", default="results/evaluation/token_length_metric_details.csv")
     parser.add_argument("--max_samples", type=int, default=None)
     args = parser.parse_args()
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer"])
 
     # Load Test Samples
     with open(args.test_data_path, "r", encoding="utf-8") as f:
@@ -360,7 +501,55 @@ def main():
 
     print(f"Geladene Test-Samples: {len(test_samples)}")
 
-    # Fallback to master metric if token_length_exp metric is not yet trained
+    # =========================================================================
+    # 1. EVALUATE METRIC MODELS (BiLSTM 256, 500, 1000)
+    # =========================================================================
+    metric_configs = [
+        {
+            "name": "metric_mixup_256",
+            "model_path": "results/models/token_length_exp/bilstm_mixup_regression_256.pt",
+            "vocab_path": "data/token_length_exp/mixup_vocab_256.json",
+            "max_seq_len": 256,
+        },
+        {
+            "name": "metric_mixup_500",
+            "model_path": "results/models/token_length_exp/bilstm_mixup_regression_500.pt",
+            "vocab_path": "data/token_length_exp/mixup_vocab_500.json",
+            "max_seq_len": 500,
+        },
+        {
+            "name": "metric_mixup_1000",
+            "model_path": "results/models/token_length_exp/bilstm_mixup_regression_1000.pt",
+            "vocab_path": "data/token_length_exp/mixup_vocab_1000.json",
+            "max_seq_len": 1000,
+        },
+        # Master baseline if present
+        {
+            "name": "metric_mixup_master",
+            "model_path": "results/models/bilstm_mixup_regression.pt",
+            "vocab_path": "data/vocabs/mixup_vocab.json",
+            "max_seq_len": 256,
+        },
+    ]
+
+    df_metric_summary, df_metric_details = evaluate_metric_models(metric_configs, test_samples, device, nlp)
+
+    if not df_metric_summary.empty:
+        df_metric_summary.to_csv(args.output_metric_summary, index=False)
+        print(f"Metrik-Zusammenfassung gespeichert: {args.output_metric_summary}")
+        if not df_metric_details.empty:
+            df_metric_details.to_csv(args.output_metric_details, index=False)
+            print(f"Metrik-Details gespeichert: {args.output_metric_details}")
+
+        print("\n--- Zusammenfassung der Simplicity-Metrik-Modelle ---")
+        try:
+            print(df_metric_summary.to_markdown(index=False))
+        except Exception:
+            print(df_metric_summary.to_string(index=False))
+
+    # =========================================================================
+    # 2. EVALUATE SEQ2SEQ MODELS (SFT & DPO)
+    # =========================================================================
     rm_path = args.reward_model_path
     rv_path = args.reward_vocab_path
     if not os.path.exists(rm_path):
@@ -371,6 +560,7 @@ def main():
         reward_model_path=rm_path,
         reward_vocab_path=rv_path,
         reward_max_seq_len=1000,
+        device=device,
     )
 
     models_to_eval = [
@@ -397,6 +587,7 @@ def main():
             test_samples=test_samples,
             max_source_len=max_src,
             max_target_len=max_tgt,
+            prompt_prefix=args.prompt_prefix,
             batch_size=4 if max_src <= 500 else 2,
         )
 
@@ -408,13 +599,18 @@ def main():
         df_summary = pd.DataFrame(summaries)
         df_summary.to_csv(args.output_summary, index=False)
         print(f"\nErfolgreich gespeichert: {args.output_summary}")
-        print("\n--- Zusammenfassung der Ergebnisse ---")
-        print(df_summary.to_markdown(index=False))
 
     if all_details:
         df_all_details = pd.concat(all_details, ignore_index=True)
         df_all_details.to_csv(args.output_details, index=False)
         print(f"Detailergebnisse gespeichert: {args.output_details}")
+
+    if summaries:
+        print("\n--- Zusammenfassung der Übersetzungs-Modelle (SFT & DPO) ---")
+        try:
+            print(df_summary.to_markdown(index=False))
+        except Exception:
+            print(df_summary.to_string(index=False))
 
 
 if __name__ == "__main__":
