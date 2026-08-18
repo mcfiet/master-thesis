@@ -1,0 +1,39 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {section}{\numberline {1}Einleitung}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Problemstellung \& Motivation}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Zielsetzung \& Forschungsfragen}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Aufbau der Arbeit}{3}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Theoretical Background \& Stand der Forschung}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Das Konzept der Leichten Sprache und verfügbare Datenbasis}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Maschinelle Textvereinfachung und Satz-Alignment}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Evaluierungsmetriken für die Vereinfachung}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Präferenzoptimierung (DPO) in der Textgenerierung}{7}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Themenblock 1: Datenbasis \& Korpus-Erstellung}{9}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Multi-Quellen-Crawling \& Datenakquise}{11}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Alignment \& Das 1:n-Problem}{11}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Quality Assurance \& Similarity Sweet-Spot}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Datenbereinigung \& Normalisierung}{11}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Korpus-Statistiken \& Lexikalische Diversität}{11}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}{12}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Klassifikationsmodelle}{12}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Out-of-Domain-Generalisierung \& Empirische Bias-Kontrolle}{12}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Continuous MixUp Regression}{12}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Evaluierung synthetischer Sprachstufen}{12}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Datenvorbereitung \& Trainings-Splits}{13}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Supervised Fine-Tuning (SFT)}{13}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Reward-Guided Optimization (RLHF / DPO)}{13}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Mehrdimensionale Evaluierung}{13}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Diskussion \& Gesamtevaluation}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Inhaltssynthese der drei Themenblöcke}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Stärken, Grenzen \& Systemrestriktionen}{14}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Beantwortung der Forschungsfragen}{14}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Fazit \& Ausblick}{15}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Zusammenfassung der Kernergebnisse}{15}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Ausblick \& Zukünftige Forschungsarbeiten}{15}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Anhang}{16}{section.8}%
+\contentsline {section}{Glossar}{17}{section*.2}%
+\contentsline {section}{Abbildungsverzeichnis}{18}{section*.3}%
+\contentsline {section}{Tabellenverzeichnis}{19}{section*.5}%
+\contentsline {section}{Literaturverzeichnis}{20}{section*.7}%
+\contentsline {section}{\numberline {9}Anhang}{22}{section.9}%

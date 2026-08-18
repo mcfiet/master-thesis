@@ -1,4 +1,4 @@
-\section{Das Konzept der Leichten Sprache und verfügbare Datenbasis}
+\subsection{Das Konzept der Leichten Sprache und verfügbare Datenbasis}
 \label{sec:konzept_leichte_sprache}
 
 Das Konzept der Leichten Sprache (LS) stellt eine stark reglementierte Sprachvariante der deutschen Standardsprache dar, die primär darauf abzielt, Barrierefreiheit in der schriftlichen Kommunikation für Menschen mit kognitiven Einschränkungen, Lernschwierigkeiten oder geringer Lese- und Schreibkompetenz zu gewährleisten. Syntaktisch zeichnet sich LS unter anderem durch kurze Hauptsätze (Subjekt-Prädikat-Objekt), den Verzicht auf Nebensätze, Passivkonstruktionen, den Genitiv sowie den Konjunktiv aus. Auf lexikalischer Ebene werden abstrakte Begriffe durch konkrete Beispiele ersetzt, und lange zusammengesetzte Wörter werden mittels typografischer Hilfsmittel wie Bindestrichen oder dem Mediopunkt (z.~B. \textit{Bundestags-Wahl} oder \textit{Bundestags·wahl}) segmentiert. 
@@ -13,14 +13,14 @@ Für den Bereich der "`Einfachen Sprache"' (Plain German) präsentierten \citet{
 
 Einen weiteren Beitrag zur Generierung paralleler Ressourcen leisteten \citet{toborek2023new} mit der Vorstellung des \textit{New Aligned Simple German Corpus}. Ihr Datensatz besteht aus ca. 700 Dokumentenpaaren auf Dokumentenebene und über 10.000 Satzpaaren auf Satzebene, die teils manuell annotiert und teils automatisch berechnet wurden. Das Korpus kombiniert dabei das systematische Scraping paralleler Webinhalte mit automatischer Satz-Ausrichtung. Allerdings fasst die Arbeit Texte sowohl der Leichten als auch der Einfachen Sprache unter einem gemeinsamen Vereinfachungsbegriff zusammen, was eine feine Unterscheidung der spezifischen syntaktischen und semantischen Richtlinien von Leichter Sprache erschwert.
 
-\section{Maschinelle Textvereinfachung und Satz-Alignment}
+\subsection{Maschinelle Textvereinfachung und Satz-Alignment}
 \label{sec:maschinelle_textvereinfachung_alignment}
 
 Die maschinelle Textvereinfachung lässt sich formal als Monolingual Machine Translation begreifen, bei der ein komplexer Ausgangstext in eine vereinfachte Zielsprachvariante übersetzt wird. Eine fundamentale Herausforderung im Vergleich zur klassischen maschinellen Übersetzung (z.~B. Deutsch-Englisch) ist die Asymmetrie der Satzstrukturen: Eine Vereinfachung erfordert häufig Satzaufspaltungen (Sentence Splitting), Auslassungen irrelevanter Informationen (Compression) oder Paraphrasierungen. Folglich liegt selten ein einfaches 1:1-Satzalignment vor; stattdessen dominieren 1:n-, n:1- oder n:m-Alignments.
 
 Zur automatisierten Ausrichtung paralleler Dokumente auf Satz- und Absatzebene hat sich das Werkzeug \textit{CATS} von \citet{stajner2018cats} etabliert. CATS implementiert verschiedene lexikalische und semantische Ähnlichkeitsmetriken (wie Character N-Grams (CNG) und gemittelte Word-Embeddings) und kombiniert diese mit dem \textit{Most Similar Text} (MST) bzw. \textit{MST-LIS} (Longest Increasing Subsequence) Suchalgorithmus. \citet{stajner2018cats} wiesen nach, dass die Einbeziehung semantischer Vektoren (WAVG) und kontinuierlicher Wort-Alignments (CWASA) im Vergleich zu rein lexikalischen Maßen robustere Alignments bei stark paraphrasierten Sätzen liefert, wie sie für Leichte Sprache typisch sind. Dennoch bleibt die automatische Filterung verrauschter Alignments auf Basis kosinusähnlicher Schwellenwerte ein aktives Forschungsfeld, da zu niedrige Schwellenwerte fehlerhafte Übersetzungen und zu hohe Schwellenwerte einen Informationsverlust im Trainingsdatensatz induzieren.
 
-\section{Evaluierungsmetriken für die Vereinfachung}
+\subsection{Evaluierungsmetriken für die Vereinfachung}
 \label{sec:evaluierungsmetriken}
 
 Die automatische Evaluierung von Textvereinfachungssystemen stellt eine große methodische Hürde dar. Traditionelle Metriken der maschinellen Übersetzung wie BLEU, die primär auf n-Gramm-Präzision im Vergleich zu einer Referenzübersetzung basieren, erweisen sich für die Vereinfachung oft als ungeeignet. Wie \citet{alva2021unsuitability} empirisch belegen, korreliert BLEU nur schwach mit dem menschlichen Urteil über Einfachheit und Textqualität. Der Grund liegt darin, dass BLEU lexikalische Variationen und strukturelle Modifikationen (wie Satzteilung und Umformulierung) als Fehler abstraft, obwohl genau diese für eine gute Vereinfachung essenziell sind.
@@ -33,7 +33,7 @@ Dadurch belohnt SARI explizit Vereinfachungsoperationen, die sich vom komplexen 
 
 Für die deutsche Sprache stellt die neu entwickelte Metrik \textit{DETECT} von \citet{stodden2026detect} einen wichtigen Fortschritt dar. DETECT versucht, die Dimensionen Verständlichkeit (Ease), Grammatikalität und semantische Konsistenz (Textual Clarity) über ein erlerntes Evaluierungsmodell abzubilden, das auf synthetischen LLM-Generaten trainiert wurde. Dies adressiert die Schwäche klassischer Referenzmetriken, die die semantische Abweichung (Information Loss) bei extremen Kürzungen oft nicht hinreichend quantifizieren können.
 
-\section{Präferenzoptimierung (DPO) in der Textgenerierung}
+\subsection{Präferenzoptimierung (DPO) in der Textgenerierung}
 \label{sec:dpo_textgenerierung}
 
 Während Supervised Fine-Tuning (SFT) darauf abzielt, die Token-Verteilung eines Referenzkorpus zu imitieren, stößt dieser Ansatz bei der Durchsetzung spezifischer Stil- und Formatierungsregeln (wie den Richtlinien der Leichten Sprache) an Grenzen. Um generative Modelle präziser auf menschliche Qualitätsurteile und formale Textregeln auszurichten, wurde traditionell Reinforcement Learning from Human Feedback (RLHF) über Proximal Policy Optimization (PPO) eingesetzt. Dieser Prozess ist jedoch rechenzeitintensiv und hyperparameter-instabil.

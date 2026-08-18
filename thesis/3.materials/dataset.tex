@@ -8,7 +8,7 @@ Ein zentrales methodisches Charakteristikum der in dieser Arbeit entwickelten Pi
     \item \textbf{Verrauschte Satz-Alignments:} Die Modellierung auf Satzebene setzt voraus, dass präzise Alignments vorliegen. Wie \citet{stodden2023deplain} und \citet{stajner2018cats} zeigen, führt die asymmetrische Natur der Vereinfachung (z.~B. n:m-Alignments und Satzteilungen) dazu, dass automatische Satz-Aligner entweder stark fehlerhafte Paare erzeugen oder einen massiven Informationsverlust durch das Verwerfen nicht-linearer Übergänge in Kauf nehmen müssen.
     \item \textbf{Verlust struktureller Metadaten:} Wie \citet{battisti2020corpus} nachwiesen, spielen visuelle Layoutmerkmale, Absatzstrukturen und die Gliederung auf Dokumentenebene eine entscheidende Rolle für das Verständnis von Leichter Sprache. Ein satzbasiertes Alignment eliminiert diese Strukturen vollständig.
 \end{enumerate}
-Indem wir den gesamten Artikel als Basiseinheit wählen, kann das Übersetzungsmodell lernen, globale Kürzungen vorzunehmen und Texte kohärent umzuformulieren. Gleichzeitig erlaubt dies der Komplexitätsmetrik, die Verständlichkeit eines Textes im Kontext des gesamten Dokuments statt isolierter Sätze zu bewerten. Die methodischen Entscheidungen dieser Pipeline spiegeln dabei direkt die in Kapitel~\ref{sec:maschinelle_textvereinfachung_alignment} und \ref{sec:evaluierungsmetriken} diskutierten Herausforderungen des Forschungsstandes wider:
+Indem wir den gesamten Artikel als Basiseinheit wählen, kann das Übersetzungsmodell lernen, globale Kürzungen vorzunehmen und Texte kohärent umzuformulieren. Gleichzeitig erlaubt dies der Komplexitätsmetrik, die Verständlichkeit eines Textes im Kontext des gesamten Dokuments statt isolierter Sätze zu bewerten. Die methodischen Entscheidungen dieser Pipeline spiegeln dabei direkt die in Abschnitt~\ref{sec:maschinelle_textvereinfachung_alignment} und \ref{sec:evaluierungsmetriken} diskutierten Herausforderungen des Forschungsstandes wider:
 \begin{itemize}
     \item \textbf{Multi-Quellen-Crawling \& Datenakquise (Abschnitt~3.1):} Um eine breite lexikalische und domänenspezifische Abdeckung zu erzielen und nicht auf eine einzelne Textgattung beschränkt zu sein, wurde ein modularer Scraper für eine Vielzahl deutschsprachiger Webportale implementiert. Dies erweitert den Ansatz von \citet{battisti2020corpus} und stellt sicher, dass sowohl behördliche Texte (im Kontext der BITV 2.0) als auch journalistische Beiträge und Alltagstexte vertreten sind.
     \item \textbf{Alignment \& Das 1:n-Problem (Abschnitt~3.2):} Wie in Abschnitt~\ref{sec:maschinelle_textvereinfachung_alignment} erläutert, übersetzen menschliche Übersetzer Leichte Sprache selten in Form von 1:1-Satzentsprechungen. Häufiger sind Satzaufspaltungen (Sentence Splitting) und starke Komprimierungen. Daher wird eine dynamische Alignment-Strategie benötigt, die über klassische Satzähnlichkeiten hinausgeht und semantische Einbettungen nutzt, um asymmetrische Satzbeziehungen (1:n) zuverlässig abzubilden.
@@ -19,13 +19,12 @@ Indem wir den gesamten Artikel als Basiseinheit wählen, kann das Übersetzungsm
 
 Dieses Kapitel beschreibt den detaillierten Ablauf dieser Schritte und dokumentiert die Designentscheidungen bei der Konstruktion des finalen Datensatzes.
 
-\section{Multi-Quellen-Crawling \& Datenakquise}
+\subsection{Multi-Quellen-Crawling \& Datenakquise}
 
-\section{Alignment \& Das 1:n-Problem}
+\subsection{Alignment \& Das 1:n-Problem}
 
-\section{Quality Assurance \& Similarity Sweet-Spot}
+\subsection{Quality Assurance \& Similarity Sweet-Spot}
 
-\section{Datenbereinigung \& Normalisierung}
+\subsection{Datenbereinigung \& Normalisierung}
 
-\section{Korpus-Statistiken \& Lexikalische Diversität}
-
+\subsection{Korpus-Statistiken \& Lexikalische Diversität}

@@ -1,53 +1,126 @@
-\documentclass[a4paper, ngerman, 12pt]{scrreprt}
-
-\input{options/packages.tex}
+\documentclass{article}
+\usepackage{svg}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{hyphenat}
+\usepackage{url}
+\hyphenation{Mathe-matik wieder-gewinnen}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[autostyle,german=guillemets]{csquotes}
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{acronym}
+\usepackage{glossaries}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[most]{tcolorbox}
+\usepackage[style=apa,citestyle=authoryear,natbib=true,backend=biber]{biblatex}
+% \usepackage{refcheck} % ist zum checken und debuggen hilfreich
+\usepackage{pdflscape}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{csvsimple}
+\usepackage{caption}
+\pgfplotsset{compat=1.18}
+\usepackage{adjustbox}
 
 \DeclareDelimFormat{nameyeardelim}{\addcomma\space}
 \providecommand{\apashortdash}{-}
 
-\input{options/code.tex}
+\addbibresource{Literatur.bib}
+\input{glossary}
 
-\addbibresource{bibliography.bib}
 
+% \setcounter{tocdepth}{4}
+% \setcounter{secnumdepth}{4}
 
+\linespread{1.3} % setzt den Zeilenabstand nach oben auf 1,5
 \begin{document}
-
-\title{Entwicklung domänenspezifischer Datensätze und automatisierter Evaluation für ein Framework zur neuronalen Textvereinfachung in leichte Sprache} % Title
-\author{Fiete Scheel} % Author
-\date{\today} % Date
-
-\maketitle
-
-\tableofcontents
+\pagenumbering{gobble} % Unterdrückt die Seitennummerierung
+\input{titlepage}
 \newpage
+\input{deckblatt}
 
-% \chapter{Basic Elemente}
-% \input{chapters/example_chapter.tex}
+\newpage
+\input{eigenstaendigkeits}
 
-\chapter{Einleitung}
-\input{chapters/01_einleitung.tex}
-
-\chapter{Theoretical Background \& Stand der Forschung}
-\input{chapters/02_background.tex}
-
-\chapter{Themenblock 1: Datenbasis \& Korpus-Erstellung}
-\input{chapters/03_datenbasis.tex}
-
-\chapter{Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}
-\input{chapters/04_metrik.tex}
-
-\chapter{Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}
-\input{chapters/05_modellierung.tex}
-
-\chapter{Diskussion \& Gesamtevaluation}
-\input{chapters/06_diskussion.tex}
-
-\chapter{Fazit \& Ausblick}
-\input{chapters/07_fazit.tex}
+\newpage
+\tableofcontents
+\thispagestyle{empty}
 
 
-\printbibliography
 
-\input{chapters/99_appendix.tex}
+\newpage
+\pagenumbering{arabic} % Beginnt die Nummerierung ab hier mit 1
+\section{Einleitung}
+\input{1.introduction/target}
+
+\newpage
+\section{Theoretical Background \& Stand der Forschung}
+\input{2.relatedWork/mainLiteratureReviews}
+
+\newpage
+\section{Themenblock 1: Datenbasis \& Korpus-Erstellung}
+\input{3.materials/dataset}
+
+\newpage
+\section{Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}
+\input{4.methodology/_methodologies}
+
+\newpage
+\section{Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}
+\input{5.experimentsAndResults/_experiments}
+
+\newpage
+\section{Diskussion \& Gesamtevaluation}
+\input{6.discussion/discussion}
+
+\newpage
+\section{Fazit \& Ausblick}
+\input{8.conclusion/conclusion}
+
+
+
+
+% ---------- ANHANG
+\newpage
+%\addcontentsline{toc}{section}{Anhang}
+%\section*{Appendix}
+\section{Anhang}
+
+% \input{acronyms}
+\newpage
+\section*{Glossar}
+\addcontentsline{toc}{section}{Glossar}
+\printglossary[title=, toctitle=]
+
+\newpage
+\section*{Abbildungsverzeichnis}
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\renewcommand{\listfigurename}{}  % unterdrückt Titel
+\listoffigures
+
+\newpage
+\section*{Tabellenverzeichnis}
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
+\renewcommand{\listtablename}{}   % unterdrückt Titel
+\listoftables
+%\input{codeAvailability} %TODO
+
+\newpage
+%\addcontentsline{toc}{subsection}{Literaturverzeichnis}
+% \nocite{*}
+
+\printbibliography[title=Literaturverzeichnis, heading=bibintoc]
+
+
+\newpage
+\input{anhang/anhang}
 
 \end{document}

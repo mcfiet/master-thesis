@@ -1,4 +1,4 @@
-\section{Problemstellung \& Motivation}
+\subsection{Problemstellung \& Motivation}
 \label{sec:problemstellung_motivation}
 
 \begin{tcolorbox}[boxrule=0pt,sharp corners,enhanced,borderline west={2pt}{0pt}{blue}]
@@ -13,7 +13,7 @@ Mit dem Inkrafttreten des Barrierefreiheitsstärkungsgesetzes (BFSG) in Deutschl
 
 Hieraus ergibt sich ein dringender Forschungs- und Entwicklungsbedarf im Bereich der maschinellen Textvereinfachung. Bisherige neuronale Übersetzungsmodelle scheitern jedoch häufig an den spezifischen syntaktischen und strukturellen Besonderheiten der Leichten Sprache oder leiden unter dem Mangel an qualitativ hochwertigen, parallelen Trainingsdaten. Es bedarf daher systematischer Ansätze zur automatisierten Erstellung paralleler Korpora, robuster Metriken zur Komplexitätsbewertung und optimierter Trainingsstrategien.
 
-\section{Zielsetzung \& Forschungsfragen}
+\subsection{Zielsetzung \& Forschungsfragen}
 \label{sec:zielsetzung_forschungsfragen}
 
 Ziel dieser Arbeit ist die Entwicklung, Optimierung und Evaluierung eines methodischen Frameworks zur automatisierten Übersetzung deutscher Alltagssprache in Leichte Sprache. Dies umfasst den gesamten Prozess von der automatisierten Datenakquise über die Bewertung von Sprachkomplexität bis hin zum Training und der Optimierung generativer Sprachmodelle.
@@ -45,7 +45,7 @@ Zur Beantwortung dieser Leitfrage werden drei zentrale Forschungsbereiche (Theme
     \end{itemize}
 \end{enumerate}
 
-\section{Aufbau der Arbeit}
+\subsection{Aufbau der Arbeit}
 \label{sec:aufbau_der_arbeit}
 
 Die vorliegende Arbeit folgt einer logischen Struktur, die sich an den drei Säulen des entwickelten Übersetzungssystems orientiert:
@@ -53,11 +53,11 @@ Die vorliegende Arbeit folgt einer logischen Struktur, die sich an den drei Säu
 \begin{itemize}
     \item \textbf{Kapitel 2 (Theoretical Background \& Stand der Forschung)} legt das theoretische Fundament. Es erörtert die sprachlichen Regeln der Leichten Sprache, den aktuellen Stand der maschinellen Übersetzung (Seq2Seq, LLMs, LoRA-Tuning) sowie Methoden zur automatisierten Evaluation.
     
-    \item \textbf{Kapitel 3 (Datenbasis \& Korpus-Erstellung)} beschreibt die erste Stufe der Pipeline. Im Fokus steht das Crawling paralleler Texte, die Behandlung des 1:n-Alignment-Problems und die qualitative Filterung mittels semantischer Embeddings.
+    \item \textbf{Kapitel 3 (Themenblock 1: Datenbasis \& Korpus-Erstellung)} beschreibt die erste Stufe der Pipeline. Im Fokus steht das Crawling paralleler Texte, die Behandlung des 1:n-Alignment-Problems und die qualitative Filterung mittels semantischer Embeddings.
     
-    \item \textbf{Kapitel 4 (Metrik \& Bewerten von Sprachkomplexität)} widmet sich der zweiten Stufe: der Entwicklung von Klassifikationsmodellen (BiLSTM vs. SBERT) und dem Entwurf einer \textit{Continuous MixUp Regression} zur stufenlosen Komplexitätsbewertung.
+    \item \textbf{Kapitel 4 (Themenblock 2: Metrik \& Bewerten von Sprachkomplexität)} widmet sich der zweiten Stufe: der Entwicklung von Klassifikationsmodellen (BiLSTM vs. SBERT) und dem Entwurf einer \textit{Continuous MixUp Regression} zur stufenlosen Komplexitätsbewertung.
     
-    \item \textbf{Kapitel 5 (Modellierung der Übersetzung \& Fine-Tuning)} stellt das eigentliche Übersetzungsmodell vor. Hierbei werden die Implementierung des Supervised Fine-Tunings (SFT) sowie das Reward-Guided Fine-Tuning (DPO) zur Regeleinhaltung evaluiert.
+    \item \textbf{Kapitel 5 (Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning)} stellt das eigentliche Übersetzungsmodell vor. Hierbei werden die Implementierung des Supervised Fine-Tunings (SFT) sowie das Reward-Guided Fine-Tuning (DPO) zur Regeleinhaltung evaluiert.
     
     \item \textbf{Kapitel 6 (Diskussion \& Gesamtevaluation)} führt die Ergebnisse der drei Stufen zusammen, beantwortet systematisch die aufgeworfenen Forschungsfragen und beleuchtet kritisch die Systemrestriktionen sowie Fragen zur Faktentreue.
     

@@ -219,7 +219,7 @@ def main():
         ref_model=None,  # PEFT automatically handles reference disabling (0 extra VRAM)
         train_dataset=train_ds,
         eval_dataset=eval_ds,
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         peft_config=peft_config,
         args=dpo_config,
     )
