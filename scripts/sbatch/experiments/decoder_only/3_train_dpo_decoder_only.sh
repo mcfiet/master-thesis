@@ -19,16 +19,16 @@ python scripts/modeling/decoder_only/train_dpo_decoder_only.py \
     --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
     --output_dir "results/models/decoder_only/dpo" \
     --beta 0.1 \
-    --lr 5e-6 \
+    --lr 2e-6 \
     --batch_size 2 \
     --gradient_accumulation_steps 8 \
     --epochs 3 \
     --warmup_ratio 0.10 \
     --max_length 1024 \
     --use_peft \
-    --lora_r 16 \
-    --lora_alpha 32 \
-    --lora_dropout 0.05
+    --lora_r 8 \
+    --lora_alpha 16 \
+    --lora_dropout 0.10
 
 echo "=== DPO Training Complete ==="
 date

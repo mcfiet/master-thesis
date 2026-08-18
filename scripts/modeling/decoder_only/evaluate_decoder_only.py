@@ -201,6 +201,8 @@ def main():
                 max_new_tokens=args.max_target_len,
                 temperature=args.temperature,
                 do_sample=False if args.temperature == 0.0 else True,
+                repetition_penalty=1.2,
+                no_repeat_ngram_size=3,
                 pad_token_id=tokenizer.pad_token_id,
                 eos_token_id=tokenizer.eos_token_id,
             )

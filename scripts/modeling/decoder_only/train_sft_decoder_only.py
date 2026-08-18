@@ -34,6 +34,7 @@ from transformers import (
     AutoTokenizer,
     AutoModelForCausalLM,
     TrainingArguments,
+    EarlyStoppingCallback,
     set_seed,
 )
 from peft import LoraConfig, get_peft_model, TaskType
@@ -131,16 +132,16 @@ def main():
     parser.add_argument("--max_seq_length", type=int, default=1024, help="Maximum sequence length")
     parser.add_argument("--batch_size", type=int, default=4, help="Per-device train batch size")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=4)
-    parser.add_argument("--epochs", type=int, default=5)
-    parser.add_argument("--lr", type=float, default=2e-4, help="Learning rate for LoRA adapters")
-    parser.add_argument("--warmup_ratio", type=float, default=0.05)
+    parser.add_argument("--epochs", type=int, default=3)
+    parser.add_argument("--lr", type=float, default=1e-4, help="Learning rate for LoRA adapters")
+    parser.add_argument("--warmup_ratio", type=float, default=0.10)
     parser.add_argument("--val_split", type=float, default=0.10)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max_samples", type=int, default=None)
     parser.add_argument("--use_peft", action="store_true", default=True, help="Use LoRA fine-tuning")
-    parser.add_argument("--lora_r", type=int, default=16, help="LoRA rank")
-    parser.add_argument("--lora_alpha", type=int, default=32, help="LoRA alpha")
-    parser.add_argument("--lora_dropout", type=float, default=0.05, help="LoRA dropout")
+    parser.add_argument("--lora_r", type=int, default=8, help="LoRA rank")
+    parser.add_argument("--lora_alpha", type=int, default=16, help="LoRA alpha")
+    parser.add_argument("--lora_dropout", type=float, default=0.10, help="LoRA dropout")
     args = parser.parse_args()
 
     set_seed(args.seed)
@@ -163,30 +164,42 @@ def main():
     val_records = all_pairs[split_idx:]
     print(f"Dataset split: {len(train_records)} Train | {len(val_records)} Validation")
 
-    # Format into chat messages
-    def format_chat_records(records):
+    # Instruction Variations against template-overfitting
+    INSTRUCTION_VARIATIONS = [
+        "Vereinfache folgenden Text in verständliche deutsche Leichte Sprache:\n\n",
+        "Übersetze folgenden deutschen Text nach den offiziellen Regeln der Leichten Sprache:\n\n",
+        "Schreibe diesen Text in einfacher, klarer und leicht verständlicher Sprache:\n\n",
+        "Übertrage den folgenden Text in Leichte Sprache (kurze Sätze, einfache Wörter):\n\n",
+        "Formuliere den folgenden schweren Text in barrierefreie deutsche Leichte Sprache um:\n\n",
+    ]
+
+    # Format into chat messages with header cleanup and instruction jittering
+    def format_chat_records(records, is_train=True):
         formatted = []
         for r in records:
+            # Header cleanup: remove isolated state/portal header lines
+            clean_ls = re.sub(r"^(Sachsen-Anhalt|Hamburg|Schleswig-Holstein|Bremen|Niedersachsen|Pinneberg|Kiel)\s*\n+", "", r["ls_text"], flags=re.IGNORECASE).strip()
+            prefix = random.choice(INSTRUCTION_VARIATIONS) if is_train else USER_INSTRUCTION_PREFIX
             messages = create_chat_messages(
                 as_text=r["as_text"],
-                ls_text=r["ls_text"],
+                ls_text=clean_ls,
                 system_prompt=SYSTEM_PROMPT_LEICHTE_SPRACHE,
-                instruction_prefix=USER_INSTRUCTION_PREFIX,
+                instruction_prefix=prefix,
             )
             formatted.append({"messages": messages})
         return formatted
 
-    train_dataset = Dataset.from_list(format_chat_records(train_records))
-    val_dataset = Dataset.from_list(format_chat_records(val_records)) if len(val_records) > 0 else None
+    train_dataset = Dataset.from_list(format_chat_records(train_records, is_train=True))
+    val_dataset = Dataset.from_list(format_chat_records(val_records, is_train=False)) if len(val_records) > 0 else None
 
-    # 2. Tokenizer Setup
+    # 2. Load Tokenizer
     print(f"Loading Tokenizer from: {args.model_name}...")
     tokenizer = AutoTokenizer.from_pretrained(args.model_name, trust_remote_code=True)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    tokenizer.padding_side = "right"
+    tokenizer.padding_side = "right"  # SFTTrainer handles padding
 
-    # 3. Model Setup
+    # 3. Load Model
     print(f"Loading Model: {args.model_name}...")
     torch_dtype = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else (torch.float16 if torch.cuda.is_available() else torch.float32)
     
@@ -200,7 +213,7 @@ def main():
     # 4. LoRA Setup
     peft_config = None
     if args.use_peft:
-        print(f"Configuring PEFT/LoRA (rank={args.lora_r}, alpha={args.lora_alpha})...")
+        print(f"Configuring PEFT/LoRA (rank={args.lora_r}, alpha={args.lora_alpha}, dropout={args.lora_dropout})...")
         target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
         peft_config = LoraConfig(
             r=args.lora_r,
@@ -220,10 +233,14 @@ def main():
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         learning_rate=args.lr,
         warmup_ratio=args.warmup_ratio,
+        weight_decay=0.01,
         lr_scheduler_type="cosine",
         logging_steps=10,
         eval_strategy="epoch" if val_dataset else "no",
-        save_strategy="epoch",
+        save_strategy="epoch" if val_dataset else "no",
+        load_best_model_at_end=True if val_dataset else False,
+        metric_for_best_model="eval_loss" if val_dataset else None,
+        greater_is_better=False,
         save_total_limit=2,
         bf16=(torch_dtype == torch.bfloat16),
         fp16=(torch_dtype == torch.float16),
@@ -233,12 +250,14 @@ def main():
     )
 
     # 6. SFTTrainer Initialization & Training
+    callbacks = [EarlyStoppingCallback(early_stopping_patience=1)] if val_dataset else []
     trainer = SFTTrainer(
         model=model,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         peft_config=peft_config,
         args=sft_config,
+        callbacks=callbacks,
     )
 
     print("\n" + "=" * 60)

@@ -28,8 +28,9 @@ import torch
 import matplotlib.pyplot as plt
 from datasets import Dataset
 from transformers import (
-    AutoTokenizer,
     AutoModelForCausalLM,
+    AutoTokenizer,
+    EarlyStoppingCallback,
     set_seed,
 )
 from peft import PeftModel, LoraConfig, TaskType
@@ -116,7 +117,7 @@ def main():
     parser.add_argument("--base_model_name", default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument("--output_dir", default="results/models/decoder_only/dpo")
     parser.add_argument("--beta", type=float, default=0.1, help="DPO temperature beta (0.05 to 0.2)")
-    parser.add_argument("--lr", type=float, default=5e-6, help="Learning rate for DPO")
+    parser.add_argument("--lr", type=float, default=2e-6, help="Learning rate for DPO")
     parser.add_argument("--batch_size", type=int, default=2)
     parser.add_argument("--gradient_accumulation_steps", type=int, default=8)
     parser.add_argument("--epochs", type=int, default=3)
@@ -126,9 +127,9 @@ def main():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max_samples", type=int, default=None)
     parser.add_argument("--use_peft", action="store_true", default=True)
-    parser.add_argument("--lora_r", type=int, default=16)
-    parser.add_argument("--lora_alpha", type=int, default=32)
-    parser.add_argument("--lora_dropout", type=float, default=0.05)
+    parser.add_argument("--lora_r", type=int, default=8)
+    parser.add_argument("--lora_alpha", type=int, default=16)
+    parser.add_argument("--lora_dropout", type=float, default=0.10)
     args = parser.parse_args()
 
     set_seed(args.seed)
@@ -205,7 +206,10 @@ def main():
         lr_scheduler_type="cosine",
         logging_steps=5,
         eval_strategy="epoch" if eval_ds else "no",
-        save_strategy="epoch",
+        save_strategy="epoch" if eval_ds else "no",
+        load_best_model_at_end=True if eval_ds else False,
+        metric_for_best_model="eval_loss" if eval_ds else None,
+        greater_is_better=False,
         save_total_limit=2,
         bf16=(torch_dtype == torch.bfloat16),
         fp16=(torch_dtype == torch.float16),
@@ -214,6 +218,7 @@ def main():
     )
 
     # 5. DPOTrainer Initialization
+    callbacks = [EarlyStoppingCallback(early_stopping_patience=1)] if eval_ds else []
     trainer = DPOTrainer(
         model=model,
         ref_model=None,  # PEFT automatically handles reference disabling (0 extra VRAM)
@@ -222,6 +227,7 @@ def main():
         processing_class=tokenizer,
         peft_config=peft_config,
         args=dpo_config,
+        callbacks=callbacks,
     )
 
     print("\n" + "=" * 60)
