@@ -132,7 +132,12 @@ class CompositeRewardEvaluator:
 
         # 4. Load SBERT Model
         logger.info(f"Loading SBERT model for semantic evaluation: {sbert_model_name}")
-        self.sbert_model = SentenceTransformer(sbert_model_name, device=self.device)
+        self.sbert_model = SentenceTransformer(sbert_model_name, trust_remote_code=True, device=self.device)
+        if "jina" in sbert_model_name.lower():
+            # Align Jina context window directly with reward_max_seq_len to prevent OOM
+            target_seq_len = max(self.max_seq_len, 256)
+            self.sbert_model.max_seq_length = min(target_seq_len, 1024)
+            logger.info(f"Set Jina SBERT max_seq_length to {self.sbert_model.max_seq_length} (aligned with max_target_len)")
 
     def predict_simplicity_scores(self, texts: List[str]) -> np.ndarray:
         scores = []
@@ -149,9 +154,10 @@ class CompositeRewardEvaluator:
         return np.array(scores)
 
     def predict_semantic_similarity(self, source_texts: List[str], candidate_texts: List[str]) -> np.ndarray:
-        emb_src = self.sbert_model.encode(source_texts, convert_to_tensor=True, show_progress_bar=False)
-        emb_cand = self.sbert_model.encode(candidate_texts, convert_to_tensor=True, show_progress_bar=False)
-        cosine_sims = util.cos_sim(emb_src, emb_cand).diagonal().cpu().numpy()
+        with torch.inference_mode():
+            emb_src = self.sbert_model.encode(source_texts, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
+            emb_cand = self.sbert_model.encode(candidate_texts, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
+            cosine_sims = util.cos_sim(emb_src, emb_cand).diagonal().cpu().numpy()
         return cosine_sims
 
     def compute_rewards(

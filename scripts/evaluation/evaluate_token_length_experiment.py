@@ -281,20 +281,21 @@ class TokenLengthEvaluator:
     ):
         self.device = torch.device(device)
         self.reward_max_seq_len = reward_max_seq_len
-
         # Load SBERT
         print(f"Lade SBERT: {sbert_model_name}")
-        self.sbert = SentenceTransformer(sbert_model_name, device=self.device)
+        self.sbert = SentenceTransformer(sbert_model_name, trust_remote_code=True, device=self.device)
+        if "jina" in sbert_model_name.lower():
+            self.sbert.max_seq_length = min(self.reward_max_seq_len, 1024)
+            print(f"Jina SBERT max_seq_length gesetzt auf: {self.sbert.max_seq_length}")
 
         # Load BiLSTM Simplicity Model
         print(f"Lade Simplicity Regressor: {reward_model_path}")
         with open(reward_vocab_path, "r", encoding="utf-8") as f:
-            vocab_data = json.load(f)
-            self.stoi = vocab_data.get("stoi", vocab_data)
-
+            self.stoi = json.load(f)
         self.unk_idx = self.stoi.get("<unk>") or self.stoi.get("<UNK>") or 1
-        self.bilstm = BiLSTMRegressor(vocab_size=len(self.stoi), embed_dim=128, hidden_dim=128).to(self.device)
-        self.bilstm.load_state_dict(torch.load(reward_model_path, map_location=self.device))
+
+        self.bilstm = BiLSTMRegressor(vocab_size=len(self.stoi)).to(self.device)
+        self.bilstm.load_state_dict(torch.load(reward_model_path, map_location=self.device, weights_only=True))
         self.bilstm.eval()
 
         self.nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer"])
@@ -302,7 +303,7 @@ class TokenLengthEvaluator:
     def predict_simplicity(self, texts: List[str]) -> np.ndarray:
         scores = []
         for text in texts:
-            doc = self.nlp(text)
+            doc = self.nlp(str(text or ""))
             tokens = [t.text.lower() for t in doc if not t.is_space]
             indices = [self.stoi.get(t, self.unk_idx) for t in tokens[:self.reward_max_seq_len]]
             if len(indices) == 0:
@@ -314,9 +315,10 @@ class TokenLengthEvaluator:
         return np.array(scores)
 
     def predict_semantic_sim(self, texts_a: List[str], texts_b: List[str]) -> np.ndarray:
-        emb_a = self.sbert.encode(texts_a, convert_to_tensor=True, show_progress_bar=False)
-        emb_b = self.sbert.encode(texts_b, convert_to_tensor=True, show_progress_bar=False)
-        cos_sims = util.cos_sim(emb_a, emb_b).diagonal().cpu().numpy()
+        with torch.inference_mode():
+            emb_a = self.sbert.encode(texts_a, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
+            emb_b = self.sbert.encode(texts_b, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
+            cos_sims = util.cos_sim(emb_a, emb_b).diagonal().cpu().numpy()
         return cos_sims
 
     def evaluate_generation(
@@ -482,6 +484,7 @@ def main():
     parser.add_argument("--reward_model_path", default="results/models/token_length_exp/bilstm_mixup_regression_500.pt")
     parser.add_argument("--reward_vocab_path", default="data/token_length_exp/mixup_vocab_500.json")
     parser.add_argument("--prompt_prefix", default="", help="Prompt prefix for Seq2Seq inference (default: empty)")
+    parser.add_argument("--sbert_model_name", default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2", help="SentenceTransformer model name")
     parser.add_argument("--output_summary", default="results/evaluation/token_length_comparison_summary.csv")
     parser.add_argument("--output_details", default="results/evaluation/token_length_comparison_details.csv")
     parser.add_argument("--output_metric_summary", default="results/evaluation/token_length_metric_comparison.csv")
@@ -560,6 +563,7 @@ def main():
         reward_model_path=rm_path,
         reward_vocab_path=rv_path,
         reward_max_seq_len=1000,
+        sbert_model_name=args.sbert_model_name,
         device=device,
     )
 
@@ -571,6 +575,9 @@ def main():
         ("results/models/token_length_exp/dpo_len256", 256, 256),
         ("results/models/token_length_exp/dpo_len500", 500, 500),
         ("results/models/token_length_exp/dpo_len1000", 1000, 1000),
+        ("results/models/token_length_jina_exp/dpo_len256_jina", 256, 256),
+        ("results/models/token_length_jina_exp/dpo_len500_jina", 500, 500),
+        ("results/models/token_length_jina_exp/dpo_len1000_jina", 1000, 1000),
     ]
 
     summaries = []

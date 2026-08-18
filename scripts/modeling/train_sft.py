@@ -90,6 +90,7 @@ parser.add_argument('--lora_dropout', type=float, default=0.05, help='LoRA dropo
 parser.add_argument('--reward_model_path', default=None)
 parser.add_argument('--reward_vocab_path', default=None)
 parser.add_argument('--reward_max_seq_len', type=int, default=None, help='Max token length for reward model evaluation (defaults to max_target_len)')
+parser.add_argument('--sbert_model_name', default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2", help='SentenceTransformer model name')
 parser.add_argument('--w_style', type=float, default=0.5)
 parser.add_argument('--w_sem', type=float, default=0.5)
 parser.add_argument('--resume_from_checkpoint', action='store_true', default=False, help='Resume training from existing output_dir checkpoint')
@@ -119,6 +120,7 @@ LORA_DROPOUT = args.lora_dropout
 REWARD_MODEL_PATH = args.reward_model_path
 REWARD_VOCAB_PATH = args.reward_vocab_path
 REWARD_MAX_SEQ_LEN = args.reward_max_seq_len if args.reward_max_seq_len is not None else MAX_TARGET_LEN
+SBERT_MODEL_NAME = args.sbert_model_name
 W_STYLE = args.w_style
 W_SEM = args.w_sem
 
@@ -424,8 +426,9 @@ else:
                 scores.append(score)
             return np.array(scores)
 
-        SBERT_MODEL_NAME = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
-        sbert_model = SentenceTransformer(SBERT_MODEL_NAME, device="cpu")
+        sbert_model = SentenceTransformer(SBERT_MODEL_NAME, trust_remote_code=True, device="cpu")
+        if "jina" in SBERT_MODEL_NAME.lower():
+            sbert_model.max_seq_length = 8192
 
         def predict_semantic_similarity(source_texts, generated_texts):
             emb_src = sbert_model.encode(source_texts, convert_to_tensor=True)
