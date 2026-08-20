@@ -16,13 +16,13 @@ date
 python scripts/modeling/decoder_only/generate_dpo_dataset_decoder_only.py \
     --corpus_path "data/corpus/corpus_master_with_steps.json" \
     --sft_model_path "results/models/decoder_only/sft" \
-    --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --base_model_name "Qwen/Qwen2.5-1.5B-Instruct" \
     --reward_model_path "results/models/token_length_exp/bilstm_mixup_regression_1000.pt" \
     --reward_vocab_path "data/token_length_exp/mixup_vocab_1000.json" \
     --sbert_model_name "jinaai/jina-embeddings-v2-base-de" \
     --w_style 0.7 \
     --w_sem 0.3 \
-    --max_source_len 1000 \
+    --max_source_len 2048 \
     --max_target_len 1000 \
     --output_file "data/dpo/dpo_preference_pairs_decoder_only.jsonl" \
     --num_candidates 4 \

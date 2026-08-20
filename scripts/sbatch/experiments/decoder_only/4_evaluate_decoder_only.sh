@@ -20,9 +20,9 @@ echo "Evaluating SFT Baseline..."
 python scripts/modeling/decoder_only/evaluate_decoder_only.py \
     --test_data_path "data/corpus/corpus_master_with_steps.json" \
     --model_path "results/models/decoder_only/sft" \
-    --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --base_model_name "Qwen/Qwen2.5-1.5B-Instruct" \
     --sbert_model "jinaai/jina-embeddings-v2-base-de" \
-    --max_target_len 1000 \
+    --max_target_len 1500 \
     --output_file "results/evaluation/eval_sft_decoder_only.csv" \
     --max_samples 100
 
@@ -31,9 +31,9 @@ echo "Evaluating DPO Optimized Model..."
 python scripts/modeling/decoder_only/evaluate_decoder_only.py \
     --test_data_path "data/corpus/corpus_master_with_steps.json" \
     --model_path "results/models/decoder_only/dpo" \
-    --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --base_model_name "Qwen/Qwen2.5-1.5B-Instruct" \
     --sbert_model "jinaai/jina-embeddings-v2-base-de" \
-    --max_target_len 1000 \
+    --max_target_len 1500 \
     --output_file "results/evaluation/eval_dpo_decoder_only.csv" \
     --max_samples 100
 

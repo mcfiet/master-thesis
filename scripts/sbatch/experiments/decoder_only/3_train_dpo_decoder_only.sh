@@ -16,7 +16,7 @@ date
 python scripts/modeling/decoder_only/train_dpo_decoder_only.py \
     --dpo_train_file "data/dpo/dpo_preference_pairs_decoder_only.jsonl" \
     --sft_model_path "results/models/decoder_only/sft" \
-    --base_model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --base_model_name "Qwen/Qwen2.5-1.5B-Instruct" \
     --output_dir "results/models/decoder_only/dpo" \
     --beta 0.1 \
     --lr 2e-6 \
@@ -24,7 +24,7 @@ python scripts/modeling/decoder_only/train_dpo_decoder_only.py \
     --gradient_accumulation_steps 8 \
     --epochs 3 \
     --warmup_ratio 0.10 \
-    --max_length 1024 \
+    --max_length 2048 \
     --use_peft \
     --lora_r 8 \
     --lora_alpha 16 \

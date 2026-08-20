@@ -21,6 +21,7 @@ import os
 import sys
 import json
 import random
+import re
 import datetime
 import argparse
 from typing import List, Dict, Any
@@ -126,10 +127,10 @@ def main():
     parser.add_argument("--corpus_path", default="data/corpus/corpus_master_with_steps.json", help="Path to corpus file")
     parser.add_argument("--lh_dataset_path", default=None, help="Optional additional lebenshilfe dataset path")
     parser.add_argument("--output_dir", default="results/models/decoder_only/sft", help="Output directory for model checkpoint")
-    parser.add_argument("--model_name", default="Qwen/Qwen2.5-7B-Instruct", help="Base decoder-only model identifier")
+    parser.add_argument("--model_name", default="Qwen/Qwen2.5-1.5B-Instruct", help="Base decoder-only model identifier")
     parser.add_argument("--min_sim", type=float, default=0.70)
     parser.add_argument("--max_sim", type=float, default=1.0)
-    parser.add_argument("--max_seq_length", type=int, default=1024, help="Maximum sequence length")
+    parser.add_argument("--max_seq_length", type=int, default=2048, help="Maximum sequence length")
     parser.add_argument("--batch_size", type=int, default=4, help="Per-device train batch size")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=4)
     parser.add_argument("--epochs", type=int, default=3)

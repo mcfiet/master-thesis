@@ -15,11 +15,11 @@ date
 
 python scripts/modeling/decoder_only/train_sft_decoder_only.py \
     --corpus_path "data/corpus/corpus_master_with_steps.json" \
-    --model_name "Qwen/Qwen2.5-7B-Instruct" \
+    --model_name "Qwen/Qwen2.5-1.5B-Instruct" \
     --output_dir "results/models/decoder_only/sft" \
     --min_sim 0.70 \
     --max_sim 0.98 \
-    --max_seq_length 1024 \
+    --max_seq_length 2048 \
     --batch_size 4 \
     --gradient_accumulation_steps 4 \
     --epochs 3 \
