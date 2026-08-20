@@ -126,6 +126,7 @@ def parse_args():
     parser.add_argument("--max_target_len", type=int, default=256, help="Max target completion length (tokens).")
 
     # Hyperparameters
+    parser.add_argument("--loss_type", type=str, default="mean", choices=["mean", "sum"], help="DPO loss reduction: 'mean' (length-normalized per-token log-prob, prevents length exploitation) or 'sum' (classic unnormalized).")
     parser.add_argument("--beta", type=float, default=0.1, help="DPO temperature parameter beta (default: 0.1).")
     parser.add_argument("--learning_rate", "--lr", dest="lr", type=float, default=5e-6, help="Learning rate (default: 5e-6).")
     parser.add_argument("--batch_size", type=int, default=2, help="Per-device batch size (default: 2).")
@@ -242,12 +243,17 @@ class DPOPreferenceDataset(Dataset):
 # ==============================================================================
 # EXACT SEQ2SEQ DPO LOG-LIKELIHOOD & LOSS COMPUTATION
 # ==============================================================================
-def get_seq2seq_logps(logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
+def get_seq2seq_logps(
+    logits: torch.Tensor,
+    labels: torch.Tensor,
+    loss_type: str = "mean"
+) -> torch.Tensor:
     """
     Computes exact sequence-level log-probabilities for Seq2Seq target tokens.
     Args:
         logits: (batch_size, seq_len, vocab_size)
         labels: (batch_size, seq_len) with -100 for pad tokens
+        loss_type: 'mean' (length-normalized, per-token logp to prevent length exploitation) or 'sum' (classic)
     Returns:
         log_probabilities per sequence in batch: (batch_size,)
     """
@@ -260,14 +266,19 @@ def get_seq2seq_logps(logits: torch.Tensor, labels: torch.Tensor) -> torch.Tenso
     per_token_logps = torch.gather(log_probs, dim=-1, index=labels_clamped.unsqueeze(-1)).squeeze(-1)
     
     # Sum log probabilities over non-padding tokens
-    seq_logps = (per_token_logps * loss_mask).sum(dim=-1)
-    return seq_logps
+    sum_logps = (per_token_logps * loss_mask).sum(dim=-1)
+
+    if loss_type == "mean":
+        token_counts = loss_mask.sum(dim=-1).clamp(min=1)
+        return sum_logps / token_counts
+    return sum_logps
 
 def compute_dpo_step(
     model: nn.Module,
     batch: Dict[str, torch.Tensor],
     device: torch.device,
     beta: float = 0.1,
+    loss_type: str = "mean",
     is_peft: bool = True,
     ref_model: nn.Module = None,
 ) -> Tuple[torch.Tensor, float, float, float]:
@@ -284,8 +295,8 @@ def compute_dpo_step(
     policy_chosen_out = model(input_ids=prompt_ids, attention_mask=prompt_mask, labels=chosen_labels)
     policy_rejected_out = model(input_ids=prompt_ids, attention_mask=prompt_mask, labels=rejected_labels)
 
-    policy_chosen_logps = get_seq2seq_logps(policy_chosen_out.logits, chosen_labels)
-    policy_rejected_logps = get_seq2seq_logps(policy_rejected_out.logits, rejected_labels)
+    policy_chosen_logps = get_seq2seq_logps(policy_chosen_out.logits, chosen_labels, loss_type=loss_type)
+    policy_rejected_logps = get_seq2seq_logps(policy_rejected_out.logits, rejected_labels, loss_type=loss_type)
 
     # 2. Forward Pass with Reference Model π_ref
     with torch.no_grad():
@@ -294,13 +305,13 @@ def compute_dpo_step(
             with model.disable_adapter():
                 ref_chosen_out = model(input_ids=prompt_ids, attention_mask=prompt_mask, labels=chosen_labels)
                 ref_rejected_out = model(input_ids=prompt_ids, attention_mask=prompt_mask, labels=rejected_labels)
-                ref_chosen_logps = get_seq2seq_logps(ref_chosen_out.logits, chosen_labels)
-                ref_rejected_logps = get_seq2seq_logps(ref_rejected_out.logits, rejected_labels)
+                ref_chosen_logps = get_seq2seq_logps(ref_chosen_out.logits, chosen_labels, loss_type=loss_type)
+                ref_rejected_logps = get_seq2seq_logps(ref_rejected_out.logits, rejected_labels, loss_type=loss_type)
         else:
             ref_chosen_out = ref_model(input_ids=prompt_ids, attention_mask=prompt_mask, labels=chosen_labels)
             ref_rejected_out = ref_model(input_ids=prompt_ids, attention_mask=prompt_mask, labels=rejected_labels)
-            ref_chosen_logps = get_seq2seq_logps(ref_chosen_out.logits, chosen_labels)
-            ref_rejected_logps = get_seq2seq_logps(ref_rejected_out.logits, rejected_labels)
+            ref_chosen_logps = get_seq2seq_logps(ref_chosen_out.logits, chosen_labels, loss_type=loss_type)
+            ref_rejected_logps = get_seq2seq_logps(ref_rejected_out.logits, rejected_labels, loss_type=loss_type)
 
     # 3. Compute DPO Loss & Implicit Rewards
     pi_logratios = policy_chosen_logps - policy_rejected_logps
@@ -327,7 +338,8 @@ def evaluate_dpo(
     dataloader: DataLoader,
     device: torch.device,
     beta: float,
-    is_peft: bool,
+    loss_type: str = "mean",
+    is_peft: bool = True,
     ref_model: nn.Module = None,
 ) -> Tuple[float, float, float]:
     """
@@ -349,6 +361,7 @@ def evaluate_dpo(
                 batch=batch,
                 device=device,
                 beta=beta,
+                loss_type=loss_type,
                 is_peft=is_peft,
                 ref_model=ref_model,
             )
@@ -471,6 +484,7 @@ def main():
                     batch=batch,
                     device=device,
                     beta=args.beta,
+                    loss_type=args.loss_type,
                     is_peft=args.use_peft,
                     ref_model=ref_model,
                 )
@@ -512,6 +526,7 @@ def main():
                 dataloader=val_loader,
                 device=device,
                 beta=args.beta,
+                loss_type=args.loss_type,
                 is_peft=args.use_peft,
                 ref_model=ref_model,
             )
