@@ -234,13 +234,25 @@ class MetricWeightsEvaluator:
 
         # Load Model
         config = AutoConfig.from_pretrained(base_model_name)
+        dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+
+        def _load_base():
+            for kwargs in [{"use_safetensors": True}, {"use_safetensors": False, "weights_only": False}, {}]:
+                try:
+                    return AutoModelForSeq2SeqLM.from_pretrained(base_model_name, config=config, torch_dtype=dtype, **kwargs)
+                except Exception:
+                    continue
+            return AutoModelForSeq2SeqLM.from_pretrained(base_model_name, config=config, torch_dtype=dtype)
+
         if os.path.isdir(model_name_or_path) and os.path.exists(os.path.join(model_name_or_path, "adapter_config.json")):
-            base_model = AutoModelForSeq2SeqLM.from_pretrained(base_model_name, config=config, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
+            base_model = _load_base()
             model = PeftModel.from_pretrained(base_model, model_name_or_path)
             model = model.to(self.device)
         else:
-            model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, config=config, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
-            model = model.to(self.device)
+            try:
+                model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, config=config, torch_dtype=dtype, use_safetensors=True).to(self.device)
+            except Exception:
+                model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, config=config, torch_dtype=dtype, weights_only=False).to(self.device)
 
         model.eval()
 
