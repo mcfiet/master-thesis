@@ -228,7 +228,12 @@ class MetricWeightsEvaluator:
         print(f"==================================================================")
 
         # Load Tokenizer
-        tokenizer = AutoTokenizer.from_pretrained(model_name_or_path if os.path.exists(os.path.join(model_name_or_path, "tokenizer_config.json")) else base_model_name)
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_name_or_path if os.path.exists(os.path.join(model_name_or_path, "tokenizer_config.json")) else base_model_name,
+            use_fast=False
+        )
+        tokenizer.src_lang = "de_DE"
+        tokenizer.tgt_lang = "de_DE"
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
 
@@ -244,15 +249,44 @@ class MetricWeightsEvaluator:
                     continue
             return AutoModelForSeq2SeqLM.from_pretrained(base_model_name, config=config, torch_dtype=dtype)
 
-        if os.path.isdir(model_name_or_path) and os.path.exists(os.path.join(model_name_or_path, "adapter_config.json")):
+        has_weights = (
+            os.path.exists(os.path.join(model_name_or_path, "model.safetensors")) or
+            os.path.exists(os.path.join(model_name_or_path, "pytorch_model.bin"))
+        )
+        has_adapter = os.path.exists(os.path.join(model_name_or_path, "adapter_config.json"))
+
+        print(f"[MODELL-LADEN] {display_name}")
+        print(f"  -> Pfad: {model_name_or_path}")
+
+        if has_weights:
+            weight_file = "model.safetensors" if os.path.exists(os.path.join(model_name_or_path, "model.safetensors")) else "pytorch_model.bin"
+            size_mb = os.path.getsize(os.path.join(model_name_or_path, weight_file)) / (1024 * 1024)
+            print(f"  -> Lade-Modus: Vollstaendig fusioniertes Standalone-Modell ({weight_file}, {size_mb:.1f} MB)")
+            try:
+                model = AutoModelForSeq2SeqLM.from_pretrained(
+                    model_name_or_path, torch_dtype=dtype, use_safetensors=True
+                ).to(self.device)
+            except Exception:
+                model = AutoModelForSeq2SeqLM.from_pretrained(
+                    model_name_or_path, torch_dtype=dtype, weights_only=False
+                ).to(self.device)
+        elif has_adapter:
+            print(f"  -> Lade-Modus: LoRA-Adapter auf Basismodell '{base_model_name}' (adapter_config.json)")
             base_model = _load_base()
             model = PeftModel.from_pretrained(base_model, model_name_or_path)
             model = model.to(self.device)
         else:
+            print(f"  -> Lade-Modus: Standard Pretrained Seq2Seq Modell")
             try:
-                model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, config=config, torch_dtype=dtype, use_safetensors=True).to(self.device)
+                model = AutoModelForSeq2SeqLM.from_pretrained(
+                    model_name_or_path, config=config, torch_dtype=dtype, use_safetensors=True
+                ).to(self.device)
             except Exception:
-                model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, config=config, torch_dtype=dtype, weights_only=False).to(self.device)
+                model = AutoModelForSeq2SeqLM.from_pretrained(
+                    model_name_or_path, config=config, torch_dtype=dtype, weights_only=False
+                ).to(self.device)
+
+        print(f"  -> Instanziierte Modell-Klasse: {model.__class__.__name__} ({dtype})\n")
 
         model.eval()
 

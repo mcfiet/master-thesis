@@ -412,16 +412,33 @@ def main():
         print("[SPRACHCODE-KONTROLLE] Kein multilingualer Tokenizer erkannt (Standard Monolingual).")
         print("=" * 80)
 
-    # Load Seq2Seq Model
-    model = AutoModelForSeq2SeqLM.from_pretrained(
-        args.model_name_or_path,
-        torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
-    ).to(device)
+    # Load Seq2Seq Model with Robust SFT Adapter Merging
+    dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+    adapter_cfg_file = os.path.join(args.model_name_or_path, "adapter_config.json")
+    
+    if os.path.exists(adapter_cfg_file):
+        with open(adapter_cfg_file, "r", encoding="utf-8") as f:
+            acfg = json.load(f)
+        base_model_id = acfg.get("base_model_name_or_path", "facebook/mbart-large-50")
+        print(f"Lade Basismodell '{base_model_id}' fuer SFT-Adapter...")
+        base_model = AutoModelForSeq2SeqLM.from_pretrained(base_model_id, torch_dtype=dtype)
+        
+        print(f"Lade und verschmelze (merge_and_unload) SFT-LoRA-Adapter aus: {args.model_name_or_path}...")
+        sft_peft_model = PeftModel.from_pretrained(base_model, args.model_name_or_path)
+        base_model = sft_peft_model.merge_and_unload()
+        print("[ERFOLG] SFT-Adapter erfolgreich in Basisgewichte integriert (SFT ist nun die Basis fuer DPO)!")
+        model = base_model.to(device)
+    else:
+        print(f"Lade regulaeres Seq2Seq-Modell direkt aus: {args.model_name_or_path}...")
+        model = AutoModelForSeq2SeqLM.from_pretrained(
+            args.model_name_or_path,
+            torch_dtype=dtype,
+        ).to(device)
 
-    # LoRA / PEFT Configuration
+    # LoRA / PEFT Configuration for DPO
     ref_model = None
     if args.use_peft:
-        print(f"Konfiguriere LoRA für Seq2Seq (r={args.lora_r}, alpha={args.lora_alpha}, dropout={args.lora_dropout})...")
+        print(f"Konfiguriere DPO-LoRA auf Basis des SFT-Modells (r={args.lora_r}, alpha={args.lora_alpha}, dropout={args.lora_dropout})...")
         peft_config = LoraConfig(
             task_type=TaskType.SEQ_2_SEQ_LM,
             r=args.lora_r,
@@ -481,6 +498,23 @@ def main():
 
     best_val_loss = float("inf")
     patience_counter = 0
+
+    def _save_checkpoint(m, path, tok):
+        os.makedirs(path, exist_ok=True)
+        if hasattr(m, "merge_and_unload"):
+            try:
+                import copy
+                temp_m = copy.deepcopy(m)
+                merged = temp_m.merge_and_unload()
+                merged.save_pretrained(path)
+                del temp_m, merged
+                print(f"Modell fusioniert und gespeichert nach: {path}")
+            except Exception as e:
+                print(f"Hinweis beim Speichern des fusionierten Modells: {e}")
+                m.save_pretrained(path)
+        else:
+            m.save_pretrained(path)
+        tok.save_pretrained(path)
 
     for epoch in range(1, args.epochs + 1):
         model.train()
@@ -554,8 +588,7 @@ def main():
                 best_val_loss = avg_val_loss
                 patience_counter = 0
                 print(f"Neuer bester Val Loss ({best_val_loss:.4f})! Speichere Modell nach {args.output_dir}...")
-                model.save_pretrained(args.output_dir)
-                tokenizer.save_pretrained(args.output_dir)
+                _save_checkpoint(model, args.output_dir, tokenizer)
             else:
                 patience_counter += 1
                 print(f"Keine Verbesserung (Patience: {patience_counter}/{args.patience})")
@@ -564,8 +597,7 @@ def main():
                     break
         else:
             # Save final checkpoint if no validation set is used
-            model.save_pretrained(args.output_dir)
-            tokenizer.save_pretrained(args.output_dir)
+            _save_checkpoint(model, args.output_dir, tokenizer)
 
     print("\n" + "=" * 80)
     print(f"DPO Training erfolgreich beendet! Modell gespeichert in: {args.output_dir}")

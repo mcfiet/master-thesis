@@ -19,6 +19,7 @@ srun python scripts/modeling/train_dpo.py \
     --train_file "data/metric_weights_exp/dpo_pairs_w07_w03.jsonl" \
     --eval_file "data/metric_weights_exp/dpo_pairs_w07_w03_eval.jsonl" \
     --output_dir "results/models/metric_weights_exp/dpo_w07_w03" \
+    --loss_type "mean" \
     --use_peft \
     --lora_r 16 \
     --lora_alpha 32 \

@@ -43,6 +43,7 @@ from transformers import (
     PreTrainedTokenizerBase,
     set_seed,
 )
+from peft import PeftModel
 
 # ---------------------------------------------------------------------------
 # Setup Logging
@@ -298,11 +299,47 @@ def load_sft_model_and_tokenizer(
             logger.warning(f"Could not load tokenizer directly from {model_name_or_path}. Falling back to base_model_name: {base_model_name}")
             tokenizer = AutoTokenizer.from_pretrained(base_model_name, use_fast=False)
 
-    # Load Model
+    # Load Model with PEFT support
+    has_weights = (
+        os.path.exists(os.path.join(model_name_or_path, "model.safetensors")) or
+        os.path.exists(os.path.join(model_name_or_path, "pytorch_model.bin"))
+    )
+    has_adapter = os.path.exists(os.path.join(model_name_or_path, "adapter_config.json"))
+
     if detected_seq2seq:
-        model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, torch_dtype=dtype)
+        if has_weights:
+            try:
+                model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, torch_dtype=dtype, use_safetensors=True)
+            except Exception:
+                model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, torch_dtype=dtype, weights_only=False)
+        elif has_adapter:
+            logger.info(f"Loading SFT PEFT Adapter from {model_name_or_path} onto {base_model_name} and merging weights...")
+            try:
+                base_m = AutoModelForSeq2SeqLM.from_pretrained(base_model_name, torch_dtype=dtype, use_safetensors=True)
+            except Exception:
+                base_m = AutoModelForSeq2SeqLM.from_pretrained(base_model_name, torch_dtype=dtype, weights_only=False)
+            peft_m = PeftModel.from_pretrained(base_m, model_name_or_path)
+            model = peft_m.merge_and_unload()
+            logger.info("Successfully merged SFT LoRA adapter into base Seq2Seq model!")
+        else:
+            model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, torch_dtype=dtype)
     else:
-        model = AutoModelForCausalLM.from_pretrained(model_name_or_path, torch_dtype=dtype)
+        if has_weights:
+            try:
+                model = AutoModelForCausalLM.from_pretrained(model_name_or_path, torch_dtype=dtype, use_safetensors=True)
+            except Exception:
+                model = AutoModelForCausalLM.from_pretrained(model_name_or_path, torch_dtype=dtype, weights_only=False)
+        elif has_adapter:
+            logger.info(f"Loading SFT PEFT Adapter from {model_name_or_path} onto {base_model_name} and merging weights...")
+            try:
+                base_m = AutoModelForCausalLM.from_pretrained(base_model_name, torch_dtype=dtype, use_safetensors=True)
+            except Exception:
+                base_m = AutoModelForCausalLM.from_pretrained(base_model_name, torch_dtype=dtype, weights_only=False)
+            peft_m = PeftModel.from_pretrained(base_m, model_name_or_path)
+            model = peft_m.merge_and_unload()
+            logger.info("Successfully merged SFT LoRA adapter into base Causal LM model!")
+        else:
+            model = AutoModelForCausalLM.from_pretrained(model_name_or_path, torch_dtype=dtype)
 
     if tokenizer.pad_token is None:
         if tokenizer.eos_token is not None:
@@ -467,14 +504,8 @@ def parse_args() -> argparse.Namespace:
     sft_group.add_argument(
         "--num_candidates",
         type=int,
-        default=3,
-        help="Number of candidate simplifications to generate per text (default: 3).",
-    )
-    sft_group.add_argument(
-        "--include_ground_truth",
-        action="store_true",
-        default=True,
-        help="Include the ground-truth ls_text from the corpus as an additional candidate for evaluation.",
+        default=4,
+        help="Number of candidate simplifications to generate per text (default: 4).",
     )
     sft_group.add_argument(
         "--batch_size",
@@ -657,12 +688,6 @@ def main():
 
         for item, as_text, prompt, cands in zip(batch_items, as_texts, prompts, generated_candidates):
             all_cands = list(set([c for c in cands if len(c) > 0]))
-
-            # Optionally include ground-truth LS text
-            if args.include_ground_truth:
-                gt_ls = str(item.get("ls_text") or "").strip()
-                if gt_ls and gt_ls not in all_cands:
-                    all_cands.append(gt_ls)
 
             if len(all_cands) < 2:
                 dropped_identical += 1
