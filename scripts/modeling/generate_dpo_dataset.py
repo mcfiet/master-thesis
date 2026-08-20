@@ -311,9 +311,10 @@ def load_sft_model_and_tokenizer(
             tokenizer.add_special_tokens({"pad_token": "[PAD]"})
 
     check_name = str(model_name_or_path).lower()
-    if "mbart" in check_name or "facebook/mbart" in str(getattr(model.config, "_name_or_path", "")).lower():
+    if hasattr(tokenizer, "src_lang") or hasattr(tokenizer, "lang_code_to_id") or "mbart" in check_name or "facebook/mbart" in str(getattr(model.config, "_name_or_path", "")).lower():
         tokenizer.src_lang = "de_DE"
         tokenizer.tgt_lang = "de_DE"
+        logger.info(f"Configured tokenizer with src_lang='{tokenizer.src_lang}' and tgt_lang='{tokenizer.tgt_lang}'")
 
     model = model.to(device)
     model.eval()

@@ -395,9 +395,22 @@ def main():
     except Exception:
         tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path, use_fast=True)
 
-    if "mbart" in args.model_name_or_path.lower():
+    if hasattr(tokenizer, "src_lang") or hasattr(tokenizer, "lang_code_to_id") or "mbart" in str(getattr(tokenizer, "name_or_path", "")).lower() or "mbart" in args.model_name_or_path.lower():
         tokenizer.src_lang = "de_DE"
         tokenizer.tgt_lang = "de_DE"
+        print("=" * 80)
+        print("[SPRACHCODE-KONTROLLE] Tokenizer für mBART erfolgreich konfiguriert:")
+        print(f"  -> src_lang: {tokenizer.src_lang}")
+        print(f"  -> tgt_lang: {tokenizer.tgt_lang}")
+        if hasattr(tokenizer, "lang_code_to_id"):
+            print(f"  -> de_DE Token-ID: {tokenizer.lang_code_to_id.get('de_DE')}")
+        test_toks = tokenizer(text_target="Test")["input_ids"]
+        print(f"  -> Test-Target Enkodierung (Token IDs): {test_toks}")
+        print("=" * 80)
+    else:
+        print("=" * 80)
+        print("[SPRACHCODE-KONTROLLE] Kein multilingualer Tokenizer erkannt (Standard Monolingual).")
+        print("=" * 80)
 
     # Load Seq2Seq Model
     model = AutoModelForSeq2SeqLM.from_pretrained(
