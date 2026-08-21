@@ -5,12 +5,15 @@ Progressive Temperature Ladder DPO Dataset Generator (500 Tokens)
 =============================================================================
 Generates high-contrast DPO preference pairs (prompt, chosen, rejected) strictly
 from SFT model generation without ground-truth reference texts:
-  1. Starts candidate sampling at a base temperature (e.g. T = 0.7).
-  2. Evaluates candidates using the 500-Token BiLSTM Regressor & SBERT.
-  3. If candidate pool margin (max_reward - min_reward) < min_score_margin (0.05),
-     escalates temperature through a ladder (0.7 -> 0.8 -> 0.9 -> 1.0) and
+  1. Uses no_repeat_ngram_size=3 and repetition_penalty=1.35 to completely
+     prevent decoder attractor loops and phrase repetitions.
+  2. Starts candidate sampling at a base temperature (e.g. T = 0.6).
+  3. Evaluates candidates using the 500-Token BiLSTM Regressor & SBERT.
+  4. If candidate pool margin (max_reward - min_reward) < min_score_margin (0.05),
+     escalates temperature through a ladder (0.6 -> 0.7 -> 0.8 -> 0.85) and
      samples additional candidates until the target margin is satisfied.
-  4. Exports train and validation splits to JSONL format.
+  5. Includes strict candidate hygiene (rejects fragments < 20 words, loops, echos).
+  6. Exports train and validation splits to JSONL format.
 =============================================================================
 """
 
@@ -204,7 +207,6 @@ def load_sft_model_and_tokenizer(
 ) -> Tuple[PreTrainedModel, PreTrainedTokenizerBase, bool]:
     logger.info(f"Loading SFT model/tokenizer from: {model_name_or_path}")
 
-    # Determine Seq2Seq architecture
     is_seq2seq = True
     try:
         cfg = AutoConfig.from_pretrained(model_name_or_path)
@@ -223,7 +225,6 @@ def load_sft_model_and_tokenizer(
 
     dtype = torch.float16 if device == "cuda" else torch.float32
 
-    # Check for weights/adapters
     has_adapter = os.path.exists(os.path.join(model_name_or_path, "adapter_config.json"))
 
     if is_seq2seq:
@@ -257,6 +258,44 @@ def load_sft_model_and_tokenizer(
 
 
 # ---------------------------------------------------------------------------
+# Candidate Hygiene & Quality Verification
+# ---------------------------------------------------------------------------
+def is_valid_candidate(candidate_text: str, source_text: str, min_words: int = 20) -> bool:
+    """
+    Ensures candidate is not a degenerative fragment, repetitive loop, or exact echo.
+    """
+    cand = candidate_text.strip()
+    if not cand:
+        return False
+
+    words = cand.split()
+    if len(words) < min_words or len(cand) < 80:
+        return False
+
+    # Check exact echo of source
+    if cand.lower() == source_text.strip().lower():
+        return False
+
+    # Trigram repetition check (catches attractor loops)
+    words_lower = [w.lower() for w in words]
+    if len(words_lower) >= 10:
+        trigrams = [tuple(words_lower[i : i + 3]) for i in range(len(words_lower) - 2)]
+        if len(trigrams) > 0:
+            unique_ratio = len(set(trigrams)) / len(trigrams)
+            if unique_ratio < 0.75:
+                return False
+
+    # Sentence repetition check
+    sents = [s.strip().lower() for s in cand.replace("\n", ".").split(".") if len(s.strip()) > 15]
+    if len(sents) >= 3:
+        repeated_sents = len(sents) - len(set(sents))
+        if repeated_sents >= 2:
+            return False
+
+    return True
+
+
+# ---------------------------------------------------------------------------
 # Candidate Generation Helper
 # ---------------------------------------------------------------------------
 def sample_candidates_batch(
@@ -268,6 +307,8 @@ def sample_candidates_batch(
     temperature: float,
     top_p: float = 0.92,
     top_k: int = 50,
+    repetition_penalty: float = 1.35,
+    no_repeat_ngram_size: int = 3,
     max_source_len: int = 500,
     max_target_len: int = 500,
     device: str = "cuda",
@@ -291,11 +332,14 @@ def sample_candidates_batch(
         "temperature": temperature,
         "top_p": top_p,
         "top_k": top_k,
-        "repetition_penalty": 1.2,
+        "repetition_penalty": repetition_penalty,
         "num_return_sequences": num_candidates,
         "pad_token_id": tokenizer.pad_token_id,
         "eos_token_id": tokenizer.eos_token_id,
     }
+
+    if no_repeat_ngram_size > 0:
+        gen_kwargs["no_repeat_ngram_size"] = no_repeat_ngram_size
 
     if is_seq2seq:
         gen_kwargs["max_length"] = max_target_len
@@ -385,8 +429,8 @@ def parse_args() -> argparse.Namespace:
         "--temperature_ladder",
         type=float,
         nargs="+",
-        default=[0.7, 0.8, 0.9, 1.0],
-        help="Progressive temperature ladder steps (default: 0.7 0.8 0.9 1.0).",
+        default=[0.6, 0.7, 0.8, 0.85],
+        help="Progressive temperature ladder steps (default: 0.6 0.7 0.8 0.85).",
     )
     parser.add_argument(
         "--candidates_per_step",
@@ -405,6 +449,18 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=0.05,
         help="Minimum required margin (chosen_score - rejected_score >= min_margin, default: 0.05).",
+    )
+    parser.add_argument(
+        "--repetition_penalty",
+        type=float,
+        default=1.35,
+        help="Repetition penalty parameter (default: 1.35).",
+    )
+    parser.add_argument(
+        "--no_repeat_ngram_size",
+        type=int,
+        default=3,
+        help="Block repetition of n-grams of this size (default: 3).",
     )
     parser.add_argument(
         "--top_p",
@@ -490,6 +546,7 @@ def main():
     device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
     logger.info(f"Active compute device: {device}")
     logger.info(f"Configured Temperature Ladder: {args.temperature_ladder}")
+    logger.info(f"Repetition Penalty: {args.repetition_penalty} | No-Repeat-Ngram: {args.no_repeat_ngram_size}")
     logger.info(f"Target Score Margin: >= {args.min_score_margin}")
 
     # 1. Load Corpus
@@ -520,7 +577,7 @@ def main():
     logger.info("Starting Progressive Temperature Ladder generation...")
     dpo_pairs: List[Dict[str, Any]] = []
     dropped_low_margin = 0
-    dropped_identical = 0
+    dropped_insufficient = 0
     temp_resolution_counts = {t: 0 for t in args.temperature_ladder}
 
     batch_size = args.batch_size
@@ -566,6 +623,8 @@ def main():
                 temperature=temp,
                 top_p=args.top_p,
                 top_k=args.top_k,
+                repetition_penalty=args.repetition_penalty,
+                no_repeat_ngram_size=args.no_repeat_ngram_size,
                 max_source_len=args.max_source_len,
                 max_target_len=args.max_target_len,
                 device=device,
@@ -576,11 +635,11 @@ def main():
                 state = batch_state[global_idx]
                 new_cands = sampled[idx_in_active]
 
-                # Hygiene filtering: no empty, no extreme fragments, no exact echo of input
+                # Hygiene filtering: no empty, no extreme fragments, no loops, no exact echo
                 clean_new = []
                 for c in new_cands:
                     c_clean = c.strip()
-                    if len(c_clean) >= 10 and c_clean != state["as_text"] and c_clean not in state["candidate_pool"]:
+                    if c_clean not in state["candidate_pool"] and is_valid_candidate(c_clean, state["as_text"]):
                         clean_new.append(c_clean)
 
                 if len(clean_new) > 0:
@@ -607,7 +666,7 @@ def main():
         for state in batch_state:
             pool = state["candidate_pool"]
             if len(pool) < 2:
-                dropped_identical += 1
+                dropped_insufficient += 1
                 continue
 
             # Rank all pooled candidates by total reward
@@ -620,7 +679,7 @@ def main():
             margin = chosen_score - rejected_score
 
             if chosen_cand == rejected_cand:
-                dropped_identical += 1
+                dropped_insufficient += 1
                 continue
 
             if margin < args.min_score_margin:
@@ -654,7 +713,7 @@ def main():
     logger.info(f"Total Input Prompts: {total_processed}")
     logger.info(f"Valid DPO Pairs Generated: {len(dpo_pairs)} ({len(dpo_pairs)/max(1, total_processed)*100:.1f}% retention)")
     logger.info(f"Dropped (Margin < {args.min_score_margin}): {dropped_low_margin}")
-    logger.info(f"Dropped (Identical/Insufficient): {dropped_identical}")
+    logger.info(f"Dropped (Identical/Insufficient/Fragments): {dropped_insufficient}")
     logger.info(f"Resolution Breakdown by Temperature:")
     for t in args.temperature_ladder:
         count = temp_resolution_counts.get(t, 0)

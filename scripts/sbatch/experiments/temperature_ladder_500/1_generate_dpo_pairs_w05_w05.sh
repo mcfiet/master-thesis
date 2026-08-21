@@ -24,9 +24,11 @@ srun python scripts/modeling/generate_dpo_dataset_ladder.py \
     --reward_model_path "results/models/token_length_exp/bilstm_mixup_regression_500.pt" \
     --reward_vocab_path "data/token_length_exp/mixup_vocab_500.json" \
     --sbert_model_name "sentence-transformers/paraphrase-multilingual-mpnet-base-v2" \
-    --temperature_ladder 0.7 0.8 0.9 1.0 \
+    --temperature_ladder 0.6 0.7 0.8 0.85 \
     --candidates_per_step 3 \
     --max_total_candidates 12 \
+    --repetition_penalty 1.35 \
+    --no_repeat_ngram_size 3 \
     --min_score_margin 0.05 \
     --w_style 0.5 \
     --w_sem 0.5 \

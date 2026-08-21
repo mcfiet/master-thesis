@@ -4,7 +4,7 @@
 # =============================================================================
 # Runs the full 500-token Temperature Ladder DPO pipeline sequentially:
 #   1. Prepares 10kGNAD corpus (uncapped / full dataset if desired)
-#   2. Generates DPO pairs with Progressive Temperature Ladder
+#   2. Generates DPO pairs with Progressive Temperature Ladder (Anti-Repetition)
 #   3. Trains DPO model (500 tokens, loss: mean)
 #   4. Evaluates on Lebenshilfe benchmark
 # =============================================================================
@@ -38,7 +38,7 @@ python scripts/data/prepare_10kgnad_corpus.py \
     $MAX_SAMPLES
 
 # --- STEP 1: GENERATE DPO PAIRS ---
-echo -e "\n[2/4] Generating DPO Preference Pairs (Temperature Ladder)..."
+echo -e "\n[2/4] Generating DPO Preference Pairs (Temperature Ladder + Anti-Repetition)..."
 python scripts/modeling/generate_dpo_dataset_ladder.py \
     --corpus_path "data/temperature_ladder_500/corpus_10kgnad_len500_as.json" \
     --sft_model_path "results/models/token_length_exp/sft_len500" \
@@ -49,9 +49,11 @@ python scripts/modeling/generate_dpo_dataset_ladder.py \
     --reward_model_path "results/models/token_length_exp/bilstm_mixup_regression_500.pt" \
     --reward_vocab_path "data/token_length_exp/mixup_vocab_500.json" \
     --sbert_model_name "sentence-transformers/paraphrase-multilingual-mpnet-base-v2" \
-    --temperature_ladder 0.7 0.8 0.9 1.0 \
+    --temperature_ladder 0.6 0.7 0.8 0.85 \
     --candidates_per_step 3 \
     --max_total_candidates 12 \
+    --repetition_penalty 1.35 \
+    --no_repeat_ngram_size 3 \
     --min_score_margin 0.05 \
     --w_style 0.5 \
     --w_sem 0.5 \
