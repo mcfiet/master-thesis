@@ -1,0 +1,48 @@
+#!/bin/bash
+#SBATCH --job-name=1_sft_scaling_grid
+#SBATCH --partition=research
+#SBATCH --time=04:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=24G
+#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --output=results/logs/sft_scaling_grid_%j.log
+
+set -e
+
+echo "=== Starte SFT Data Scaling Grid (Fractions: 10%, 25%, 50%, 75%, 100%) ==="
+mkdir -p results/experiments/sft_scaling results/logs
+
+FRACTION_VALUES=(0.10 0.25 0.50 0.75 1.00)
+
+for F in "${FRACTION_VALUES[@]}"; do
+    EXP_NAME="sft_scale_f$(echo "${F}" | sed 's/\.//')"
+    echo "=========================================================================="
+    echo "--- Starte Experiment: ${EXP_NAME} (train_fraction=${F}) ---"
+    echo "=========================================================================="
+    
+    srun python scripts/experiments/sft_scaling/train_sft_scaling.py \
+        --corpus_path data/analysis/corpus_master.csv \
+        --test_file data/lebenshilfe/lebenshilfe_dataset_clean.json \
+        --output_dir results/experiments/sft_scaling \
+        --base_model_name facebook/mbart-large-50 \
+        --reward_model_path results/models/bilstm_mixup_regression.pt \
+        --reward_vocab_path data/vocabs/mixup_vocab.json \
+        --sbert_model_name sentence-transformers/paraphrase-multilingual-mpnet-base-v2 \
+        --train_fraction ${F} \
+        --experiment_name "${EXP_NAME}" \
+        --min_sim 0.70 \
+        --max_sim 0.98 \
+        --max_source_len 256 \
+        --max_target_len 256 \
+        --batch_size 4 \
+        --accumulation_steps 4 \
+        --epochs 25 \
+        --lr 1e-4 \
+        --patience 6 \
+        --seed 42 \
+        --lora_r 16 \
+        --lora_alpha 32 \
+        --lora_dropout 0.05
+done
+
+echo "=== SFT Data Scaling Grid Training erfolgreich beendet! ==="
