@@ -10,4 +10,4 @@
 
 mkdir -p results/logs/run_pipeline results/plots/run_pipeline results/evaluation
 srun python scripts/preprocessing/create_lebenshilfe_dataset.py \
-    --data-dir data/texts_lebenshilfe
+    --data-dir data/lebenshilfe/texts_lebenshilfe
