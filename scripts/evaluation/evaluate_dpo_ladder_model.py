@@ -108,18 +108,18 @@ def load_model_and_tokenizer(model_path: str, base_model_name: str, device: str)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate 500-token DPO Ladder Model vs SFT Baseline.")
+    parser = argparse.ArgumentParser(description="Evaluate 512-token DPO Ladder Model vs SFT Baseline.")
     parser.add_argument("--test_data_path", type=str, default="data/lebenshilfe/lebenshilfe_dataset_clean.json")
-    parser.add_argument("--sft_model_path", type=str, default="results/models/token_length_exp/sft_len500")
-    parser.add_argument("--dpo_model_path", type=str, default="results/models/temperature_ladder_500/dpo_w05_w05")
+    parser.add_argument("--sft_model_path", type=str, default="results/models/sft" if os.path.exists("results/models/sft") else "results/models/token_length_exp/sft_len512")
+    parser.add_argument("--dpo_model_path", type=str, default="results/models/dpo" if os.path.exists("results/models/dpo") else "results/models/temperature_ladder_500/dpo_w05_w05")
     parser.add_argument("--base_model_name", type=str, default="facebook/mbart-large-50")
-    parser.add_argument("--reward_model_path", type=str, default="results/models/token_length_exp/bilstm_mixup_regression_500.pt")
-    parser.add_argument("--reward_vocab_path", type=str, default="data/token_length_exp/mixup_vocab_500.json")
+    parser.add_argument("--reward_model_path", type=str, default="results/models/bilstm_mixup_regression.pt" if os.path.exists("results/models/bilstm_mixup_regression.pt") else "results/models/token_length_exp/bilstm_mixup_regression_512.pt")
+    parser.add_argument("--reward_vocab_path", type=str, default="data/vocabs/mixup_vocab.json" if os.path.exists("data/vocabs/mixup_vocab.json") else "data/token_length_exp/mixup_vocab_512.json")
     parser.add_argument("--sbert_model_name", type=str, default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
-    parser.add_argument("--output_summary", type=str, default="results/evaluation/temperature_ladder_500_summary.csv")
-    parser.add_argument("--output_details", type=str, default="results/evaluation/temperature_ladder_500_details.csv")
-    parser.add_argument("--max_source_len", type=int, default=500)
-    parser.add_argument("--max_target_len", type=int, default=500)
+    parser.add_argument("--output_summary", type=str, default="results/evaluation/dpo_ladder_summary.csv")
+    parser.add_argument("--output_details", type=str, default="results/evaluation/dpo_ladder_details.csv")
+    parser.add_argument("--max_source_len", type=int, default=512)
+    parser.add_argument("--max_target_len", type=int, default=512)
     parser.add_argument("--batch_size", type=int, default=4)
     args = parser.parse_args()
 
@@ -158,7 +158,7 @@ def main():
         for text in cand_list:
             doc = nlp(str(text or ""))
             tokens = [t.text.lower() for t in doc if not t.is_space]
-            indices = [stoi.get(t, unk_idx) for t in tokens[:500]]
+            indices = [stoi.get(t, unk_idx) for t in tokens[:args.max_target_len]]
             if len(indices) == 0:
                 indices = [0]
             inp = torch.tensor([indices], dtype=torch.long, device=device)
@@ -180,8 +180,8 @@ def main():
         return style_scores, sim_as, sim_ref, tot_reward
 
     models_to_evaluate = [
-        ("SFT (500 tokens)", args.sft_model_path),
-        ("DPO Ladder (500 tokens)", args.dpo_model_path),
+        ("SFT", args.sft_model_path),
+        ("DPO Ladder", args.dpo_model_path),
     ]
 
     summary_records = []

@@ -167,4 +167,4 @@ Experimente sind modular vom Haupt-Pipeline-Ablauf getrennt:
 4. **Metric Weights (`scripts/sbatch/experiments/metric_weights/`):**
    - Grid-Search über Gewichte von Style- vs. Semantik-Reward ($w_{\text{style}}, w_{\text{sem}}$).
 5. **Token Length (`scripts/sbatch/experiments/token_length/`):**
-   - Skalierungsexperimente bei Sequenzlängen von 256, 500 und 1000 Tokens.
+   - Skalierungsexperimente bei Sequenzlängen von 256, 512 und 1024 Tokens.

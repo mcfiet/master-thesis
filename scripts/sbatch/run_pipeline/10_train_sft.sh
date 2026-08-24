@@ -19,8 +19,8 @@ srun python scripts/modeling/train_sft.py \
     --output_dir "results/models/sft" \
     --min_sim 0.70 \
     --max_sim 0.98 \
-    --max_source_len 500 \
-    --max_target_len 500 \
+    --max_source_len 512 \
+    --max_target_len 512 \
     --model_name "facebook/mbart-large-50" \
     --batch_size 8 \
     --accumulation_steps 2 \

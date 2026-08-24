@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 =============================================================================
-Comparative Evaluation Script: Token Length Experiment (256 vs. 500 vs. 1000)
+Comparative Evaluation Script: Token Length Experiment (256 vs. 512 vs. 1024)
 =============================================================================
 Evaluates and benchmarks:
-  1. Simplicity Regressor Models (BiLSTM 256 vs. 500 vs. 1000 tokens)
-  2. SFT and DPO Seq2Seq Models (mBART-50 256 vs. 500 vs. 1000 tokens)
+  1. Simplicity Regressor Models (BiLSTM 256 vs. 512 vs. 1024 tokens)
+  2. SFT and DPO Seq2Seq Models (mBART-50 256 vs. 512 vs. 1024 tokens)
 
 Metrics computed for Translation / Generation:
   - Simplicity / Style Score (via BiLSTM Regressors)
@@ -275,7 +275,7 @@ class TokenLengthEvaluator:
         self,
         reward_model_path: str,
         reward_vocab_path: str,
-        reward_max_seq_len: int = 500,
+        reward_max_seq_len: int = 512,
         sbert_model_name: str = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
     ):
@@ -326,8 +326,8 @@ class TokenLengthEvaluator:
         model_name_or_path: str,
         base_model_name: str,
         test_samples: List[Dict[str, Any]],
-        max_source_len: int = 500,
-        max_target_len: int = 500,
+        max_source_len: int = 512,
+        max_target_len: int = 512,
         prompt_prefix: str = "",
         batch_size: int = 4,
         w_style: float = 0.5,
@@ -478,11 +478,11 @@ class TokenLengthEvaluator:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate Token Length Experiment (256 vs 500 vs 1000).")
+    parser = argparse.ArgumentParser(description="Evaluate Token Length Experiment (256 vs 512 vs 1024).")
     parser.add_argument("--test_data_path", default="data/lebenshilfe/lebenshilfe_dataset_clean.json")
     parser.add_argument("--base_model_name", default="facebook/mbart-large-50")
-    parser.add_argument("--reward_model_path", default="results/models/token_length_exp/bilstm_mixup_regression_500.pt")
-    parser.add_argument("--reward_vocab_path", default="data/token_length_exp/mixup_vocab_500.json")
+    parser.add_argument("--reward_model_path", default="results/models/token_length_exp/bilstm_mixup_regression_512.pt")
+    parser.add_argument("--reward_vocab_path", default="data/token_length_exp/mixup_vocab_512.json")
     parser.add_argument("--prompt_prefix", default="", help="Prompt prefix for Seq2Seq inference (default: empty)")
     parser.add_argument("--sbert_model_name", default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2", help="SentenceTransformer model name")
     parser.add_argument("--output_summary", default="results/evaluation/token_length_comparison_summary.csv")
@@ -505,7 +505,7 @@ def main():
     print(f"Geladene Test-Samples: {len(test_samples)}")
 
     # =========================================================================
-    # 1. EVALUATE METRIC MODELS (BiLSTM 256, 500, 1000)
+    # 1. EVALUATE METRIC MODELS (BiLSTM 256, 512, 1024)
     # =========================================================================
     metric_configs = [
         {
@@ -514,6 +514,19 @@ def main():
             "vocab_path": "data/token_length_exp/mixup_vocab_256.json",
             "max_seq_len": 256,
         },
+        {
+            "name": "metric_mixup_512",
+            "model_path": "results/models/token_length_exp/bilstm_mixup_regression_512.pt",
+            "vocab_path": "data/token_length_exp/mixup_vocab_512.json",
+            "max_seq_len": 512,
+        },
+        {
+            "name": "metric_mixup_1024",
+            "model_path": "results/models/token_length_exp/bilstm_mixup_regression_1024.pt",
+            "vocab_path": "data/token_length_exp/mixup_vocab_1024.json",
+            "max_seq_len": 1024,
+        },
+        # Legacy fallback if 500/1000 models exist
         {
             "name": "metric_mixup_500",
             "model_path": "results/models/token_length_exp/bilstm_mixup_regression_500.pt",
@@ -556,13 +569,18 @@ def main():
     rm_path = args.reward_model_path
     rv_path = args.reward_vocab_path
     if not os.path.exists(rm_path):
-        rm_path = "results/models/bilstm_mixup_regression.pt"
-        rv_path = "data/vocabs/mixup_vocab.json"
+        # Check fallback 500 or master
+        if os.path.exists("results/models/token_length_exp/bilstm_mixup_regression_500.pt"):
+            rm_path = "results/models/token_length_exp/bilstm_mixup_regression_500.pt"
+            rv_path = "data/token_length_exp/mixup_vocab_500.json"
+        else:
+            rm_path = "results/models/bilstm_mixup_regression.pt"
+            rv_path = "data/vocabs/mixup_vocab.json"
 
     evaluator = TokenLengthEvaluator(
         reward_model_path=rm_path,
         reward_vocab_path=rv_path,
-        reward_max_seq_len=1000,
+        reward_max_seq_len=1024,
         sbert_model_name=args.sbert_model_name,
         device=device,
     )
@@ -570,12 +588,19 @@ def main():
     models_to_eval = [
         # (model_dir, max_source_len, max_target_len)
         ("results/models/token_length_exp/sft_len256", 256, 256),
+        ("results/models/token_length_exp/sft_len512", 512, 512),
+        ("results/models/token_length_exp/sft_len1024", 1024, 1024),
+        ("results/models/token_length_exp/dpo_len256", 256, 256),
+        ("results/models/token_length_exp/dpo_len512", 512, 512),
+        ("results/models/token_length_exp/dpo_len1024", 1024, 1024),
+        ("results/models/token_length_jina_exp/dpo_len256_jina", 256, 256),
+        ("results/models/token_length_jina_exp/dpo_len512_jina", 512, 512),
+        ("results/models/token_length_jina_exp/dpo_len1024_jina", 1024, 1024),
+        # Legacy fallbacks
         ("results/models/token_length_exp/sft_len500", 500, 500),
         ("results/models/token_length_exp/sft_len1000", 1000, 1000),
-        ("results/models/token_length_exp/dpo_len256", 256, 256),
         ("results/models/token_length_exp/dpo_len500", 500, 500),
         ("results/models/token_length_exp/dpo_len1000", 1000, 1000),
-        ("results/models/token_length_jina_exp/dpo_len256_jina", 256, 256),
         ("results/models/token_length_jina_exp/dpo_len500_jina", 500, 500),
         ("results/models/token_length_jina_exp/dpo_len1000_jina", 1000, 1000),
     ]
@@ -595,7 +620,7 @@ def main():
             max_source_len=max_src,
             max_target_len=max_tgt,
             prompt_prefix=args.prompt_prefix,
-            batch_size=4 if max_src <= 500 else 2,
+            batch_size=4 if max_src <= 512 else 2,
         )
 
         if summary:

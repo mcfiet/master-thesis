@@ -15,12 +15,12 @@ echo "=== Start DPO-Präferenzdatengenerierung auf ungesehenem 10kGNAD Korpus ==
 date
 
 srun python scripts/modeling/generate_dpo_dataset.py \
-    --corpus_path "data/corpus/corpus_10kgnad_len500_as.json" \
+    --corpus_path "data/corpus/corpus_10kgnad_len512_as.json" \
     --sft_model_path "results/models/sft" \
     --base_model_name "facebook/mbart-large-50" \
-    --max_source_len 500 \
-    --max_target_len 500 \
-    --reward_max_seq_len 500 \
+    --max_source_len 512 \
+    --max_target_len 512 \
+    --reward_max_seq_len 512 \
     --reward_model_path "results/models/bilstm_mixup_regression.pt" \
     --reward_vocab_path "data/vocabs/mixup_vocab.json" \
     --sbert_model_name "sentence-transformers/paraphrase-multilingual-mpnet-base-v2" \

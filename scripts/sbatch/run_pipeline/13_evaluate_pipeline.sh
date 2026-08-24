@@ -24,8 +24,8 @@ srun python scripts/evaluation/evaluate_dpo_ladder_model.py \
     --sbert_model_name "sentence-transformers/paraphrase-multilingual-mpnet-base-v2" \
     --output_summary "results/evaluation/pipeline_final_summary.csv" \
     --output_details "results/evaluation/pipeline_final_details.csv" \
-    --max_source_len 500 \
-    --max_target_len 500 \
+    --max_source_len 512 \
+    --max_target_len 512 \
     --batch_size 4
 
 echo "=== Pipeline Evaluierung abgeschlossen ==="

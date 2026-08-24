@@ -29,8 +29,8 @@ srun python scripts/modeling/train_dpo.py \
     --batch_size 2 \
     --accumulation_steps 8 \
     --patience 3 \
-    --max_source_len 500 \
-    --max_target_len 500
+    --max_source_len 512 \
+    --max_target_len 512
 
 echo "=== DPO Training abgeschlossen ==="
 date

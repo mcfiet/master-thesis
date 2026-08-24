@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
 =============================================================================
-10kGNAD Alltagssprache Corpus Preprocessor (500 Tokens)
+10kGNAD Alltagssprache Corpus Preprocessor (512 Tokens)
 =============================================================================
 Downloads/loads the 10kGNAD (10,000 German News Articles Dataset) and segments
 articles into clean, coherent Alltagssprache passages aligned with a target
-token length of up to 500 tokens.
+token length of up to 512 tokens.
 
 Features:
   - Normalized deduplication (exact & near-duplicates, typography agnostic)
   - Prefix deduplication (catches repetitive editorial templates/teasers)
   - Boilerplate & disclaimer filtering (removes quizzes, OTS headers, legal notes)
-  - Token bounds: 50 to 500 tokens per passage
+  - Token bounds: 50 to 512 tokens per passage
 
 Output JSON format:
 [
@@ -190,11 +190,11 @@ def chunk_article_text(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Prepare 500-token Alltagssprache corpus from 10kGNAD.")
+    parser = argparse.ArgumentParser(description="Prepare 512-token Alltagssprache corpus from 10kGNAD.")
     parser.add_argument(
         "--output_file",
         type=str,
-        default="data/temperature_ladder_500/corpus_10kgnad_len500_as.json",
+        default="data/corpus/corpus_10kgnad_len512_as.json",
         help="Path for output JSON corpus.",
     )
     parser.add_argument(
@@ -218,8 +218,8 @@ def main():
     parser.add_argument(
         "--max_tokens",
         type=int,
-        default=500,
-        help="Maximum token length per chunk (default: 500).",
+        default=512,
+        help="Maximum token length per chunk (default: 512).",
     )
     parser.add_argument(
         "--max_samples",

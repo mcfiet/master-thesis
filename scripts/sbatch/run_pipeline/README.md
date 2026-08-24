@@ -41,4 +41,4 @@ bash scripts/sbatch/run_pipeline/run_all_pipeline.sh
 * **Loss Aggregation:** [`scripts/sbatch/experiments/loss_aggregation/`](../experiments/loss_aggregation/)
 * **Metric Weights:** [`scripts/sbatch/experiments/metric_weights/`](../experiments/metric_weights/)
 * **Data & SFT Scaling:** [`scripts/sbatch/experiments/sft_scaling/`](../experiments/sft_scaling/) und [`scripts/sbatch/experiments/data_scaling/`](../experiments/data_scaling/)
-* **Token Length (256 vs 500 vs 1000):** [`scripts/sbatch/experiments/token_length/`](../experiments/token_length/)
+* **Token Length (256 vs 512 vs 1024):** [`scripts/sbatch/experiments/token_length/`](../experiments/token_length/)

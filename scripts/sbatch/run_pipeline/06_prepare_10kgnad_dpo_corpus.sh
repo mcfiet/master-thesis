@@ -14,9 +14,9 @@ echo "=== Vorbereitung des ungesehenen 10kGNAD Alltagssprache-Korpus für DPO ==
 date
 
 srun python scripts/data/prepare_10kgnad_corpus.py \
-    --output_file "data/corpus/corpus_10kgnad_len500_as.json" \
+    --output_file "data/corpus/corpus_10kgnad_len512_as.json" \
     --min_tokens 50 \
-    --max_tokens 500
+    --max_tokens 512
 
 echo "=== 10kGNAD Vorbereitung abgeschlossen ==="
 date
