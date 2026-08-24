@@ -1,15 +1,6 @@
-\subsection{Theoretischer Hintergrund: Das Konzept der Leichten Sprache}
-\label{sec:konzept_leichte_sprache}
-
-Das Konzept der Leichten Sprache (LS) stellt eine stark reglementierte Sprachvariante der deutschen Standardsprache dar, die primär darauf abzielt, Barrierefreiheit in der schriftlichen Kommunikation für Menschen mit kognitiven Einschränkungen, Lernschwierigkeiten oder geringer Lese- und Schreibkompetenz zu gewährleisten. Syntaktisch zeichnet sich LS unter anderem durch kurze Hauptsätze (Subjekt-Prädikat-Objekt), den Verzicht auf Nebensätze, Passivkonstruktionen, den Genitiv sowie den Konjunktiv aus. Auf lexikalischer Ebene werden abstrakte Begriffe durch konkrete Beispiele ersetzt, und lange zusammengesetzte Wörter werden mittels typografischer Hilfsmittel wie Bindestrichen oder dem Mediopunkt (z.~B. \textit{Bundestags-Wahl} oder \textit{Bundestags·wahl}) segmentiert. 
-
-Vom Konzept der Leichten Sprache ist die sogenannte \textit{Einfache Sprache} (Plain German) abzugrenzen. Während die Leichte Sprache als hochspezialisierte Sprachvariante mit strengen, normierten Richtlinien konzipiert ist und in Deutschland rechtlich durch die Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) für öffentliche Stellen vorgeschrieben wird \citep{bund2026barrierefreiheit}, besitzt die Einfache Sprache ein weitaus weniger restriktives Regelwerk. Letztere richtet sich an eine breitere Zielgruppe (wie Menschen mit Deutsch als Zweitsprache oder funktionale Alphabeten) und lässt komplexere Satzstrukturen sowie einen größeren Wortschatz zu. Ein weiterer kritischer Unterschied liegt im Qualitätssicherungsprozess: Texte in Leichter Sprache müssen zwingend von Personen aus der primären Zielgruppe auf ihre Verständlichkeit hin geprüft werden, was bei Texten in Einfacher Sprache nicht vorgeschrieben ist.
-
-
-\subsection{Stand der Forschung}
 \label{sec:stand_der_forschung}
 
-\subsubsection{Verfügbare Datenbasis und Korpora}
+\subsection{Verfügbare Datenbasis und Korpora (Themenblock 1)}
 \label{sec:datenbasis_korpora}
 
 Einen guten Überblick über den aktuellen Stand und die verfügbaren Ressourcen für Leichte und Einfache Sprache in Deutschland geben \citet{madina2023easy}. Sie zeigen dabei vor allem auf, wie unterschiedlich die bestehenden Datensätze strukturiert sind und dass es an standardisierten Werkzeugen zur automatischen Bewertung der Texte fehlt.
@@ -22,7 +13,7 @@ Für den Bereich der "`Einfachen Sprache"' (Plain German) präsentierten \citet{
 
 Einen weiteren Beitrag zur Generierung paralleler Ressourcen leisteten \citet{toborek2023new} mit der Vorstellung des \textit{New Aligned Simple German Corpus}. Ihr Datensatz besteht aus ca. 700 Dokumentenpaaren auf Dokumentenebene und über 10.000 Satzpaaren auf Satzebene, die teils manuell annotiert und teils automatisch berechnet wurden. Das Korpus kombiniert dabei das systematische Scraping paralleler Webinhalte mit automatischer Satz-Ausrichtung. Allerdings fasst die Arbeit Texte sowohl der Leichten als auch der Einfachen Sprache unter einem gemeinsamen Vereinfachungsbegriff zusammen, was eine feine Unterscheidung der spezifischen syntaktischen und semantischen Richtlinien von Leichter Sprache erschwert. Dieser Kompromiss verdeutlicht jedoch auch ein grundlegendes Problem der aktuellen Forschung: Ein Korpusaufbau, der sich ausschließlich auf reine Leichte Sprache beschränkt, ist Stand jetzt kaum in großem Umfang realisierbar, da es im deutschsprachigen Web schlichtweg an einer ausreichenden Anzahl frei zugänglicher, paralleler Quellen fehlt.
 
-\subsubsection{Evaluierungsmetriken für die Vereinfachung}
+\subsection{Evaluierungsmetriken für die Vereinfachung (Themenblock 2)}
 \label{sec:evaluierungsmetriken}
 
 Die automatische Evaluierung von Textvereinfachungssystemen stellt eine große methodische Hürde dar. Traditionelle Metriken der maschinellen Übersetzung wie BLEU, die primär auf n-Gramm-Präzision im Vergleich zu einer Referenzübersetzung basieren, erweisen sich für die Vereinfachung oft als ungeeignet. Wie \citet{alva2021unsuitability} empirisch belegen, korreliert BLEU nur schwach mit dem menschlichen Urteil über Einfachheit und Textqualität. Der Grund liegt darin, dass BLEU lexikalische Variationen und strukturelle Modifikationen (wie Satzteilung und Umformulierung) als Fehler abstraft, obwohl genau diese für eine gute Vereinfachung essenziell sind.
@@ -39,7 +30,7 @@ Gleichzeitig verdeutlicht dieser Ansatz zentrale verbleibende Forschungslücken:
 
 Obwohl das Thema Leichte Sprache in der deutschsprachigen NLP-Forschung über viele Jahre hinweg nur wenig Beachtung gefunden hat, zeigt das jüngste Erscheinen solcher Arbeiten, dass das Forschungsfeld derzeit stark an Dynamik gewinnt, was die wissenschaftliche und gesellschaftliche Relevanz dieses Themenbereichs zusätzlich unterstreicht.
 
-\subsubsection{Maschinelle Übersetzung und Optimierungsverfahren (Themenblock 3)}
+\subsection{Maschinelle Übersetzung und Optimierungsverfahren (Themenblock 3)}
 \label{sec:maschinelle_textvereinfachung_alignment}
 \label{sec:maschinelle_uebersetzung_modellierung}
 \label{sec:dpo_textgenerierung}

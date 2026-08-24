@@ -1,0 +1,55 @@
+\label{sec:theoretischer_hintergrund}
+
+\subsection{Das Konzept der Leichten Sprache}
+\label{sec:konzept_leichte_sprache}
+
+Das Konzept der Leichten Sprache (LS) stellt eine stark reglementierte Sprachvariante der deutschen Standardsprache dar, die primär darauf abzielt, Barrierefreiheit in der schriftlichen Kommunikation für Menschen mit kognitiven Einschränkungen, Lernschwierigkeiten oder geringer Lese- und Schreibkompetenz zu gewährleisten. Syntaktisch zeichnet sich LS unter anderem durch kurze Hauptsätze (Subjekt-Prädikat-Objekt), den Verzicht auf Nebensätze, Passivkonstruktionen, den Genitiv sowie den Konjunktiv aus. Auf lexikalischer Ebene werden abstrakte Begriffe durch konkrete Beispiele ersetzt, und lange zusammengesetzte Wörter werden mittels typografischer Hilfsmittel wie Bindestrichen oder dem Mediopunkt (z.~B. \textit{Bundestags-Wahl} oder \textit{Bundestags·wahl}) segmentiert. 
+
+Vom Konzept der Leichten Sprache ist die sogenannte \textit{Einfache Sprache} (Plain German) abzugrenzen. Während die Leichte Sprache als hochspezialisierte Sprachvariante mit strengen, normierten Richtlinien konzipiert ist und in Deutschland rechtlich durch die Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) für öffentliche Stellen vorgeschrieben wird \citep{bund2026barrierefreiheit}, besitzt die Einfache Sprache ein weitaus weniger restriktives Regelwerk. Letztere richtet sich an eine breitere Zielgruppe (wie Menschen mit Deutsch als Zweitsprache oder funktionale Alphabeten) und lässt komplexere Satzstrukturen sowie einen größeren Wortschatz zu. Ein weiterer kritischer Unterschied liegt im Qualitätssicherungsprozess: Texte in Leichter Sprache müssen zwingend von Personen aus der primären Zielgruppe auf ihre Verständlichkeit hin geprüft werden, was bei Texten in Einfacher Sprache nicht vorgeschrieben ist.
+
+\subsection{Grundlagen der automatischen Textvereinfachung}
+\label{sec:grundlagen_ats}
+
+Die automatische Textvereinfachung (\textit{Automatic Text Simplification}, ATS) zielt darauf ab, die syntaktische und lexikalische Komplexität eines Textes zu reduzieren, während die semantische Kernbotschaft erhalten bleibt. Aus maschineller Sicht lässt sich ATS formal als monolinguale maschinelle Übersetzung (\textit{Monolingual Machine Translation}) modellieren. Im Gegensatz zur klassischen bilingualen Übersetzung (z.~B. Deutsch nach Englisch) erfordert ATS tiefgreifende asymmetrische Strukturtransformationen:
+\begin{itemize}
+    \item \textbf{Satzteilung (Sentence Splitting):} Lange, hypotaktische Satzgefüge müssen in mehrere koordinierte Hauptsätze zerlegt werden.
+    \item \textbf{Streichung \& Kompression (Deletion/Compression):} Redundante oder nebensächliche Füllinformationen müssen getilgt werden, um die kognitive Belastung des Lesers zu reduzieren.
+    \item \textbf{Lexikalische Substitution \& Explikation:} Schwierige Fachtermini müssen durch frequente Synonyme ersetzt oder um definitorische Nebensätze erweitert werden.
+\end{itemize}
+
+\subsubsection{Textrepräsentationen \& Einbettungen}
+Moderne Algorithmen des Natural Language Processing (NLP) verarbeiten Text über numerische Repräsentationen. Der Prozess gliedert sich in Tokenisierung und Einbettung (\textit{Embedding}):
+\begin{enumerate}
+    \item \textbf{Tokenisierung:} Vor der mathematischen Modellierung wird der Text in atomare Einheiten (Tokens) zerlegt. Neben wortbasierten Verfahren kommen in neuronalen Modellen überwiegend Subword-Tokenisierer wie Byte-Pair Encoding (BPE) nach \citet{sennrich2016neural} oder SentencePiece zum Einsatz. Diese ermöglichen es, ein geschlossenes Vokabular fester Größe zu definieren und gleichzeitig seltene oder unbekannte Wörter (\textit{Out-of-Vocabulary}, OOV) in morphologische Subkomponenten aufzuspalten.
+    \item \textbf{Dichte Vektoreinbettungen (Dense Embeddings):} Tokens oder ganze Sequenzen werden auf kontinuierliche Vektoren $\mathbf{e} \in \mathbb{R}^d$ im latenten semantischen Raum abgebildet. Sentence-Embedding-Modelle wie Sentence-BERT (SBERT) nach \citet{reimers2019sentence} erzeugen über siamesische Netzwerke kontextsensitive Sequenzrepräsentationen.
+    \item \textbf{Semantische Ähnlichkeit:} Die inhaltliche Verwandtschaft zweier Textsequenzen $x$ und $y$ mit den Einbettungen $\mathbf{e}_x, \mathbf{e}_y$ wird üblicherweise über die Kosinus-Ähnlichkeit im Vektorraum quantifiziert:
+    \begin{equation}
+        \text{sim}_{\cos}(\mathbf{e}_x, \mathbf{e}_y) = \frac{\mathbf{e}_x \cdot \mathbf{e}_y}{\|\mathbf{e}_x\|_2 \|\mathbf{e}_y\|_2} \in [-1, 1]
+    \end{equation}
+    welche für Normalisierungszwecke oft linear auf das Intervall $[0, 1]$ skaliert wird: $\text{sim}_{\text{norm}} = \frac{\text{sim}_{\cos} + 1}{2}$.
+\end{enumerate}
+
+\subsubsection{Herausforderungen der automatischen Evaluation}
+Die Evaluation von ATS-Systemen unterscheidet sich fundamental von der Standard-Übersetzung. Klassische referenzbasierte N-Gramm-Metriken wie BLEU \citep{papineni2002bleu} und ROUGE \citep{lin2004rouge} messen primär die wörtliche Übereinstimmung mit einem Referenztext. Wie \citet{alva2021unsuitability} empirisch belegen, korreliert BLEU im ATS-Kontext jedoch häufig negativ mit der menschlichen Beurteilung: Ein System, das den komplexen Ausgangstext unverändert kopiert, erzielt oft hohe BLEU-Werte, leistet jedoch keine Vereinfachung. 
+
+Aus diesem Grund etablierte sich die Metrik SARI \citep{xu2016optimizing}, welche eingefügte (\textit{add}), beibehaltene (\textit{keep}) und gelöschte N-Gramme (\textit{delete}) explizit getrennt gegenüber der Quelle und den Referenzen bewertet und somit Vereinfachungsoperationen honoriert.
+
+\subsection{Architekturen moderner neuronaler Sprachmodelle}
+\label{sec:architekturen_sprachmodelle}
+
+Neuronale Sprachmodelle haben sich als führendes Paradigma für Sequence-to-Sequence-Aufgaben etabliert. Das Fundament bildet die von \citet{vaswani2017attention} eingeführte \textbf{Transformer-Architektur}, welche vollständig auf rekurrente Schleifen verzichtet und stattdessen auf dem Konzept der \textit{Self-Attention} (Selbstaufmerksamkeit) aufbaut. 
+
+\subsubsection{Der Attention-Mechanismus}
+Der skalierten Skalarprodukt-Aufmerksamkeit (\textit{Scaled Dot-Product Attention}) liegen drei Vektormatrizen zugrunde: Queries $\mathbf{Q}$, Keys $\mathbf{K}$ und Values $\mathbf{V}$, welche durch lineare Projektionen der Eingangsrepräsentationen entstehen. Die Aufmerksamkeitsmatrix wird formal berechnet durch:
+\begin{equation}
+    \text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left( \frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}} \right) \mathbf{V}
+\end{equation}
+wobei $d_k$ die Dimension der Key-Vektoren darstellt. Mittels \textit{Multi-Head Attention} wird dieser Prozess mehrfach parallel mit unterschiedlichen Projektionsmatrizen durchgeführt, wodurch das Modell simultan Beziehungen auf unterschiedlichen semantischen und syntaktischen Abstraktionsebenen erfassen kann.
+
+\subsubsection{Modellfamilien im NLP}
+Je nach Aufbau der Transformer-Schichten werden drei primäre Architekturtypen unterschieden:
+\begin{enumerate}
+    \item \textbf{Encoder-Decoder-Modelle (Sequence-to-Sequence):} Diese Architektur (wie mBART von \citet{lewis2020bart, tang2020multilingual} oder mT5) besteht aus einem bidirektionalen Encoder zur Repräsentation des Eingabetextes und einem autoregressiven Decoder, der mittels \textit{Cross-Attention} konditioniert auf die Encoder-Ausgaben den Zieltext Token für Token generiert. Sie eignet sich hervorragend für klassische Transformations- und Übersetzungsaufgaben.
+    \item \textbf{Decoder-Only-Modelle (Kausale Sprachmodelle):} Modelle wie die LLaMA- oder Mistral-Familie nutzen ausschließlich kausal maskierte Decoder-Schichten (\textit{Causal Masking}). Jedes Token darf nur auf vorherige Token aufmerksam werden. Sie werden auf die Vorhersage des nächsten Tokens (\textit{Next-Token Prediction}) vortrainiert und über Prompting oder Instruction Fine-Tuning gesteuert.
+    \item \textbf{Encoder-Only-Modelle:} Modelle wie BERT \citep{devlin2019bert} oder das deutschsprachige GBERT verarbeiten Eingabesequenzen vollständig bidirektional. Sie eignen sich primär für Sequenz- und Token-Klassifikationsaufgaben sowie für Einbettungsmodelle, nicht jedoch zur autoregressiven Textgenerierung.
+\end{enumerate}

@@ -1,7 +1,53 @@
-\subsection{Klassifikationsmodelle}
+Die automatisierte, referenzfreie Bewertung von Sprachkomplexität stellt eine Kernkomponente dieser Arbeit dar. Um Textvereinfachungen objektiv zu bewerten und ein steuerbares Belohnungssignal (\textit{Reward}) für das spätere Modelltraining bereitzustellen, wird in diesem Themenblock eine eigene Metrik-Pipeline entwickelt und systematisch untersucht.
+
+\subsection{Klassifikationsmodelle (BiLSTM vs. Baselines)}
+\label{sec:klassifikationsmodelle}
+\begin{itemize}
+    \item \textbf{Modellarchitektur:} Bidirektionales Long Short-Term Memory (BiLSTM) mit Word-Embedding-Layer, Dropout-Regularisierung und Klassifikationskopf (Linear + Sigmoid).
+    \item \textbf{Vergleichsbaselines:} Vanilla RNN, Standard-LSTM und vortrainierte Transformer-Klassifikatoren (GBERT).
+    \item \textbf{Granularitätsebenen:}
+    \begin{itemize}
+        \item \textit{Satz-Klassifikator:} Training und Inferenz auf isolierten Einzelsätzen.
+        \item \textit{Artikel-Klassifikator:} Dokumentenweites Training (bis 512 Tokens).
+        \item \textit{Majority Voting:} Aggregierte Dokumenten-Klassifikation durch Mehrheitsentscheid über alle Sätze eines Textes.
+    \end{itemize}
+    \item \textbf{In-Domain-Evaluation:} Leistungsvergleich anhand von Balanced Accuracy (BAcc) und F1-Score auf dem internen Test-Split.
+\end{itemize}
 
 \subsection{Out-of-Domain-Generalisierung \& Empirische Bias-Kontrolle}
+\label{sec:ood_bias_kontrolle}
+\begin{itemize}
+    \item \textbf{Out-of-Domain-Validierung:} Evaluation auf einem unabhängigen, externen Testdatensatz der \textit{Lebenshilfe Schleswig-Holstein e.\,V.}
+    \item \textbf{Shortcut- und Bias-Kontrollen:}
+    \begin{itemize}
+        \item \textit{Dummy-Content-Test (Längen-Bias):} Maskierung aller Wörter durch identische Satzzeichen (`\texttt{.}') bei unveränderter Tokenanzahl zur Kontrolle von Längen-Shortcuts.
+        \item \textit{Layout-Bias-Test:} Vollständige Entfernung von Absätzen und Zeilenumbrüchen zur Überprüfung von typografischen Heuristiken.
+    \end{itemize}
+\end{itemize}
 
 \subsection{Continuous MixUp Regression}
+\label{sec:mixup_regression}
+\begin{itemize}
+    \item \textbf{Das Konzept des textuellen MixUp:} Erzeugung kontinuierlicher Schwierigkeitsgrade $\lambda \in [0{,}0, 1{,}0]$ durch satzweise Mischungen paralleler Artikel.
+    \item \textbf{Dynamische Target-Berechnung:} Gewichtung anhand des relativen Zeichenlängenanteils:
+    \begin{equation}
+        \lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)}
+    \end{equation}
+    \item \textbf{Vergleich der Trainings- und Dataloader-Varianten:}
+    \begin{itemize}
+        \item \textit{Variante A (Statisch):} Feste Vorabmischung des Trainingskorpus.
+        \item \textit{Variante B (Dynamisch):} On-the-Fly Shuffling (Analyse des \textit{Prediction Collapse}).
+        \item \textit{Variante C (Hybrid):} Epochenabhängiges Curriculum-Shuffling.
+        \item \textit{Variante D (Hybrid + Cyclic Learning Rate):} Optimierung mittels \textit{CosineAnnealingWarmRestarts} zur Vermeidung lokaler Minima.
+    \end{itemize}
+    \item \textbf{Kontextlängen-Ablationsstudie:} Empirische Bestimmung der optimalen Eingabesequenzlänge (128, 256, 500, 1000 Tokens).
+    \item \textbf{Regressions-Metriken:} Mean Squared Error (MSE), Mean Absolute Error (MAE), Pearson- und Spearman-Korrelation sowie KDE-Dichteverteilungsanalysen.
+\end{itemize}
 
 \subsection{Evaluierung synthetischer Sprachstufen}
+\label{sec:synthetische_sprachstufen}
+\begin{itemize}
+    \item \textbf{LLM-basierte Stufengenerierung:} Synthetische Erzeugung diskreter Zwischenstufen ($0{,}25$, $0{,}50$, $0{,}75$) mittels Instruction Prompting großer Sprachmodelle (FlensGen-GPT / OpenAI).
+    \item \textbf{Kreuz-Evaluation:} Gegenüberstellung des MixUp-Regressors und des synthetisch trainierten Regressors auf dem Lebenshilfe-Datensatz.
+    \item \textbf{Monotonie- und Reliabilitätsprüfung:} Analyse von Fehlertrends, Boxplots und stilistischen Artefakten (\textit{Chatty Prefixes}, Formatierungsverluste).
+\end{itemize}

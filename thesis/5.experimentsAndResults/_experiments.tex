@@ -1,7 +1,40 @@
+In diesem Themenblock wird das generative Übersetzungsmodell entwickelt, trainiert und optimiert. Aufbauend auf dem bereinigten Parallelkorpus (Themenblock 1) und der gelernten Komplexitätsmetrik (Themenblock 2) erfolgt die Modellierung über ein zweistufiges Trainingsverfahren aus Supervised Fine-Tuning (SFT) und anschließender Präferenzoptimierung mittels Direct Preference Optimization (DPO).
+
 \subsection{Datenvorbereitung \& Trainings-Splits}
+\label{sec:daten_splits_dpo}
+\begin{itemize}
+    \item \textbf{Datensatzfilterung:} Bereitstellung der Trainingspaare aus dem Sweet-Spot-Korpus ($0{,}60 \le \text{sim}_{\cos} \le 0{,}98$).
+    \item \textbf{Split-Konfiguration:} Aufteilung in Trainings- ($80\,\%$), Validierungs- ($10\,\%$) und Test-Sets ($10\,\%$) unter Vermeidung von Datenlecks (\textit{Data Contamination}).
+    \item \textbf{Präferenzdatensatz-Konstruktion:} Offline-Generierung von $(x, y_w, y_l)$-Tripeln (Prompt, präferierte Antwort, dispräferierte Antwort) mittels SFT-Sampling und automatischer Reward-Bewertung.
+\end{itemize}
 
 \subsection{Supervised Fine-Tuning (SFT)}
+\label{sec:sft_training}
+\begin{itemize}
+    \item \textbf{Modellauswahl \& Architektur:} Sequence-to-Sequence Modellierung mit \texttt{facebook/mbart-large-50} inklusive korrekter Sprachcode-Initialisierung (\texttt{de\_DE}) sowie Gegenüberstellung mit Decoder-Only-Modellen (Mistral, LLaMA).
+    \item \textbf{Parameter-Efficient Fine-Tuning (PEFT / LoRA):} Konfiguration der Niedrigrang-Adaption ($r=16$, $\alpha=32$, Dropout $0{,}05$) auf allen Aufmerksamkeits- und Feed-Forward-Projektionen.
+    \item \textbf{Trainingsdynamik \& Overfitting-Kontrolle:} Analyse von Lernkurven, Early Stopping mit Patience und Rollback-Mechanismen bei Spät-Divergenz.
+\end{itemize}
 
 \subsection{Reward-Guided Optimization (RLHF / DPO)}
+\label{sec:dpo_optimization}
+\begin{itemize}
+    \item \textbf{DPO-Implementierung:} Native PyTorch-Engine für Seq2Seq-Architekturen mit Zero-VRAM Referenzmodell über PEFT-Adapterdeaktivierung (\texttt{disable\_adapter()}).
+    \item \textbf{Verbund-Reward-Design (\textit{Composite Reward}):} Steuerung des Zielkonflikts aus syntaktischer Einfachheit und semantischer Faktentreue:
+    \begin{equation}
+        R(x, y) = w_{\text{style}} \cdot R_{\text{style}}(y) + w_{\text{sem}} \cdot R_{\text{sem, norm}}(x, y)
+    \end{equation}
+    unter Nutzung des BiLSTM-MixUp-Regressors ($R_{\text{style}}$) und der SBERT-Ähnlichkeit ($R_{\text{sem}}$).
+    \item \textbf{Ablation der Reward-Gewichte:} Systematische Untersuchung von $w_{\text{style}} / w_{\text{sem}}$ ($0{,}5/0{,}5$, $0{,}7/0{,}3$, $1{,}0/0{,}0$) zur Identifikation der optimalen Pareto-Grenze.
+    \item \textbf{Loss-Aggregation (Sum vs. Mean):} Mathematische Analyse und experimentelle Behebung der Kürzungsfalle (\textit{Length Exploitation}) durch längennormalisiertes Per-Token-DPO (\texttt{mean}).
+    \item \textbf{Einfluss der Glossar-Anreicherung:} Vergleich von Modellen auf Standard- vs. Enriched-Korpora.
+\end{itemize}
 
-\subsection{Mehrdimensionale Evaluierung}
+\subsection{Mehrdimensionale Evaluierung \& Demonstrator-App}
+\label{sec:mehrdimensionale_evaluierung}
+\begin{itemize}
+    \item \textbf{Out-of-Domain-Benchmark:} Evaluation der Übersetzungsmodelle auf dem unabhängigen \textit{Lebenshilfe}-Testset.
+    \item \textbf{Decoding-Parameter \& Halluzinationskontrolle:} Kalibrierung von Beam Search, Repetition Penalty und N-Gramm-Sperren (\texttt{no\_repeat\_ngram\_size}) zur Unterbindung von Wiederholungsschleifen.
+    \item \textbf{Qualitative Analyse:} Linguistische Detailuntersuchung von Modellgenerierungen (Satzkürzungen, Passiv-Aktiv-Wandlung, Wortkomposita-Trennung).
+    \item \textbf{Full-Stack Web-Demonstrator:} Implementierung einer interaktiven Anwendung (Next.js Frontend + Flask Inferenz-Backend) mit dynamischer Einfachheits-Skala für Endanwender.
+\end{itemize}

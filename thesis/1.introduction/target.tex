@@ -51,15 +51,17 @@ Zur Beantwortung dieser Leitfrage werden drei zentrale Forschungsbereiche (Theme
 Die vorliegende Arbeit folgt einer logischen Struktur, die sich an den drei Säulen des entwickelten Übersetzungssystems orientiert:
 
 \begin{itemize}
-    \item \textbf{Kapitel 2 (Theoretical Background \& Stand der Forschung)} legt das theoretische Fundament. Es erörtert die sprachlichen Regeln der Leichten Sprache, den aktuellen Stand der maschinellen Übersetzung (Seq2Seq, LLMs, LoRA-Tuning) sowie Methoden zur automatisierten Evaluation.
+    \item \textbf{Kapitel 2 (Theoretischer Hintergrund)} legt das theoretische und linguistische Fundament. Es definiert das Konzept der Leichten Sprache und grenzt dieses formal sowie rechtlich von der Einfachen Sprache ab.
     
-    \item \textbf{Kapitel 3 (Themenblock 1: Datenbasis \& Korpus-Erstellung)} beschreibt die erste Stufe der Pipeline. Im Fokus steht das Crawling paralleler Texte, die Behandlung des 1:n-Alignment-Problems und die qualitative Filterung mittels semantischer Embeddings.
+    \item \textbf{Kapitel 3 (Stand der Forschung)} stellt den aktuellen wissenschaftlichen Stand strukturiert entlang der drei Säulen Datenbasis, Komplexitätsmetriken und maschinelle Übersetzungsverfahren dar und leitet die bestehenden Forschungslücken ab.
     
-    \item \textbf{Kapitel 4 (Themenblock 2: Metrik \& Bewerten von Sprachkomplexität)} widmet sich der zweiten Stufe: der Entwicklung von Klassifikationsmodellen (BiLSTM vs. SBERT) und dem Entwurf einer \textit{Continuous MixUp Regression} zur stufenlosen Komplexitätsbewertung.
+    \item \textbf{Kapitel 4 (Themenblock 1: Datenbasis \& Korpus-Erstellung)} beschreibt die erste Stufe der Pipeline. Im Fokus steht das Crawling paralleler Texte, die Behandlung des 1:n-Alignment-Problems und die qualitative Filterung mittels semantischer Embeddings.
     
-    \item \textbf{Kapitel 5 (Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning)} stellt das eigentliche Übersetzungsmodell vor. Hierbei werden die Implementierung des Supervised Fine-Tunings (SFT) sowie das Reward-Guided Fine-Tuning (DPO) zur Regeleinhaltung evaluiert.
+    \item \textbf{Kapitel 5 (Themenblock 2: Metrik \& Bewerten von Sprachkomplexität)} widmet sich der zweiten Stufe: der Entwicklung von Klassifikationsmodellen (BiLSTM vs. SBERT) und dem Entwurf einer \textit{Continuous MixUp Regression} zur stufenlosen Komplexitätsbewertung.
     
-    \item \textbf{Kapitel 6 (Diskussion \& Gesamtevaluation)} führt die Ergebnisse der drei Stufen zusammen, beantwortet systematisch die aufgeworfenen Forschungsfragen und beleuchtet kritisch die Systemrestriktionen sowie Fragen zur Faktentreue.
+    \item \textbf{Kapitel 6 (Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning)} stellt das eigentliche Übersetzungsmodell vor. Hierbei werden die Implementierung des Supervised Fine-Tunings (SFT) sowie das Reward-Guided Fine-Tuning (DPO) zur Regeleinhaltung evaluiert.
     
-    \item \textbf{Kapitel 7 (Fazit \& Ausblick)} fasst die Kernergebnisse der Arbeit zusammen und gibt einen Ausblick auf zukünftige Forschungsarbeiten und praktische Anwendungsfelder.
+    \item \textbf{Kapitel 7 (Diskussion \& Gesamtevaluation)} führt die Ergebnisse der drei Stufen zusammen, beantwortet systematisch die aufgeworfenen Forschungsfragen und beleuchtet kritisch die Systemrestriktionen sowie Fragen zur Faktentreue.
+    
+    \item \textbf{Kapitel 8 (Fazit \& Ausblick)} fasst die Kernergebnisse der Arbeit zusammen und gibt einen Ausblick auf zukünftige Forschungsarbeiten und praktische Anwendungsfelder.
 \end{itemize}
