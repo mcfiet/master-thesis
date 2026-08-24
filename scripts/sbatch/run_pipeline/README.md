@@ -2,11 +2,11 @@
 
 Übersicht aller Slurm `sbatch` Ausführungsskripte für die standardmäßige, lineare End-to-End Datenbeschaffungs-, Vorverarbeitungs-, Trainings- und Evaluierungs-Pipeline.
 
-Alle Skripte befinden sich in diesem Ordner und können aus dem Wurzelverzeichnis des Repositories per `sbatch scripts/sbatch/run_pipeline/<skript_name>.sh` oder vollständig automatisiert über `scripts/sbatch/run_pipeline/run_all_pipeline.sh` gestartet werden.
+Alle Skripte befinden sich in diesem Ordner und können aus dem Wurzelverzeichnis des Repositories per `sbatch scripts/sbatch/run_pipeline/<skript_name>.sh`, themenbereichsweise modular über die `run_0*_*.sh` Runner oder vollständig automatisiert über `run_all_pipeline.sh` gestartet werden.
 
 ---
 
-## Übersicht der 13 Pipeline-Schritte
+## Übersicht der 13 Pipeline-Einzelschritte
 
 | Nr. | Skriptname | SBATCH Job-Name | Ressource | Max. Zeit | Beschreibung & Datensatz |
 |:---|:---|:---|:---|:---|:---|
@@ -26,7 +26,38 @@ Alle Skripte befinden sich in diesem Ordner und können aus dem Wurzelverzeichni
 
 ---
 
+## Modulare Themenbereich-Runner (Teil für Teil starten)
+
+Neben der Gesamtausführung können einzelne Themenbereiche isoliert ausgeführt werden:
+
+| Themenbereich | Runner-Skript | Enthaltene Schritte | Beschreibung |
+|:---|:---|:---|:---|
+| **1. Scraping & Crawling** | [`run_01_scraping.sh`](run_01_scraping.sh) | 01 $\rightarrow$ 02 | URL-Alignment & Content-Extraktion für alle 12 Webquellen |
+| **2. Lebenshilfe Vorbereitung** | [`run_02_lebenshilfe_prep.sh`](run_02_lebenshilfe_prep.sh) | 03 $\rightarrow$ 04 | Lokale Lebenshilfe-Texte einlesen & bereinigen |
+| **3. Korpus-Erstellung** | [`run_03_corpus_building.sh`](run_03_corpus_building.sh) | 05, 06 | Master CSV/JSON bauen & ungesehenes 10kGNAD vorbereiten |
+| **4. Reward- & Metrik-Modelle** | [`run_04_reward_models.sh`](run_04_reward_models.sh) | 07, 08, 09 (parallel) | Satz-/Artikel-Klassifikatoren & MixUp-Regressor trainieren |
+| **5. SFT-Training** | [`run_05_sft_training.sh`](run_05_sft_training.sh) | 10 | Supervised Fine-Tuning von mBART-50 |
+| **6. DPO-Pipeline** | [`run_06_dpo_pipeline.sh`](run_06_dpo_pipeline.sh) | 11 $\rightarrow$ 12 | Preference-Data Generierung & LoRA DPO-Training |
+| **7. Pipeline-Evaluierung** | [`run_07_evaluation.sh`](run_07_evaluation.sh) | 13 | Finale Evaluierung auf dem Lebenshilfe-Benchmark |
+
+### Beispiele für Modulare Aufrufe
+
+```bash
+# Nur Web Scraping ausführen:
+bash scripts/sbatch/run_pipeline/run_01_scraping.sh
+
+# Nur Reward-Modelle trainieren (nachdem Korpus vorliegt):
+bash scripts/sbatch/run_pipeline/run_04_reward_models.sh
+
+# Nur DPO-Generierung und DPO-Training starten:
+bash scripts/sbatch/run_pipeline/run_06_dpo_pipeline.sh
+```
+
+---
+
 ## Vollständige Ausführung mit einem Befehl
+
+Startet alle 13 Schritte sequentiell mit automatischer Slurm-Abhängigkeitskette:
 
 ```bash
 bash scripts/sbatch/run_pipeline/run_all_pipeline.sh

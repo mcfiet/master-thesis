@@ -151,6 +151,20 @@ Um die gesamte Pipeline automatisiert mit Job-Abhängigkeiten (`--dependency=aft
 bash scripts/sbatch/run_pipeline/run_all_pipeline.sh
 ```
 
+### 2.3 Modulare Ausführung nach Themenbereichen (Teil für Teil)
+
+Falls nur bestimmte Phasen oder Komponenten neu gerechnet oder getestet werden sollen:
+
+| Themenbereich | Skript | Enthaltene Einzelschritte |
+|:---|:---|:---|
+| **1. Scraping & Crawling** | `bash scripts/sbatch/run_pipeline/run_01_scraping.sh` | 01 $\rightarrow$ 02 |
+| **2. Lebenshilfe Vorbereitung** | `bash scripts/sbatch/run_pipeline/run_02_lebenshilfe_prep.sh` | 03 $\rightarrow$ 04 |
+| **3. Korpus-Erstellung** | `bash scripts/sbatch/run_pipeline/run_03_corpus_building.sh` | 05, 06 |
+| **4. Reward- & Metrik-Modelle** | `bash scripts/sbatch/run_pipeline/run_04_reward_models.sh` | 07, 08, 09 (parallel) |
+| **5. SFT-Training** | `bash scripts/sbatch/run_pipeline/run_05_sft_training.sh` | 10 |
+| **6. DPO-Pipeline** | `bash scripts/sbatch/run_pipeline/run_06_dpo_pipeline.sh` | 11 $\rightarrow$ 12 |
+| **7. Pipeline-Evaluierung** | `bash scripts/sbatch/run_pipeline/run_07_evaluation.sh` | 13 |
+
 ---
 
 ## 3. Experimente & Ablationen (`scripts/sbatch/experiments/`)

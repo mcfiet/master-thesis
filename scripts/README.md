@@ -47,10 +47,16 @@ scripts/
 
 ## Haupt-Pipeline Ausführung
 
-Die Haupt-Pipeline wird über die nummerierten Skripte in `scripts/sbatch/run_pipeline/` ausgeführt oder per Master-Runner gestartet:
+Die Haupt-Pipeline kann vollständig über das Master-Skript oder modular nach Themenbereichen gestartet werden:
 
 ```bash
+# Vollständige Pipeline (alle 13 Schritte mit Slurm-Dependencies):
 bash scripts/sbatch/run_pipeline/run_all_pipeline.sh
+
+# Modular nach Themenbereichen (z.B. nur Reward-Modelle oder DPO-Stufe):
+bash scripts/sbatch/run_pipeline/run_04_reward_models.sh
+bash scripts/sbatch/run_pipeline/run_06_dpo_pipeline.sh
 ```
 
-Details zu jedem Schritt siehe [`run_pipeline_guide.md`](../run_pipeline_guide.md).
+Details zu jedem Schritt und allen Themenbereich-Runnern siehe [`run_pipeline_guide.md`](../run_pipeline_guide.md) sowie [`scripts/sbatch/run_pipeline/README.md`](sbatch/run_pipeline/README.md).
+
