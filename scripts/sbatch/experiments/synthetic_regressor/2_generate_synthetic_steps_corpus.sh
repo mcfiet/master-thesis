@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 
-srun python -u scripts/preprocessing/generate_synthetic_steps.py \
+srun python -u scripts/experiments/synthetic_regressor/generate_synthetic_steps.py \
     --input data/analysis/corpus_master.json \
     --output data/corpus/corpus_master_with_steps.json \
     --url http://193.175.180.196:8000/v1/chat/completions \

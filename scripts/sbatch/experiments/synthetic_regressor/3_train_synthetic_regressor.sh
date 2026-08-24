@@ -6,7 +6,7 @@
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
 
-srun python scripts/modeling/regression_train_synthetic.py \
+srun python scripts/experiments/synthetic_regressor/regression_train_synthetic.py \
     --corpus_with_steps_path data/corpus/corpus_master_with_steps.json \
     --lh_with_steps_path data/lebenshilfe/lebenshilfe_dataset_with_steps.json \
     --model_save_path results/models/bilstm_synthetic_regression.pt \

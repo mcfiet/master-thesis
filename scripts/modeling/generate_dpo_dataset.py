@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
 """
 =============================================================================
-DPO Preference Dataset Generator
+Progressive Temperature Ladder DPO Dataset Generator (500 Tokens)
 =============================================================================
-This script creates a preference dataset (prompt, chosen, rejected) for DPO
-training by:
-  1. Loading and filtering `corpus_master.json` based on metadata (e.g.
-     semantic similarity, token counts, sources).
-  2. Generating multiple candidate simplifications using the fine-tuned SFT
-     model (from `5_train_sft.py`). Supports checkpoints (.pt/.pth/directory).
-  3. Evaluating each candidate using:
-     - The BiLSTM Simplicity / Style Regressor (from `3_regression_train_mixup.py`
-       or `4_regression_train_synthetic.py`).
-     - Semantic similarity via Sentence-BERT (meaning preservation).
-     - Composite Reward = w_style * R_style + w_sem * R_sem_norm.
-  4. Ranking candidates into winner (chosen) and loser (rejected) pairs.
-  5. Filtering by minimum score margin and exporting ready-to-train DPO datasets.
+Generates high-contrast DPO preference pairs (prompt, chosen, rejected) strictly
+from SFT model generation without ground-truth reference texts:
+  1. Uses no_repeat_ngram_size=3 and repetition_penalty=1.35 to completely
+     prevent decoder attractor loops and phrase repetitions.
+  2. Starts candidate sampling at a base temperature (e.g. T = 0.6).
+  3. Evaluates candidates using the 500-Token BiLSTM Regressor & SBERT.
+  4. If candidate pool margin (max_reward - min_reward) < min_score_margin (0.05),
+     escalates temperature through a ladder (0.6 -> 0.7 -> 0.8 -> 0.85) and
+     samples additional candidates until the target margin is satisfied.
+  5. Includes strict candidate hygiene (rejects fragments < 20 words, loops, echos).
+  6. Exports train and validation splits to JSONL format.
 =============================================================================
 """
 
@@ -54,11 +52,11 @@ logging.basicConfig(
     handlers=[logging.StreamHandler(sys.stdout)],
     level=logging.INFO,
 )
-logger = logging.getLogger("GenerateDPODataset")
+logger = logging.getLogger("GenerateDPOLadder")
 
 
 # ---------------------------------------------------------------------------
-# BiLSTM Regressor Definition (compatible with 3_regression_train_mixup & 4)
+# BiLSTM Regressor Definition (500-Token Compatible)
 # ---------------------------------------------------------------------------
 class BiLSTMRegressor(nn.Module):
     def __init__(self, vocab_size: int, embed_dim: int = 128, hidden_dim: int = 128, dropout: float = 0.3):
@@ -90,7 +88,7 @@ class CompositeRewardEvaluator:
         w_sem: float = 0.5,
         embed_dim: int = 128,
         hidden_dim: int = 128,
-        max_seq_len: int = 150,
+        max_seq_len: int = 500,
         device: str = "cpu",
     ):
         self.w_style = w_style
@@ -124,7 +122,7 @@ class CompositeRewardEvaluator:
         self.bilstm_model.load_state_dict(raw_state)
         self.bilstm_model.eval()
 
-        # 3. Load SpaCy for tokenizer
+        # 3. Load SpaCy Tokenizer
         try:
             self.nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer"])
         except Exception:
@@ -135,10 +133,7 @@ class CompositeRewardEvaluator:
         logger.info(f"Loading SBERT model for semantic evaluation: {sbert_model_name}")
         self.sbert_model = SentenceTransformer(sbert_model_name, trust_remote_code=True, device=self.device)
         if "jina" in sbert_model_name.lower():
-            # Align Jina context window directly with reward_max_seq_len to prevent OOM
-            target_seq_len = max(self.max_seq_len, 256)
-            self.sbert_model.max_seq_length = min(target_seq_len, 1024)
-            logger.info(f"Set Jina SBERT max_seq_length to {self.sbert_model.max_seq_length} (aligned with max_target_len)")
+            self.sbert_model.max_seq_length = min(max(self.max_seq_len, 256), 1024)
 
     def predict_simplicity_scores(self, texts: List[str]) -> np.ndarray:
         scores = []
@@ -164,34 +159,18 @@ class CompositeRewardEvaluator:
     def compute_rewards(
         self, source_texts: List[str], candidate_texts: List[str]
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-        """
-        Computes composite reward, style simplicity score, and normalized semantic similarity.
-        """
         r_style = self.predict_simplicity_scores(candidate_texts)
         r_sem = self.predict_semantic_similarity(source_texts, candidate_texts)
-        # Normalize semantic cosine similarity from [-1, 1] to [0, 1]
         r_sem_norm = np.clip((r_sem + 1.0) / 2.0, 0.0, 1.0)
         total_rewards = self.w_style * r_style + self.w_sem * r_sem_norm
         return total_rewards, r_style, r_sem_norm
 
 
 # ---------------------------------------------------------------------------
-# Corpus Loading and Filtering
+# Corpus Loading
 # ---------------------------------------------------------------------------
-def load_and_filter_corpus(
-    corpus_path: str,
-    min_sim: Optional[float] = None,
-    max_sim: Optional[float] = None,
-    min_as_tokens: Optional[int] = None,
-    max_as_tokens: Optional[int] = None,
-    sources: Optional[List[str]] = None,
-    max_samples: Optional[int] = None,
-) -> List[Dict[str, Any]]:
-    """
-    Loads corpus_master.json / .csv and filters records based on metadata.
-    """
+def load_corpus_data(corpus_path: str, max_samples: Optional[int] = None) -> List[Dict[str, Any]]:
     logger.info(f"Loading corpus from: {corpus_path}")
-
     if corpus_path.endswith(".json"):
         with open(corpus_path, "r", encoding="utf-8") as f:
             raw_data = json.load(f)
@@ -199,181 +178,141 @@ def load_and_filter_corpus(
         df = pd.read_csv(corpus_path)
         raw_data = df.to_dict(orient="records")
     else:
-        raise ValueError(f"Unsupported corpus file type: {corpus_path}. Must be .json or .csv.")
+        raise ValueError(f"Unsupported file format: {corpus_path}")
 
-    logger.info(f"Total raw records in corpus: {len(raw_data)}")
-
-    filtered_records = []
+    cleaned = []
     for item in raw_data:
-        as_text = str(item.get("as_text") or "").strip()
-        ls_text = str(item.get("ls_text") or "").strip()
+        as_text = str(item.get("as_text") or item.get("text") or "").strip()
+        if len(as_text) > 20:
+            cleaned.append({
+                "as_text": as_text,
+                "source": item.get("source", "unknown"),
+                "as_tokens": item.get("as_tokens", len(as_text.split())),
+            })
 
-        if not as_text or not ls_text:
-            continue
-
-        # 1. Similarity filter
-        sim = item.get("semantic_similarity_8192")
-        if sim is not None:
-            try:
-                sim_val = float(sim)
-                if min_sim is not None and sim_val < min_sim:
-                    continue
-                if max_sim is not None and sim_val > max_sim:
-                    continue
-            except (ValueError, TypeError):
-                pass
-
-        # 2. Token length filters
-        as_tokens = item.get("as_tokens")
-        if as_tokens is not None:
-            try:
-                tokens_val = int(as_tokens)
-                if min_as_tokens is not None and tokens_val < min_as_tokens:
-                    continue
-                if max_as_tokens is not None and tokens_val > max_as_tokens:
-                    continue
-            except (ValueError, TypeError):
-                pass
-
-        # 3. Source filter
-        if sources is not None and len(sources) > 0:
-            item_source = item.get("source")
-            if item_source not in sources:
-                continue
-
-        filtered_records.append(item)
-
-    logger.info(f"Records remaining after metadata filtering: {len(filtered_records)}")
-
-    if max_samples is not None and len(filtered_records) > max_samples:
+    logger.info(f"Loaded {len(cleaned)} valid records from corpus.")
+    if max_samples and len(cleaned) > max_samples:
         logger.info(f"Subsampling to {max_samples} records.")
-        filtered_records = filtered_records[:max_samples]
-
-    return filtered_records
+        cleaned = cleaned[:max_samples]
+    return cleaned
 
 
 # ---------------------------------------------------------------------------
-# SFT Model Loading & Generation
+# Model Loading
 # ---------------------------------------------------------------------------
 def load_sft_model_and_tokenizer(
     model_name_or_path: str,
     base_model_name: str = "facebook/mbart-large-50",
     device: str = "cuda",
-    torch_dtype: str = "bfloat16",
-    is_seq2seq: Optional[bool] = None,
 ) -> Tuple[PreTrainedModel, PreTrainedTokenizerBase, bool]:
-    """
-    Loads SFT model and tokenizer from directory (or Hugging Face Hub model ID).
-    """
-    dtype = getattr(torch, torch_dtype) if torch_dtype != "auto" else "auto"
+    logger.info(f"Loading SFT model/tokenizer from: {model_name_or_path}")
 
-    # Enforce directory path (no raw .pt files)
-    if os.path.isfile(model_name_or_path) or model_name_or_path.endswith((".pt", ".pth", ".bin")):
-        raise ValueError(
-            f"Ungültiger Pfad '{model_name_or_path}': Es muss ein Modell-Ordnerpfad übergeben werden "
-            f"(z.B. 'results/models/new_pipeline/sft' oder ein HuggingFace Hub Modell-Name), keine .pt/.pth Datei."
-        )
-
-    logger.info(f"Loading Hugging Face SFT Model and Tokenizer from directory: {model_name_or_path}")
-
-    # Robustly identify whether the architecture is Encoder-Decoder (Seq2Seq) or Decoder-Only (Causal LM)
+    is_seq2seq = True
     try:
-        config = AutoConfig.from_pretrained(model_name_or_path)
-        detected_seq2seq = bool(getattr(config, "is_encoder_decoder", False))
-    except Exception:
-        name_lower = str(model_name_or_path).lower()
-        detected_seq2seq = any(k in name_lower for k in ["mbart", "bart", "t5", "marian", "pegasus"])
-
-    if is_seq2seq is not None:
-        detected_seq2seq = is_seq2seq
-
-    logger.info(f"Model architecture mode: {'Seq2Seq (Encoder-Decoder)' if detected_seq2seq else 'Causal LM (Decoder-Only)'}")
-
-    # Load Tokenizer
-    try:
-        tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=False)
+        cfg = AutoConfig.from_pretrained(model_name_or_path)
+        is_seq2seq = cfg.is_encoder_decoder
     except Exception:
         try:
-            tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=True)
+            cfg = AutoConfig.from_pretrained(base_model_name)
+            is_seq2seq = cfg.is_encoder_decoder
         except Exception:
-            logger.warning(f"Could not load tokenizer directly from {model_name_or_path}. Falling back to base_model_name: {base_model_name}")
-            tokenizer = AutoTokenizer.from_pretrained(base_model_name, use_fast=False)
+            pass
 
-    # Load Model with PEFT support
-    has_weights = (
-        os.path.exists(os.path.join(model_name_or_path, "model.safetensors")) or
-        os.path.exists(os.path.join(model_name_or_path, "pytorch_model.bin"))
-    )
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
+    except Exception:
+        tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+
+    dtype = torch.float16 if device == "cuda" else torch.float32
+
     has_adapter = os.path.exists(os.path.join(model_name_or_path, "adapter_config.json"))
 
-    if detected_seq2seq:
-        if has_weights:
-            try:
-                model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, torch_dtype=dtype, use_safetensors=True)
-            except Exception:
-                model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, torch_dtype=dtype, weights_only=False)
-        elif has_adapter:
-            logger.info(f"Loading SFT PEFT Adapter from {model_name_or_path} onto {base_model_name} and merging weights...")
-            try:
-                base_m = AutoModelForSeq2SeqLM.from_pretrained(base_model_name, torch_dtype=dtype, use_safetensors=True)
-            except Exception:
-                base_m = AutoModelForSeq2SeqLM.from_pretrained(base_model_name, torch_dtype=dtype, weights_only=False)
+    if is_seq2seq:
+        if has_adapter:
+            logger.info(f"Merging SFT LoRA adapter into base Seq2Seq model ({base_model_name})...")
+            base_m = AutoModelForSeq2SeqLM.from_pretrained(base_model_name, torch_dtype=dtype)
             peft_m = PeftModel.from_pretrained(base_m, model_name_or_path)
             model = peft_m.merge_and_unload()
-            logger.info("Successfully merged SFT LoRA adapter into base Seq2Seq model!")
         else:
             model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, torch_dtype=dtype)
     else:
-        if has_weights:
-            try:
-                model = AutoModelForCausalLM.from_pretrained(model_name_or_path, torch_dtype=dtype, use_safetensors=True)
-            except Exception:
-                model = AutoModelForCausalLM.from_pretrained(model_name_or_path, torch_dtype=dtype, weights_only=False)
-        elif has_adapter:
-            logger.info(f"Loading SFT PEFT Adapter from {model_name_or_path} onto {base_model_name} and merging weights...")
-            try:
-                base_m = AutoModelForCausalLM.from_pretrained(base_model_name, torch_dtype=dtype, use_safetensors=True)
-            except Exception:
-                base_m = AutoModelForCausalLM.from_pretrained(base_model_name, torch_dtype=dtype, weights_only=False)
+        if has_adapter:
+            logger.info(f"Merging SFT LoRA adapter into base CausalLM model ({base_model_name})...")
+            base_m = AutoModelForCausalLM.from_pretrained(base_model_name, torch_dtype=dtype)
             peft_m = PeftModel.from_pretrained(base_m, model_name_or_path)
             model = peft_m.merge_and_unload()
-            logger.info("Successfully merged SFT LoRA adapter into base Causal LM model!")
         else:
             model = AutoModelForCausalLM.from_pretrained(model_name_or_path, torch_dtype=dtype)
 
     if tokenizer.pad_token is None:
-        if tokenizer.eos_token is not None:
-            tokenizer.pad_token = tokenizer.eos_token
-        else:
-            tokenizer.add_special_tokens({"pad_token": "[PAD]"})
+        tokenizer.pad_token = tokenizer.eos_token or "[PAD]"
 
-    check_name = str(model_name_or_path).lower()
-    if hasattr(tokenizer, "src_lang") or hasattr(tokenizer, "lang_code_to_id") or "mbart" in check_name or "facebook/mbart" in str(getattr(model.config, "_name_or_path", "")).lower():
+    if hasattr(tokenizer, "src_lang") or hasattr(tokenizer, "lang_code_to_id"):
         tokenizer.src_lang = "de_DE"
         tokenizer.tgt_lang = "de_DE"
-        logger.info(f"Configured tokenizer with src_lang='{tokenizer.src_lang}' and tgt_lang='{tokenizer.tgt_lang}'")
+        logger.info(f"Configured multilingual tokenizer with src_lang='de_DE' and tgt_lang='de_DE'")
 
     model = model.to(device)
     model.eval()
-    return model, tokenizer, detected_seq2seq
+    return model, tokenizer, is_seq2seq
 
 
-def generate_candidates_batch(
+# ---------------------------------------------------------------------------
+# Candidate Hygiene & Quality Verification
+# ---------------------------------------------------------------------------
+def is_valid_candidate(candidate_text: str, source_text: str, min_words: int = 20) -> bool:
+    """
+    Ensures candidate is not a degenerative fragment, repetitive loop, or exact echo.
+    """
+    cand = candidate_text.strip()
+    if not cand:
+        return False
+
+    words = cand.split()
+    if len(words) < min_words or len(cand) < 80:
+        return False
+
+    # Check exact echo of source
+    if cand.lower() == source_text.strip().lower():
+        return False
+
+    # Trigram repetition check (catches attractor loops)
+    words_lower = [w.lower() for w in words]
+    if len(words_lower) >= 10:
+        trigrams = [tuple(words_lower[i : i + 3]) for i in range(len(words_lower) - 2)]
+        if len(trigrams) > 0:
+            unique_ratio = len(set(trigrams)) / len(trigrams)
+            if unique_ratio < 0.75:
+                return False
+
+    # Sentence repetition check
+    sents = [s.strip().lower() for s in cand.replace("\n", ".").split(".") if len(s.strip()) > 15]
+    if len(sents) >= 3:
+        repeated_sents = len(sents) - len(set(sents))
+        if repeated_sents >= 2:
+            return False
+
+    return True
+
+
+# ---------------------------------------------------------------------------
+# Candidate Generation Helper
+# ---------------------------------------------------------------------------
+def sample_candidates_batch(
     model: PreTrainedModel,
     tokenizer: PreTrainedTokenizerBase,
     prompts: List[str],
     is_seq2seq: bool,
-    num_candidates: int = 3,
-    max_source_len: int = 512,
-    max_target_len: int = 512,
-    temperature: float = 0.8,
+    num_candidates: int,
+    temperature: float,
     top_p: float = 0.92,
     top_k: int = 50,
+    repetition_penalty: float = 1.35,
+    no_repeat_ngram_size: int = 3,
+    max_source_len: int = 500,
+    max_target_len: int = 500,
     device: str = "cuda",
 ) -> List[List[str]]:
-    """
-    Generates `num_candidates` sample simplifications for each prompt.
-    """
     inputs = tokenizer(
         prompts,
         padding=True,
@@ -393,11 +332,14 @@ def generate_candidates_batch(
         "temperature": temperature,
         "top_p": top_p,
         "top_k": top_k,
-        "repetition_penalty": 1.2,
+        "repetition_penalty": repetition_penalty,
         "num_return_sequences": num_candidates,
         "pad_token_id": tokenizer.pad_token_id,
         "eos_token_id": tokenizer.eos_token_id,
     }
+
+    if no_repeat_ngram_size > 0:
+        gen_kwargs["no_repeat_ngram_size"] = no_repeat_ngram_size
 
     if is_seq2seq:
         gen_kwargs["max_length"] = max_target_len
@@ -410,7 +352,6 @@ def generate_candidates_batch(
         outputs = model.generate(**gen_kwargs)
 
     if not is_seq2seq:
-        # Cut off prompt from output for Causal LM
         input_len = inputs["input_ids"].shape[1]
         outputs = outputs[:, input_len:]
 
@@ -419,9 +360,7 @@ def generate_candidates_batch(
     result = []
     for i in range(len(prompts)):
         cands = decoded[i * num_candidates : (i + 1) * num_candidates]
-        # Clean candidates
-        cands = [c.strip() for c in cands]
-        result.append(cands)
+        result.append([c.strip() for c in cands])
     return result
 
 
@@ -430,184 +369,168 @@ def generate_candidates_batch(
 # ---------------------------------------------------------------------------
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate DPO preference pairs (chosen/rejected) using SFT and Reward Models."
+        description="Generate DPO preference pairs using Progressive Temperature Ladder (500 Tokens)."
     )
 
-    # --- Corpus & Filtering Arguments ---
-    corpus_group = parser.add_argument_group("Corpus & Filtering")
-    corpus_group.add_argument(
+    # Data
+    parser.add_argument(
         "--corpus_path",
         type=str,
-        default="data/new_pipeline/analysis/corpus_master.json",
-        help="Path to corpus_master.json or .csv.",
+        default="data/temperature_ladder_500/corpus_10kgnad_len500_as.json",
+        help="Path to input corpus JSON/CSV with as_text.",
     )
-    corpus_group.add_argument(
-        "--min_sim",
-        type=float,
-        default=0.75,
-        help="Minimum semantic_similarity_8192 to include (default: 0.75).",
-    )
-    corpus_group.add_argument(
-        "--max_sim",
-        type=float,
-        default=1.0,
-        help="Maximum semantic_similarity_8192 to include (default: 1.0).",
-    )
-    corpus_group.add_argument(
-        "--min_as_tokens",
-        type=int,
-        default=None,
-        help="Minimum token count for as_text.",
-    )
-    corpus_group.add_argument(
-        "--max_as_tokens",
-        type=int,
-        default=None,
-        help="Maximum token count for as_text.",
-    )
-    corpus_group.add_argument(
-        "--sources",
-        type=str,
-        nargs="+",
-        default=None,
-        help="Filter by specific sources (e.g., 'behindertenbeauftragter', 'bmas', 'mdr').",
-    )
-    corpus_group.add_argument(
+    parser.add_argument(
         "--max_samples",
         type=int,
         default=None,
-        help="Maximum number of corpus samples to process (for debugging or partial runs).",
+        help="Max corpus records to process.",
     )
 
-    # --- SFT Model Arguments ---
-    sft_group = parser.add_argument_group("SFT Model")
-    sft_group.add_argument(
+    # SFT Model
+    parser.add_argument(
         "--sft_model_path",
         type=str,
-        required=True,
-        help="Path to SFT model weights (.pt/.pth) or HF model directory.",
+        default="results/models/token_length_exp/sft_len500",
+        help="Path to SFT model directory or checkpoint.",
     )
-    sft_group.add_argument(
-        "--model_name",
+    parser.add_argument(
         "--base_model_name",
-        dest="base_model_name",
         type=str,
         default="facebook/mbart-large-50",
-        help="Base pretrained model name/architecture if sft_model_path is a .pt weights file (default: 'facebook/mbart-large-50').",
+        help="Base model architecture (default: facebook/mbart-large-50).",
     )
-    sft_group.add_argument(
+    parser.add_argument(
         "--prompt_prefix",
         type=str,
         default="",
-        help="Optional prompt instruction prefix prepended to as_text (default: '').",
+        help="Optional prompt prefix.",
     )
-    sft_group.add_argument(
-        "--num_candidates",
-        type=int,
-        default=4,
-        help="Number of candidate simplifications to generate per text (default: 4).",
-    )
-    sft_group.add_argument(
+    parser.add_argument(
         "--batch_size",
         type=int,
         default=4,
-        help="Batch size for SFT candidate generation (default: 4).",
+        help="Batch size for candidate generation.",
     )
-    sft_group.add_argument(
-        "--temperature",
+    parser.add_argument(
+        "--max_source_len",
+        type=int,
+        default=500,
+        help="Max source sequence length (default: 500).",
+    )
+    parser.add_argument(
+        "--max_target_len",
+        type=int,
+        default=500,
+        help="Max target sequence length (default: 500).",
+    )
+
+    # Temperature Ladder & Sampling
+    parser.add_argument(
+        "--temperature_ladder",
         type=float,
-        default=0.8,
-        help="Sampling temperature for generation (default: 0.8).",
+        nargs="+",
+        default=[0.6, 0.7, 0.8, 0.85],
+        help="Progressive temperature ladder steps (default: 0.6 0.7 0.8 0.85).",
     )
-    sft_group.add_argument(
+    parser.add_argument(
+        "--candidates_per_step",
+        type=int,
+        default=3,
+        help="Number of candidates sampled at each temperature step (default: 3).",
+    )
+    parser.add_argument(
+        "--max_total_candidates",
+        type=int,
+        default=12,
+        help="Maximum cumulative candidate pool per item (default: 12).",
+    )
+    parser.add_argument(
+        "--min_score_margin",
+        type=float,
+        default=0.05,
+        help="Minimum required margin (chosen_score - rejected_score >= min_margin, default: 0.05).",
+    )
+    parser.add_argument(
+        "--repetition_penalty",
+        type=float,
+        default=1.35,
+        help="Repetition penalty parameter (default: 1.35).",
+    )
+    parser.add_argument(
+        "--no_repeat_ngram_size",
+        type=int,
+        default=3,
+        help="Block repetition of n-grams of this size (default: 3).",
+    )
+    parser.add_argument(
         "--top_p",
         type=float,
         default=0.92,
-        help="Top-p nucleus sampling parameter (default: 0.92).",
+        help="Top-p sampling parameter (default: 0.92).",
     )
-    sft_group.add_argument(
+    parser.add_argument(
         "--top_k",
         type=int,
         default=50,
         help="Top-k sampling parameter (default: 50).",
     )
-    sft_group.add_argument(
-        "--max_source_len",
-        type=int,
-        default=512,
-        help="Max source token sequence length (default: 512).",
-    )
-    sft_group.add_argument(
-        "--max_target_len",
-        type=int,
-        default=512,
-        help="Max target token sequence length (default: 512).",
-    )
 
-    # --- Reward Model Arguments ---
-    reward_group = parser.add_argument_group("Reward Model & Evaluation")
-    reward_group.add_argument(
+    # Reward Model
+    parser.add_argument(
         "--reward_model_path",
         type=str,
-        required=True,
-        help="Path to trained BiLSTM Regressor weights (.pt).",
+        default="results/models/token_length_exp/bilstm_mixup_regression_500.pt",
+        help="Path to 500-token BiLSTM weights (.pt).",
     )
-    reward_group.add_argument(
+    parser.add_argument(
         "--reward_vocab_path",
         type=str,
-        required=True,
-        help="Path to vocabulary JSON for BiLSTM Regressor.",
+        default="data/token_length_exp/mixup_vocab_500.json",
+        help="Path to 500-token BiLSTM vocabulary JSON.",
     )
-    reward_group.add_argument(
+    parser.add_argument(
+        "--reward_max_seq_len",
+        type=int,
+        default=500,
+        help="Max sequence length for Reward Model (default: 500).",
+    )
+    parser.add_argument(
         "--sbert_model_name",
         type=str,
         default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
-        help="SentenceTransformer model for semantic preservation scoring.",
+        help="SBERT model for semantic evaluation.",
     )
-    reward_group.add_argument(
+    parser.add_argument(
         "--w_style",
         type=float,
         default=0.5,
-        help="Weight for simplicity/style score in composite reward (default: 0.5).",
+        help="Weight for style score in composite reward (default: 0.5).",
     )
-    reward_group.add_argument(
+    parser.add_argument(
         "--w_sem",
         type=float,
         default=0.5,
         help="Weight for semantic similarity in composite reward (default: 0.5).",
     )
-    reward_group.add_argument(
-        "--reward_max_seq_len",
-        type=int,
-        default=None,
-        help="Max sequence token length for BiLSTM simplicity reward scoring (defaults to max_target_len).",
-    )
-    reward_group.add_argument(
-        "--min_score_margin",
-        type=float,
-        default=0.05,
-        help="Minimum reward score margin (chosen_score - rejected_score) to keep a pair (default: 0.05).",
-    )
 
-    # --- Output Arguments ---
-    out_group = parser.add_argument_group("Output & General")
-    out_group.add_argument(
+    # Output
+    parser.add_argument(
         "--output_file",
         type=str,
-        required=True,
-        help="Output file path for generated DPO dataset (.jsonl or .json).",
+        default="data/temperature_ladder_500/dpo_pairs_w05_w05.jsonl",
+        help="Output path for DPO dataset.",
     )
-    out_group.add_argument(
+    parser.add_argument(
         "--val_split_ratio",
         type=float,
-        default=0.1,
-        help="Ratio of generated pairs to save into a separate validation set (default: 0.1).",
+        default=0.15,
+        help="Validation split ratio (default: 0.15).",
     )
-    out_group.add_argument(
+    parser.add_argument(
         "--seed",
         type=int,
         default=42,
-        help="Random seed for reproducibility (default: 42).",
+        help="Random seed (default: 42).",
     )
 
     return parser.parse_args()
@@ -622,20 +545,14 @@ def main():
 
     device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
     logger.info(f"Active compute device: {device}")
+    logger.info(f"Configured Temperature Ladder: {args.temperature_ladder}")
+    logger.info(f"Repetition Penalty: {args.repetition_penalty} | No-Repeat-Ngram: {args.no_repeat_ngram_size}")
+    logger.info(f"Target Score Margin: >= {args.min_score_margin}")
 
-    # 1. Load and filter corpus
-    corpus_records = load_and_filter_corpus(
-        corpus_path=args.corpus_path,
-        min_sim=args.min_sim,
-        max_sim=args.max_sim,
-        min_as_tokens=args.min_as_tokens,
-        max_as_tokens=args.max_as_tokens,
-        sources=args.sources,
-        max_samples=args.max_samples,
-    )
-
+    # 1. Load Corpus
+    corpus_records = load_corpus_data(corpus_path=args.corpus_path, max_samples=args.max_samples)
     if len(corpus_records) == 0:
-        logger.error("No records remaining after filtering! Check your filtering thresholds.")
+        logger.error("No valid corpus records found.")
         return
 
     # 2. Load SFT Model
@@ -646,108 +563,175 @@ def main():
     )
 
     # 3. Load Reward Evaluator
-    reward_max_len = args.reward_max_seq_len if args.reward_max_seq_len is not None else args.max_target_len
     reward_evaluator = CompositeRewardEvaluator(
         reward_model_path=args.reward_model_path,
         reward_vocab_path=args.reward_vocab_path,
         sbert_model_name=args.sbert_model_name,
         w_style=args.w_style,
         w_sem=args.w_sem,
-        max_seq_len=reward_max_len,
+        max_seq_len=args.reward_max_seq_len,
         device=device,
     )
 
-    # 4. Generate & Score Candidates in Batches
-    logger.info("Starting SFT candidate generation and reward scoring...")
+    # 4. Process Batches through Temperature Ladder
+    logger.info("Starting Progressive Temperature Ladder generation...")
     dpo_pairs: List[Dict[str, Any]] = []
     dropped_low_margin = 0
-    dropped_identical = 0
+    dropped_insufficient = 0
+    temp_resolution_counts = {t: 0 for t in args.temperature_ladder}
 
     batch_size = args.batch_size
     num_batches = (len(corpus_records) + batch_size - 1) // batch_size
 
-    for b_idx in tqdm(range(num_batches), desc="Processing Corpus"):
+    for b_idx in tqdm(range(num_batches), desc="Processing Batches"):
         batch_items = corpus_records[b_idx * batch_size : (b_idx + 1) * batch_size]
-        as_texts = [str(item.get("as_text") or "").strip() for item in batch_items]
-        prompts = [args.prompt_prefix + text for text in as_texts]
+        as_texts = [item["as_text"] for item in batch_items]
+        prompts = [args.prompt_prefix + t for t in as_texts]
 
-        # Generate candidates from SFT model
-        generated_candidates = generate_candidates_batch(
-            model=sft_model,
-            tokenizer=sft_tokenizer,
-            prompts=prompts,
-            is_seq2seq=is_seq2seq,
-            num_candidates=args.num_candidates,
-            max_source_len=args.max_source_len,
-            max_target_len=args.max_target_len,
-            temperature=args.temperature,
-            top_p=args.top_p,
-            top_k=args.top_k,
-            device=device,
-        )
+        # Tracking state per item in this batch
+        batch_state = []
+        for item, as_text, prompt in zip(batch_items, as_texts, prompts):
+            batch_state.append({
+                "item": item,
+                "as_text": as_text,
+                "prompt": prompt,
+                "candidate_pool": [],
+                "reward_cache": {},  # cand_str -> (total_r, style_r, sem_r)
+                "resolved": False,
+                "resolved_temp": None,
+            })
 
-        for item, as_text, prompt, cands in zip(batch_items, as_texts, prompts, generated_candidates):
-            all_cands = list(set([c for c in cands if len(c) > 0]))
+        # Iterate through temperature ladder
+        for temp in args.temperature_ladder:
+            active_indices = [
+                i for i, s in enumerate(batch_state)
+                if not s["resolved"] and len(s["candidate_pool"]) < args.max_total_candidates
+            ]
 
-            if len(all_cands) < 2:
-                dropped_identical += 1
+            if len(active_indices) == 0:
+                break  # All items in batch already resolved!
+
+            active_prompts = [batch_state[i]["prompt"] for i in active_indices]
+
+            # Sample candidates for active items at current temperature
+            sampled = sample_candidates_batch(
+                model=sft_model,
+                tokenizer=sft_tokenizer,
+                prompts=active_prompts,
+                is_seq2seq=is_seq2seq,
+                num_candidates=args.candidates_per_step,
+                temperature=temp,
+                top_p=args.top_p,
+                top_k=args.top_k,
+                repetition_penalty=args.repetition_penalty,
+                no_repeat_ngram_size=args.no_repeat_ngram_size,
+                max_source_len=args.max_source_len,
+                max_target_len=args.max_target_len,
+                device=device,
+            )
+
+            # Update candidate pools and evaluate new candidates
+            for idx_in_active, global_idx in enumerate(active_indices):
+                state = batch_state[global_idx]
+                new_cands = sampled[idx_in_active]
+
+                # Hygiene filtering: no empty, no extreme fragments, no loops, no exact echo
+                clean_new = []
+                for c in new_cands:
+                    c_clean = c.strip()
+                    if c_clean not in state["candidate_pool"] and is_valid_candidate(c_clean, state["as_text"]):
+                        clean_new.append(c_clean)
+
+                if len(clean_new) > 0:
+                    # Compute rewards for newly generated candidates
+                    source_rep = [state["as_text"]] * len(clean_new)
+                    tot_r, style_r, sem_r = reward_evaluator.compute_rewards(source_rep, clean_new)
+                    for c_str, tr, sr, semr in zip(clean_new, tot_r, style_r, sem_r):
+                        state["reward_cache"][c_str] = (float(tr), float(sr), float(semr))
+                        state["candidate_pool"].append(c_str)
+
+                # Check if pool satisfies margin
+                if len(state["candidate_pool"]) >= 2:
+                    pool = state["candidate_pool"]
+                    scores = [state["reward_cache"][c][0] for c in pool]
+                    max_sc = max(scores)
+                    min_sc = min(scores)
+                    margin = max_sc - min_sc
+
+                    if margin >= args.min_score_margin:
+                        state["resolved"] = True
+                        state["resolved_temp"] = temp
+
+        # Extract preference pairs from batch state
+        for state in batch_state:
+            pool = state["candidate_pool"]
+            if len(pool) < 2:
+                dropped_insufficient += 1
                 continue
 
-            # Compute rewards for all candidates against original as_text
-            source_rep = [as_text] * len(all_cands)
-            tot_rewards, style_scores, sem_scores = reward_evaluator.compute_rewards(source_rep, all_cands)
+            # Rank all pooled candidates by total reward
+            ranked_cands = sorted(pool, key=lambda c: state["reward_cache"][c][0], reverse=True)
+            chosen_cand = ranked_cands[0]
+            rejected_cand = ranked_cands[-1]
 
-            # Rank candidates by composite reward (descending)
-            ranked_indices = np.argsort(-tot_rewards)
-            best_idx = ranked_indices[0]
-            worst_idx = ranked_indices[-1]
-
-            chosen_text = all_cands[best_idx]
-            rejected_text = all_cands[worst_idx]
-
-            chosen_score = float(tot_rewards[best_idx])
-            rejected_score = float(tot_rewards[worst_idx])
+            chosen_score, chosen_style, chosen_sem = state["reward_cache"][chosen_cand]
+            rejected_score, rejected_style, rejected_sem = state["reward_cache"][rejected_cand]
             margin = chosen_score - rejected_score
 
-            if chosen_text == rejected_text:
-                dropped_identical += 1
+            if chosen_cand == rejected_cand:
+                dropped_insufficient += 1
                 continue
 
             if margin < args.min_score_margin:
                 dropped_low_margin += 1
                 continue
 
-            pair = {
-                "prompt": prompt,
-                "chosen": chosen_text,
-                "rejected": rejected_text,
+            # Success
+            res_temp = state["resolved_temp"] or args.temperature_ladder[-1]
+            temp_resolution_counts[res_temp] = temp_resolution_counts.get(res_temp, 0) + 1
+
+            dpo_pairs.append({
+                "prompt": state["prompt"],
+                "as_text": state["as_text"],
+                "chosen": chosen_cand,
+                "rejected": rejected_cand,
                 "chosen_score": chosen_score,
                 "rejected_score": rejected_score,
                 "score_margin": margin,
-                "chosen_style": float(style_scores[best_idx]),
-                "chosen_sem": float(sem_scores[best_idx]),
-                "rejected_style": float(style_scores[worst_idx]),
-                "rejected_sem": float(sem_scores[worst_idx]),
-                "source": item.get("source"),
-                "as_sim": item.get("semantic_similarity_8192"),
-            }
-            dpo_pairs.append(pair)
+                "chosen_style": chosen_style,
+                "chosen_sem": chosen_sem,
+                "rejected_style": rejected_style,
+                "rejected_sem": rejected_sem,
+                "resolved_temp": res_temp,
+                "pool_size": len(pool),
+                "source": state["item"].get("source", "10kgnad"),
+            })
 
-    logger.info(f"Generated {len(dpo_pairs)} valid DPO preference pairs.")
-    logger.info(f"Dropped due to low margin (< {args.min_score_margin}): {dropped_low_margin}")
-    logger.info(f"Dropped due to identical/insufficient candidates: {dropped_identical}")
+    # Summary Stats
+    total_processed = len(corpus_records)
+    logger.info(f"=== Temperature Ladder Generation Summary ===")
+    logger.info(f"Total Input Prompts: {total_processed}")
+    logger.info(f"Valid DPO Pairs Generated: {len(dpo_pairs)} ({len(dpo_pairs)/max(1, total_processed)*100:.1f}% retention)")
+    logger.info(f"Dropped (Margin < {args.min_score_margin}): {dropped_low_margin}")
+    logger.info(f"Dropped (Identical/Insufficient/Fragments): {dropped_insufficient}")
+    logger.info(f"Resolution Breakdown by Temperature:")
+    for t in args.temperature_ladder:
+        count = temp_resolution_counts.get(t, 0)
+        logger.info(f"  - Resolved at T={t}: {count} pairs ({count/max(1, len(dpo_pairs))*100:.1f}%)")
 
     if len(dpo_pairs) == 0:
-        logger.error("No valid DPO pairs generated! Lower `--min_score_margin` or check model generation.")
+        logger.error("No valid pairs generated! Consider adjusting --min_score_margin.")
         return
 
-    # Statistics
     margins = [p["score_margin"] for p in dpo_pairs]
     chosen_scs = [p["chosen_score"] for p in dpo_pairs]
     rejected_scs = [p["rejected_score"] for p in dpo_pairs]
-    logger.info(f"Score Summary -> Chosen Avg: {np.mean(chosen_scs):.4f} | Rejected Avg: {np.mean(rejected_scs):.4f} | Avg Margin: {np.mean(margins):.4f}")
+    logger.info(
+        f"Score Summary -> Chosen Avg: {np.mean(chosen_scs):.4f} | "
+        f"Rejected Avg: {np.mean(rejected_scs):.4f} | Avg Margin: {np.mean(margins):.4f}"
+    )
 
-    # 5. Save Output
+    # 5. Save Output Splits
     os.makedirs(os.path.dirname(os.path.abspath(args.output_file)), exist_ok=True)
     random.shuffle(dpo_pairs)
 
@@ -756,22 +740,19 @@ def main():
         train_pairs = dpo_pairs[:split_idx]
         val_pairs = dpo_pairs[split_idx:]
 
-        # Determine train and eval output paths
         base_name, ext = os.path.splitext(args.output_file)
         eval_output_file = f"{base_name}_eval{ext}"
 
-        # Save Train
         _save_pairs(train_pairs, args.output_file)
         logger.info(f"Saved {len(train_pairs)} training pairs to: {args.output_file}")
 
-        # Save Eval
         _save_pairs(val_pairs, eval_output_file)
         logger.info(f"Saved {len(val_pairs)} validation pairs to: {eval_output_file}")
     else:
         _save_pairs(dpo_pairs, args.output_file)
         logger.info(f"Saved all {len(dpo_pairs)} pairs to: {args.output_file}")
 
-    logger.info("=== DPO Preference Dataset Generation Completed Successfully ===")
+    logger.info("=== Temperature Ladder DPO Generation Complete ===")
 
 
 def _save_pairs(pairs: List[Dict[str, Any]], filepath: str):

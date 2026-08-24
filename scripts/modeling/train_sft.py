@@ -66,7 +66,7 @@ def set_seed(seed=42):
 # ZENTRALE KONFIGURATION & PARAMS
 # ==============================================================================
 parser = argparse.ArgumentParser()
-parser.add_argument('--lh_dataset_path', required=True)
+parser.add_argument('--lh_dataset_path', default=None, help='Optional path to lebenshilfe dataset')
 parser.add_argument('--corpus_path', required=True)
 parser.add_argument('--output_dir', required=True)
 parser.add_argument('--min_sim', type=float, required=True)

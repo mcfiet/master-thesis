@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 
-srun python -u scripts/preprocessing/generate_synthetic_steps.py \
+srun python -u scripts/experiments/synthetic_regressor/generate_synthetic_steps.py \
     --input data/lebenshilfe/lebenshilfe_dataset_clean.json \
     --output data/lebenshilfe/lebenshilfe_dataset_with_steps.json \
     --url http://193.175.180.196:8000/v1/chat/completions \
