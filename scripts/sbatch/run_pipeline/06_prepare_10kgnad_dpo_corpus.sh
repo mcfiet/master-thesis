@@ -4,11 +4,11 @@
 #SBATCH --time=01:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/run_pipeline/%x_%j.out
+#SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
 mkdir -p data/corpus
-mkdir -p results/logs
+mkdir -p results/logs/run_pipeline results/plots/run_pipeline results/evaluation
 
 echo "=== Vorbereitung des ungesehenen 10kGNAD Alltagssprache-Korpus für DPO ==="
 date

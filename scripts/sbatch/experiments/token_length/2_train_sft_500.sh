@@ -5,7 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --output=results/logs/experiments/token_length/%x_%j.out
+#SBATCH --error=results/logs/experiments/token_length/%x_%j.err
 
+
+mkdir -p results/logs/experiments/token_length results/plots/experiments/token_length results/evaluation
 mkdir -p results/models/token_length_exp/sft_len500
 
 srun python scripts/modeling/train_sft.py \

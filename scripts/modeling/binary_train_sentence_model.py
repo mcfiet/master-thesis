@@ -458,6 +458,8 @@ else:
     lh_sent_bacc = balanced_accuracy_score(lh_y_true_sents, lh_y_pred_sents)
     
     df_lh = pd.DataFrame(lh_results)
+    os.makedirs(report_dir, exist_ok=True)
+    df_lh.to_csv(os.path.join(report_dir, "sentence_model_lh_eval.csv"), index=False)
     lh_y_true_art = [1] * len(df_lh) + [0] * len(df_lh)
     lh_y_pred_art = list(df_lh["LS_Pred"].map({"Simple": 1, "Normal": 0})) + list(df_lh["AS_Pred"].map({"Simple": 1, "Normal": 0}))
     
@@ -472,3 +474,5 @@ else:
     print(f"Perfect Pair Match: {df_lh['Correct'].sum()} / {len(df_lh)} ({df_lh['Correct'].mean()*100:.1f}%) - (Both LS & AS correct)")
     print(f"Avg LS Flesch: {df_lh['LS_Flesch'].mean():.2f} (AS: {df_lh['AS_Flesch'].mean():.2f})")
     print(f"Avg LS Wiener: {df_lh['LS_Wiener'].mean():.2f} (AS: {df_lh['AS_Wiener'].mean():.2f})")
+    print(f"Ergebnisse gespeichert unter: {os.path.join(report_dir, 'sentence_model_lh_eval.csv')}")
+

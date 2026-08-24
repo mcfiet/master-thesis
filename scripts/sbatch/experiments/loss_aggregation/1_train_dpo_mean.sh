@@ -5,11 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/loss_aggregation/%x_%j.out
+#SBATCH --error=results/logs/experiments/loss_aggregation/%x_%j.err
 
 mkdir -p results/models/loss_aggregation_exp/dpo_mean
-mkdir -p results/logs
+mkdir -p results/logs/experiments/loss_aggregation results/plots/experiments/loss_aggregation results/evaluation
 
 echo "=== Training DPO Model with Loss Type: MEAN (Length-Normalized / Per-Token Log-Probabilities) ==="
 date

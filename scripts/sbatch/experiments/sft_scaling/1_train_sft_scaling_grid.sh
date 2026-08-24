@@ -5,12 +5,12 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=24G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/sft_scaling_grid_%j.log
+#SBATCH --output=results/logs/experiments/sft_scaling/%x_%j.out
 
 set -e
 
 echo "=== Starte SFT Data Scaling Grid (Fractions: 10%, 25%, 50%, 75%, 100%) ==="
-mkdir -p results/experiments/sft_scaling results/logs
+mkdir -p results/logs/experiments/sft_scaling results/plots/experiments/sft_scaling results/evaluation
 
 FRACTION_VALUES=(0.10 0.25 0.50 0.75 1.00)
 

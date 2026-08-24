@@ -5,8 +5,12 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --output=results/logs/experiments/rnn_baseline/%x_%j.out
+#SBATCH --error=results/logs/experiments/rnn_baseline/%x_%j.err
 
 # 1. Standard: Vanilla RNN (Elman RNN, unidirektional)
+
+mkdir -p results/logs/experiments/rnn_baseline results/plots/experiments/rnn_baseline results/evaluation
 srun python scripts/modeling/regression_train_rnn_baseline.py \
     --csv_path data/analysis/corpus_master.csv \
     --batch_size 64 \

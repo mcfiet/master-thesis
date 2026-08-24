@@ -5,11 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/temperature_ladder_500/%x_%j.out
+#SBATCH --error=results/logs/experiments/temperature_ladder_500/%x_%j.err
 
 mkdir -p results/evaluation
-mkdir -p results/logs
+mkdir -p results/logs/experiments/temperature_ladder_500 results/plots/experiments/temperature_ladder_500 results/evaluation
 
 echo "=== 4. Evaluating DPO Ladder Model vs SFT Baseline (500 Tokens) ==="
 date

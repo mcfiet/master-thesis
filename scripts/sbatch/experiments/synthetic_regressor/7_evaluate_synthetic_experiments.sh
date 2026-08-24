@@ -5,10 +5,10 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/synthetic_regressor/%x_%j.out
+#SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
 
-mkdir -p results/evaluation results/logs
+mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation
 
 echo "=== 1. Evaluierung MixUp vs. Synthetic Regressor (Unbiased) ==="
 srun python scripts/evaluation/evaluate_mixup_vs_synthetic.py \

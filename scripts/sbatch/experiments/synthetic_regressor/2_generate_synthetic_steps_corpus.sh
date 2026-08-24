@@ -4,7 +4,11 @@
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
+#SBATCH --output=results/logs/experiments/synthetic_regressor/%x_%j.out
+#SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
 
+
+mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation
 srun python -u scripts/experiments/synthetic_regressor/generate_synthetic_steps.py \
     --input data/analysis/corpus_master.json \
     --output data/corpus/corpus_master_with_steps.json \

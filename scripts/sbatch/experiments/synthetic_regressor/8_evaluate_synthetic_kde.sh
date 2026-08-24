@@ -5,11 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_48gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/synthetic_regressor/%x_%j.out
+#SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
 
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-mkdir -p results/evaluation results/logs
+mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation
 
 echo "=== Starte MixUp vs. Synthetic KDE Evaluation auf Lebenshilfe ==="
 date

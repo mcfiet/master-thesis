@@ -5,11 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/run_pipeline/%x_%j.out
+#SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
 mkdir -p results/evaluation
-mkdir -p results/logs
+mkdir -p results/logs/run_pipeline results/plots/run_pipeline results/evaluation
 
 echo "=== Evaluierung des finalen DPO Modells vs. SFT Baseline auf dem ungesehenen Lebenshilfe Benchmark ==="
 date

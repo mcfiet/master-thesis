@@ -486,7 +486,8 @@ def main():
         "test_pearson_r": round(float(p_corr), 5),
         "test_spearman_rho": round(float(s_corr), 5),
         "test_binary_acc": round(binary_acc * 100.0, 2),
-        "model_save_path": model_save_path
+        "model_save_path": model_save_path,
+        "history": history
     }
     
     metrics_path = os.path.join(args.output_dir, f"{args.experiment_name}_metrics.json")

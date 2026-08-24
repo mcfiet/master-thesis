@@ -5,7 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --output=results/logs/run_pipeline/%x_%j.out
+#SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
+
+mkdir -p results/logs/run_pipeline results/plots/run_pipeline results/evaluation
 srun python scripts/modeling/binary_train_article_model.py \
     --csv_path data/analysis/corpus_master.csv \
     --lh_dataset_path data/lebenshilfe/lebenshilfe_dataset_clean.json \

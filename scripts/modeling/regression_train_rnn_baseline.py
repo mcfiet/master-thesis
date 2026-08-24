@@ -485,3 +485,17 @@ print(f"Abschließende Validierungsmetriken des besten {RNN_TYPE.upper()}-Modell
 print(f"- Mean Squared Error (MSE): {val_mse:.4f}")
 print(f"- Mean Absolute Error (MAE): {val_mae:.4f}")
 print("="*50)
+
+# Save validation metrics
+metrics_save_path = os.path.splitext(MODEL_SAVE_PATH)[0] + "_metrics.json"
+metrics_data = {
+    "rnn_type": RNN_TYPE,
+    "val_mse": float(val_mse),
+    "val_mae": float(val_mae),
+    "best_val_loss": float(best_val_loss),
+    "history": history
+}
+with open(metrics_save_path, "w", encoding="utf-8") as f:
+    json.dump(metrics_data, f, indent=2)
+print(f"=> Validierungsmetriken gespeichert unter: {metrics_save_path}")
+

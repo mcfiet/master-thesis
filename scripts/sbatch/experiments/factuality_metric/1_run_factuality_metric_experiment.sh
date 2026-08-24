@@ -5,11 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:mig_48gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/factuality_metric/%x_%j.out
+#SBATCH --error=results/logs/experiments/factuality_metric/%x_%j.err
 
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-mkdir -p results/evaluation results/logs
+mkdir -p results/logs/experiments/factuality_metric results/plots/experiments/factuality_metric results/evaluation
 
 echo "=== Starte Faktenkonsistenz- & Halluzinationserkennungs-Benchmark ==="
 date

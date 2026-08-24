@@ -356,7 +356,7 @@ elif os.path.exists(OUTPUT_DIR) and len(os.listdir(OUTPUT_DIR)) > 0:
     seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(OUTPUT_DIR).to(DEVICE)
     print("Das beste Modell wurde erfolgreich geladen!")
 
-# Save SFT Loss Curves
+# Save SFT Loss Curves & History
 plt.figure(figsize=(8, 5))
 plt.plot(range(1, len(history["train_loss"]) + 1), history["train_loss"], marker='o', label='Train Loss')
 plt.plot(range(1, len(history["val_loss"]) + 1), history["val_loss"], marker='s', label='Validation Loss')
@@ -366,6 +366,14 @@ plt.ylabel("Cross Entropy Loss")
 plt.legend()
 plt.grid(True)
 plt.savefig(os.path.join(plot_dir, "sft_loss_curves.png"))
+if OUTPUT_DIR:
+    plt.savefig(os.path.join(OUTPUT_DIR, "sft_loss_curves.png"))
+    try:
+        with open(os.path.join(OUTPUT_DIR, "training_history.json"), "w", encoding="utf-8") as f:
+            json.dump(history, f, indent=2)
+        print(f"SFT Trainingshistorie gespeichert unter: {os.path.join(OUTPUT_DIR, 'training_history.json')}")
+    except Exception as e:
+        print(f"Hinweis: Historie konnte nicht gespeichert werden: {e}")
 plt.close()
 
 # ==============================================================================
@@ -506,6 +514,11 @@ else:
             
             print(df_res[["style_score", "sbert_sim_to_as", "sbert_sim_to_ref", "composite_reward"]].describe())
             
+            # Save evaluation predictions DataFrame
+            lh_csv_path = os.path.join(OUTPUT_DIR, "eval_lebenshilfe.csv")
+            df_res.to_csv(lh_csv_path, index=False)
+            print(f"Lebenshilfe Evaluationsergebnisse gespeichert nach: {lh_csv_path}")
+
             # Plot metrics distributions
             plt.figure(figsize=(10, 5))
             plt.hist(df_res["style_score"], bins=15, alpha=0.6, label="Style Einfachheit ($R_{style}$)", color="blue")

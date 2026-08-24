@@ -5,11 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/temperature_ladder_500/%x_%j.out
+#SBATCH --error=results/logs/experiments/temperature_ladder_500/%x_%j.err
 
 mkdir -p results/models/temperature_ladder_500/dpo_w05_w05
-mkdir -p results/logs
+mkdir -p results/logs/experiments/temperature_ladder_500 results/plots/experiments/temperature_ladder_500 results/evaluation
 
 echo "=== 3. Training DPO Model (500 Tokens, Loss: MEAN, w_style=0.5, w_sem=0.5) ==="
 date

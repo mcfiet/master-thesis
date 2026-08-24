@@ -5,12 +5,12 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/metric_weights/%x_%j.out
+#SBATCH --error=results/logs/experiments/metric_weights/%x_%j.err
 
 mkdir -p results/evaluation
 mkdir -p results/plots
-mkdir -p results/logs
+mkdir -p results/logs/experiments/metric_weights results/plots/experiments/metric_weights results/evaluation
 
 echo "=== Running Metric Weights Evaluation (0.5/0.5 vs 0.7/0.3 vs 1.0/0.0) ==="
 date

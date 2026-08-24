@@ -5,10 +5,10 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/rnn_baseline/%x_%j.out
+#SBATCH --error=results/logs/experiments/rnn_baseline/%x_%j.err
 
-mkdir -p results/evaluation results/logs
+mkdir -p results/logs/experiments/rnn_baseline results/plots/experiments/rnn_baseline results/evaluation
 
 echo "=== BiLSTM vs. Vanilla RNN Baseline Evaluation auf Lebenshilfe ==="
 srun python scripts/evaluation/evaluate_bilstm_vs_rnn.py \

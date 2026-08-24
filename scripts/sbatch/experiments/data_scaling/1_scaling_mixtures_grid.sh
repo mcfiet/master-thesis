@@ -5,12 +5,12 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/data_scaling_mixtures_%j.log
+#SBATCH --output=results/logs/experiments/data_scaling/%x_%j.out
 
 set -e
 
 echo "=== Starting MixUp Multiplier Scaling Grid (mixtures_per_pair) ==="
-mkdir -p results/experiments/data_scaling results/logs data/vocabs
+mkdir -p results/logs/experiments/data_scaling results/plots/experiments/data_scaling results/evaluation
 
 MIXTURE_VALUES=(2 5 10 20 40 80)
 

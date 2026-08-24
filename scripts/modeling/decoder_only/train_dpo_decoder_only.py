@@ -270,8 +270,18 @@ def main():
 
         plot_path = os.path.join(plot_dir, f"dpo_decoder_curves_{timestamp}.png")
         plt.savefig(plot_path, dpi=300, bbox_inches="tight")
+        plt.savefig(os.path.join(args.output_dir, "training_curves.png"), dpi=300, bbox_inches="tight")
         plt.close()
         print(f"DPO training plot saved to: {plot_path}")
+
+    # Save training history JSON
+    try:
+        hist_path = os.path.join(args.output_dir, "training_history.json")
+        with open(hist_path, "w", encoding="utf-8") as f:
+            json.dump(log_history, f, indent=2)
+        print(f"DPO Trainingshistorie gespeichert unter: {hist_path}")
+    except Exception as e:
+        print(f"Hinweis: Historie konnte nicht gespeichert werden ({e})")
 
     print("\n" + "=" * 60)
     print("DPO Training Completed Successfully!")

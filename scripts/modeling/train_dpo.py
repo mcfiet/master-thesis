@@ -649,5 +649,15 @@ def main():
     except Exception as e:
         print(f"Hinweis: Plot konnte nicht erstellt werden ({e})")
 
+    # Save training history JSON
+    try:
+        hist_path = os.path.join(args.output_dir, "training_history.json")
+        with open(hist_path, "w", encoding="utf-8") as f:
+            json.dump(history, f, indent=2)
+        print(f"DPO Trainingshistorie gespeichert unter: {hist_path}")
+    except Exception as e:
+        print(f"Hinweis: Historie konnte nicht gespeichert werden ({e})")
+
 if __name__ == "__main__":
     main()
+

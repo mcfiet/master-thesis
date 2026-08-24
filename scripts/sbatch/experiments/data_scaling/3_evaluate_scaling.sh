@@ -4,8 +4,10 @@
 #SBATCH --time=00:30:00
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=8G
-#SBATCH --output=results/logs/data_scaling_eval_%j.log
+#SBATCH --output=results/logs/experiments/data_scaling/%x_%j.out
 
+
+mkdir -p results/logs/experiments/data_scaling results/plots/experiments/data_scaling results/evaluation
 set -e
 
 echo "=== Aggregating Data Scaling Experiment Results ==="

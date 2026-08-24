@@ -358,6 +358,14 @@ def main():
     tokenizer.save_pretrained(model_save_dir)
     torch.save(merged_model.state_dict(), os.path.join(model_save_dir, "sft.pt"))
     
+    # Save training history JSON
+    try:
+        hist_path = os.path.join(model_save_dir, "training_history.json")
+        with open(hist_path, "w", encoding="utf-8") as f:
+            json.dump(history, f, indent=2)
+    except Exception:
+        pass
+    
     # Bereinige temporäres Adapter-Verzeichnis und entferne jegliche adapter_config.json Reste
     if os.path.exists(temp_adapter_dir):
         shutil.rmtree(temp_adapter_dir)

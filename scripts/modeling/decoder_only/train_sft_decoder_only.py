@@ -294,8 +294,18 @@ def main():
         plt.grid(True, linestyle="--", alpha=0.6)
         plot_path = os.path.join(plot_dir, f"sft_decoder_loss_{timestamp}.png")
         plt.savefig(plot_path, dpi=300, bbox_inches="tight")
+        plt.savefig(os.path.join(args.output_dir, "training_loss.png"), dpi=300, bbox_inches="tight")
         plt.close()
         print(f"Loss plot saved to: {plot_path}")
+
+    # Save training history JSON
+    try:
+        hist_path = os.path.join(args.output_dir, "training_history.json")
+        with open(hist_path, "w", encoding="utf-8") as f:
+            json.dump(log_history, f, indent=2)
+        print(f"SFT Trainingshistorie gespeichert unter: {hist_path}")
+    except Exception as e:
+        print(f"Hinweis: Historie konnte nicht gespeichert werden ({e})")
 
     print("\n" + "=" * 60)
     print("SFT Training Completed Successfully!")

@@ -22,7 +22,7 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 mkdir -p data/temperature_ladder_500
 mkdir -p results/models/temperature_ladder_500/dpo_w05_w05
 mkdir -p results/evaluation
-mkdir -p results/logs
+mkdir -p results/logs/experiments/temperature_ladder_500 results/plots/experiments/temperature_ladder_500 results/evaluation
 
 echo "========================================================================"
 echo "Starting Standalone Temperature Ladder 500 Pipeline (GPU: $CUDA_DEV)"

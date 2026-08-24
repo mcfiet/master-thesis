@@ -5,12 +5,12 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/data_scaling_articles_%j.log
+#SBATCH --output=results/logs/experiments/data_scaling/%x_%j.out
 
 set -e
 
 echo "=== Starting Base Article Scaling Grid (train_fraction) ==="
-mkdir -p results/experiments/data_scaling results/logs data/vocabs
+mkdir -p results/logs/experiments/data_scaling results/plots/experiments/data_scaling results/evaluation
 
 FRACTION_VALUES=(0.10 0.25 0.50 0.75 1.00)
 

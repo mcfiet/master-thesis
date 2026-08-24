@@ -4,10 +4,10 @@
 #SBATCH --time=02:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/rule_adherence/%x_%j.out
+#SBATCH --error=results/logs/experiments/rule_adherence/%x_%j.err
 
-mkdir -p data/analysis results/logs
+mkdir -p results/logs/experiments/rule_adherence results/plots/experiments/rule_adherence results/evaluation
 
 echo "=== Starte Quantitative Regel-Adhärenz Evaluation ==="
 date

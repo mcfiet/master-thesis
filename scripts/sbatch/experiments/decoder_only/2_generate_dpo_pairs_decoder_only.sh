@@ -5,9 +5,11 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:mig_48gb:1
-#SBATCH --output=results/logs/%x_%j.out
-#SBATCH --error=results/logs/%x_%j.err
+#SBATCH --output=results/logs/experiments/decoder_only/%x_%j.out
+#SBATCH --error=results/logs/experiments/decoder_only/%x_%j.err
 
+
+mkdir -p results/logs/experiments/decoder_only results/plots/experiments/decoder_only results/evaluation
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 echo "=== Starting Decoder-Only DPO Dataset Generation (48GB GPU, Jina Embeddings) ==="

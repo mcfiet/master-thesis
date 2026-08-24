@@ -4,8 +4,10 @@
 #SBATCH --time=00:30:00
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=8G
-#SBATCH --output=results/logs/sft_scaling_eval_%j.log
+#SBATCH --output=results/logs/experiments/sft_scaling/%x_%j.out
 
+
+mkdir -p results/logs/experiments/sft_scaling results/plots/experiments/sft_scaling results/evaluation
 set -e
 
 echo "=== Aggregiere SFT Data Scaling Ergebnisse ==="
