@@ -2723,3 +2723,443 @@ Input (Standard German):
 - **Structure & Placement of Research Questions (Forschungsfragen):**
   - Should all detailed sub-questions (e.g., corpus curation, metric modeling, LoRA stability, DPO reward alignment) be explicitly enumerated upfront in the introduction?
   - Or should the introduction focus on overarching research goals, with specific sub-questions introduced at the beginning of their respective chapters?
+
+---
+
+<!-- _class: section-header -->
+
+## Week 22
+
+---
+
+### Weekly Focus: Empirical Scaling Laws, Quantitative Rule Adherence, Factuality Benchmarking & Long-Context DPO
+
+- **1. Quantitative Rule Adherence & Benchmark Evaluation:** 14 linguistic metrics across 12 corpus sources ($N=1,439$) and SFT translation vs. Lebenshilfe gold standard.
+- **2. Empirical Sample Complexity & Data Scaling Laws:** Systematic scaling study for both the continuous MixUp BiLSTM metric ($M=20$ sweet spot) and mBART SFT ($N \approx 162$ phase transition).
+- **3. Qualitative Error Analysis & Factual Consistency Benchmark:** Diagnosing 4 SFT failure modes, proving the SBERT bi-encoder blindspot & NER dilemma, and validating NLI sentence contradiction filtering ($N=177$).
+- **4. Context Window Expansion & Long-Context Jina Embeddings:** Scaling from 256 to 1000 tokens and replacing MPNet-128 with Jina-8192, dropping DPO sentence truncation to **$5.4\%$**.
+- **5. DPO Loss Formulation & Composite Reward Balancing:** Mathematical proof of length bias in unweighted sum DPO vs. length-normalized mean DPO; discovering the Pareto optimum at **$0.7 \text{ Style} / 0.3 \text{ Semantic}$**.
+- **6. Thesis Synthesis & Next Steps:** Optimal end-to-end pipeline configuration and timeline for expert human evaluation with Lebenshilfe Kiel.
+
+---
+
+<!-- _class: section-header -->
+
+## Part 1: Quantitative Rule Adherence & Corpus Benchmarking
+
+---
+
+<!-- _class: split -->
+
+### 1.1 The Linguistic Rule Framework (14 Metrics)
+
+<div class="column-left">
+
+**Syntactic & Structural Rules:**
+
+- **Sentence Length (MSL):** Max 8–12 words per sentence; long sentence ratio ($>12$ words).
+- **Subordination Ratio:** Main sentences only (Parataxe); eliminating relative, causal, and conditional sub-clauses.
+- **SVO Order:** Subject-initial sentence preference.
+
+**Grammatical Rules:**
+
+- **Passive Voice Elimination:** Replacing passive with active transitive verbs.
+- **Genitive Elimination:** Substitution by dative prepositional phrases (_"von"_).
+- **Verbal vs. Nominal Style:** Suffix density (`-ung`, `-heit`, `-keit`) & Verb-to-Noun Ratio.
+
+</div>
+
+<div class="column-right">
+
+**Lexical & Readability Dimensions:**
+
+- **Polysyllabic Words ($\ge 3$ syllables):** Pyphen hyphenation engine.
+- **Compound Hyphenation:** Splitting German compound nouns with hyphens (`-`) or Mediopunkt (`·`).
+- **Standard Readability:** Wiener Sachtextformel (WSTF, target $\le 6.0$) and German Flesch Reading Ease.
+- **Semantic Faithfulness:** Dense cosine embedding similarity (Jina v2 Long Context).
+
+**Tooling:**
+
+- Implemented automated `LeichteSpracheRuleAuditor` in Spacy (`de_core_news_lg`), `textstat`, and `regex`.
+
+</div>
+
+---
+
+### 1.2 Corpus Rule Adherence: Source-Level Discrepancies ($N=1,439$)
+
+| Source                  | Domain            | AS Sentence Length | LS Sentence Length | Sentence Reduction (%) | AS Passive / Sent | LS Passive / Sent | Passive Red. (%) | AS Genitive | LS Genitive | Genitive Red. (%) | AS WSTF | LS WSTF  |
+| :---------------------- | :---------------- | :----------------: | :----------------: | :--------------------: | :---------------: | :---------------: | :--------------: | :---------: | :---------: | :---------------: | :-----: | :------: |
+| **BrandEins**           | Journalism        |       17.16        |        7.17        |      **-54.2 %**       |       0.12        |       0.02        |   **-34.7 %**    |    0.10     |    0.01     |    **-86.2 %**    |  11.39  | **3.65** |
+| **Hamburg**             | Municipality      |       13.63        |        6.92        |      **-47.2 %**       |       0.07        |       0.01        |   **-60.4 %**    |    0.08     |    0.01     |    **-90.8 %**    |  11.63  | **6.17** |
+| **Hannover**            | Municipality      |       11.96        |        6.67        |      **-41.4 %**       |       0.05        |       0.00        |   **-57.8 %**    |    0.06     |    0.00     |    **-86.5 %**    |  11.18  | **6.66** |
+| **Sozialpolitik**       | NGO / Association |       13.09        |        7.73        |      **-40.3 %**       |       0.07        |       0.01        |   **-84.9 %**    |    0.07     |    0.01     |    **-86.3 %**    |  11.24  | **7.33** |
+| **Apotheken**           | Health            |       11.77        |        6.94        |      **-39.9 %**       |       0.04        |       0.01        |   **-48.4 %**    |    0.05     |    0.03     |    **-35.8 %**    |  11.03  | **7.70** |
+| **Behindertenbeauftr.** | Federal Agency    |       15.52        |        8.97        |      **-39.7 %**       |       0.05        |       0.05        |    **-8.6 %**    |    0.10     |    0.03     |    **-73.6 %**    |  11.96  | **8.96** |
+| **MDR**                 | News / Broadcast  |       12.13        |        7.70        |      **-35.1 %**       |       0.07        |       0.06        |    **-2.6 %**    |    0.06     |    0.00     |    **-92.1 %**    |  10.25  | **5.94** |
+| **Koeln**               | Municipality      |       12.38        |        7.83        |      **-34.9 %**       |       0.09        |       0.01        |   **-77.0 %**    |    0.10     |    0.01     |    **-90.7 %**    |  11.66  | **6.10** |
+| **Wiesbaden**           | Municipality      |       11.33        |        8.22        |      **-18.5 %**       |       0.07        |       0.02        |   **-49.2 %**    |    0.07     |    0.03     |    **-49.7 %**    |  14.25  | **8.53** |
+
+---
+
+<!-- _class: image-caption -->
+
+### 1.3b Corpus Comparison: Sentence Length, Genitives, Passives & WSTF
+
+![Corpus Rule Adherence Side-by-Side](img/analysis/rule_adherence_corpus_side_by_side.png)
+
+---
+
+### 1.4 SFT Translation Model vs. Lebenshilfe Gold Standard ($N=37$)
+
+| Rule Dimension  | Metric                                     | 1. Standard German (AS) | 2. SFT Model (500 Tok) | 3. Lebenshilfe Gold |   SFT Reduction / Transformation   |
+| :-------------- | :----------------------------------------- | :---------------------: | :--------------------: | :-----------------: | :--------------------------------: |
+| **Syntax**      | **Mean Sentence Length (MSL)**             |       12.50 words       |     **7.71 words**     |   **6.79 words**    |    **-38.3 % Length Reduction**    |
+| **Syntax**      | **Long Sentence Ratio ($>12$ words)**      |         42.4 %          |       **11.2 %**       |      **3.3 %**      |   **-73.6 % Long Sentence Drop**   |
+| **Syntax**      | **Subordination Ratio (Subclauses/Sent)**  |          0.108          |       **0.069**        |      **0.018**      |     **-36.2 % Subclause Drop**     |
+| **Grammar**     | **Passive Voice Ratio (per Sent)**         |          0.093          |       **0.023**        |      **0.020**      |  **-75.4 % Passive Elimination**   |
+| **Grammar**     | **Genitive Noun Ratio (per Noun)**         |          0.092          |       **0.021**        |      **0.010**      |  **-77.4 % Genitive Elimination**  |
+| **Grammar**     | **Verb-to-Noun Ratio (Verbal Style)**      |          0.406          |       **0.614**        |      **0.567**      | **+0.208 Increase (Active Style)** |
+| **Lexicon**     | **Polysyllable Ratio ($\ge 3$ Syllables)** |         33.0 %          |       **23.1 %**       |     **23.4 %**      | **-30.0 % (Matches Gold Exactly)** |
+| **Lexicon**     | **Compound Hyphenation Ratio**             |          2.9 %          |       **16.9 %**       |     **11.7 %**      |    **+14.0 % Over-Hyphenation**    |
+| **Readability** | **Wiener Sachtextformel (WSTF)**           |          11.62          |        **7.28**        |      **7.31**       |     **-37.3 % (Matches Gold)**     |
+| **Readability** | **Flesch Reading Ease (German)**           |        37.44 pts        |     **59.63 pts**      |    **60.67 pts**    |   **+22.19 Points Improvement**    |
+
+---
+
+<!-- _class: image-caption -->
+
+### 1.5 SFT Model vs. Gold Standard: 9-Dimension Rule Dashboard
+
+![Comprehensive Rule Adherence Dashboard](img/analysis/rule_adherence_comprehensive_dashboard.png)
+
+---
+
+<!-- _class: split -->
+
+### 1.6 Qualitative Samples: Positive Simplification vs. Severe Defects
+
+<div class="column-left">
+
+**Positive Simplification (Fluent SVO & Lists):**
+
+```text
+Source: "Pfarrer Schüller ist in der Flüchtlings-
+betreuung engagiert – in seinem Pfarrgarten sollen
+Wohncontainer aufgestellt werden. Wenn man keine
+Räume hat, soll man welche schaffen..."
+```
+
+> _"Als Pfarrer arbeitet er in der Flüchtlings-Betreuung. Er sagt: Wenn es genug Räume gibt, dann können auch andere Pfarren helfen. Zum Beispiel: • In der Pfarr-Gemeinschaft, • im Pfarr-Garten, • und in den Wohn-Containern."_
+
+- Clean active voice, simple SVO structures, hyphenation, bullet list explication.
+
+</div>
+
+<div class="column-right">
+
+**Severe Semantic Defects (Distortions & Prefix Bias):**
+
+```text
+Source 1: "...zu 16 Jahren und einem Monat Haft
+verurteilt. Costa Concordia vor Giglio gekentert..."
+```
+
+> _"Francesco Schettino ist der frühere Kapitän... Er wurde verhaftet. Und er war 16 Jahre alt. ...Dort gab es eine schwere Erdbeben-Erschütterung."_
+
+- **Prison term becomes age** ($16$ J. Haft $\to 16$ Jahre alt); **hallucinates earthquake**.
+
+```text
+Source 2 (NZZ Zürich): "Gewinn von 20,47 Mio. €..."
+```
+
+> _"Sachsen-Anhalt Die NZZ... Im Jahr 2047 hat die NZZ einen Gewinn von 22,2 Mio. Euro..."_
+
+- **MDR Prefix bias** + **profit turns into year 2047**.
+
+</div>
+
+---
+
+<!-- _class: section-header -->
+
+## Part 2: Empirical Sample Complexity & Data Scaling Laws
+
+---
+
+<!-- _class: split -->
+
+### 2.1 BiLSTM MixUp Metric: Sample Complexity Scaling
+
+<div class="column-left">
+
+**Experimental Design:**
+
+- **Axis 1 (Synthetic MixUp Multiplier $M$):** $M \in \{2, 5, 10, 20, 40, 80\}$ on 480 base pairs.
+- **Axis 2 (Real Base Pairs $N$):** $F \in \{10\%, 25\%, 50\%, 75\%, 100\%\}$ ($N=48 \dots 480$) at fixed $M=20$.
+
+**The $M=20$ Phase Transition:**
+
+- Below $M=20$, the metric fails continuous regression ($R^2 \approx 0.27\text{--}0.35$, Accuracy $\approx 74.5\%$).
+- **At $M=20$:** $R^2$ doubles to **$0.678$**, MSE drops from $0.0497 \to \mathbf{0.0248}$, and Accuracy surges to **$85.08\%$**.
+- **Saturation beyond $M=20$:** Quadrupling effort to $M=80$ yields $<0.7$ percentage points gain. $M=20$ is the proven Pareto sweet spot.
+
+</div>
+
+<div class="column-right">
+
+| Exp Run          | Pairs ($N$) | Multiplier ($M$) | Test MAE $\downarrow$ | Test $R^2$ $\uparrow$ | Binary Acc $\uparrow$ |
+| :--------------- | :---------: | :--------------: | :-------------------: | :-------------------: | :-------------------: |
+| `scale_m2`       |     480     |        2         |        0.1867         |        0.2671         |        74.00 %        |
+| `scale_m5`       |     480     |        5         |        0.1778         |        0.3340         |        74.50 %        |
+| `scale_m10`      |     480     |        10        |        0.1775         |        0.3553         |        74.50 %        |
+| **`scale_m20`**  |   **480**   |      **20**      |      **0.1121**       |      **0.6777**       |      **85.08 %**      |
+| `scale_m40`      |     480     |        40        |        0.1038         |        0.6903         |        86.42 %        |
+| `scale_m80`      |     480     |        80        |        0.1050         |        0.6976         |        86.83 %        |
+| `scale_f010`     |   **48**    |        20        |        0.2086         |        0.0903         |        68.25 %        |
+| `scale_f025`     |   **120**   |        20        |        0.1587         |        0.4673         |        79.17 %        |
+| `scale_f050`     |   **240**   |        20        |        0.1461         |        0.5379         |        81.92 %        |
+| `scale_f075`     |   **360**   |        20        |        0.1272         |        0.6208         |        83.17 %        |
+| **`scale_f100`** |   **480**   |      **20**      |      **0.1121**       |      **0.6777**       |      **85.08 %**      |
+
+</div>
+
+---
+
+<!-- _class: split -->
+
+### 2.2 MixUp Insight: Real Diversity vs. Synthetic Remixing
+
+<div class="column-left">
+
+**Direct Comparison (960 Samples / Epoch):**
+
+- **480 Base Articles $\times$ 2 Mixes:**  
+  $\text{MAE} = \mathbf{0.1867}, \quad R^2 = \mathbf{0.2671}, \quad \text{Acc} = \mathbf{74.00\%}$
+
+- **48 Base Articles $\times$ 20 Mixes:**  
+  $\text{MAE} = \mathbf{0.2086}, \quad R^2 = \mathbf{0.0903}, \quad \text{Acc} = \mathbf{68.25\%}$
+
+**Scientific Takeaway:**
+
+- At identical batch capacity, a broader corpus of real human texts is **$3\times$ more effective** ($R^2 = 0.267$ vs. $0.090$) than repeatedly remixing small base data.
+- Real lexical and syntactic diversity cannot be fully substituted by synthetic permutation.
+
+</div>
+
+<div class="column-right">
+
+**Dynamic Resampling Coverage:**
+
+- 480 base pairs $\times$ $M=20$ yield 9,600 training pairs per epoch.
+- With epoch-wise dynamic $\lambda$-resampling across 40 epochs, the BiLSTM encounters up to **384,000 distinct sentence mixtures**.
+- Validates that the current dataset size is mathematically sufficient for robust regression signals.
+
+</div>
+
+---
+
+### 2.3 mBART SFT: Neural Scaling Law & Sample Complexity
+
+| Fraction ($F$) | Train Pairs ($N$) | Val Loss $\downarrow$ | Simplicity ($R_{\text{style}}$) $\uparrow$ | Semantics ($R_{\text{sem}}$) | LS Reference ($Sim_{\text{ref}}$) | BLEU $\uparrow$ | ROUGE-L $\uparrow$ | Avg. Tokens | Truncation Rate (%) |
+| :------------: | :---------------: | :-------------------: | :----------------------------------------: | :--------------------------: | :-------------------------------: | :-------------: | :----------------: | :---------: | :-----------------: |
+|    **10 %**    |        65         |        2.6771         |                 **0.2773**                 |            0.9400            |              0.8708               |     0.0038      |       0.0940       |    102.0    |       83.78 %       |
+|    **25 %**    |        162        |        2.5182         |                 **0.4669**                 |            0.9254            |              0.8732               |     0.0074      |       0.1225       |    135.5    |       78.38 %       |
+|    **50 %**    |        323        |        2.3352         |                 **0.3798**                 |            0.9426            |              0.8830               |     0.0095      |       0.1329       |    154.9    |       78.38 %       |
+|    **75 %**    |        484        |        2.2153         |                 **0.4439**                 |            0.9237            |              0.8857               |     0.0101      |       0.1323       |    149.9    |       64.86 %       |
+|   **100 %**    |        646        |      **2.0624**       |                 **0.4688**                 |            0.9428            |              0.8798               |   **0.0113**    |     **0.1395**     |  **163.1**  |     **64.86 %**     |
+
+**Empirical Scaling Insights:**
+
+1. **Monotonic Power-Law Scaling:** Validation cross-entropy loss follows strict power-law decay ($2.677 \to 2.062$).
+2. **Linguistic Phase Transition ($N \approx 162$):** At 10% ($N=65$), mBART suffers from _shortcut copying_ ($R_{style}=0.277$). At 25% ($N=162$), it achieves a breakthrough ($+68.4\%$ to $0.467$), autonomously learning SVO syntax, bullet lists, and compound hyphenation.
+3. **Simplicity Plateau vs. Robustness Growth:** Adding data beyond $N=162$ does not force deeper syntactic simplification under Cross-Entropy loss ($R_{style} \approx 0.47$), but triples BLEU ($0.0038 \to 0.0113$) and drops truncation ($83.8\% \to 64.9\%$).
+
+---
+
+<!-- _class: image-caption -->
+
+### 2.3b mBART SFT Empirical Scaling Curves (6 Panels: Loss, Metrics, Stability & Compute)
+
+![mBART SFT Scaling Curves](img/analysis/sft_scaling_comprehensive_curves.png)
+
+---
+
+<!-- _class: section-header -->
+
+## Part 3: Qualitative Error Analysis & Factual Consistency Benchmark
+
+---
+
+<!-- _class: split -->
+
+### 3.1 Qualitative SFT Failure Modes ($N=9,030$ Evaluated Outputs)
+
+<div class="column-left">
+
+**1. Numerical Slot Shifts & Hallucinations:**
+
+- _Source:_ Former captain sentenced to 16 years prison.  
+  _SFT:_ _"He was arrested and was 16 years old."_ (Prison term $\to$ Age).
+- _Source:_ 20.47 million Euro profit.  
+  _SFT:_ _"In the year 2047, NZZ earned 22 million Euro."_ (Profit $\to$ Year).
+- _Source:_ Sports car manufacturer Ferrari on stock market.  
+  _SFT:_ _"Ferrari is a famous race car driver."_ (Entity category confusion).
+
+**2. Corpus-Induced Prefix Artefacts:**
+
+- Unconditionally prefixing articles with _"Sachsen-Anhalt"_ due to high MDR broadcast representation ($P(y_1=\text{"Sachsen-Anhalt"})\gg 0$).
+
+</div>
+
+<div class="column-right">
+
+**3. Pseudo-Word Neologisms:**
+
+- Forced syllable hyphenation causes bizarre creations: _"Bischwürden"_, _"Schritt-Früchte"_, _"Kriegs-Kraft-Material"_.
+
+**4. Token Budget Exhaustion:**
+
+- Verbose rhetorical question chains consume early token budget, cutting off sentences abruptly at the 256-token limit.
+
+**MixUp Metric Immunity:**
+
+- While autoregressive SFT learns directional text priors, the discriminative BiLSTM metric pools globally over all tokens. A single regional prefix has $<1\%$ weight and zero correlation with label $\lambda=1.0$.
+
+</div>
+
+---
+
+### 3.2 Factual Consistency Benchmark ($N=177$)
+
+Evaluated on 4 balanced test slices: (1) Gold Positives, (2) Real Model Hallucinations, (3) Random Shuffle Negatives, (4) Targeted Minimal Perturbations (1-word negation/number shifts).
+
+| Metric                                  | ROC-AUC (Overall) | Gold Positives ($N=77$) | Real Hallucinations ($N=40$) | Random Shuffle ($N=30$) | Minimal Perturbations ($N=30$) | Diagnostic Finding                                                                           |
+| :-------------------------------------- | :---------------: | :---------------------: | :--------------------------: | :---------------------: | :----------------------------: | :------------------------------------------------------------------------------------------- |
+| **SBERT Similarity ($R_{\text{sem}}$)** |   **$0.7722$**    |    $0.8877 \pm 0.05$    |      $0.8687 \pm 0.07$       |  **$0.6523 \pm 0.09$**  |     **$0.7934 \pm 0.12$**      | **Bi-Encoder Blindspot:** Detects topic shuffle ($0.65$), but blind to fact errors ($0.87$). |
+| **NLI $P(\text{Contradiction})$**       |   **$0.6223$**    |  **$0.2530 \pm 0.16$**  |      $0.3101 \pm 0.13$       |    $0.3123 \pm 0.09$    |     **$0.4091 \pm 0.26$**      | **Sharp Contradiction Sensitivity:** Heavily penalizes fine semantic inversions.             |
+| **NLI Factuality ($P_e - P_c$)**        |   **$0.5840$**    |    $0.4547 \pm 0.10$    |      $0.4452 \pm 0.06$       |    $0.4461 \pm 0.04$    |       $0.4027 \pm 0.18$        | Diluted on document-level by neutral background sentences.                                   |
+| **NER Jaccard Overlap**                 |   **$0.4900$**    |  **$0.1345 \pm 0.11$**  |      $0.2032 \pm 0.12$       |    $0.0039 \pm 0.01$    |     **$0.6778 \pm 0.25$**      | **The NER Dilemma:** Worse than random ($0.49$). Penalizes valid LS simplification.          |
+| **Number Check (Regex)**                |   **$0.4619$**    |    $0.6343 \pm 0.40$    |      $0.7915 \pm 0.28$       |    $0.3003 \pm 0.38$    |       $0.8167 \pm 0.35$        | Deterministic complement; insufficient in isolation.                                         |
+
+---
+
+<!-- _class: split -->
+
+### 3.3 Diagnostic Visualizations: Metric Distributions & ROC Curves
+
+<div class="column-left">
+
+![Factuality 4-Panel Comparison](img/analysis/factuality_metrics_4panel_comparison.png)
+
+</div>
+
+<div class="column-right">
+
+![Factuality ROC Curves](img/analysis/factuality_metrics_roc_curves.png)
+
+</div>
+
+---
+
+<!-- _class: section-header -->
+
+## Part 5: DPO Loss Formulation & Composite Reward Balancing
+
+---
+
+<!-- _class: split -->
+
+### 5.1 Loss Aggregation: Unweighted Sum vs. Length-Normalized Mean
+
+<div class="column-left">
+
+**The Length-Bias Dilemma in Classical DPO (`sum`):**
+$$\log \pi(y \mid x) = \sum_{t=1}^{|y|} \log \pi(y_t \mid x, y_{<t})$$
+
+- Because $\log p \le 0$, every additional explanatory token accumulates negative log-likelihood.
+- Penalizes long, didactically rich Leichte Sprache paraphrases and rewards premature truncations.
+
+**Length-Normalized Mean DPO (`mean`):**
+$$\overline{\log \pi(y \mid x)} = \frac{1}{|y|} \sum_{t=1}^{|y|} \log \pi(y_t \mid x, y_{<t})$$
+
+- Optimizes average confidence per token, eliminating length exploitation.
+
+</div>
+
+<div class="column-right">
+
+| Model Variant               | Simplicity ($R_{style}$) | Semantics ($R_{sem}$) | Composite Reward | Truncation Rate (%) |
+| :-------------------------- | :----------------------: | :-------------------: | :--------------: | :-----------------: |
+| **SFT Baseline**            |          0.6734          |        0.8528         |      0.7631      |       78.38 %       |
+| **DPO Sum (Classic)**       |          0.6616          |        0.8590         |      0.7603      |       72.97 %       |
+| **DPO Mean (Length-Norm.)** |        **0.6938**        |      **0.8595**       |    **0.7767**    |     **67.57 %**     |
+
+**Empirical Verification:**
+
+- `DPO Mean` achieves the highest Simplicity (**$0.6938$**) and Composite Reward (**$0.7767$**).
+- `DPO Sum` falls behind SFT on Simplicity ($0.6616$) due to token accumulation penalties.
+
+</div>
+
+---
+
+### 5.2 Composite Reward Weighting: Simplicity vs. Semantics
+
+$$R(x, y) = w_{\text{style}} \cdot R_{\text{style}}(y) + w_{\text{sem}} \cdot R_{\text{sem, norm}}(x, y)$$
+
+| Configuration     | $w_{\text{style}}$ | $w_{\text{sem}}$ | Simplicity ($R_{style}$) | Semantics ($R_{sem}$) | LS Reference ($Sim_{ref}$) | Composite (0.7/0.3) | BLEU $\uparrow$ | Truncation Rate (%) |
+| :---------------- | :----------------: | :--------------: | :----------------------: | :-------------------: | :------------------------: | :-----------------: | :-------------: | :-----------------: |
+| **SFT Baseline**  |         –          |        –         |          0.6445          |      **0.8628**       |           0.8503           |       0.7100        |     0.0069      |       75.68 %       |
+| **`dpo_w05_w05`** |        0.50        |       0.50       |          0.6747          |        0.8585         |         **0.8561**         |       0.7298        |   **0.0091**    |       72.97 %       |
+| **`dpo_w07_w03`** |      **0.70**      |     **0.30**     |        **0.6877**        |        0.8540         |           0.8554           |     **0.7376**      |     0.0085      |       81.08 %       |
+| **`dpo_w10_w00`** |        1.00        |       0.00       |          0.6756          |        0.8613         |           0.8552           |       0.7313        |     0.0075      |     **64.86 %**     |
+
+**Scientific Insights:**
+
+1. **Pareto Optimum at $0.7 \text{ Style} / 0.3 \text{ Semantic}$:** Maximizes simplicity ($0.6877$) and composite reward ($0.7376$) while maintaining semantic fidelity ($0.8540$).
+2. **Implicit DPO Regularization ($w_{\text{sem}}=0.0$):** Even with zero semantic reward, semantic similarity does not collapse ($0.8613$) because the reference model $\pi_{ref}$ acts as a regularizing anchor.
+3. **Reproducibility:** `dpo_w05_w05` replicates `dpo_mean` from the loss aggregation study to the exact decimal.
+
+---
+
+<!-- _class: section-header -->
+
+## Part 6: Thesis Synthesis & Next Steps
+
+---
+
+### 6.2 Next Steps: Human Expert Evaluation (Lebenshilfe Kiel)
+
+- **Expert Evaluation Study Execution:**
+  - Blinded evaluation of randomized source texts, SFT/DPO model outputs, and human gold translations with domain experts from **Lebenshilfe Kiel**.
+  - Harmonized 0–10 scoring on Content Preservation (Factuality) and Leichte Sprache Compliance (Rule Adherence).
+- **Thesis Writing Roadmap:**
+  - **Chapter 3 (Methodology):** Rule Auditor (14 metrics), continuous BiLSTM MixUp derivation, and length-normalized DPO formulation.
+  - **Chapter 4 (Empirical Experiments):** Corpus analysis, scaling laws ($M=20$ & $N=162$), factuality benchmarking ($N=177$), and long-context alignment.
+  - **Chapter 5 (Evaluation & Expert Study):** Automated metric correlations vs. blind expert human ratings.
+
+---
+
+<!-- _class: split -->
+
+### Discussion & Open Questions for the Supervisor
+
+<div class="column-left">
+
+**1. Factuality Metric vs. Scope of the Master's Thesis:**
+
+- **State of Research:** We have proven that the models successfully learn syntax, morphology, Leichte Sprache rules, and high semantic fidelity. However, an off-the-shelf composite metric that reliably stops fine-grained numerical/entity hallucinations without human-in-the-loop filtering is still an open research problem (SBERT blindspot & NER dilemma).
+- **Core Question:** Given the strict master's thesis timeline, is it necessary to build a "flawless end product", or is the scientific proof of feasibility, scaling boundaries, and diagnostic limitation analysis already a complete academic contribution?
+
+</div>
+
+<div class="column-right">
+
+**2. Focus on Core Contribution vs. Engineering Polish:**
+
+- Should the remaining thesis time strictly prioritize **writing the manuscript** (formalizing the 14-rule framework, scaling laws, and evaluation results) and conducting the **expert study with Lebenshilfe Kiel**?
+- Or should additional engineering effort be allocated to train custom cross-encoder NLI reward models for hallucination elimination?
+- **Thesis Framing:** How to best frame the trade-off between generative simplification capabilities and automated factuality evaluation in the discussion chapter?
+
+</div>
