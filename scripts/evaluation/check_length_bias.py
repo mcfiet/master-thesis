@@ -207,6 +207,37 @@ def main():
     
     print("\nClassification Report (100 tokens):")
     print(classification_report(true_labels, fixed_len_preds_100, target_names=["AS", "LS"]))
+
+    # Save DataFrame for Notebook Consumption
+    output_csv = getattr(args, "output_csv", "results/evaluation/length_bias_results.csv")
+    os.makedirs(os.path.dirname(output_csv), exist_ok=True)
+    df_results = pd.DataFrame({
+        "text": all_texts,
+        "length": lengths,
+        "probability": probabilities,
+        "true_label": true_labels,
+        "dummy_pred": dummy_preds,
+        "fixed_50_pred": fixed_len_preds_50,
+        "fixed_100_pred": fixed_len_preds_100,
+    })
+    df_results.to_csv(output_csv, index=False)
+    print(f"\nErgebnisse erfolgreich gespeichert in: {output_csv}")
     
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Check length bias in BiLSTM classifier")
+    parser.add_argument("--dataset_path", default="data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json")
+    parser.add_argument("--model_path", default="results/models/lstm_article_sim_0.80_to_0.98.pt")
+    parser.add_argument("--vocab_source_csv", default="data/analysis/information_loss_analysis_cleaned.csv")
+    parser.add_argument("--output_csv", default="results/evaluation/length_bias_results.csv")
+    args = parser.parse_args()
+    
+    if os.path.exists(args.dataset_path):
+        DATASET_PATH = args.dataset_path
+    if os.path.exists(args.model_path):
+        MODEL_PATH = args.model_path
+    if os.path.exists(args.vocab_source_csv):
+        VOCAB_SOURCE_CSV = args.vocab_source_csv
+        
     main()
+

@@ -486,7 +486,7 @@ def main():
     parser.add_argument("--prompt_prefix", default="", help="Prompt prefix for Seq2Seq inference (default: empty)")
     parser.add_argument("--sbert_model_name", default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2", help="SentenceTransformer model name")
     parser.add_argument("--output_summary", default="results/evaluation/token_length_comparison_summary.csv")
-    parser.add_argument("--output_details", default="results/evaluation/token_length_comparison_details.csv")
+    parser.add_argument("--output_details", default="results/evaluation/token_length_comparison_detailed.csv")
     parser.add_argument("--output_metric_summary", default="results/evaluation/token_length_metric_comparison.csv")
     parser.add_argument("--output_metric_details", default="results/evaluation/token_length_metric_details.csv")
     parser.add_argument("--max_samples", type=int, default=None)
@@ -610,7 +610,12 @@ def main():
     if all_details:
         df_all_details = pd.concat(all_details, ignore_index=True)
         df_all_details.to_csv(args.output_details, index=False)
+        # Also save alternative name for compatibility
+        alt_details = args.output_details.replace("detailed.csv", "details.csv")
+        if alt_details != args.output_details:
+            df_all_details.to_csv(alt_details, index=False)
         print(f"Detailergebnisse gespeichert: {args.output_details}")
+
 
     if summaries:
         print("\n--- Zusammenfassung der Übersetzungs-Modelle (SFT & DPO) ---")

@@ -5,7 +5,7 @@
 
 set -e
 
-mkdir -p results/logs data/synthetic results/models/synthetic
+mkdir -p results/logs data/synthetic results/models/synthetic results/evaluation
 
 echo "=== Submitting Synthetic Regressor Experiment Pipeline ==="
 
@@ -31,5 +31,9 @@ echo "Step 5 (Generate DPO Synthetic): Job ID $JOB5"
 # Stufe 5: DPO Training
 JOB6=$(sbatch --parsable --dependency=afterok:$JOB4:$JOB5 scripts/sbatch/experiments/synthetic_regressor/6_train_dpo_synthetic.sh)
 echo "Step 6 (Train DPO Synthetic): Job ID $JOB6"
+
+# Stufe 6: Evaluierung
+JOB7=$(sbatch --parsable --dependency=afterok:$JOB3:$JOB6 scripts/sbatch/experiments/synthetic_regressor/7_evaluate_synthetic_experiments.sh)
+echo "Step 7 (Evaluate Synthetic Experiments): Job ID $JOB7"
 
 echo "=== Synthetic Pipeline Submitted Successfully! ==="

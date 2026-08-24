@@ -1,0 +1,24 @@
+#!/bin/bash
+#SBATCH --job-name=eval_textcomplexityde
+#SBATCH --partition=research
+#SBATCH --time=01:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --gres=gpu:mig_48gb:1
+#SBATCH --output=results/logs/%x_%j.out
+#SBATCH --error=results/logs/%x_%j.err
+
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+mkdir -p results/evaluation results/logs
+
+echo "=== Starte TextComplexityDE Benchmark Evaluation ==="
+date
+
+srun python scripts/evaluation/evaluate_textcomplexityde.py \
+    --model_path "results/models/bilstm_mixup_regression.pt" \
+    --vocab_path "data/vocabs/mixup_vocab.json" \
+    --benchmark_csv "data/analysis/textcomplexityde/ratings.csv" \
+    --output_csv "results/evaluation/textcomplexityde_eval.csv"
+
+echo "=== TextComplexityDE Evaluation erfolgreich abgeschlossen ==="
+date

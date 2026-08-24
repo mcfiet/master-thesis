@@ -242,4 +242,19 @@ def main():
     print(f"Avg AS Wiener: {df_res['AS_Wiener'].mean():.2f}")
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Evaluate sentence-level BiLSTM classifier")
+    parser.add_argument("--dataset_path", default="data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json")
+    parser.add_argument("--model_path", default="results/models/lstm_sentence_sim_0.80_to_0.98.pt")
+    parser.add_argument("--vocab_source_csv", default="data/analysis/information_loss_analysis_cleaned.csv")
+    args = parser.parse_args()
+    
+    if os.path.exists(args.dataset_path):
+        DATASET_PATH = args.dataset_path
+    if os.path.exists(args.model_path):
+        MODEL_PATH = args.model_path
+    if os.path.exists(args.vocab_source_csv):
+        VOCAB_SOURCE_CSV = args.vocab_source_csv
+        
     main()
+

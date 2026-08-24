@@ -1,0 +1,26 @@
+#!/bin/bash
+#SBATCH --job-name=eval_synthetic_kde
+#SBATCH --partition=research
+#SBATCH --time=01:00:00
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --gres=gpu:mig_48gb:1
+#SBATCH --output=results/logs/%x_%j.out
+#SBATCH --error=results/logs/%x_%j.err
+
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+mkdir -p results/evaluation results/logs
+
+echo "=== Starte MixUp vs. Synthetic KDE Evaluation auf Lebenshilfe ==="
+date
+
+srun python scripts/evaluation/evaluate_mixup_synthetic_kde.py \
+    --test_data_path "data/lebenshilfe/lebenshilfe_dataset_clean.json" \
+    --mixup_model_path "results/models/bilstm_mixup_regression.pt" \
+    --mixup_vocab_path "data/vocabs/mixup_vocab.json" \
+    --synthetic_model_path "results/models/bilstm_synthetic_regression.pt" \
+    --synthetic_vocab_path "data/vocabs/synthetic_vocab.json" \
+    --output_csv "results/evaluation/mixup_synthetic_kde_eval.csv"
+
+echo "=== MixUp vs. Synthetic KDE Evaluation erfolgreich abgeschlossen ==="
+date
