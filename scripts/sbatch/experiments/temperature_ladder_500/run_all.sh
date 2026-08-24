@@ -25,11 +25,11 @@ JOB0=$(sbatch --parsable scripts/sbatch/experiments/temperature_ladder_500/0_pre
 echo "Submitted Step 0 (Prepare Corpus): Job ID $JOB0"
 
 # Step 1: Generate DPO Pairs (depends on Step 0)
-JOB1=$(sbatch --parsable --dependency=afterok:$JOB0 scripts/sbatch/experiments/temperature_ladder_500/1_generate_dpo_pairs_w05_w05.sh)
+JOB1=$(sbatch --parsable --dependency=afterok:$JOB0 scripts/sbatch/experiments/temperature_ladder_500/1_generate_dpo_pairs_w10_w00.sh)
 echo "Submitted Step 1 (Generate DPO Pairs): Job ID $JOB1"
 
 # Step 2: Train DPO Model (depends on Step 1)
-JOB2=$(sbatch --parsable --dependency=afterok:$JOB1 scripts/sbatch/experiments/temperature_ladder_500/2_train_dpo_w05_w05.sh)
+JOB2=$(sbatch --parsable --dependency=afterok:$JOB1 scripts/sbatch/experiments/temperature_ladder_500/2_train_dpo_w10_w00.sh)
 echo "Submitted Step 2 (Train DPO Model): Job ID $JOB2"
 
 # Step 3: Evaluate DPO Model (depends on Step 2)
