@@ -1,4 +1,8 @@
 import requests
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + '/..'))
+import cleaner
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
@@ -96,8 +100,11 @@ def extract_koeln_content(soup):
 
 def main():
     # Path to the aligned URLs
-    aligned_urls_path = os.path.join("results", "aligned_urls", "koeln_aligned_urls.json")
-    output_file = os.path.join("results", "corpus", "koeln_articles.json")
+    aligned_urls_path = os.path.join("data", "corpus", "1_aligned_urls", "koeln_aligned_urls.json")
+    if not os.path.exists(aligned_urls_path):
+        aligned_urls_path = os.path.join("results", "aligned_urls", "koeln_aligned_urls.json")
+    output_file = os.path.join("data", "corpus", "2_raw_scraped", "koeln_articles.json")
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
     if not os.path.exists(aligned_urls_path):
         print(f"Aligned URLs file not found at {aligned_urls_path}")

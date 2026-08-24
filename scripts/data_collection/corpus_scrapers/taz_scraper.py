@@ -1,4 +1,8 @@
 import requests
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + '/..'))
+import cleaner
 from bs4 import BeautifulSoup
 import json
 import re
@@ -68,7 +72,9 @@ def extract_taz_content(soup):
 
 def main():
     # Path to the aligned URLs
-    aligned_urls_path = os.path.join("results", "aligned_urls", "taz_aligned_urls.json")
+    aligned_urls_path = os.path.join("data", "corpus", "1_aligned_urls", "taz_aligned_urls.json")
+    if not os.path.exists(aligned_urls_path):
+        aligned_urls_path = os.path.join("results", "aligned_urls", "taz_aligned_urls.json")
     
     if not os.path.exists(aligned_urls_path):
         print(f"Aligned URLs file not found at {aligned_urls_path}")
@@ -139,7 +145,8 @@ def main():
 
     # Ensure output directory exists
     os.makedirs(os.path.join("results", "corpus"), exist_ok=True)
-    output_file = os.path.join("results", "corpus", "taz_articles.json")
+    output_file = os.path.join("data", "corpus", "2_raw_scraped", "taz_articles.json")
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=4)

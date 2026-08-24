@@ -1,4 +1,8 @@
 import requests
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + '/..'))
+import cleaner
 from bs4 import BeautifulSoup
 import json
 import re
@@ -88,8 +92,11 @@ def extract_stuttgart_content(soup):
     return " ".join(texts)
 
 def main():
-    aligned_urls_path = os.path.join("results", "aligned_urls", "stuttgart_aligned_urls.json")
-    output_file = os.path.join("results", "corpus", "stuttgart_articles.json")
+    aligned_urls_path = os.path.join("data", "corpus", "1_aligned_urls", "stuttgart_aligned_urls.json")
+    if not os.path.exists(aligned_urls_path):
+        aligned_urls_path = os.path.join("results", "aligned_urls", "stuttgart_aligned_urls.json")
+    output_file = os.path.join("data", "corpus", "2_raw_scraped", "stuttgart_articles.json")
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
     if not os.path.exists(aligned_urls_path):
         print(f"Aligned URLs file not found at {aligned_urls_path}")

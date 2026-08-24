@@ -1,4 +1,8 @@
 import requests
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + '/..'))
+import cleaner
 from bs4 import BeautifulSoup
 import json
 import re
@@ -35,7 +39,7 @@ def extract_mdr_content(soup):
     # 2. Selection: Get Headline, Lead, and Paragraphs
     # In MDR LS, paragraphs are often in div.paragraph
     # In MDR AS, paragraphs are often in div.paragraph or p.text
-    candidates = content_area.select('h1, .article-header__lead, .media-item__caption, div.paragraph, p.text')
+    candidates = content_area.select('h1, h2, h3, .article-header__lead, .media-item__caption, div.paragraph, p, p.text')
     
     content_parts = []
     for el in candidates:
@@ -60,6 +64,7 @@ def extract_mdr_content(soup):
             if any(sig in lower_text for sig in skip_signals):
                 continue
                 
+            text = cleaner.ensure_block_punctuation(text)
             content_parts.append(text)
     
     full_text = " ".join(content_parts)
@@ -68,11 +73,13 @@ def extract_mdr_content(soup):
     full_text = full_text.replace("•", " • ")
     full_text = re.sub(r'\s+', ' ', full_text).strip()
     
-    return full_text
+    return cleaner.clean_text(full_text, source="mdr")
 
 def main():
     # Path to the aligned URLs
-    aligned_urls_path = os.path.join("results", "aligned_urls", "mdr_aligned_urls.json")
+    aligned_urls_path = os.path.join("data", "corpus", "1_aligned_urls", "mdr_aligned_urls.json")
+    if not os.path.exists(aligned_urls_path):
+        aligned_urls_path = os.path.join("results", "aligned_urls", "mdr_aligned_urls.json")
     
     if not os.path.exists(aligned_urls_path):
         print(f"Aligned URLs file not found at {aligned_urls_path}")
@@ -156,7 +163,8 @@ def main():
         "pairs": aligned_pairs
     }
 
-    output_file = os.path.join("results", "corpus", "mdr_articles.json")
+    output_file = os.path.join("data", "corpus", "2_raw_scraped", "mdr_articles.json")
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=4)
