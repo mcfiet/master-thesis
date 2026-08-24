@@ -528,6 +528,25 @@ def main():
     det_csv = os.path.join(args.output_dir, f"{args.experiment_name}_details.csv")
     df_det.to_csv(det_csv, index=False)
     
+    # Save Loss Plot
+    try:
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(8, 5))
+        epochs_range = range(1, len(history["train_loss"]) + 1)
+        plt.plot(epochs_range, history["train_loss"], label="Train Loss", marker="o")
+        plt.plot(epochs_range, history["val_loss"], label="Val Loss", marker="s")
+        plt.title(f"SFT Lernkurve: {args.experiment_name} (F={args.train_fraction})")
+        plt.xlabel("Epoche")
+        plt.ylabel("Loss")
+        plt.legend()
+        plt.grid(True, linestyle="--", alpha=0.6)
+        plot_path = os.path.join(args.output_dir, f"{args.experiment_name}_loss_curve.png")
+        plt.savefig(plot_path, dpi=200, bbox_inches="tight")
+        plt.close()
+        print(f"  -> Plot: {plot_path}")
+    except Exception as e:
+        print(f"  [!] Plot-Erstellung fehlgeschlagen: {e}")
+
     print(f"\n[ERFOLG] Ergebnisse gespeichert:")
     print(f"  -> JSON: {json_path}")
     print(f"  -> CSV:  {det_csv}")

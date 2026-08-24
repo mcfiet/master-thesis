@@ -270,11 +270,16 @@ metrics_to_show = ["sbert_score", "nli_factuality", "nli_p_contra", "ner_jaccard
 df_summary = df_benchmark.groupby("category")[metrics_to_show].mean().round(4)
 print(df_summary.to_string())
 
+summary_cat_path = "results/evaluation/factual_consistency_summary_by_category.csv"
+df_summary.to_csv(summary_cat_path)
+print(f"Kategorie-Zusammenfassung gespeichert in: {summary_cat_path}")
+
 print("\n" + "="*80)
 print("TRENNKRAFT & ROC-AUC (Unterscheidung: Gold Positives vs. Alle Negatives)")
 print("="*80)
 
 y_true = df_benchmark["is_factually_correct"].values
+roc_auc_records = []
 
 for m in metrics_to_show:
     if m == "nli_p_contra":
@@ -289,6 +294,21 @@ for m in metrics_to_show:
     delta_hallu = gold_mean - hallu_mean
     delta_pert = gold_mean - pert_mean
     
+    roc_auc_records.append({
+        "metric": m,
+        "roc_auc": round(float(auc), 4),
+        "gold_mean": round(float(gold_mean), 4),
+        "hallu_mean": round(float(hallu_mean), 4),
+        "pert_mean": round(float(pert_mean), 4),
+        "delta_gold_hallu": round(float(delta_hallu), 4),
+        "delta_gold_pert": round(float(delta_pert), 4)
+    })
     print(f"Metrik: {m:<22} | ROC-AUC: {auc:.4f} | Δ(Gold - Hallu): {delta_hallu:+.4f} | Δ(Gold - Perturb): {delta_pert:+.4f}")
 
+df_roc = pd.DataFrame(roc_auc_records)
+roc_table_path = "results/evaluation/factual_consistency_roc_auc_table.csv"
+df_roc.to_csv(roc_table_path, index=False)
+print(f"ROC-AUC Tabelle gespeichert in: {roc_table_path}")
+
 print("\nEvaluierung erfolgreich abgeschlossen.")
+

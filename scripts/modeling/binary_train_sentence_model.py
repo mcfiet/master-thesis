@@ -20,18 +20,8 @@ import textstat
 import json
 
 # ==============================================================================
-# LOGGING SETUP
+# LOGGING CLASS
 # ==============================================================================
-log_dir = "results/logs"
-plot_dir = "results/plots"
-os.makedirs(log_dir, exist_ok=True)
-os.makedirs("results/models", exist_ok=True)
-os.makedirs(plot_dir, exist_ok=True)
-
-script_name = os.path.basename(__file__).replace(".py", "")
-timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
-
 class Logger(object):
     def __init__(self, filename):
         self.terminal = sys.stdout
@@ -45,11 +35,6 @@ class Logger(object):
     def flush(self):
         self.terminal.flush()
         self.log.flush()
-
-sys.stdout = Logger(log_file)
-sys.stderr = sys.stdout
-print(f"Log file initialized at: {log_file}")
-print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 # ==============================================================================
 # SEED CONFIGURATION
@@ -83,7 +68,27 @@ parser.add_argument('--min_sent_len', type=int, required=True)
 parser.add_argument('--min_sim', type=float, required=True)
 parser.add_argument('--model_save_path', default="results/models/bilstm_sentence_classifier.pt")
 parser.add_argument('--vocab_save_path', default="data/vocabs/sentence_vocab.json")
+parser.add_argument('--log_dir', default="results/logs/run_pipeline", help="Directory where logs are stored")
+parser.add_argument('--plot_dir', default="results/plots/run_pipeline", help="Directory where plots are stored")
+parser.add_argument('--report_dir', default="results/evaluation", help="Directory where reports are stored")
 args = parser.parse_args()
+
+log_dir = args.log_dir
+plot_dir = args.plot_dir
+report_dir = args.report_dir
+os.makedirs(log_dir, exist_ok=True)
+os.makedirs(plot_dir, exist_ok=True)
+os.makedirs(report_dir, exist_ok=True)
+os.makedirs(os.path.dirname(args.model_save_path), exist_ok=True)
+os.makedirs(os.path.dirname(args.vocab_save_path), exist_ok=True)
+
+script_name = os.path.basename(__file__).replace(".py", "")
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
+sys.stdout = Logger(log_file)
+sys.stderr = sys.stdout
+print(f"Log file initialized at: {log_file}")
+print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 CSV_PATH = args.csv_path
 LH_DATASET_PATH = args.lh_dataset_path

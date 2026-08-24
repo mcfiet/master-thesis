@@ -241,12 +241,54 @@ def main():
     print(f"Avg LS Wiener: {df_res['LS_Wiener'].mean():.2f} (Lower = Easier, target LS: <6)")
     print(f"Avg AS Wiener: {df_res['AS_Wiener'].mean():.2f}")
 
+    # Speichern der Ergebnisse
+    if output_csv:
+        os.makedirs(os.path.dirname(output_csv), exist_ok=True)
+        # Drop list column before saving flat csv if desired or convert to string
+        df_to_save = df_res.copy()
+        if "LS_Sents_Preds" in df_to_save.columns:
+            df_to_save["LS_Sents_Preds"] = df_to_save["LS_Sents_Preds"].astype(str)
+        if "AS_Sents_Preds" in df_to_save.columns:
+            df_to_save["AS_Sents_Preds"] = df_to_save["AS_Sents_Preds"].astype(str)
+        df_to_save.to_csv(output_csv, index=False)
+        print(f"\n[ERFOLG] Detail-Vorhersagen gespeichert unter: {output_csv}")
+
+    if output_summary:
+        os.makedirs(os.path.dirname(output_summary), exist_ok=True)
+        summary_data = {
+            "dataset_path": DATASET_PATH,
+            "model_path": MODEL_PATH,
+            "sentence_level": {
+                "accuracy": float(sent_acc),
+                "balanced_accuracy": float(sent_bacc),
+                "classification_report": classification_report(y_true_sents, y_pred_sents, target_names=["Normal (AS)", "Simple (LS)"], output_dict=True)
+            },
+            "article_level_majority_vote": {
+                "accuracy": float(art_acc),
+                "balanced_accuracy": float(art_bacc),
+                "perfect_pair_match_ratio": float(df_res["Correct"].mean()),
+                "classification_report": classification_report(y_true_art, y_pred_art, target_names=["Normal (AS)", "Simple (LS)"], output_dict=True)
+            },
+            "readability": {
+                "avg_ls_flesch": float(df_res["LS_Flesch"].mean()),
+                "avg_as_flesch": float(df_res["AS_Flesch"].mean()),
+                "flesch_gap": float(df_res["LS_Flesch"].mean() - df_res["AS_Flesch"].mean()),
+                "avg_ls_wiener": float(df_res["LS_Wiener"].mean()),
+                "avg_as_wiener": float(df_res["AS_Wiener"].mean())
+            }
+        }
+        with open(output_summary, "w", encoding="utf-8") as f:
+            json.dump(summary_data, f, ensure_ascii=False, indent=2)
+        print(f"[ERFOLG] Metrik-Zusammenfassung gespeichert unter: {output_summary}")
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Evaluate sentence-level BiLSTM classifier")
-    parser.add_argument("--dataset_path", default="data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json")
+    parser.add_argument("--dataset_path", default="data/lebenshilfe/lebenshilfe_dataset_clean.json" if os.path.exists("data/lebenshilfe/lebenshilfe_dataset_clean.json") else "data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json")
     parser.add_argument("--model_path", default="results/models/lstm_sentence_sim_0.80_to_0.98.pt")
-    parser.add_argument("--vocab_source_csv", default="data/analysis/information_loss_analysis_cleaned.csv")
+    parser.add_argument("--vocab_source_csv", default="data/analysis/corpus_master.csv" if os.path.exists("data/analysis/corpus_master.csv") else "data/analysis/information_loss_analysis_cleaned.csv")
+    parser.add_argument("--output_csv", default="results/evaluation/eval_sentence_classifier.csv")
+    parser.add_argument("--output_summary", default="results/evaluation/sentence_classifier_metrics.json")
     args = parser.parse_args()
     
     if os.path.exists(args.dataset_path):
@@ -255,6 +297,9 @@ if __name__ == "__main__":
         MODEL_PATH = args.model_path
     if os.path.exists(args.vocab_source_csv):
         VOCAB_SOURCE_CSV = args.vocab_source_csv
+    
+    output_csv = args.output_csv
+    output_summary = args.output_summary
         
     main()
 

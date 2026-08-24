@@ -18,18 +18,8 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 # ==============================================================================
-# LOGGING & DIRECTORY SETUP
+# LOGGING CLASS
 # ==============================================================================
-log_dir = "results/logs"
-plot_dir = "results/plots"
-os.makedirs(log_dir, exist_ok=True)
-os.makedirs("results/models", exist_ok=True)
-os.makedirs(plot_dir, exist_ok=True)
-
-script_name = os.path.basename(__file__).replace(".py", "")
-timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
-
 class Logger(object):
     def __init__(self, filename):
         self.terminal = sys.stdout
@@ -43,11 +33,6 @@ class Logger(object):
     def flush(self):
         self.terminal.flush()
         self.log.flush()
-
-sys.stdout = Logger(log_file)
-sys.stderr = sys.stdout
-print(f"Log file initialized at: {log_file}")
-print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 # ==============================================================================
 # SEED CONFIGURATION
@@ -69,6 +54,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--lh_dataset_path', default=None, help='Optional path to lebenshilfe dataset')
 parser.add_argument('--corpus_path', required=True)
 parser.add_argument('--output_dir', required=True)
+parser.add_argument('--log_dir', default="results/logs/run_pipeline", help='Directory to save log files')
+parser.add_argument('--plot_dir', default="results/plots/run_pipeline", help='Directory to save plots')
 parser.add_argument('--min_sim', type=float, required=True)
 parser.add_argument('--max_sim', type=float, required=True)
 parser.add_argument('--max_source_len', type=int, required=True)
@@ -95,6 +82,20 @@ parser.add_argument('--w_style', type=float, default=0.5)
 parser.add_argument('--w_sem', type=float, default=0.5)
 parser.add_argument('--resume_from_checkpoint', action='store_true', default=False, help='Resume training from existing output_dir checkpoint')
 args = parser.parse_args()
+
+log_dir = args.log_dir
+plot_dir = args.plot_dir
+os.makedirs(log_dir, exist_ok=True)
+os.makedirs(args.output_dir, exist_ok=True)
+os.makedirs(plot_dir, exist_ok=True)
+
+script_name = os.path.basename(__file__).replace(".py", "")
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
+sys.stdout = Logger(log_file)
+sys.stderr = sys.stdout
+print(f"Log file initialized at: {log_file}")
+print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 LH_DATASET_PATH = args.lh_dataset_path
 CORPUS_PATH = args.corpus_path

@@ -43,18 +43,8 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 # ==============================================================================
-# LOGGING & DIRECTORY SETUP
+# LOGGING CLASS
 # ==============================================================================
-log_dir = "results/logs"
-plot_dir = "results/plots"
-os.makedirs(log_dir, exist_ok=True)
-os.makedirs("results/models", exist_ok=True)
-os.makedirs(plot_dir, exist_ok=True)
-
-script_name = os.path.basename(__file__).replace(".py", "")
-timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
-
 class Logger(object):
     def __init__(self, filename):
         self.terminal = sys.stdout
@@ -68,11 +58,6 @@ class Logger(object):
     def flush(self):
         self.terminal.flush()
         self.log.flush()
-
-sys.stdout = Logger(log_file)
-sys.stderr = sys.stdout
-print(f"Log file initialized at: {log_file}")
-print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
 
 # ==============================================================================
 # SEED CONFIGURATION
@@ -119,6 +104,18 @@ def parse_args():
         type=str,
         required=True,
         help="Directory where trained DPO model & tokenizer will be saved."
+    )
+    parser.add_argument(
+        "--log_dir",
+        type=str,
+        default="results/logs/run_pipeline",
+        help="Directory where training log file will be saved."
+    )
+    parser.add_argument(
+        "--plot_dir",
+        type=str,
+        default="results/plots/run_pipeline",
+        help="Directory where loss/accuracy plots will be saved."
     )
 
     # Sequence Lengths
@@ -378,7 +375,20 @@ def main():
     args = parse_args()
     set_seed(args.seed)
 
+    log_dir = args.log_dir
+    plot_dir = args.plot_dir
+    os.makedirs(log_dir, exist_ok=True)
+    os.makedirs(plot_dir, exist_ok=True)
     os.makedirs(args.output_dir, exist_ok=True)
+
+    script_name = os.path.basename(__file__).replace(".py", "")
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = os.path.join(log_dir, f"{script_name}_{timestamp}.log")
+    sys.stdout = Logger(log_file)
+    sys.stderr = sys.stdout
+    print(f"Log file initialized at: {log_file}")
+    print("Aktuelles Arbeitsverzeichnis:", os.getcwd())
+
     device = torch.device("cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu"))
     print(f"Nutze Device: {device}")
 

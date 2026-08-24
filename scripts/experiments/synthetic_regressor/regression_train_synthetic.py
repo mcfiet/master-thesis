@@ -289,6 +289,17 @@ for epoch in range(1, EPOCHS + 1):
         
     print(f"Epoche {epoch:02d}/{EPOCHS:02d} | Train MSE: {avg_train_loss:.4f} | Val MSE: {avg_val_loss:.4f}{saved_str}")
 
+# Save training history
+history_path = os.path.join(os.path.dirname(MODEL_SAVE_PATH), "training_history.json")
+with open(history_path, "w", encoding="utf-8") as f:
+    json.dump({
+        "train_loss": train_losses,
+        "val_loss": val_losses,
+        "best_epoch": int(best_epoch) if 'best_epoch' in locals() else None,
+        "best_val_loss": float(best_val_loss) if 'best_val_loss' in locals() else None,
+    }, f, indent=2)
+print(f"Trainingsverlauf gespeichert unter: {history_path}")
+
 # ==============================================================================
 # EVALUATION & PLOTTING
 # ==============================================================================
@@ -339,10 +350,25 @@ print(f"Pearson Korrelation r:    {pearson_r:.4f}")
 print(f"Spearman Korrelation rho: {spearman_rho:.4f}")
 print("=" * 60)
 
+# Save evaluation metrics
+eval_metrics_path = os.path.join(os.path.dirname(MODEL_SAVE_PATH), "synthetic_eval_metrics.json")
+with open(eval_metrics_path, "w", encoding="utf-8") as f:
+    json.dump({
+        "num_eval_samples": len(all_targets),
+        "mse": float(mse),
+        "mae": float(mae),
+        "pearson_r": float(pearson_r),
+        "spearman_rho": float(spearman_rho),
+    }, f, indent=2)
+print(f"Out-of-Domain Metriken gespeichert unter: {eval_metrics_path}")
+
 df_eval = pd.DataFrame({
     "Zielstufe": [f"{t:.2f}" for t in all_targets],
     "Vorhergesagter Score": all_preds
 })
+os.makedirs("results/evaluation", exist_ok=True)
+df_eval.to_csv("results/evaluation/synthetic_regressor_lh_eval.csv", index=False)
+print("Detail-Vorhersagen gespeichert unter: results/evaluation/synthetic_regressor_lh_eval.csv")
 
 plt.figure(figsize=(10, 6))
 sns.boxplot(data=df_eval, x="Zielstufe", y="Vorhergesagter Score", palette="viridis")
@@ -353,3 +379,4 @@ plt.ylabel("Modellvorhersage (BiLSTM Regressor)")
 plt.grid(True, linestyle="--", alpha=0.5)
 plt.savefig(os.path.join(plot_dir, "synthetic_eval_boxplot.png"))
 plt.close()
+

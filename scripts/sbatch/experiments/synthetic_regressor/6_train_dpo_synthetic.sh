@@ -9,12 +9,14 @@
 #SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
 
 
-mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation
+mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation results/models/experiments/synthetic_regressor/dpo
 srun python scripts/modeling/train_dpo.py \
-    --model_name_or_path "results/models/sft" \
-    --train_file "data/dpo_preference_pairs_synthetic.jsonl" \
-    --eval_file "data/dpo_preference_pairs_synthetic_eval.jsonl" \
-    --output_dir "results/models/dpo_synthetic" \
+    --model_name_or_path "results/models/experiments/synthetic_regressor/sft" \
+    --train_file "data/dpo/dpo_preference_pairs_synthetic.jsonl" \
+    --eval_file "data/dpo/dpo_preference_pairs_synthetic_eval.jsonl" \
+    --output_dir "results/models/experiments/synthetic_regressor/dpo" \
+    --log_dir "results/logs/experiments/synthetic_regressor" \
+    --plot_dir "results/plots/experiments/synthetic_regressor" \
     --use_peft \
     --lora_r 16 \
     --lora_alpha 32 \

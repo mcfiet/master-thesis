@@ -9,12 +9,12 @@
 #SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
 
 
-mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation
+mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation data/dpo
 srun python scripts/modeling/generate_dpo_dataset.py \
     --corpus_path "data/analysis/corpus_master.json" \
     --min_sim 0.70 \
     --max_sim 0.98 \
-    --sft_model_path "results/models/sft" \
+    --sft_model_path "results/models/experiments/synthetic_regressor/sft" \
     --prompt_prefix "" \
     --num_candidates 5 \
     --temperature 0.8 \
@@ -23,5 +23,5 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --w_style 0.5 \
     --w_sem 0.5 \
     --min_score_margin 0.05 \
-    --output_file "data/dpo_preference_pairs_synthetic.jsonl" \
+    --output_file "data/dpo/dpo_preference_pairs_synthetic.jsonl" \
     --val_split_ratio 0.15

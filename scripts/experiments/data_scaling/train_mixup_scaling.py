@@ -499,6 +499,25 @@ def main():
                 test_mse, test_mae, test_r2, p_corr, binary_acc * 100.0)
     logger.info("Saved metrics to %s", metrics_path)
 
+    # 7. Save Loss Curve Plot
+    try:
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(8, 5))
+        epochs_range = range(1, len(history["train_loss"]) + 1)
+        plt.plot(epochs_range, history["train_loss"], label="Train Loss", marker="o")
+        plt.plot(epochs_range, history["val_loss"], label="Val Loss", marker="s")
+        plt.title(f"Lernkurve: {args.experiment_name}")
+        plt.xlabel("Epoche")
+        plt.ylabel("MSE Loss")
+        plt.legend()
+        plt.grid(True, linestyle="--", alpha=0.6)
+        plot_path = os.path.join(args.output_dir, f"{args.experiment_name}_loss_curve.png")
+        plt.savefig(plot_path, dpi=200, bbox_inches="tight")
+        plt.close()
+        logger.info("Saved loss curve plot to %s", plot_path)
+    except Exception as e:
+        logger.warning("Could not generate plot for %s: %s", args.experiment_name, e)
+
 
 if __name__ == "__main__":
     main()
