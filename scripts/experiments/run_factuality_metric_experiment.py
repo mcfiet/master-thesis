@@ -22,7 +22,7 @@ random.seed(42)
 np.random.seed(42)
 torch.manual_seed(42)
 
-DEVICE = "cpu"
+DEVICE = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
 print(f"Nutze Device: {DEVICE}")
 
 # 1. Lade SpaCy für NER
@@ -31,7 +31,9 @@ nlp = spacy.load("de_core_news_sm")
 
 # 2. Lade SBERT
 print("Lade SBERT...")
-sbert_model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-mpnet-base-v2", device=DEVICE)
+sbert_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-de", device=DEVICE, trust_remote_code=True)
+if hasattr(sbert_model, "max_seq_length"):
+    sbert_model.max_seq_length = 8192
 
 # 3. Lade NLI Cross-Encoder
 print("Lade NLI Cross-Encoder...")
@@ -77,132 +79,18 @@ def compute_number_consistency(as_text: str, ls_text: str):
     return consistency_score, len(nums_as), len(hallucinated_nums)
 
 # -----------------------------------------------------------------------------
-# Datensatz-Erstellung (4 Klassen)
+# Datensatz-Laden (Festes 4-Klassen Benchmark Testset)
 # -----------------------------------------------------------------------------
-print("Erstelle 4-Klassen Benchmark-Datensatz...")
+benchmark_file = "data/evaluation_sets/benchmark_factuality_testset.json"
+if os.path.exists(benchmark_file):
+    print(f"Lade festes Benchmark-Testset aus {benchmark_file}...")
+    df_benchmark = pd.read_json(benchmark_file)
+else:
+    print(f"Warnung: {benchmark_file} nicht gefunden, lade data/analysis/factual_consistency_benchmark_dataset.json...")
+    df_benchmark = pd.read_json("data/analysis/factual_consistency_benchmark_dataset.json")
 
-samples = []
-
-# KLASSE 1: Gold Truth Positives
-# 1.1 Lebenshilfe
-lh_path = "data/lebenshilfe/lebenshilfe_dataset_clean.json"
-if os.path.exists(lh_path):
-    with open(lh_path, "r", encoding="utf-8") as f:
-        lh_data = json.load(f)
-    for row in lh_data:
-        as_t = str(row.get("as_text") or "").strip()
-        ls_t = str(row.get("ls_text") or "").strip()
-        if len(as_t) > 20 and len(ls_t) > 20:
-            samples.append({
-                "category": "1_Gold_Positives",
-                "subtype": "Lebenshilfe",
-                "as_text": as_t,
-                "ls_text": ls_t,
-                "is_factually_correct": 1
-            })
-
-# 1.2 Corpus Master
-cm_path = "data/analysis/corpus_master.csv"
-if os.path.exists(cm_path):
-    df_cm = pd.read_csv(cm_path)
-    df_cm_clean = df_cm.dropna(subset=["as_text", "ls_text"]).sample(n=min(40, len(df_cm)), random_state=42)
-    for _, row in df_cm_clean.iterrows():
-        samples.append({
-            "category": "1_Gold_Positives",
-            "subtype": f"Corpus_{row.get('source', 'master')}",
-            "as_text": str(row["as_text"]).strip(),
-            "ls_text": str(row["ls_text"]).strip(),
-            "is_factually_correct": 1
-        })
-
-# KLASSE 2: Reale Modell-Halluzinationen (aus dpo_pairs_w05_w05.jsonl)
-dpo_path = "data/temperature_ladder_500/dpo_pairs_w05_w05.jsonl"
-if os.path.exists(dpo_path):
-    dpo_rows = []
-    with open(dpo_path, "r", encoding="utf-8") as f:
-        for i, line in enumerate(f):
-            if i >= 500: break
-            dpo_rows.append(json.loads(line))
-            
-    for idx in range(min(40, len(dpo_rows))):
-        item = dpo_rows[idx]
-        as_t = str(item.get("prompt") or item.get("as_text") or "").strip()
-        ls_t = str(item.get("rejected") or "").strip()
-        if len(as_t) > 20 and len(ls_t) > 20:
-            samples.append({
-                "category": "2_Real_Model_Hallucinations",
-                "subtype": f"mBART_SFT_{item.get('source', 'generation')}",
-                "as_text": as_t,
-                "ls_text": ls_t,
-                "is_factually_correct": 0
-            })
-
-# KLASSE 3: Random Shuffle Negatives (Themenwechsel)
-gold_samples = [s for s in samples if s["category"] == "1_Gold_Positives"]
-if len(gold_samples) >= 30:
-    sampled_gold = random.sample(gold_samples, 30)
-    for i in range(len(sampled_gold)):
-        as_t = sampled_gold[i]["as_text"]
-        target_idx = (i + 7) % len(sampled_gold)
-        ls_t = sampled_gold[target_idx]["ls_text"]
-        samples.append({
-            "category": "3_Random_Shuffle_Negatives",
-            "subtype": "Thematic_Mismatch",
-            "as_text": as_t,
-            "ls_text": ls_t,
-            "is_factually_correct": 0
-        })
-
-# KLASSE 4: Kontrollierte Minimal-Perturbationen (Adversarial Slices)
-perturbation_templates = [
-    ("Kapitän Francesco Schettino wurde zu 16 Jahren Haft verurteilt.", "Der Kapitän war 16 Jahre alt und muss nicht ins Gefängnis.", "Number_Slot_Shift"),
-    ("Die NZZ machte im letzten Jahr einen Gewinn von 20,47 Millionen Euro.", "Im Jahr 2047 hat die NZZ einen Gewinn von 20 Euro gemacht.", "Number_To_Year_Shift"),
-    ("Der Beirat für Menschen mit Behinderungen besteht aus 15 Mitgliedern.", "Der Beirat für Menschen mit Behinderungen besteht aus 500 Mitgliedern.", "Number_Exaggeration"),
-    ("Ferrari verkaufte 7900 Autos im Jahr 2015.", "Ferrari verkaufte 20 Autos im Jahr 2015.", "Number_Reduction"),
-    ("Das Teleskop hat einen Durchmesser von 39 Metern.", "Das Teleskop hat einen Durchmesser von 3900 Kilometern.", "Number_Scale_Shift"),
-    ("Die Beratung findet montags von 8 bis 12 Uhr statt.", "Die Beratung findet sonntags um Mitternacht statt.", "Date_Time_Shift"),
-    ("Mehr als 80 Prozent der Befragten haben Sorgen.", "Nur 2 Prozent der Befragten haben Sorgen.", "Percentage_Inversion"),
-    ("Der Bau kostet rund 1,5 Millionen Euro.", "Der Bau kostet rund 150 Milliarden Euro.", "Financial_Scale_Shift"),
-    ("Die Beratung in den Pflegestützpunkten ist für alle Bürger kostenlos.", "Die Beratung in den Pflegestützpunkten ist nicht kostenlos und kostet viel Geld.", "Negation_Inversion"),
-    ("Alle Menschen haben ein Recht auf barrierefreies Wohnen.", "Kein Mensch hat ein Recht auf barrierefreies Wohnen.", "Negation_Inversion"),
-    ("Die Justiz soll die Bürger vor Kriminellen schützen.", "Die Justiz soll die Bürger nicht vor Kriminellen schützen.", "Negation_Inversion"),
-    ("Sie müssen für diesen Antrag kein Geld bezahlen.", "Sie müssen für diesen Antrag viel Geld bezahlen.", "Polarity_Flip"),
-    ("Die Mitarbeiter dürfen Ihre privaten Daten nicht an fremde Personen weitergeben.", "Die Mitarbeiter dürfen Ihre privaten Daten an alle fremden Personen weitergeben.", "Negation_Removal"),
-    ("Das neue Gesetz tritt am ersten Januar in Kraft.", "Das neue Gesetz tritt niemals in Kraft.", "Negation_Temporal"),
-    ("Kinder mit Behinderungen werden in der Schule gefördert.", "Kinder mit Behinderungen werden in der Schule nicht gefördert.", "Negation_Inversion"),
-    ("Das Gericht hat entschieden, dass diese Gebühr unzulässig ist.", "Das Gericht hat entschieden, dass diese Gebühr vollkommen erlaubt ist.", "Polarity_Flip"),
-    ("Der ehemalige Sportwagenbauer Ferrari befindet sich auf Talfahrt an der Börse.", "Der Sportwagen-Fahrer Herr Ferrari hat ein schnelles Rennen gewonnen.", "Entity_Role_Shift"),
-    ("Lewis Hamilton spielt in seiner Freizeit Klavier zu Liedern von Adele.", "Lewis Hamilton ist ein deutscher Schreiner und baut Klaviere für Adele.", "Entity_Hallucination"),
-    ("Die Polizei überwacht gefährliche Straftäter nach dem Justizgesetz.", "Die gefährlichen Straftäter überwachen die Polizei in ganz Hamburg.", "Subject_Object_Inversion"),
-    ("Das Schiff Costa Concordia rammte vor der italienischen Küste einen Felsen.", "In Sachsen-Anhalt gab es ein schweres Erdbeben bei einem Schiffsunglück.", "Geographic_Hallucination"),
-    ("Die Bischofskonferenz im Vatikan berät über Reformen der katholischen Kirche.", "Sachsen-Anhalt Die Bischwürden wollen keine Früchte mehr in Rom essen.", "Neologism_Hallucination"),
-    ("Die Verbraucherzentrale hilft Mietern bei Streitigkeiten mit Vermietern.", "Die Vermieter helfen der Verbraucherzentrale gegen alle Mieter.", "Subject_Object_Inversion"),
-    ("Der Senat ist die Landesregierung der Freien und Hansestadt Hamburg.", "Der Senat ist ein Fußballverein aus Sachsen-Anhalt.", "Entity_Category_Shift"),
-    ("Die Techniker-Krankenkasse erstattet die Kosten für medizinische Hilfsmittel.", "Die Patienten müssen die Techniker-Krankenkasse monatlich bar im Krankenhaus bezahlen.", "Role_Payment_Shift"),
-    ("Österreich ist Mitglied im europäischen Teleskop-Konsortium MOSAIC.", "Saudi-Arabien baut das europäische Teleskop mitten in Wien.", "Country_Substitution"),
-    ("Verbraucherschützer haben gegen das Flugreise-Portal vor Gericht geklagt.", "Das Flugreise-Portal hat alle Verbraucher ins Gefängnis geklagt.", "Subject_Object_Inversion"),
-    ("In Pinneberg wurde ein neuer Rat für Menschen mit Behinderung gewählt.", "In Pinneberg wurden alle Räte für behinderte Menschen verboten.", "Polarity_Abolish"),
-    ("Die Hamburger Wasserwerke kontrollieren täglich die Trinkwasserqualität.", "Das Trinkwasser in Hamburg wird aus der Atacama-Wüste importiert.", "Geographic_Nonsense"),
-    ("Das Landgericht Frankfurt verbietet unerlaubte Zusatzgebühren beim Online-Kauf.", "Das Landgericht Frankfurt zwingt alle Käufer zu doppelten Bankgebühren.", "Polarity_Verdict_Flip"),
-    ("Elternvertreter fordern verlässliche Betreuungszeiten in Kindertagesstätten.", "Die Kindertagesstätten fordern die Abschaffung aller Elternvertreter.", "Role_Reversal")
-]
-
-for as_t, ls_t, subtype in perturbation_templates:
-    samples.append({
-        "category": "4_Targeted_Minimal_Perturbations",
-        "subtype": subtype,
-        "as_text": as_t,
-        "ls_text": ls_t,
-        "is_factually_correct": 0
-    })
-
-df_benchmark = pd.DataFrame(samples)
-print(f"Benchmark-Datensatz erstellt mit {len(df_benchmark)} Stichproben:")
+print(f"Benchmark-Datensatz geladen mit {len(df_benchmark)} Stichproben:")
 print(df_benchmark["category"].value_counts())
-
-os.makedirs("data/analysis", exist_ok=True)
-df_benchmark.to_json("data/analysis/factual_consistency_benchmark_dataset.json", orient="records", force_ascii=False, indent=2)
-print("Gespeichert in: data/analysis/factual_consistency_benchmark_dataset.json")
 
 # -----------------------------------------------------------------------------
 # Metrik-Berechnung

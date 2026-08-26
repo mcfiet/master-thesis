@@ -221,6 +221,7 @@ def main():
     parser.add_argument("--reward_model_path", default="results/models/bilstm_mixup_regression.pt")
     parser.add_argument("--reward_vocab_path", default="data/vocabs/mixup_vocab.json")
     parser.add_argument("--sbert_model_name", default="jinaai/jina-embeddings-v2-base-de")
+    parser.add_argument("--sbert_max_seq_len", type=int, default=8192, help="Max sequence length for SBERT (default: 8192)")
     parser.add_argument("--output_csv", default="results/evaluation/benchmark_5way_decoder_vs_encoder_decoder.csv")
     parser.add_argument("--output_summary", default="results/evaluation/master_benchmark_summary.csv")
     parser.add_argument("--max_source_len", type=int, default=512)
@@ -259,6 +260,8 @@ def main():
     bilstm.eval()
 
     sbert = SentenceTransformer(args.sbert_model_name, device=args.device, trust_remote_code=True)
+    if args.sbert_max_seq_len and hasattr(sbert, "max_seq_length"):
+        sbert.max_seq_length = args.sbert_max_seq_len
     try:
         nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer", "parser"])
     except Exception:
@@ -280,12 +283,13 @@ def main():
 
     def calc_r_sem(src_list: List[str], hyp_list: List[str]) -> np.ndarray:
         sims = []
-        for i in range(0, len(src_list), 32):
-            e_src = sbert.encode(src_list[i : i + 32], convert_to_tensor=True, show_progress_bar=False)
-            e_hyp = sbert.encode(hyp_list[i : i + 32], convert_to_tensor=True, show_progress_bar=False)
-            c = util.cos_sim(e_src, e_hyp).diag().cpu().numpy()
-            c_norm = np.clip((c + 1.0) / 2.0, 0.0, 1.0)
-            sims.extend(c_norm.tolist() if isinstance(c_norm, np.ndarray) and c_norm.ndim > 0 else [float(c_norm)])
+        with torch.no_grad():
+            for i in range(0, len(src_list), 4):
+                e_src = sbert.encode(src_list[i : i + 4], batch_size=4, convert_to_tensor=True, show_progress_bar=False)
+                e_hyp = sbert.encode(hyp_list[i : i + 4], batch_size=4, convert_to_tensor=True, show_progress_bar=False)
+                c = util.cos_sim(e_src, e_hyp).diag().cpu().numpy()
+                c_norm = np.clip((c + 1.0) / 2.0, 0.0, 1.0)
+                sims.extend(c_norm.tolist() if isinstance(c_norm, np.ndarray) and c_norm.ndim > 0 else [float(c_norm)])
         return np.array(sims)
 
     results_dict: Dict[str, Any] = {
@@ -375,13 +379,19 @@ def main():
     print("\n--- [2/5] Inferenz: Decoder-Only SFT (Qwen) ---")
     try:
         if os.path.exists(args.sft_decoder_path):
-            base_m = AutoModelForCausalLM.from_pretrained(
-                args.qwen_base_model,
-                torch_dtype=torch.float16 if args.device == "cuda" else torch.float32,
-                device_map=args.device if args.device != "cpu" else None
-            )
-            sft_dec_m = PeftModel.from_pretrained(base_m, args.sft_decoder_path)
-            sft_dec_m = sft_dec_m.merge_and_unload() if hasattr(sft_dec_m, "merge_and_unload") else sft_dec_m
+            try:
+                sft_dec_m = AutoModelForCausalLM.from_pretrained(
+                    args.sft_decoder_path,
+                    torch_dtype=torch.float16 if args.device == "cuda" else torch.float32,
+                    device_map=args.device if args.device != "cpu" else None
+                )
+            except Exception:
+                base_m = AutoModelForCausalLM.from_pretrained(
+                    args.qwen_base_model,
+                    torch_dtype=torch.float16 if args.device == "cuda" else torch.float32,
+                    device_map=args.device if args.device != "cpu" else None
+                )
+                sft_dec_m = PeftModel.from_pretrained(base_m, args.sft_decoder_path).merge_and_unload()
             sft_dec_m.eval()
             gen_dec_sft = []
             for src in tqdm(as_texts, desc="Decoder SFT Inferenz"):
@@ -397,7 +407,7 @@ def main():
                     )
                 gen_text = qwen_tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True).strip()
                 gen_dec_sft.append(gen_text)
-            del sft_dec_m, base_m
+            del sft_dec_m
             torch.cuda.empty_cache() if torch.cuda.is_available() else None
         else:
             print(f"Decoder SFT Modellpfad {args.sft_decoder_path} nicht gefunden.")
@@ -414,13 +424,19 @@ def main():
     print("\n--- [3/5] Inferenz: Decoder-Only DPO (Qwen) ---")
     try:
         if os.path.exists(args.dpo_decoder_path):
-            base_m = AutoModelForCausalLM.from_pretrained(
-                args.qwen_base_model,
-                torch_dtype=torch.float16 if args.device == "cuda" else torch.float32,
-                device_map=args.device if args.device != "cpu" else None
-            )
-            dpo_dec_m = PeftModel.from_pretrained(base_m, args.dpo_decoder_path)
-            dpo_dec_m = dpo_dec_m.merge_and_unload() if hasattr(dpo_dec_m, "merge_and_unload") else dpo_dec_m
+            try:
+                dpo_dec_m = AutoModelForCausalLM.from_pretrained(
+                    args.dpo_decoder_path,
+                    torch_dtype=torch.float16 if args.device == "cuda" else torch.float32,
+                    device_map=args.device if args.device != "cpu" else None
+                )
+            except Exception:
+                base_m = AutoModelForCausalLM.from_pretrained(
+                    args.qwen_base_model,
+                    torch_dtype=torch.float16 if args.device == "cuda" else torch.float32,
+                    device_map=args.device if args.device != "cpu" else None
+                )
+                dpo_dec_m = PeftModel.from_pretrained(base_m, args.dpo_decoder_path).merge_and_unload()
             dpo_dec_m.eval()
             gen_dec_dpo = []
             for src in tqdm(as_texts, desc="Decoder DPO Inferenz"):
@@ -436,7 +452,7 @@ def main():
                     )
                 gen_text = qwen_tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True).strip()
                 gen_dec_dpo.append(gen_text)
-            del dpo_dec_m, base_m
+            del dpo_dec_m
             torch.cuda.empty_cache() if torch.cuda.is_available() else None
         else:
             print(f"Decoder DPO Modellpfad {args.dpo_decoder_path} nicht gefunden.")
@@ -467,11 +483,14 @@ def main():
                 batch_src = as_texts[i : i + args.batch_size]
                 inputs = mbart_tok(batch_src, max_length=args.max_source_len, padding=True, truncation=True, return_tensors="pt").to(args.device)
                 with torch.no_grad():
+                    de_id = mbart_tok.lang_code_to_id.get("de_DE", None)
                     outs = sft_mbart_m.generate(
                         **inputs,
                         max_length=args.max_target_len,
                         num_beams=4,
-                        forced_bos_token_id=mbart_tok.lang_code_to_id.get("de_DE", None),
+                        no_repeat_ngram_size=3,
+                        forced_bos_token_id=de_id,
+                        decoder_start_token_id=de_id,
                         repetition_penalty=1.2,
                         early_stopping=True
                     )
@@ -503,11 +522,14 @@ def main():
                 batch_src = as_texts[i : i + args.batch_size]
                 inputs = mbart_tok(batch_src, max_length=args.max_source_len, padding=True, truncation=True, return_tensors="pt").to(args.device)
                 with torch.no_grad():
+                    de_id = mbart_tok.lang_code_to_id.get("de_DE", None)
                     outs = dpo_mbart_m.generate(
                         **inputs,
                         max_length=args.max_target_len,
                         num_beams=4,
-                        forced_bos_token_id=mbart_tok.lang_code_to_id.get("de_DE", None),
+                        no_repeat_ngram_size=3,
+                        forced_bos_token_id=de_id,
+                        decoder_start_token_id=de_id,
                         repetition_penalty=1.2,
                         early_stopping=True
                     )

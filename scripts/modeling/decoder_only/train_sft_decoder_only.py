@@ -124,7 +124,7 @@ def load_corpus_pairs(
 # ==============================================================================
 def main():
     parser = argparse.ArgumentParser(description="Train SFT model (Decoder-Only) using TRL")
-    parser.add_argument("--corpus_path", default="data/corpus/corpus_master_with_steps.json", help="Path to corpus file")
+    parser.add_argument("--corpus_path", default="data/analysis/corpus_master.json", help="Path to corpus file")
     parser.add_argument("--lh_dataset_path", default=None, help="Optional additional lebenshilfe dataset path")
     parser.add_argument("--output_dir", default="results/models/decoder_only/sft", help="Output directory for model checkpoint")
     parser.add_argument("--model_name", default="Qwen/Qwen2.5-1.5B-Instruct", help="Base decoder-only model identifier")
@@ -266,9 +266,14 @@ def main():
     print("=" * 60)
     train_result = trainer.train()
 
-    # 7. Save Model & Tokenizer
-    print(f"\nSaving fine-tuned SFT adapter to: {args.output_dir}")
-    trainer.save_model(args.output_dir)
+    # 7. Save Merged Standalone Model & Tokenizer
+    print(f"\nSaving merged standalone SFT model to: {args.output_dir}")
+    try:
+        merged_model = trainer.model.merge_and_unload()
+        merged_model.save_pretrained(args.output_dir)
+    except Exception as e:
+        print(f"Fallback saving with trainer: {e}")
+        trainer.save_model(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
 
     # 8. Save Metrics & Plot

@@ -64,11 +64,22 @@ def extract_hannover_content(soup):
     boilerplate_selectors = [
         'script', 'style', 'nav', 'footer', 'header',
         '.action-toolbar', '.breadcrumb', '.social-share',
-        '.copyright', '.more-items', '.breadcrumb__item'
+        '.copyright', '.more-items', '.breadcrumb__item',
+        '.toc', '.table-of-contents', '.jump-links', '.inhaltsverzeichnis'
     ]
     for selector in boilerplate_selectors:
         for element in area.select(selector):
             element.decompose()
+            
+    # Remove anchor link lists (TOC)
+    for container in area.find_all(['ul', 'ol', 'div']):
+        if container.parent is None or container.attrs is None:
+            continue
+        links = container.find_all('a')
+        if links and len(links) >= 2:
+            hash_links = [a for a in links if '#' in a.get('href', '') or a.get('href', '').startswith('#')]
+            if len(hash_links) / len(links) >= 0.4:
+                container.decompose()
     
     texts = []
     # Relevant tags for content

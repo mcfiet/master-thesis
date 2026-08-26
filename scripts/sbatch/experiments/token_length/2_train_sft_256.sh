@@ -8,6 +8,14 @@
 #SBATCH --output=results/logs/experiments/token_length/%x_%j.out
 #SBATCH --error=results/logs/experiments/token_length/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 
 mkdir -p results/logs/experiments/token_length results/plots/experiments/token_length results/evaluation
 mkdir -p results/models/token_length_exp/sft_len256

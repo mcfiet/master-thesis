@@ -1,1 +1,4 @@
 \babel@toc {ngerman}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Lexikalische Diversität: Längenunabhängigkeit der MATTR ($W=50$) (links) sowie quellenweiser Vergleich zwischen Alltagssprache (AS) und Leichter Sprache (LS) (rechts).}}{33}{figure.caption.6}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Bidirektionaler NER-Recall nach Quellen: Gegenüberstellung von Faktenerhalt ($\text {AS} \to \text {LS}$, blau) und Faktentreue ($\text {LS} \to \text {AS}$, orange).}}{34}{figure.caption.7}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Empirische Überprüfung der linguistischen Regel-Adhärenz über alle 11 Korpusquellen: Gegenüberstellung von Ausgangstext (AS, blau) und Leichter Sprache (LS, grün) für Satzlänge, Genitiv-Quote, Passiv-Dichte und Wiener Sachtextformel (WSTF).}}{36}{figure.caption.9}%

@@ -1,16 +1,25 @@
 #!/bin/bash
+#SBATCH --job-name=run_all_loss_aggregation
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/experiments/loss_aggregation/%x_%j.out
+#SBATCH --error=results/logs/experiments/loss_aggregation/%x_%j.err
 # Master Runner for Loss Aggregation Experiment (Sum vs. Mean DPO)
 # Submits training jobs concurrently and queues evaluation upon completion.
+
+set -e
 
 echo "========================================================================"
 echo "Starte Loss-Aggregations-Experiment: Sum vs. Mean Log-Probabilities"
 echo "========================================================================"
 
-mkdir -p results/logs
+mkdir -p results/logs/experiments/loss_aggregation
 mkdir -p results/models/loss_aggregation_exp/dpo_sum
 mkdir -p results/models/loss_aggregation_exp/dpo_mean
 mkdir -p results/evaluation
-mkdir -p results/plots
+mkdir -p results/plots/experiments/loss_aggregation
 
 # 1. Starte Generierung der sauberen DPO-Paare (reines Self-Play ohne Human Ground Truth)
 JOB_GEN=$(sbatch --parsable scripts/sbatch/experiments/metric_weights/1_generate_dpo_pairs_w05_w05.sh)

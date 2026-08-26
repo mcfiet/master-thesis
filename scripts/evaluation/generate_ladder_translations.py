@@ -121,13 +121,14 @@ def generate_batch(model, tokenizer, texts, device, max_source_len=500, max_targ
         "input_ids": inputs["input_ids"],
         "attention_mask": inputs["attention_mask"],
         "max_length": max_target_len,
-        "num_beams": 2,
-        "repetition_penalty": 1.35,
+        "num_beams": 4,
+        "repetition_penalty": 1.2,
         "no_repeat_ngram_size": 3,
         "early_stopping": True
     }
     if forced_bos_token_id is not None:
         gen_kwargs["forced_bos_token_id"] = forced_bos_token_id
+        gen_kwargs["decoder_start_token_id"] = forced_bos_token_id
 
     with torch.no_grad():
         outputs = model.generate(**gen_kwargs)

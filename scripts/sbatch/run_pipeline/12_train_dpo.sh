@@ -8,8 +8,17 @@
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
 mkdir -p results/models/dpo
 mkdir -p results/logs/run_pipeline results/plots/run_pipeline results/evaluation
+unset SLURM_MEM_PER_CPU SLURM_MEM_PER_GPU
+
 
 echo "=== Start DPO Training (LoRA auf mBART-50 SFT) ==="
 date
@@ -29,8 +38,8 @@ srun python scripts/modeling/train_dpo.py \
     --batch_size 2 \
     --accumulation_steps 8 \
     --patience 3 \
-    --max_source_len 512 \
-    --max_target_len 512
+    --max_source_len 256 \
+    --max_target_len 256
 
 echo "=== DPO Training abgeschlossen ==="
 date

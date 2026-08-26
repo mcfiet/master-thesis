@@ -1,4 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=run_02_lebenshilfe_prep
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/run_pipeline/%x_%j.out
+#SBATCH --error=results/logs/run_pipeline/%x_%j.err
 # =============================================================================
 # Themenbereich 2: Lebenshilfe-Datensatz Vorbereitung & Bereinigung
 # =============================================================================

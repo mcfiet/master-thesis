@@ -1,4 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=run_all_data_scaling
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/experiments/data_scaling/%x_%j.out
+#SBATCH --error=results/logs/experiments/data_scaling/%x_%j.err
 # ==============================================================================
 # Pipeline Runner: Data Scaling & Learning Curve Experiment
 # Submits all dependent SLURM jobs sequentially.
@@ -6,6 +13,7 @@
 
 set -e
 
+mkdir -p results/logs/experiments/data_scaling
 SCRIPT_DIR="scripts/sbatch/experiments/data_scaling"
 
 echo "=== Submitting Data Scaling Experiments ==="

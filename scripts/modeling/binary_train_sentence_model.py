@@ -239,7 +239,7 @@ for epoch in range(EPOCHS):
     for batch_x, batch_y in tqdm(train_loader, desc=f"Epoch {epoch+1}", leave=False):
         batch_x, batch_y = batch_x.to(DEVICE), batch_y.to(DEVICE)
         optimizer.zero_grad()
-        loss = criterion(model(batch_x).squeeze(), batch_y)
+        loss = criterion(model(batch_x).squeeze(-1), batch_y)
         loss.backward()
         optimizer.step()
         epoch_loss += loss.item()
@@ -250,7 +250,7 @@ for epoch in range(EPOCHS):
     with torch.no_grad():
         for bx, by in val_loader:
             bx, by = bx.to(DEVICE), by.to(DEVICE)
-            out = model(bx).squeeze()
+            out = model(bx).squeeze(-1)
             val_epoch_loss += criterion(out, by).item()
             preds.extend(torch.round(torch.sigmoid(out)).cpu().numpy())
             targets.extend(by.cpu().numpy())
@@ -303,7 +303,7 @@ model.eval()
 test_preds, test_targets = [], []
 with torch.no_grad():
     for bx, by in test_loader:
-        out = model(bx.to(DEVICE)).squeeze()
+        out = model(bx.to(DEVICE)).squeeze(-1)
         test_preds.extend(torch.round(torch.sigmoid(out)).cpu().numpy())
         test_targets.extend(by.numpy())
 

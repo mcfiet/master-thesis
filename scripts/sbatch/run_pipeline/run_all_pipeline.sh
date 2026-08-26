@@ -1,4 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=run_all_pipeline
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/run_pipeline/%x_%j.out
+#SBATCH --error=results/logs/run_pipeline/%x_%j.err
 # =============================================================================
 # Master Pipeline Runner: Vollständige End-to-End Ausführung
 # =============================================================================
@@ -8,7 +15,7 @@
 
 set -e
 
-mkdir -p results/logs
+mkdir -p results/logs/run_pipeline
 mkdir -p data/corpus
 mkdir -p data/lebenshilfe
 mkdir -p data/analysis

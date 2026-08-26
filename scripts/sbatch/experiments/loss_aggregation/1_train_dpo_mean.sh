@@ -8,19 +8,22 @@
 #SBATCH --output=results/logs/experiments/loss_aggregation/%x_%j.out
 #SBATCH --error=results/logs/experiments/loss_aggregation/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 mkdir -p results/models/loss_aggregation_exp/dpo_mean
 mkdir -p results/logs/experiments/loss_aggregation results/plots/experiments/loss_aggregation results/evaluation
 
 echo "=== Training DPO Model with Loss Type: MEAN (Length-Normalized / Per-Token Log-Probabilities) ==="
 date
 
-# Check for training dataset (fallback to metric_weights_exp if default not present)
-TRAIN_FILE="data/metric_weights_exp/dpo_pairs_w05_w05.jsonl"
-EVAL_FILE="data/metric_weights_exp/dpo_pairs_w05_w05_eval.jsonl"
-if [ ! -f "$TRAIN_FILE" ]; then
-    TRAIN_FILE="data/dpo_preference_pairs.jsonl"
-    EVAL_FILE="data/dpo_preference_pairs_eval.jsonl"
-fi
+TRAIN_FILE="data/corpus/dpo_pairs_mixup.jsonl"
+EVAL_FILE="data/corpus/dpo_pairs_mixup_eval.jsonl"
 
 srun python scripts/modeling/train_dpo.py \
     --model_name_or_path "results/models/sft" \

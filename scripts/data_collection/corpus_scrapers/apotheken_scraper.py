@@ -47,13 +47,19 @@ def extract_au_content(soup):
     for tag in soup(['figcaption', 'figure', 'script', 'style']):
         tag.decompose()
 
-    # 2. Decompose TOC: ul elements where more than 50% of links start with #
-    for ul in soup.find_all('ul'):
-        links = ul.find_all('a')
-        if links:
-            hash_links = [a for a in links if a.get('href', '').startswith('#')]
-            if len(hash_links) / len(links) > 0.5:
-                ul.decompose()
+    # 2. Decompose TOC: nav, ul, ol, div elements where links are anchor/jump links or TOC classes
+    for container in soup.find_all(['nav', 'div', 'ul', 'ol', 'section']):
+        if container.parent is None or container.attrs is None:
+            continue
+        classes = container.get('class', [])
+        if any(re.search(r'(toc|table-of-contents|jump-links|inhaltsverzeichnis|article-chapter)', cls, re.I) for cls in classes):
+            container.decompose()
+            continue
+        links = container.find_all('a')
+        if links and len(links) >= 2:
+            hash_links = [a for a in links if '#' in a.get('href', '') or a.get('href', '').startswith('#')]
+            if len(hash_links) / len(links) >= 0.4:
+                container.decompose()
 
     # 3. Decompose Summary Boxes
     summary_phrases = ["Kurz zusammengefasst", "Kurz erklärt", "Das Wichtigste zu"]

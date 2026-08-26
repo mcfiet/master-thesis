@@ -1,4 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=run_all_metric_weights
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/experiments/metric_weights/%x_%j.out
+#SBATCH --error=results/logs/experiments/metric_weights/%x_%j.err
 # ==============================================================================
 # Pipeline Runner: Metric Weighting Experiment (0.5/0.5 vs. 0.7/0.3 vs. 1.0/0.0)
 # Submits all dependent SLURM jobs sequentially for all weighting configurations.
@@ -6,6 +13,7 @@
 
 set -e
 
+mkdir -p results/logs/experiments/metric_weights
 SCRIPT_DIR="scripts/sbatch/experiments/metric_weights"
 
 echo "=== Submitting Metric Weighting Experiment Jobs ==="

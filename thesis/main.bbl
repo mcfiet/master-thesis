@@ -91,6 +91,45 @@
       \field{title}{Evaluating the Effectiveness of Direct Preference Optimization for Personalizing German Automatic Text Simplifications for Persons with Intellectual Disabilities}
       \field{year}{2025}
     \endentry
+    \entry{bamberger1984lesen}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f52880a15a89aa1eb61ddb0d201375c3}{%
+           family={Bamberger},
+           familyi={B\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=82c7d3cec54c5034b1769b81410a572e}{%
+           family={Vanecek},
+           familyi={V\bibinitperiod},
+           given={Erich},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Wien}%
+      }
+      \list{publisher}{1}{%
+        {Jugend und Volk}%
+      }
+      \strng{namehash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{fullhash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{fullhashraw}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{bibnamehash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{authorbibnamehash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{authornamehash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{authorfullhash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{authorfullhashraw}{eb0bf73d934c4c58c8945afbe14eda11}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Lesen -- Verstehen -- Lernen -- Schreiben: Die Wiener Sachtextformel}
+      \field{year}{1984}
+    \endentry
     \entry{battisti2020corpus}{article}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=b98fa99c0eaa51c80b9e989ca3ccae4e}{%
@@ -145,6 +184,157 @@
       \field{pages}{3302\bibrangedash 3311}
       \range{pages}{10}
     \endentry
+    \entry{bredel2016leichte}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=14a74b0c2417166f5999c2e823fa8e42}{%
+           family={Bredel},
+           familyi={B\bibinitperiod},
+           given={Ursula},
+           giveni={U\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=83ae6fff3634cb572e18224e385cd227}{%
+           family={Maa{ß}},
+           familyi={M\bibinitperiod},
+           given={Christiane},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Dudenverlag}%
+      }
+      \strng{namehash}{659381ae7065828ab186e971ce411bc1}
+      \strng{fullhash}{659381ae7065828ab186e971ce411bc1}
+      \strng{fullhashraw}{659381ae7065828ab186e971ce411bc1}
+      \strng{bibnamehash}{659381ae7065828ab186e971ce411bc1}
+      \strng{authorbibnamehash}{659381ae7065828ab186e971ce411bc1}
+      \strng{authornamehash}{659381ae7065828ab186e971ce411bc1}
+      \strng{authorfullhash}{659381ae7065828ab186e971ce411bc1}
+      \strng{authorfullhashraw}{659381ae7065828ab186e971ce411bc1}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Leichte Sprache: Theoretische Grundlagen, Orientierung für die Praxis}
+      \field{year}{2016}
+    \endentry
+    \entry{bmas2018ratgeber}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c91ac37956d17c006816d7a9c8cec244}{%
+           family={{Bundesministerium für Arbeit und Soziales}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{fullhash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{fullhashraw}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{bibnamehash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{authorbibnamehash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{authornamehash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{authorfullhash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{authorfullhashraw}{c91ac37956d17c006816d7a9c8cec244}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Leichte Sprache: Ein Ratgeber -- Regeln für Leichte Sprache}
+      \field{urlday}{25}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.bmas.de/SharedDocs/Downloads/DE/Publikationen/a752l-1-ratgeber-zu-den-regeln-von-leichter-sprache.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.bmas.de/SharedDocs/Downloads/DE/Publikationen/a752l-1-ratgeber-zu-den-regeln-von-leichter-sprache.pdf
+      \endverb
+    \endentry
+    \entry{din8581}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b6b1f3522543458908932b272c18e7a0}{%
+           family={{Deutsches Institut für Normung}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Beuth Verlag}%
+      }
+      \strng{namehash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{fullhash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{fullhashraw}{b6b1f3522543458908932b272c18e7a0}
+      \strng{bibnamehash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{authorbibnamehash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{authornamehash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{authorfullhash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{authorfullhashraw}{b6b1f3522543458908932b272c18e7a0}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{DIN 8581-1:2024-05}: Einfache Sprache -- Teil 1: Grundsätze und Leitlinien}
+      \field{year}{2024}
+    \endentry
+    \entry{devaraj2021evaluating}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=40914cbf3fa92932848677c1d90fa547}{%
+           family={Devaraj},
+           familyi={D\bibinitperiod},
+           given={Ashwin},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4b4d7916fdb8010d84d3023a81dbbaf1}{%
+           family={Marshall},
+           familyi={M\bibinitperiod},
+           given={Iain},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dcf3fece96fc55df5a003eccf64d2961}{%
+           family={Wallace},
+           familyi={W\bibinitperiod},
+           given={Byron\bibnamedelima C.},
+           giveni={B\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1f30679330f0fc32db88902b582f4499}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Junyi\bibnamedelima Jessy},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{95ddc193eac40270d7a476fc99c21760}
+      \strng{fullhash}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{fullhashraw}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{bibnamehash}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{authorbibnamehash}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{authornamehash}{95ddc193eac40270d7a476fc99c21760}
+      \strng{authorfullhash}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{authorfullhashraw}{34e4655da94f6d37ea5ba866d1948509}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}
+      \field{title}{Evaluating the Factuality of Text Simplification}
+      \field{year}{2021}
+      \field{pages}{7331\bibrangedash 7345}
+      \range{pages}{15}
+    \endentry
     \entry{devlin2019bert}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=13202969e372bc82318f9629cbdd199b}{%
@@ -192,6 +382,52 @@
       \field{year}{2019}
       \field{pages}{4171\bibrangedash 4186}
       \range{pages}{16}
+    \endentry
+    \entry{gunther2023jina}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=36e06ec0bef21ce0f1cb5421ff73bacc}{%
+           family={Günther},
+           familyi={G\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3259551e2aea2d42cc6695692e7394c9}{%
+           family={Mohr},
+           familyi={M\bibinitperiod},
+           given={Isabelle},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2938deb5048323c6e1bfdd80975d5b28}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e455b4baac829220a95ebc58f137271d}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f6cef185932d46d05bf223382daea2b1}
+      \strng{fullhash}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{fullhashraw}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{bibnamehash}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{authorbibnamehash}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{authornamehash}{f6cef185932d46d05bf223382daea2b1}
+      \strng{authorfullhash}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{authorfullhashraw}{a544b30b7f96cc28aebf8278f8027fb8}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2310.19923}
+      \field{title}{Jina Embeddings 2: 8192-Token General-Purpose Text Embeddings for Long Documents}
+      \field{year}{2023}
     \endentry
     \entry{klaper2013klaper}{article}{}{}
       \name{author}{3}{}{%
@@ -382,6 +618,39 @@
       \field{year}{2004}
       \field{pages}{74\bibrangedash 81}
       \range{pages}{8}
+    \endentry
+    \entry{maass2020leichte}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=83ae6fff3634cb572e18224e385cd227}{%
+           family={Maa{ß}},
+           familyi={M\bibinitperiod},
+           given={Christiane},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Dudenverlag}%
+      }
+      \strng{namehash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{fullhash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{fullhashraw}{83ae6fff3634cb572e18224e385cd227}
+      \strng{bibnamehash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{authorbibnamehash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{authornamehash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{authorfullhash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{authorfullhashraw}{83ae6fff3634cb572e18224e385cd227}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Leichte Sprache: Das Regelbuch}
+      \field{year}{2020}
     \endentry
     \entry{madina2023easy}{article}{}{}
       \name{author}{3}{}{%
@@ -1097,6 +1366,45 @@
       \field{title}{Evaluating the Effectiveness of Direct Preference Optimization for Personalizing German Automatic Text Simplifications for Persons with Intellectual Disabilities}
       \field{year}{2025}
     \endentry
+    \entry{bamberger1984lesen}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=f52880a15a89aa1eb61ddb0d201375c3}{%
+           family={Bamberger},
+           familyi={B\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=82c7d3cec54c5034b1769b81410a572e}{%
+           family={Vanecek},
+           familyi={V\bibinitperiod},
+           given={Erich},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Wien}%
+      }
+      \list{publisher}{1}{%
+        {Jugend und Volk}%
+      }
+      \strng{namehash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{fullhash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{fullhashraw}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{bibnamehash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{authorbibnamehash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{authornamehash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{authorfullhash}{eb0bf73d934c4c58c8945afbe14eda11}
+      \strng{authorfullhashraw}{eb0bf73d934c4c58c8945afbe14eda11}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Lesen -- Verstehen -- Lernen -- Schreiben: Die Wiener Sachtextformel}
+      \field{year}{1984}
+    \endentry
     \entry{battisti2020corpus}{article}{}{}
       \name{author}{5}{}{%
         {{un=0,uniquepart=base,hash=b98fa99c0eaa51c80b9e989ca3ccae4e}{%
@@ -1151,6 +1459,157 @@
       \field{pages}{3302\bibrangedash 3311}
       \range{pages}{10}
     \endentry
+    \entry{bredel2016leichte}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=14a74b0c2417166f5999c2e823fa8e42}{%
+           family={Bredel},
+           familyi={B\bibinitperiod},
+           given={Ursula},
+           giveni={U\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=83ae6fff3634cb572e18224e385cd227}{%
+           family={Maa{ß}},
+           familyi={M\bibinitperiod},
+           given={Christiane},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Dudenverlag}%
+      }
+      \strng{namehash}{659381ae7065828ab186e971ce411bc1}
+      \strng{fullhash}{659381ae7065828ab186e971ce411bc1}
+      \strng{fullhashraw}{659381ae7065828ab186e971ce411bc1}
+      \strng{bibnamehash}{659381ae7065828ab186e971ce411bc1}
+      \strng{authorbibnamehash}{659381ae7065828ab186e971ce411bc1}
+      \strng{authornamehash}{659381ae7065828ab186e971ce411bc1}
+      \strng{authorfullhash}{659381ae7065828ab186e971ce411bc1}
+      \strng{authorfullhashraw}{659381ae7065828ab186e971ce411bc1}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Leichte Sprache: Theoretische Grundlagen, Orientierung für die Praxis}
+      \field{year}{2016}
+    \endentry
+    \entry{bmas2018ratgeber}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c91ac37956d17c006816d7a9c8cec244}{%
+           family={{Bundesministerium für Arbeit und Soziales}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{fullhash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{fullhashraw}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{bibnamehash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{authorbibnamehash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{authornamehash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{authorfullhash}{c91ac37956d17c006816d7a9c8cec244}
+      \strng{authorfullhashraw}{c91ac37956d17c006816d7a9c8cec244}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Leichte Sprache: Ein Ratgeber -- Regeln für Leichte Sprache}
+      \field{urlday}{25}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
+      \field{year}{2018}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.bmas.de/SharedDocs/Downloads/DE/Publikationen/a752l-1-ratgeber-zu-den-regeln-von-leichter-sprache.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.bmas.de/SharedDocs/Downloads/DE/Publikationen/a752l-1-ratgeber-zu-den-regeln-von-leichter-sprache.pdf
+      \endverb
+    \endentry
+    \entry{din8581}{misc}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b6b1f3522543458908932b272c18e7a0}{%
+           family={{Deutsches Institut für Normung}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Beuth Verlag}%
+      }
+      \strng{namehash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{fullhash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{fullhashraw}{b6b1f3522543458908932b272c18e7a0}
+      \strng{bibnamehash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{authorbibnamehash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{authornamehash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{authorfullhash}{b6b1f3522543458908932b272c18e7a0}
+      \strng{authorfullhashraw}{b6b1f3522543458908932b272c18e7a0}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{DIN 8581-1:2024-05}: Einfache Sprache -- Teil 1: Grundsätze und Leitlinien}
+      \field{year}{2024}
+    \endentry
+    \entry{devaraj2021evaluating}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=40914cbf3fa92932848677c1d90fa547}{%
+           family={Devaraj},
+           familyi={D\bibinitperiod},
+           given={Ashwin},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4b4d7916fdb8010d84d3023a81dbbaf1}{%
+           family={Marshall},
+           familyi={M\bibinitperiod},
+           given={Iain},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dcf3fece96fc55df5a003eccf64d2961}{%
+           family={Wallace},
+           familyi={W\bibinitperiod},
+           given={Byron\bibnamedelima C.},
+           giveni={B\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1f30679330f0fc32db88902b582f4499}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Junyi\bibnamedelima Jessy},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{95ddc193eac40270d7a476fc99c21760}
+      \strng{fullhash}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{fullhashraw}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{bibnamehash}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{authorbibnamehash}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{authornamehash}{95ddc193eac40270d7a476fc99c21760}
+      \strng{authorfullhash}{34e4655da94f6d37ea5ba866d1948509}
+      \strng{authorfullhashraw}{34e4655da94f6d37ea5ba866d1948509}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}
+      \field{title}{Evaluating the Factuality of Text Simplification}
+      \field{year}{2021}
+      \field{pages}{7331\bibrangedash 7345}
+      \range{pages}{15}
+    \endentry
     \entry{devlin2019bert}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=13202969e372bc82318f9629cbdd199b}{%
@@ -1198,6 +1657,52 @@
       \field{year}{2019}
       \field{pages}{4171\bibrangedash 4186}
       \range{pages}{16}
+    \endentry
+    \entry{gunther2023jina}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=36e06ec0bef21ce0f1cb5421ff73bacc}{%
+           family={Günther},
+           familyi={G\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3259551e2aea2d42cc6695692e7394c9}{%
+           family={Mohr},
+           familyi={M\bibinitperiod},
+           given={Isabelle},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2938deb5048323c6e1bfdd80975d5b28}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e455b4baac829220a95ebc58f137271d}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f6cef185932d46d05bf223382daea2b1}
+      \strng{fullhash}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{fullhashraw}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{bibnamehash}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{authorbibnamehash}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{authornamehash}{f6cef185932d46d05bf223382daea2b1}
+      \strng{authorfullhash}{a544b30b7f96cc28aebf8278f8027fb8}
+      \strng{authorfullhashraw}{a544b30b7f96cc28aebf8278f8027fb8}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2310.19923}
+      \field{title}{Jina Embeddings 2: 8192-Token General-Purpose Text Embeddings for Long Documents}
+      \field{year}{2023}
     \endentry
     \entry{klaper2013klaper}{article}{}{}
       \name{author}{3}{}{%
@@ -1388,6 +1893,39 @@
       \field{year}{2004}
       \field{pages}{74\bibrangedash 81}
       \range{pages}{8}
+    \endentry
+    \entry{maass2020leichte}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=83ae6fff3634cb572e18224e385cd227}{%
+           family={Maa{ß}},
+           familyi={M\bibinitperiod},
+           given={Christiane},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Dudenverlag}%
+      }
+      \strng{namehash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{fullhash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{fullhashraw}{83ae6fff3634cb572e18224e385cd227}
+      \strng{bibnamehash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{authorbibnamehash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{authornamehash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{authorfullhash}{83ae6fff3634cb572e18224e385cd227}
+      \strng{authorfullhashraw}{83ae6fff3634cb572e18224e385cd227}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Leichte Sprache: Das Regelbuch}
+      \field{year}{2020}
     \endentry
     \entry{madina2023easy}{article}{}{}
       \name{author}{3}{}{%

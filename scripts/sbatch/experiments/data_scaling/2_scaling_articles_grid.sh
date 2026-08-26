@@ -6,6 +6,15 @@
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/data_scaling/%x_%j.out
+#SBATCH --error=results/logs/experiments/data_scaling/%x_%j.err
+
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
 
 set -e
 

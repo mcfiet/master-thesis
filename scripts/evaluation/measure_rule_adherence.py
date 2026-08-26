@@ -332,7 +332,7 @@ def process_model_comparisons(input_csv: str, output_csv: str, auditor: LeichteS
     as_col = "as_text" if "as_text" in df.columns else "source_text"
     ref_col = "ls_reference" if "ls_reference" in df.columns else ("ls_ref_text" if "ls_ref_text" in df.columns else None)
     gen_col = "translation" if "translation" in df.columns else ("generated_text" if "generated_text" in df.columns else None)
-    model_col = "Model" if "Model" in df.columns else ("model" if "model" in df.columns else None)
+    model_col = "model_name" if "model_name" in df.columns else ("Model" if "Model" in df.columns else ("model" if "model" in df.columns else ("experiment_name" if "experiment_name" in df.columns else None)))
 
     as_texts = df[as_col].fillna("").astype(str).tolist()
     gen_texts = df[gen_col].fillna("").astype(str).tolist() if gen_col else []

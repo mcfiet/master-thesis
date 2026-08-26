@@ -7,6 +7,14 @@
 #SBATCH --output=results/logs/experiments/rule_adherence/%x_%j.out
 #SBATCH --error=results/logs/experiments/rule_adherence/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 mkdir -p results/logs/experiments/rule_adherence results/plots/experiments/rule_adherence results/evaluation
 
 echo "=== Starte Quantitative Regel-Adhärenz Evaluation ==="

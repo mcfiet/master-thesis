@@ -1,4 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=run_05_sft_training
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/run_pipeline/%x_%j.out
+#SBATCH --error=results/logs/run_pipeline/%x_%j.err
 # =============================================================================
 # Themenbereich 5: SFT-Training (Supervised Fine-Tuning)
 # =============================================================================

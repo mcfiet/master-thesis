@@ -7,6 +7,14 @@
 #SBATCH --output=results/logs/experiments/synthetic_regressor/%x_%j.out
 #SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 
 mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation
 srun python -u scripts/experiments/synthetic_regressor/generate_synthetic_steps.py \

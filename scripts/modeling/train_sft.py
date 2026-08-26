@@ -77,7 +77,7 @@ parser.add_argument('--lora_dropout', type=float, default=0.05, help='LoRA dropo
 parser.add_argument('--reward_model_path', default=None)
 parser.add_argument('--reward_vocab_path', default=None)
 parser.add_argument('--reward_max_seq_len', type=int, default=None, help='Max token length for reward model evaluation (defaults to max_target_len)')
-parser.add_argument('--sbert_model_name', default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2", help='SentenceTransformer model name')
+parser.add_argument('--sbert_model_name', default="jinaai/jina-embeddings-v2-base-de", help='SentenceTransformer model name')
 parser.add_argument('--w_style', type=float, default=0.5)
 parser.add_argument('--w_sem', type=float, default=0.5)
 parser.add_argument('--resume_from_checkpoint', action='store_true', default=False, help='Resume training from existing output_dir checkpoint')
@@ -380,8 +380,8 @@ plt.close()
 # ==============================================================================
 # EVALUATION ON LEBENSHILFE DATASET
 # ==============================================================================
-if not os.path.exists(LH_DATASET_PATH):
-    print(f"Lebenshilfe dataset not found at {LH_DATASET_PATH}. Skipping evaluation.")
+if not LH_DATASET_PATH or not os.path.exists(LH_DATASET_PATH):
+    print(f"Lebenshilfe dataset not found or not provided ({LH_DATASET_PATH}). Skipping evaluation.")
 else:
     with open(LH_DATASET_PATH, "r", encoding="utf-8") as f:
         lh_data = json.load(f)

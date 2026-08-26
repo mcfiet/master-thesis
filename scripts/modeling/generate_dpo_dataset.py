@@ -124,7 +124,7 @@ class CompositeRewardEvaluator:
 
         # 3. Load SpaCy Tokenizer
         try:
-            self.nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer"])
+            self.nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer", "parser"])
         except Exception:
             self.nlp = spacy.blank("de")
             self.nlp.add_pipe("sentencizer")
@@ -132,36 +132,96 @@ class CompositeRewardEvaluator:
         # 4. Load SBERT Model
         logger.info(f"Loading SBERT model for semantic evaluation: {sbert_model_name}")
         self.sbert_model = SentenceTransformer(sbert_model_name, trust_remote_code=True, device=self.device)
-        if "jina" in sbert_model_name.lower():
-            self.sbert_model.max_seq_length = min(max(self.max_seq_len, 256), 1024)
+        if hasattr(self.sbert_model, "max_seq_length"):
+            self.sbert_model.max_seq_length = max(self.max_seq_len, 256)
+
+    def _get_sbert_batch_size(self) -> int:
+        eff_len = getattr(self.sbert_model, "max_seq_length", self.max_seq_len)
+        if eff_len > 4096:
+            return 2
+        elif eff_len > 1024:
+            return 4
+        elif eff_len > 512:
+            return 8
+        return 16
 
     def predict_simplicity_scores(self, texts: List[str]) -> np.ndarray:
-        scores = []
-        for text in texts:
-            doc = self.nlp(str(text or ""))
+        """Batched GPU evaluation of BiLSTM simplicity scores."""
+        if not texts:
+            return np.array([])
+
+        batch_indices = []
+        max_l = 0
+        docs = list(self.nlp.pipe(texts, batch_size=len(texts))) if len(texts) > 1 else [self.nlp(str(texts[0] or ""))]
+        for doc in docs:
             tokens = [t.text.lower() for t in doc if not t.is_space]
             indices = [self.stoi.get(t, self.unk_idx) for t in tokens[: self.max_seq_len]]
             if len(indices) == 0:
                 indices = [0]
-            inp_tensor = torch.tensor([indices], dtype=torch.long, device=self.device)
-            with torch.no_grad():
-                score = self.bilstm_model(inp_tensor).item()
-            scores.append(score)
-        return np.array(scores)
+            batch_indices.append(indices)
+            if len(indices) > max_l:
+                max_l = len(indices)
 
-    def predict_semantic_similarity(self, source_texts: List[str], candidate_texts: List[str]) -> np.ndarray:
+        padded = np.zeros((len(batch_indices), max(max_l, 1)), dtype=np.int64)
+        for i, idxs in enumerate(batch_indices):
+            padded[i, : len(idxs)] = idxs
+
+        inp_tensor = torch.tensor(padded, dtype=torch.long, device=self.device)
         with torch.inference_mode():
-            emb_src = self.sbert_model.encode(source_texts, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
-            emb_cand = self.sbert_model.encode(candidate_texts, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
-            cosine_sims = util.cos_sim(emb_src, emb_cand).diagonal().cpu().numpy()
-        return cosine_sims
+            scores = self.bilstm_model(inp_tensor).squeeze(-1).cpu().numpy()
+        if scores.ndim == 0:
+            scores = np.array([scores.item()])
+        return scores
+
+    def encode_sources(self, source_texts: List[str]) -> torch.Tensor:
+        """Batched GPU encoding of source prompts for caching."""
+        bs = min(self._get_sbert_batch_size(), len(source_texts))
+        with torch.inference_mode():
+            return self.sbert_model.encode(
+                source_texts,
+                batch_size=bs,
+                convert_to_tensor=True,
+                show_progress_bar=False,
+            )
+
+    def compute_rewards_for_candidates(
+        self, source_emb: torch.Tensor, candidate_texts: List[str]
+    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Fast reward computation reusing pre-encoded source embedding."""
+        if not candidate_texts:
+            return np.array([]), np.array([]), np.array([])
+
+        r_style = self.predict_simplicity_scores(candidate_texts)
+        bs = min(self._get_sbert_batch_size(), len(candidate_texts))
+        with torch.inference_mode():
+            emb_cand = self.sbert_model.encode(
+                candidate_texts,
+                batch_size=bs,
+                convert_to_tensor=True,
+                show_progress_bar=False,
+            )
+            src_tensor = source_emb.unsqueeze(0) if source_emb.ndim == 1 else source_emb
+            cosine_sims = util.cos_sim(src_tensor, emb_cand).squeeze(0).cpu().numpy()
+            if cosine_sims.ndim == 0:
+                cosine_sims = np.array([cosine_sims.item()])
+
+        r_sem_norm = np.clip((cosine_sims + 1.0) / 2.0, 0.0, 1.0)
+        total_rewards = self.w_style * r_style + self.w_sem * r_sem_norm
+        return total_rewards, r_style, r_sem_norm
 
     def compute_rewards(
         self, source_texts: List[str], candidate_texts: List[str]
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Fallback reward computation for unbatched source-candidate pairs."""
         r_style = self.predict_simplicity_scores(candidate_texts)
-        r_sem = self.predict_semantic_similarity(source_texts, candidate_texts)
-        r_sem_norm = np.clip((r_sem + 1.0) / 2.0, 0.0, 1.0)
+        bs = self._get_sbert_batch_size()
+        with torch.inference_mode():
+            emb_src = self.sbert_model.encode(source_texts, batch_size=min(bs, len(source_texts)), convert_to_tensor=True, show_progress_bar=False)
+            emb_cand = self.sbert_model.encode(candidate_texts, batch_size=min(bs, len(candidate_texts)), convert_to_tensor=True, show_progress_bar=False)
+            cosine_sims = util.cos_sim(emb_src, emb_cand).diagonal().cpu().numpy()
+            if cosine_sims.ndim == 0:
+                cosine_sims = np.array([cosine_sims.item()])
+        r_sem_norm = np.clip((cosine_sims + 1.0) / 2.0, 0.0, 1.0)
         total_rewards = self.w_style * r_style + self.w_sem * r_sem_norm
         return total_rewards, r_style, r_sem_norm
 
@@ -169,7 +229,12 @@ class CompositeRewardEvaluator:
 # ---------------------------------------------------------------------------
 # Corpus Loading
 # ---------------------------------------------------------------------------
-def load_corpus_data(corpus_path: str, max_samples: Optional[int] = None) -> List[Dict[str, Any]]:
+def load_corpus_data(
+    corpus_path: str,
+    max_samples: Optional[int] = None,
+    min_sim: Optional[float] = None,
+    max_sim: Optional[float] = None,
+) -> List[Dict[str, Any]]:
     logger.info(f"Loading corpus from: {corpus_path}")
     if corpus_path.endswith(".json"):
         with open(corpus_path, "r", encoding="utf-8") as f:
@@ -182,6 +247,17 @@ def load_corpus_data(corpus_path: str, max_samples: Optional[int] = None) -> Lis
 
     cleaned = []
     for item in raw_data:
+        sim = item.get("semantic_similarity_8192") or item.get("similarity") or item.get("sim")
+        if sim is not None:
+            try:
+                sim_val = float(sim)
+                if min_sim is not None and sim_val < min_sim:
+                    continue
+                if max_sim is not None and sim_val > max_sim:
+                    continue
+            except (ValueError, TypeError):
+                pass
+
         as_text = str(item.get("as_text") or item.get("text") or "").strip()
         if len(as_text) > 20:
             cleaned.append({
@@ -336,6 +412,7 @@ def sample_candidates_batch(
         "num_return_sequences": num_candidates,
         "pad_token_id": tokenizer.pad_token_id,
         "eos_token_id": tokenizer.eos_token_id,
+        "use_cache": True,
     }
 
     if no_repeat_ngram_size > 0:
@@ -348,8 +425,12 @@ def sample_candidates_batch(
     else:
         gen_kwargs["max_new_tokens"] = max_target_len
 
-    with torch.no_grad():
-        outputs = model.generate(**gen_kwargs)
+    with torch.inference_mode():
+        if str(device).startswith("cuda") and torch.cuda.is_available():
+            with torch.autocast(device_type="cuda", dtype=torch.float16):
+                outputs = model.generate(**gen_kwargs)
+        else:
+            outputs = model.generate(**gen_kwargs)
 
     if not is_seq2seq:
         input_len = inputs["input_ids"].shape[1]
@@ -376,7 +457,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--corpus_path",
         type=str,
-        default="data/temperature_ladder_500/corpus_10kgnad_len500_as.json",
+        default="data/corpus/corpus_10kgnad_len512_as.json",
         help="Path to input corpus JSON/CSV with as_text.",
     )
     parser.add_argument(
@@ -408,8 +489,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--batch_size",
         type=int,
-        default=4,
-        help="Batch size for candidate generation.",
+        default=16,
+        help="Batch size for candidate generation (default: 16).",
     )
     parser.add_argument(
         "--max_source_len",
@@ -479,25 +560,25 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--reward_model_path",
         type=str,
-        default="results/models/token_length_exp/bilstm_mixup_regression_500.pt",
-        help="Path to 500-token BiLSTM weights (.pt).",
+        default="results/models/bilstm_mixup_regression.pt",
+        help="Path to BiLSTM weights (.pt).",
     )
     parser.add_argument(
         "--reward_vocab_path",
         type=str,
-        default="data/token_length_exp/mixup_vocab_500.json",
-        help="Path to 500-token BiLSTM vocabulary JSON.",
+        default="data/vocabs/mixup_vocab.json",
+        help="Path to BiLSTM vocabulary JSON.",
     )
     parser.add_argument(
         "--reward_max_seq_len",
         type=int,
-        default=500,
-        help="Max sequence length for Reward Model (default: 500).",
+        default=512,
+        help="Max sequence length for Reward Model (default: 512).",
     )
     parser.add_argument(
         "--sbert_model_name",
         type=str,
-        default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+        default="jinaai/jina-embeddings-v2-base-de",
         help="SBERT model for semantic evaluation.",
     )
     parser.add_argument(
@@ -513,11 +594,11 @@ def parse_args() -> argparse.Namespace:
         help="Weight for semantic similarity in composite reward (default: 0.5).",
     )
 
-    # Output
+    # Output & Sharding
     parser.add_argument(
         "--output_file",
         type=str,
-        default="data/temperature_ladder_500/dpo_pairs_w05_w05.jsonl",
+        default="data/corpus/dpo_pairs_mixup.jsonl",
         help="Output path for DPO dataset.",
     )
     parser.add_argument(
@@ -527,13 +608,59 @@ def parse_args() -> argparse.Namespace:
         help="Validation split ratio (default: 0.15).",
     )
     parser.add_argument(
+        "--shard_id",
+        type=int,
+        default=None,
+        help="Optional shard index for multi-GPU distribution.",
+    )
+    parser.add_argument(
+        "--num_shards",
+        type=int,
+        default=None,
+        help="Optional total number of shards for multi-GPU distribution.",
+    )
+    parser.add_argument(
         "--seed",
         type=int,
         default=42,
         help="Random seed (default: 42).",
     )
 
-    return parser.parse_args()
+    # Legacy compatibility arguments
+    parser.add_argument(
+        "--min_sim",
+        type=float,
+        default=None,
+        help="Legacy argument: minimum semantic similarity to filter corpus (optional).",
+    )
+    parser.add_argument(
+        "--max_sim",
+        type=float,
+        default=None,
+        help="Legacy argument: maximum semantic similarity to filter corpus (optional).",
+    )
+    parser.add_argument(
+        "--num_candidates",
+        type=int,
+        default=None,
+        help="Legacy argument for candidates per step / sampling.",
+    )
+    parser.add_argument(
+        "--temperature",
+        type=float,
+        default=None,
+        help="Legacy argument for sampling temperature (sets single-step ladder if specified).",
+    )
+
+    parsed = parser.parse_args()
+
+    # Map legacy arguments if provided
+    if parsed.temperature is not None and "--temperature_ladder" not in sys.argv:
+        parsed.temperature_ladder = [parsed.temperature]
+    if parsed.num_candidates is not None and "--candidates_per_step" not in sys.argv:
+        parsed.candidates_per_step = parsed.num_candidates
+
+    return parsed
 
 
 # ---------------------------------------------------------------------------
@@ -550,10 +677,22 @@ def main():
     logger.info(f"Target Score Margin: >= {args.min_score_margin}")
 
     # 1. Load Corpus
-    corpus_records = load_corpus_data(corpus_path=args.corpus_path, max_samples=args.max_samples)
+    corpus_records = load_corpus_data(
+        corpus_path=args.corpus_path,
+        max_samples=args.max_samples,
+        min_sim=args.min_sim,
+        max_sim=args.max_sim,
+    )
     if len(corpus_records) == 0:
         logger.error("No valid corpus records found.")
         return
+
+    # Sharding support
+    if args.num_shards is not None and args.shard_id is not None:
+        assert 0 <= args.shard_id < args.num_shards, f"Invalid shard_id {args.shard_id} for num_shards {args.num_shards}"
+        total_records = len(corpus_records)
+        corpus_records = [rec for i, rec in enumerate(corpus_records) if i % args.num_shards == args.shard_id]
+        logger.info(f"Processing Shard {args.shard_id + 1}/{args.num_shards} ({len(corpus_records)}/{total_records} records).")
 
     # 2. Load SFT Model
     sft_model, sft_tokenizer, is_seq2seq = load_sft_model_and_tokenizer(
@@ -588,13 +727,17 @@ def main():
         as_texts = [item["as_text"] for item in batch_items]
         prompts = [args.prompt_prefix + t for t in as_texts]
 
+        # Fast SBERT caching: Pre-encode source texts for the entire batch in ONE GPU pass
+        source_embs = reward_evaluator.encode_sources(as_texts)
+
         # Tracking state per item in this batch
         batch_state = []
-        for item, as_text, prompt in zip(batch_items, as_texts, prompts):
+        for idx_in_b, (item, as_text, prompt) in enumerate(zip(batch_items, as_texts, prompts)):
             batch_state.append({
                 "item": item,
                 "as_text": as_text,
                 "prompt": prompt,
+                "source_emb": source_embs[idx_in_b],
                 "candidate_pool": [],
                 "reward_cache": {},  # cand_str -> (total_r, style_r, sem_r)
                 "resolved": False,
@@ -643,9 +786,10 @@ def main():
                         clean_new.append(c_clean)
 
                 if len(clean_new) > 0:
-                    # Compute rewards for newly generated candidates
-                    source_rep = [state["as_text"]] * len(clean_new)
-                    tot_r, style_r, sem_r = reward_evaluator.compute_rewards(source_rep, clean_new)
+                    # Compute rewards using batched BiLSTM and cached source embedding
+                    tot_r, style_r, sem_r = reward_evaluator.compute_rewards_for_candidates(
+                        state["source_emb"], clean_new
+                    )
                     for c_str, tr, sr, semr in zip(clean_new, tot_r, style_r, sem_r):
                         state["reward_cache"][c_str] = (float(tr), float(sr), float(semr))
                         state["candidate_pool"].append(c_str)
@@ -706,6 +850,15 @@ def main():
                 "pool_size": len(pool),
                 "source": state["item"].get("source", "10kgnad"),
             })
+
+        # Periodic clean progress logging every 25 batches
+        if (b_idx + 1) % 25 == 0 or (b_idx + 1) == num_batches:
+            pct = (b_idx + 1) / num_batches * 100
+            logger.info(
+                f"Progress: Batch {b_idx + 1}/{num_batches} ({pct:.1f}%) | "
+                f"Pairs: {len(dpo_pairs)} | Dropped: {dropped_low_margin + dropped_insufficient}"
+            )
+            sys.stdout.flush()
 
     # Summary Stats
     total_processed = len(corpus_records)

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=1_crawl_url_alignment
+#SBATCH --job-name=01_crawl_url_alignment
 #SBATCH --partition=research
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=4
@@ -7,8 +7,17 @@
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
 
 mkdir -p results/logs/run_pipeline results/plots/run_pipeline results/evaluation
+unset SLURM_MEM_PER_CPU SLURM_MEM_PER_GPU
+
 echo "=== Schritt 1: URL-Alignment (12 Scraper) gestartet ==="
 
 scrapers=(

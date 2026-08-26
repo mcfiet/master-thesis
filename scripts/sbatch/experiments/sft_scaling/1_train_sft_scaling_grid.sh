@@ -6,6 +6,15 @@
 #SBATCH --mem=24G
 #SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/sft_scaling/%x_%j.out
+#SBATCH --error=results/logs/experiments/sft_scaling/%x_%j.err
+
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
 
 set -e
 
@@ -27,7 +36,7 @@ for F in "${FRACTION_VALUES[@]}"; do
         --base_model_name facebook/mbart-large-50 \
         --reward_model_path results/models/bilstm_mixup_regression.pt \
         --reward_vocab_path data/vocabs/mixup_vocab.json \
-        --sbert_model_name sentence-transformers/paraphrase-multilingual-mpnet-base-v2 \
+        --sbert_model_name jinaai/jina-embeddings-v2-base-de \
         --train_fraction ${F} \
         --experiment_name "${EXP_NAME}" \
         --min_sim 0.70 \

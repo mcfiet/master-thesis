@@ -1,0 +1,289 @@
+{
+    "summary": {
+        "total_ls_articles_scanned": 59,
+        "aligned_pairs_count": 46,
+        "unaligned_articles_count": 13,
+        "total_ls_tokens": 8050,
+        "total_as_tokens": 9243,
+        "average_ls_tokens": 175.0,
+        "average_as_tokens": 200.93478260869566
+    },
+    "pairs": [
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/reisen.html",
+            "as_url": "https://web.archive.org/web/20210225194538/https://www.lebenshilfe-main-taunus.de/reisen.html",
+            "ls_tokens": 87,
+            "as_tokens": 39
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/haus-flesch.html",
+            "as_url": "https://web.archive.org/web/20210117033610/https://www.lebenshilfe-main-taunus.de/haus-flesch.html",
+            "ls_tokens": 184,
+            "as_tokens": 164
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/wohnheime.html",
+            "as_url": "https://web.archive.org/web/20210117022018/https://www.lebenshilfe-main-taunus.de/die-wohnhaeuser-der-lebenshilfe.html",
+            "ls_tokens": 89,
+            "as_tokens": 114
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/die-kunst-gruppe.html",
+            "as_url": "https://web.archive.org/web/20220401084555/https://www.lebenshilfe-main-taunus.de/kunstforum.html",
+            "ls_tokens": 510,
+            "as_tokens": 338
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/was-wir-bieten.html",
+            "as_url": "https://web.archive.org/web/20210117025640/https://www.lebenshilfe-main-taunus.de/was-wir-bieten.html",
+            "ls_tokens": 319,
+            "as_tokens": 279
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/buecherei-126.html",
+            "as_url": "https://web.archive.org/web/20210225192022/https://www.lebenshilfe-main-taunus.de/buecherei-126.html",
+            "ls_tokens": 130,
+            "as_tokens": 90
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/infos.html-1529997863.html",
+            "as_url": "https://web.archive.org/web/20201124200727/https://www.lebenshilfe-main-taunus.de/unser-infomaterial.html",
+            "ls_tokens": 105,
+            "as_tokens": 206
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/neues-und-termine.html",
+            "as_url": "https://web.archive.org/web/20210122214824/https://www.lebenshilfe-main-taunus.de/aktuelles-und-termine.html",
+            "ls_tokens": 100,
+            "as_tokens": 73
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/texte-in-leichter-sprache.html",
+            "as_url": "https://web.archive.org/web/20220401085011/https://www.lebenshilfe-main-taunus.de/leichte-sprache.html",
+            "ls_tokens": 150,
+            "as_tokens": 300
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/familien-unterstuetzender-dienst.html",
+            "as_url": "https://web.archive.org/web/20200926184140/https://www.lebenshilfe-main-taunus.de/familienunterstuetzender-dienst-fud.html",
+            "ls_tokens": 373,
+            "as_tokens": 234
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/termine.html",
+            "as_url": "https://web.archive.org/web/20200812072527/https://www.lebenshilfe-main-taunus.de/termine.html",
+            "ls_tokens": 65,
+            "as_tokens": 736
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/treffpunkt-leichte-sprache-m-65/",
+            "as_url": "https://web.archive.org/web/20210123112625/https://www.lebenshilfe-main-taunus.de/treffpunkt-leichte-sprache-m-65/",
+            "ls_tokens": 175,
+            "as_tokens": 167
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/wohnheim-haus-walburga.html",
+            "as_url": "https://web.archive.org/web/20210117022640/https://www.lebenshilfe-main-taunus.de/haus-walburga.html",
+            "ls_tokens": 253,
+            "as_tokens": 172
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/helfen.html",
+            "as_url": "https://web.archive.org/web/20211203004518/https://www.lebenshilfe-main-taunus.de/helfen.html",
+            "ls_tokens": 320,
+            "as_tokens": 323
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/betreutes-wohnen.html",
+            "as_url": "https://web.archive.org/web/20210117030816/https://www.lebenshilfe-main-taunus.de/betreutes-wohnen.html",
+            "ls_tokens": 139,
+            "as_tokens": 140
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/weitere-informationen-zum-betreuten-wohnen.html",
+            "as_url": "https://web.archive.org/web/20220401083927/https://www.lebenshilfe-main-taunus.de/informationen-zum-betreuten-wohnen.html",
+            "ls_tokens": 332,
+            "as_tokens": 363
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/das-haus-wehr.html",
+            "as_url": "https://web.archive.org/web/20220529142722/https://www.lebenshilfe-main-taunus.de/haus-wehr-betreute-wohngemeinschaft-179.html",
+            "ls_tokens": 152,
+            "as_tokens": 112
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/galerie.html",
+            "as_url": "https://web.archive.org/web/20220401131339/https://www.lebenshilfe-main-taunus.de/galerie.html",
+            "ls_tokens": 14,
+            "as_tokens": 16
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/grusswort.html",
+            "as_url": "https://web.archive.org/web/20210126082540/https://www.lebenshilfe-main-taunus.de/grusswort.html",
+            "ls_tokens": 22,
+            "as_tokens": 223
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/infos-zu-leichter-sprache.html",
+            "as_url": "https://web.archive.org/web/20220401084728/https://www.lebenshilfe-main-taunus.de/informationen-und-pressestimmen.html",
+            "ls_tokens": 322,
+            "as_tokens": 217
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/wohnheim-floersheim.html",
+            "as_url": "https://web.archive.org/web/20210117034921/https://www.lebenshilfe-main-taunus.de/wohnheim-floersheim.html",
+            "ls_tokens": 190,
+            "as_tokens": 137
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/freizeit-und-kunst-m-30/",
+            "as_url": "https://web.archive.org/web/20210123234023/https://www.lebenshilfe-main-taunus.de/freizeit-und-kunst-m-30/",
+            "ls_tokens": 71,
+            "as_tokens": 126
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/kunst.html",
+            "as_url": "https://web.archive.org/web/20210225193352/https://www.lebenshilfe-main-taunus.de/kunst.html",
+            "ls_tokens": 188,
+            "as_tokens": 108
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/buecherei-74.html",
+            "as_url": "https://web.archive.org/web/20200812064850/https://www.lebenshilfe-main-taunus.de/buecherei-74.html",
+            "ls_tokens": 116,
+            "as_tokens": 91
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/ueber-uns.html",
+            "as_url": "https://web.archive.org/web/20210126080139/https://www.lebenshilfe-main-taunus.de/ueber-uns.html",
+            "ls_tokens": 222,
+            "as_tokens": 147
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/der-vorstand.html",
+            "as_url": "https://web.archive.org/web/20210126082007/https://www.lebenshilfe-main-taunus.de/vorstand.html",
+            "ls_tokens": 180,
+            "as_tokens": 130
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/ueber-uns-m-7/",
+            "as_url": "https://web.archive.org/web/20210123233051/https://www.lebenshilfe-main-taunus.de/ueber-uns-m-7/",
+            "ls_tokens": 222,
+            "as_tokens": 147
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/die-frueh-foerder-stelle.html",
+            "as_url": "https://web.archive.org/web/20210624015858/https://www.lebenshilfe-main-taunus.de/fruehfoerderung.html",
+            "ls_tokens": 206,
+            "as_tokens": 366
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/wohnen.html",
+            "as_url": "https://web.archive.org/web/20210117032049/https://www.lebenshilfe-main-taunus.de/wohnen.html",
+            "ls_tokens": 173,
+            "as_tokens": 157
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/beratung-wohnen-12.html",
+            "as_url": "https://web.archive.org/web/20210117021759/https://www.lebenshilfe-main-taunus.de/beratungsstelle-wohnen-12.html",
+            "ls_tokens": 176,
+            "as_tokens": 227
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/freizeit-programm.html",
+            "as_url": "https://web.archive.org/web/20210225184957/https://www.lebenshilfe-main-taunus.de/programm-des-familienunterstuetzenden-diensts.html",
+            "ls_tokens": 204,
+            "as_tokens": 145
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/freie-stellen.html",
+            "as_url": "https://web.archive.org/web/20210123103301/https://www.lebenshilfe-main-taunus.de/freie-stellen.html",
+            "ls_tokens": 26,
+            "as_tokens": 422
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/tages-betreuung.html",
+            "as_url": "https://web.archive.org/web/20210117021537/https://www.lebenshilfe-main-taunus.de/tagesstruktur.html",
+            "ls_tokens": 204,
+            "as_tokens": 122
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/-131.html",
+            "as_url": "https://web.archive.org/web/20191023060255/https://www.lebenshilfe-main-taunus.de/reportagen.html",
+            "ls_tokens": 0,
+            "as_tokens": 456
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/treffpunkt-leichte-sprache.html-1526288265.html-1526288405.html",
+            "as_url": "https://web.archive.org/web/20220401084923/https://www.lebenshilfe-main-taunus.de/treffpunkt-leichte-sprache.html",
+            "ls_tokens": 175,
+            "as_tokens": 167
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/wohnen-und-arbeit-m-20/",
+            "as_url": "https://web.archive.org/web/20210122214213/https://www.lebenshilfe-main-taunus.de/wohnen-und-arbeit-m-20/",
+            "ls_tokens": 173,
+            "as_tokens": 157
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/schulungen.html",
+            "as_url": "https://web.archive.org/web/20220401085118/https://www.lebenshilfe-main-taunus.de/schulungen.html",
+            "ls_tokens": 108,
+            "as_tokens": 100
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/mitleben.html",
+            "as_url": "https://web.archive.org/web/20210117023228/https://www.lebenshilfe-main-taunus.de/projekt-mitleben.html",
+            "ls_tokens": 91,
+            "as_tokens": 276
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/die-villa-luce.html",
+            "as_url": "https://web.archive.org/web/20210117032634/https://www.lebenshilfe-main-taunus.de/villa-luce-5.html",
+            "ls_tokens": 192,
+            "as_tokens": 151
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/beratung-und-foerderung.html",
+            "as_url": "https://web.archive.org/web/20220401084159/https://www.lebenshilfe-main-taunus.de/beratung-und-foerderung.html",
+            "ls_tokens": 91,
+            "as_tokens": 95
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/haus-trappen-9.html",
+            "as_url": "https://web.archive.org/web/20210225192653/https://www.lebenshilfe-main-taunus.de/haus-trappen-9.html",
+            "ls_tokens": 171,
+            "as_tokens": 208
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/spenden-helfen-mitmachen.html",
+            "as_url": "https://web.archive.org/web/20210124001158/https://www.lebenshilfe-main-taunus.de/spenden-helfen-mitmachen.html",
+            "ls_tokens": 234,
+            "as_tokens": 270
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/gruppen.html",
+            "as_url": "https://web.archive.org/web/20210225194355/https://www.lebenshilfe-main-taunus.de/gruppen.html",
+            "ls_tokens": 634,
+            "as_tokens": 262
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/-198.html",
+            "as_url": "https://web.archive.org/web/20221207001045/https://www.lebenshilfe-main-taunus.de/offenes-werk-atelier-vom-25-bis-29-juli-2011.html",
+            "ls_tokens": 0,
+            "as_tokens": 252
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/freizeit-und-kunst.html",
+            "as_url": "https://web.archive.org/web/20210225195237/https://www.lebenshilfe-main-taunus.de/freizeit.html",
+            "ls_tokens": 71,
+            "as_tokens": 126
+        },
+        {
+            "ls_url": "https://web.archive.org/web/20210122220843/https://www.lebenshilfe-main-taunus.de/ls/beratung-und-foerderung-m-79/",
+            "as_url": "https://web.archive.org/web/20210123233551/https://www.lebenshilfe-main-taunus.de/beratung-und-foerderung-m-79/",
+            "ls_tokens": 91,
+            "as_tokens": 92
+        }
+    ]
+}

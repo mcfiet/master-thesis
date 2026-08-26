@@ -16,32 +16,33 @@ Hieraus ergibt sich ein dringender Forschungs- und Entwicklungsbedarf im Bereich
 \subsection{Zielsetzung \& Forschungsfragen}
 \label{sec:zielsetzung_forschungsfragen}
 
-Ziel dieser Arbeit ist die Entwicklung, Optimierung und Evaluierung eines methodischen Frameworks zur automatisierten Übersetzung deutscher Alltagssprache in Leichte Sprache. Dies umfasst den gesamten Prozess von der automatisierten Datenakquise über die Bewertung von Sprachkomplexität bis hin zum Training und der Optimierung generativer Sprachmodelle.
+Ziel dieser Arbeit ist die Entwicklung, Optimierung und empirische Evaluierung eines methodischen Frameworks zur automatisierten Übersetzung deutscher Alltagssprache in Leichte Sprache. Dies umfasst die gesamte Pipeline: von der Akquise und Bereinigung paralleler Web-Korpora über die kontinuierliche, referenzfreie Modellierung von Textsimplizität bis hin zur dateneffizienten Modelladaption (LoRA) und dem Präferenz-Alignment (DPO).
 
 Im Zentrum dieser Arbeit steht die folgende übergreifende Leitfrage:
 
 \begin{tcolorbox}[boxrule=0pt,sharp corners,enhanced,borderline west={2pt}{0pt}{blue}]
-    \textbf{\large Wie lässt sich die automatische Übersetzung in Leichte Sprache (LS) durch die Kombination aus semantisch optimierten Korpora, strukturellen Klassifikatoren und zielgerichteten Trainingsstrategien systematisch verbessern und evaluieren?}
+    \textbf{\large Wie lässt sich die automatische Übersetzung in Leichte Sprache (LS) durch die Kombination aus rauschbereinigten Korpora, kontinuierlichen Simplizitätsmetriken und zielgerichteten Alignment-Strategien (DPO) systematisch optimieren und validieren?}
 \end{tcolorbox}
 
-Zur Beantwortung dieser Leitfrage werden drei zentrale Forschungsbereiche (Themenblöcke) untersucht:
+Zur systematischen Beantwortung dieser Leitfrage werden sechs forschungsleitende Kernfragen (\textbf{FF1} bis \textbf{FF6}) formuliert, die den logischen Bogen über die drei methodischen Hauptsäulen der Arbeit spannen:
 
 \begin{enumerate}
-    \item \textbf{Datenbasis \& Alignment (Themenblock 1):}
+    \item \textbf{Datenbasis \& Korpusqualität (Themenblock 1):}
     \begin{itemize}
-        \item \textit{FF 2.1:} Wie stark beeinträchtigt das 1:n-Satzalignment das Training von Sequenz-zu-Sequenz-Modellen und kann ein absatzweises Alignment semantische Einheiten besser wahren?
-        \item \textit{FF 2.2 \& 2.3:} Welcher Filterbereich der Kosinus-Ähnlichkeit bei parallelen Textpaaren liefert den qualitativen "`Sweet Spot"' für das Modelltraining und inwiefern helfen Long-Context Embeddings bei der Rauschreduktion?
+        \item \textbf{FF1 (Quellenheterogenität \& Web-Rauschen):} \textit{Inwieweit existiert im deutschsprachigen Web eine hinreichende und qualitativ konsistente Datenbasis für Leichte Sprache, und welche Vorverarbeitungsschritte sind erforderlich, um domänenspezifisches Web-Rauschen (Boilerplate, Teaser, maschinelle Vorübersetzungen) zu eliminieren?}
+        \item \textbf{FF2 (Artikel- vs. Satzebene \& Informationsverlust):} \textit{Welche Vor- und Nachteile bietet eine artikelbasierte Modellierung gegenüber satzweiser Segmentierung für das Übersetzen in Leichte Sprache, und wie lässt sich der inhärente Konflikt zwischen syntaktischer Simplifikation und semantischem Informationsverlust (Faktenerhalt) quantifizieren?}
     \end{itemize}
     
-    \item \textbf{Klassifikation \& Sprachkomplexität (Themenblock 2):}
+    \item \textbf{Metrik \& Kontinuierliche Simplizitäts-Modellierung (Themenblock 2):}
     \begin{itemize}
-        \item \textit{FF 3.1 \& 3.2:} Lässt sich Sprachkomplexität besser auf Satz- oder Dokumentenebene klassifizieren und wie gut generalisieren diese Klassifikatoren auf unabhängige, proprietäre Testdaten?
-        \item \textit{FF 3.3:} Wie lassen sich systematische Shortcuts (Längen-, Layout- und typografische Biases) in den Klassifikationsmodellen empirisch ausschließen?
+        \item \textbf{FF3 (Kontinuierliche Regression ohne Zwischenkorpora):} \textit{Wie kann ein kontinuierliches Regressionsmodell zur Messung des Vereinfachungsgrads trainiert werden, wenn in realen Korpora ausschließlich binäre Extremzustände (Standardsprache vs. Leichte Sprache) ohne natürliche Zwischenstufen vorliegen?}
     \end{itemize}
 
-    \item \textbf{Übersetzung \& Reward-Guided Fine-Tuning (Themenblock 3):}
+    \item \textbf{Übersetzung, Alignment \& Expertenvalidierung (Themenblock 3 \& Diskussion):}
     \begin{itemize}
-        \item \textit{FF 5.3 \& 5.4:} Inwiefern verbessert ein mit Reinforcement Learning (DPO) optimiertes Übersetzungsmodell unter Nutzung eines Komplexitätsklassifikators als Reward-Funktion die Einhaltung formaler Regeln im Vergleich zu reinem Supervised Fine-Tuning (SFT)?
+        \item \textbf{FF4 (Dateneffizienz \& PEFT/LoRA):} \textit{In welchem Maße können vortrainierte Sequenz-zu-Sequenz-Modelle bei extrem begrenzter Datenmenge (~800--1.000 Artikelpaare) die komplexen syntaktischen und lexikalischen Regeln der Leichten Sprache erlernen, ohne in Memorization und Overfitting zu verfallen?}
+        \item \textbf{FF5 (Reward-Guided Alignment via DPO):} \textit{Inwiefern kann das Signal eines kontinuierlich trainierten Simplizitäts-Regressors genutzt werden, um ein vortrainiertes Übersetzungsmodell über Direct Preference Optimization (DPO) gezielt auf die Eigenheiten Leichter Sprache auszurichten, ohne die semantische Faktentreue zu kompromittieren?}
+        \item \textbf{FF6 (Expertenvalidierung \& Ökologische Validität):} \textit{Wie valide korrelieren automatisierte Bewertungsmetriken mit dem qualitativen Urteil von Fachkräften für Leichte Sprache (Lebenshilfe Kiel), und in welchem Maße sind Modellübersetzungen von professionellen Humanübersetzungen unterscheidbar?}
     \end{itemize}
 \end{enumerate}
 
@@ -55,7 +56,7 @@ Die vorliegende Arbeit folgt einer logischen Struktur, die sich an den drei Säu
     
     \item \textbf{Kapitel 3 (Stand der Forschung)} stellt den aktuellen wissenschaftlichen Stand strukturiert entlang der drei Säulen Datenbasis, Komplexitätsmetriken und maschinelle Übersetzungsverfahren dar und leitet die bestehenden Forschungslücken ab.
     
-    \item \textbf{Kapitel 4 (Themenblock 1: Datenbasis \& Korpus-Erstellung)} beschreibt die erste Stufe der Pipeline. Im Fokus steht das Crawling paralleler Texte, die Behandlung des 1:n-Alignment-Problems und die qualitative Filterung mittels semantischer Embeddings.
+    \item \textbf{Kapitel 4 (Themenblock 1: Datenbasis \& Korpus-Erstellung)} beschreibt die erste Stufe der Pipeline. Im Fokus steht das Crawling paralleler Webtexte, die domänenspezifische Datenbereinigung und die qualitative Filterung mittels semantischer Embeddings.
     
     \item \textbf{Kapitel 5 (Themenblock 2: Metrik \& Bewerten von Sprachkomplexität)} widmet sich der zweiten Stufe: der Entwicklung von Klassifikationsmodellen (BiLSTM vs. SBERT) und dem Entwurf einer \textit{Continuous MixUp Regression} zur stufenlosen Komplexitätsbewertung.
     

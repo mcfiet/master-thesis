@@ -7,6 +7,14 @@
 #SBATCH --output=results/logs/experiments/glossary/%x_%j.out
 #SBATCH --error=results/logs/experiments/glossary/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 
 mkdir -p results/logs/experiments/glossary results/plots/experiments/glossary results/evaluation
 srun python scripts/experiments/glossary/build_glossary.py

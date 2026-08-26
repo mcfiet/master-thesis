@@ -209,6 +209,42 @@ def remove_web_navigation(text: str) -> str:
 
     return text.strip()
 
+def remove_toc_question_streaks(text: str) -> str:
+    """
+    Entfernt redundante Inhaltsverzeichnis-Frageketten am Textanfang (TOC-Bias).
+    Erhält die letzte Frage der führenden Kette, da diese die echte Überschrift
+    für den ersten Antwortabsatz darstellt.
+    """
+    if not text or not isinstance(text, str):
+        return ""
+    
+    raw_segments = re.findall(r'[^.!?\n]+[.!?\n]?', text)
+    segments = [s.strip() for s in raw_segments if s.strip()]
+    if not segments:
+        return text
+    
+    first_non_q_idx = -1
+    for i, s in enumerate(segments):
+        if '?' not in s:
+            first_non_q_idx = i
+            break
+            
+    if first_non_q_idx >= 2:
+        leading_qs = segments[:first_non_q_idx]
+        remaining_text = ' '.join(segments[first_non_q_idx:])
+        
+        keep_from = 0
+        if len(leading_qs) >= 3:
+            keep_from = first_non_q_idx - 1
+        elif len(leading_qs) == 2:
+            q0_clean = leading_qs[0].rstrip('?.!').strip()
+            if q0_clean in remaining_text:
+                keep_from = 1
+                
+        segments = segments[keep_from:]
+        
+    return ' '.join(segments)
+
 def clean_text(text: str, source: str = "") -> str:
     """
     Führt die vollständige Bereinigungskette für einen einzelnen Text aus.
@@ -232,7 +268,10 @@ def clean_text(text: str, source: str = "") -> str:
     # 5. Typographie und Satzzeichen normalisieren
     text = normalize_typography(text)
 
-    return text
+    # 6. Inhaltsverzeichnis-Ketten (TOC-Bias) bereinigen
+    text = remove_toc_question_streaks(text)
+
+    return text.strip()
 
 def clean_pair(ls_text: str, as_text: str, source: str = "") -> tuple:
     """

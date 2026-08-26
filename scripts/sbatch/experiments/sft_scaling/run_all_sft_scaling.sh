@@ -1,4 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=run_all_sft_scaling
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/experiments/sft_scaling/%x_%j.out
+#SBATCH --error=results/logs/experiments/sft_scaling/%x_%j.err
 # ==============================================================================
 # Pipeline Runner: SFT Data Scaling & Learning Curve Experiment
 # Startet das Grid-Training und anschließend automatisch die Evaluation
@@ -6,6 +13,7 @@
 
 set -e
 
+mkdir -p results/logs/experiments/sft_scaling
 SCRIPT_DIR="scripts/sbatch/experiments/sft_scaling"
 
 echo "=== Starte SFT Data Scaling Pipeline ==="

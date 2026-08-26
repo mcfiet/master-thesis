@@ -8,6 +8,14 @@
 #SBATCH --output=results/logs/experiments/metric_weights/%x_%j.out
 #SBATCH --error=results/logs/experiments/metric_weights/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 mkdir -p results/models/metric_weights_exp/dpo_w10_w00
 mkdir -p results/logs/experiments/metric_weights results/plots/experiments/metric_weights results/evaluation
 

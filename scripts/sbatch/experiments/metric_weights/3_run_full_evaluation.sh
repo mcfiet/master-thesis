@@ -8,6 +8,14 @@
 #SBATCH --output=results/logs/experiments/metric_weights/%x_%j.out
 #SBATCH --error=results/logs/experiments/metric_weights/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 mkdir -p results/evaluation
 mkdir -p results/plots
 mkdir -p results/logs/experiments/metric_weights results/plots/experiments/metric_weights results/evaluation
@@ -24,7 +32,7 @@ srun python scripts/evaluation/evaluate_metric_weights_experiment.py \
     --dpo_w10_w00_path "results/models/metric_weights_exp/dpo_w10_w00" \
     --reward_model_path "results/models/bilstm_mixup_regression.pt" \
     --reward_vocab_path "data/vocabs/mixup_vocab.json" \
-    --sbert_model_name "sentence-transformers/paraphrase-multilingual-mpnet-base-v2" \
+    --sbert_model_name "jinaai/jina-embeddings-v2-base-de" \
     --output_summary "results/evaluation/metric_weights_comparison_summary.csv" \
     --output_details "results/evaluation/metric_weights_comparison_details.csv" \
     --output_plot "results/plots/metric_weights_tradeoff_curve.png"

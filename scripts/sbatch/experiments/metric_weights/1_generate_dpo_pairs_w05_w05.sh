@@ -8,6 +8,14 @@
 #SBATCH --output=results/logs/experiments/metric_weights/%x_%j.out
 #SBATCH --error=results/logs/experiments/metric_weights/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 mkdir -p data/metric_weights_exp
 mkdir -p results/logs/experiments/metric_weights results/plots/experiments/metric_weights results/evaluation
 
@@ -15,21 +23,24 @@ echo "=== Generating DPO Preference Pairs (w_style=0.5, w_sem=0.5) ==="
 date
 
 srun python scripts/modeling/generate_dpo_dataset.py \
-    --corpus_path "data/analysis/corpus_master.json" \
-    --min_sim 0.70 \
-    --max_sim 0.98 \
+    --corpus_path "data/corpus/corpus_10kgnad_len512_as.json" \
     --sft_model_path "results/models/sft" \
-    --prompt_prefix "" \
-    --num_candidates 5 \
-    --temperature 0.8 \
+    --base_model_name "facebook/mbart-large-50" \
+    --temperature_ladder 0.6 0.7 0.8 0.85 \
+    --candidates_per_step 3 \
+    --max_total_candidates 12 \
+    --repetition_penalty 1.35 \
+    --no_repeat_ngram_size 3 \
     --max_source_len 256 \
     --max_target_len 256 \
     --reward_max_seq_len 256 \
     --reward_model_path "results/models/bilstm_mixup_regression.pt" \
     --reward_vocab_path "data/vocabs/mixup_vocab.json" \
+    --sbert_model_name "jinaai/jina-embeddings-v2-base-de" \
     --w_style 0.5 \
     --w_sem 0.5 \
     --min_score_margin 0.05 \
+    --batch_size 16 \
     --output_file "data/metric_weights_exp/dpo_pairs_w05_w05.jsonl" \
     --val_split_ratio 0.15
 

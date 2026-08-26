@@ -1,12 +1,20 @@
 #!/bin/bash
 #SBATCH --job-name=2_train_sft_1024
 #SBATCH --partition=research
-#SBATCH --time=16:00:00
+#SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/token_length/%x_%j.out
 #SBATCH --error=results/logs/experiments/token_length/%x_%j.err
+
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
 
 
 mkdir -p results/logs/experiments/token_length results/plots/experiments/token_length results/evaluation

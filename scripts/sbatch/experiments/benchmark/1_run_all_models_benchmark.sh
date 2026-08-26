@@ -8,6 +8,14 @@
 #SBATCH --output=results/logs/experiments/benchmark/%x_%j.out
 #SBATCH --error=results/logs/experiments/benchmark/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 mkdir -p results/logs/experiments/benchmark results/plots/experiments/benchmark results/evaluation

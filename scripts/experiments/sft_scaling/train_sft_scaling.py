@@ -154,7 +154,7 @@ def main():
     parser.add_argument("--base_model_name", type=str, default="facebook/mbart-large-50")
     parser.add_argument("--reward_model_path", type=str, default="results/models/bilstm_mixup_regression.pt")
     parser.add_argument("--reward_vocab_path", type=str, default="data/vocabs/mixup_vocab.json")
-    parser.add_argument("--sbert_model_name", type=str, default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
+    parser.add_argument("--sbert_model_name", type=str, default="jinaai/jina-embeddings-v2-base-de")
     
     parser.add_argument("--train_fraction", type=float, default=1.0, help="Fraction of training corpus to use (e.g. 0.10, 0.25, 0.50, 0.75, 1.00)")
     parser.add_argument("--experiment_name", type=str, default=None)
@@ -433,7 +433,9 @@ def main():
         reward_model.load_state_dict(state_dict)
     reward_model.eval()
     
-    sbert = SentenceTransformer(args.sbert_model_name, device=device)
+    sbert = SentenceTransformer(args.sbert_model_name, device=device, trust_remote_code=True)
+    if hasattr(sbert, "max_seq_length"):
+        sbert.max_seq_length = 512
     
     # Simplicity
     def predict_simplicity(texts: List[str]) -> np.ndarray:
@@ -453,10 +455,20 @@ def main():
         return np.array(all_s)
         
     def predict_sbert_sim(t1: List[str], t2: List[str]) -> np.ndarray:
+        effective_len = getattr(sbert, "max_seq_length", 8192)
+        if effective_len > 4096:
+            sbert_bs = 2
+        elif effective_len > 1024:
+            sbert_bs = 4
+        elif effective_len > 512:
+            sbert_bs = 8
+        else:
+            sbert_bs = 16
+
         all_sim = []
-        for i in range(0, len(t1), 64):
-            e1 = sbert.encode(t1[i : i + 64], convert_to_tensor=True, show_progress_bar=False)
-            e2 = sbert.encode(t2[i : i + 64], convert_to_tensor=True, show_progress_bar=False)
+        for i in range(0, len(t1), sbert_bs):
+            e1 = sbert.encode(t1[i : i + sbert_bs], convert_to_tensor=True, batch_size=sbert_bs, show_progress_bar=False)
+            e2 = sbert.encode(t2[i : i + sbert_bs], convert_to_tensor=True, batch_size=sbert_bs, show_progress_bar=False)
             sims = util.cos_sim(e1, e2).diag().cpu().numpy()
             all_sim.extend(sims.tolist() if isinstance(sims, np.ndarray) and sims.ndim > 0 else [float(sims)])
         return np.array(all_sim)

@@ -115,7 +115,8 @@ def main():
     parser.add_argument("--base_model_name", type=str, default="facebook/mbart-large-50")
     parser.add_argument("--reward_model_path", type=str, default="results/models/bilstm_mixup_regression.pt" if os.path.exists("results/models/bilstm_mixup_regression.pt") else "results/models/token_length_exp/bilstm_mixup_regression_512.pt")
     parser.add_argument("--reward_vocab_path", type=str, default="data/vocabs/mixup_vocab.json" if os.path.exists("data/vocabs/mixup_vocab.json") else "data/token_length_exp/mixup_vocab_512.json")
-    parser.add_argument("--sbert_model_name", type=str, default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
+    parser.add_argument("--sbert_model_name", type=str, default="jinaai/jina-embeddings-v2-base-de")
+    parser.add_argument("--sbert_max_seq_len", type=int, default=8192, help="Max sequence length for SBERT (default: 8192)")
     parser.add_argument("--output_summary", type=str, default="results/evaluation/dpo_ladder_summary.csv")
     parser.add_argument("--output_details", type=str, default="results/evaluation/dpo_ladder_details.csv")
     parser.add_argument("--max_source_len", type=int, default=512)
@@ -150,7 +151,9 @@ def main():
         nlp = spacy.blank("de")
         nlp.add_pipe("sentencizer")
 
-    sbert = SentenceTransformer(args.sbert_model_name, device=device)
+    sbert = SentenceTransformer(args.sbert_model_name, device=device, trust_remote_code=True)
+    if args.sbert_max_seq_len and hasattr(sbert, "max_seq_length"):
+        sbert.max_seq_length = args.sbert_max_seq_len
 
     def score_texts(as_list, cand_list, ref_list):
         # Simplicity
@@ -167,10 +170,20 @@ def main():
         style_scores = np.array(style_scores)
 
         # Semantics
+        effective_len = getattr(sbert, "max_seq_length", args.sbert_max_seq_len)
+        if effective_len > 4096:
+            sbert_bs = 2
+        elif effective_len > 1024:
+            sbert_bs = 4
+        elif effective_len > 512:
+            sbert_bs = 8
+        else:
+            sbert_bs = 16
+
         with torch.inference_mode():
-            emb_as = sbert.encode(as_list, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
-            emb_cand = sbert.encode(cand_list, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
-            emb_ref = sbert.encode(ref_list, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
+            emb_as = sbert.encode(as_list, batch_size=sbert_bs, convert_to_tensor=True, show_progress_bar=False)
+            emb_cand = sbert.encode(cand_list, batch_size=sbert_bs, convert_to_tensor=True, show_progress_bar=False)
+            emb_ref = sbert.encode(ref_list, batch_size=sbert_bs, convert_to_tensor=True, show_progress_bar=False)
 
             sim_as = util.cos_sim(emb_as, emb_cand).diagonal().cpu().numpy()
             sim_ref = util.cos_sim(emb_ref, emb_cand).diagonal().cpu().numpy()
@@ -214,13 +227,16 @@ def main():
                 "input_ids": inp["input_ids"],
                 "attention_mask": inp.get("attention_mask"),
                 "max_length": args.max_target_len,
+                "num_beams": 4,
                 "repetition_penalty": 1.2,
                 "no_repeat_ngram_size": 3,
+                "early_stopping": True,
                 "pad_token_id": tokenizer.pad_token_id,
                 "eos_token_id": tokenizer.eos_token_id,
             }
             if is_seq2seq and hasattr(tokenizer, "lang_code_to_id") and "de_DE" in tokenizer.lang_code_to_id:
                 gen_kwargs["forced_bos_token_id"] = tokenizer.lang_code_to_id["de_DE"]
+                gen_kwargs["decoder_start_token_id"] = tokenizer.lang_code_to_id["de_DE"]
 
             with torch.no_grad():
                 out = model.generate(**gen_kwargs)

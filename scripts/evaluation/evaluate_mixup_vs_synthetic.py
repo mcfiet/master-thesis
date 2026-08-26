@@ -10,8 +10,11 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
+import spacy
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from scipy.stats import pearsonr, spearmanr
+
+nlp = spacy.blank("de")
 
 class BiLSTMRegressor(nn.Module):
     def __init__(self, vocab_size, embed_dim=128, hidden_dim=128, dropout=0.3):
@@ -49,7 +52,8 @@ def load_model(model_path, vocab_size, device):
 def tokenize_and_predict(model, vocab, texts, device, max_len=256):
     tokenized = []
     for text in texts:
-        tokens = text.lower().split()
+        doc = nlp(str(text or ""))
+        tokens = [t.text.lower() for t in doc if not t.is_space]
         ids = [vocab.get(t, vocab.get("<unk>", 1)) for t in tokens][:max_len]
         if len(ids) == 0:
             ids = [0]

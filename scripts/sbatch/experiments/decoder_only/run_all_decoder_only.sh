@@ -1,4 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=run_all_decoder_only
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/experiments/decoder_only/%x_%j.out
+#SBATCH --error=results/logs/experiments/decoder_only/%x_%j.err
 # ==============================================================================
 # Master Pipeline Runner for Decoder-Only SFT & DPO Experiment
 # ==============================================================================
@@ -12,7 +19,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-mkdir -p results/logs results/plots results/models/decoder_only data/dpo results/evaluation
+mkdir -p results/logs/experiments/decoder_only results/plots/experiments/decoder_only results/models/decoder_only data/dpo results/evaluation
 
 echo "=================================================================="
 echo " Launching Decoder-Only SFT & DPO Pipeline"

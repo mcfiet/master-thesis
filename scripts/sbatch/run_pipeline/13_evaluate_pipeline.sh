@@ -8,8 +8,17 @@
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
 mkdir -p results/evaluation
 mkdir -p results/logs/run_pipeline results/plots/run_pipeline results/evaluation
+unset SLURM_MEM_PER_CPU SLURM_MEM_PER_GPU
+
 
 echo "=== Evaluierung des finalen DPO Modells vs. SFT Baseline auf dem ungesehenen Lebenshilfe Benchmark ==="
 date
@@ -21,11 +30,11 @@ srun python scripts/evaluation/evaluate_dpo_ladder_model.py \
     --base_model_name "facebook/mbart-large-50" \
     --reward_model_path "results/models/bilstm_mixup_regression.pt" \
     --reward_vocab_path "data/vocabs/mixup_vocab.json" \
-    --sbert_model_name "sentence-transformers/paraphrase-multilingual-mpnet-base-v2" \
+    --sbert_model_name "jinaai/jina-embeddings-v2-base-de" \
     --output_summary "results/evaluation/pipeline_final_summary.csv" \
     --output_details "results/evaluation/pipeline_final_details.csv" \
-    --max_source_len 512 \
-    --max_target_len 512 \
+    --max_source_len 256 \
+    --max_target_len 256 \
     --batch_size 4
 
 echo "=== Pipeline Evaluierung abgeschlossen ==="

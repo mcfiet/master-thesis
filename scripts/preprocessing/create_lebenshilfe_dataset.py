@@ -40,10 +40,32 @@ def extract_text(file_path):
         return ""
 
 parser = argparse.ArgumentParser(description="Create Lebenshilfe dataset")
-parser.add_argument("--data-dir", type=str, default="data/texts_lebenshilfe", help="Path to texts_lebenshilfe folder")
+parser.add_argument("--data-dir", type=str, default=None, help="Path to texts_lebenshilfe folder")
 args = parser.parse_args()
 
-base_dir = args.data_dir
+# Search for the directory containing 'ls' and 'as' folders
+candidate_dirs = []
+if args.data_dir:
+    candidate_dirs.append(args.data_dir)
+candidate_dirs.extend([
+    "data/lebenshilfe/texts_lebenshilfe",
+    "data/texts_lebenshilfe",
+])
+
+base_dir = None
+for c_dir in candidate_dirs:
+    if os.path.isdir(c_dir) and os.path.isdir(os.path.join(c_dir, 'ls')) and os.path.isdir(os.path.join(c_dir, 'as')):
+        base_dir = c_dir
+        break
+
+if base_dir is None:
+    # If a specific directory was passed or first fallback, construct a helpful error message
+    searched = ", ".join(candidate_dirs)
+    raise FileNotFoundError(
+        f"Could not find 'ls' and 'as' subdirectories in any of the candidate paths: {searched}"
+    )
+
+print(f"Using Lebenshilfe texts directory: {base_dir}")
 ls_dir = os.path.join(base_dir, 'ls')
 as_dir = os.path.join(base_dir, 'as')
 

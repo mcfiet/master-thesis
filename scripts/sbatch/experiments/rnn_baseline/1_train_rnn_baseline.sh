@@ -8,6 +8,14 @@
 #SBATCH --output=results/logs/experiments/rnn_baseline/%x_%j.out
 #SBATCH --error=results/logs/experiments/rnn_baseline/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 # 1. Standard: Vanilla RNN (Elman RNN, unidirektional)
 
 mkdir -p results/logs/experiments/rnn_baseline results/plots/experiments/rnn_baseline results/evaluation

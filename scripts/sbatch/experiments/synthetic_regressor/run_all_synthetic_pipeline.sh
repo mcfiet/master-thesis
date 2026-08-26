@@ -1,11 +1,18 @@
 #!/bin/bash
+#SBATCH --job-name=run_all_synthetic_pipeline
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/experiments/synthetic_regressor/%x_%j.out
+#SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
 # =============================================================================
 # Synthetic Regressor Experiment Runner
 # =============================================================================
 
 set -e
 
-mkdir -p results/logs data/synthetic results/models/synthetic results/evaluation
+mkdir -p results/logs/experiments/synthetic_regressor data/synthetic results/models/experiments/synthetic_regressor results/evaluation
 
 echo "=== Submitting Synthetic Regressor Experiment Pipeline ==="
 

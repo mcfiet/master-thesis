@@ -11,7 +11,10 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
+import spacy
 from scipy.stats import pearsonr, spearmanr, kendalltau
+
+nlp = spacy.blank("de")
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 class BiLSTMRegressor(nn.Module):
@@ -80,7 +83,8 @@ def main():
 
     tokenized = []
     for s in sentences:
-        tokens = str(s).lower().split()
+        doc = nlp(str(s or ""))
+        tokens = [t.text.lower() for t in doc if not t.is_space]
         ids = [vocab.get(t, vocab.get("<unk>", 1)) for t in tokens][:256]
         if len(ids) == 0:
             ids = [0]

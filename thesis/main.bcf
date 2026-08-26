@@ -3104,6 +3104,23 @@
     <bcf:citekey order="31" intorder="1">stajner2018cats</bcf:citekey>
     <bcf:citekey order="32" intorder="1">toborek2023new</bcf:citekey>
     <bcf:citekey order="33" intorder="1">bund2026barrierefreiheit</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">maass2020leichte</bcf:citekey>
+    <bcf:citekey order="34" intorder="2">bredel2016leichte</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">bredel2016leichte</bcf:citekey>
+    <bcf:citekey order="35" intorder="2">maass2020leichte</bcf:citekey>
+    <bcf:citekey order="36" intorder="1">reimers2019sentence</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">gunther2023jina</bcf:citekey>
+    <bcf:citekey order="38" intorder="1">bmas2018ratgeber</bcf:citekey>
+    <bcf:citekey order="38" intorder="2">bund2026barrierefreiheit</bcf:citekey>
+    <bcf:citekey order="38" intorder="3">din8581</bcf:citekey>
+    <bcf:citekey order="39" intorder="1">maass2020leichte</bcf:citekey>
+    <bcf:citekey order="39" intorder="2">bredel2016leichte</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">devaraj2021evaluating</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">bmas2018ratgeber</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">bmas2018ratgeber</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">bund2026barrierefreiheit</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">din8581</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">bamberger1984lesen</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">

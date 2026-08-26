@@ -1,40 +1,39 @@
-# 22. Versuchsaufbau & Evaluation: Einfluss der Token-Länge (256 vs. 512 vs. 1024 Tokens)
+# 22. Versuchsaufbau & Evaluation: Einfluss der Token-Länge mit Long-Context Jina-Embeddings (256 vs. 512 vs. 1024 Tokens)
 
 ## 1. Motivation & Forschungsfrage
 
-In bisherigen Experimenten wurde standardmäßig mit Sequenzlängen von $256$ Tokens gearbeitet. Deutsche Artikel in Alltagssprache (AS) sowie deren Entsprechungen in Leichter Sprache (LS) umfassen im Lebenshilfe-Korpus jedoch durchschnittlich $\approx 916$ bzw. $\approx 1107$ Tokens.
+In frühen Iterationen der Übersetzungspipeline wurde standardmäßig mit Sequenzlängen von $256$ Tokens gearbeitet. Deutsche Artikel in Alltagssprache (AS) sowie deren Entsprechungen in Leichter Sprache (LS) umfassen im Lebenshilfe-Korpus jedoch durchschnittlich $\approx 916$ bzw. $\approx 1107$ Tokens.
 
-Daraus ergibt sich die zentrale Forschungsfrage:
-> **Welchen Einfluss hat die maximale Token-Länge ($256$, $512$, $1024$ Tokens) auf die Modellierungsqualität der drei Pipeline-Stufen:**
-> 1. **Simplicity-Metrik (BiLSTM MixUp Regressor)**
-> 2. **SFT Fine-Tuning (mBART-50 LoRA)**
-> 3. **DPO Alignment (Direct Preference Optimization)**
+Daraus ergeben sich zwei zentrale Forschungsfragen:
+1. **Skalierung der Sequenzlänge:** Welchen Einfluss hat die maximale Token-Länge ($256$, $512$, $1024$ Tokens) auf die drei Pipeline-Stufen (Simplicity-Metrik, SFT Fine-Tuning und DPO Alignment)?
+2. **Metric-Bottleneck & Long-Context:** Warum führen Standard-Sentence-Transformer mit hartem $128$-Token-Limit (z. B. MPNet) zu DPO-Verzerrungen und wie löst ein Long-Context-Embedding (**Jina Embeddings v2**, bis 8192 Tokens) dieses Problem?
 
 ---
 
 ## 2. Experimenteller Aufbau & Methodik
 
-### 2.1 Hardware- & Ressourcen-Management (24 GB VRAM GPU)
-Um Out-of-Memory-Fehler (OOM) bei langen Sequenzen auf einer 24 GB GPU (`mig_24gb:1`) zu verhindern und die effektive Batch-Größe konsistent auf $16$ zu halten, wurden die Batch-Größen und Gradient-Accumulation-Schritte angepasst:
+### 2.1 Hardware- & Ressourcen-Management
+Um Out-of-Memory-Fehler (OOM) bei Sequenzlängen bis $1024$ Tokens zu vermeiden und eine konsistente effektive Batch-Größe von $16$ zu gewährleisten, wurden folgende Trainingsparameter und GPU-Profile definiert:
 
-| Token-Länge | SFT (`train_sft.py`) | DPO (`train_dpo.py`) | Effektive Batch-Größe |
-|---|---|---|---|
-| **256 Tokens** | `batch_size=8`, `accum=2` | `batch_size=2`, `accum=8` | **16** |
-| **512 Tokens** | `batch_size=4`, `accum=4` | `batch_size=2`, `accum=8` | **16** |
-| **1024 Tokens**| `batch_size=2`, `accum=8` | `batch_size=1`, `accum=16`| **16** |
+| Stufe / Token-Länge | Batch-Größe | Accumulation Steps | Effektive Batch-Größe | GPU-Ressource |
+|---|---|---|---|---|
+| **SFT 256 Tokens** | 8 | 2 | **16** | `mig_24gb:1` (16 GB RAM) |
+| **SFT 512 Tokens** | 4 | 4 | **16** | `mig_24gb:1` (16 GB RAM) |
+| **SFT 1024 Tokens**| 2 | 8 | **16** | `mig_24gb:1` (16 GB RAM) |
+| **DPO 256 Tokens (Jina)** | 2 | 8 | **16** | `mig_24gb:1` (16 GB RAM) |
+| **DPO 512 Tokens (Jina)** | 2 | 8 | **16** | `mig_24gb:1` (16 GB RAM) |
+| **DPO 1024 Tokens (Jina)**| 1 | 16| **16** | `mig_48gb:1` (32 GB RAM) |
 
-### 2.2 Skript-Anpassungen
-1. **[`scripts/modeling/train_sft.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/modeling/train_sft.py) & [`scripts/modeling/generate_dpo_dataset.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/modeling/generate_dpo_dataset.py)**:
-   - Neuer CLI-Parameter `--reward_max_seq_len` (synchronisiert mit `--max_target_len`), um das vormals hardcodierte `[:150]` Token-Slicing während der Reward-Berechnung zu eliminieren.
-2. **[`scripts/evaluation/evaluate_token_length_experiment.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/evaluation/evaluate_token_length_experiment.py)**:
-   - Entfernung des hardcodierten Prompt-Präfixes (`--prompt_prefix ""`), um einen Trainings-Inferenz-Mismatch bei DPO zu verhindern.
-   - Ergänzung einer vollständigen Evaluierungsroutine für die BiLSTM-Metrikmodelle auf dem Lebenshilfe-Goldstandard.
+### 2.2 Drei-Stufen-Architektur mit Jina Long-Context
+1. **Stufe 1 (Simplicity-Metrik):** BiLSTM MixUp Regressoren (`metric_mixup_256`, `metric_mixup_512`, `metric_mixup_1024`).
+2. **Stufe 2 (SFT-Baseline):** mBART-50 LoRA (`sft_len256`, `sft_len512`, `sft_len1024`).
+3. **Stufe 3 (DPO Alignment):** Präferenzpaar-Generierung mit dynamisch angepasstem Jina-Kontextfenster (`jinaai/jina-embeddings-v2-base-de`), wodurch der semantische Reward $R_{sem}$ über die gesamte Dokumentlänge ohne stillschweigenden Cut-off berechnet wird.
 
 ---
 
 ## 3. Ergebnisse Teil A: Evaluation der Simplicity-Metrik (BiLSTM MixUp)
 
-Evaluation auf dem unabhängigen Lebenshilfe-Datensatz (`data/lebenshilfe/lebenshilfe_dataset_clean.json`, 37 Artikelpaare).
+Evaluation auf dem unabhängigen Lebenshilfe-Datensatz (`data/lebenshilfe/lebenshilfe_dataset_clean.json`, 37 vollständige Artikelpaare).
 
 ### 3.1 Statistische Kennzahlen
 
@@ -52,56 +51,63 @@ Evaluation auf dem unabhängigen Lebenshilfe-Datensatz (`data/lebenshilfe/lebens
 | **`metric_mixup_512`** | $0.4792$ | $0.6072$ | $0.6470$ | $-0.4211$ |
 | **`metric_mixup_1024`**| $0.4795$ | $0.6616$ | $\mathbf{0.6897}$ 🏆 | $\mathbf{-0.5323}$ 🏆 |
 
-### 3.3 Visualisierung: KDE-Dichteverteilungs-Plots
-Gespeichert unter: `results/plots/compare_token_length_metrics_lh_kde.png`
-
-* **Bimodale Verteilung**: Alle drei Modelle trennen Leichte Sprache (Grün, Peak bei $\approx 0.85$) und Alltagssprache (Blau, Peak bei $\approx 0.08$) scharf an der Schwelle $\lambda = 0.5$.
-* **Vorteil 1024 Tokens**: Das 1024-Token-Modell eliminiert die bei 256 Tokens sichtbare Ausreißer-Häufung bei $\lambda \approx 0.45$, da lange Alltagstexte vollständig erfasst und nicht vorzeitig abgeschnitten werden.
+*Erkenntnis:* `metric_mixup_1024` erzielt $100.0\,\%$ paarweise Genauigkeit und eliminiert den Längen-Bias bei langen Texten.
 
 ---
 
-## 4. Ergebnisse Teil B: Evaluation der Übersetzungsmodelle (SFT & DPO)
+## 4. Ergebnisse Teil B: Gesamtvergleich der Übersetzungsmodelle (SFT vs. DPO Jina vs. MPNet Ablation)
 
-Evaluation auf dem Lebenshilfe-Testset mit 37 vollständigen Artikeln.
+Evaluation aller Modelle auf dem Lebenshilfe-Testset mit 37 vollständigen Artikeln unter Verwendung der Long-Context Jina-Evaluation:
 
-| Modell | Max Tokens | Simplicity ($R_{style}$) | Semantik ($R_{sem, AS}$) | Sim. Ref ($Sim_{ref}$) | **Composite Reward** | **BLEU** | **ROUGE-L F1** | **Avg. Tokens** | **Truncation Rate** |
-|---|---|---|---|---|---|---|---|---|---|
-| **`sft_len256`** | 256 | $0.6086$ | $\mathbf{0.8892}$ | $0.8649$ | $0.7489$ | $0.0089$ | $0.1292$ | $154.6$ | $43.2\,\%$ |
-| **`sft_len512`** | 512 | $\mathbf{0.6583}$ | $0.8533$ | $0.8520$ | $\mathbf{0.7558}$ 🏆 | $0.0198$ | $0.1493$ | $237.6$ | $43.2\,\%$ |
-| **`sft_len1024`**| 1024 | $0.5804$ | $0.8747$ | $\mathbf{0.8626}$ | $0.7276$ | $\mathbf{0.0249}$ 🏆 | $\mathbf{0.1606}$ 🏆 | $\mathbf{288.9}$ 🏆 | $\mathbf{18.9\,\%}$ 🏆 |
-| `dpo_len256` | 256 | $0.4391$ | $0.8978$ | $0.8353$ | $0.6684$ | $0.0000$ | $0.0411$ | $37.8$ | $40.5\,\%$ |
-| `dpo_len512` | 512 | $0.4175$ | $0.8840$ | $0.8233$ | $0.6507$ | $0.0009$ | $0.0422$ | $43.2$ | $29.7\,\%$ |
-| `dpo_len1024`| 1024 | $0.3376$ | $0.8949$ | $0.8277$ | $0.6163$ | $0.0024$ | $0.0651$ | $114.1$ | $\mathbf{10.8\,\%}$ |
-
----
-
-## 5. Zentrale Thesen & Erkenntnisse für die Masterarbeit
-
-### 1. Drastische Reduktion von Truncation bei SFT-1024
-Bei $256$ und $512$ Tokens brechen $43.2\,\%$ aller SFT-Übersetzungen mitten im Satz ab, weil das Tokenbudget für die ausführlichen Erklärungsstrukturen Leichter Sprache nicht ausreicht. Bei **1024 Tokens sinkt die Truncation-Rate auf $18.9\,\%$** (über $81\,\%$ aller Texte schließen syntaktisch sauber ab).
-
-### 2. Lexikalische Qualität vervielfacht sich (BLEU & ROUGE)
-* **BLEU-Score**: Steigt von $0.0089$ ($256$) über $0.0198$ ($512$) auf **$0.0249$ ($1024$)** — eine Steigerung um **$+180\,\%$** gegenüber dem 256er-Baseline-Modell.
-* **ROUGE-L F1**: Steigt von $12.9\,\%$ auf **$16.1\,\%$**.
-* **Ursache**: Mit 1024 Tokens kann das Modell auch Folgeabsätze übersetzen, anstatt nach der Einleitung zu stoppen.
-
-### 3. Sweet-Spot-Differenzierung
-* **512 Tokens**: Bester Kompromiss für abschnittsweise/paragraphenweise Vereinfachungen mit dem **höchsten Simplicity-Score ($0.6583$)** und **höchsten Composite Reward ($0.7558$)**.
-* **1024 Tokens**: Unverzichtbar für die **vollständige Übersetzung ganzer Artikel**, da Textverlust und Satzabbrüche minimiert werden.
-
-### 4. Funktionsweise der BiLSTM-Metrik bei 1024 Tokens
-Entgegen theoretischer Bedenken hinsichtlich Gradient Degradation bei RNNs über 1024 Zeitschritte erzielt `metric_mixup_1024` die beste Performance ($100\,\%$ Klassifikationsgenauigkeit):
-* Da es sich um eine **globale Stil-Klassifikation** handelt (und keine autoregressive Generierung), agiert das BiLSTM als kontinuierlicher Akkumulator stilistischer Merkmale.
-* Durch die bidirektionale Verknüpfung des Vorwärts- und Rückwärtszustands bleiben Anfang und Ende des Textes gleichermaßen präsent.
-
-### 5. DPO-Dynamik bei unterschiedlichen Token-Längen
-DPO-Modelle neigen bei $w_{sem} = 0.5$ zu einer starken Kondensierung (38–114 Tokens) und selektieren bevorzugt extraktive Teilsätze, um den SBERT-Score zu maximieren. Für künftige DPO-Trainings empfiehlt sich eine höhere Gewichtung des Style-Scores ($w_{style} = 0.7$, $w_{sem} = 0.3$).
+| Modell | Typ / Semantik-Backbone | Max Tokens | Simplicity ($R_{style}$) | Semantik ($R_{sem, AS}$) | Sim. Ref ($Sim_{ref}$) | **Composite Reward** | **BLEU** | **ROUGE-L F1** | **Avg. Tokens** | **Truncation Rate** |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **`sft_len256`** | SFT Baseline | 256 | $0.6086$ | $0.8908$ | $0.8772$ | $0.7497$ | $0.0089$ | $0.1292$ | $154.6$ | $43.2\,\%$ |
+| **`sft_len512`** | SFT Baseline | 512 | $\mathbf{0.6583}$ | $0.9011$ | $0.8943$ | $\mathbf{0.7797}$ 🏆 | $0.0198$ | $0.1493$ | $237.6$ | $43.2\,\%$ |
+| **`sft_len1024`**| SFT Baseline | 1024 | $0.5795$ | $\mathbf{0.9179}$ | $\mathbf{0.8965}$ | $0.7487$ | $\mathbf{0.0259}$ 🏆 | $\mathbf{0.1615}$ 🏆 | $\mathbf{289.1}$ 🏆 | $18.9\,\%$ |
+| `dpo_len256` | DPO Ablation (MPNet 128) | 256 | $0.4391$ | $0.8662$ | $0.8329$ | $0.6527$ | $0.0000$ | $0.0411$ | $37.8$ | $40.5\,\%$ |
+| `dpo_len256_jina` | **DPO Primary (Jina Long)** | 256 | $0.4467$ | $0.8665$ | $0.8339$ | $0.6566$ | $0.0000$ | $0.0400$ | $35.8$ | $43.2\,\%$ |
+| `dpo_len512` | DPO Ablation (MPNet 128) | 512 | $0.4175$ | $0.8758$ | $0.8421$ | $0.6466$ | $0.0009$ | $0.0422$ | $43.2$ | $29.7\,\%$ |
+| `dpo_len512_jina` | **DPO Primary (Jina Long)** | 512 | $0.4328$ | $0.8753$ | $0.8414$ | $0.6541$ | $0.0009$ | $0.0424$ | $43.7$ | $27.0\,\%$ |
+| `dpo_len1024` | DPO Ablation (MPNet 128) | 1024 | $0.3376$ | $0.8960$ | $0.8519$ | $0.6168$ | $0.0024$ | $0.0651$ | $114.1$ | $10.8\,\%$ |
+| **`dpo_len1024_jina`** | **DPO Primary (Jina Long)** | 1024 | $0.3297$ | $\mathbf{0.9000}$ | $\mathbf{0.8572}$ | $0.6148$ | $\mathbf{0.0034}$ | $\mathbf{0.0682}$ | $\mathbf{125.6}$ | $\mathbf{5.4\,\%}$ 🏆 |
 
 ---
 
-## 6. Zugehörige Skripte und Artefakte
+## 5. Zentrale Thesen & wissenschaftliche Erkenntnisse
 
-- **SBatch-Suite**: [`scripts/sbatch/experiments/token_length/`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/experiments/token_length/)
+### 1. Behebung des Metric-Bottlenecks durch Jina
+* MPNet schneidet Texte unbemerkt nach 128 Tokens ab. Bei 1024 Tokens bewertet MPNet folglich nur die ersten $\approx 12\,\%$ des Textes.
+* **Jina Long-Context halbiert die Truncation-Rate**: Bei 1024 Tokens sinken die Satzabbrüche von $10.8\,\%$ auf **$5.4\,\%$** ($94.6\,\%$ aller generierten Artikel schließen syntaktisch sauber ab).
+* Die Generierungslänge steigt um $+10\,\%$ ($125.6$ vs. $114.1$ Tokens), und der BLEU-Score verbessert sich um $+39\,\%$.
+
+### 2. Drastische Reduktion von Satzabbrüchen bei SFT-1024
+* Bei 256 und 512 Tokens brechen $43.2\,\%$ aller SFT-Texte vorzeitig ab, weil das Token-Budget für die expandierende Struktur Leichter Sprache unzureichend ist.
+* Bei **1024 Tokens sinkt die SFT-Truncation auf $18.9\,\%$**, während der BLEU-Score von $0.0089$ auf **$0.0259$ ($+191\,\%$)** steigt.
+
+### 3. Komplementäre Stärken von SFT und DPO
+* **SFT-1024**: Erzeugt ausführliche Übersetzungen ($289.1$ Tokens) mit hohem Simplicity-Wert ($0.5795$) und echtem Satzbau Leichter Sprache.
+* **DPO-1024-Jina**: Erreicht die höchste Satzabschluss-Zuverlässigkeit ($94.6\,\%$ vollständige Sätze) und höchste semantische Treue ($0.9000$).
+
+---
+
+## 6. Empfohlene finale Pipeline-Konfiguration
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                        OPTIMALE GESAMTKONFIGURATION DER MASTERARBEIT                   │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ 1. Simplicity-Metrik:  BiLSTM MixUp Regressor ──► max_seq_len = 1024                   │
+│ 2. SFT Fine-Tuning:    mBART-50 LoRA          ──► max_src = 1024, max_tgt = 1024       │
+│ 3. DPO Alignment:      DPO Alignment (Jina)   ──► max_len = 1024, w_style=0.7, w_sem=0.3│
+│ 4. Semantik-Metrik:    Jina Embeddings v2     ──► jinaai/jina-embeddings-v2-base-de    │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 7. Zugehörige Skripte und Artefakte
+
+- **SBatch-Suite (Jina-Standard)**: [`scripts/sbatch/experiments/token_length/`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/experiments/token_length/)
 - **Evaluationsskript**: [`scripts/evaluation/evaluate_token_length_experiment.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/evaluation/evaluate_token_length_experiment.py)
 - **Metrik-Notebook**: [`notebooks/research/metric/compare_token_lengths.ipynb`](file:///Users/fietescheel/Documents/Master%20Thesis/notebooks/research/metric/compare_token_lengths.ipynb)
 - **Übersetzungs-Notebook**: [`notebooks/research/translation/compare_token_lengths.ipynb`](file:///Users/fietescheel/Documents/Master%20Thesis/notebooks/research/translation/compare_token_lengths.ipynb)

@@ -11,9 +11,10 @@ import numpy as np
 from scipy.stats import pearsonr, spearmanr
 
 # --- CONFIGURATION ---
-DATASET_PATH = "data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json" 
-MODEL_PATH = "results/models/lstm_article_sim_0.80_to_0.98.pt"
-VOCAB_SOURCE_CSV = "data/analysis/information_loss_analysis_cleaned.csv"
+DATASET_PATH = "data/lebenshilfe/lebenshilfe_dataset_clean.json" 
+MODEL_PATH = "results/models/bilstm_article_classifier.pt"
+VOCAB_PATH = "data/vocabs/article_vocab.json"
+VOCAB_SOURCE_CSV = "data/analysis/corpus_master.csv"
 VOCAB_SIM_RANGE = (0.8, 0.98)
 
 MAX_SEQ_LEN = 512
@@ -36,7 +37,9 @@ class BiLSTMClassifier(nn.Module):
         return self.fc(self.dropout(hidden))
 
 class Vocab:
-    def __init__(self, sentences, max_size=25000, min_freq=3):
+    def __init__(self, sentences=None, max_size=25000, min_freq=3):
+        if sentences is None:
+            sentences = []
         counter = Counter()
         for sent in sentences:
             counter.update(sent)
@@ -55,10 +58,27 @@ class Vocab:
     def encode(self, tokens):
         return [self.stoi.get(t, self.stoi["<unk>"]) for t in tokens]
 
-def build_original_vocab():
+def load_or_build_vocab():
+    if VOCAB_PATH and os.path.exists(VOCAB_PATH):
+        print(f"Loading vocabulary from JSON: {VOCAB_PATH}...")
+        with open(VOCAB_PATH, "r", encoding="utf-8") as f:
+            v_data = json.load(f)
+        stoi = v_data.get("stoi", v_data)
+        itos = v_data.get("itos", None)
+        if itos is None:
+            itos = [None] * len(stoi)
+            for k, idx in stoi.items():
+                if idx < len(itos):
+                    itos[idx] = k
+        vocab_obj = Vocab()
+        vocab_obj.stoi = stoi
+        vocab_obj.itos = itos
+        return vocab_obj
+
     print(f"Reconstructing vocab from {VOCAB_SOURCE_CSV}...")
     df = pd.read_csv(VOCAB_SOURCE_CSV)
-    mask = (df["semantic_similarity_8192"] >= VOCAB_SIM_RANGE[0]) & (df["semantic_similarity_8192"] <= VOCAB_SIM_RANGE[1])
+    sim_col = "semantic_similarity_8192" if "semantic_similarity_8192" in df.columns else "semantic_similarity"
+    mask = (df[sim_col] >= VOCAB_SIM_RANGE[0]) & (df[sim_col] <= VOCAB_SIM_RANGE[1])
     df_filtered = df[mask]
     
     nlp = spacy.blank("de")
@@ -81,11 +101,14 @@ def build_original_vocab():
 
 def main():
     print(f"Using device: {DEVICE}")
-    vocab = build_original_vocab()
+    vocab = load_or_build_vocab()
     print(f"Vocab size: {len(vocab)}")
     
     model = BiLSTMClassifier(len(vocab), EMBED_DIM, HIDDEN_DIM).to(DEVICE)
-    model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
+    raw_weights = torch.load(MODEL_PATH, map_location=DEVICE, weights_only=False)
+    if isinstance(raw_weights, dict) and "model_state_dict" in raw_weights:
+        raw_weights = raw_weights["model_state_dict"]
+    model.load_state_dict(raw_weights)
     model.eval()
     print("Model loaded successfully.")
     
@@ -95,6 +118,7 @@ def main():
     nlp = spacy.blank("de")
     
     # Collect statistics
+    all_texts = []
     lengths = []
     probabilities = []
     true_labels = []
@@ -106,7 +130,7 @@ def main():
     fixed_len_preds_50 = []
     fixed_len_preds_100 = []
     
-    dummy_token = vocab.itos[2] if len(vocab.itos) > 2 else "der"
+    dummy_token = vocab.itos[2] if len(vocab.itos) > 2 and vocab.itos[2] is not None else "der"
     print(f"Selected dummy token for replacement: '{dummy_token}'")
     
     for item in data:
@@ -118,6 +142,7 @@ def main():
         for text, label in [(ls_text, 1), (as_text, 0)]:
             tokens = [t.text.lower() for t in nlp(text) if not t.is_space]
             original_len = len(tokens)
+            all_texts.append(text)
             lengths.append(original_len)
             true_labels.append(label)
             
@@ -226,17 +251,20 @@ def main():
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Check length bias in BiLSTM classifier")
-    parser.add_argument("--dataset_path", default="data/lebenshilfe/lebenshilfe_dataset_no_paragraphs.json")
-    parser.add_argument("--model_path", default="results/models/lstm_article_sim_0.80_to_0.98.pt")
-    parser.add_argument("--vocab_source_csv", default="data/analysis/information_loss_analysis_cleaned.csv")
+    parser.add_argument("--dataset_path", default="data/lebenshilfe/lebenshilfe_dataset_clean.json")
+    parser.add_argument("--model_path", default="results/models/bilstm_article_classifier.pt")
+    parser.add_argument("--vocab_path", default="data/vocabs/article_vocab.json")
+    parser.add_argument("--vocab_source_csv", default="data/analysis/corpus_master.csv")
     parser.add_argument("--output_csv", default="results/evaluation/length_bias_results.csv")
     args = parser.parse_args()
     
-    if os.path.exists(args.dataset_path):
+    if args.dataset_path:
         DATASET_PATH = args.dataset_path
-    if os.path.exists(args.model_path):
+    if args.model_path:
         MODEL_PATH = args.model_path
-    if os.path.exists(args.vocab_source_csv):
+    if args.vocab_path:
+        VOCAB_PATH = args.vocab_path
+    if args.vocab_source_csv:
         VOCAB_SOURCE_CSV = args.vocab_source_csv
         
     main()

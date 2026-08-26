@@ -102,12 +102,14 @@ class LossAggregationEvaluator:
         self,
         reward_model_path: str = "results/models/bilstm_mixup_regression.pt",
         reward_vocab_path: str = "data/vocabs/mixup_vocab.json",
-        sbert_model_name: str = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+        sbert_model_name: str = "jinaai/jina-embeddings-v2-base-de",
+        sbert_max_seq_len: int = 8192,
         max_seq_len: int = 256,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
     ):
         self.device = torch.device(device)
         self.max_seq_len = max_seq_len
+        self.sbert_max_seq_len = sbert_max_seq_len
 
         print("Initialisiere SpaCy Tokenizer...")
         self.nlp = spacy.load("de_core_news_sm", disable=["ner", "tagger", "lemmatizer", "parser"])
@@ -131,8 +133,10 @@ class LossAggregationEvaluator:
         self.regressor.eval()
 
         # 3. SBERT
-        print(f"Lade SBERT Modell ({sbert_model_name})...")
-        self.sbert = SentenceTransformer(sbert_model_name, device=self.device)
+        print(f"Lade SBERT Modell ({sbert_model_name}, max_seq_len={sbert_max_seq_len})...")
+        self.sbert = SentenceTransformer(sbert_model_name, device=self.device, trust_remote_code=True)
+        if sbert_max_seq_len and hasattr(self.sbert, "max_seq_length"):
+            self.sbert.max_seq_length = sbert_max_seq_len
 
     def text_to_tensor(self, texts: List[str]) -> torch.Tensor:
         batch_ids = []
@@ -147,7 +151,7 @@ class LossAggregationEvaluator:
         return torch.tensor(batch_ids, dtype=torch.long, device=self.device)
 
     @torch.no_grad()
-    def predict_simplicity(self, texts: List[str], batch_size: int = 64) -> np.ndarray:
+    def predict_simplicity(self, texts: List[str], batch_size: int = 32) -> np.ndarray:
         all_preds = []
         for i in range(0, len(texts), batch_size):
             batch_texts = texts[i : i + batch_size]
@@ -157,13 +161,23 @@ class LossAggregationEvaluator:
         return np.array(all_preds)
 
     @torch.no_grad()
-    def predict_semantic_sim(self, texts1: List[str], texts2: List[str], batch_size: int = 64) -> np.ndarray:
+    def predict_semantic_sim(self, texts1: List[str], texts2: List[str]) -> np.ndarray:
+        effective_len = getattr(self.sbert, "max_seq_length", self.sbert_max_seq_len)
+        if effective_len > 4096:
+            sbert_batch_size = 2
+        elif effective_len > 1024:
+            sbert_batch_size = 4
+        elif effective_len > 512:
+            sbert_batch_size = 8
+        else:
+            sbert_batch_size = 16
+
         all_sims = []
-        for i in range(0, len(texts1), batch_size):
-            b1 = texts1[i : i + batch_size]
-            b2 = texts2[i : i + batch_size]
-            emb1 = self.sbert.encode(b1, convert_to_tensor=True, show_progress_bar=False)
-            emb2 = self.sbert.encode(b2, convert_to_tensor=True, show_progress_bar=False)
+        for i in range(0, len(texts1), sbert_batch_size):
+            b1 = texts1[i : i + sbert_batch_size]
+            b2 = texts2[i : i + sbert_batch_size]
+            emb1 = self.sbert.encode(b1, convert_to_tensor=True, batch_size=sbert_batch_size, show_progress_bar=False)
+            emb2 = self.sbert.encode(b2, convert_to_tensor=True, batch_size=sbert_batch_size, show_progress_bar=False)
             sims = util.cos_sim(emb1, emb2).diag().cpu().numpy()
             all_sims.extend(sims.tolist() if isinstance(sims, np.ndarray) and sims.ndim > 0 else [float(sims)])
         return np.array(all_sims)
@@ -195,67 +209,44 @@ class LossAggregationEvaluator:
         config = AutoConfig.from_pretrained(base_model_name)
         dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
-        def _load_base():
-            for kwargs in [{"use_safetensors": True}, {"use_safetensors": False, "weights_only": False}, {}]:
-                try:
-                    return AutoModelForSeq2SeqLM.from_pretrained(base_model_name, config=config, torch_dtype=dtype, **kwargs)
-                except Exception:
-                    continue
-            return AutoModelForSeq2SeqLM.from_pretrained(base_model_name, config=config, torch_dtype=dtype)
-
-        has_weights = (
-            os.path.exists(os.path.join(model_name_or_path, "model.safetensors")) or
-            os.path.exists(os.path.join(model_name_or_path, "pytorch_model.bin"))
-        )
-        has_adapter = os.path.exists(os.path.join(model_name_or_path, "adapter_config.json"))
-
         print(f"[MODELL-LADEN] {display_name}")
         print(f"  -> Pfad: {model_name_or_path}")
 
-        if has_weights:
-            weight_file = "model.safetensors" if os.path.exists(os.path.join(model_name_or_path, "model.safetensors")) else "pytorch_model.bin"
-            size_mb = os.path.getsize(os.path.join(model_name_or_path, weight_file)) / (1024 * 1024)
-            print(f"  -> Lade-Modus: Vollstaendig fusioniertes Standalone-Modell ({weight_file}, {size_mb:.1f} MB)")
-            try:
-                model = AutoModelForSeq2SeqLM.from_pretrained(
-                    model_name_or_path, torch_dtype=dtype, use_safetensors=True
-                ).to(self.device)
-            except Exception:
-                model = AutoModelForSeq2SeqLM.from_pretrained(
-                    model_name_or_path, torch_dtype=dtype, weights_only=False
-                ).to(self.device)
-        elif has_adapter:
-            print(f"  -> Lade-Modus: LoRA-Adapter auf Basismodell '{base_model_name}' (adapter_config.json)")
-            base_model = _load_base()
-            model = PeftModel.from_pretrained(base_model, model_name_or_path).to(self.device)
-        else:
-            print(f"  -> Lade-Modus: Standard Pretrained Seq2Seq Modell")
-            try:
-                model = AutoModelForSeq2SeqLM.from_pretrained(
-                    model_name_or_path, config=config, torch_dtype=dtype, use_safetensors=True
-                ).to(self.device)
-            except Exception:
-                model = AutoModelForSeq2SeqLM.from_pretrained(
-                    model_name_or_path, config=config, torch_dtype=dtype, weights_only=False
-                ).to(self.device)
+        try:
+            model = AutoModelForSeq2SeqLM.from_pretrained(
+                model_name_or_path, torch_dtype=dtype
+            ).to(self.device)
+        except Exception:
+            model = AutoModelForSeq2SeqLM.from_pretrained(
+                base_model_name, torch_dtype=dtype
+            )
+            model = PeftModel.from_pretrained(model, model_name_or_path).merge_and_unload().to(self.device)
 
         print(f"  -> Instanziierte Modell-Klasse: {model.__class__.__name__} ({dtype})\n")
         model.eval()
+
+        de_id = tokenizer.lang_code_to_id.get("de_DE") if hasattr(tokenizer, "lang_code_to_id") else None
 
         # Inferenz
         gen_texts = []
         for i in tqdm(range(0, len(as_texts), batch_size), desc=f"Inferenz {display_name}"):
             batch_src = as_texts[i : i + batch_size]
             inputs = tokenizer(batch_src, max_length=max_source_len, padding=True, truncation=True, return_tensors="pt").to(self.device)
+            gen_kwargs = {
+                "input_ids": inputs["input_ids"],
+                "attention_mask": inputs["attention_mask"],
+                "max_length": max_target_len,
+                "num_beams": 4,
+                "repetition_penalty": 1.2,
+                "no_repeat_ngram_size": 3,
+                "early_stopping": True,
+            }
+            if de_id is not None:
+                gen_kwargs["forced_bos_token_id"] = de_id
+                gen_kwargs["decoder_start_token_id"] = de_id
+
             with torch.no_grad():
-                outputs = model.generate(
-                    input_ids=inputs["input_ids"],
-                    attention_mask=inputs["attention_mask"],
-                    max_length=max_target_len,
-                    num_beams=4,
-                    no_repeat_ngram_size=3,
-                    early_stopping=True,
-                )
+                outputs = model.generate(**gen_kwargs)
             decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
             gen_texts.extend(decoded)
 
@@ -336,6 +327,8 @@ def main():
     parser = argparse.ArgumentParser(description="Evaluate DPO Loss Aggregation Experiment (Sum vs. Mean).")
     parser.add_argument("--test_file", type=str, default="data/lebenshilfe/lebenshilfe_dataset_clean.json")
     parser.add_argument("--base_model_name", type=str, default="facebook/mbart-large-50")
+    parser.add_argument("--sbert_model_name", type=str, default="jinaai/jina-embeddings-v2-base-de")
+    parser.add_argument("--sbert_max_seq_len", type=int, default=8192, help="Max sequence length for SBERT (default: 8192)")
     parser.add_argument("--output_dir", type=str, default="results/evaluation")
     parser.add_argument("--plot_dir", type=str, default="results/plots")
     parser.add_argument("--max_samples", type=int, default=None)
@@ -354,7 +347,10 @@ def main():
     as_texts = [item.get("source_text", item.get("as_text", item.get("source", ""))) for item in lh_data]
     ls_ref_texts = [item.get("target_text", item.get("ls_text", item.get("target", ""))) for item in lh_data]
 
-    evaluator = LossAggregationEvaluator()
+    evaluator = LossAggregationEvaluator(
+        sbert_model_name=args.sbert_model_name,
+        sbert_max_seq_len=args.sbert_max_seq_len,
+    )
 
     models_to_evaluate = [
         ("results/models/sft", "SFT Baseline"),

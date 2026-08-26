@@ -10,8 +10,11 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
+import spacy
 from scipy.stats import wasserstein_distance, ks_2samp
 from sklearn.metrics import roc_auc_score, accuracy_score, balanced_accuracy_score
+
+nlp = spacy.blank("de")
 
 class BiLSTMRegressor(nn.Module):
     def __init__(self, vocab_size, embed_dim=128, hidden_dim=128, dropout=0.3):
@@ -54,7 +57,8 @@ def load_vocab_dict(vocab_path):
 def tokenize_and_predict(model, vocab, texts, device, max_len=256):
     tokenized = []
     for text in texts:
-        tokens = text.lower().split()
+        doc = nlp(str(text or ""))
+        tokens = [t.text.lower() for t in doc if not t.is_space]
         ids = [vocab.get(t, vocab.get("<unk>", 1)) for t in tokens][:max_len]
         if len(ids) == 0:
             ids = [0]
@@ -76,6 +80,7 @@ def main():
     parser.add_argument("--rnn_model_path", default="results/models/rnn_vanilla_mixup_regression.pt")
     parser.add_argument("--vocab_path", default="data/vocabs/mixup_vocab.json")
     parser.add_argument("--output_csv", default="results/evaluation/bilstm_vs_rnn_eval.csv")
+    parser.add_argument("--output_predictions_csv", default="results/evaluation/bilstm_vs_rnn_predictions.csv")
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     args = parser.parse_args()
 
@@ -85,15 +90,21 @@ def main():
 
     as_texts = [d.get("as_text") or d.get("source_text") for d in data]
     ls_texts = [d.get("ls_text") or d.get("target_text") for d in data]
+    titles = [d.get("source") or d.get("title") or d.get("ls_filename") or f"Sample_{i}" for i, d in enumerate(data)]
     y_true = np.array([0] * len(as_texts) + [1] * len(ls_texts))
 
     eval_configs = [
-        ("BiLSTM (MixUp)", BiLSTMRegressor(len(vocab)), args.bilstm_model_path),
-        ("Vanilla RNN (Baseline)", VanillaRNNRegressor(len(vocab)), args.rnn_model_path)
+        ("BiLSTM (MixUp)", BiLSTMRegressor(len(vocab)), args.bilstm_model_path, "bilstm"),
+        ("Vanilla RNN (Baseline)", VanillaRNNRegressor(len(vocab)), args.rnn_model_path, "rnn")
     ]
 
     results = []
-    for model_name, model, path in eval_configs:
+    preds_dict = {
+        "sample_idx": list(range(len(data))),
+        "source": titles
+    }
+
+    for model_name, model, path, key in eval_configs:
         if not os.path.exists(path):
             continue
         state = torch.load(path, map_location=args.device, weights_only=False)
@@ -108,6 +119,10 @@ def main():
         all_preds = np.concatenate([as_scores, ls_scores])
         binary_preds = (all_preds >= 0.5).astype(int)
 
+        preds_dict[f"as_pred_{key}"] = [float(s) for s in as_scores]
+        preds_dict[f"ls_pred_{key}"] = [float(s) for s in ls_scores]
+        preds_dict[f"margin_{key}"] = [float(l - a) for l, a in zip(ls_scores, as_scores)]
+
         results.append({
             "model": model_name,
             "mean_as_score": float(np.mean(as_scores)),
@@ -121,9 +136,15 @@ def main():
         })
 
     os.makedirs(os.path.dirname(args.output_csv), exist_ok=True)
-    df = pd.DataFrame(results)
-    df.to_csv(args.output_csv, index=False)
-    print(f"Gespeichert in {args.output_csv}")
+    df_summary = pd.DataFrame(results)
+    df_summary.to_csv(args.output_csv, index=False)
+    print(f"Aggregierte Metriken gespeichert in {args.output_csv}")
+
+    if args.output_predictions_csv:
+        os.makedirs(os.path.dirname(args.output_predictions_csv), exist_ok=True)
+        df_preds = pd.DataFrame(preds_dict)
+        df_preds.to_csv(args.output_predictions_csv, index=False)
+        print(f"Sample-Vorhersagen gespeichert in {args.output_predictions_csv}")
 
 if __name__ == "__main__":
     main()

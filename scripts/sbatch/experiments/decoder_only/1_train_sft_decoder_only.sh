@@ -8,6 +8,14 @@
 #SBATCH --output=results/logs/experiments/decoder_only/%x_%j.out
 #SBATCH --error=results/logs/experiments/decoder_only/%x_%j.err
 
+# Virtuelle Python-Umgebung aktivieren
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
+    source "$HOME/master-thesis/.venv/bin/activate"
+fi
+
+
 
 mkdir -p results/logs/experiments/decoder_only results/plots/experiments/decoder_only results/evaluation
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
@@ -15,8 +23,8 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 echo "=== Starting Decoder-Only SFT Training (48GB GPU) ==="
 date
 
-python scripts/modeling/decoder_only/train_sft_decoder_only.py \
-    --corpus_path "data/corpus/corpus_master_with_steps.json" \
+srun python scripts/modeling/decoder_only/train_sft_decoder_only.py \
+    --corpus_path "data/analysis/corpus_master.json" \
     --model_name "Qwen/Qwen2.5-1.5B-Instruct" \
     --output_dir "results/models/decoder_only/sft" \
     --min_sim 0.70 \

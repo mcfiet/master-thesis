@@ -63,6 +63,26 @@ Startet alle 13 Schritte sequentiell mit automatischer Slurm-Abhängigkeitskette
 bash scripts/sbatch/run_pipeline/run_all_pipeline.sh
 ```
 
+Falls das URL-Alignment (Schritt 01) bereits ausgeführt wurde und auf dem Server vorliegt, kann die Pipeline direkt ab Schritt 02 gestartet werden:
+
+```bash
+bash scripts/sbatch/run_pipeline/run_all_pipeline_from_02.sh
+```
+
+---
+
+## Gesamt-Orchestrierung: Pipeline + Alle 17 Experimente mit einem Befehl
+
+Startet die Hauptpipeline sowie sämtliche 17 Experimente, Ablationen und den 5-Wege-Benchmark mit vollständiger Slurm-Abhängigkeitskette:
+
+```bash
+# Standard (startet Hauptpipeline ab Schritt 02):
+bash scripts/sbatch/run_all_pipeline_and_experiments.sh
+
+# Oder ab Schritt 01 (inkl. neuem URL-Crawling):
+bash scripts/sbatch/run_all_pipeline_and_experiments.sh --from-step-1
+```
+
 ---
 
 ## Experimente & Ablationen (`scripts/sbatch/experiments/`)

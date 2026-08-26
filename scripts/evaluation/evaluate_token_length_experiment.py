@@ -284,8 +284,8 @@ class TokenLengthEvaluator:
         # Load SBERT
         print(f"Lade SBERT: {sbert_model_name}")
         self.sbert = SentenceTransformer(sbert_model_name, trust_remote_code=True, device=self.device)
-        if "jina" in sbert_model_name.lower():
-            self.sbert.max_seq_length = min(self.reward_max_seq_len, 1024)
+        if hasattr(self.sbert, "max_seq_length"):
+            self.sbert.max_seq_length = self.reward_max_seq_len
             print(f"Jina SBERT max_seq_length gesetzt auf: {self.sbert.max_seq_length}")
 
         # Load BiLSTM Simplicity Model
@@ -315,9 +315,19 @@ class TokenLengthEvaluator:
         return np.array(scores)
 
     def predict_semantic_sim(self, texts_a: List[str], texts_b: List[str]) -> np.ndarray:
+        effective_len = getattr(self.sbert, "max_seq_length", self.reward_max_seq_len)
+        if effective_len > 4096:
+            sbert_batch_size = 2
+        elif effective_len > 1024:
+            sbert_batch_size = 4
+        elif effective_len > 512:
+            sbert_batch_size = 8
+        else:
+            sbert_batch_size = 16
+
         with torch.inference_mode():
-            emb_a = self.sbert.encode(texts_a, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
-            emb_b = self.sbert.encode(texts_b, batch_size=8, convert_to_tensor=True, show_progress_bar=False)
+            emb_a = self.sbert.encode(texts_a, batch_size=sbert_batch_size, convert_to_tensor=True, show_progress_bar=False)
+            emb_b = self.sbert.encode(texts_b, batch_size=sbert_batch_size, convert_to_tensor=True, show_progress_bar=False)
             cos_sims = util.cos_sim(emb_a, emb_b).diagonal().cpu().numpy()
         return cos_sims
 
@@ -345,12 +355,17 @@ class TokenLengthEvaluator:
         except TypeError:
             tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
         
-        adapter_config_path = os.path.join(model_name_or_path, "adapter_config.json")
-        if os.path.exists(adapter_config_path):
-            base_model = AutoModelForSeq2SeqLM.from_pretrained(base_model_name).to(self.device)
-            model = PeftModel.from_pretrained(base_model, model_name_or_path).to(self.device)
-        else:
+        if hasattr(tokenizer, "src_lang"):
+            tokenizer.src_lang = "de_DE"
+            tokenizer.tgt_lang = "de_DE"
+
+        de_id = tokenizer.lang_code_to_id.get("de_DE") if hasattr(tokenizer, "lang_code_to_id") else None
+        
+        try:
             model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path).to(self.device)
+        except Exception:
+            base_model = AutoModelForSeq2SeqLM.from_pretrained(base_model_name).to(self.device)
+            model = PeftModel.from_pretrained(base_model, model_name_or_path).merge_and_unload().to(self.device)
 
         model.eval()
 
@@ -370,16 +385,21 @@ class TokenLengthEvaluator:
                 return_tensors="pt"
             ).to(self.device)
 
+            gen_kwargs = {
+                "input_ids": inputs["input_ids"],
+                "attention_mask": inputs["attention_mask"],
+                "max_length": max_target_len,
+                "num_beams": 4,
+                "repetition_penalty": 1.2,
+                "no_repeat_ngram_size": 3,
+                "early_stopping": True,
+            }
+            if de_id is not None:
+                gen_kwargs["forced_bos_token_id"] = de_id
+                gen_kwargs["decoder_start_token_id"] = de_id
+
             with torch.no_grad():
-                outputs = model.generate(
-                    input_ids=inputs["input_ids"],
-                    attention_mask=inputs["attention_mask"],
-                    max_length=max_target_len,
-                    num_beams=4,
-                    repetition_penalty=1.2,
-                    no_repeat_ngram_size=3,
-                    early_stopping=True,
-                )
+                outputs = model.generate(**gen_kwargs)
             decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
             gen_texts.extend(decoded)
 
@@ -481,10 +501,10 @@ def main():
     parser = argparse.ArgumentParser(description="Evaluate Token Length Experiment (256 vs 512 vs 1024).")
     parser.add_argument("--test_data_path", default="data/lebenshilfe/lebenshilfe_dataset_clean.json")
     parser.add_argument("--base_model_name", default="facebook/mbart-large-50")
-    parser.add_argument("--reward_model_path", default="results/models/token_length_exp/bilstm_mixup_regression_512.pt")
-    parser.add_argument("--reward_vocab_path", default="data/token_length_exp/mixup_vocab_512.json")
+    parser.add_argument("--reward_model_path", default="results/models/token_length_exp/bilstm_mixup_regression_1024.pt")
+    parser.add_argument("--reward_vocab_path", default="data/token_length_exp/mixup_vocab_1024.json")
     parser.add_argument("--prompt_prefix", default="", help="Prompt prefix for Seq2Seq inference (default: empty)")
-    parser.add_argument("--sbert_model_name", default="sentence-transformers/paraphrase-multilingual-mpnet-base-v2", help="SentenceTransformer model name")
+    parser.add_argument("--sbert_model_name", default="jinaai/jina-embeddings-v2-base-de", help="SentenceTransformer model name")
     parser.add_argument("--output_summary", default="results/evaluation/token_length_comparison_summary.csv")
     parser.add_argument("--output_details", default="results/evaluation/token_length_comparison_detailed.csv")
     parser.add_argument("--output_metric_summary", default="results/evaluation/token_length_metric_comparison.csv")

@@ -1,4 +1,11 @@
 #!/bin/bash
+#SBATCH --job-name=run_all_token_length
+#SBATCH --partition=research
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH --output=results/logs/experiments/token_length/%x_%j.out
+#SBATCH --error=results/logs/experiments/token_length/%x_%j.err
 # ==============================================================================
 # Pipeline Runner: Token Length Experiment (256 vs 512 vs 1024 Tokens)
 # Submits all dependent SLURM jobs sequentially for each length track.
@@ -6,6 +13,7 @@
 
 set -e
 
+mkdir -p results/logs/experiments/token_length
 SCRIPT_DIR="scripts/sbatch/experiments/token_length"
 
 echo "=== Submitting Token Length Experiments (256, 512, 1024) ==="

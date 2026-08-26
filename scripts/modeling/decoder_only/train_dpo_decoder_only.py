@@ -174,23 +174,32 @@ def main():
         device_map="auto" if torch.cuda.is_available() else None,
     )
 
-    # Check if loading existing PEFT SFT adapter or training fresh LoRA
+    # Robust SFT model integration
     if os.path.exists(os.path.join(args.sft_model_path, "adapter_config.json")):
-        print(f"Loading SFT LoRA adapter from: {args.sft_model_path}...")
-        model = PeftModel.from_pretrained(base_model, args.sft_model_path, is_trainable=True)
-        peft_config = None
-    else:
-        print("Using base model and applying fresh LoRA config for DPO...")
-        target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
-        peft_config = LoraConfig(
-            r=args.lora_r,
-            lora_alpha=args.lora_alpha,
-            lora_dropout=args.lora_dropout,
-            bias="none",
-            task_type=TaskType.CAUSAL_LM,
-            target_modules=target_modules,
+        print(f"Loading and merging SFT LoRA adapter from: {args.sft_model_path}...")
+        sft_peft = PeftModel.from_pretrained(base_model, args.sft_model_path)
+        base_model = sft_peft.merge_and_unload()
+        print("[ERFOLG] SFT-Adapter erfolgreich in Basisgewichte integriert (SFT ist nun die Basis fuer DPO)!")
+    elif os.path.exists(os.path.join(args.sft_model_path, "model.safetensors")) or os.path.exists(os.path.join(args.sft_model_path, "pytorch_model.bin")):
+        print(f"Loading standalone SFT model from: {args.sft_model_path}...")
+        base_model = AutoModelForCausalLM.from_pretrained(
+            args.sft_model_path,
+            torch_dtype=torch_dtype,
+            trust_remote_code=True,
+            device_map="auto" if torch.cuda.is_available() else None,
         )
-        model = base_model
+
+    print("Applying fresh LoRA config for DPO on top of SFT baseline...")
+    target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+    peft_config = LoraConfig(
+        r=args.lora_r,
+        lora_alpha=args.lora_alpha,
+        lora_dropout=args.lora_dropout,
+        bias="none",
+        task_type=TaskType.CAUSAL_LM,
+        target_modules=target_modules,
+    )
+    model = base_model
 
     # 4. DPO Configuration
     dpo_config = DPOConfig(
@@ -235,9 +244,14 @@ def main():
     print("=" * 60)
     train_result = trainer.train()
 
-    # 6. Save Model & Tokenizer
-    print(f"\nSaving DPO model adapter to: {args.output_dir}")
-    trainer.save_model(args.output_dir)
+    # 6. Save Merged Standalone Model & Tokenizer
+    print(f"\nSaving merged standalone DPO model to: {args.output_dir}")
+    try:
+        merged_model = trainer.model.merge_and_unload()
+        merged_model.save_pretrained(args.output_dir)
+    except Exception as e:
+        print(f"Fallback saving with trainer: {e}")
+        trainer.save_model(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
 
     metrics = train_result.metrics
