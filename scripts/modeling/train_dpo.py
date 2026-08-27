@@ -137,6 +137,7 @@ def parse_args():
     parser.add_argument("--seed", type=int, default=42, help="Random seed (default: 42).")
 
     # LoRA / PEFT
+    parser.add_argument("--prompt_prefix", type=str, default="", help="Prompt prefix for source text (e.g. 'Vereinfache zu Leichter Sprache: ').")
     parser.add_argument("--use_peft", action="store_true", default=True, help="Use LoRA parameter-efficient training (default: True).")
     parser.add_argument("--no_peft", action="store_false", dest="use_peft", help="Disable LoRA and fine-tune all parameters.")
     parser.add_argument("--lora_r", type=int, default=16, help="LoRA rank r (default: 16).")
@@ -158,10 +159,12 @@ class DPOPreferenceDataset(Dataset):
         tokenizer,
         max_source_len: int = 256,
         max_target_len: int = 256,
+        prompt_prefix: str = "",
     ):
         self.tokenizer = tokenizer
         self.max_source_len = max_source_len
         self.max_target_len = max_target_len
+        self.prompt_prefix = prompt_prefix
         self.records: List[Dict[str, Any]] = []
 
         if not os.path.exists(data_file):
@@ -193,7 +196,7 @@ class DPOPreferenceDataset(Dataset):
 
     def __getitem__(self, idx: int) -> Dict[str, Any]:
         item = self.records[idx]
-        prompt = str(item.get("prompt", "")).strip()
+        prompt = self.prompt_prefix + str(item.get("prompt", "")).strip()
         chosen = str(item.get("chosen", "")).strip()
         rejected = str(item.get("rejected", "")).strip()
 
@@ -244,14 +247,14 @@ class DPOPreferenceDataset(Dataset):
 def get_seq2seq_logps(
     logits: torch.Tensor,
     labels: torch.Tensor,
-    loss_type: str = "mean"
+    loss_type: str = "sum"
 ) -> torch.Tensor:
     """
     Computes exact sequence-level log-probabilities for Seq2Seq target tokens.
     Args:
         logits: (batch_size, seq_len, vocab_size)
         labels: (batch_size, seq_len) with -100 for pad tokens
-        loss_type: 'mean' (length-normalized, per-token logp to prevent length exploitation) or 'sum' (classic)
+        loss_type: 'sum' (classic sequence-level log-prob sum) or 'mean' (length-normalized ablation)
     Returns:
         log_probabilities per sequence in batch: (batch_size,)
     """
@@ -276,7 +279,7 @@ def compute_dpo_step(
     batch: Dict[str, torch.Tensor],
     device: torch.device,
     beta: float = 0.1,
-    loss_type: str = "mean",
+    loss_type: str = "sum",
     is_peft: bool = True,
     ref_model: nn.Module = None,
 ) -> Tuple[torch.Tensor, float, float, float]:
@@ -336,7 +339,7 @@ def evaluate_dpo(
     dataloader: DataLoader,
     device: torch.device,
     beta: float,
-    loss_type: str = "mean",
+    loss_type: str = "sum",
     is_peft: bool = True,
     ref_model: nn.Module = None,
 ) -> Tuple[float, float, float]:
@@ -449,13 +452,20 @@ def main():
     # LoRA / PEFT Configuration for DPO
     ref_model = None
     if args.use_peft:
-        print(f"Konfiguriere DPO-LoRA auf Basis des SFT-Modells (r={args.lora_r}, alpha={args.lora_alpha}, dropout={args.lora_dropout})...")
+        # Determine base model architecture
+        is_t5_model = "t5" in args.model_name_or_path.lower() or (os.path.exists(adapter_cfg_file) and "t5" in base_model_id.lower())
+        if is_t5_model:
+            target_modules = ["q", "v", "k", "o", "wi_0", "wi_1", "wo"] if "mt5" in (args.model_name_or_path.lower() + (base_model_id.lower() if os.path.exists(adapter_cfg_file) else "")) else ["q", "v", "k", "o", "wi", "wo"]
+        else:
+            target_modules = ["q_proj", "v_proj", "k_proj", "out_proj", "fc1", "fc2"]
+
+        print(f"Konfiguriere DPO-LoRA auf Basis des SFT-Modells (r={args.lora_r}, alpha={args.lora_alpha}, dropout={args.lora_dropout}, targets={target_modules})...")
         peft_config = LoraConfig(
             task_type=TaskType.SEQ_2_SEQ_LM,
             r=args.lora_r,
             lora_alpha=args.lora_alpha,
             lora_dropout=args.lora_dropout,
-            target_modules=["q_proj", "v_proj", "k_proj", "out_proj", "fc1", "fc2"],
+            target_modules=target_modules,
             bias="none",
         )
         model = get_peft_model(model, peft_config)
@@ -474,6 +484,7 @@ def main():
         tokenizer=tokenizer,
         max_source_len=args.max_source_len,
         max_target_len=args.max_target_len,
+        prompt_prefix=args.prompt_prefix,
     )
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
 
@@ -484,6 +495,7 @@ def main():
             tokenizer=tokenizer,
             max_source_len=args.max_source_len,
             max_target_len=args.max_target_len,
+            prompt_prefix=args.prompt_prefix,
         )
         val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False)
         print(f"Validierungsset initialisiert: {len(val_dataset)} Paare ({len(val_loader)} Batches).")
