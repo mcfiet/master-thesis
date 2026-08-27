@@ -3,8 +3,8 @@
 #SBATCH --partition=research
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --mem=32G
+#SBATCH --gres=gpu:1
 #SBATCH --output=results/logs/experiments/metric_weights/%x_%j.out
 #SBATCH --error=results/logs/experiments/metric_weights/%x_%j.err
 
@@ -42,7 +42,8 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --min_score_margin 0.05 \
     --batch_size 16 \
     --output_file "data/metric_weights_exp/dpo_pairs_w05_w05.jsonl" \
-    --val_split_ratio 0.15
+    --val_split_ratio 0.15 \
+    --resume
 
 echo "=== Generation Completed ==="
 date

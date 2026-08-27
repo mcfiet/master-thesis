@@ -397,10 +397,6 @@ def sample_candidates_batch(
         return_tensors="pt",
     ).to(device)
 
-    forced_bos_token_id = None
-    if is_seq2seq and hasattr(tokenizer, "lang_code_to_id") and "de_DE" in tokenizer.lang_code_to_id:
-        forced_bos_token_id = tokenizer.lang_code_to_id["de_DE"]
-
     gen_kwargs = {
         "input_ids": inputs["input_ids"],
         "attention_mask": inputs.get("attention_mask"),
@@ -420,8 +416,6 @@ def sample_candidates_batch(
 
     if is_seq2seq:
         gen_kwargs["max_length"] = max_target_len
-        if forced_bos_token_id is not None:
-            gen_kwargs["forced_bos_token_id"] = forced_bos_token_id
     else:
         gen_kwargs["max_new_tokens"] = max_target_len
 
@@ -620,6 +614,12 @@ def parse_args() -> argparse.Namespace:
         help="Optional total number of shards for multi-GPU distribution.",
     )
     parser.add_argument(
+        "--resume",
+        action="store_true",
+        default=False,
+        help="Resume generation from existing checkpoint file.",
+    )
+    parser.add_argument(
         "--seed",
         type=int,
         default=42,
@@ -712,13 +712,63 @@ def main():
         device=device,
     )
 
-    # 4. Process Batches through Temperature Ladder
-    logger.info("Starting Progressive Temperature Ladder generation...")
+    # 4. Checkpoint & Resume Handling
+    os.makedirs(os.path.dirname(os.path.abspath(args.output_file)), exist_ok=True)
+    checkpoint_path = f"{args.output_file}.checkpoint.jsonl"
     dpo_pairs: List[Dict[str, Any]] = []
+    processed_as_texts = set()
     dropped_low_margin = 0
     dropped_insufficient = 0
     temp_resolution_counts = {t: 0 for t in args.temperature_ladder}
 
+    if args.resume and os.path.exists(checkpoint_path):
+        logger.info(f"Existing checkpoint detected at: {checkpoint_path}")
+        try:
+            with open(checkpoint_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        record = json.loads(line)
+                        if "type" in record:
+                            if record["type"] == "pair":
+                                pair_data = record["data"]
+                                dpo_pairs.append(pair_data)
+                                processed_as_texts.add(pair_data["as_text"])
+                                res_t = pair_data.get("resolved_temp")
+                                if res_t in temp_resolution_counts:
+                                    temp_resolution_counts[res_t] += 1
+                            elif record["type"] == "dropped":
+                                processed_as_texts.add(record["as_text"])
+                                reason = record.get("reason", "")
+                                if reason == "low_margin":
+                                    dropped_low_margin += 1
+                                else:
+                                    dropped_insufficient += 1
+                        else:
+                            dpo_pairs.append(record)
+                            if "as_text" in record:
+                                processed_as_texts.add(record["as_text"])
+                    except Exception as e:
+                        logger.warning(f"Error parsing checkpoint record: {e}")
+            logger.info(
+                f"Resumed state: {len(dpo_pairs)} valid pairs recovered, "
+                f"{len(processed_as_texts)} records previously processed."
+            )
+        except Exception as e:
+            logger.warning(f"Failed to read checkpoint file: {e}")
+
+    if len(processed_as_texts) > 0:
+        original_count = len(corpus_records)
+        corpus_records = [rec for rec in corpus_records if rec["as_text"] not in processed_as_texts]
+        logger.info(f"Corpus records remaining: {len(corpus_records)} / {original_count}")
+
+    # Open checkpoint file in append mode for real-time incremental saving
+    checkpoint_file_handle = open(checkpoint_path, "a", encoding="utf-8")
+
+    # 5. Process Batches through Temperature Ladder
+    logger.info("Starting Progressive Temperature Ladder generation...")
     batch_size = args.batch_size
     num_batches = (len(corpus_records) + batch_size - 1) // batch_size
 
@@ -790,7 +840,7 @@ def main():
                     tot_r, style_r, sem_r = reward_evaluator.compute_rewards_for_candidates(
                         state["source_emb"], clean_new
                     )
-                    for c_str, tr, sr, semr in zip(clean_new, tot_r, style_r, sem_r):
+                    for c_str, tr, sr, semr in zip(clean_new, tot_r, style_r, semr):
                         state["reward_cache"][c_str] = (float(tr), float(sr), float(semr))
                         state["candidate_pool"].append(c_str)
 
@@ -806,11 +856,14 @@ def main():
                         state["resolved"] = True
                         state["resolved_temp"] = temp
 
-        # Extract preference pairs from batch state
+        # Extract preference pairs and persist incrementally to checkpoint
         for state in batch_state:
             pool = state["candidate_pool"]
             if len(pool) < 2:
                 dropped_insufficient += 1
+                checkpoint_file_handle.write(
+                    json.dumps({"type": "dropped", "as_text": state["as_text"], "reason": "insufficient"}, ensure_ascii=False) + "\n"
+                )
                 continue
 
             # Rank all pooled candidates by total reward
@@ -824,17 +877,23 @@ def main():
 
             if chosen_cand == rejected_cand:
                 dropped_insufficient += 1
+                checkpoint_file_handle.write(
+                    json.dumps({"type": "dropped", "as_text": state["as_text"], "reason": "identical"}, ensure_ascii=False) + "\n"
+                )
                 continue
 
             if margin < args.min_score_margin:
                 dropped_low_margin += 1
+                checkpoint_file_handle.write(
+                    json.dumps({"type": "dropped", "as_text": state["as_text"], "reason": "low_margin"}, ensure_ascii=False) + "\n"
+                )
                 continue
 
             # Success
             res_temp = state["resolved_temp"] or args.temperature_ladder[-1]
             temp_resolution_counts[res_temp] = temp_resolution_counts.get(res_temp, 0) + 1
 
-            dpo_pairs.append({
+            pair = {
                 "prompt": state["prompt"],
                 "as_text": state["as_text"],
                 "chosen": chosen_cand,
@@ -849,21 +908,29 @@ def main():
                 "resolved_temp": res_temp,
                 "pool_size": len(pool),
                 "source": state["item"].get("source", "10kgnad"),
-            })
+            }
+            dpo_pairs.append(pair)
+            checkpoint_file_handle.write(
+                json.dumps({"type": "pair", "data": pair}, ensure_ascii=False) + "\n"
+            )
+
+        checkpoint_file_handle.flush()
 
         # Periodic clean progress logging every 25 batches
         if (b_idx + 1) % 25 == 0 or (b_idx + 1) == num_batches:
             pct = (b_idx + 1) / num_batches * 100
             logger.info(
                 f"Progress: Batch {b_idx + 1}/{num_batches} ({pct:.1f}%) | "
-                f"Pairs: {len(dpo_pairs)} | Dropped: {dropped_low_margin + dropped_insufficient}"
+                f"Total Valid Pairs: {len(dpo_pairs)} | Total Dropped: {dropped_low_margin + dropped_insufficient}"
             )
             sys.stdout.flush()
 
+    checkpoint_file_handle.close()
+
     # Summary Stats
-    total_processed = len(corpus_records)
+    total_processed = len(dpo_pairs) + dropped_low_margin + dropped_insufficient
     logger.info(f"=== Temperature Ladder Generation Summary ===")
-    logger.info(f"Total Input Prompts: {total_processed}")
+    logger.info(f"Total Processed Prompts: {total_processed}")
     logger.info(f"Valid DPO Pairs Generated: {len(dpo_pairs)} ({len(dpo_pairs)/max(1, total_processed)*100:.1f}% retention)")
     logger.info(f"Dropped (Margin < {args.min_score_margin}): {dropped_low_margin}")
     logger.info(f"Dropped (Identical/Insufficient/Fragments): {dropped_insufficient}")
@@ -884,8 +951,7 @@ def main():
         f"Rejected Avg: {np.mean(rejected_scs):.4f} | Avg Margin: {np.mean(margins):.4f}"
     )
 
-    # 5. Save Output Splits
-    os.makedirs(os.path.dirname(os.path.abspath(args.output_file)), exist_ok=True)
+    # 6. Save Output Splits
     random.shuffle(dpo_pairs)
 
     if args.val_split_ratio > 0 and len(dpo_pairs) > 10:
@@ -904,6 +970,14 @@ def main():
     else:
         _save_pairs(dpo_pairs, args.output_file)
         logger.info(f"Saved all {len(dpo_pairs)} pairs to: {args.output_file}")
+
+    # Clean up checkpoint on successful completion
+    if os.path.exists(checkpoint_path):
+        try:
+            os.remove(checkpoint_path)
+            logger.info(f"Cleaned up checkpoint file: {checkpoint_path}")
+        except Exception:
+            pass
 
     logger.info("=== Temperature Ladder DPO Generation Complete ===")
 

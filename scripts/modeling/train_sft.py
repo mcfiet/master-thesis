@@ -343,8 +343,21 @@ for epoch in range(NUM_EPOCHS):
             print(f"Early Stopping getriggert! Keine Verbesserung des Val Loss seit {patience} Epochen.")
             break
 
+# Speicher nach dem Training aufräumen
+del optimizer, scheduler, train_loader, val_loader
+import gc
+gc.collect()
+if torch.cuda.is_available():
+    torch.cuda.empty_cache()
+
 if USE_PEFT:
     print(f"\nLade bestes LoRA-Modell aus {OUTPUT_DIR} und führe merge_and_unload() durch...")
+    del seq2seq_model
+    import gc
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
     base_model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME).to(DEVICE)
     peft_model = PeftModel.from_pretrained(base_model, OUTPUT_DIR)
     merged_model = peft_model.merge_and_unload()
@@ -352,6 +365,10 @@ if USE_PEFT:
     tokenizer.save_pretrained(OUTPUT_DIR)
     torch.save(merged_model.state_dict(), os.path.join(OUTPUT_DIR, "sft.pt"))
     seq2seq_model = merged_model
+    del base_model, peft_model
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
     print(f"Erfolgreich gemergtes SFT-Modell unter {OUTPUT_DIR} gespeichert!")
 elif os.path.exists(OUTPUT_DIR) and len(os.listdir(OUTPUT_DIR)) > 0:
     seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(OUTPUT_DIR).to(DEVICE)
@@ -440,8 +457,8 @@ else:
             sbert_model.max_seq_length = 8192
 
         def predict_semantic_similarity(source_texts, generated_texts):
-            emb_src = sbert_model.encode(source_texts, convert_to_tensor=True)
-            emb_gen = sbert_model.encode(generated_texts, convert_to_tensor=True)
+            emb_src = sbert_model.encode(source_texts, batch_size=4, convert_to_tensor=True, show_progress_bar=False)
+            emb_gen = sbert_model.encode(generated_texts, batch_size=4, convert_to_tensor=True, show_progress_bar=False)
             cosine_sims = util.cos_sim(emb_src, emb_gen).diagonal().cpu().numpy()
             return cosine_sims
 
@@ -462,91 +479,94 @@ else:
         print("Kein/ungültiges Reward-Modell angegeben. Führe nur qualitative Evaluation durch (Übersetzung ohne Scores)...")
 
     def evaluate_on_lebenshilfe(model, tokenizer, lh_data, max_samples=49):
-        model.eval()
-        as_texts = [item["as_text"] for item in lh_data[:max_samples]]
-        ls_ref_texts = [item["ls_text"] for item in lh_data[:max_samples]]
-        
-        batch_size = 16
-        gen_texts = []
-        for i in tqdm(range(0, len(as_texts), batch_size), desc="Übersetze Lebenshilfe Datensatz"):
-            batch_src = as_texts[i:i+batch_size]
-            prompts = [t for t in batch_src]
-            inputs = tokenizer(prompts, padding=True, truncation=True, max_length=MAX_SOURCE_LEN, return_tensors="pt").to(DEVICE)
-            gen_kwargs = {
-                "input_ids": inputs["input_ids"],
-                "attention_mask": inputs["attention_mask"],
-                "max_length": MAX_TARGET_LEN,
-                "num_beams": 4,
-                "repetition_penalty": 1.2,
-                "no_repeat_ngram_size": 3,
-                "early_stopping": True
-            }
-            if hasattr(tokenizer, "lang_code_to_id") and "de_DE" in tokenizer.lang_code_to_id:
-                gen_kwargs["forced_bos_token_id"] = tokenizer.lang_code_to_id["de_DE"]
-            elif hasattr(model.config, "forced_bos_token_id") and model.config.forced_bos_token_id is not None:
-                gen_kwargs["forced_bos_token_id"] = model.config.forced_bos_token_id
+        try:
+            model.eval()
+            as_texts = [item["as_text"] for item in lh_data[:max_samples]]
+            ls_ref_texts = [item["ls_text"] for item in lh_data[:max_samples]]
+            
+            batch_size = 4
+            gen_texts = []
+            for i in tqdm(range(0, len(as_texts), batch_size), desc="Übersetze Lebenshilfe Datensatz"):
+                batch_src = as_texts[i:i+batch_size]
+                prompts = [t for t in batch_src]
+                inputs = tokenizer(prompts, padding=True, truncation=True, max_length=MAX_SOURCE_LEN, return_tensors="pt").to(DEVICE)
+                gen_kwargs = {
+                    "input_ids": inputs["input_ids"],
+                    "attention_mask": inputs["attention_mask"],
+                    "max_length": MAX_TARGET_LEN,
+                    "do_sample": True,
+                    "temperature": 0.7,
+                    "top_p": 0.92,
+                    "top_k": 50,
+                    "repetition_penalty": 1.2,
+                    "no_repeat_ngram_size": 3,
+                    "num_beams": 4,
+                    "early_stopping": True,
+                }
 
-            with torch.no_grad():
-                outputs = model.generate(**gen_kwargs)
-            decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-            gen_texts.extend(decoded)
-            
-        if has_reward_model:
-            tot_reward, r_style, r_sem = reward_evaluator.compute_reward(as_texts, gen_texts)
-            sim_to_ref = predict_semantic_similarity(ls_ref_texts, gen_texts)
-            sim_to_ref_norm = np.clip((sim_to_ref + 1.0) / 2.0, 0.0, 1.0)
-            
-            df_res = pd.DataFrame({
-                "as_text": as_texts,
-                "ls_reference": ls_ref_texts,
-                "model_translation": gen_texts,
-                "style_score": r_style,
-                "sbert_sim_to_as": r_sem,
-                "sbert_sim_to_ref": sim_to_ref_norm,
-                "composite_reward": tot_reward
-            })
-            
-            print("\n=================== EVALUIERUNGSERGEBNISSE (LEBENSHILFE - SFT) ===================")
-            print(f"Ø Style-Einfachheits-Score (R_style):       {r_style.mean():.4f} ± {r_style.std():.4f}")
-            print(f"Ø SBERT-Ähnlichkeit zur AS-Quelle (R_sem):   {r_sem.mean():.4f} ± {r_sem.std():.4f}")
-            print(f"Ø SBERT-Ähnlichkeit zu echter LS-Referenz:  {sim_to_ref_norm.mean():.4f} ± {sim_to_ref_norm.std():.4f}")
-            print(f"Ø Composite Reward:                        {tot_reward.mean():.4f} ± {tot_reward.std():.4f}")
-            print("========================================================================\n")
-            
-            print(df_res[["style_score", "sbert_sim_to_as", "sbert_sim_to_ref", "composite_reward"]].describe())
-            
-            # Save evaluation predictions DataFrame
-            lh_csv_path = os.path.join(OUTPUT_DIR, "eval_lebenshilfe.csv")
-            df_res.to_csv(lh_csv_path, index=False)
-            print(f"Lebenshilfe Evaluationsergebnisse gespeichert nach: {lh_csv_path}")
+                with torch.no_grad():
+                    outputs = model.generate(**gen_kwargs)
+                decoded = tokenizer.batch_decode(outputs, skip_special_tokens=True)
+                gen_texts.extend(decoded)
+                
+            if has_reward_model:
+                tot_reward, r_style, r_sem = reward_evaluator.compute_reward(as_texts, gen_texts)
+                sim_to_ref = predict_semantic_similarity(ls_ref_texts, gen_texts)
+                sim_to_ref_norm = np.clip((sim_to_ref + 1.0) / 2.0, 0.0, 1.0)
+                
+                df_res = pd.DataFrame({
+                    "as_text": as_texts,
+                    "ls_reference": ls_ref_texts,
+                    "model_translation": gen_texts,
+                    "style_score": r_style,
+                    "sbert_sim_to_as": r_sem,
+                    "sbert_sim_to_ref": sim_to_ref_norm,
+                    "composite_reward": tot_reward
+                })
+                
+                print("\n=================== EVALUIERUNGSERGEBNISSE (LEBENSHILFE - SFT) ===================")
+                print(f"Ø Style-Einfachheits-Score (R_style):       {r_style.mean():.4f} ± {r_style.std():.4f}")
+                print(f"Ø SBERT-Ähnlichkeit zur AS-Quelle (R_sem):   {r_sem.mean():.4f} ± {r_sem.std():.4f}")
+                print(f"Ø SBERT-Ähnlichkeit zu echter LS-Referenz:  {sim_to_ref_norm.mean():.4f} ± {sim_to_ref_norm.std():.4f}")
+                print(f"Ø Composite Reward:                        {tot_reward.mean():.4f} ± {tot_reward.std():.4f}")
+                print("========================================================================\n")
+                
+                print(df_res[["style_score", "sbert_sim_to_as", "sbert_sim_to_ref", "composite_reward"]].describe())
+                
+                # Save evaluation predictions DataFrame
+                lh_csv_path = os.path.join(OUTPUT_DIR, "eval_lebenshilfe.csv")
+                df_res.to_csv(lh_csv_path, index=False)
+                print(f"Lebenshilfe Evaluationsergebnisse gespeichert nach: {lh_csv_path}")
 
-            # Plot metrics distributions
-            plt.figure(figsize=(10, 5))
-            plt.hist(df_res["style_score"], bins=15, alpha=0.6, label="Style Einfachheit ($R_{style}$)", color="blue")
-            plt.hist(df_res["sbert_sim_to_as"], bins=15, alpha=0.6, label="SBERT Ähnlichkeit zur AS ($R_{sem}$)", color="green")
-            plt.hist(df_res["sbert_sim_to_ref"], bins=15, alpha=0.6, label="SBERT Ähnlichkeit zu LS-Referenz", color="orange")
-            plt.title("SFT Metrik-Verteilung auf dem Lebenshilfe-Testdatensatz (Out-of-Domain)")
-            plt.xlabel("Score")
-            plt.ylabel("Anzahl Artikel")
-            plt.legend()
-            plt.grid(True, linestyle="--", alpha=0.5)
-            plt.savefig(os.path.join(plot_dir, "sft_lh_metrics_distribution.png"))
-            plt.close()
-            
-            print("\n--- QUALITATIVE STICHPROBEN (LEBENSHILFE TESTSET) ---")
-            for idx, row in df_res.head(3).iterrows():
-                print(f"\n[Artikel {idx + 1}]")
-                print(f"AS-Quelle:     {row['as_text'][:130]}...")
-                print(f"LS-Referenz:   {row['ls_reference'][:130]}...")
-                print(f"Modell-Übers.: {row['model_translation']}")
-                print(f"Scores: Style={row['style_score']:.3f} | Sim(AS)={row['sbert_sim_to_as']:.3f} | Sim(Ref)={row['sbert_sim_to_ref']:.3f}")
-        else:
-            print("\n--- QUALITATIVE STICHPROBEN (LEBENSHILFE TESTSET - OHNE SCORES) ---")
-            for idx in range(min(3, len(as_texts))):
-                print(f"\n[Artikel {idx + 1}]")
-                print(f"AS-Quelle:     {as_texts[idx][:130]}...")
-                print(f"LS-Referenz:   {ls_ref_texts[idx][:130]}...")
-                print(f"Modell-Übers.: {gen_texts[idx]}")
+                # Plot metrics distributions
+                plt.figure(figsize=(10, 5))
+                plt.hist(df_res["style_score"], bins=15, alpha=0.6, label="Style Einfachheit ($R_{style}$)", color="blue")
+                plt.hist(df_res["sbert_sim_to_as"], bins=15, alpha=0.6, label="SBERT Ähnlichkeit zur AS ($R_{sem}$)", color="green")
+                plt.hist(df_res["sbert_sim_to_ref"], bins=15, alpha=0.6, label="SBERT Ähnlichkeit zu LS-Referenz", color="orange")
+                plt.title("SFT Metrik-Verteilung auf dem Lebenshilfe-Testdatensatz (Out-of-Domain)")
+                plt.xlabel("Score")
+                plt.ylabel("Anzahl Artikel")
+                plt.legend()
+                plt.grid(True, linestyle="--", alpha=0.5)
+                plt.savefig(os.path.join(plot_dir, "sft_lh_metrics_distribution.png"))
+                plt.close()
+                
+                print("\n--- QUALITATIVE STICHPROBEN (LEBENSHILFE TESTSET) ---")
+                for idx, row in df_res.head(3).iterrows():
+                    print(f"\n[Artikel {idx + 1}]")
+                    print(f"AS-Quelle:     {row['as_text'][:130]}...")
+                    print(f"LS-Referenz:   {row['ls_reference'][:130]}...")
+                    print(f"Modell-Übers.: {row['model_translation']}")
+                    print(f"Scores: Style={row['style_score']:.3f} | Sim(AS)={row['sbert_sim_to_as']:.3f} | Sim(Ref)={row['sbert_sim_to_ref']:.3f}")
+            else:
+                print("\n--- QUALITATIVE STICHPROBEN (LEBENSHILFE TESTSET - OHNE SCORES) ---")
+                for idx in range(min(3, len(as_texts))):
+                    print(f"\n[Artikel {idx + 1}]")
+                    print(f"AS-Quelle:     {as_texts[idx][:130]}...")
+                    print(f"LS-Referenz:   {ls_ref_texts[idx][:130]}...")
+                    print(f"Modell-Übers.: {gen_texts[idx]}")
+        except Exception as e:
+            print(f"Warnung bei Lebenshilfe-In-Training-Evaluation: {e}. Training und Modellspeicherung waren bereits erfolgreich.")
 
     evaluate_on_lebenshilfe(seq2seq_model, tokenizer, lh_data)
 

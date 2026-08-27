@@ -3,7 +3,7 @@
 #SBATCH --partition=research
 #SBATCH --time=06:00:00
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
+#SBATCH --mem=32G
 #SBATCH --output=results/logs/experiments/synthetic_regressor/%x_%j.out
 #SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
 

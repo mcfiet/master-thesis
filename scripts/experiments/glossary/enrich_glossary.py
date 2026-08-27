@@ -26,8 +26,8 @@ def enrich_corpus(glossary, input_dir="data/corpus/4_normalized_clean", output_d
         with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
             
-        source = data.get("source", "unknown")
-        original_pairs = data.get("pairs", [])
+        source = data.get("source", "unknown") if isinstance(data, dict) else "corpus_master"
+        original_pairs = data if isinstance(data, list) else data.get("pairs", [])
         enriched_pairs = []
         
         for pair in original_pairs:

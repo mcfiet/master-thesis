@@ -120,31 +120,8 @@ def test_configurations(model, tokenizer, prompt: str, device: str):
         max_length=500,
     ).to(device)
 
-    forced_bos_token_id = None
-    if hasattr(tokenizer, "lang_code_to_id") and "de_DE" in tokenizer.lang_code_to_id:
-        forced_bos_token_id = tokenizer.lang_code_to_id["de_DE"]
-
-    print("\n" + "=" * 80)
-    print("PROMPT (Eingabetext):")
-    print(prompt[:300] + "...\n" + "=" * 80)
-
-    for cfg in configs:
-        gen_kwargs = {
-            "input_ids": inputs["input_ids"],
-            "attention_mask": inputs.get("attention_mask"),
-            "do_sample": True,
-            "temperature": cfg["temp"],
-            "top_p": cfg["top_p"],
-            "top_k": 50,
-            "repetition_penalty": cfg["rep_penalty"],
-            "max_length": 500,
-            "pad_token_id": tokenizer.pad_token_id,
-            "eos_token_id": tokenizer.eos_token_id,
-        }
         if cfg["no_repeat_ngram"] > 0:
             gen_kwargs["no_repeat_ngram_size"] = cfg["no_repeat_ngram"]
-        if forced_bos_token_id is not None:
-            gen_kwargs["forced_bos_token_id"] = forced_bos_token_id
 
         with torch.no_grad():
             output = model.generate(**gen_kwargs)

@@ -30,7 +30,7 @@ srun python scripts/modeling/train_dpo.py \
     --train_file "$TRAIN_FILE" \
     --eval_file "$EVAL_FILE" \
     --output_dir "results/models/dpo_beta_sweep/dpo_beta_010" \
-    --loss_type "mean" \
+    --loss_type "sum" \
     --use_peft \
     --lora_r 16 \
     --lora_alpha 32 \

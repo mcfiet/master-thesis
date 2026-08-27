@@ -35,6 +35,8 @@ FALLBACK_GLOSSARY = {
 def extract_top_words(corpus_dir="data/corpus/4_normalized_clean", num_words=100):
     print("Analysiere Korpus im Ordner:", corpus_dir)
     json_files = glob.glob(os.path.join(corpus_dir, "*.json"))
+    if os.path.exists("data/analysis/corpus_master.json"):
+        json_files.append("data/analysis/corpus_master.json")
     word_counts = Counter()
     
     # German stop words to filter out
@@ -50,7 +52,8 @@ def extract_top_words(corpus_dir="data/corpus/4_normalized_clean", num_words=100
     for file_path in json_files:
         with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-            for item in data.get("pairs", []):
+            items = data if isinstance(data, list) else data.get("pairs", [])
+            for item in items:
                 as_text = item.get("as_text", "").strip()
                 if as_text:
                     # Clean and tokenize

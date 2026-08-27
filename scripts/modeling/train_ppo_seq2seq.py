@@ -526,8 +526,6 @@ def main():
                     "top_p": args.top_p,
                     "repetition_penalty": args.repetition_penalty,
                 }
-                if de_lang_id is not None:
-                    gen_kwargs["forced_bos_token_id"] = de_lang_id
 
                 gen_outputs = model.pretrained_model.generate(**gen_kwargs)
 

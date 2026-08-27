@@ -105,18 +105,10 @@ def load_model(model_path: str, base_model_name: str, device: torch.device):
 
 
 def generate_batch(model, tokenizer, texts, device, max_source_len=500, max_target_len=500):
-    forced_bos_token_id = None
-    if hasattr(tokenizer, "lang_code_to_id") and tokenizer.lang_code_to_id and "de_DE" in tokenizer.lang_code_to_id:
-        forced_bos_token_id = tokenizer.lang_code_to_id["de_DE"]
-    elif hasattr(tokenizer, "convert_tokens_to_ids"):
-        forced_bos_token_id = tokenizer.convert_tokens_to_ids("de_DE")
-    if forced_bos_token_id is None or forced_bos_token_id == getattr(tokenizer, "unk_token_id", None):
-        forced_bos_token_id = 250003
-
     inputs = tokenizer(
         texts,
         max_length=max_source_len,
-        padding=True,
+        padding="max_length",
         truncation=True,
         return_tensors="pt"
     ).to(device)
@@ -125,17 +117,12 @@ def generate_batch(model, tokenizer, texts, device, max_source_len=500, max_targ
         "input_ids": inputs["input_ids"],
         "attention_mask": inputs["attention_mask"],
         "max_length": max_target_len,
-        "do_sample": True,
-        "temperature": 0.7,
-        "top_p": 0.92,
-        "top_k": 50,
-        "repetition_penalty": 1.35,
+        "num_beams": 4,
+        "repetition_penalty": 1.2,
         "no_repeat_ngram_size": 3,
-        "pad_token_id": tokenizer.pad_token_id,
-        "eos_token_id": tokenizer.eos_token_id,
+        "early_stopping": True,
+        "length_penalty": 1.0,
     }
-    if forced_bos_token_id is not None:
-        gen_kwargs["forced_bos_token_id"] = forced_bos_token_id
 
     with torch.no_grad():
         outputs = model.generate(**gen_kwargs)

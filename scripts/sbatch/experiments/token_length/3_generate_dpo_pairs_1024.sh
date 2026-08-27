@@ -41,4 +41,5 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --min_score_margin 0.05 \
     --batch_size 8 \
     --output_file "data/token_length_exp/dpo_pairs_len1024.jsonl" \
-    --val_split_ratio 0.15
+    --val_split_ratio 0.15 \
+    --resume

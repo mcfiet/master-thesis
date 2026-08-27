@@ -4,7 +4,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --gres=gpu:1
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
@@ -43,7 +43,8 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --w_sem 0.5 \
     --batch_size 16 \
     --output_file "data/corpus/dpo_pairs_mixup.jsonl" \
-    --val_split_ratio 0.15
+    --val_split_ratio 0.15 \
+    --resume
 
 echo "=== DPO Datengenerierung abgeschlossen ==="
 date

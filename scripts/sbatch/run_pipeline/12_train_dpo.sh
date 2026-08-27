@@ -3,8 +3,8 @@
 #SBATCH --partition=research
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --mem=32G
+#SBATCH --gres=gpu:1
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
@@ -28,7 +28,7 @@ srun python scripts/modeling/train_dpo.py \
     --train_file "data/corpus/dpo_pairs_mixup.jsonl" \
     --eval_file "data/corpus/dpo_pairs_mixup_eval.jsonl" \
     --output_dir "results/models/dpo" \
-    --loss_type "mean" \
+    --loss_type "sum" \
     --use_peft \
     --lora_r 16 \
     --lora_alpha 32 \

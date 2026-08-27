@@ -4,7 +4,7 @@
 #SBATCH --time=01:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --gres=gpu:1
 #SBATCH --output=results/logs/experiments/rnn_baseline/%x_%j.out
 #SBATCH --error=results/logs/experiments/rnn_baseline/%x_%j.err
 

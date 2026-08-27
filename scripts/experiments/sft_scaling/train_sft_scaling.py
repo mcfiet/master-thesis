@@ -376,7 +376,7 @@ def main():
             
     print(f"[ERFOLG] Vollstaendig fusioniertes Standalone-Modell (ohne Adapter-Reste) unter {model_save_dir} gespeichert!")
     
-    # 7. Vollständige Quantitative Evaluation auf dem Lebenshilfe-Testset mit forced_bos_token_id
+    # 7. Vollständige Quantitative Evaluation auf dem Lebenshilfe-Testset (Standard Beam Search)
     print("\n" + "="*75)
     print("STARTE QUANTITATIVE EVALUATION (Lebenshilfe-Benchmark)")
     print("="*75)
@@ -393,19 +393,20 @@ def main():
     
     gen_kwargs = {
         "max_length": args.max_target_len,
+        "do_sample": True,
+        "temperature": 0.7,
+        "top_p": 0.92,
+        "top_k": 50,
         "num_beams": 4,
         "repetition_penalty": 1.2,
         "no_repeat_ngram_size": 3,
         "early_stopping": True,
+        "length_penalty": 1.0,
     }
-    if hasattr(tokenizer, "lang_code_to_id") and "de_DE" in tokenizer.lang_code_to_id:
-        gen_kwargs["forced_bos_token_id"] = tokenizer.lang_code_to_id["de_DE"]
-    elif hasattr(merged_model.config, "forced_bos_token_id") and merged_model.config.forced_bos_token_id is not None:
-        gen_kwargs["forced_bos_token_id"] = merged_model.config.forced_bos_token_id
         
     for i in tqdm(range(0, len(as_texts), infer_batch_size), desc="Generierung"):
         b_src = as_texts[i : i + infer_batch_size]
-        inp = tokenizer(b_src, max_length=args.max_source_len, padding=True, truncation=True, return_tensors="pt").to(device)
+        inp = tokenizer(b_src, max_length=args.max_source_len, padding="max_length", truncation=True, return_tensors="pt").to(device)
         with torch.no_grad():
             outs = merged_model.generate(
                 input_ids=inp["input_ids"],

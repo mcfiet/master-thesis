@@ -490,20 +490,17 @@ def main():
             gen_enc_sft = []
             for i in tqdm(range(0, len(as_texts), args.batch_size), desc="mBART SFT Inferenz"):
                 batch_src = as_texts[i : i + args.batch_size]
-                inputs = mbart_tok(batch_src, max_length=args.max_source_len, padding=True, truncation=True, return_tensors="pt").to(args.device)
+                inputs = mbart_tok(batch_src, max_length=args.max_source_len, padding="max_length", truncation=True, return_tensors="pt").to(args.device)
                 with torch.no_grad():
                     outs = sft_mbart_m.generate(
-                        **inputs,
+                        input_ids=inputs["input_ids"],
+                        attention_mask=inputs["attention_mask"],
                         max_length=args.max_target_len,
-                        do_sample=True,
-                        temperature=0.7,
-                        top_p=0.92,
-                        top_k=50,
-                        repetition_penalty=1.35,
+                        num_beams=4,
+                        repetition_penalty=1.2,
                         no_repeat_ngram_size=3,
-                        forced_bos_token_id=de_id,
-                        pad_token_id=mbart_tok.pad_token_id,
-                        eos_token_id=mbart_tok.eos_token_id,
+                        early_stopping=True,
+                        length_penalty=1.0,
                     )
                 gen_enc_sft.extend(mbart_tok.batch_decode(outs, skip_special_tokens=True))
             del sft_mbart_m
@@ -531,20 +528,17 @@ def main():
             gen_enc_dpo = []
             for i in tqdm(range(0, len(as_texts), args.batch_size), desc="mBART DPO Inferenz"):
                 batch_src = as_texts[i : i + args.batch_size]
-                inputs = mbart_tok(batch_src, max_length=args.max_source_len, padding=True, truncation=True, return_tensors="pt").to(args.device)
+                inputs = mbart_tok(batch_src, max_length=args.max_source_len, padding="max_length", truncation=True, return_tensors="pt").to(args.device)
                 with torch.no_grad():
                     outs = dpo_mbart_m.generate(
-                        **inputs,
+                        input_ids=inputs["input_ids"],
+                        attention_mask=inputs["attention_mask"],
                         max_length=args.max_target_len,
-                        do_sample=True,
-                        temperature=0.7,
-                        top_p=0.92,
-                        top_k=50,
-                        repetition_penalty=1.35,
+                        num_beams=4,
+                        repetition_penalty=1.2,
                         no_repeat_ngram_size=3,
-                        forced_bos_token_id=de_id,
-                        pad_token_id=mbart_tok.pad_token_id,
-                        eos_token_id=mbart_tok.eos_token_id,
+                        early_stopping=True,
+                        length_penalty=1.0,
                     )
                 gen_enc_dpo.extend(mbart_tok.batch_decode(outs, skip_special_tokens=True))
             del dpo_mbart_m

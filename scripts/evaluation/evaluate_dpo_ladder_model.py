@@ -223,28 +223,28 @@ def main():
                 return_tensors="pt",
             ).to(device)
 
-            gen_kwargs = {
-                "input_ids": inp["input_ids"],
-                "attention_mask": inp.get("attention_mask"),
-                "max_length": args.max_target_len,
-                "do_sample": True,
-                "temperature": 0.7,
-                "top_p": 0.92,
-                "top_k": 50,
-                "repetition_penalty": 1.35,
-                "no_repeat_ngram_size": 3,
-                "pad_token_id": tokenizer.pad_token_id,
-                "eos_token_id": tokenizer.eos_token_id,
-            }
             if is_seq2seq:
-                de_id = None
-                if hasattr(tokenizer, "lang_code_to_id") and tokenizer.lang_code_to_id and "de_DE" in tokenizer.lang_code_to_id:
-                    de_id = tokenizer.lang_code_to_id["de_DE"]
-                elif hasattr(tokenizer, "convert_tokens_to_ids"):
-                    de_id = tokenizer.convert_tokens_to_ids("de_DE")
-                if de_id is None or de_id == getattr(tokenizer, "unk_token_id", None):
-                    de_id = 250003
-                gen_kwargs["forced_bos_token_id"] = de_id
+                gen_kwargs = {
+                    "input_ids": inp["input_ids"],
+                    "attention_mask": inp.get("attention_mask"),
+                    "max_length": args.max_target_len,
+                    "num_beams": 4,
+                    "repetition_penalty": 1.2,
+                    "no_repeat_ngram_size": 3,
+                    "early_stopping": True,
+                    "length_penalty": 1.0,
+                }
+            else:
+                gen_kwargs = {
+                    "input_ids": inp["input_ids"],
+                    "attention_mask": inp.get("attention_mask"),
+                    "max_new_tokens": args.max_target_len,
+                    "do_sample": False,
+                    "num_beams": 1,
+                    "repetition_penalty": 1.1,
+                    "pad_token_id": tokenizer.pad_token_id,
+                    "eos_token_id": tokenizer.eos_token_id,
+                }
 
             with torch.no_grad():
                 out = model.generate(**gen_kwargs)
