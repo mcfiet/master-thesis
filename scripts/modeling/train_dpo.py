@@ -125,7 +125,7 @@ def parse_args():
 
     # Hyperparameters
     parser.add_argument("--loss_type", type=str, default="sum", choices=["sum", "mean"], help="DPO loss reduction: 'sum' (classic sequence-level log-prob sum, Rafailov et al. 2023) or 'mean' (length-normalized ablation).")
-    parser.add_argument("--beta", type=float, default=0.1, help="DPO temperature parameter beta (default: 0.1).")
+    parser.add_argument("--beta", type=float, default=0.01, help="DPO temperature parameter beta (default: 0.01, optimal setting identified in Beta sweep).")
     parser.add_argument("--learning_rate", "--lr", dest="lr", type=float, default=5e-6, help="Learning rate (default: 5e-6).")
     parser.add_argument("--batch_size", type=int, default=2, help="Per-device batch size (default: 2).")
     parser.add_argument("--accumulation_steps", type=int, default=8, help="Gradient accumulation steps (default: 8).")

@@ -32,7 +32,7 @@ srun python scripts/modeling/train_dpo.py \
     --use_peft \
     --lora_r 16 \
     --lora_alpha 32 \
-    --beta 0.1 \
+    --beta 0.01 \
     --learning_rate 5e-6 \
     --epochs 3 \
     --batch_size 2 \
