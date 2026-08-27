@@ -393,10 +393,6 @@ def main():
     
     gen_kwargs = {
         "max_length": args.max_target_len,
-        "do_sample": True,
-        "temperature": 0.7,
-        "top_p": 0.92,
-        "top_k": 50,
         "num_beams": 4,
         "repetition_penalty": 1.2,
         "no_repeat_ngram_size": 3,

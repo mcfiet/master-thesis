@@ -187,27 +187,35 @@ print(f"Trainingsdaten: {len(train_data)} Paare | Validierungsdaten: {len(val_da
 # ==============================================================================
 # MODEL & TOKENIZER SETUP
 # ==============================================================================
+dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
 if getattr(args, "resume_from_checkpoint", False) and OUTPUT_DIR and os.path.exists(OUTPUT_DIR) and len(os.listdir(OUTPUT_DIR)) > 0:
     print(f"Setze Training fort: Lade Modell aus lokalem Verzeichnis: {OUTPUT_DIR}...")
     tokenizer = AutoTokenizer.from_pretrained(OUTPUT_DIR, use_fast=False)
-    seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(OUTPUT_DIR).to(DEVICE)
+    seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(OUTPUT_DIR, torch_dtype=dtype).to(DEVICE)
 else:
     print(f"Starte neues SFT-Training von Basismodell: {MODEL_NAME}...")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=False)
-    seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME).to(DEVICE)
+    seq2seq_model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME, torch_dtype=dtype).to(DEVICE)
 
 if "mbart" in MODEL_NAME.lower():
     tokenizer.src_lang = "de_DE"
     tokenizer.tgt_lang = "de_DE"
 
 if USE_PEFT:
-    print(f"Konfiguriere LoRA für Seq2Seq SFT (r={LORA_R}, alpha={LORA_ALPHA}, dropout={LORA_DROPOUT})...")
+    if "t5" in MODEL_NAME.lower():
+        # T5 / mT5 Target Modules
+        target_modules = ["q", "v", "k", "o", "wi_0", "wi_1", "wo"] if "mt5" in MODEL_NAME.lower() else ["q", "v", "k", "o", "wi", "wo"]
+    else:
+        # mBART / BART / NLLB Target Modules
+        target_modules = ["q_proj", "v_proj", "k_proj", "out_proj", "fc1", "fc2"]
+
+    print(f"Konfiguriere LoRA für Seq2Seq SFT (r={LORA_R}, alpha={LORA_ALPHA}, dropout={LORA_DROPOUT}, targets={target_modules})...")
     peft_config = LoraConfig(
         task_type=TaskType.SEQ_2_SEQ_LM,
         r=LORA_R,
         lora_alpha=LORA_ALPHA,
         lora_dropout=LORA_DROPOUT,
-        target_modules=["q_proj", "v_proj", "k_proj", "out_proj", "fc1", "fc2"],
+        target_modules=target_modules,
         bias="none",
     )
     seq2seq_model = get_peft_model(seq2seq_model, peft_config)
@@ -264,13 +272,22 @@ def train_sft_epoch(model, dataloader, optimizer, scheduler, accumulation_steps=
     total_loss = 0.0
     optimizer.zero_grad()
     
+    use_amp = torch.cuda.is_available()
+    amp_dtype = torch.bfloat16 if (torch.cuda.is_available() and torch.cuda.is_bf16_supported()) else torch.float16
+    
     for batch_idx, batch in enumerate(tqdm(dataloader, desc="SFT Training")):
         input_ids = batch["input_ids"].to(DEVICE)
         attention_mask = batch["attention_mask"].to(DEVICE)
         labels = batch["labels"].to(DEVICE)
         
-        outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
-        loss = outputs.loss / accumulation_steps
+        if use_amp:
+            with torch.amp.autocast('cuda', dtype=amp_dtype):
+                outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+                loss = outputs.loss / accumulation_steps
+        else:
+            outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+            loss = outputs.loss / accumulation_steps
+
         loss.backward()
         
         if (batch_idx + 1) % accumulation_steps == 0 or (batch_idx + 1) == len(dataloader):
@@ -286,13 +303,19 @@ def train_sft_epoch(model, dataloader, optimizer, scheduler, accumulation_steps=
 def validate_sft_epoch(model, dataloader):
     model.eval()
     total_loss = 0.0
+    use_amp = torch.cuda.is_available()
+    amp_dtype = torch.bfloat16 if (torch.cuda.is_available() and torch.cuda.is_bf16_supported()) else torch.float16
+
     with torch.no_grad():
         for batch in tqdm(dataloader, desc="SFT Validation"):
             input_ids = batch["input_ids"].to(DEVICE)
             attention_mask = batch["attention_mask"].to(DEVICE)
             labels = batch["labels"].to(DEVICE)
             
-            with torch.amp.autocast('cuda', dtype=torch.bfloat16):
+            if use_amp:
+                with torch.amp.autocast('cuda', dtype=amp_dtype):
+                    outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+            else:
                 outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
                 
             total_loss += outputs.loss.item()
@@ -488,20 +511,17 @@ else:
             gen_texts = []
             for i in tqdm(range(0, len(as_texts), batch_size), desc="Übersetze Lebenshilfe Datensatz"):
                 batch_src = as_texts[i:i+batch_size]
-                prompts = [t for t in batch_src]
+                prompts = [PROMPT_PREFIX + t for t in batch_src]
                 inputs = tokenizer(prompts, padding=True, truncation=True, max_length=MAX_SOURCE_LEN, return_tensors="pt").to(DEVICE)
                 gen_kwargs = {
                     "input_ids": inputs["input_ids"],
                     "attention_mask": inputs["attention_mask"],
                     "max_length": MAX_TARGET_LEN,
-                    "do_sample": True,
-                    "temperature": 0.7,
-                    "top_p": 0.92,
-                    "top_k": 50,
+                    "num_beams": 4,
                     "repetition_penalty": 1.2,
                     "no_repeat_ngram_size": 3,
-                    "num_beams": 4,
                     "early_stopping": True,
+                    "length_penalty": 1.0,
                 }
 
                 with torch.no_grad():
