@@ -470,17 +470,11 @@ def main():
                         "input_ids": enc["input_ids"],
                         "attention_mask": enc["attention_mask"],
                         "max_length": 256,
-                        "do_sample": True,
-                        "temperature": 0.7,
-                        "top_p": 0.92,
-                        "top_k": 50,
-                        "repetition_penalty": 1.35,
+                        "num_beams": 4,
+                        "repetition_penalty": 1.2,
                         "no_repeat_ngram_size": 3,
-                        "pad_token_id": tok.pad_token_id,
-                        "eos_token_id": tok.eos_token_id,
+                        "early_stopping": True,
                     }
-                    if de_id:
-                        gen_kw["forced_bos_token_id"] = de_id
                     out = lm.generate(**gen_kw)
                 gen_text = tok.decode(out[0], skip_special_tokens=True).strip()
                 preds.append(gen_text)
