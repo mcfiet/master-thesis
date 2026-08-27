@@ -24,6 +24,7 @@ import json
 import datetime
 import random
 import argparse
+import contextlib
 from typing import List, Dict, Any, Tuple
 
 import numpy as np
@@ -535,7 +536,7 @@ def main():
 
         pbar = tqdm(train_loader, desc=f"DPO Epoche {epoch}/{args.epochs}")
         for step, batch in enumerate(pbar):
-            with torch.amp.autocast('cuda', dtype=torch.bfloat16) if torch.cuda.is_available() else torch.no_grad():
+            with torch.amp.autocast('cuda', dtype=torch.bfloat16) if torch.cuda.is_available() else contextlib.nullcontext():
                 loss, acc, margin, loss_val = compute_dpo_step(
                     model=model,
                     batch=batch,
