@@ -255,11 +255,22 @@ class DPOBetaEvaluator:
         print("=" * 65)
 
         # 1. Tokenizer laden
-        tokenizer = AutoTokenizer.from_pretrained(
-            model_name_or_path if os.path.exists(os.path.join(model_name_or_path, "tokenizer_config.json")) else base_model_name,
-            src_lang="de_DE",
-            tgt_lang="de_DE",
-        )
+        tok_path = model_name_or_path if os.path.exists(os.path.join(model_name_or_path, "tokenizer_config.json")) else base_model_name
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(tok_path, use_fast=False)
+        except Exception:
+            tokenizer = AutoTokenizer.from_pretrained(base_model_name, use_fast=False)
+        tokenizer.src_lang = "de_DE"
+        tokenizer.tgt_lang = "de_DE"
+
+        de_id = None
+        if hasattr(tokenizer, "lang_code_to_id") and tokenizer.lang_code_to_id and "de_DE" in tokenizer.lang_code_to_id:
+            de_id = tokenizer.lang_code_to_id["de_DE"]
+        elif hasattr(tokenizer, "convert_tokens_to_ids"):
+            de_id = tokenizer.convert_tokens_to_ids("de_DE")
+        if de_id is None or de_id == getattr(tokenizer, "unk_token_id", None):
+            de_id = 250003
+        print(f"  -> Konfigurierte Ziel-Sprach-ID (de_DE): {de_id}")
 
         # 2. Modell laden
         try:
@@ -283,7 +294,6 @@ class DPOBetaEvaluator:
                 return_tensors="pt",
             ).to(self.device)
 
-            de_id = tokenizer.lang_code_to_id.get("de_DE") if hasattr(tokenizer, "lang_code_to_id") else None
             gen_kwargs = {
                 "input_ids": inputs["input_ids"],
                 "attention_mask": inputs["attention_mask"],
@@ -293,9 +303,6 @@ class DPOBetaEvaluator:
                 "no_repeat_ngram_size": 3,
                 "early_stopping": True,
             }
-            if de_id is not None:
-                gen_kwargs["forced_bos_token_id"] = de_id
-                gen_kwargs["decoder_start_token_id"] = de_id
 
             with torch.no_grad():
                 outputs = model.generate(**gen_kwargs)

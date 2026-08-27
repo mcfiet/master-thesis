@@ -271,7 +271,14 @@ class MetricWeightsEvaluator:
 
         model.eval()
 
-        de_id = tokenizer.lang_code_to_id.get("de_DE") if hasattr(tokenizer, "lang_code_to_id") else None
+        de_id = None
+        if hasattr(tokenizer, "lang_code_to_id") and tokenizer.lang_code_to_id and "de_DE" in tokenizer.lang_code_to_id:
+            de_id = tokenizer.lang_code_to_id["de_DE"]
+        elif hasattr(tokenizer, "convert_tokens_to_ids"):
+            de_id = tokenizer.convert_tokens_to_ids("de_DE")
+        if de_id is None or de_id == getattr(tokenizer, "unk_token_id", None):
+            de_id = 250003
+        print(f"  -> Konfigurierte Ziel-Sprach-ID (de_DE): {de_id}")
 
         # Batch Generation
         gen_texts = []
@@ -289,14 +296,17 @@ class MetricWeightsEvaluator:
                 "input_ids": inputs["input_ids"],
                 "attention_mask": inputs["attention_mask"],
                 "max_length": max_target_len,
-                "num_beams": 4,
-                "repetition_penalty": 1.2,
+                "do_sample": True,
+                "temperature": 0.7,
+                "top_p": 0.92,
+                "top_k": 50,
+                "repetition_penalty": 1.35,
                 "no_repeat_ngram_size": 3,
-                "early_stopping": True,
+                "pad_token_id": tokenizer.pad_token_id,
+                "eos_token_id": tokenizer.eos_token_id,
             }
             if de_id is not None:
                 gen_kwargs["forced_bos_token_id"] = de_id
-                gen_kwargs["decoder_start_token_id"] = de_id
 
             with torch.no_grad():
                 outputs = model.generate(**gen_kwargs)

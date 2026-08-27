@@ -468,9 +468,18 @@ def main():
     # ==========================================================================
     print("\n--- [4/5] Inferenz: Encoder-Decoder SFT (mBART-50) ---")
     try:
-        mbart_tok = AutoTokenizer.from_pretrained("facebook/mbart-large-50")
+        mbart_tok = AutoTokenizer.from_pretrained("facebook/mbart-large-50", use_fast=False)
         mbart_tok.src_lang = "de_DE"
         mbart_tok.tgt_lang = "de_DE"
+
+        de_id = None
+        if hasattr(mbart_tok, "lang_code_to_id") and mbart_tok.lang_code_to_id and "de_DE" in mbart_tok.lang_code_to_id:
+            de_id = mbart_tok.lang_code_to_id["de_DE"]
+        elif hasattr(mbart_tok, "convert_tokens_to_ids"):
+            de_id = mbart_tok.convert_tokens_to_ids("de_DE")
+        if de_id is None or de_id == getattr(mbart_tok, "unk_token_id", None):
+            de_id = 250003
+        print(f"  -> Konfigurierte Ziel-Sprach-ID (de_DE): {de_id}")
 
         if os.path.exists(args.sft_mbart_path):
             sft_mbart_m = AutoModelForSeq2SeqLM.from_pretrained(
@@ -483,16 +492,18 @@ def main():
                 batch_src = as_texts[i : i + args.batch_size]
                 inputs = mbart_tok(batch_src, max_length=args.max_source_len, padding=True, truncation=True, return_tensors="pt").to(args.device)
                 with torch.no_grad():
-                    de_id = mbart_tok.lang_code_to_id.get("de_DE", None)
                     outs = sft_mbart_m.generate(
                         **inputs,
                         max_length=args.max_target_len,
-                        num_beams=4,
+                        do_sample=True,
+                        temperature=0.7,
+                        top_p=0.92,
+                        top_k=50,
+                        repetition_penalty=1.35,
                         no_repeat_ngram_size=3,
                         forced_bos_token_id=de_id,
-                        decoder_start_token_id=de_id,
-                        repetition_penalty=1.2,
-                        early_stopping=True
+                        pad_token_id=mbart_tok.pad_token_id,
+                        eos_token_id=mbart_tok.eos_token_id,
                     )
                 gen_enc_sft.extend(mbart_tok.batch_decode(outs, skip_special_tokens=True))
             del sft_mbart_m
@@ -522,16 +533,18 @@ def main():
                 batch_src = as_texts[i : i + args.batch_size]
                 inputs = mbart_tok(batch_src, max_length=args.max_source_len, padding=True, truncation=True, return_tensors="pt").to(args.device)
                 with torch.no_grad():
-                    de_id = mbart_tok.lang_code_to_id.get("de_DE", None)
                     outs = dpo_mbart_m.generate(
                         **inputs,
                         max_length=args.max_target_len,
-                        num_beams=4,
+                        do_sample=True,
+                        temperature=0.7,
+                        top_p=0.92,
+                        top_k=50,
+                        repetition_penalty=1.35,
                         no_repeat_ngram_size=3,
                         forced_bos_token_id=de_id,
-                        decoder_start_token_id=de_id,
-                        repetition_penalty=1.2,
-                        early_stopping=True
+                        pad_token_id=mbart_tok.pad_token_id,
+                        eos_token_id=mbart_tok.eos_token_id,
                     )
                 gen_enc_dpo.extend(mbart_tok.batch_decode(outs, skip_special_tokens=True))
             del dpo_mbart_m

@@ -198,12 +198,22 @@ class LossAggregationEvaluator:
         print(f"{'='*70}")
 
         # Tokenizer
-        tokenizer = AutoTokenizer.from_pretrained(
-            model_name_or_path if os.path.exists(os.path.join(model_name_or_path, "tokenizer_config.json")) else base_model_name,
-            use_fast=False
-        )
+        tok_path = model_name_or_path if os.path.exists(os.path.join(model_name_or_path, "tokenizer_config.json")) else base_model_name
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(tok_path, use_fast=False)
+        except Exception:
+            tokenizer = AutoTokenizer.from_pretrained(base_model_name, use_fast=False)
         tokenizer.src_lang = "de_DE"
         tokenizer.tgt_lang = "de_DE"
+
+        de_id = None
+        if hasattr(tokenizer, "lang_code_to_id") and tokenizer.lang_code_to_id and "de_DE" in tokenizer.lang_code_to_id:
+            de_id = tokenizer.lang_code_to_id["de_DE"]
+        elif hasattr(tokenizer, "convert_tokens_to_ids"):
+            de_id = tokenizer.convert_tokens_to_ids("de_DE")
+        if de_id is None or de_id == getattr(tokenizer, "unk_token_id", None):
+            de_id = 250003
+        print(f"  -> Konfigurierte Ziel-Sprach-ID (de_DE): {de_id}")
 
         # Model Loading
         config = AutoConfig.from_pretrained(base_model_name)
@@ -225,13 +235,11 @@ class LossAggregationEvaluator:
         print(f"  -> Instanziierte Modell-Klasse: {model.__class__.__name__} ({dtype})\n")
         model.eval()
 
-        de_id = tokenizer.lang_code_to_id.get("de_DE") if hasattr(tokenizer, "lang_code_to_id") else None
-
         # Inferenz
         gen_texts = []
         for i in tqdm(range(0, len(as_texts), batch_size), desc=f"Inferenz {display_name}"):
             batch_src = as_texts[i : i + batch_size]
-            inputs = tokenizer(batch_src, max_length=max_source_len, padding=True, truncation=True, return_tensors="pt").to(self.device)
+            inputs = tokenizer(batch_src, max_length=max_source_len, padding="max_length", truncation=True, return_tensors="pt").to(self.device)
             gen_kwargs = {
                 "input_ids": inputs["input_ids"],
                 "attention_mask": inputs["attention_mask"],
@@ -241,9 +249,6 @@ class LossAggregationEvaluator:
                 "no_repeat_ngram_size": 3,
                 "early_stopping": True,
             }
-            if de_id is not None:
-                gen_kwargs["forced_bos_token_id"] = de_id
-                gen_kwargs["decoder_start_token_id"] = de_id
 
             with torch.no_grad():
                 outputs = model.generate(**gen_kwargs)

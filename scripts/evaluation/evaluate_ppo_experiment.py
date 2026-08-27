@@ -347,7 +347,9 @@ def main():
     # Seq2Seq Models (mBART-50)
     if os.path.exists(args.mbart_base_model) or "mbart" in args.mbart_base_model.lower():
         try:
-            mbart_tok = AutoTokenizer.from_pretrained(args.mbart_base_model, src_lang="de_DE", tgt_lang="de_DE")
+            mbart_tok = AutoTokenizer.from_pretrained(args.mbart_base_model, use_fast=False)
+            mbart_tok.src_lang = "de_DE"
+            mbart_tok.tgt_lang = "de_DE"
         except Exception:
             mbart_tok = None
 
@@ -452,7 +454,14 @@ def main():
                 ).to(device)
             lm.eval()
 
-            de_id = tok.lang_code_to_id.get("de_DE") if hasattr(tok, "lang_code_to_id") else None
+            de_id = None
+            if hasattr(tok, "lang_code_to_id") and tok.lang_code_to_id and "de_DE" in tok.lang_code_to_id:
+                de_id = tok.lang_code_to_id["de_DE"]
+            elif hasattr(tok, "convert_tokens_to_ids"):
+                de_id = tok.convert_tokens_to_ids("de_DE")
+            if de_id is None or de_id == getattr(tok, "unk_token_id", None):
+                de_id = 250003
+            print(f"  -> Konfigurierte Ziel-Sprach-ID (de_DE): {de_id}")
             preds = []
             for src in tqdm(sources, desc=model_name):
                 enc = tok(src, max_length=256, truncation=True, return_tensors="pt").to(device)
@@ -461,14 +470,17 @@ def main():
                         "input_ids": enc["input_ids"],
                         "attention_mask": enc["attention_mask"],
                         "max_length": 256,
-                        "num_beams": 4,
-                        "repetition_penalty": 1.2,
+                        "do_sample": True,
+                        "temperature": 0.7,
+                        "top_p": 0.92,
+                        "top_k": 50,
+                        "repetition_penalty": 1.35,
                         "no_repeat_ngram_size": 3,
-                        "early_stopping": True,
+                        "pad_token_id": tok.pad_token_id,
+                        "eos_token_id": tok.eos_token_id,
                     }
                     if de_id:
                         gen_kw["forced_bos_token_id"] = de_id
-                        gen_kw["decoder_start_token_id"] = de_id
                     out = lm.generate(**gen_kw)
                 gen_text = tok.decode(out[0], skip_special_tokens=True).strip()
                 preds.append(gen_text)

@@ -351,15 +351,21 @@ class TokenLengthEvaluator:
         
         # Load Tokenizer & Model
         try:
-            tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, fix_mistral_regex=True)
-        except TypeError:
-            tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
+            tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=False)
+        except Exception:
+            tokenizer = AutoTokenizer.from_pretrained(base_model_name, use_fast=False)
         
-        if hasattr(tokenizer, "src_lang"):
-            tokenizer.src_lang = "de_DE"
-            tokenizer.tgt_lang = "de_DE"
+        tokenizer.src_lang = "de_DE"
+        tokenizer.tgt_lang = "de_DE"
 
-        de_id = tokenizer.lang_code_to_id.get("de_DE") if hasattr(tokenizer, "lang_code_to_id") else None
+        de_id = None
+        if hasattr(tokenizer, "lang_code_to_id") and tokenizer.lang_code_to_id and "de_DE" in tokenizer.lang_code_to_id:
+            de_id = tokenizer.lang_code_to_id["de_DE"]
+        elif hasattr(tokenizer, "convert_tokens_to_ids"):
+            de_id = tokenizer.convert_tokens_to_ids("de_DE")
+        if de_id is None or de_id == getattr(tokenizer, "unk_token_id", None):
+            de_id = 250003
+        print(f"  -> Konfigurierte Ziel-Sprach-ID (de_DE): {de_id}")
         
         try:
             model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path).to(self.device)
@@ -389,14 +395,17 @@ class TokenLengthEvaluator:
                 "input_ids": inputs["input_ids"],
                 "attention_mask": inputs["attention_mask"],
                 "max_length": max_target_len,
-                "num_beams": 4,
-                "repetition_penalty": 1.2,
+                "do_sample": True,
+                "temperature": 0.7,
+                "top_p": 0.92,
+                "top_k": 50,
+                "repetition_penalty": 1.35,
                 "no_repeat_ngram_size": 3,
-                "early_stopping": True,
+                "pad_token_id": tokenizer.pad_token_id,
+                "eos_token_id": tokenizer.eos_token_id,
             }
             if de_id is not None:
                 gen_kwargs["forced_bos_token_id"] = de_id
-                gen_kwargs["decoder_start_token_id"] = de_id
 
             with torch.no_grad():
                 outputs = model.generate(**gen_kwargs)
