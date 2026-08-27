@@ -3,8 +3,8 @@
 #SBATCH --partition=research
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --mem=32G
+#SBATCH --gres=gpu:1
 #SBATCH --output=results/logs/experiments/dpo_beta_sweep/%x_%j.out
 #SBATCH --error=results/logs/experiments/dpo_beta_sweep/%x_%j.err
 

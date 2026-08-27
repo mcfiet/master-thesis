@@ -3,8 +3,8 @@
 #SBATCH --partition=research
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --mem=32G
+#SBATCH --gres=gpu:1
 #SBATCH --output=results/logs/experiments/dpo_beta_sweep/%x_%j.out
 #SBATCH --error=results/logs/experiments/dpo_beta_sweep/%x_%j.err
 
@@ -22,8 +22,8 @@ mkdir -p results/logs/experiments/dpo_beta_sweep results/plots/experiments/dpo_b
 echo "=== Training DPO Model with Beta = 0.01 (Aggressive Preference Shift) ==="
 date
 
-TRAIN_FILE="data/corpus/dpo_pairs_mixup.jsonl"
-EVAL_FILE="data/corpus/dpo_pairs_mixup_eval.jsonl"
+TRAIN_FILE="data/metric_weights_exp/dpo_pairs_w05_w05.jsonl"
+EVAL_FILE="data/metric_weights_exp/dpo_pairs_w05_w05_eval.jsonl"
 
 srun python scripts/modeling/train_dpo.py \
     --model_name_or_path "results/models/sft" \
