@@ -102,15 +102,20 @@ ls_list = df_benchmark["ls_text"].tolist()
 
 # 1. SBERT Similarity
 print("1. Berechne SBERT Embeddings...")
-emb_as = sbert_model.encode(as_list, batch_size=16, convert_to_tensor=True, show_progress_bar=True)
-emb_ls = sbert_model.encode(ls_list, batch_size=16, convert_to_tensor=True, show_progress_bar=True)
-sbert_cos = util.cos_sim(emb_as, emb_ls).diagonal().cpu().numpy()
-sbert_norm = np.clip((sbert_cos + 1.0) / 2.0, 0.0, 1.0)
+with torch.inference_mode():
+    emb_as = sbert_model.encode(as_list, batch_size=4, convert_to_tensor=True, show_progress_bar=True)
+    emb_ls = sbert_model.encode(ls_list, batch_size=4, convert_to_tensor=True, show_progress_bar=True)
+    sbert_cos = util.cos_sim(emb_as, emb_ls).diagonal().cpu().numpy()
+    sbert_norm = np.clip((sbert_cos + 1.0) / 2.0, 0.0, 1.0)
+    del emb_as, emb_ls
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
 # 2. NLI Cross-Encoder
 print("2. Berechne NLI Entailment & Contradiction Scores...")
 pairs = list(zip(as_list, ls_list))
-nli_logits = nli_model.predict(pairs, batch_size=16, show_progress_bar=True)
+with torch.inference_mode():
+    nli_logits = nli_model.predict(pairs, batch_size=8, show_progress_bar=True)
 nli_probs = F.softmax(torch.tensor(nli_logits), dim=-1).numpy()
 p_contradiction = nli_probs[:, 0]
 p_neutral = nli_probs[:, 1]
