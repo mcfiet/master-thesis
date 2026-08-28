@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=3_train_dpo_decoder_only
 #SBATCH --partition=research
 #SBATCH --time=12:00:00

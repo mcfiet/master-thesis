@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=1_gen_dpo_w05_w05
 #SBATCH --partition=research
 #SBATCH --time=12:00:00

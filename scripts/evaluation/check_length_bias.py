@@ -99,7 +99,7 @@ def load_or_build_vocab():
     
     return Vocab(X_train)
 
-def main():
+def main(output_csv: str = "results/evaluation/length_bias_results.csv"):
     print(f"Using device: {DEVICE}")
     vocab = load_or_build_vocab()
     print(f"Vocab size: {len(vocab)}")
@@ -234,7 +234,6 @@ def main():
     print(classification_report(true_labels, fixed_len_preds_100, target_names=["AS", "LS"]))
 
     # Save DataFrame for Notebook Consumption
-    output_csv = getattr(args, "output_csv", "results/evaluation/length_bias_results.csv")
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
     df_results = pd.DataFrame({
         "text": all_texts,
@@ -267,5 +266,5 @@ if __name__ == "__main__":
     if args.vocab_source_csv:
         VOCAB_SOURCE_CSV = args.vocab_source_csv
         
-    main()
+    main(output_csv=args.output_csv)
 

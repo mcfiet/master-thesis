@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=eval_dpo_beta_sweep
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=1_train_sft_decoder_only
 #SBATCH --partition=research
 #SBATCH --time=12:00:00

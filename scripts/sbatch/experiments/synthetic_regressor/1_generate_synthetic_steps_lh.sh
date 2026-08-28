@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=11_generate_synthetic_steps_lh
 #SBATCH --partition=research
 #SBATCH --time=06:00:00

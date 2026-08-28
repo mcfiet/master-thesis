@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=03_create_lebenshilfe_dataset
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

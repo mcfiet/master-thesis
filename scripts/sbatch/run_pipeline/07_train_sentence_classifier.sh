@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=07_train_sentence_classifier
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

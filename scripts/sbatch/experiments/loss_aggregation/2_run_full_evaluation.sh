@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=eval_loss_aggregation
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

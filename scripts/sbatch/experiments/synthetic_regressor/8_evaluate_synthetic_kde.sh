@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=eval_synthetic_kde
 #SBATCH --partition=research
 #SBATCH --time=01:00:00

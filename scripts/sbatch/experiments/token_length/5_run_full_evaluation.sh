@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=5_eval_token_length_exp
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

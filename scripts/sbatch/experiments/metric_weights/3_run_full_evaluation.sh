@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=3_eval_metric_weights
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

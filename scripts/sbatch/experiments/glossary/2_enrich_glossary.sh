@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=enrich_glossary
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

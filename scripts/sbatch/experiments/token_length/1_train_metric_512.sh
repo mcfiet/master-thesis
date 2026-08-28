@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=1_train_metric_512
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

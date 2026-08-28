@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=18b_train_dpo_synthetic
 #SBATCH --partition=research
 #SBATCH --time=12:00:00

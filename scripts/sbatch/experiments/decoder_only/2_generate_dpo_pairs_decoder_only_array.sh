@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=2_gen_dpo_dec_array
 #SBATCH --partition=research
 #SBATCH --time=06:00:00

@@ -119,8 +119,8 @@ def main():
     parser.add_argument("--sbert_max_seq_len", type=int, default=8192, help="Max sequence length for SBERT (default: 8192)")
     parser.add_argument("--output_summary", type=str, default="results/evaluation/dpo_ladder_summary.csv")
     parser.add_argument("--output_details", type=str, default="results/evaluation/dpo_ladder_details.csv")
-    parser.add_argument("--max_source_len", type=int, default=512)
-    parser.add_argument("--max_target_len", type=int, default=512)
+    parser.add_argument("--max_source_len", type=int, default=1024)
+    parser.add_argument("--max_target_len", type=int, default=1024)
     parser.add_argument("--batch_size", type=int, default=4)
     args = parser.parse_args()
 

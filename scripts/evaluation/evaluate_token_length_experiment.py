@@ -354,18 +354,19 @@ class TokenLengthEvaluator:
             tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=False)
         except Exception:
             tokenizer = AutoTokenizer.from_pretrained(base_model_name, use_fast=False)
-        
-        tokenizer.src_lang = "de_DE"
-        tokenizer.tgt_lang = "de_DE"
 
-        de_id = None
-        if hasattr(tokenizer, "lang_code_to_id") and tokenizer.lang_code_to_id and "de_DE" in tokenizer.lang_code_to_id:
-            de_id = tokenizer.lang_code_to_id["de_DE"]
-        elif hasattr(tokenizer, "convert_tokens_to_ids"):
-            de_id = tokenizer.convert_tokens_to_ids("de_DE")
-        if de_id is None or de_id == getattr(tokenizer, "unk_token_id", None):
-            de_id = 250003
-        print(f"  -> Konfigurierte Ziel-Sprach-ID (de_DE): {de_id}")
+        if "mbart" in model_name_or_path.lower() or "mbart" in base_model_name.lower():
+            tokenizer.src_lang = "de_DE"
+            tokenizer.tgt_lang = "de_DE"
+
+            de_id = None
+            if hasattr(tokenizer, "lang_code_to_id") and tokenizer.lang_code_to_id and "de_DE" in tokenizer.lang_code_to_id:
+                de_id = tokenizer.lang_code_to_id["de_DE"]
+            elif hasattr(tokenizer, "convert_tokens_to_ids"):
+                de_id = tokenizer.convert_tokens_to_ids("de_DE")
+            if de_id is None or de_id == getattr(tokenizer, "unk_token_id", None):
+                de_id = 250003
+            print(f"  -> Konfigurierte Ziel-Sprach-ID (de_DE): {de_id}")
         
         try:
             model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path).to(self.device)
@@ -611,6 +612,8 @@ def main():
 
     models_to_eval = [
         # (model_dir, max_source_len, max_target_len)
+        ("results/models/mt5_exp/sft_mt5_base", 1024, 1024),
+        ("results/models/mt5_exp/dpo_mt5_base", 1024, 1024),
         ("results/models/token_length_exp/sft_len256", 256, 256),
         ("results/models/token_length_exp/sft_len512", 512, 512),
         ("results/models/token_length_exp/sft_len1024", 1024, 1024),

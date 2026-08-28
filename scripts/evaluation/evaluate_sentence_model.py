@@ -104,7 +104,7 @@ def build_original_vocab():
     
     return Vocab(X_train)
 
-def main():
+def main(output_csv: str = "results/evaluation/eval_sentence_classifier.csv", output_summary: str = "results/evaluation/sentence_classifier_metrics.json"):
     print(f"Using device: {DEVICE}")
     vocab = build_original_vocab()
     print(f"Vocab size: {len(vocab)}")
@@ -298,8 +298,5 @@ if __name__ == "__main__":
     if os.path.exists(args.vocab_source_csv):
         VOCAB_SOURCE_CSV = args.vocab_source_csv
     
-    output_csv = args.output_csv
-    output_summary = args.output_summary
-        
-    main()
+    main(output_csv=args.output_csv, output_summary=args.output_summary)
 

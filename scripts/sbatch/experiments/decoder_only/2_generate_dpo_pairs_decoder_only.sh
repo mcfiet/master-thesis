@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=2_generate_dpo_pairs_decoder_only
 #SBATCH --partition=research
 #SBATCH --time=12:00:00

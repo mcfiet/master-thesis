@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=01_crawl_url_alignment
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

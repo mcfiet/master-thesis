@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=06_prepare_10kgnad_dpo_corpus
 #SBATCH --partition=research
 #SBATCH --time=01:00:00
@@ -26,7 +27,7 @@ date
 srun python scripts/data/prepare_10kgnad_corpus.py \
     --output_file "data/corpus/corpus_10kgnad_len512_as.json" \
     --min_tokens 50 \
-    --max_tokens 512
+    --max_tokens 1024
 
 echo "=== 10kGNAD Vorbereitung abgeschlossen ==="
 date

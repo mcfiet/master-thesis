@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=17b_generate_dpo_dataset_synthetic
 #SBATCH --partition=research
 #SBATCH --time=12:00:00

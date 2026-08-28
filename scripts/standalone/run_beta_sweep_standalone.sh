@@ -33,8 +33,8 @@ else
     echo "nvidia-smi not found, defaulting to single GPU/CPU."
 fi
 
-TRAIN_FILE="data/metric_weights_exp/dpo_pairs_w05_w05.jsonl"
-EVAL_FILE="data/metric_weights_exp/dpo_pairs_w05_w05_eval.jsonl"
+TRAIN_FILE="data/corpus/dpo_pairs_mixup.jsonl"
+EVAL_FILE="data/corpus/dpo_pairs_mixup_eval.jsonl"
 SFT_MODEL="results/models/sft"
 
 # Verify prerequisites

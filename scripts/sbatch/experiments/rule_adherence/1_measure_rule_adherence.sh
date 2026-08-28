@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=eval_rule_adherence
 #SBATCH --partition=research
 #SBATCH --time=02:00:00

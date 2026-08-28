@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experten-Evaluation: Sprachkomplexität & Sinnhaftigkeit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --warning: #f59e0b;
+      --admin-bg: #fef2f2;
+      --admin-border: #fca5a5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 90px;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .header-title h1 { font-size: 1.2rem; font-weight: 700; color: #0f172a; }
+    .header-title p { font-size: 0.8rem; color: var(--text-muted); }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .item-select {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .progress-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .progress-bar-bg {
+      width: 140px;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .progress-text { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+
+    .admin-toggle-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #f1f5f9;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .admin-toggle-btn.active {
+      background: #fee2e2;
+      border-color: #f87171;
+      color: #991b1b;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 24px auto;
+      padding: 0 20px;
+    }
+
+    /* Admin Debug Banner */
+    .admin-banner {
+      display: none;
+      background: var(--admin-bg);
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      padding: 12px 18px;
+      margin-bottom: 18px;
+      font-size: 0.85rem;
+      color: #991b1b;
+    }
+    .admin-banner.visible { display: block; }
+    .admin-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .admin-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      background: #ffffff;
+      border: 1px solid #fca5a5;
+    }
+
+    .instructions-card {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: #1e3a8a;
+    }
+    .instructions-card summary { font-weight: 600; cursor: pointer; }
+
+    /* Single Text Card */
+    .text-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+    .text-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+    .item-badge-main {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1e293b;
+      background: #e2e8f0;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+    .word-count-badge {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .text-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #0f172a;
+      white-space: pre-wrap;
+      min-height: 180px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+
+    /* Rating Area */
+    .rating-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+
+    .rating-row {
+      margin-bottom: 26px;
+    }
+    .rating-label-box {
+      margin-bottom: 12px;
+    }
+    .rating-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .rating-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .scale-buttons {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+
+    .scale-btn {
+      background: #f8fafc;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+    .scale-btn:hover {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+    .scale-btn.active {
+      border-color: var(--primary);
+      background: #dbeafe;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+    .scale-num {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .scale-tag {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.2;
+      display: block;
+    }
+
+    /* Checkboxes & Notes */
+    .flags-box {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .flags-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
+    .flags-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .flag-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .flag-label:hover { background: #f1f5f9; }
+
+    .comment-area {
+      width: 100%;
+      height: 75px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+    .comment-area:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Action bar */
+    .action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+    .btn {
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease;
+    }
+    .btn-outline {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover { background: #f1f5f9; }
+    .btn-primary { background: var(--primary); color: #ffffff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-success { background: var(--success); color: #ffffff; }
+    .btn-success:hover { background: #15803d; }
+
+    .nav-buttons { display: flex; gap: 10px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">
+      <h1>Experten-Evaluation: Textverständlichkeit & Sinnhaftigkeit</h1>
+      <p>Unabhängige Blindstudie zur Sprachkomplexität und Textqualität</p>
+    </div>
+
+    <div class="header-controls">
+      <select class="item-select" id="itemSelectDropdown" onchange="jumpToItem(this.value)">
+        <!-- Options populated dynamically -->
+      </select>
+
+      <div class="progress-box">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <span class="progress-text" id="progressText">1 / 50</span>
+      </div>
+
+      <button class="admin-toggle-btn" id="adminToggle" onclick="toggleAdminMode()">
+        <span>👁️</span> <span id="adminToggleText">Admin-Modus: Aus</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Admin / Origin Details Banner -->
+    <div class="admin-banner" id="adminBanner">
+      <strong>🔎 EXPERIMENTATOR-DETAILS (GEHEIM / DEM EXPERTEN VERBORGEN):</strong>
+      <div class="admin-meta-grid">
+        <div><strong>Wahre Bedingung:</strong> <span class="admin-badge" id="adminTrueCond">-</span></div>
+        <div><strong>Ursprungsportal:</strong> <span id="adminSourceDom">-</span></div>
+        <div><strong>Artikel-ID:</strong> <span id="adminArticleId">-</span></div>
+        <div><strong>BiLSTM Style Score ($R_{style}$):</strong> <span id="adminRStyle">-</span></div>
+        <div><strong>SBERT Score ($R_{sem}$):</strong> <span id="adminRSem">-</span></div>
+        <div><strong>Flesch Reading Ease:</strong> <span id="adminFlesch">-</span></div>
+      </div>
+    </div>
+
+    <details class="instructions-card" open>
+      <summary>Kriterienkatalog & Bewertungsanleitung (Hier klicken zum Ein-/Ausklappen)</summary>
+      <div style="margin-top: 10px; font-size: 0.85rem; line-height: 1.6;">
+        <p><strong>1. Sprachliche Einfachheit (0–5):</strong> Wie einfach und barrierefrei ist dieser Text geschrieben? (0 = Schwere Alltagssprache / Fachsprache &rarr; 5 = Perfekte Leichte Sprache nach Regelwerk).</p>
+        <p><strong>2. Sinnhaftigkeit & Textverständnis (0–5):</strong> Wie sinnvoll, logisch und schlüssig ist der Text in sich? Ergeben die Erklärungen Sinn oder ist es unzusammenhängender Kauderwelsch / unlogisch?</p>
+      </div>
+    </details>
+
+    <!-- Single Evaluated Text Card -->
+    <div class="text-card">
+      <div class="text-card-header">
+        <span class="item-badge-main" id="itemBadge">TEXT-BEISPIEL 01 / 50</span>
+        <span class="word-count-badge" id="wordCount">0 Wörter</span>
+      </div>
+      <div class="text-content" id="mainText">Lade Text...</div>
+    </div>
+
+    <!-- Rating Matrix -->
+    <div class="rating-section">
+      <!-- Dim 1: Einfachheit / LS-Grad -->
+      <div class="rating-row">
+        <div class="rating-label-box">
+          <span class="rating-title">1. Sprachliche Einfachheit & Barrierefreiheit (AS vs. LS)</span>
+          <p class="rating-desc">Wie schätzen Sie das sprachliche Niveau dieses Textes ein?</p>
+        </div>
+        <div class="scale-buttons" id="styleScale">
+          <button class="scale-btn" onclick="setScore('style', 0)">
+            <span class="scale-num">0</span>
+            <span class="scale-tag">Reines AS / Fachsprache</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('style', 1)">
+            <span class="scale-num">1</span>
+            <span class="scale-tag">Schwere Alltagssprache</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('style', 2)">
+            <span class="scale-num">2</span>
+            <span class="scale-tag">Einfache Sprache</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('style', 3)">
+            <span class="scale-num">3</span>
+            <span class="scale-tag">Ansatzweise Leichte Sprache</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('style', 4)">
+            <span class="scale-num">4</span>
+            <span class="scale-tag">Gute Leichte Sprache</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('style', 5)">
+            <span class="scale-num">5</span>
+            <span class="scale-tag">Perfekte Leichte Sprache</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dim 2: Sinnhaftigkeit / Kohärenz / Erklärungen -->
+      <div class="rating-row">
+        <div class="rating-label-box">
+          <span class="rating-title">2. Sinnhaftigkeit & Textlogik (Erklärungsqualität)</span>
+          <p class="rating-desc">Macht der Text in sich Sinn? Sind die Zusammenhänge und Erklärungen logisch und verständlich?</p>
+        </div>
+        <div class="scale-buttons" id="meaningScale">
+          <button class="scale-btn" onclick="setScore('meaning', 0)">
+            <span class="scale-num">0</span>
+            <span class="scale-tag">Sinnloser Kauderwelsch</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('meaning', 1)">
+            <span class="scale-num">1</span>
+            <span class="scale-tag">Sehr unlogisch / verwirrend</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('meaning', 2)">
+            <span class="scale-num">2</span>
+            <span class="scale-tag">Teilweise unklar / holprig</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('meaning', 3)">
+            <span class="scale-num">3</span>
+            <span class="scale-tag">Verständlich & solide</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('meaning', 4)">
+            <span class="scale-num">4</span>
+            <span class="scale-tag">Gut & schlüssig erklärt</span>
+          </button>
+          <button class="scale-btn" onclick="setScore('meaning', 5)">
+            <span class="scale-num">5</span>
+            <span class="scale-tag">Glasklar, logisch & sinnvoll</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Flags & Comments -->
+      <div class="flags-box">
+        <div class="flags-title">Optionale Fehlermarker:</div>
+        <div class="flags-grid">
+          <label class="flag-label">
+            <input type="checkbox" id="flagNonsense" onchange="updateFlag('unclear_logic', this.checked)">
+            Unlogischer Gedankengang / Kauderwelsch
+          </label>
+          <label class="flag-label">
+            <input type="checkbox" id="flagGrammar" onchange="updateFlag('grammar_syntax', this.checked)">
+            Grammatik- / Syntaxfehler
+          </label>
+          <label class="flag-label">
+            <input type="checkbox" id="flagCompound" onchange="updateFlag('unsplit_compounds', this.checked)">
+            Lange Wörter nicht getrennt
+          </label>
+          <label class="flag-label">
+            <input type="checkbox" id="flagPassive" onchange="updateFlag('passive_voice', this.checked)">
+            Viel Passiv / Konjunktiv
+          </label>
+        </div>
+
+        <textarea class="comment-area" id="commentArea" placeholder="Optionale Begründung oder Anmerkung zu diesem Text..." oninput="updateComment(this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="action-bar">
+    <button class="btn btn-outline" id="prevBtn" onclick="prevItem()">Zurück</button>
+    <div style="font-size: 0.85rem; color: var(--text-muted);" id="saveStatus">Autosave: Aktiv</div>
+    <div class="nav-buttons">
+      <button class="btn btn-success" onclick="exportResults()">Ergebnisse Exportieren</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextItem()">Nächster Text &rarr;</button>
+    </div>
+  </div>
+
+  <script>
+    let items = [];
+    let ratings = {};
+    let currentIndex = 0;
+    let adminMode = false;
+
+    async function init() {
+      try {
+        const res = await fetch('/data/expert_eval/blinded_items.json');
+        if (res.ok) {
+          items = await res.json();
+        }
+      } catch (e) {
+        console.warn("Lade lokale Items...");
+      }
+
+      // Populate Dropdown
+      const dropdown = document.getElementById('itemSelectDropdown');
+      dropdown.innerHTML = '';
+      items.forEach((it, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.innerText = `Item ${idx + 1}: ${it.item_id}`;
+        dropdown.appendChild(opt);
+      });
+
+      // Load existing ratings
+      const saved = localStorage.getItem('expert_eval_ratings');
+      if (saved) {
+        try { ratings = JSON.parse(saved); } catch (e) {}
+      }
+
+      renderItem();
+    }
+
+    function toggleAdminMode() {
+      adminMode = !adminMode;
+      const btn = document.getElementById('adminToggle');
+      const banner = document.getElementById('adminBanner');
+      const txt = document.getElementById('adminToggleText');
+
+      if (adminMode) {
+        btn.classList.add('active');
+        banner.classList.add('visible');
+        txt.innerText = "Admin-Modus: AN";
+      } else {
+        btn.classList.remove('active');
+        banner.classList.remove('visible');
+        txt.innerText = "Admin-Modus: AUS";
+      }
+      renderItem();
+    }
+
+    function jumpToItem(idx) {
+      currentIndex = parseInt(idx, 10);
+      renderItem();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderItem() {
+      if (!items || items.length === 0) return;
+      const item = items[currentIndex];
+
+      // In single text evaluation: display candidate_text (which holds AS, LS, SFT, DPO or Baseline)
+      const textToDisplay = item.candidate_text || item.source_text_as;
+      document.getElementById('mainText').innerText = textToDisplay;
+      document.getElementById('itemBadge').innerText = `TEXT-BEISPIEL ${currentIndex + 1} / ${items.length} (${item.item_id})`;
+      
+      const words = textToDisplay.trim().split(/\s+/).filter(Boolean).length;
+      document.getElementById('wordCount').innerText = `${words} Wörter`;
+      document.getElementById('itemSelectDropdown').value = currentIndex;
+
+      // Admin / Origin details
+      if (adminMode) {
+        document.getElementById('adminTrueCond').innerText = item.true_condition || "Unbekannt";
+        document.getElementById('adminSourceDom').innerText = item.source_domain ? item.source_domain.toUpperCase() : "-";
+        document.getElementById('adminArticleId').innerText = item.source_article_id || "-";
+        if (item.metrics) {
+          document.getElementById('adminRStyle').innerText = item.metrics.r_style ?? "-";
+          document.getElementById('adminRSem').innerText = item.metrics.r_sem ?? "-";
+          document.getElementById('adminFlesch').innerText = item.metrics.flesch_de ?? "-";
+        }
+      }
+
+      const total = items.length;
+      document.getElementById('progressText').innerText = `${currentIndex + 1} / ${total}`;
+      document.getElementById('progressBar').style.width = `${((currentIndex + 1) / total) * 100}%`;
+
+      document.getElementById('prevBtn').disabled = (currentIndex === 0);
+      document.getElementById('nextBtn').innerText = (currentIndex === total - 1) ? "Abschließen" : "Nächster Text →";
+
+      // Restore ratings
+      const itemRating = ratings[item.item_id] || {
+        style_score: null,
+        meaning_score: null,
+        flags: {},
+        comment: ""
+      };
+
+      updateScaleButtons('styleScale', itemRating.style_score);
+      updateScaleButtons('meaningScale', itemRating.meaning_score);
+
+      document.getElementById('flagNonsense').checked = !!itemRating.flags.unclear_logic;
+      document.getElementById('flagGrammar').checked = !!itemRating.flags.grammar_syntax;
+      document.getElementById('flagCompound').checked = !!itemRating.flags.unsplit_compounds;
+      document.getElementById('flagPassive').checked = !!itemRating.flags.passive_voice;
+      document.getElementById('commentArea').value = itemRating.comment || "";
+    }
+
+    function updateScaleButtons(containerId, activeScore) {
+      const btns = document.getElementById(containerId).querySelectorAll('.scale-btn');
+      btns.forEach((btn, idx) => {
+        if (idx === activeScore) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    function ensureItemRating() {
+      const itemId = items[currentIndex].item_id;
+      if (!ratings[itemId]) {
+        ratings[itemId] = {
+          item_id: itemId,
+          style_score: null,
+          meaning_score: null,
+          flags: {},
+          comment: ""
+        };
+      }
+      return ratings[itemId];
+    }
+
+    function setScore(type, val) {
+      const r = ensureItemRating();
+      if (type === 'style') r.style_score = val;
+      if (type === 'meaning') r.meaning_score = val;
+      saveRatings();
+      renderItem();
+    }
+
+    function updateFlag(flagName, val) {
+      const r = ensureItemRating();
+      r.flags[flagName] = val;
+      saveRatings();
+    }
+
+    function updateComment(val) {
+      const r = ensureItemRating();
+      r.comment = val;
+      saveRatings();
+    }
+
+    function saveRatings() {
+      localStorage.setItem('expert_eval_ratings', JSON.stringify(ratings));
+      document.getElementById('saveStatus').innerText = "Autosave: Gespeichert (" + new Date().toLocaleTimeString() + ")";
+
+      fetch('/api/save_rating', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(ratings)
+      }).catch(() => {});
+    }
+
+    function prevItem() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderItem();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function nextItem() {
+      if (currentIndex < items.length - 1) {
+        currentIndex++;
+        renderItem();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert("Alle 50 Texte wurden bewertet! Bitte klicken Sie auf 'Ergebnisse Exportieren'.");
+      }
+    }
+
+    function exportResults() {
+      saveRatings();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(ratings, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "expert_eval_ratings.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      alert("Ergebnisse wurden erfolgreich exportiert!");
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>

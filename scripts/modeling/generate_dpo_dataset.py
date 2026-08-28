@@ -489,14 +489,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max_source_len",
         type=int,
-        default=500,
-        help="Max source sequence length (default: 500).",
+        default=1024,
+        help="Max source sequence length (default: 1024).",
     )
     parser.add_argument(
         "--max_target_len",
         type=int,
-        default=500,
-        help="Max target sequence length (default: 500).",
+        default=1024,
+        help="Max target sequence length (default: 1024).",
     )
 
     # Temperature Ladder & Sampling
@@ -566,8 +566,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--reward_max_seq_len",
         type=int,
-        default=512,
-        help="Max sequence length for Reward Model (default: 512).",
+        default=1024,
+        help="Max sequence length for Reward Model (default: 1024).",
     )
     parser.add_argument(
         "--sbert_model_name",
@@ -840,7 +840,7 @@ def main():
                     tot_r, style_r, sem_r = reward_evaluator.compute_rewards_for_candidates(
                         state["source_emb"], clean_new
                     )
-                    for c_str, tr, sr, semr in zip(clean_new, tot_r, style_r, semr):
+                    for c_str, tr, sr, semr in zip(clean_new, tot_r, style_r, sem_r):
                         state["reward_cache"][c_str] = (float(tr), float(sr), float(semr))
                         state["candidate_pool"].append(c_str)
 

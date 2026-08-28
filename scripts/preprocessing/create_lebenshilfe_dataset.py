@@ -185,13 +185,8 @@ for ls_n in ls_files_map.keys():
             matched_ls.add(ls_n)
             matched_as.add(as_n)
 
-output_files = [
-    'data/lebenshilfe/lebenshilfe_dataset.json',
-    'data/new_pipeline/lebenshilfe/lebenshilfe_dataset.json'
-]
-
-for out_f in output_files:
-    os.makedirs(os.path.dirname(out_f), exist_ok=True)
-    with open(out_f, 'w', encoding='utf-8') as f:
-        json.dump(dataset, f, ensure_ascii=False, indent=2)
-    print(f"Dataset saved to {out_f} with {len(dataset)} articles.")
+output_file = 'data/lebenshilfe/lebenshilfe_dataset.json'
+os.makedirs(os.path.dirname(output_file), exist_ok=True)
+with open(output_file, 'w', encoding='utf-8') as f:
+    json.dump(dataset, f, ensure_ascii=False, indent=2)
+print(f"Dataset saved to {output_file} with {len(dataset)} articles.")

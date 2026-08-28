@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=3_generate_dpo_pairs_1024
 #SBATCH --partition=research
 #SBATCH --time=12:00:00

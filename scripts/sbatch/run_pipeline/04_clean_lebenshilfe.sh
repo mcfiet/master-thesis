@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=04_clean_lebenshilfe
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

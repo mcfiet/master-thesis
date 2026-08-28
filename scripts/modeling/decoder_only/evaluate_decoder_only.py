@@ -95,7 +95,7 @@ def load_reward_model(device: str = "cpu", vocab_path: str = "data/vocabs/mixup_
     with open(vocab_path, "r", encoding="utf-8") as f:
         vocab = json.load(f)
 
-    model = BiLSTMRegressor(len(vocab) + 2).to(device)
+    model = BiLSTMRegressor(len(vocab)).to(device)
     if os.path.exists(model_path):
         model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
     elif os.path.exists("results/models/experiments/synthetic_regressor/bilstm_regressor_synthetic.pt"):

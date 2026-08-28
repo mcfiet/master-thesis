@@ -15,7 +15,7 @@ sns.set_theme(style="whitegrid")
 
 # Paths
 LH_WITH_STEPS_PATH = "data/lebenshilfe/lebenshilfe_dataset_with_steps.json"
-MIXUP_MODEL_PATH = "results/models/bilstm_mixup_regression_hybrid_cyclic.pt"
+MIXUP_MODEL_PATH = "results/models/bilstm_mixup_regression.pt"
 MIXUP_VOCAB_PATH = "data/vocabs/mixup_vocab.json"
 SYNTHETIC_MODEL_PATH = "results/models/bilstm_synthetic_regression.pt"
 SYNTHETIC_VOCAB_PATH = "data/vocabs/synthetic_vocab.json"

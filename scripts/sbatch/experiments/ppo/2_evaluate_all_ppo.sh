@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=2_evaluate_all_ppo
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

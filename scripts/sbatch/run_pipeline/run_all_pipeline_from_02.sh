@@ -75,6 +75,10 @@ echo "Schritt 12 eingereicht (DPO Training): Job ID $JOB12"
 JOB13=$(sbatch --parsable --dependency=afterok:$JOB4:$JOB10:$JOB12 scripts/sbatch/run_pipeline/13_evaluate_pipeline.sh)
 echo "Schritt 13 eingereicht (Pipeline Evaluierung): Job ID $JOB13"
 
+# Stufe 8: Experten-Evaluationspool erstellen (50 Items, 10 Nicht-Lebenshilfe Domaenen)
+JOB_EXP=$(sbatch --parsable --dependency=afterok:$JOB9:$JOB10:$JOB12 scripts/sbatch/experiments/benchmark/2_run_expert_eval_benchmark.sh)
+echo "Experten-Evaluationspool eingereicht (50 Items, verblindet): Job ID $JOB_EXP"
+
 echo "========================================================================"
 echo "Pipeline (ab Schritt 02) erfolgreich mit Job-Dependencies eingereicht!"
 echo "Status prüfen mit: squeue -u \$USER"

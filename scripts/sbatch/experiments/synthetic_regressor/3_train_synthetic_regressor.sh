@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=15b_train_synthetic_regressor
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

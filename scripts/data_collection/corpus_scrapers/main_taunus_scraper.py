@@ -125,7 +125,7 @@ def extract_lmt_content(soup):
                 texts.append(text)
                 
     full_text = " ".join(texts)
-    return cleaner.clean_text(clean_text, source="main_taunus")(full_text)
+    return cleaner.clean_text(full_text, source="main_taunus")
 
 def main():
     # Path to the aligned URLs

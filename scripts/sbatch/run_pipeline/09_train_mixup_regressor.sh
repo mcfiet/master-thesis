@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=09_train_mixup_regressor
 #SBATCH --partition=research
 #SBATCH --time=04:00:00
@@ -28,6 +29,6 @@ srun python scripts/modeling/regression_train_mixup.py \
     --lr 0.001 \
     --max_sim 0.98 \
     --min_sim 0.8 \
-    --max_seq_len 256 \
+    --max_seq_len 1024 \
     --model_save_path results/models/bilstm_mixup_regression.pt \
     --vocab_save_path data/vocabs/mixup_vocab.json

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=02_crawl_content_extraction
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

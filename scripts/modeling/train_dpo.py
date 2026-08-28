@@ -86,7 +86,7 @@ def parse_args():
         dest="model_name_or_path",
         type=str,
         required=True,
-        help="Path to pre-trained SFT model directory (e.g. results/models/new_pipeline/sft)."
+        help="Path to pre-trained SFT model directory (e.g. results/models/sft)."
     )
     parser.add_argument(
         "--train_file",
@@ -120,8 +120,8 @@ def parse_args():
     )
 
     # Sequence Lengths
-    parser.add_argument("--max_source_len", type=int, default=256, help="Max source prompt length (tokens).")
-    parser.add_argument("--max_target_len", type=int, default=256, help="Max target completion length (tokens).")
+    parser.add_argument("--max_source_len", type=int, default=1024, help="Max source prompt length (tokens).")
+    parser.add_argument("--max_target_len", type=int, default=1024, help="Max target completion length (tokens).")
 
     # Hyperparameters
     parser.add_argument("--loss_type", type=str, default="sum", choices=["sum", "mean"], help="DPO loss reduction: 'sum' (classic sequence-level log-prob sum, Rafailov et al. 2023) or 'mean' (length-normalized ablation).")
@@ -400,7 +400,7 @@ def main():
     if os.path.isfile(args.model_name_or_path) or args.model_name_or_path.endswith((".pt", ".pth", ".bin")):
         raise ValueError(
             f"Ungültiger Pfad '{args.model_name_or_path}': Es muss ein Modell-Ordnerpfad übergeben werden "
-            f"(z.B. 'results/models/new_pipeline/sft'), keine .pt Datei."
+            f"(z.B. 'results/models/sft'), keine .pt Datei."
         )
 
     print(f"Lade Basis-SFT-Modell und Tokenizer aus: {args.model_name_or_path}...")

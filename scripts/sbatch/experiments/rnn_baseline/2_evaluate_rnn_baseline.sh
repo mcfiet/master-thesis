@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=eval_rnn_baseline
 #SBATCH --partition=research
 #SBATCH --time=01:00:00

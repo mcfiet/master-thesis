@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=13_evaluate_pipeline
 #SBATCH --partition=research
 #SBATCH --time=02:00:00
@@ -33,8 +34,8 @@ srun python scripts/evaluation/evaluate_dpo_ladder_model.py \
     --sbert_model_name "jinaai/jina-embeddings-v2-base-de" \
     --output_summary "results/evaluation/pipeline_final_summary.csv" \
     --output_details "results/evaluation/pipeline_final_details.csv" \
-    --max_source_len 256 \
-    --max_target_len 256 \
+    --max_source_len 1024 \
+    --max_target_len 1024 \
     --batch_size 4
 
 echo "=== Pipeline Evaluierung abgeschlossen ==="

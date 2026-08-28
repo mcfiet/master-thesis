@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=4_evaluate_decoder_only
 #SBATCH --partition=research
 #SBATCH --time=04:00:00

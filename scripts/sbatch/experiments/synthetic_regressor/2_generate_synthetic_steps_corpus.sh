@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=12_generate_synthetic_steps_corpus
 #SBATCH --partition=research
 #SBATCH --time=12:00:00
