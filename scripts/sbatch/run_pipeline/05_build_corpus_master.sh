@@ -1,9 +1,10 @@
 #!/bin/bash
+set -e
 #SBATCH --job-name=05_build_corpus_master
 #SBATCH --partition=research
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
+#SBATCH --mem=32G
 #SBATCH --gres=gpu:1
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err

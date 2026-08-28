@@ -215,9 +215,11 @@ def main():
             seen_pairs.add(dedup_key)
             
             # 4. SBERT Similarity Filter
-            emb_as = sbert.encode(clean_as, convert_to_tensor=True)
-            emb_ls = sbert.encode(clean_ls, convert_to_tensor=True)
-            sim_8192 = float(util.cos_sim(emb_as, emb_ls)[0][0])
+            with torch.inference_mode():
+                emb_as = sbert.encode(clean_as, convert_to_tensor=True, show_progress_bar=False)
+                emb_ls = sbert.encode(clean_ls, convert_to_tensor=True, show_progress_bar=False)
+                sim_8192 = float(util.cos_sim(emb_as, emb_ls)[0][0].item())
+                del emb_as, emb_ls
             
             if not (args.sim_min <= sim_8192 <= args.sim_max):
                 continue
@@ -239,6 +241,8 @@ def main():
             ls_sents = list(ls_doc.sents)
             as_avg_sent = len(as_doc) / len(as_sents) if as_sents else 0
             ls_avg_sent = len(ls_doc) / len(ls_sents) if ls_sents else 0
+            
+            del as_doc, ls_doc
             
             row_dict = {
                 "source": source_name,
