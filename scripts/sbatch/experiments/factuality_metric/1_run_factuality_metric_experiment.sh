@@ -5,7 +5,7 @@ set -e
 #SBATCH --time=02:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=48G
-#SBATCH --gres=gpu:mig_48gb:1
+#SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/factuality_metric/%x_%j.out
 #SBATCH --error=results/logs/experiments/factuality_metric/%x_%j.err
 

@@ -5,7 +5,7 @@ set -e
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --gres=gpu:mig_48gb:1
+#SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/decoder_only/%x_%j.out
 #SBATCH --error=results/logs/experiments/decoder_only/%x_%j.err
 

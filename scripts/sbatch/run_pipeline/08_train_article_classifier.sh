@@ -5,7 +5,7 @@ set -e
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
 
@@ -28,7 +28,7 @@ srun python scripts/modeling/binary_train_article_model.py \
     --epochs 30 \
     --hidden_dim 128 \
     --lr 0.001 \
-    --max_seq_len 1024 \
+    --max_seq_len 512 \
     --max_sim 0.98 \
     --min_sent_len 3 \
     --min_sim 0.8 \

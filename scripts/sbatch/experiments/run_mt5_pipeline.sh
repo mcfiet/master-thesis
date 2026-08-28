@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=mt5_experiment
 #SBATCH --partition=research
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --time=04:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
