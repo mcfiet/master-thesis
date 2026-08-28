@@ -6,13 +6,14 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
+
+set -e
 # =============================================================================
 # Themenbereich 3: Korpus-Erstellung (Master-Korpus & 10kGNAD)
 # =============================================================================
 # Startet Schritt 05 (build_corpus_master) und Schritt 06 (10kGNAD DPO-Korpus).
 # =============================================================================
 
-set -e
 
 mkdir -p results/logs/run_pipeline
 mkdir -p data/corpus

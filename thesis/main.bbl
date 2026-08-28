@@ -63,6 +63,39 @@
       \field{pages}{861\bibrangedash 889}
       \range{pages}{29}
     \endentry
+    \entry{amstad1978verstaendlich}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e73d98237a5063bd9533d131ced31593}{%
+           family={Amstad},
+           familyi={A\bibinitperiod},
+           given={Toni},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Freiburg}%
+      }
+      \list{publisher}{1}{%
+        {Universitätsverlag Freiburg}%
+      }
+      \strng{namehash}{e73d98237a5063bd9533d131ced31593}
+      \strng{fullhash}{e73d98237a5063bd9533d131ced31593}
+      \strng{fullhashraw}{e73d98237a5063bd9533d131ced31593}
+      \strng{bibnamehash}{e73d98237a5063bd9533d131ced31593}
+      \strng{authorbibnamehash}{e73d98237a5063bd9533d131ced31593}
+      \strng{authornamehash}{e73d98237a5063bd9533d131ced31593}
+      \strng{authorfullhash}{e73d98237a5063bd9533d131ced31593}
+      \strng{authorfullhashraw}{e73d98237a5063bd9533d131ced31593}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Wie verständlich sind unsere Zeitungen?}
+      \field{year}{1978}
+    \endentry
     \entry{dpo2025personalizing}{article}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=7d770a576e5d7cb50f7ba7842c8cbae5}{%
@@ -383,6 +416,74 @@
       \field{pages}{4171\bibrangedash 4186}
       \range{pages}{16}
     \endentry
+    \entry{geirhos2020shortcut}{article}{}{}
+      \name{author}{7}{}{%
+        {{un=0,uniquepart=base,hash=f5e971834fd0fe06b8684443a90021c6}{%
+           family={Geirhos},
+           familyi={G\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6f99ba45e4077ee472c0e76123ab977a}{%
+           family={Jacobsen},
+           familyi={J\bibinitperiod},
+           given={Jörn-Henrik},
+           giveni={J\bibinithyphendelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b52892333d083e64c33b43b65a565bb3}{%
+           family={Michaelis},
+           familyi={M\bibinitperiod},
+           given={Claudio},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=77a44166b8233ae29b20f292779447e0}{%
+           family={Zemel},
+           familyi={Z\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8a7f657701e94ae3c82e5c742f585592}{%
+           family={Brendel},
+           familyi={B\bibinitperiod},
+           given={Wieland},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=653ad8c2337d9615a186b743cc8d69a5}{%
+           family={Bethge},
+           familyi={B\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20afa03815f57165428b0c34ca89aafc}{%
+           family={Wichmann},
+           familyi={W\bibinitperiod},
+           given={Felix\bibnamedelima A.},
+           giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{156e4e1f6d61cfd3930e52380fc49ea5}
+      \strng{fullhash}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{fullhashraw}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{bibnamehash}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{authorbibnamehash}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{authornamehash}{156e4e1f6d61cfd3930e52380fc49ea5}
+      \strng{authorfullhash}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{authorfullhashraw}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Machine Intelligence}
+      \field{number}{11}
+      \field{title}{Shortcut Learning in Deep Neural Networks}
+      \field{volume}{2}
+      \field{year}{2020}
+      \field{pages}{665\bibrangedash 673}
+      \range{pages}{9}
+    \endentry
     \entry{gunther2023jina}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=36e06ec0bef21ce0f1cb5421ff73bacc}{%
@@ -428,6 +529,44 @@
       \field{journaltitle}{arXiv preprint arXiv:2310.19923}
       \field{title}{Jina Embeddings 2: 8192-Token General-Purpose Text Embeddings for Long Documents}
       \field{year}{2023}
+    \endentry
+    \entry{hochreiter1997long}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=41b31e29fb2bdbf9f5c9c1b0d5b3e815}{%
+           family={Hochreiter},
+           familyi={H\bibinitperiod},
+           given={Sepp},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=288bdbcfe1b91ad7484d7a24f74f99ed}{%
+           family={Schmidhuber},
+           familyi={S\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{fullhash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{fullhashraw}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{bibnamehash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{authorbibnamehash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{authornamehash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{authorfullhash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{authorfullhashraw}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Neural Computation}
+      \field{number}{8}
+      \field{title}{Long Short-Term Memory}
+      \field{volume}{9}
+      \field{year}{1997}
+      \field{pages}{1735\bibrangedash 1780}
+      \range{pages}{46}
     \endentry
     \entry{klaper2013klaper}{article}{}{}
       \name{author}{3}{}{%
@@ -618,6 +757,40 @@
       \field{year}{2004}
       \field{pages}{74\bibrangedash 81}
       \range{pages}{8}
+    \endentry
+    \entry{loshchilov2019decoupled}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=1241b8181104f1917578d4c7f9b323b6}{%
+           family={Loshchilov},
+           familyi={L\bibinitperiod},
+           given={Ilya},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=528d4af87fd2ecf5fb8a22db913ce088}{%
+           family={Hutter},
+           familyi={H\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{fullhash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{fullhashraw}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{bibnamehash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{authorbibnamehash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{authornamehash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{authorfullhash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{authorfullhashraw}{b308ccb07134a06ec3735828ac4f15e2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Conference on Learning Representations}
+      \field{title}{Decoupled Weight Decay Regularization}
+      \field{year}{2019}
     \endentry
     \entry{maass2020leichte}{book}{}{}
       \name{author}{1}{}{%
@@ -875,6 +1048,44 @@
       \field{year}{2020}
       \field{pages}{41\bibrangedash 48}
       \range{pages}{8}
+    \endentry
+    \entry{schuster1997bidirectional}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=29ea22df63f174ac629e9ef100b40484}{%
+           family={Schuster},
+           familyi={S\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b1d3b7d330a0b9cd14b9467a0dfa8189}{%
+           family={Paliwal},
+           familyi={P\bibinitperiod},
+           given={Kuldip\bibnamedelima K.},
+           giveni={K\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{fullhash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{fullhashraw}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{bibnamehash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{authorbibnamehash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{authornamehash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{authorfullhash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{authorfullhashraw}{2f2edc15114454b7b2f9bea34478b390}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Signal Processing}
+      \field{number}{11}
+      \field{title}{Bidirectional Recurrent Neural Networks}
+      \field{volume}{45}
+      \field{year}{1997}
+      \field{pages}{2673\bibrangedash 2681}
+      \range{pages}{9}
     \endentry
     \entry{sennrich2016neural}{article}{}{}
       \name{author}{3}{}{%
@@ -1338,6 +1549,39 @@
       \field{pages}{861\bibrangedash 889}
       \range{pages}{29}
     \endentry
+    \entry{amstad1978verstaendlich}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e73d98237a5063bd9533d131ced31593}{%
+           family={Amstad},
+           familyi={A\bibinitperiod},
+           given={Toni},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Freiburg}%
+      }
+      \list{publisher}{1}{%
+        {Universitätsverlag Freiburg}%
+      }
+      \strng{namehash}{e73d98237a5063bd9533d131ced31593}
+      \strng{fullhash}{e73d98237a5063bd9533d131ced31593}
+      \strng{fullhashraw}{e73d98237a5063bd9533d131ced31593}
+      \strng{bibnamehash}{e73d98237a5063bd9533d131ced31593}
+      \strng{authorbibnamehash}{e73d98237a5063bd9533d131ced31593}
+      \strng{authornamehash}{e73d98237a5063bd9533d131ced31593}
+      \strng{authorfullhash}{e73d98237a5063bd9533d131ced31593}
+      \strng{authorfullhashraw}{e73d98237a5063bd9533d131ced31593}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Wie verständlich sind unsere Zeitungen?}
+      \field{year}{1978}
+    \endentry
     \entry{dpo2025personalizing}{article}{}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=7d770a576e5d7cb50f7ba7842c8cbae5}{%
@@ -1658,6 +1902,74 @@
       \field{pages}{4171\bibrangedash 4186}
       \range{pages}{16}
     \endentry
+    \entry{geirhos2020shortcut}{article}{}{}
+      \name{author}{7}{}{%
+        {{un=0,uniquepart=base,hash=f5e971834fd0fe06b8684443a90021c6}{%
+           family={Geirhos},
+           familyi={G\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6f99ba45e4077ee472c0e76123ab977a}{%
+           family={Jacobsen},
+           familyi={J\bibinitperiod},
+           given={Jörn-Henrik},
+           giveni={J\bibinithyphendelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b52892333d083e64c33b43b65a565bb3}{%
+           family={Michaelis},
+           familyi={M\bibinitperiod},
+           given={Claudio},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=77a44166b8233ae29b20f292779447e0}{%
+           family={Zemel},
+           familyi={Z\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8a7f657701e94ae3c82e5c742f585592}{%
+           family={Brendel},
+           familyi={B\bibinitperiod},
+           given={Wieland},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=653ad8c2337d9615a186b743cc8d69a5}{%
+           family={Bethge},
+           familyi={B\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20afa03815f57165428b0c34ca89aafc}{%
+           family={Wichmann},
+           familyi={W\bibinitperiod},
+           given={Felix\bibnamedelima A.},
+           giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{156e4e1f6d61cfd3930e52380fc49ea5}
+      \strng{fullhash}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{fullhashraw}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{bibnamehash}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{authorbibnamehash}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{authornamehash}{156e4e1f6d61cfd3930e52380fc49ea5}
+      \strng{authorfullhash}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \strng{authorfullhashraw}{ea0bce88e973c406aa59fef12b6b1ab4}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Machine Intelligence}
+      \field{number}{11}
+      \field{title}{Shortcut Learning in Deep Neural Networks}
+      \field{volume}{2}
+      \field{year}{2020}
+      \field{pages}{665\bibrangedash 673}
+      \range{pages}{9}
+    \endentry
     \entry{gunther2023jina}{article}{}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=36e06ec0bef21ce0f1cb5421ff73bacc}{%
@@ -1703,6 +2015,44 @@
       \field{journaltitle}{arXiv preprint arXiv:2310.19923}
       \field{title}{Jina Embeddings 2: 8192-Token General-Purpose Text Embeddings for Long Documents}
       \field{year}{2023}
+    \endentry
+    \entry{hochreiter1997long}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=41b31e29fb2bdbf9f5c9c1b0d5b3e815}{%
+           family={Hochreiter},
+           familyi={H\bibinitperiod},
+           given={Sepp},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=288bdbcfe1b91ad7484d7a24f74f99ed}{%
+           family={Schmidhuber},
+           familyi={S\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{fullhash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{fullhashraw}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{bibnamehash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{authorbibnamehash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{authornamehash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{authorfullhash}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \strng{authorfullhashraw}{4c2e1e2e1ac91e1df9d4f7b85ebe39b4}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Neural Computation}
+      \field{number}{8}
+      \field{title}{Long Short-Term Memory}
+      \field{volume}{9}
+      \field{year}{1997}
+      \field{pages}{1735\bibrangedash 1780}
+      \range{pages}{46}
     \endentry
     \entry{klaper2013klaper}{article}{}{}
       \name{author}{3}{}{%
@@ -1893,6 +2243,40 @@
       \field{year}{2004}
       \field{pages}{74\bibrangedash 81}
       \range{pages}{8}
+    \endentry
+    \entry{loshchilov2019decoupled}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=1241b8181104f1917578d4c7f9b323b6}{%
+           family={Loshchilov},
+           familyi={L\bibinitperiod},
+           given={Ilya},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=528d4af87fd2ecf5fb8a22db913ce088}{%
+           family={Hutter},
+           familyi={H\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{fullhash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{fullhashraw}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{bibnamehash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{authorbibnamehash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{authornamehash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{authorfullhash}{b308ccb07134a06ec3735828ac4f15e2}
+      \strng{authorfullhashraw}{b308ccb07134a06ec3735828ac4f15e2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Conference on Learning Representations}
+      \field{title}{Decoupled Weight Decay Regularization}
+      \field{year}{2019}
     \endentry
     \entry{maass2020leichte}{book}{}{}
       \name{author}{1}{}{%
@@ -2150,6 +2534,44 @@
       \field{year}{2020}
       \field{pages}{41\bibrangedash 48}
       \range{pages}{8}
+    \endentry
+    \entry{schuster1997bidirectional}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=29ea22df63f174ac629e9ef100b40484}{%
+           family={Schuster},
+           familyi={S\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b1d3b7d330a0b9cd14b9467a0dfa8189}{%
+           family={Paliwal},
+           familyi={P\bibinitperiod},
+           given={Kuldip\bibnamedelima K.},
+           giveni={K\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{fullhash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{fullhashraw}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{bibnamehash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{authorbibnamehash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{authornamehash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{authorfullhash}{2f2edc15114454b7b2f9bea34478b390}
+      \strng{authorfullhashraw}{2f2edc15114454b7b2f9bea34478b390}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Signal Processing}
+      \field{number}{11}
+      \field{title}{Bidirectional Recurrent Neural Networks}
+      \field{volume}{45}
+      \field{year}{1997}
+      \field{pages}{2673\bibrangedash 2681}
+      \range{pages}{9}
     \endentry
     \entry{sennrich2016neural}{article}{}{}
       \name{author}{3}{}{%

@@ -6,13 +6,14 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
+
+set -e
 # =============================================================================
 # Themenbereich 5: SFT-Training (Supervised Fine-Tuning)
 # =============================================================================
 # Startet Schritt 10 (mBART-50 SFT Training auf corpus_master.json).
 # =============================================================================
 
-set -e
 
 mkdir -p results/logs/run_pipeline
 mkdir -p results/models/sft

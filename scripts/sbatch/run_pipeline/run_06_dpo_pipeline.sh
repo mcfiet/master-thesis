@@ -6,6 +6,8 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
+
+set -e
 # =============================================================================
 # Themenbereich 6: DPO-Pipeline (Präferenz-Generierung & DPO-Training)
 # =============================================================================
@@ -13,7 +15,6 @@
 # Schritt 12 (LoRA DPO Training) mit Slurm Job-Abhängigkeit (--dependency=afterok).
 # =============================================================================
 
-set -e
 
 mkdir -p results/logs/run_pipeline
 mkdir -p data/corpus

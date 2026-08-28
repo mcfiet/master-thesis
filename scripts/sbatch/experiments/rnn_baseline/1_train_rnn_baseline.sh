@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=15c_train_rnn_baseline
 #SBATCH --partition=research
 #SBATCH --time=04:00:00
@@ -8,6 +7,8 @@ set -e
 #SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/rnn_baseline/%x_%j.out
 #SBATCH --error=results/logs/experiments/rnn_baseline/%x_%j.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then
@@ -24,7 +25,7 @@ srun python scripts/modeling/regression_train_rnn_baseline.py \
     --csv_path data/analysis/corpus_master.csv \
     --batch_size 64 \
     --embedding_dim 128 \
-    --epochs 40 \
+    --epochs 80 \
     --hidden_dim 128 \
     --lr 0.001 \
     --max_sim 0.98 \
@@ -39,7 +40,7 @@ srun python scripts/modeling/regression_train_rnn_baseline.py \
 #     --csv_path data/analysis/corpus_master.csv \
 #     --batch_size 64 \
 #     --embedding_dim 128 \
-#     --epochs 40 \
+#     --epochs 80 \
 #     --hidden_dim 128 \
 #     --lr 0.001 \
 #     --max_sim 0.98 \

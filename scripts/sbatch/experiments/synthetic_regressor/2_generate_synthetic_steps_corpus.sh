@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=12_generate_synthetic_steps_corpus
 #SBATCH --partition=research
 #SBATCH --time=12:00:00
@@ -7,6 +6,8 @@ set -e
 #SBATCH --mem=32G
 #SBATCH --output=results/logs/experiments/synthetic_regressor/%x_%j.out
 #SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then

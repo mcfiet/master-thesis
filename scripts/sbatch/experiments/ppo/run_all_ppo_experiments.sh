@@ -6,6 +6,8 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/experiments/ppo/%x_%j.out
 #SBATCH --error=results/logs/experiments/ppo/%x_%j.err
+
+set -e
 # ==============================================================================
 # Master Pipeline Runner: PPO Experiments & 7-Way Benchmark
 # ==============================================================================
@@ -15,7 +17,6 @@
 #   3. 7-Way Master Benchmark Evaluation on Lebenshilfe test set
 # ==============================================================================
 
-set -e
 
 echo "========================================================================"
 echo "Submitting PPO Training & Evaluation Pipeline to SLURM Cluster"

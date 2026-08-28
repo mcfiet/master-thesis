@@ -7,11 +7,12 @@
 #SBATCH --mem=32G
 #SBATCH --output=results/logs/experiments/mt5_exp/mt5_pipeline_%j.out
 #SBATCH --error=results/logs/experiments/mt5_exp/mt5_pipeline_%j.err
+
+set -e
 # =============================================================================
 # SLURM Job Script: Google mT5-base End-to-End Pipeline (SFT -> DPO -> Benchmark)
 # =============================================================================
 
-set -e
 
 mkdir -p results/logs/experiments/mt5_exp
 mkdir -p results/plots/experiments/mt5_exp

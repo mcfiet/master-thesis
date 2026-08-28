@@ -6,6 +6,8 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/experiments/decoder_only/%x_%j.out
 #SBATCH --error=results/logs/experiments/decoder_only/%x_%j.err
+
+set -e
 # ==============================================================================
 # Master Pipeline Runner for Decoder-Only SFT & DPO Experiment
 # ==============================================================================
@@ -16,7 +18,6 @@
 #   4. Comprehensive Evaluation (NLP & Leichte Sprache Rules)
 # ==============================================================================
 
-set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p results/logs/experiments/decoder_only results/plots/experiments/decoder_only results/models/decoder_only data/dpo results/evaluation

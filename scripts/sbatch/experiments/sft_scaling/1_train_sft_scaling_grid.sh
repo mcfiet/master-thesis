@@ -8,6 +8,8 @@
 #SBATCH --output=results/logs/experiments/sft_scaling/%x_%j.out
 #SBATCH --error=results/logs/experiments/sft_scaling/%x_%j.err
 
+set -e
+
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then
     source .venv/bin/activate
@@ -16,7 +18,6 @@ elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
 fi
 
 
-set -e
 
 echo "=== Starte SFT Data Scaling Grid (Fractions: 10%, 25%, 50%, 75%, 100%) ==="
 mkdir -p results/logs/experiments/sft_scaling results/plots/experiments/sft_scaling results/evaluation

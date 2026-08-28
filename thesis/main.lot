@@ -2,3 +2,5 @@
 \contentsline {table}{\numberline {1}{\ignorespaces Übersicht des akquirierten Rohdatenbestands (Stufe 1 der Pipeline) nach Quellen.}}{20}{table.caption.3}%
 \contentsline {table}{\numberline {2}{\ignorespaces Übersicht des Pipeline-Funnels von Stufe 1 (Rohdaten) zu Stufe 2 (Bereinigt \& Normalisiert) nach Quellen.}}{26}{table.caption.4}%
 \contentsline {table}{\numberline {3}{\ignorespaces Übersicht der quantitativen Korpusstatistiken des bereinigten Master-Datensatzes ($N=830$).}}{31}{table.caption.5}%
+\contentsline {table}{\numberline {4}{\ignorespaces Klassifikationsgüte (Balanced Accuracy) des BiLSTM in Abhängigkeit vom semantischen Similarity-Bereich und der Granularitätsebene.}}{42}{table.caption.14}%
+\contentsline {table}{\numberline {5}{\ignorespaces Zero-Shot Out-of-Domain-Klassifikationsgüte des BiLSTM auf dem Lebenshilfe-Testkorpus ($N = 49$ Artikelpaare / $98$ Dokumente).}}{44}{table.caption.15}%

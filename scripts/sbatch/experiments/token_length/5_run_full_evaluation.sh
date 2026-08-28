@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=5_eval_token_length_exp
 #SBATCH --partition=research
 #SBATCH --time=04:00:00
@@ -8,6 +7,8 @@ set -e
 #SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/token_length/%x_%j.out
 #SBATCH --error=results/logs/experiments/token_length/%x_%j.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then

@@ -6,11 +6,12 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/experiments/synthetic_regressor/%x_%j.out
 #SBATCH --error=results/logs/experiments/synthetic_regressor/%x_%j.err
+
+set -e
 # =============================================================================
 # Synthetic Regressor Experiment Runner
 # =============================================================================
 
-set -e
 
 mkdir -p results/logs/experiments/synthetic_regressor data/synthetic results/models/experiments/synthetic_regressor results/evaluation
 

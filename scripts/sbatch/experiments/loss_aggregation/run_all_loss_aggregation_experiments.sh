@@ -6,10 +6,11 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/experiments/loss_aggregation/%x_%j.out
 #SBATCH --error=results/logs/experiments/loss_aggregation/%x_%j.err
+
+set -e
 # Master Runner for Loss Aggregation Experiment (Sum vs. Mean DPO)
 # Submits training jobs concurrently and queues evaluation upon completion.
 
-set -e
 
 echo "========================================================================"
 echo "Starte Loss-Aggregations-Experiment: Sum vs. Mean Log-Probabilities"

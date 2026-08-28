@@ -6,6 +6,8 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
+
+set -e
 # =============================================================================
 # Master Pipeline Runner: Ausführung ab Schritt 02 (Content-Extraktion)
 # =============================================================================
@@ -14,7 +16,6 @@
 # Automatische Job-Abhängigkeitskette (Slurm --dependency=afterok).
 # =============================================================================
 
-set -e
 
 mkdir -p results/logs/run_pipeline
 mkdir -p data/corpus

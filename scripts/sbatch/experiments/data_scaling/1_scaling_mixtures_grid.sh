@@ -4,9 +4,11 @@
 #SBATCH --time=03:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --gres=gpu:mig_24gb:1
+#SBATCH --gres=gpu:mig_48gb:1
 #SBATCH --output=results/logs/experiments/data_scaling/%x_%j.out
 #SBATCH --error=results/logs/experiments/data_scaling/%x_%j.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then
@@ -16,12 +18,11 @@ elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
 fi
 
 
-set -e
 
 echo "=== Starting MixUp Multiplier Scaling Grid (mixtures_per_pair) ==="
 mkdir -p results/logs/experiments/data_scaling results/plots/experiments/data_scaling results/evaluation
 
-MIXTURE_VALUES=(2 5 10 20 40 80)
+MIXTURE_VALUES=(2 5 10 20 40 80 160 320)
 
 for M in "${MIXTURE_VALUES[@]}"; do
     EXP_NAME="scale_mixtures_m${M}"
@@ -31,9 +32,9 @@ for M in "${MIXTURE_VALUES[@]}"; do
         --csv_path data/analysis/corpus_master.csv \
         --min_sim 0.80 \
         --max_sim 0.98 \
-        --max_seq_len 256 \
+        --max_seq_len 1024 \
         --batch_size 64 \
-        --epochs 40 \
+        --epochs 80 \
         --lr 0.001 \
         --mixtures_per_pair ${M} \
         --train_fraction 1.0 \

@@ -6,12 +6,13 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/experiments/sft_scaling/%x_%j.out
 #SBATCH --error=results/logs/experiments/sft_scaling/%x_%j.err
+
+set -e
 # ==============================================================================
 # Pipeline Runner: SFT Data Scaling & Learning Curve Experiment
 # Startet das Grid-Training und anschließend automatisch die Evaluation
 # ==============================================================================
 
-set -e
 
 mkdir -p results/logs/experiments/sft_scaling
 SCRIPT_DIR="scripts/sbatch/experiments/sft_scaling"

@@ -57,7 +57,7 @@ parser = argparse.ArgumentParser(description="Training eines Vanilla RNN / RNN B
 parser.add_argument('--csv_path', default="data/analysis/corpus_master.csv")
 parser.add_argument('--batch_size', type=int, default=64)
 parser.add_argument('--embedding_dim', type=int, default=128)
-parser.add_argument('--epochs', type=int, default=40)
+parser.add_argument('--epochs', type=int, default=80)
 parser.add_argument('--hidden_dim', type=int, default=128)
 parser.add_argument('--lr', type=float, default=0.001)
 parser.add_argument('--max_sim', type=float, default=0.98)

@@ -7,6 +7,8 @@
 #SBATCH --output=results/logs/experiments/sft_scaling/%x_%j.out
 #SBATCH --error=results/logs/experiments/sft_scaling/%x_%j.err
 
+set -e
+
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then
     source .venv/bin/activate
@@ -16,7 +18,6 @@ fi
 
 
 mkdir -p results/logs/experiments/sft_scaling results/plots/experiments/sft_scaling results/evaluation
-set -e
 
 echo "=== Aggregiere SFT Data Scaling Ergebnisse ==="
 srun python scripts/experiments/sft_scaling/evaluate_all_sft_scaling.py \

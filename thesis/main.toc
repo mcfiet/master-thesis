@@ -40,25 +40,37 @@
 \contentsline {paragraph}{4. Wiener Sachtextformel (WSTF):}{37}{section*.13}%
 \contentsline {subsubsection}{\numberline {4.4.5}Synthese der Korpuseigenschaften}{37}{subsubsection.4.4.5}%
 \contentsline {section}{\numberline {5}Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}{39}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Klassifikationsmodelle (BiLSTM vs. Baselines)}{39}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Out-of-Domain-Generalisierung \& Empirische Bias-Kontrolle}{40}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Continuous MixUp Regression}{41}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Evaluierung synthetischer Sprachstufen}{42}{subsection.5.4}%
-\contentsline {section}{\numberline {6}Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}{43}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Datenvorbereitung \& Trainings-Splits}{43}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Supervised Fine-Tuning (SFT)}{44}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Reward-Guided Optimization (RLHF / DPO \& PPO)}{45}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Mehrdimensionale Evaluierung \& Demonstrator-App}{46}{subsection.6.4}%
-\contentsline {section}{\numberline {7}Diskussion \& Gesamtevaluation}{47}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Inhaltssynthese der drei Themenblöcke}{47}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Stärken, Grenzen \& Systemrestriktionen}{47}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Beantwortung der Forschungsfragen}{47}{subsection.7.3}%
-\contentsline {section}{\numberline {8}Fazit \& Ausblick}{48}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Zusammenfassung der Kernergebnisse}{48}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Ausblick \& Zukünftige Forschungsarbeiten}{48}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Anhang}{49}{section.9}%
-\contentsline {section}{Glossar}{50}{section*.14}%
-\contentsline {section}{Abbildungsverzeichnis}{51}{section*.15}%
-\contentsline {section}{Tabellenverzeichnis}{52}{section*.17}%
-\contentsline {section}{Literaturverzeichnis}{53}{section*.19}%
-\contentsline {section}{\numberline {10}Anhang}{56}{section.10}%
+\contentsline {subsection}{\numberline {5.1}Klassifikationsmodelle (BiLSTM auf Satz- und Artikelebene)}{39}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Motivation \& Formulierung des Klassifikationsproblems}{39}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Modellarchitektur: Bidirektionales LSTM (BiLSTM)}{40}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Granularitätsebenen: Satz- vs. Artikel-Level vs. Majority Voting}{41}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}In-Domain-Evaluation \& Sweet-Spot-Ablation}{41}{subsubsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.5}Grenzen der Klassifikation}{42}{subsubsection.5.1.5}%
+\contentsline {subsection}{\numberline {5.2}Out-of-Domain-Generalisierung \& Empirische Bias-Kontrolle}{43}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Out-of-Domain-Evaluation auf dem Lebenshilfe-Korpus}{43}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Ausschluss von Längen-Biases (Shortcut Learning)}{45}{subsubsection.5.2.2}%
+\contentsline {paragraph}{Experiment A: Korrelationsanalyse (Länge vs. Vorhersagekonfidenz)}{45}{section*.16}%
+\contentsline {paragraph}{Experiment B: Dummy-Content-Test (Konstanter Token-Ersatz)}{45}{section*.17}%
+\contentsline {paragraph}{Experiment C: Festlängen-Evaluation (Slicing)}{46}{section*.18}%
+\contentsline {subsubsection}{\numberline {5.2.3}Ausschluss von Layout- und Typografie-Biases}{46}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Synthese \& Überleitung zur kontinuierlichen Regression}{47}{subsubsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.3}Continuous MixUp Regression}{48}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Evaluierung synthetischer Sprachstufen}{49}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}{50}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Datenvorbereitung \& Trainings-Splits}{50}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Supervised Fine-Tuning (SFT)}{51}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Reward-Guided Optimization (RLHF / DPO \& PPO)}{52}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Mehrdimensionale Evaluierung \& Demonstrator-App}{53}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Diskussion \& Gesamtevaluation}{54}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Inhaltssynthese der drei Themenblöcke}{54}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Stärken, Grenzen \& Systemrestriktionen}{54}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Beantwortung der Forschungsfragen}{54}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Fazit \& Ausblick}{55}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Zusammenfassung der Kernergebnisse}{55}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Ausblick \& Zukünftige Forschungsarbeiten}{55}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Anhang}{56}{section.9}%
+\contentsline {section}{Glossar}{57}{section*.19}%
+\contentsline {section}{Abbildungsverzeichnis}{58}{section*.20}%
+\contentsline {section}{Tabellenverzeichnis}{59}{section*.22}%
+\contentsline {section}{Literaturverzeichnis}{60}{section*.24}%
+\contentsline {section}{\numberline {10}Anhang}{64}{section.10}%

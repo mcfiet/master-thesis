@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=eval_length_bias
 #SBATCH --partition=research
 #SBATCH --time=01:00:00
@@ -8,6 +7,8 @@ set -e
 #SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/length_bias/%x_%j.out
 #SBATCH --error=results/logs/experiments/length_bias/%x_%j.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then

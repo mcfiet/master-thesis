@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=2_gen_dpo_dec_array
 #SBATCH --partition=research
 #SBATCH --time=06:00:00
@@ -9,6 +8,8 @@ set -e
 #SBATCH --array=0-3
 #SBATCH --output=results/logs/experiments/decoder_only/%x_%A_%a.out
 #SBATCH --error=results/logs/experiments/decoder_only/%x_%A_%a.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then

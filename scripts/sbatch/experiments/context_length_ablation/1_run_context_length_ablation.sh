@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=eval_context_length_ablation
 #SBATCH --partition=research
 #SBATCH --time=02:00:00
@@ -8,6 +7,8 @@ set -e
 #SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/context_length_ablation/%x_%j.out
 #SBATCH --error=results/logs/experiments/context_length_ablation/%x_%j.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -d ".venv" ]; then

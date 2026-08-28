@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=eval_rule_adherence
 #SBATCH --partition=research
 #SBATCH --time=02:00:00
@@ -7,6 +6,8 @@ set -e
 #SBATCH --mem=32G
 #SBATCH --output=results/logs/experiments/rule_adherence/%x_%j.out
 #SBATCH --error=results/logs/experiments/rule_adherence/%x_%j.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then

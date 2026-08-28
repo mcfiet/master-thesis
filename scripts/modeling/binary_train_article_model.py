@@ -66,6 +66,7 @@ parser.add_argument('--max_seq_len', type=int, required=True)
 parser.add_argument('--max_sim', type=float, required=True)
 parser.add_argument('--min_sent_len', type=int, required=True)
 parser.add_argument('--min_sim', type=float, required=True)
+parser.add_argument('--patience', type=int, default=15, help="Early stopping patience")
 parser.add_argument('--model_save_path', default="results/models/bilstm_article_classifier.pt")
 parser.add_argument('--vocab_save_path', default="data/vocabs/article_vocab.json")
 parser.add_argument('--log_dir', default="results/logs/run_pipeline", help="Directory where logs are stored")
@@ -226,7 +227,7 @@ optimizer = optim.AdamW(model.parameters(), lr=LR)
 criterion = nn.BCEWithLogitsLoss()
 
 best_val_acc = 0
-patience = 7  
+patience = args.patience
 counter = 0
 model_save_path = MODEL_SAVE_PATH
 history = {'train_loss': [], 'val_loss': [], 'val_bacc': []}

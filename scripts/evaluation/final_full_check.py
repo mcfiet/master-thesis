@@ -12,7 +12,7 @@ for s in eval_scripts:
     else:
         print(f"❌ {s} Fehler: {res.stderr[:80]}")
 
-print("\n2. TEST ALL 17 NOTEBOOKS AGAINST THEIR PRODUCER SCRIPTS")
+print("\n2. TEST ALL 18 NOTEBOOKS AGAINST THEIR PRODUCER SCRIPTS")
 mapping = [
     ("notebooks/experiments/master_benchmark.ipynb", "results/evaluation/benchmark_5way_decoder_vs_encoder_decoder.csv", "scripts/sbatch/experiments/benchmark/1_run_all_models_benchmark.sh"),
     ("notebooks/experiments/metric_weights.ipynb", "results/evaluation/metric_weights_comparison_summary.csv", "scripts/sbatch/experiments/metric_weights/3_run_full_evaluation.sh"),
@@ -28,6 +28,7 @@ mapping = [
     ("notebooks/experiments/factuality_metric.ipynb", "results/evaluation/factual_consistency_metric_results.csv", "scripts/sbatch/experiments/factuality_metric/1_run_factuality_metric_experiment.sh"),
     ("notebooks/experiments/data_scaling.ipynb", "results/experiments/data_scaling/scaling_summary.csv", "scripts/sbatch/experiments/data_scaling/3_evaluate_scaling.sh"),
     ("notebooks/experiments/token_length_metric.ipynb", "results/evaluation/token_length_metric_comparison.csv", "scripts/sbatch/experiments/token_length/5_run_full_evaluation.sh"),
+    ("notebooks/experiments/mixup_model_evaluation.ipynb", "results/evaluation/mixup_variants_eval.csv", "scripts/sbatch/experiments/mixup_variants/2_evaluate_mixup_variants.sh"),
     ("notebooks/data/corpus_analysis.ipynb", "data/analysis/corpus_master.csv", "scripts/sbatch/run_pipeline/05_build_corpus_master.sh"),
     ("notebooks/data/analyze_cleaning_corpus.ipynb", "data/lebenshilfe/lebenshilfe_dataset_clean.json", "scripts/sbatch/run_pipeline/04_clean_lebenshilfe.sh")
 ]

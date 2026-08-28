@@ -6,6 +6,8 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
+
+set -e
 # =============================================================================
 # Themenbereich 4: Reward-Modelle & Klassifikatoren
 # =============================================================================
@@ -13,7 +15,6 @@
 # und Schritt 09 (MixUp-Regressor) parallel auf GPUs.
 # =============================================================================
 
-set -e
 
 mkdir -p results/logs/run_pipeline
 mkdir -p data/vocabs

@@ -63,6 +63,8 @@ parser.add_argument('--lr', type=float, required=True)
 parser.add_argument('--max_sim', type=float, required=True)
 parser.add_argument('--min_sim', type=float, required=True)
 parser.add_argument('--max_seq_len', type=int, required=True)
+parser.add_argument('--mixtures_per_pair', type=int, default=160, help="Number of random MixUp samples per article pair")
+parser.add_argument('--patience', type=int, default=15, help="Early stopping patience")
 parser.add_argument('--model_save_path', default="results/models/bilstm_mixup_regression.pt")
 parser.add_argument('--vocab_save_path', default="data/vocabs/mixup_vocab.json")
 parser.add_argument('--log_dir', default="results/logs/run_pipeline", help="Directory where log files are stored")
@@ -278,8 +280,8 @@ class MixupPyTorchDataset(Dataset):
             return torch.tensor(static_encoded, dtype=torch.long), torch.tensor(static_target, dtype=torch.float)
 
 print("Erstelle PyTorch Datasets...")
-train_dataset = MixupPyTorchDataset(train_df, vocab, nlp, max_seq_len=MAX_SEQ_LEN, mixtures_per_pair=20, is_train=True)
-val_dataset = MixupPyTorchDataset(val_df, vocab, nlp, max_seq_len=MAX_SEQ_LEN, mixtures_per_pair=20, is_train=False)
+train_dataset = MixupPyTorchDataset(train_df, vocab, nlp, max_seq_len=MAX_SEQ_LEN, mixtures_per_pair=args.mixtures_per_pair, is_train=True)
+val_dataset = MixupPyTorchDataset(val_df, vocab, nlp, max_seq_len=MAX_SEQ_LEN, mixtures_per_pair=args.mixtures_per_pair, is_train=False)
 
 # ==============================================================================
 # MODEL ARCHITECTURE
@@ -316,7 +318,7 @@ scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=10, T_
 
 history = {'train_loss': [], 'val_loss': [], 'val_mae': []}
 best_val_loss = float('inf')
-patience = 8
+patience = args.patience
 counter = 0
 
 # ==============================================================================

@@ -6,12 +6,13 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/experiments/data_scaling/%x_%j.out
 #SBATCH --error=results/logs/experiments/data_scaling/%x_%j.err
+
+set -e
 # ==============================================================================
 # Pipeline Runner: Data Scaling & Learning Curve Experiment
 # Submits all dependent SLURM jobs sequentially.
 # ==============================================================================
 
-set -e
 
 mkdir -p results/logs/experiments/data_scaling
 SCRIPT_DIR="scripts/sbatch/experiments/data_scaling"

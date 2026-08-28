@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=04_clean_lebenshilfe
 #SBATCH --partition=research
 #SBATCH --time=04:00:00
@@ -7,6 +6,8 @@ set -e
 #SBATCH --mem=16G
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
+
+set -e
 
 # Virtuelle Python-Umgebung aktivieren
 if [ -f ".venv/bin/activate" ]; then

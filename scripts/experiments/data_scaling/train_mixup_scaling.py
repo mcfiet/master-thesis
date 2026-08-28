@@ -251,7 +251,7 @@ def parse_args():
     parser.add_argument('--embedding_dim', type=int, default=128, help="Embedding dimension")
     parser.add_argument('--hidden_dim', type=int, default=128, help="LSTM hidden dimension")
     parser.add_argument('--batch_size', type=int, default=64, help="Batch size")
-    parser.add_argument('--epochs', type=int, default=40, help="Training epochs")
+    parser.add_argument('--epochs', type=int, default=80, help="Training epochs")
     parser.add_argument('--lr', type=float, default=0.001, help="Learning rate")
     parser.add_argument('--patience', type=int, default=8, help="Early stopping patience")
     

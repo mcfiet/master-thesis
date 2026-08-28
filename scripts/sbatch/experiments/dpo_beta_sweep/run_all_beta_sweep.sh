@@ -6,13 +6,14 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/experiments/dpo_beta_sweep/%x_%j.out
 #SBATCH --error=results/logs/experiments/dpo_beta_sweep/%x_%j.err
+
+set -e
 # ==============================================================================
 # Pipeline Runner: DPO Beta Sweep Experiment (Beta = 0.01, 0.05, 0.10, 0.20, 0.50)
 # Submits parallel training jobs for all Beta configurations and schedules
 # the evaluation job to run after all training jobs complete.
 # ==============================================================================
 
-set -e
 
 mkdir -p results/logs/experiments/dpo_beta_sweep
 SCRIPT_DIR="scripts/sbatch/experiments/dpo_beta_sweep"

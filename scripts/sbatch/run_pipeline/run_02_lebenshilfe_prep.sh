@@ -6,6 +6,8 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/run_pipeline/%x_%j.out
 #SBATCH --error=results/logs/run_pipeline/%x_%j.err
+
+set -e
 # =============================================================================
 # Themenbereich 2: Lebenshilfe-Datensatz Vorbereitung & Bereinigung
 # =============================================================================
@@ -13,7 +15,6 @@
 # mit Slurm Job-Abhängigkeit (--dependency=afterok).
 # =============================================================================
 
-set -e
 
 mkdir -p results/logs/run_pipeline
 mkdir -p data/lebenshilfe

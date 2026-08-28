@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 #SBATCH --job-name=build_expert_eval_pool
 #SBATCH --partition=research
 #SBATCH --time=01:00:00
@@ -8,6 +7,8 @@ set -e
 #SBATCH --gres=gpu:mig_24gb:1
 #SBATCH --output=results/logs/experiments/benchmark/%x_%j.out
 #SBATCH --error=results/logs/experiments/benchmark/%x_%j.err
+
+set -e
 
 if [ -f ".venv/bin/activate" ]; then
     source .venv/bin/activate

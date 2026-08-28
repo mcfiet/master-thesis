@@ -6,6 +6,8 @@
 #SBATCH --mem=2G
 #SBATCH --output=results/logs/%x_%j.out
 #SBATCH --error=results/logs/%x_%j.err
+
+set -e
 # =============================================================================
 # Master Thesis Complete Orchestrator: Pipeline & All Experiments
 # =============================================================================
@@ -19,7 +21,6 @@
 #   START_STEP=1 bash scripts/sbatch/run_all_pipeline_and_experiments.sh
 # =============================================================================
 
-set -e
 
 START_STEP=${START_STEP:-2}
 if [ "$1" == "--from-step-1" ] || [ "$1" == "-1" ]; then

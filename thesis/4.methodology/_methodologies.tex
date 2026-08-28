@@ -1,35 +1,173 @@
 Die automatisierte, referenzfreie Bewertung von Sprachkomplexität stellt eine Kernkomponente dieser Arbeit dar. Um Textvereinfachungen objektiv zu bewerten und ein steuerbares Belohnungssignal (\textit{Reward}) für das spätere Modelltraining bereitzustellen, wird in diesem Themenblock eine eigene Metrik-Pipeline entwickelt und systematisch untersucht.
 
-\subsection{Klassifikationsmodelle (BiLSTM vs. Baselines)}
+\subsection{Klassifikationsmodelle (BiLSTM auf Satz- und Artikelebene)}
 \label{sec:klassifikationsmodelle}
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=\textbf{Zu erklären in diesem Abschnitt:},sharp corners,boxrule=0.8pt]
-\color{red!80!black}
+
+Die Entwicklung einer automatisierten, referenzfreien Komplexitätsmetrik stellt eine der zentralen methodischen Voraussetzungen dieser Arbeit dar. Bevor ein generatives Sprachmodell über überwachtes Feintuning (SFT) oder Präferenzoptimierung (DPO) zur zielgerichteten Vereinfachung angeleitet werden kann, muss eine Instanz geschaffen werden, die den Grad sprachlicher Simplizität objektiv, quantifizierbar und reproduzierbar bewertet.
+
+Klassische lesbarkeitsmetrische Ansätze wie der \textit{Flesch Reading Ease} \citep{amstad1978verstaendlich} oder die \textit{Wiener Sachtextformel} \citep{bamberger1984lesen} basieren primär auf einfachen Oberflächenmerkmalen wie der mittleren Silben- oder Satzlänge. Bei der Bewertung von Leichter Sprache versagen diese Heuristiken jedoch systematisch, da sie weder syntaktische Verschachtelungen, Passivkonstruktionen noch linguistische Kernanforderungen wie die Auflösung von Komposita oder das Beibehalten von Subjekt-Verb-Objekt-Strukturen erfassen \citep{maass2020leichte, bredel2016leichte}.
+
+Aus diesem Grund wird in diesem Kapitel ein datengetriebener, neuronaler Ansatz verfolgt. Der logische Ausgangspunkt und fundamentale Prüfstein dieses Themenblocks ist die Formulierung und Lösung eines \textbf{binären Klassifikationsproblems}.
+
+\subsubsection{Motivation \& Formulierung des Klassifikationsproblems}
+\label{sec:klassifikation_motivation}
+
+Das binäre Klassifikationsproblem dient als notwendiger Machbarkeitsnachweis (\textit{Proof of Concept}) für die gesamte nachfolgende Modellierungs- und Evaluierungspipeline. Die Kernfrage lautet hierbei: \textit{Ist ein neuronales Sprachmodell in der Lage, anhand der im bereinigten Korpus vorliegenden linguistischen Signale trennscharf zwischen alltagssprachlichen Ausgangstexten (AS, $y=0$) und vereinfachten Fassungen in Leichter Sprache (LS, $y=1$) zu diskriminieren?}
+
+Das Ziel des Klassifikators besteht darin, eine parametrisierte Abbildung $f_\theta(\mathbf{T}) \to \hat{y} \in [\textcolor{red}{0{,}0}, \textcolor{red}{1{,}0}]$ zu erlernen, die für einen Text $\mathbf{T}$ die Vorhersagewahrscheinlichkeit $P(Y = 1 \mid \mathbf{T})$ schätzt. Die erfolgreiche Lösung dieses Problems validiert einerseits die Qualität und Rauschfreiheit des aufgebauten Parallelkorpus (Themenblock 1) und bildet andererseits die architektonische Grundlage für die spätere Reward-Modellierung.
+
+\subsubsection{Modellarchitektur: Bidirektionales LSTM (BiLSTM)}
+\label{sec:bilstm_architektur}
+
+Als Modellarchitektur für die Komplexitätsklassifikation wird ein \textbf{Bidirektionales Long Short-Term Memory (BiLSTM)} \citep{hochreiter1997long, schuster1997bidirectional} eingesetzt. Rekurrente Netze mit Gating-Mechanismen eignen sich in besonderem Maße für die Modellierung sprachlicher Simplizität, da sie Wortabfolgen sequenziell verarbeiten und gleichzeitig syntaktische Langzeitabhängigkeiten über variable Textlängen hinweg aufrechterhalten können.
+
+Die Architektur gliedert sich in folgende Komponenten:
 \begin{itemize}
-    \item \textbf{[Zu erklären] Modellarchitektur:} Bidirektionales Long Short-Term Memory (BiLSTM) mit Word-Embedding-Layer, Dropout-Regularisierung und Klassifikationskopf (Linear + Sigmoid).
-    \item \textbf{[Zu erklären] Vergleichsbaselines:} Vanilla RNN, Standard-LSTM und vortrainierte Transformer-Klassifikatoren (GBERT).
-    \item \textbf{[Zu erklären] Granularitätsebenen:}
-    \begin{itemize}
-        \item \textit{Satz-Klassifikator:} Training und Inferenz auf isolierten Einzelsätzen.
-        \item \textit{Artikel-Klassifikator:} Dokumentenweites Training (bis 512 Tokens).
-        \item \textit{Majority Voting:} Aggregierte Dokumenten-Klassifikation durch Mehrheitsentscheid über alle Sätze eines Textes.
-    \end{itemize}
-    \item \textbf{[Zu erklären] In-Domain-Evaluation:} Leistungsvergleich anhand von Balanced Accuracy (BAcc) und F1-Score auf dem internen Test-Split.
+    \item \textbf{Tokenisierung \& Embedding:} Eingabetexte werden mit dem deutschen spaCy-Modell (\texttt{de\_core\_news\_sm}) tokenisiert. Seltene Wörter außerhalb des Trainingsvokabulars ($V \approx \textcolor{red}{20.000}$ bis $\textcolor{red}{25.000}$ Tokens) werden als \texttt{<unk>} maskiert. Eine Einbettungsschicht projiziert jedes Token in einen dichten Vektor $\mathbf{x}_t \in \mathbb{R}^{\textcolor{red}{128}}$.
+    \item \textbf{Bidirektionale Verarbeitung:} Zwei separate LSTM-Schichten (Hidden-Dimension $h = \textcolor{red}{128}$) verarbeiten die Sequenz simultan in Vorwärts- ($\overrightarrow{\mathbf{h}}_t$) und Rückwärtsrichtung ($\overleftarrow{\mathbf{h}}_t$). Durch Konkatenation des letzten Vorwärts- und ersten Rückwärtszustands entsteht eine globale Sequenzrepräsentation $\mathbf{h}_{\text{out}} \in \mathbb{R}^{\textcolor{red}{256}}$, welche den gesamten Textkontext bidirektional zusammenfasst.
+    \item \textbf{Regularisierung \& Klassifikationskopf:} Zur Vermeidung von Overfitting wird ein Dropout ($p = \textcolor{red}{0{,}4}$) angewendet. Ein linearer Klassifikationskopf mit nachgeschalteter Sigmoid-Aktivierung $\sigma(z)$ transformiert die Repräsentation in den skalaren Score $\hat{y} \in [\textcolor{red}{0{,}0}, \textcolor{red}{1{,}0}]$.
 \end{itemize}
-\end{tcolorbox}
+
+Das Modell wird mittels binärer Kreuzentropie (\textit{Binary Cross-Entropy Loss}, BCE) und dem AdamW-Optimierer \citep{loshchilov2019decoupled} trainiert (Lernrate $\eta = \textcolor{red}{1 \times 10^{-3}}$, Weight Decay $\lambda = \textcolor{red}{0{,}01}$, Batch Size $\textcolor{red}{32}$, Early Stopping nach $\textcolor{red}{7}$ Epochen ohne Validierungsverbesserung bei maximal $\textcolor{red}{30}$ Epochen).
+
+\subsubsection{Granularitätsebenen: Satz- vs. Artikel-Level vs. Majority Voting}
+\label{sec:granularitaetsebenen}
+
+Die Komplexitätsklassifikation kann auf unterschiedlichen Textebenen modelliert werden:
+\begin{enumerate}
+    \item \textbf{Satz-Klassifikator (Sentence-Level):} Training und Inferenz auf isolierten Einzelsätzen ($\sim \textcolor{red}{21.400}$ bis $\textcolor{red}{118.000}$ Sätze). Vorteil ist die große Menge an Trainingsinstanzen; Nachteil ist der fehlende Dokumentenkontext bei kurzen, nicht-differenzierenden Alltagssätzen (z.\,B. Begrüßungen).
+    \item \textbf{Artikel-Klassifikator (Article-Level):} Dokumentenweites Training auf zusammenhängenden Text-Chunks bis $\textcolor{red}{512}$ Tokens. Hierbei stehen dem Modell alle kumulativen Stilmerkmale über den gesamten Artikelverlauf zur Verfügung.
+    \item \textbf{Majority Voting (Aggregierte Dokumenten-Entscheidung):} Aggregation der satzweisen Vorhersagen eines Dokuments über einen Mehrheitsentscheid ($\ge \textcolor{red}{50\,\%}$ der Sätze als LS klassifiziert). Dies verbindet granulare Satzbewertungen mit statistischer Robustheit auf Dokumentenebene.
+\end{enumerate}
+
+\subsubsection{In-Domain-Evaluation \& Sweet-Spot-Ablation}
+\label{sec:in_domain_evaluation}
+
+Die Evaluierung der Klassifikationsmodelle erfolgte auf dem internen Test-Split des Master-Korpus. Tabelle~\ref{tab:sweet_spot_ablation_klassifikation} stellt die Klassifikationsgüte (Balanced Accuracy) über verschiedene Similarity-Filterungsbereiche (Abschnitt~\ref{sec:quality_assurance_sweet_spot}) auf Satz- und Artikelebene gegenüber.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Klassifikationsgüte (Balanced Accuracy) des BiLSTM in Abhängigkeit vom semantischen Similarity-Bereich und der Granularitätsebene.}
+\label{tab:sweet_spot_ablation_klassifikation}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\textbf{Similarity-Bereich} & \shortstack[r]{\textbf{Artikelpaare}\\\textbf{(Anzahl)}} & \shortstack[r]{\textbf{Sätze}\\\textbf{(balanciert)}} & \shortstack[r]{\textbf{Satz-Level}\\\textbf{BAcc}} & \shortstack[r]{\textbf{Artikel-Level}\\\textbf{BAcc}} \\
+\midrule
+$\textcolor{red}{0{,}60} \le \text{sim}_{\cos} \le \textcolor{red}{0{,}98}$ & $\textcolor{red}{1.474}$ & $\sim \textcolor{red}{29.700}$ & $\textcolor{red}{92{,}48\,\%}$ & $\textcolor{red}{95{,}93\,\%}$ \\
+$\textcolor{red}{0{,}70} \le \text{sim}_{\cos} \le \textcolor{red}{0{,}98}$ & $\textcolor{red}{1.362}$ & $\sim \textcolor{red}{27.700}$ & $\textcolor{red}{92{,}43\,\%}$ & $\textcolor{red}{97{,}30\,\%}$ \\
+$\mathbf{\textcolor{red}{0{,}80} \le \text{sim}_{\cos} \le \textcolor{red}{0{,}98}}$ & $\mathbf{\textcolor{red}{1.032}}$ & $\mathbf{\sim \textcolor{red}{21.400}}$ & $\mathbf{\textcolor{red}{92{,}99\,\%}}$ & $\mathbf{\textcolor{red}{\mathbf{99{,}03\,\%}}}$ \\
+$\textcolor{red}{0{,}90} \le \text{sim}_{\cos} \le \textcolor{red}{0{,}98}$ & $\textcolor{red}{213}$ & $\sim \textcolor{red}{4.800}$ & $\textcolor{red}{90{,}55\,\%}$ & $\textcolor{red}{98{,}44\,\%}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die Ergebnisse bestätigen den Bereich $\textcolor{red}{0{,}80} \le \text{sim}_{\cos} \le \textcolor{red}{0{,}98}$ als optimalen Sweet-Spot. Während das Modell auf Satzebene bei $\sim \textcolor{red}{93\,\%}$ Balanced Accuracy saturiert (bei F1-Scores von $\textcolor{red}{0{,}94}$ auf Gesamtkorpus-Ebene), erreicht die Klassifikation auf Artikelebene herausragende $\textcolor{red}{\mathbf{99{,}03\,\%}}$, da sich die linguistischen Simplizitätsmerkmale über das Gesamtdokument akkumulieren.
+
+\subsubsection{Grenzen der Klassifikation}
+\label{sec:grenzen_klassifikation_uebergang}
+
+Die Experimente zeigen, dass das \textbf{Klassifikationsproblem erfolgreich gelöst ist}: Das BiLSTM trennt alltagssprachliche Texte und Texte der Leichten Sprache mit über $\textcolor{red}{99\,\%}$ Genauigkeit.
+
+Für die nachfolgende Steuerung des generativen Übersetzungsmodells mittels \textbf{Reward-Guided Fine-Tuning} (DPO / RLHF in Abschnitt~\ref{sec:dpo_optimization}) weist ein reiner Klassifikator jedoch eine fundamentale Limitierung auf:
+\begin{itemize}
+    \item \textbf{Sigmoid-Sättigung \& Binäre Extrema:} Der Klassifikator treibt Vorhersagen durch die Sigmoid-Funktion in die Extremwerte ($\hat{y} \to \textcolor{red}{0{,}0}$ oder $\hat{y} \to \textcolor{red}{1{,}0}$).
+    \item \textbf{Fehlen kontinuierlicher Abstufungen:} Generative Modelle vollziehen Vereinfachungen in graduellen Teilschritten (z.\,B. Satzverkürzung bei partiellem Erhalt komplexer Begriffe). Ein binäres Signal liefert hierbei ein rigides \enquote{Alles-oder-Nichts}-Feedback ohne stetige Gradienten, wodurch eine feindifferenzierte Belohnung gradueller Vereinfachungsfortschritte unmöglich ist.
+    \item \textbf{Bedarf an kontinuierlichen Reward-Scores:} Für ein stabiles Alignment werden stufenlose Bewertungen $\lambda \in [\textcolor{red}{0{,}0}, \textcolor{red}{1{,}0}]$ benötigt, welche die gesamte Bandbreite zwischen Standardsprache und Leichter Sprache abbilden.
+\end{itemize}
+
+Aus diesem Grund muss die Modellierung von einer diskreten Klassifikation zu einer \textbf{kontinuierlichen Regressionsmetrik} (\textit{Continuous MixUp Regression}, Abschnitt~\ref{sec:mixup_regression}) erweitert werden. Zuvor wird im folgenden Abschnitt~\ref{sec:ood_bias_kontrolle} empirisch nachgewiesen, dass die Klassifikationsleistung des Modells auf echten linguistischen Merkmalen beruht und frei von Längen- oder Layout-Artefakten ist.
+
+
+
 
 \subsection{Out-of-Domain-Generalisierung \& Empirische Bias-Kontrolle}
 \label{sec:ood_bias_kontrolle}
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=\textbf{Zu erklären in diesem Abschnitt:},sharp corners,boxrule=0.8pt]
-\color{red!80!black}
+
+Die Validierung eines maschinell gelernten Klassifikationsmodells auf dem internen Test-Split des Trainingskorpus (In-Domain, Abschnitt~\ref{sec:in_domain_evaluation}) birgt stets das Risiko, dass das neuronale Netz nicht genuin linguistische Eigenschaften der Leichten Sprache erlernt hat, sondern sogenannte \textit{Spurious Correlations} oder domänenspezifische Layout-Artefakte als Klassifikations-Shortcuts ausnutzt \citep{geirhos2020shortcut}. Um die Robustheit und Übertragbarkeit der entwickelten Metrik zweifelsfrei nachzuweisen, wird in diesem Abschnitt eine zweistufige Validierungsstrategie verfolgt: Zunächst wird das Modell im Rahmen einer strikten \textbf{Out-of-Domain-Evaluation (Zero-Shot)} auf einem unabhängigen, externen Korpus evaluiert. Anschließend wird durch eine Reihe kontrollierter \textbf{Ablations- und Bias-Experimente} empirisch nachgewiesen, dass die Klassifikationsentscheidungen unabhängig von Dokumentenlänge, Padding-Strukturen und typografischen Layout-Merkmalen getroffen werden.
+
+\subsubsection{Out-of-Domain-Evaluation auf dem Lebenshilfe-Korpus}
+\label{sec:ood_lebenshilfe_eval}
+
+Für die Out-of-Domain-Validierung wird der in Abschnitt~\ref{sec:crawling_datenakquise} beschriebene Datensatz der \textit{Lebenshilfe Schleswig-Holstein e.\,V.} herangezogen. Dieser umfasst $49$ verifizierte, vollständige Artikelpaare ($98$ Einzeldokumente) aus juristischen, behördlichen und organisatorischen Kontexten (u.\,a. JVA-Hausordnungen, Satzungen von Behindertenbeiräten, Arbeitsverträge von Werkstätten für behinderte Menschen [WfbM] sowie ministerielle Erlasse). Sämtliche Texte wurden von professionellen Übersetzungsbüros übertragen und von zertifizierten Prüfgruppen aus Menschen mit Lernschwierigkeiten validiert.
+
+Da diese Dokumente zu keinem Zeitpunkt Teil des Web-Crawls waren und ein völlig eigenständiges Fachvokabular aufweisen, liegt ein striktes Zero-Shot-Evaluierungsszenario ohne jegliches Nachtrainieren vor (\textit{No Data Contamination}). Vokabularbegriffe außerhalb des auf dem Trainingskorpus gelernten Vokabulars ($V \approx 25.000$ Tokens) werden bei der Tokenisierung deterministisch auf das \texttt{<unk>}-Token abgebildet.
+
+Tabelle~\ref{tab:ood_lebenshilfe_ergebnisse} stellt die Klassifikationsleistungen des auf dem optimalen Sweet-Spot ($0{,}80 \le \text{sim}_{\cos} \le 0{,}98$) trainierten BiLSTM über die verschiedenen Granularitätsebenen gegenüber.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Zero-Shot Out-of-Domain-Klassifikationsgüte des BiLSTM auf dem Lebenshilfe-Testkorpus ($N = 49$ Artikelpaare / $98$ Dokumente).}
+\label{tab:ood_lebenshilfe_ergebnisse}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Evaluationsmetrik} & \shortstack[r]{\textbf{Artikel-Level}\\\textbf{Modell}} & \shortstack[r]{\textbf{Satz-Level}\\\textbf{(Satzebene)}} & \shortstack[r]{\textbf{Satz-Level}\\\textbf{(Majority Vote)}} \\
+\midrule
+Overall Accuracy & $90{,}82\,\%$ & $77{,}74\,\%$ & $\mathbf{97{,}96\,\%}$ \\
+Balanced Accuracy (BAcc) & $90{,}82\,\%$ & $79{,}71\,\%$ & $\mathbf{97{,}96\,\%}$ \\
+Perfect Pair Match (AS $\ne$ LS) & $81{,}63\,\%$ ($40/49$) & -- & $\mathbf{95{,}92\,\%}$ ($47/49$) \\
+Sensitivität LS (Recall Simple) & $93{,}88\,\%$ ($46/49$) & $76{,}02\,\%$ & $\mathbf{97{,}96\,\%}$ ($48/49$) \\
+Spezifität AS (Recall Normal) & $87{,}76\,\%$ ($43/49$) & $83{,}41\,\%$ & $\mathbf{97{,}96\,\%}$ ($48/49$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Die Ergebnisse belegen eine exzellente Generalisierungsfähigkeit des Modells auf ungesehene Domänen:
 \begin{itemize}
-    \item \textbf{[Zu erklären] Out-of-Domain-Validierung:} Evaluation auf einem unabhängigen, externen Testdatensatz der \textit{Lebenshilfe Schleswig-Holstein e.\,V.}
-    \item \textbf{[Zu erklären] Shortcut- und Bias-Kontrollen:}
-    \begin{itemize}
-        \item \textit{Dummy-Content-Test (Längen-Bias):} Maskierung aller Wörter durch identische Satzzeichen (`\texttt{.}') bei unveränderter Tokenanzahl zur Kontrolle von Längen-Shortcuts.
-        \item \textit{Layout-Bias-Test:} Vollständige Entfernung von Absätzen und Zeilenumbrüchen zur Überprüfung von typografischen Heuristiken.
-    \end{itemize}
+    \item \textbf{Robuste Einzeldokument-Klassifikation:} Das direkte Artikel-Level Modell erzielt eine Balanced Accuracy von $90{,}82\,\%$. Bei $40$ von $49$ Artikelpaaren ($81{,}63\,\%$) ordnet das Modell beide Dokumente fehlerfrei ihren jeweiligen Klassen zu.
+    \item \textbf{Überlegenheit des Majority Voting:} Während das Satz-Level Modell auf isolierten Einzelsätzen eine Balanced Accuracy von $79{,}71\,\%$ erreicht (bedingt durch kurze, nicht-differenzierende Übergangssätze wie Überschriften oder Begrüßungen), eliminiert die Aggregation per Mehrheitsentscheid über alle Sätze eines Dokuments stochastische Einzelfehler nahezu vollständig. Mit einer Balanced Accuracy von $\mathbf{97{,}96\,\%}$ und einer Pair-Match-Quote von $\mathbf{95{,}92\,\%}$ (lediglich $2$ von $98$ Dokumenten fehlerhaft klassifiziert) erweist sich das aggregierte Satzmodell als extrem robust.
+    \item \textbf{Kohärenz mit klassischen Lesbarkeitsmetriken:} Zur Plausibilisierung wurden die Dokumente parallel mit dem \textit{Flesch Reading Ease} (FRE) und der \textit{Wiener Sachtextformel} (WSTF) analysiert. Der mittlere FRE-Wert liegt für Leichte Sprache bei $66{,}40$ gegenüber $43{,}29$ für Alltagssprache ($\Delta = 23{,}11$ Punkte). Die WSTF weist für LS einen Mittelwert von $5{,}19$ (entspricht 5. Schulstufe) und für AS von $9{,}07$ aus. Die neuronale Klassifikation spiegelt somit die messbare linguistische Komplexitätsreduktion adäquat wider.
 \end{itemize}
-\end{tcolorbox}
+
+\subsubsection{Ausschluss von Längen-Biases (Shortcut Learning)}
+\label{sec:laengen_bias_kontrolle}
+
+Texte in Leichter Sprache weisen durch inhaltliche Reduktion und die Eliminierung von Nebensätzen häufig eine geringere absolute Zeichen- und Tokenanzahl auf als ihre alltagssprachlichen Ausgangstexte. Bei der sequentiellen Verarbeitung mit fester Maximallänge ($L_{\max} = 512$) und anschließendem Zero-Padding besteht daher das theoretische Risiko eines \textit{Length Bias}: Das neuronale Netz könnte gelernt haben, kurze Sequenzen oder das Auftreten von Padding-Nullen als primäres Signal für Leichte Sprache zu werten, anstatt syntaktische Strukturen zu analysieren.
+
+Zur empirischen Überprüfung und Falsifikation dieser Shortcut-Hypothese wurden drei kontrollierte Experimente durchgeführt:
+
+\paragraph{Experiment A: Korrelationsanalyse (Länge vs. Vorhersagekonfidenz)}
+Untersucht wurde der Zusammenhang zwischen der absoluten Tokenlänge $N_{\text{Tokens}}$ eines Textes und der vom Modell geschätzten Wahrscheinlichkeit $\hat{y} = P(Y = 1 \mid \mathbf{T})$. 
+\begin{itemize}
+    \item \textbf{Pearson-Korrelation:} $r = -0{,}0089$ ($p = 0{,}9398$, statistisch insignifikant).
+    \item \textbf{Spearman-Rangkorrelation:} $\rho = -0{,}1507$ ($p = 0{,}1998$, statistisch nicht signifikant).
+\end{itemize}
+Es existiert somit weder ein linearer noch ein monotoner Zusammenhang zwischen der Textlänge und der Modellentscheidung.
+
+\paragraph{Experiment B: Dummy-Content-Test (Konstanter Token-Ersatz)}
+Um den semantischen Gehalt vollständig zu isolieren, wurden sämtliche Wörter aller Testdokumente durch ein identisches, neutrales Token (den Punkt \enquote{\texttt{.}} bzw. den Artikel \enquote{\textit{der}}) ersetzt, während die originären Sequenzlängen und Padding-Strukturen exakt beibehalten wurden:
+
+\begin{equation}
+    \mathbf{T}_{\text{dummy}} = \big( \underbrace{t_{\text{dummy}}, t_{\text{dummy}}, \dots, t_{\text{dummy}}}_{N_{\text{Tokens}}}, \text{PAD}, \dots, \text{PAD} \big)
+\end{equation}
+
+Bei der Inferenz auf diesen Dummy-Texten bricht die Balanced Accuracy des Modells von $90{,}82\,\%$ auf exakt $\mathbf{50{,}00\,\%}$ zusammen. Das Modell klassifiziert mangels linguistischer Information stur alle Eingaben mit gleicher Baseline-Konfidenz, wodurch der F1-Score für Alltagssprache auf $0{,}00$ fällt. Dies beweist eindeutig, dass das Modell keine rein längen- oder paddingbasierten Entscheidungsgrenzen erlernt hat.
+
+\paragraph{Experiment C: Festlängen-Evaluation (Slicing)}
+Zur vollständigen Eliminierung jeglicher Längenvarianz wurden alle $98$ Testtexte auf eine identische feste Wortanzahl von $L_{\text{fix}} = 100$ bzw. $L_{\text{fix}} = 50$ Tokens abgeschnitten, sodass alle Eingabevektoren identische Längen- und Padding-Muster aufweisen:
+\begin{itemize}
+    \item \textbf{Genauigkeit bei $100$ Tokens:} $\mathbf{87{,}76\,\%}$ Balanced Accuracy (nahezu identisch zur Volllängenevaluation mit $90{,}82\,\%$).
+    \item \textbf{Genauigkeit bei $50$ Tokens:} $69{,}39\,\%$ Balanced Accuracy (Leistungsabfall bedingt durch unvollständigen Satz- und Phrasenkontext).
+\end{itemize}
+Selbst bei künstlich erzwungener Längenidentität differenziert das BiLSTM anhand der ersten $100$ Wörter trennscharf zwischen AS und LS.
+
+\subsubsection{Ausschluss von Layout- und Typografie-Biases}
+\label{sec:layout_bias_kontrolle}
+
+Ein weiterer potenzieller Shortcut besteht in Layout- und Formatierungsmerkmalen. Leichte Sprache ist typischerweise durch eine hohe Absatzfrequenz gekennzeichnet (oft ein Satz pro Zeile). 
+
+Zur Überprüfung eines möglichen Layout-Bias wurde eine Kontrollversion des Datensatzes evaluiert, aus der sämtliche Zeilenumbrüche, Tabulatoren und Absatzstrukturen vollständig entfernt wurden (\texttt{lebenshilfe\_dataset\_no\_paragraphs.json}). Die resultierenden Vorhersagewahrscheinlichkeiten und Klassifikationsentscheidungen waren bei allen $98$ Dokumenten zu $\mathbf{100\,\%}$ identisch mit den Originaltexten. Dieser Befund gründet sich auf der Vorverarbeitungspipeline: Der spaCy-Tokenizer filtert im Vorfeld alle Whitespace-Elemente (\texttt{is\_space}) heraus, wodurch dem neuronalen Netz ausschließlich eine flache Sequenz semantischer Wort-Embeddings zugeführt wird.
+
+Ein genuiner typografischer Signalträger sind hingegen Trennungszeichen bei Wortkomposita (Mediopunkte \enquote{·} oder Bindestriche wie in \enquote{\textit{Werkstatt-Vertrag}}). Da diese Zeichen im Regelwerk der Leichten Sprache explizit zur Verständlichkeitsförderung vorgeschrieben sind \citep{bredel2016leichte}, stellen sie keinen unerwünschten Bias dar, sondern bilden ein integrales morphologisches Differenzierungsmerkmal, das vom BiLSTM adäquat verarbeitet wird.
+
+\subsubsection{Synthese \& Überleitung zur kontinuierlichen Regression}
+\label{sec:synthese_ood_bias}
+
+Die durchgeführten Out-of-Domain- und Bias-Kontrollen liefern den methodischen Nachweis, dass der BiLSTM-Klassifikator auf Basis robuster, linguistischer Abstraktionen operiert. Mit einer OOD-Genauigkeit von über $97\,\%$ ist die \textbf{Klassifikation als binäres Entscheidungsproblem erfolgreich validiert}.
+
+Wie in Abschnitt~\ref{sec:grenzen_klassifikation_uebergang} dargelegt, reicht ein binärer Klassifikator für die spätere Steuerung generativer Modelle jedoch nicht aus, da er stetige Vereinfachungsfortschritte durch Sigmoid-Sättigung nivelliert. Im folgenden Abschnitt~\ref{sec:mixup_regression} wird daher die methodische Erweiterung zu einer stufenlosen, kontinuierlichen Regressionsmetrik (\textit{Continuous MixUp Regression}) entwickelt.
+
 
 \subsection{Continuous MixUp Regression}
 \label{sec:mixup_regression}
