@@ -9,7 +9,7 @@ set -e
 
 # Robust zum Repository-Root navigieren
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || cd "$SCRIPT_DIR/../../../.." && pwd)"
 cd "$REPO_ROOT"
 
 echo "========================================================================"
@@ -19,11 +19,11 @@ echo "========================================================================"
 
 echo ""
 echo "--- [1/2] KLASSIFIKATOR-EXPERIMENTE EINREICHEN ---"
-bash scripts/sbatch/experiments/classifier_length/run_all_classifier_experiments.sh
+bash scripts/sbatch/experiments/metric/classifier_length/run_all_classifier_experiments.sh
 
 echo ""
 echo "--- [2/2] REGRESSOR-EXPERIMENTE EINREICHEN ---"
-bash scripts/sbatch/experiments/regressor_length/run_all_regressor_experiments.sh
+bash scripts/sbatch/experiments/metric/regressor_length/run_all_regressor_experiments.sh
 
 echo ""
 echo "========================================================================"

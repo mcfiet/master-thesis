@@ -15,7 +15,7 @@ set -e
 
 
 mkdir -p results/logs/experiments/data_scaling
-SCRIPT_DIR="scripts/sbatch/experiments/data_scaling"
+SCRIPT_DIR="scripts/sbatch/experiments/metric/data_scaling"
 
 echo "=== Submitting Data Scaling Experiments ==="
 

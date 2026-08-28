@@ -14,7 +14,7 @@ set -e
 # ==============================================================================
 
 mkdir -p results/logs/experiments/similarity_threshold
-SCRIPT_DIR="scripts/sbatch/experiments/similarity_threshold"
+SCRIPT_DIR="scripts/sbatch/experiments/metric/similarity_threshold"
 
 echo "=== Submitting Similarity Threshold Experiments (MixUp + SFT) ==="
 

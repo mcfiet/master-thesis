@@ -7,4 +7,4 @@ Dieses Experiment untersucht die Generierung von kontinuierlichen Komplexitäts-
 * `regression_train_synthetic.py`: Trainiert ein BiLSTM-Regressionsmodell auf den synthetischen Textstufen.
 
 ## SBATCH-Ausführungsskripte:
-Befinden sich unter `scripts/sbatch/experiments/synthetic_regressor/`.
+Befinden sich unter `scripts/sbatch/experiments/metric/synthetic_regressor/`.

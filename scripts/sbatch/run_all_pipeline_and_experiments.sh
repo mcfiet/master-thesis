@@ -172,7 +172,7 @@ echo ""
 echo ">>> [2/4] Reiche Daten-, Metrik- & Korpus-Experimente ein..."
 
 # 2.1 Factuality Benchmark (unabhängig)
-EXP_FACT=$(sbatch --parsable scripts/sbatch/experiments/factuality_metric/1_run_factuality_metric_experiment.sh)
+EXP_FACT=$(sbatch --parsable scripts/sbatch/experiments/metric/factuality_metric/1_run_factuality_metric_experiment.sh)
 echo "  [Exp 01] Factuality & Hallucination Benchmark: Job ID $EXP_FACT"
 
 # 2.2 Glossar-Extraktion (benötigt Scraped Raw / Normalized Data)
@@ -181,20 +181,20 @@ EXP_GLOSS_2=$(submit_job scripts/sbatch/experiments/glossary/2_enrich_glossary.s
 echo "  [Exp 02] Glossar-Extraktion & Enrichment: Job ID $EXP_GLOSS_1 -> $EXP_GLOSS_2"
 
 # 2.3 Jina Kontextlängen-Ablation (benötigt Corpus Master)
-EXP_CTX=$(submit_job scripts/sbatch/experiments/context_length_ablation/1_run_context_length_ablation.sh $JOB05)
+EXP_CTX=$(submit_job scripts/sbatch/experiments/metric/context_length_ablation/1_run_context_length_ablation.sh $JOB05)
 echo "  [Exp 03] Jina Kontextlängen-Ablation: Job ID $EXP_CTX"
 
 # 2.4 Length Bias & Shortcut Analyse (benötigt Lebenshilfe, Corpus Master & Artikel-Klassifikator)
-EXP_LENBIAS=$(submit_job scripts/sbatch/experiments/length_bias/1_check_length_bias.sh $JOB04 $JOB05 $JOB08)
+EXP_LENBIAS=$(submit_job scripts/sbatch/experiments/metric/length_bias/1_check_length_bias.sh $JOB04 $JOB05 $JOB08)
 echo "  [Exp 04] Length-Bias & Shortcut Analyse: Job ID $EXP_LENBIAS"
 
 # 2.5 TextComplexityDE Validierung (benötigt MixUp Regressor)
-EXP_TCDE=$(submit_job scripts/sbatch/experiments/textcomplexityde/1_evaluate_textcomplexityde.sh $JOB09)
+EXP_TCDE=$(submit_job scripts/sbatch/experiments/metric/textcomplexityde/1_evaluate_textcomplexityde.sh $JOB09)
 echo "  [Exp 05] TextComplexityDE Validierung: Job ID $EXP_TCDE"
 
 # 2.6 RNN Baseline Modell (benötigt Corpus Master; Eval benötigt Lebenshilfe & MixUp-Modell)
-EXP_RNN_TR=$(submit_job scripts/sbatch/experiments/rnn_baseline/1_train_rnn_baseline.sh $JOB05)
-EXP_RNN_EV=$(submit_job scripts/sbatch/experiments/rnn_baseline/2_evaluate_rnn_baseline.sh $JOB04 $JOB09 $EXP_RNN_TR)
+EXP_RNN_TR=$(submit_job scripts/sbatch/experiments/metric/rnn_baseline/1_train_rnn_baseline.sh $JOB05)
+EXP_RNN_EV=$(submit_job scripts/sbatch/experiments/metric/rnn_baseline/2_evaluate_rnn_baseline.sh $JOB04 $JOB09 $EXP_RNN_TR)
 echo "  [Exp 06] RNN Baseline Regressor: Training $EXP_RNN_TR -> Eval $EXP_RNN_EV"
 
 # 2.7 SFT Data Scaling Grid (benötigt Corpus Master & MixUp Regressor)
@@ -203,19 +203,19 @@ EXP_SFTSCAL_EV=$(submit_job scripts/sbatch/experiments/sft_scaling/2_evaluate_sf
 echo "  [Exp 07] SFT Data Scaling Grid: Training $EXP_SFTSCAL_TR -> Eval $EXP_SFTSCAL_EV"
 
 # 2.8 MixUp Data Scaling Grid (benötigt Corpus Master & MixUp Vocab)
-EXP_DATASCAL_M=$(submit_job scripts/sbatch/experiments/data_scaling/1_scaling_mixtures_grid.sh $JOB05 $JOB09)
-EXP_DATASCAL_A=$(submit_job scripts/sbatch/experiments/data_scaling/2_scaling_articles_grid.sh $JOB05 $JOB09)
-EXP_DATASCAL_EV=$(submit_job scripts/sbatch/experiments/data_scaling/3_evaluate_scaling.sh $JOB04 $EXP_DATASCAL_M $EXP_DATASCAL_A)
+EXP_DATASCAL_M=$(submit_job scripts/sbatch/experiments/metric/data_scaling/1_scaling_mixtures_grid.sh $JOB05 $JOB09)
+EXP_DATASCAL_A=$(submit_job scripts/sbatch/experiments/metric/data_scaling/2_scaling_articles_grid.sh $JOB05 $JOB09)
+EXP_DATASCAL_EV=$(submit_job scripts/sbatch/experiments/metric/data_scaling/3_evaluate_scaling.sh $JOB04 $EXP_DATASCAL_M $EXP_DATASCAL_A)
 echo "  [Exp 08] MixUp Data Scaling: Mixtures $EXP_DATASCAL_M, Articles $EXP_DATASCAL_A -> Eval $EXP_DATASCAL_EV"
 
 # 2.9 Synthetischer Regressor Pipeline (7 Schritte)
-EXP_SYN_1=$(submit_job scripts/sbatch/experiments/synthetic_regressor/1_generate_synthetic_steps_lh.sh $JOB04)
-EXP_SYN_2=$(submit_job scripts/sbatch/experiments/synthetic_regressor/2_generate_synthetic_steps_corpus.sh $JOB05)
-EXP_SYN_3=$(submit_job scripts/sbatch/experiments/synthetic_regressor/3_train_synthetic_regressor.sh $EXP_SYN_1 $EXP_SYN_2)
-EXP_SYN_4=$(submit_job scripts/sbatch/experiments/synthetic_regressor/4_train_sft_synthetic.sh $EXP_SYN_3 $JOB05)
-EXP_SYN_5=$(submit_job scripts/sbatch/experiments/synthetic_regressor/5_generate_dpo_synthetic.sh $EXP_SYN_3 $EXP_SYN_4 $JOB06)
-EXP_SYN_6=$(submit_job scripts/sbatch/experiments/synthetic_regressor/6_train_dpo_synthetic.sh $EXP_SYN_4 $EXP_SYN_5)
-EXP_SYN_7=$(submit_job scripts/sbatch/experiments/synthetic_regressor/7_evaluate_synthetic_experiments.sh $JOB04 $EXP_SYN_3 $EXP_SYN_6)
+EXP_SYN_1=$(submit_job scripts/sbatch/experiments/metric/synthetic_regressor/1_generate_synthetic_steps_lh.sh $JOB04)
+EXP_SYN_2=$(submit_job scripts/sbatch/experiments/metric/synthetic_regressor/2_generate_synthetic_steps_corpus.sh $JOB05)
+EXP_SYN_3=$(submit_job scripts/sbatch/experiments/metric/synthetic_regressor/3_train_synthetic_regressor.sh $EXP_SYN_1 $EXP_SYN_2)
+EXP_SYN_4=$(submit_job scripts/sbatch/experiments/metric/synthetic_regressor/4_train_sft_synthetic.sh $EXP_SYN_3 $JOB05)
+EXP_SYN_5=$(submit_job scripts/sbatch/experiments/metric/synthetic_regressor/5_generate_dpo_synthetic.sh $EXP_SYN_3 $EXP_SYN_4 $JOB06)
+EXP_SYN_6=$(submit_job scripts/sbatch/experiments/metric/synthetic_regressor/6_train_dpo_synthetic.sh $EXP_SYN_4 $EXP_SYN_5)
+EXP_SYN_7=$(submit_job scripts/sbatch/experiments/metric/synthetic_regressor/7_evaluate_synthetic_experiments.sh $JOB04 $EXP_SYN_3 $EXP_SYN_6)
 echo "  [Exp 09] Synthetischer Regressor Pipeline: 7 Jobs eingereiht (Final Eval: Job ID $EXP_SYN_7)"
 
 # 2.10 Token Length Experiment (256, 512, 1024)

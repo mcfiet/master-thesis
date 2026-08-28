@@ -95,6 +95,6 @@ Die Evaluation erfolgt zweistufig für beide Modelltypen:
 * **MixUp Trainingsskript:** [`scripts/experiments/similarity_threshold/train_similarity_mixup.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/experiments/similarity_threshold/train_similarity_mixup.py)
 * **SFT Trainingsskript:** [`scripts/experiments/similarity_threshold/train_similarity_sft.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/experiments/similarity_threshold/train_similarity_sft.py)
 * **Konsolidierungs- & Evaluationsskript:** [`scripts/experiments/similarity_threshold/evaluate_all_similarity_thresholds.py`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/experiments/similarity_threshold/evaluate_all_similarity_thresholds.py)
-* **SLURM Batch-Runner:** [`scripts/sbatch/experiments/similarity_threshold/run_all_similarity_experiments.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/experiments/similarity_threshold/run_all_similarity_experiments.sh)
+* **SLURM Batch-Runner:** [`scripts/sbatch/experiments/metric/similarity_threshold/run_all_similarity_experiments.sh`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/experiments/metric/similarity_threshold/run_all_similarity_experiments.sh)
 * **Analyse-Notebook:** [`notebooks/experiments/similarity_threshold.ipynb`](file:///Users/fietescheel/Documents/Master%20Thesis/notebooks/experiments/similarity_threshold.ipynb)
 * **Ergebnisverzeichnis:** `results/experiments/similarity_threshold/`

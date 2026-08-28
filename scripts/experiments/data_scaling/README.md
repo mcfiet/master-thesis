@@ -39,5 +39,5 @@ notebooks/
 ## Ausführung auf dem HPC-Cluster
 
 ```bash
-bash scripts/sbatch/experiments/data_scaling/run_all_data_scaling.sh
+bash scripts/sbatch/experiments/metric/data_scaling/run_all_data_scaling.sh
 ```

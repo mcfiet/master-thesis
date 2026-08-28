@@ -4,7 +4,7 @@
 **Datum:** 23. August 2026  
 **Autor:** Fiete Scheel  
 **Notebook:** [`notebooks/research/metric/5_mixup_data_scaling_analysis.ipynb`](file:///Users/fietescheel/Documents/Master%20Thesis/notebooks/research/metric/5_mixup_data_scaling_analysis.ipynb)  
-**Skripte:** [`scripts/experiments/data_scaling/`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/experiments/data_scaling/), [`scripts/sbatch/experiments/data_scaling/`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/experiments/data_scaling/)
+**Skripte:** [`scripts/experiments/data_scaling/`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/experiments/data_scaling/), [`scripts/sbatch/experiments/metric/data_scaling/`](file:///Users/fietescheel/Documents/Master%20Thesis/scripts/sbatch/experiments/metric/data_scaling/)
 
 ---
 
