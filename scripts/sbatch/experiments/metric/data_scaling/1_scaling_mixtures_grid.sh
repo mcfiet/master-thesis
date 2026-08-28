@@ -20,7 +20,7 @@ fi
 
 
 echo "=== Starting MixUp Multiplier Scaling Grid (mixtures_per_pair) ==="
-mkdir -p results/logs/experiments/data_scaling results/plots/experiments/data_scaling results/evaluation
+mkdir -p results/logs/experiments/data_scaling results/plots/experiments/data_scaling results/evaluation data/data_scaling
 
 MIXTURE_VALUES=(2 5 10 20 40 80 160 320)
 
@@ -41,7 +41,7 @@ for M in "${MIXTURE_VALUES[@]}"; do
         --experiment_group "mixtures_scaling" \
         --experiment_name "${EXP_NAME}" \
         --output_dir results/experiments/data_scaling \
-        --vocab_save_path data/vocabs/mixup_vocab.json
+        --vocab_save_path data/data_scaling/mixup_vocab.json
 done
 
 echo "=== MixUp Multiplier Scaling Grid Completed ==="

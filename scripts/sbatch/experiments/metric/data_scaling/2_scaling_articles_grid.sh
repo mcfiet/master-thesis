@@ -20,7 +20,7 @@ fi
 
 
 echo "=== Starting Base Article Scaling Grid (train_fraction) ==="
-mkdir -p results/logs/experiments/data_scaling results/plots/experiments/data_scaling results/evaluation
+mkdir -p results/logs/experiments/data_scaling results/plots/experiments/data_scaling results/evaluation data/data_scaling
 
 FRACTION_VALUES=(0.10 0.25 0.50 0.75 1.00)
 
@@ -41,7 +41,7 @@ for F in "${FRACTION_VALUES[@]}"; do
         --experiment_group "pairs_scaling" \
         --experiment_name "${EXP_NAME}" \
         --output_dir results/experiments/data_scaling \
-        --vocab_save_path data/vocabs/mixup_vocab.json
+        --vocab_save_path data/data_scaling/mixup_vocab.json
 done
 
 echo "=== Base Article Scaling Grid Completed ==="

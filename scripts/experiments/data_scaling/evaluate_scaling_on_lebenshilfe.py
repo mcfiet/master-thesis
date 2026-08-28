@@ -58,7 +58,7 @@ class BiLSTMRegressor(nn.Module):
 def parse_args():
     parser = argparse.ArgumentParser(description="Evaluate Data Scaling models on Lebenshilfe dataset")
     parser.add_argument("--lh_dataset", default="data/lebenshilfe/lebenshilfe_dataset_clean.json", help="Path to LH dataset")
-    parser.add_argument("--vocab_path", default="data/vocabs/mixup_vocab.json", help="Path to vocabulary")
+    parser.add_argument("--vocab_path", default="data/data_scaling/mixup_vocab.json", help="Path to vocabulary")
     parser.add_argument("--models_dir", default="results/experiments/data_scaling", help="Directory containing .pt models")
     parser.add_argument("--output_csv", default="results/experiments/data_scaling/scaling_lh_summary.csv", help="Output summary CSV")
     parser.add_argument("--plots_dir", default="results/experiments/data_scaling/plots", help="Directory to save plots")
@@ -80,7 +80,12 @@ def main():
     nlp = spacy.blank("de")
 
     # Load Vocab
-    with open(args.vocab_path, "r", encoding="utf-8") as f:
+    vocab_path = args.vocab_path
+    if not os.path.exists(vocab_path) and os.path.exists("data/vocabs/mixup_vocab.json"):
+        print(f"Notice: {vocab_path} not found, falling back to data/vocabs/mixup_vocab.json")
+        vocab_path = "data/vocabs/mixup_vocab.json"
+
+    with open(vocab_path, "r", encoding="utf-8") as f:
         full_stoi = json.load(f)
 
     # Load LH Data

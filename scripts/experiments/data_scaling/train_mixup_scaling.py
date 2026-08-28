@@ -263,7 +263,7 @@ def parse_args():
     
     # Output Paths
     parser.add_argument('--output_dir', default="results/experiments/data_scaling", help="Directory to save artifacts")
-    parser.add_argument('--vocab_save_path', default="data/vocabs/mixup_vocab.json", help="Path to vocabulary json")
+    parser.add_argument('--vocab_save_path', default="data/data_scaling/mixup_vocab.json", help="Path to vocabulary json")
     parser.add_argument('--seed', type=int, default=42, help="Random seed")
     
     return parser.parse_args()
