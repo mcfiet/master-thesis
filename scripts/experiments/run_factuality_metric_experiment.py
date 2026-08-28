@@ -33,7 +33,7 @@ nlp = spacy.load("de_core_news_sm")
 print("Lade SBERT...")
 sbert_model = SentenceTransformer("jinaai/jina-embeddings-v2-base-de", device=DEVICE, trust_remote_code=True)
 if hasattr(sbert_model, "max_seq_length"):
-    sbert_model.max_seq_length = 8192
+    sbert_model.max_seq_length = 2048
 
 # 3. Lade NLI Cross-Encoder
 print("Lade NLI Cross-Encoder...")

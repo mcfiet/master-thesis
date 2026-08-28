@@ -172,9 +172,10 @@ def main():
             
     nlp.max_length = 2000000
     
-    print(f"Loading SentenceTransformer: {args.sbert_model}...")
-    sbert = SentenceTransformer(args.sbert_model, trust_remote_code=True)
-    sbert.max_seq_length = 8192
+    device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
+    print(f"Loading SentenceTransformer: {args.sbert_model} on device: {device}...")
+    sbert = SentenceTransformer(args.sbert_model, trust_remote_code=True, device=device)
+    sbert.max_seq_length = 2048
     
     json_files = sorted(glob.glob(os.path.join(input_dir, "*.json")))
     print(f"Found {len(json_files)} source files in '{input_dir}'.")
