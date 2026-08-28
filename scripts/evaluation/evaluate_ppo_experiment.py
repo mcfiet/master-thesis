@@ -491,13 +491,16 @@ def main():
     summary_rows = []
 
     # Pre-encode sources & references
-    src_embeddings = sbert.encode(sources, convert_to_tensor=True, batch_size=32)
-    ref_embeddings = sbert.encode(references, convert_to_tensor=True, batch_size=32)
+    with torch.inference_mode():
+        src_embeddings = sbert.encode(sources, convert_to_tensor=True, batch_size=4, show_progress_bar=True)
+        ref_embeddings = sbert.encode(references, convert_to_tensor=True, batch_size=4, show_progress_bar=True)
 
     for model_name, preds in translations_dict.items():
         print(f"Evaluating {model_name}...")
-        pred_embeddings = sbert.encode(preds, convert_to_tensor=True, batch_size=32)
-        sbert_sims = torch.diagonal(util.cos_sim(src_embeddings, pred_embeddings)).clamp(0.0, 1.0).cpu().numpy()
+        with torch.inference_mode():
+            pred_embeddings = sbert.encode(preds, convert_to_tensor=True, batch_size=4, show_progress_bar=True)
+            sbert_sims = torch.diagonal(util.cos_sim(src_embeddings, pred_embeddings)).clamp(0.0, 1.0).cpu().numpy()
+            del pred_embeddings
         bilstm_scores = get_bilstm_scores(preds)
 
         m_flesch, m_lix, m_wiener, m_bleu, m_rouge, m_comp, m_ratio = [], [], [], [], [], [], []
