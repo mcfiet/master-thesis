@@ -1,1 +1,174 @@
-\section{Anhang}
+\subsection{Ergänzende Evaluation auf TextComplexityDE (Naderi et al., 2019)}
+\label{sec:anhang_textcomplexityde}
+
+In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur Satzkomplexitäts-Evaluation auf dem \textit{TextComplexityDE}-Benchmark \citep{naderi2019textcomplexityde} ($N = 1.000$ deutsche Wikipedia-Sätze mit menschlichen Likert-Urteilen) dargestellt.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Gesamtevaluation aller Modellfamilien auf dem TextComplexityDE-Benchmark ($N = 1.000$ Sätze).}
+\label{tab:anhang_textcomplexityde_master}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+\textbf{Modell} & \textbf{Kategorie} & \textbf{Pearson $r$ (Simplicity)} & \textbf{Spearman $\rho$ (Rang)} & \textbf{Kendall $\tau$} & \textbf{MAE (normiert)} \\
+\midrule
+LIX Lesbarkeitsindex                & Baseline             & $0{,}657$ & $0{,}641$ & $0{,}467$ & $0{,}177$ \\
+BiLSTM Satz-Klassifikator          & Klassifikator (Satz) & $0{,}549$ & $\mathbf{0{,}648}$ & $0{,}468$ & $0{,}509$ \\
+BiLSTM MixUp Regressor ($512$)     & Regressor ($512$)    & $0{,}583$ & $0{,}615$ & $0{,}446$ & $0{,}471$ \\
+BiLSTM Artikel-Klassifikator ($512$)& Klassifikator ($512$)& $\mathbf{0{,}602}$ & $0{,}585$ & $0{,}417$ & $0{,}343$ \\
+BiLSTM MixUp Regressor ($256$)     & Regressor ($256$)    & $0{,}567$ & $0{,}509$ & $0{,}361$ & $0{,}477$ \\
+Wiener Sachtextformel              & Baseline             & $0{,}540$ & $0{,}519$ & $0{,}370$ & $0{,}164$ \\
+BiLSTM MixUp Regressor ($1.024$)   & Regressor ($1.024$)  & $0{,}566$ & $0{,}461$ & $0{,}323$ & $0{,}464$ \\
+Flesch Reading Ease                & Baseline             & $0{,}456$ & $0{,}456$ & $0{,}322$ & $0{,}174$ \\
+BiLSTM Artikel-Klassifikator ($256$)& Klassifikator ($256$)& $0{,}394$ & $0{,}227$ & $0{,}151$ & $0{,}576$ \\
+BiLSTM Artikel-Klassifikator ($1.024$)& Klassifikator ($1.024$)& $0{,}417$ & $0{,}193$ & $0{,}128$ & $0{,}557$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/textcomplexityde_correlation_barchart.png}
+\caption{Pearson- und Spearman-Korrelationen aller Modelle mit dem menschlichen Einfachheitsurteil auf TextComplexityDE ($N = 1.000$ Sätze).}
+\label{fig:anhang_textcomplexityde_barchart}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{images/textcomplexityde_scatter_all_models_grid.png}
+\caption{Streudiagramm-Grid aller 10 Modellvarianten gegen den kontinuierlichen menschlichen Einfachheits-Score auf TextComplexityDE inklusive Regressionsgeraden.}
+\label{fig:anhang_textcomplexityde_scatter}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{images/textcomplexityde_boxplots_all_models_grid.png}
+\caption{Boxplot-Verteilungen der Modell-Scores gruppiert nach den diskretisierten Likert-Komplexitätsstufen auf TextComplexityDE.}
+\label{fig:anhang_textcomplexityde_boxplots}
+\end{figure}
+
+\newpage
+\subsection{Ergänzende Evaluation auf dem MERLIN CEFR-Benchmark (Boyd et al., 2014)}
+\label{sec:anhang_merlin}
+
+In diesem Abschnitt sind die detaillierten statistischen Auswertungen zur Dokumenten- und Fließtextevaluation auf dem \textit{MERLIN}-Korpus \citep{boyd2014merlin} ($N = 1.033$ deutsche Volltexte mit offiziellen CEFR-Niveaustufen $A1$ bis $C2$) dokumentiert.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Gesamtevaluation aller Modellfamilien auf dem MERLIN CEFR-Benchmark ($N = 1.033$ Dokumente).}
+\label{tab:anhang_merlin_master}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+\textbf{Modell} & \textbf{Kategorie} & \textbf{Pearson $r$ (Simplicity)} & \textbf{Spearman $\rho$ (Rang)} & \textbf{Kendall $\tau$} & \textbf{MAE (normiert)} \\
+\midrule
+LIX Lesbarkeitsindex                & Baseline             & $\mathbf{0{,}632}$ & $\mathbf{0{,}656}$ & $0{,}515$ & $0{,}127$ \\
+Wiener Sachtextformel              & Baseline             & $0{,}584$ & $0{,}602$ & $0{,}463$ & $0{,}137$ \\
+Flesch Reading Ease                & Baseline             & $0{,}513$ & $0{,}543$ & $0{,}412$ & $0{,}144$ \\
+BiLSTM Artikel-Klassifikator ($512$)& Klassifikator ($512$)& $\mathbf{0{,}386}$ & $0{,}397$ & $0{,}296$ & $0{,}408$ \\
+BiLSTM MixUp Regressor ($512$)     & Regressor ($512$)    & $0{,}348$ & $0{,}352$ & $0{,}268$ & $0{,}346$ \\
+BiLSTM MixUp Regressor ($1.024$)   & Regressor ($1.024$)  & $0{,}327$ & $0{,}328$ & $0{,}251$ & $0{,}347$ \\
+BiLSTM MixUp Regressor ($256$)     & Regressor ($256$)    & $0{,}304$ & $0{,}296$ & $0{,}226$ & $0{,}341$ \\
+BiLSTM Satz-Klassifikator          & Klassifikator (Satz) & $0{,}285$ & $\mathbf{0{,}419}$ & $0{,}319$ & $0{,}483$ \\
+BiLSTM Artikel-Klassifikator ($256$)& Klassifikator ($256$)& $0{,}076$ & $0{,}518$ & $0{,}389$ & $0{,}566$ \\
+BiLSTM Artikel-Klassifikator ($1.024$)& Klassifikator ($1.024$)& $-0{,}049$ & $-0{,}078$ & $-0{,}058$ & $0{,}569$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Mittelwerte der vorhergesagten Modell-Scores über die 6 CEFR-Stufen im MERLIN-Korpus zur Überprüfung der Monotonie ($A1 \to C2$).}
+\label{tab:anhang_merlin_monotonie}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+\textbf{CEFR-Stufe} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($256$)}} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($512$)}} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($1.024$)}} & \shortstack{\textbf{Art.-Klass.}\\\textbf{($512$)}} & \shortstack{\textbf{Satz-Klass.}\\\textbf{(P(LS))}} & \shortstack{\textbf{Wiener}\\\textbf{Formel}} \\
+\midrule
+\textbf{A1} (Sehr einfach, $N=57$)   & $0{,}2957$ & $0{,}3353$ & $0{,}3368$ & $\mathbf{0{,}5042}$ & $0{,}3043$ & $-1{,}28$ \\
+\textbf{A2} (Einfach, $N=306$)       & $0{,}3302$ & $0{,}3356$ & $0{,}3596$ & $\mathbf{0{,}4419}$ & $0{,}2537$ & $-1{,}52$ \\
+\textbf{B1} (Mittelstufe, $N=331$)   & $0{,}2966$ & $0{,}2946$ & $0{,}3166$ & $\mathbf{0{,}3385}$ & $0{,}1624$ & $-2{,}38$ \\
+\textbf{B2} (Fortgeschritten, $N=293$)& $0{,}1944$ & $0{,}1762$ & $0{,}2017$ & $\mathbf{0{,}0955}$ & $0{,}0607$ & $-4{,}57$ \\
+\textbf{C1} (Fachsprache, $N=42$)    & $0{,}1241$ & $0{,}1011$ & $0{,}1055$ & $\mathbf{0{,}0730}$ & $0{,}0751$ & $-5{,}30$ \\
+\textbf{C2} (Muttersprachlich, $N=4$)& $0{,}0762$ & $0{,}0686$ & $0{,}0692$ & $\mathbf{0{,}0499}$ & $0{,}0334$ & $-5{,}24$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/merlin_correlation_barchart.png}
+\caption{Pearson- und Spearman-Rangkorrelationen aller Modelle auf dem MERLIN CEFR-Benchmark ($N = 1.033$ Volltexte).}
+\label{fig:anhang_merlin_barchart}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{images/merlin_scatter_all_models_grid.png}
+\caption{Streudiagramm-Grid aller 10 Modellvarianten gegen das kontinuierliche CEFR-Simplicity-Maß ($1{,}0 = \text{A1} \dots 0{,}0 = \text{C2}$) auf MERLIN inklusive Regressionsgeraden.}
+\label{fig:anhang_merlin_scatter}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{images/merlin_boxplots_all_models_grid.png}
+\caption{Monotonie-Prüfung aller Modellfamilien: Boxplots der vorhergesagten Scores über die 5 CEFR-Stufen ($A1, A2, B1, B2, C1$) auf MERLIN (weiße Punkte kennzeichnen den Mittelwert).}
+\label{fig:anhang_merlin_boxplots}
+\end{figure}
+
+\newpage
+\subsection{Ergänzende Evaluation der Klassifikationsmodelle (Längen- und Granularitätsvergleich)}
+\label{sec:anhang_klassifikatoren}
+
+In diesem Abschnitt sind die ergänzenden empirischen Visualisierungen zum Vergleich der binären Klassifikationsarchitekturen auf dem bereinigten \textit{Lebenshilfe}-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze) dokumentiert.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/classifier_kde_length_comparison.png}
+\caption{Vergleich der Dichteverteilungen (KDE) für Leichte Sprache (LS, grün) und Alltagssprache (AS, blau) über alle Klassifikationsmodi: (a) BiLSTM Satz-Klassifikator (Simple-Sentence-Ratio $r_{LS}$), (b) BiLSTM Artikel-Klassifikator ($256$ Tokens), (c) BiLSTM Artikel-Klassifikator ($512$ Tokens) und (d) BiLSTM Artikel-Klassifikator ($1.024$ Tokens). Man beachte die ausgeprägte Asymmetrie: Während Alltagssprache durch scharfe Peaks bei $0{,}0$ überkonfident separiert wird, bricht die Konfidenz für Leichte Sprache bei längeren Artikelkontexten stark ein.}
+\label{fig:anhang_classifier_kde}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/classifier_roc_pr_length_comparison.png}
+\caption{ROC- und Precision-Recall-Kurven der Klassifikationsmodelle auf dem Lebenshilfe-Goldstandard. Das Satzmodell mit Majority-Voting ($r_{LS}$) erzielt den höchsten AUC-Wert ($0{,}9985$) und übertrifft die direkten Artikelmodelle ($256$, $512$, $1.024$ Tokens) deutlich.}
+\label{fig:anhang_classifier_roc_pr}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{images/classifier_confusion_matrices.png}
+\caption{Konfusionsmatrizen und relative Performanzmaße der Klassifikatoren: (1) Satz-Modell auf Einzelsatzebene ($N = 6.901$ Sätze), (2) Satz-Modell aggregiert via Majority Voting auf Dokumentebene ($N = 74$ Dokumente), (3) Artikel-Modell auf Dokumentebene sowie (4) vergleichende Gütekriterien im Balkendiagramm.}
+\label{fig:anhang_classifier_confusion}
+\end{figure}
+
+\newpage
+\subsection{Ergänzende Evaluation der BiLSTM MixUp Regressoren (Längenvergleich \& Trajektorien)}
+\label{sec:anhang_regressoren_laengen}
+
+In diesem Abschnitt sind die ergänzenden grafischen Auswertungen zur Kontextlängen-Ablation der kontinuierlichen BiLSTM MixUp Regressoren ($256$, $512$ und $1.024$ Tokens) auf dem \textit{Lebenshilfe}-Goldstandard dargestellt.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/regressor_kde_length_comparison.png}
+\caption{KDE-Dichteverteilungen der BiLSTM MixUp Regressoren für Leichte Sprache (LS, grün) und Alltagssprache (AS, blau) über verschiedene Kontextlängen: (a) $256$ Tokens, (b) $512$ Tokens und (c) $1.024$ Tokens. Im Gegensatz zum binären Klassifikator weisen die Regressoren bei allen Längen wohlgeformte, breit separierte Verteilungen auf, wobei das $1.024$-Token-Modell die geringste Varianz und schärfste Trennung erzielt.}
+\label{fig:anhang_regressor_kde}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/regressor_roc_pr_length_comparison.png}
+\caption{ROC- und Precision-Recall-Kurven der BiLSTM MixUp Regressoren ($256$, $512$, $1.024$ Tokens) auf dem Lebenshilfe-Goldstandard. Alle drei Varianten erreichen herausragende Diskriminationswerte ($\text{ROC-AUC} \ge 0{,}998$, $\text{PR-AUC} \ge 0{,}997$), wobei die $1.024$-Token-Konfiguration mit $\text{ROC-AUC} = 0{,}9993$ dominiert.}
+\label{fig:anhang_regressor_roc_pr}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/regressor_pairwise_trajectories.png}
+\caption{Paarweises Profil der Regressions-Scores und Textlängen-Einfluss: (a) Direkte Gegenüberstellung der vorhergesagten Scores für alle $37$ parallelen Lebenshilfe-Artikelpaare ($\text{LS} > \text{AS}$ bei allen Paaren, $100\,\%$ Perfect Pair Match beim $1.024$-Modell) sowie (b) Korrelation zwischen Dokumentenlänge (Satzanzahl) und resultierendem Einfachheits-Score.}
+\label{fig:anhang_regressor_trajectories}
+\end{figure}

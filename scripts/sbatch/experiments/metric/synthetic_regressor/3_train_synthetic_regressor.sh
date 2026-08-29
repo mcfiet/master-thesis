@@ -26,4 +26,4 @@ srun python scripts/experiments/synthetic_regressor/regression_train_synthetic.p
     --model_save_path results/models/bilstm_synthetic_regression.pt \
     --vocab_save_path data/vocabs/synthetic_vocab.json \
     --epochs 15 \
-    --max_seq_len 256
+    --max_seq_len 1024

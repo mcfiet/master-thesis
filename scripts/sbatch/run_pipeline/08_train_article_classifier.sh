@@ -29,7 +29,7 @@ srun python scripts/modeling/binary_train_article_model.py \
     --epochs 30 \
     --hidden_dim 128 \
     --lr 0.001 \
-    --max_seq_len 512 \
+    --max_seq_len 256 \
     --max_sim 0.98 \
     --min_sent_len 3 \
     --min_sim 0.8 \

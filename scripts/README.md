@@ -24,9 +24,12 @@ scripts/
 │   ├── train_dpo.py
 │   └── train_sft.py
 ├── evaluation/                # Schritt 4: Metriken, Korpusanalysen & Modell-Benchmarks
-│   ├── evaluate_dpo_ladder_model.py
+│   ├── evaluate_all_models_benchmark.py
 │   ├── evaluate_article_model.py
+│   ├── evaluate_dpo_ladder_model.py
+│   ├── evaluate_merlin.py
 │   ├── evaluate_sentence_model.py
+│   ├── evaluate_textcomplexityde.py
 │   ├── measure_information_loss.py
 │   ├── measure_readability.py
 │   ├── measure_ttr.py

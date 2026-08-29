@@ -217,6 +217,84 @@
       \field{pages}{3302\bibrangedash 3311}
       \range{pages}{10}
     \endentry
+    \entry{boyd2014merlin}{article}{}{}
+      \name{author}{9}{}{%
+        {{un=0,uniquepart=base,hash=536eccdf07a1897181ba997c05a422d4}{%
+           family={Boyd},
+           familyi={B\bibinitperiod},
+           given={Adriane},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=86e6cd947e301d906cec97f3234fcc55}{%
+           family={Hana},
+           familyi={H\bibinitperiod},
+           given={Jirka},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4945d8853867cea6586fb2c81e77df33}{%
+           family={Nicolas},
+           familyi={N\bibinitperiod},
+           given={Lionel},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2f348b0f0a5d2bed7cffd60b87191fbd}{%
+           family={Meurers},
+           familyi={M\bibinitperiod},
+           given={Detmar},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6b043d8535911a56a9e08112936bd449}{%
+           family={Wisniewski},
+           familyi={W\bibinitperiod},
+           given={Katrin},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9a02de95e867fc1fb108d04b7da9b5ee}{%
+           family={Abel},
+           familyi={A\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9a76d364e61706879f9bebbd7f10da2e}{%
+           family={Schöne},
+           familyi={S\bibinitperiod},
+           given={Karin},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ade1d363b9d0a56bb60073401ebc2957}{%
+           family={Štindlová},
+           familyi={Š\bibinitperiod},
+           given={Barbora},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8b7e02c2ce659fe041eed0f575022fa7}{%
+           family={Vettori},
+           familyi={V\bibinitperiod},
+           given={Chiara},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d3200d8cb98311bc8fc8d722d3ee1f37}
+      \strng{fullhash}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{fullhashraw}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{bibnamehash}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{authorbibnamehash}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{authornamehash}{d3200d8cb98311bc8fc8d722d3ee1f37}
+      \strng{authorfullhash}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{authorfullhashraw}{ed20e3f8806d1454e592cd22361cc57a}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC 2014)}
+      \field{title}{The {MERLIN} Corpus: Learner Language and the {CEFR}}
+      \field{year}{2014}
+      \field{pages}{1281\bibrangedash 1288}
+      \range{pages}{8}
+    \endentry
     \entry{bredel2016leichte}{book}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=14a74b0c2417166f5999c2e823fa8e42}{%
@@ -758,6 +836,79 @@
       \field{pages}{74\bibrangedash 81}
       \range{pages}{8}
     \endentry
+    \entry{liu2020multilingual}{article}{}{}
+      \name{author}{8}{}{%
+        {{un=0,uniquepart=base,hash=94530daf7a9db4abe89cfb22935373eb}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yinhan},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3b2c5c469614e18daf4dc607b57e8131}{%
+           family={Gu},
+           familyi={G\bibinitperiod},
+           given={Jiatao},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=78a420900f50a8470ad085fb05231bf6}{%
+           family={Goyal},
+           familyi={G\bibinitperiod},
+           given={Naman},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=38c1b6cde89d710a72edcefc64b9e309}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xian},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=79caf76234e835df3dc38a785e0913e0}{%
+           family={Edunov},
+           familyi={E\bibinitperiod},
+           given={Sergey},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=48c4948c609cf46c9b488f9abb83441d}{%
+           family={Ghazvininejad},
+           familyi={G\bibinitperiod},
+           given={Marjan},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c97f53fdeeb04c28de19e3324cb4bc0a}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1dbd3a5b42828fb2cebd7786488ba425}{%
+           family={Zettlemoyer},
+           familyi={Z\bibinitperiod},
+           given={Luke},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{bbac34a28b7aba5cd543f7c72e0d987d}
+      \strng{fullhash}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{fullhashraw}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{bibnamehash}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{authorbibnamehash}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{authornamehash}{bbac34a28b7aba5cd543f7c72e0d987d}
+      \strng{authorfullhash}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{authorfullhashraw}{76b6ea0848f4e18a5be68fc65017b00a}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transactions of the Association for Computational Linguistics}
+      \field{title}{Multilingual Denoising Pre-training for Neural Machine Translation}
+      \field{volume}{8}
+      \field{year}{2020}
+      \field{pages}{726\bibrangedash 742}
+      \range{pages}{17}
+    \endentry
     \entry{loshchilov2019decoupled}{article}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=1241b8181104f1917578d4c7f9b323b6}{%
@@ -864,6 +1015,54 @@
       \field{journaltitle}{arXiv preprint arXiv:2306.03189}
       \field{title}{Easy-to-Read in Germany: A Survey on its Current State and Available Resources}
       \field{year}{2023}
+    \endentry
+    \entry{naderi2019textcomplexityde}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=1d78e3f0ed4f981fa415bb4298ca102c}{%
+           family={Naderi},
+           familyi={N\bibinitperiod},
+           given={Babak},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=49a96e03f0ec12211b5430f57075b39d}{%
+           family={Mohtaj},
+           familyi={M\bibinitperiod},
+           given={Sahar},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=df528fb18b29aa5b02868fd3ffc62ba5}{%
+           family={Ensikat},
+           familyi={E\bibinitperiod},
+           given={Kaspar},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5b09b0cd967e3a5b8296ad319d92fbee}{%
+           family={Möller},
+           familyi={M\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8a484d4b885368aacc5f32ee291c08d3}
+      \strng{fullhash}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{fullhashraw}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{bibnamehash}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{authorbibnamehash}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{authornamehash}{8a484d4b885368aacc5f32ee291c08d3}
+      \strng{authorfullhash}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{authorfullhashraw}{6774e54f07a4ffe4910440a65369a8fb}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 15th Conference on Natural Language Processing (KONVENS 2019)}
+      \field{title}{{TextComplexityDE}: A Dataset for German Text Readability and Complexity}
+      \field{year}{2019}
+      \field{pages}{202\bibrangedash 211}
+      \range{pages}{10}
     \endentry
     \entry{papineni2002bleu}{article}{}{}
       \name{author}{4}{}{%
@@ -1703,6 +1902,84 @@
       \field{pages}{3302\bibrangedash 3311}
       \range{pages}{10}
     \endentry
+    \entry{boyd2014merlin}{article}{}{}
+      \name{author}{9}{}{%
+        {{un=0,uniquepart=base,hash=536eccdf07a1897181ba997c05a422d4}{%
+           family={Boyd},
+           familyi={B\bibinitperiod},
+           given={Adriane},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=86e6cd947e301d906cec97f3234fcc55}{%
+           family={Hana},
+           familyi={H\bibinitperiod},
+           given={Jirka},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4945d8853867cea6586fb2c81e77df33}{%
+           family={Nicolas},
+           familyi={N\bibinitperiod},
+           given={Lionel},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2f348b0f0a5d2bed7cffd60b87191fbd}{%
+           family={Meurers},
+           familyi={M\bibinitperiod},
+           given={Detmar},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6b043d8535911a56a9e08112936bd449}{%
+           family={Wisniewski},
+           familyi={W\bibinitperiod},
+           given={Katrin},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9a02de95e867fc1fb108d04b7da9b5ee}{%
+           family={Abel},
+           familyi={A\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9a76d364e61706879f9bebbd7f10da2e}{%
+           family={Schöne},
+           familyi={S\bibinitperiod},
+           given={Karin},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ade1d363b9d0a56bb60073401ebc2957}{%
+           family={Štindlová},
+           familyi={Š\bibinitperiod},
+           given={Barbora},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8b7e02c2ce659fe041eed0f575022fa7}{%
+           family={Vettori},
+           familyi={V\bibinitperiod},
+           given={Chiara},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d3200d8cb98311bc8fc8d722d3ee1f37}
+      \strng{fullhash}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{fullhashraw}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{bibnamehash}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{authorbibnamehash}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{authornamehash}{d3200d8cb98311bc8fc8d722d3ee1f37}
+      \strng{authorfullhash}{ed20e3f8806d1454e592cd22361cc57a}
+      \strng{authorfullhashraw}{ed20e3f8806d1454e592cd22361cc57a}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC 2014)}
+      \field{title}{The {MERLIN} Corpus: Learner Language and the {CEFR}}
+      \field{year}{2014}
+      \field{pages}{1281\bibrangedash 1288}
+      \range{pages}{8}
+    \endentry
     \entry{bredel2016leichte}{book}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=14a74b0c2417166f5999c2e823fa8e42}{%
@@ -2244,6 +2521,79 @@
       \field{pages}{74\bibrangedash 81}
       \range{pages}{8}
     \endentry
+    \entry{liu2020multilingual}{article}{}{}
+      \name{author}{8}{}{%
+        {{un=0,uniquepart=base,hash=94530daf7a9db4abe89cfb22935373eb}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yinhan},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3b2c5c469614e18daf4dc607b57e8131}{%
+           family={Gu},
+           familyi={G\bibinitperiod},
+           given={Jiatao},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=78a420900f50a8470ad085fb05231bf6}{%
+           family={Goyal},
+           familyi={G\bibinitperiod},
+           given={Naman},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=38c1b6cde89d710a72edcefc64b9e309}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xian},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=79caf76234e835df3dc38a785e0913e0}{%
+           family={Edunov},
+           familyi={E\bibinitperiod},
+           given={Sergey},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=48c4948c609cf46c9b488f9abb83441d}{%
+           family={Ghazvininejad},
+           familyi={G\bibinitperiod},
+           given={Marjan},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c97f53fdeeb04c28de19e3324cb4bc0a}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1dbd3a5b42828fb2cebd7786488ba425}{%
+           family={Zettlemoyer},
+           familyi={Z\bibinitperiod},
+           given={Luke},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{bbac34a28b7aba5cd543f7c72e0d987d}
+      \strng{fullhash}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{fullhashraw}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{bibnamehash}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{authorbibnamehash}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{authornamehash}{bbac34a28b7aba5cd543f7c72e0d987d}
+      \strng{authorfullhash}{76b6ea0848f4e18a5be68fc65017b00a}
+      \strng{authorfullhashraw}{76b6ea0848f4e18a5be68fc65017b00a}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transactions of the Association for Computational Linguistics}
+      \field{title}{Multilingual Denoising Pre-training for Neural Machine Translation}
+      \field{volume}{8}
+      \field{year}{2020}
+      \field{pages}{726\bibrangedash 742}
+      \range{pages}{17}
+    \endentry
     \entry{loshchilov2019decoupled}{article}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=1241b8181104f1917578d4c7f9b323b6}{%
@@ -2350,6 +2700,54 @@
       \field{journaltitle}{arXiv preprint arXiv:2306.03189}
       \field{title}{Easy-to-Read in Germany: A Survey on its Current State and Available Resources}
       \field{year}{2023}
+    \endentry
+    \entry{naderi2019textcomplexityde}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=1d78e3f0ed4f981fa415bb4298ca102c}{%
+           family={Naderi},
+           familyi={N\bibinitperiod},
+           given={Babak},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=49a96e03f0ec12211b5430f57075b39d}{%
+           family={Mohtaj},
+           familyi={M\bibinitperiod},
+           given={Sahar},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=df528fb18b29aa5b02868fd3ffc62ba5}{%
+           family={Ensikat},
+           familyi={E\bibinitperiod},
+           given={Kaspar},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5b09b0cd967e3a5b8296ad319d92fbee}{%
+           family={Möller},
+           familyi={M\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8a484d4b885368aacc5f32ee291c08d3}
+      \strng{fullhash}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{fullhashraw}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{bibnamehash}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{authorbibnamehash}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{authornamehash}{8a484d4b885368aacc5f32ee291c08d3}
+      \strng{authorfullhash}{6774e54f07a4ffe4910440a65369a8fb}
+      \strng{authorfullhashraw}{6774e54f07a4ffe4910440a65369a8fb}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 15th Conference on Natural Language Processing (KONVENS 2019)}
+      \field{title}{{TextComplexityDE}: A Dataset for German Text Readability and Complexity}
+      \field{year}{2019}
+      \field{pages}{202\bibrangedash 211}
+      \range{pages}{10}
     \endentry
     \entry{papineni2002bleu}{article}{}{}
       \name{author}{4}{}{%

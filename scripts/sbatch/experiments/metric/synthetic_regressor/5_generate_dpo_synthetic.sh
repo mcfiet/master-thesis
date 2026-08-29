@@ -20,6 +20,8 @@ fi
 
 
 mkdir -p results/logs/experiments/synthetic_regressor results/plots/experiments/synthetic_regressor results/evaluation data/dpo
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
 srun python scripts/modeling/generate_dpo_dataset.py \
     --corpus_path "data/corpus/corpus_10kgnad_len512_as.json" \
     --sft_model_path "results/models/experiments/synthetic_regressor/sft" \
@@ -29,16 +31,16 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --max_total_candidates 12 \
     --repetition_penalty 1.35 \
     --no_repeat_ngram_size 3 \
-    --max_source_len 256 \
-    --max_target_len 256 \
-    --reward_max_seq_len 256 \
+    --max_source_len 1024 \
+    --max_target_len 1024 \
+    --reward_max_seq_len 1024 \
     --reward_model_path "results/models/bilstm_synthetic_regression.pt" \
     --reward_vocab_path "data/vocabs/synthetic_vocab.json" \
     --sbert_model_name "jinaai/jina-embeddings-v2-base-de" \
     --w_style 0.5 \
     --w_sem 0.5 \
     --min_score_margin 0.05 \
-    --batch_size 16 \
+    --batch_size 8 \
     --output_file "data/dpo/dpo_preference_pairs_synthetic.jsonl" \
     --val_split_ratio 0.15 \
     --resume

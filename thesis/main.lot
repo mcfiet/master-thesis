@@ -4,3 +4,8 @@
 \contentsline {table}{\numberline {3}{\ignorespaces Übersicht der quantitativen Korpusstatistiken des bereinigten Master-Datensatzes ($N=830$).}}{31}{table.caption.5}%
 \contentsline {table}{\numberline {4}{\ignorespaces Klassifikationsgüte (Balanced Accuracy) des BiLSTM in Abhängigkeit vom semantischen Similarity-Bereich und der Granularitätsebene.}}{42}{table.caption.14}%
 \contentsline {table}{\numberline {5}{\ignorespaces Zero-Shot Out-of-Domain-Klassifikationsgüte des BiLSTM auf dem Lebenshilfe-Testkorpus ($N = 49$ Artikelpaare / $98$ Dokumente).}}{44}{table.caption.15}%
+\contentsline {table}{\numberline {6}{\ignorespaces Benchmark der Klassifikationsmodelle über Granularitätsebenen und Sequenzlängen auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze).}}{47}{table.caption.19}%
+\contentsline {table}{\numberline {7}{\ignorespaces Längen-Benchmark der BiLSTM MixUp Regressoren auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}}{52}{table.caption.21}%
+\contentsline {table}{\numberline {8}{\ignorespaces Gesamtevaluation aller Modellfamilien auf dem TextComplexityDE-Benchmark ($N = 1.000$ Sätze).}}{76}{table.caption.30}%
+\contentsline {table}{\numberline {9}{\ignorespaces Gesamtevaluation aller Modellfamilien auf dem MERLIN CEFR-Benchmark ($N = 1.033$ Dokumente).}}{79}{table.caption.34}%
+\contentsline {table}{\numberline {10}{\ignorespaces Mittelwerte der vorhergesagten Modell-Scores über die 6 CEFR-Stufen im MERLIN-Korpus zur Überprüfung der Monotonie ($A1 \to C2$).}}{79}{table.caption.35}%

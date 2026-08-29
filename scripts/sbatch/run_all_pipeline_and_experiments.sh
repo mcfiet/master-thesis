@@ -37,9 +37,9 @@ echo "========================================================================"
 # 0. Verzeichnisstruktur sicherstellen
 # -----------------------------------------------------------------------------
 mkdir -p results/logs/run_pipeline
-mkdir -p results/logs/experiments/{benchmark,context_length_ablation,data_scaling,decoder_only,dpo_beta_sweep,factuality_metric,glossary,length_bias,loss_aggregation,metric_weights,ppo,rnn_baseline,rule_adherence,sft_scaling,synthetic_regressor,textcomplexityde,token_length}
+mkdir -p results/logs/experiments/{benchmark,context_length_ablation,data_scaling,decoder_only,dpo_beta_sweep,factuality_metric,glossary,length_bias,loss_aggregation,merlin,metric_weights,ppo,rnn_baseline,rule_adherence,sft_scaling,synthetic_regressor,textcomplexityde,token_length}
 mkdir -p results/plots/run_pipeline
-mkdir -p results/plots/experiments/{benchmark,context_length_ablation,decoder_only,dpo_beta_sweep,factuality_metric,glossary,length_bias,loss_aggregation,metric_weights,ppo,rnn_baseline,rule_adherence,sft_scaling,synthetic_regressor,textcomplexityde,token_length}
+mkdir -p results/plots/experiments/{benchmark,context_length_ablation,decoder_only,dpo_beta_sweep,factuality_metric,glossary,length_bias,loss_aggregation,merlin,metric_weights,ppo,rnn_baseline,rule_adherence,sft_scaling,synthetic_regressor,textcomplexityde,token_length}
 mkdir -p data/{corpus,lebenshilfe,analysis,vocabs,synthetic,dpo,metric_weights_exp,evaluation_sets}
 mkdir -p data/corpus/{1_aligned_urls,2_raw_scraped,3_content_extracted,4_normalized_clean}
 mkdir -p results/models/{sft,dpo,decoder_only,ppo,loss_aggregation_exp,experiments}
@@ -190,7 +190,11 @@ echo "  [Exp 04] Length-Bias & Shortcut Analyse: Job ID $EXP_LENBIAS"
 
 # 2.5 TextComplexityDE Validierung (benötigt MixUp Regressor)
 EXP_TCDE=$(submit_job scripts/sbatch/experiments/metric/textcomplexityde/1_evaluate_textcomplexityde.sh $JOB09)
-echo "  [Exp 05] TextComplexityDE Validierung: Job ID $EXP_TCDE"
+echo "  [Exp 05a] TextComplexityDE Validierung: Job ID $EXP_TCDE"
+
+# 2.5b MERLIN CEFR Validierung (benötigt MixUp Regressor)
+EXP_MERLIN=$(submit_job scripts/sbatch/experiments/metric/merlin/1_evaluate_merlin.sh $JOB09)
+echo "  [Exp 05b] MERLIN CEFR Validierung (Dokumentebene): Job ID $EXP_MERLIN"
 
 # 2.6 RNN Baseline Modell (benötigt Corpus Master; Eval benötigt Lebenshilfe & MixUp-Modell)
 EXP_RNN_TR=$(submit_job scripts/sbatch/experiments/metric/rnn_baseline/1_train_rnn_baseline.sh $JOB05)

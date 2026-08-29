@@ -21,6 +21,8 @@ Basierend auf der Analyse der Textpassage (u.a. Klaper et al., Battisti et al.) 
   - [Link (ACL Anthology - Verwandte Arbeit)](https://aclanthology.org/2021.gem-1.18/)
 - **Aumiller und Gertz [5] (Klexicon)**: Alignment auf Dokumentebene zwischen Wikipedia-Artikeln und dem Kinderlexikon *Klexikon* (2.898 Artikelpaare).
   - [Link (ACL Anthology)](https://aclanthology.org/2022.lrec-1.282/)
+- **Boyd et al. (MERLIN-Korpus)**: 1.033 deutsche Fließtexte auf Dokumentebene, manuell und offiziell mit 5 CEFR-Stufen ($A1, A2, B1, B2, C1, C2$) gelabelt.
+  - [Link (LREC 2014)](https://aclanthology.org/L14-1188/) | [Plattform](https://www.merlin-platform.eu/)
 
 ### 3. Wichtige Abgrenzungen (Nicht oder nur teilweise aligniert)
 - **Rios et al. [55] (20m)**: 18.305 Artikelpaare (News vs. Zusammenfassung), aber **nicht** auf Satzebene aligniert.
