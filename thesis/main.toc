@@ -15,76 +15,79 @@
 \contentsline {subsection}{\numberline {3.1}Verfügbare Datenbasis und Korpora (Themenblock 1)}{9}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Evaluierungsmetriken für die Vereinfachung (Themenblock 2)}{10}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Maschinelle Übersetzung und Optimierungsverfahren (Themenblock 3)}{12}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Themenblock 1: Datenbasis \& Korpus-Erstellung}{14}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Multi-Quellen-Crawling \& Datenakquise}{16}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Domänen- und Quellenabdeckung}{17}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Technische Extraktions- \& Verknüpfungsmechanismen}{18}{subsubsection.4.1.2}%
-\contentsline {subsubsection}{\numberline {4.1.3}Ergebnis der Datenakquise (Roh-Korpus)}{20}{subsubsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.2}Datenbereinigung \& Normalisierung}{21}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Web-Boilerplate-Bereinigung \& Tag-Punctuation-Guard}{22}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Typografische Normalisierung \& Listen-Transformation}{23}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Quantitative Korpusevaluation: Pipeline-Funnel \& Retention}{25}{subsubsection.4.2.3}%
-\contentsline {subsubsection}{\numberline {4.2.4}Empirische Fallstudien zur Bias- \& Halluzinations-Prävention}{26}{subsubsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.3}Quality Assurance \& Similarity Sweet-Spot}{28}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Long-Context-Vektorisierung mittels Jina Embeddings v2}{28}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Der Similarity Sweet-Spot: Filtration \& Grenzdefinition}{29}{subsubsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.4}Korpus-Statistiken \& Lexikalische Diversität}{30}{subsection.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.1}Quantitative Korpusmaße \& Quellcharakteristika}{31}{subsubsection.4.4.1}%
-\contentsline {subsubsection}{\numberline {4.4.2}Lexikalische Diversität: TTR vs. MATTR \& Längen-Bias}{32}{subsubsection.4.4.2}%
-\contentsline {subsubsection}{\numberline {4.4.3}Faktenerhalt vs. Faktentreue: Grenzen von NER als Metrik}{33}{subsubsection.4.4.3}%
-\contentsline {paragraph}{Empirische Befunde des NER-Vergleichs:}{34}{section*.8}%
-\contentsline {subsubsection}{\numberline {4.4.4}Regeleinhaltung nach BMAS-Richtlinien}{35}{subsubsection.4.4.4}%
-\contentsline {paragraph}{1. Satzlängen-Begrenzung (Regel BMAS S.\,20 / Syntax):}{35}{section*.10}%
-\contentsline {paragraph}{2. Genitiv-Vermeidung (Regel BMAS S.\,32 / Grammatik):}{35}{section*.11}%
-\contentsline {paragraph}{3. Passiv-Vermeidung \& Handlungsbezug (Regel BMAS S.\,30 / Grammatik):}{37}{section*.12}%
-\contentsline {paragraph}{4. Wiener Sachtextformel (WSTF):}{37}{section*.13}%
-\contentsline {subsubsection}{\numberline {4.4.5}Synthese der Korpuseigenschaften}{37}{subsubsection.4.4.5}%
-\contentsline {section}{\numberline {5}Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}{39}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Klassifikationsmodelle (BiLSTM auf Satz- und Artikelebene)}{39}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Motivation \& Formulierung des Klassifikationsproblems}{39}{subsubsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.2}Modellarchitektur: Bidirektionales LSTM (BiLSTM)}{40}{subsubsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.1.3}Granularitätsebenen: Satz- vs. Artikel-Level vs. Majority Voting}{41}{subsubsection.5.1.3}%
-\contentsline {subsubsection}{\numberline {5.1.4}In-Domain-Evaluation \& Sweet-Spot-Ablation}{41}{subsubsection.5.1.4}%
-\contentsline {subsubsection}{\numberline {5.1.5}Grenzen der Klassifikation}{42}{subsubsection.5.1.5}%
-\contentsline {subsection}{\numberline {5.2}Out-of-Domain-Generalisierung \& Empirische Bias-Kontrolle}{43}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Out-of-Domain-Evaluation auf dem Lebenshilfe-Korpus}{43}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Ausschluss von Längen-Biases (Shortcut Learning)}{45}{subsubsection.5.2.2}%
-\contentsline {paragraph}{Experiment A: Korrelationsanalyse (Länge vs. Vorhersagekonfidenz)}{45}{section*.16}%
-\contentsline {paragraph}{Experiment B: Dummy-Content-Test (Konstanter Token-Ersatz)}{45}{section*.17}%
-\contentsline {paragraph}{Experiment C: Festlängen-Evaluation (Slicing)}{46}{section*.18}%
-\contentsline {subsubsection}{\numberline {5.2.3}Ausschluss von Layout- und Typografie-Biases}{46}{subsubsection.5.2.3}%
-\contentsline {subsubsection}{\numberline {5.2.4}Ablationsstudie: Einfluss der Sequenzlänge und Granularität beim Klassifikator}{47}{subsubsection.5.2.4}%
-\contentsline {subsubsection}{\numberline {5.2.5}Synthese \& Überleitung zur kontinuierlichen Regression}{48}{subsubsection.5.2.5}%
-\contentsline {subsection}{\numberline {5.3}Continuous MixUp Regression}{50}{subsection.5.3}%
-\contentsline {paragraph}{Einfluss der Trainings- und Sampling-Strategien auf die Regressionsgüte}{50}{section*.20}%
-\contentsline {subsubsection}{\numberline {5.3.1}Ablationsstudie: Einfluss der Kontextlänge auf die MixUp-Regression}{51}{subsubsection.5.3.1}%
-\contentsline {paragraph}{Inverses Skalierungsverhalten: Warum dominiert beim Regressor das $1.024$-Token-Modell?}{52}{section*.22}%
-\contentsline {paragraph}{Systematische Überlegenheit und Trainingsstabilität des MixUp-Regressors gegenüber dem Klassifikator}{52}{section*.23}%
-\contentsline {subsection}{\numberline {5.4}Validierung der kontinuierlichen Abstufungsfähigkeit auf externen Benchmarks (TextComplexityDE \& MERLIN)}{54}{subsection.5.4}%
-\contentsline {subsubsection}{\numberline {5.4.1}Das fundamentale Dilemma: Diskrete Klassifikation vs. kontinuierlicher Reward}{54}{subsubsection.5.4.1}%
-\contentsline {subsubsection}{\numberline {5.4.2}Satzebene: Evaluation auf TextComplexityDE \& Analyse des Floor-Effekts}{55}{subsubsection.5.4.2}%
-\contentsline {subsubsection}{\numberline {5.4.3}Dokumentebene: Evaluation auf dem MERLIN CEFR-Benchmark}{56}{subsubsection.5.4.3}%
-\contentsline {subsubsection}{\numberline {5.4.4}Kritische Synthese: Validität des Zero-Shot-Transfers \& Fazit}{57}{subsubsection.5.4.4}%
-\contentsline {subsection}{\numberline {5.5}Evaluierung synthetischer Sprachstufen}{58}{subsection.5.5}%
-\contentsline {subsection}{\numberline {5.6}Synthese \& Modellauswahl für die generative Übersetzung (Themenblock 3)}{58}{subsection.5.6}%
-\contentsline {section}{\numberline {6}Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}{60}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Datenvorbereitung \& Trainings-Splits}{60}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Supervised Fine-Tuning (SFT)}{61}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Reward-Guided Optimization (RLHF / DPO \& PPO)}{62}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Mehrdimensionale Evaluierung \& Demonstrator-App}{63}{subsection.6.4}%
-\contentsline {section}{\numberline {7}Diskussion \& Gesamtevaluation}{64}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Inhaltssynthese der drei Themenblöcke}{64}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Stärken, Grenzen \& Systemrestriktionen}{64}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Beantwortung der Forschungsfragen}{64}{subsection.7.3}%
-\contentsline {section}{\numberline {8}Fazit \& Ausblick}{65}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Zusammenfassung der Kernergebnisse}{65}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Ausblick \& Zukünftige Forschungsarbeiten}{65}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Anhang}{66}{section.9}%
-\contentsline {section}{Glossar}{67}{section*.24}%
-\contentsline {section}{Abbildungsverzeichnis}{68}{section*.25}%
-\contentsline {section}{Tabellenverzeichnis}{71}{section*.27}%
-\contentsline {section}{Literaturverzeichnis}{72}{section*.29}%
+\contentsline {section}{\numberline {4}Themenblock 1: Datenbasis \& Korpus-Erstellung}{15}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Multi-Quellen-Crawling \& Datenakquise}{17}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Domänen- und Quellenabdeckung}{18}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Technische Extraktions- \& Verknüpfungsmechanismen}{19}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Ergebnis der Datenakquise (Roh-Korpus)}{21}{subsubsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.2}Datenbereinigung \& Normalisierung}{22}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Web-Boilerplate-Bereinigung \& Tag-Punctuation-Guard}{23}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Typografische Normalisierung \& Listen-Transformation}{24}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Quantitative Korpusevaluation: Pipeline-Funnel \& Retention}{26}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Empirische Fallstudien zur Bias- \& Halluzinations-Prävention}{27}{subsubsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.3}Quality Assurance \& Similarity Sweet-Spot}{29}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Long-Context-Vektorisierung mittels Jina Embeddings v2}{29}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Der Similarity Sweet-Spot: Filtration \& Grenzdefinition}{30}{subsubsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.4}Korpus-Statistiken \& Lexikalische Diversität}{31}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Quantitative Korpusmaße \& Quellcharakteristika}{32}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Lexikalische Diversität: TTR vs. MATTR \& Längen-Bias}{33}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Faktenerhalt vs. Faktentreue: Grenzen von NER als Metrik}{34}{subsubsection.4.4.3}%
+\contentsline {paragraph}{Empirische Befunde des NER-Vergleichs:}{35}{section*.8}%
+\contentsline {subsubsection}{\numberline {4.4.4}Regeleinhaltung nach BMAS-Richtlinien}{36}{subsubsection.4.4.4}%
+\contentsline {paragraph}{1. Satzlängen-Begrenzung (Regel BMAS S.\,20 / Syntax):}{36}{section*.10}%
+\contentsline {paragraph}{2. Genitiv-Vermeidung (Regel BMAS S.\,32 / Grammatik):}{36}{section*.11}%
+\contentsline {paragraph}{3. Passiv-Vermeidung \& Handlungsbezug (Regel BMAS S.\,30 / Grammatik):}{38}{section*.12}%
+\contentsline {paragraph}{4. Wiener Sachtextformel (WSTF):}{38}{section*.13}%
+\contentsline {subsubsection}{\numberline {4.4.5}Synthese der Korpuseigenschaften}{38}{subsubsection.4.4.5}%
+\contentsline {section}{\numberline {5}Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}{40}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Vorstufe: Binäre Klassifikation als Machbarkeitsnachweis \& Architektur-Baseline}{40}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Motivation, Lesbarkeitsmetriken \& BiLSTM-Architektur}{40}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Granularitäts-Ablation: Majority Voting vs. Dilution-Effekt}{42}{subsubsection.5.1.2}%
+\contentsline {paragraph}{Multi-Seed-Stabilität und Kapazitätsanalyse}{43}{section*.15}%
+\contentsline {paragraph}{Einordnung der traditionellen Baselines gegenüber den neuronalen Modellen}{43}{section*.16}%
+\contentsline {subsubsection}{\numberline {5.1.3}Ausschluss von Längen- und Layout-Biases (Kontrollexperimente)}{44}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}Synthese: Erlernbarkeit des Signals \& Überleitung zur MixUp-Regression}{45}{subsubsection.5.1.4}%
+\contentsline {subsection}{\numberline {5.2}Continuous MixUp Regression}{46}{subsection.5.2}%
+\contentsline {paragraph}{Einfluss der Trainings- und Sampling-Strategien auf die Regressionsgüte}{46}{section*.17}%
+\contentsline {subsubsection}{\numberline {5.2.1}Ablationsstudie: Einfluss der Kontextlänge auf die MixUp-Regression}{47}{subsubsection.5.2.1}%
+\contentsline {paragraph}{Inverses Skalierungsverhalten: Warum dominiert beim Regressor das $1.024$-Token-Modell?}{48}{section*.19}%
+\contentsline {paragraph}{Systematische Überlegenheit und Trainingsstabilität des MixUp-Regressors gegenüber dem Klassifikator}{48}{section*.20}%
+\contentsline {paragraph}{MixUp-Regression vs. Traditionelle Formel-Baselines}{49}{section*.21}%
+\contentsline {subsection}{\numberline {5.3}Validierung der kontinuierlichen Abstufungsfähigkeit auf externen Benchmarks (TextComplexityDE \& MERLIN)}{50}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Das fundamentale Dilemma: Diskrete Klassifikation vs. kontinuierlicher Reward}{50}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Satzebene: Evaluation auf TextComplexityDE \& Analyse des Floor-Effekts}{51}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Dokumentebene: Evaluation auf dem MERLIN CEFR-Benchmark}{52}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Kritische Synthese: Validität des Zero-Shot-Transfers \& Fazit}{53}{subsubsection.5.3.4}%
+\contentsline {subsection}{\numberline {5.4}Evaluierung synthetischer Sprachstufen (LLM-basierter Regressor)}{54}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Konzeption, Prompt-Design \& Generierung mit FlensGen-GPT}{54}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Empirische Ergebnisse \& Vergleich mit dem MixUp-Paradigma}{55}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Methodische Grenzen \& Begründung der Ausmusterung}{55}{subsubsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.5}Synthese \& Modellauswahl für die generative Übersetzung (Themenblock 3)}{56}{subsection.5.5}%
+\contentsline {paragraph}{Architektur-Ablation: Die Vanilla RNN Baseline}{56}{section*.22}%
+\contentsline {paragraph}{Synthese: Traditionelle Baselines vs. Neuronale Metrik-Modelle}{57}{section*.24}%
+\contentsline {paragraph}{Finale Modellauswahl für Themenblock 3}{57}{section*.25}%
+\contentsline {section}{\numberline {6}Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}{59}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Datenvorbereitung \& Trainings-Splits}{59}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Supervised Fine-Tuning (SFT)}{60}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Reward-Guided Optimization (RLHF / DPO \& PPO)}{61}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Mehrdimensionale Evaluierung \& Demonstrator-App}{62}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Diskussion \& Gesamtevaluation}{63}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Inhaltssynthese der drei Themenblöcke}{63}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Stärken, Grenzen \& Systemrestriktionen}{63}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Beantwortung der Forschungsfragen}{63}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Fazit \& Ausblick}{64}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Zusammenfassung der Kernergebnisse}{64}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Ausblick \& Zukünftige Forschungsarbeiten}{64}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Anhang}{65}{section.9}%
+\contentsline {section}{Glossar}{66}{section*.26}%
+\contentsline {section}{Abbildungsverzeichnis}{67}{section*.27}%
+\contentsline {section}{Tabellenverzeichnis}{70}{section*.29}%
+\contentsline {section}{Literaturverzeichnis}{72}{section*.31}%
 \contentsline {subsection}{\numberline {9.1}Ergänzende Evaluation auf TextComplexityDE (Naderi et al., 2019)}{76}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}Ergänzende Evaluation auf dem MERLIN CEFR-Benchmark (Boyd et al., 2014)}{79}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Ergänzende Evaluation der Klassifikationsmodelle (Längen- und Granularitätsvergleich)}{80}{subsection.9.3}%
-\contentsline {subsection}{\numberline {9.4}Ergänzende Evaluation der BiLSTM MixUp Regressoren (Längenvergleich \& Trajektorien)}{85}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.3}Ergänzende Evaluation der Klassifikationsmodelle (In-Domain Sweet-Spot \& Granularitätsvergleich)}{80}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Ergänzende Evaluation der MixUp Trainings- und Sampling-Strategien (Varianten A--D)}{86}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Ergänzende Evaluation der BiLSTM MixUp Regressoren (Längenvergleich \& Trajektorien)}{89}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}Ergänzende Evaluation des Synthetischen Regressors \& Prompt-Design}{91}{subsection.9.6}%
+\contentsline {subsubsection}{\numberline {9.6.1}Master-Benchmark auf dem Lebenshilfe-Goldstandard}{91}{subsubsection.9.6.1}%
+\contentsline {subsubsection}{\numberline {9.6.2}Prompt-Design zur Generierung synthetischer Zwischenstufen}{92}{subsubsection.9.6.2}%

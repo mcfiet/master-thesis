@@ -217,6 +217,39 @@
       \field{pages}{3302\bibrangedash 3311}
       \range{pages}{10}
     \endentry
+    \entry{bjornsson1968readability}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=68face6385473c9b399617058fff7ed3}{%
+           family={Björnsson},
+           familyi={B\bibinitperiod},
+           given={C.\bibnamedelimi H.},
+           giveni={C\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Stockholm}%
+      }
+      \list{publisher}{1}{%
+        {Liber}%
+      }
+      \strng{namehash}{68face6385473c9b399617058fff7ed3}
+      \strng{fullhash}{68face6385473c9b399617058fff7ed3}
+      \strng{fullhashraw}{68face6385473c9b399617058fff7ed3}
+      \strng{bibnamehash}{68face6385473c9b399617058fff7ed3}
+      \strng{authorbibnamehash}{68face6385473c9b399617058fff7ed3}
+      \strng{authornamehash}{68face6385473c9b399617058fff7ed3}
+      \strng{authorfullhash}{68face6385473c9b399617058fff7ed3}
+      \strng{authorfullhashraw}{68face6385473c9b399617058fff7ed3}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Läsbarhet}
+      \field{year}{1968}
+    \endentry
     \entry{boyd2014merlin}{article}{}{}
       \name{author}{9}{}{%
         {{un=0,uniquepart=base,hash=536eccdf07a1897181ba997c05a422d4}{%
@@ -493,74 +526,6 @@
       \field{year}{2019}
       \field{pages}{4171\bibrangedash 4186}
       \range{pages}{16}
-    \endentry
-    \entry{geirhos2020shortcut}{article}{}{}
-      \name{author}{7}{}{%
-        {{un=0,uniquepart=base,hash=f5e971834fd0fe06b8684443a90021c6}{%
-           family={Geirhos},
-           familyi={G\bibinitperiod},
-           given={Robert},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=6f99ba45e4077ee472c0e76123ab977a}{%
-           family={Jacobsen},
-           familyi={J\bibinitperiod},
-           given={Jörn-Henrik},
-           giveni={J\bibinithyphendelim H\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=b52892333d083e64c33b43b65a565bb3}{%
-           family={Michaelis},
-           familyi={M\bibinitperiod},
-           given={Claudio},
-           giveni={C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=77a44166b8233ae29b20f292779447e0}{%
-           family={Zemel},
-           familyi={Z\bibinitperiod},
-           given={Richard},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=8a7f657701e94ae3c82e5c742f585592}{%
-           family={Brendel},
-           familyi={B\bibinitperiod},
-           given={Wieland},
-           giveni={W\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=653ad8c2337d9615a186b743cc8d69a5}{%
-           family={Bethge},
-           familyi={B\bibinitperiod},
-           given={Matthias},
-           giveni={M\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=20afa03815f57165428b0c34ca89aafc}{%
-           family={Wichmann},
-           familyi={W\bibinitperiod},
-           given={Felix\bibnamedelima A.},
-           giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{156e4e1f6d61cfd3930e52380fc49ea5}
-      \strng{fullhash}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{fullhashraw}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{bibnamehash}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{authorbibnamehash}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{authornamehash}{156e4e1f6d61cfd3930e52380fc49ea5}
-      \strng{authorfullhash}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{authorfullhashraw}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \field{sortinit}{G}
-      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Nature Machine Intelligence}
-      \field{number}{11}
-      \field{title}{Shortcut Learning in Deep Neural Networks}
-      \field{volume}{2}
-      \field{year}{2020}
-      \field{pages}{665\bibrangedash 673}
-      \range{pages}{9}
     \endentry
     \entry{gunther2023jina}{article}{}{}
       \name{author}{4}{}{%
@@ -1902,6 +1867,39 @@
       \field{pages}{3302\bibrangedash 3311}
       \range{pages}{10}
     \endentry
+    \entry{bjornsson1968readability}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=68face6385473c9b399617058fff7ed3}{%
+           family={Björnsson},
+           familyi={B\bibinitperiod},
+           given={C.\bibnamedelimi H.},
+           giveni={C\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Stockholm}%
+      }
+      \list{publisher}{1}{%
+        {Liber}%
+      }
+      \strng{namehash}{68face6385473c9b399617058fff7ed3}
+      \strng{fullhash}{68face6385473c9b399617058fff7ed3}
+      \strng{fullhashraw}{68face6385473c9b399617058fff7ed3}
+      \strng{bibnamehash}{68face6385473c9b399617058fff7ed3}
+      \strng{authorbibnamehash}{68face6385473c9b399617058fff7ed3}
+      \strng{authornamehash}{68face6385473c9b399617058fff7ed3}
+      \strng{authorfullhash}{68face6385473c9b399617058fff7ed3}
+      \strng{authorfullhashraw}{68face6385473c9b399617058fff7ed3}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Läsbarhet}
+      \field{year}{1968}
+    \endentry
     \entry{boyd2014merlin}{article}{}{}
       \name{author}{9}{}{%
         {{un=0,uniquepart=base,hash=536eccdf07a1897181ba997c05a422d4}{%
@@ -2178,74 +2176,6 @@
       \field{year}{2019}
       \field{pages}{4171\bibrangedash 4186}
       \range{pages}{16}
-    \endentry
-    \entry{geirhos2020shortcut}{article}{}{}
-      \name{author}{7}{}{%
-        {{un=0,uniquepart=base,hash=f5e971834fd0fe06b8684443a90021c6}{%
-           family={Geirhos},
-           familyi={G\bibinitperiod},
-           given={Robert},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=6f99ba45e4077ee472c0e76123ab977a}{%
-           family={Jacobsen},
-           familyi={J\bibinitperiod},
-           given={Jörn-Henrik},
-           giveni={J\bibinithyphendelim H\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=b52892333d083e64c33b43b65a565bb3}{%
-           family={Michaelis},
-           familyi={M\bibinitperiod},
-           given={Claudio},
-           giveni={C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=77a44166b8233ae29b20f292779447e0}{%
-           family={Zemel},
-           familyi={Z\bibinitperiod},
-           given={Richard},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=8a7f657701e94ae3c82e5c742f585592}{%
-           family={Brendel},
-           familyi={B\bibinitperiod},
-           given={Wieland},
-           giveni={W\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=653ad8c2337d9615a186b743cc8d69a5}{%
-           family={Bethge},
-           familyi={B\bibinitperiod},
-           given={Matthias},
-           giveni={M\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=20afa03815f57165428b0c34ca89aafc}{%
-           family={Wichmann},
-           familyi={W\bibinitperiod},
-           given={Felix\bibnamedelima A.},
-           giveni={F\bibinitperiod\bibinitdelim A\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{156e4e1f6d61cfd3930e52380fc49ea5}
-      \strng{fullhash}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{fullhashraw}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{bibnamehash}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{authorbibnamehash}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{authornamehash}{156e4e1f6d61cfd3930e52380fc49ea5}
-      \strng{authorfullhash}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \strng{authorfullhashraw}{ea0bce88e973c406aa59fef12b6b1ab4}
-      \field{sortinit}{G}
-      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Nature Machine Intelligence}
-      \field{number}{11}
-      \field{title}{Shortcut Learning in Deep Neural Networks}
-      \field{volume}{2}
-      \field{year}{2020}
-      \field{pages}{665\bibrangedash 673}
-      \range{pages}{9}
     \endentry
     \entry{gunther2023jina}{article}{}{}
       \name{author}{4}{}{%
