@@ -1,0 +1,47 @@
+=== Starte Faktenkonsistenz- & Halluzinationserkennungs-Benchmark ===
+Fri Aug 28 20:30:45 UTC 2026
+Nutze Device: cuda
+Lade SpaCy...
+Lade SBERT...
+Lade NLI Cross-Encoder...
+Lade festes Benchmark-Testset aus data/evaluation_sets/benchmark_factuality_testset.json...
+Benchmark-Datensatz geladen mit 160 Stichproben:
+category
+1_Gold_Positives                    50
+2_Real_Model_Hallucinations         50
+3_Random_Shuffle_Negatives          30
+4_Targeted_Minimal_Perturbations    30
+Name: count, dtype: int64
+
+Starte Berechnung aller Metriken...
+1. Berechne SBERT Embeddings...
+2. Berechne NLI Entailment & Contradiction Scores...
+3. Berechne SpaCy NER Metriken...
+4. Berechne Numerische Konsistenz...
+Ergebnisse gespeichert in: results/evaluation/factual_consistency_metric_results.csv
+
+================================================================================
+DURCHSCHNITTSWERTE PRO TESTKLASSE
+================================================================================
+                                  sbert_score  nli_factuality  nli_p_contra  ner_jaccard  number_consistency  composite_factuality
+category                                                                                                                          
+1_Gold_Positives                       0.9161          0.4854        0.2349       0.1549              0.6824                0.3015
+2_Real_Model_Hallucinations            0.9035          0.4638        0.2041       0.1653              0.9200                0.3873
+3_Random_Shuffle_Negatives             0.5560          0.4796        0.2891       0.0008              0.2918                0.0775
+4_Targeted_Minimal_Perturbations       0.8121          0.4027        0.4091       0.6778              0.8167                0.2927
+Kategorie-Zusammenfassung gespeichert in: results/evaluation/factual_consistency_summary_by_category.csv
+
+================================================================================
+TRENNKRAFT & ROC-AUC (Unterscheidung: Gold Positives vs. Alle Negatives)
+================================================================================
+Metrik: sbert_score            | ROC-AUC: 0.7849 | Δ(Gold - Hallu): +0.0126 | Δ(Gold - Perturb): +0.1040
+Metrik: nli_factuality         | ROC-AUC: 0.5660 | Δ(Gold - Hallu): +0.0217 | Δ(Gold - Perturb): +0.0827
+Metrik: nli_p_contra           | ROC-AUC: 0.5435 | Δ(Gold - Hallu): +0.0308 | Δ(Gold - Perturb): -0.1742
+Metrik: ner_jaccard            | ROC-AUC: 0.5595 | Δ(Gold - Hallu): -0.0105 | Δ(Gold - Perturb): -0.5229
+Metrik: number_consistency     | ROC-AUC: 0.4121 | Δ(Gold - Hallu): -0.2376 | Δ(Gold - Perturb): -0.1343
+Metrik: composite_factuality   | ROC-AUC: 0.5109 | Δ(Gold - Hallu): -0.0858 | Δ(Gold - Perturb): +0.0087
+ROC-AUC Tabelle gespeichert in: results/evaluation/factual_consistency_roc_auc_table.csv
+
+Evaluierung erfolgreich abgeschlossen.
+=== Faktenkonsistenz-Benchmark erfolgreich abgeschlossen ===
+Fri Aug 28 20:31:24 UTC 2026

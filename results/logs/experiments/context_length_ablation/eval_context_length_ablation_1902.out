@@ -1,0 +1,24 @@
+=== Starte Jina Kontextlängen-Ablationsstudie (128 vs 256 vs 512 vs 1024 vs 8192) ===
+Fri Aug 28 20:31:25 UTC 2026
+=== Starte Kontextlängen-Ablation mit Modell: jinaai/jina-embeddings-v2-base-de ===
+Datensatz geladen: 860 Artikelpaare gefunden.
+Verwende Device: cuda
+Detaillierte Paar-Ergebnisse gespeichert in: data/analysis/jina_context_ablation.csv
+Aggregierte Zusammenfassung gespeichert in: results/evaluation/jina_context_ablation_summary.csv
+
+=== Übersicht der Mittelwerte nach Quelle ===
+                 source  sim_128_mean  sim_512_mean  sim_8192_mean  delta_8192_minus_128
+              apotheken      0.703973      0.810693       0.845319              0.141346
+behindertenbeauftragter      0.810217      0.850236       0.863331              0.053114
+              brandeins      0.645258      0.705752       0.705752              0.060495
+                hamburg      0.704001      0.795554       0.817791              0.113789
+               hannover      0.697899      0.803325       0.827264              0.129365
+                  koeln      0.705651      0.786846       0.834957              0.129305
+            main_taunus      0.779962      0.838726       0.839235              0.059272
+                    mdr      0.747767      0.841882       0.843464              0.095697
+          sozialpolitik      0.675712      0.750268       0.781896              0.106184
+              stuttgart      0.866709      0.882496       0.841474             -0.025235
+                    taz      0.580839      0.789589       0.828810              0.247971
+              wiesbaden      0.760376      0.786431       0.786979              0.026603
+=== Kontextlängen-Ablationsstudie erfolgreich abgeschlossen ===
+Fri Aug 28 20:34:24 UTC 2026

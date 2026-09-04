@@ -1,0 +1,2969 @@
+dataset,model,text_type,true_label,predicted_lambda
+in_domain_test,Variante A (Statisch),LS,1.0,0.9247843623161316
+in_domain_test,Variante A (Statisch),LS,1.0,0.9296093583106995
+in_domain_test,Variante A (Statisch),LS,1.0,0.9051626324653625
+in_domain_test,Variante A (Statisch),LS,1.0,0.9157010316848755
+in_domain_test,Variante A (Statisch),LS,1.0,0.9761402606964111
+in_domain_test,Variante A (Statisch),AS,0.0,0.0788242369890213
+in_domain_test,Variante A (Statisch),AS,0.0,0.01939280703663826
+in_domain_test,Variante A (Statisch),AS,0.0,0.025043724104762077
+in_domain_test,Variante A (Statisch),LS,1.0,0.7939948439598083
+in_domain_test,Variante A (Statisch),LS,1.0,0.6399891972541809
+in_domain_test,Variante A (Statisch),LS,1.0,0.7739575505256653
+in_domain_test,Variante A (Statisch),LS,1.0,0.49161040782928467
+in_domain_test,Variante A (Statisch),AS,0.0,0.01793508231639862
+in_domain_test,Variante A (Statisch),AS,0.0,0.018209535628557205
+in_domain_test,Variante A (Statisch),AS,0.0,0.10783325880765915
+in_domain_test,Variante A (Statisch),LS,1.0,0.8186160326004028
+in_domain_test,Variante A (Statisch),LS,1.0,0.664764940738678
+in_domain_test,Variante A (Statisch),AS,0.0,0.023406971246004105
+in_domain_test,Variante A (Statisch),LS,1.0,0.8946475982666016
+in_domain_test,Variante A (Statisch),LS,1.0,0.9644261002540588
+in_domain_test,Variante A (Statisch),LS,1.0,0.715775728225708
+in_domain_test,Variante A (Statisch),LS,1.0,0.7796880006790161
+in_domain_test,Variante A (Statisch),LS,1.0,0.04255115985870361
+in_domain_test,Variante A (Statisch),AS,0.0,0.1801014244556427
+in_domain_test,Variante A (Statisch),AS,0.0,0.08479323983192444
+in_domain_test,Variante A (Statisch),AS,0.0,0.2753293216228485
+in_domain_test,Variante A (Statisch),AS,0.0,0.019916167482733727
+in_domain_test,Variante A (Statisch),LS,1.0,0.9039504528045654
+in_domain_test,Variante A (Statisch),LS,1.0,0.6311853528022766
+in_domain_test,Variante A (Statisch),AS,0.0,0.07888463139533997
+in_domain_test,Variante A (Statisch),AS,0.0,0.030870236456394196
+in_domain_test,Variante A (Statisch),AS,0.0,0.018853776156902313
+in_domain_test,Variante A (Statisch),AS,0.0,0.017979919910430908
+in_domain_test,Variante A (Statisch),AS,0.0,0.023558171465992928
+in_domain_test,Variante A (Statisch),AS,0.0,0.03237488865852356
+in_domain_test,Variante A (Statisch),LS,1.0,0.8945745229721069
+in_domain_test,Variante A (Statisch),LS,1.0,0.260003924369812
+in_domain_test,Variante A (Statisch),AS,0.0,0.09232976287603378
+in_domain_test,Variante A (Statisch),AS,0.0,0.07317174971103668
+in_domain_test,Variante A (Statisch),AS,0.0,0.028295215219259262
+in_domain_test,Variante A (Statisch),AS,0.0,0.028231214731931686
+in_domain_test,Variante A (Statisch),LS,1.0,0.6305590271949768
+in_domain_test,Variante A (Statisch),LS,1.0,0.5218960046768188
+in_domain_test,Variante A (Statisch),LS,1.0,0.6777080297470093
+in_domain_test,Variante A (Statisch),AS,0.0,0.01696181483566761
+in_domain_test,Variante A (Statisch),AS,0.0,0.02688497118651867
+in_domain_test,Variante A (Statisch),AS,0.0,0.05096694082021713
+in_domain_test,Variante A (Statisch),AS,0.0,0.017444970086216927
+in_domain_test,Variante A (Statisch),LS,1.0,0.7108744978904724
+in_domain_test,Variante A (Statisch),LS,1.0,0.9518510103225708
+in_domain_test,Variante A (Statisch),LS,1.0,0.9110689163208008
+in_domain_test,Variante A (Statisch),LS,1.0,0.8881427049636841
+in_domain_test,Variante A (Statisch),LS,1.0,0.8704224824905396
+in_domain_test,Variante A (Statisch),LS,1.0,0.6288381814956665
+in_domain_test,Variante A (Statisch),AS,0.0,0.019242528825998306
+in_domain_test,Variante A (Statisch),AS,0.0,0.14432081580162048
+in_domain_test,Variante A (Statisch),AS,0.0,0.0938270315527916
+in_domain_test,Variante A (Statisch),AS,0.0,0.16879978775978088
+in_domain_test,Variante A (Statisch),AS,0.0,0.05149739608168602
+in_domain_test,Variante A (Statisch),AS,0.0,0.059164274483919144
+in_domain_test,Variante A (Statisch),AS,0.0,0.04384102672338486
+in_domain_test,Variante A (Statisch),AS,0.0,0.018240762874484062
+in_domain_test,Variante A (Statisch),LS,1.0,0.8633472323417664
+in_domain_test,Variante A (Statisch),LS,1.0,0.41069045662879944
+in_domain_test,Variante A (Statisch),AS,0.0,0.03624740615487099
+in_domain_test,Variante A (Statisch),AS,0.0,0.01822781376540661
+in_domain_test,Variante A (Statisch),LS,1.0,0.8890260457992554
+in_domain_test,Variante A (Statisch),LS,1.0,0.6063725352287292
+in_domain_test,Variante A (Statisch),LS,1.0,0.8521730899810791
+in_domain_test,Variante A (Statisch),LS,1.0,0.857224702835083
+in_domain_test,Variante A (Statisch),LS,1.0,0.8255729675292969
+in_domain_test,Variante A (Statisch),AS,0.0,0.02571055293083191
+in_domain_test,Variante A (Statisch),AS,0.0,0.019745146855711937
+in_domain_test,Variante A (Statisch),AS,0.0,0.020555812865495682
+in_domain_test,Variante A (Statisch),AS,0.0,0.07314716279506683
+in_domain_test,Variante A (Statisch),LS,1.0,0.9054989814758301
+in_domain_test,Variante A (Statisch),LS,1.0,0.10726836323738098
+in_domain_test,Variante A (Statisch),LS,1.0,0.3813134729862213
+in_domain_test,Variante A (Statisch),LS,1.0,0.3552936911582947
+in_domain_test,Variante A (Statisch),LS,1.0,0.9598402380943298
+in_domain_test,Variante A (Statisch),AS,0.0,0.02054026536643505
+in_domain_test,Variante A (Statisch),AS,0.0,0.02308119833469391
+in_domain_test,Variante A (Statisch),AS,0.0,0.04057591035962105
+in_domain_test,Variante A (Statisch),AS,0.0,0.025168299674987793
+in_domain_test,Variante A (Statisch),LS,1.0,0.6308023929595947
+in_domain_test,Variante A (Statisch),LS,1.0,0.8328357338905334
+in_domain_test,Variante A (Statisch),LS,1.0,0.9004836082458496
+in_domain_test,Variante A (Statisch),AS,0.0,0.03770315274596214
+in_domain_test,Variante A (Statisch),AS,0.0,0.01651393622159958
+in_domain_test,Variante A (Statisch),AS,0.0,0.19000916182994843
+in_domain_test,Variante A (Statisch),LS,1.0,0.5636084079742432
+in_domain_test,Variante A (Statisch),LS,1.0,0.5199921131134033
+in_domain_test,Variante A (Statisch),LS,1.0,0.47273239493370056
+in_domain_test,Variante A (Statisch),LS,1.0,0.4509097635746002
+in_domain_test,Variante A (Statisch),LS,1.0,0.6587254405021667
+in_domain_test,Variante A (Statisch),LS,1.0,0.7994672060012817
+in_domain_test,Variante A (Statisch),AS,0.0,0.06149769946932793
+in_domain_test,Variante A (Statisch),AS,0.0,0.0376497320830822
+in_domain_test,Variante A (Statisch),AS,0.0,0.02816327102482319
+in_domain_test,Variante A (Statisch),AS,0.0,0.024266649037599564
+in_domain_test,Variante A (Statisch),AS,0.0,0.048186589032411575
+in_domain_test,Variante A (Statisch),AS,0.0,0.07242451608181
+in_domain_test,Variante A (Statisch),AS,0.0,0.0478188693523407
+in_domain_test,Variante A (Statisch),AS,0.0,0.06015921011567116
+in_domain_test,Variante A (Statisch),AS,0.0,0.01813330128788948
+in_domain_test,Variante A (Statisch),AS,0.0,0.01974840648472309
+in_domain_test,Variante A (Statisch),AS,0.0,0.06761585921049118
+in_domain_test,Variante A (Statisch),AS,0.0,0.012236865237355232
+in_domain_test,Variante A (Statisch),AS,0.0,0.034286051988601685
+in_domain_test,Variante A (Statisch),AS,0.0,0.04880832880735397
+in_domain_test,Variante A (Statisch),AS,0.0,0.8073446750640869
+in_domain_test,Variante A (Statisch),LS,1.0,0.9066292643547058
+in_domain_test,Variante A (Statisch),LS,1.0,0.923628032207489
+in_domain_test,Variante A (Statisch),LS,1.0,0.8215909600257874
+in_domain_test,Variante A (Statisch),LS,1.0,0.7960455417633057
+in_domain_test,Variante A (Statisch),LS,1.0,0.8934871554374695
+in_domain_test,Variante A (Statisch),LS,1.0,0.9136532545089722
+in_domain_test,Variante A (Statisch),AS,0.0,0.17497216165065765
+in_domain_test,Variante A (Statisch),AS,0.0,0.21132448315620422
+in_domain_test,Variante A (Statisch),AS,0.0,0.07680352032184601
+in_domain_test,Variante A (Statisch),AS,0.0,0.3095169961452484
+in_domain_test,Variante A (Statisch),AS,0.0,0.01691218465566635
+in_domain_test,Variante A (Statisch),AS,0.0,0.03585299476981163
+in_domain_test,Variante A (Statisch),AS,0.0,0.03298865631222725
+in_domain_test,Variante A (Statisch),AS,0.0,0.13956594467163086
+in_domain_test,Variante A (Statisch),AS,0.0,0.016507595777511597
+in_domain_test,Variante A (Statisch),AS,0.0,0.07230032235383987
+in_domain_test,Variante A (Statisch),AS,0.0,0.07998292148113251
+in_domain_test,Variante A (Statisch),AS,0.0,0.016340993344783783
+in_domain_test,Variante A (Statisch),AS,0.0,0.036780934780836105
+in_domain_test,Variante A (Statisch),AS,0.0,0.025876030325889587
+in_domain_test,Variante A (Statisch),AS,0.0,0.014346635900437832
+in_domain_test,Variante A (Statisch),AS,0.0,0.015332371927797794
+in_domain_test,Variante A (Statisch),AS,0.0,0.034629859030246735
+in_domain_test,Variante A (Statisch),LS,1.0,0.9047957062721252
+in_domain_test,Variante A (Statisch),LS,1.0,0.08798263221979141
+in_domain_test,Variante A (Statisch),AS,0.0,0.03376888483762741
+in_domain_test,Variante A (Statisch),AS,0.0,0.040404126048088074
+in_domain_test,Variante A (Statisch),AS,0.0,0.03954620286822319
+in_domain_test,Variante A (Statisch),AS,0.0,0.11620625853538513
+in_domain_test,Variante A (Statisch),LS,1.0,0.759263277053833
+in_domain_test,Variante A (Statisch),LS,1.0,0.6415871977806091
+in_domain_test,Variante A (Statisch),LS,1.0,0.9133397340774536
+in_domain_test,Variante A (Statisch),LS,1.0,0.9182717204093933
+in_domain_test,Variante A (Statisch),LS,1.0,0.8095956444740295
+in_domain_test,Variante A (Statisch),LS,1.0,0.8912057876586914
+in_domain_test,Variante A (Statisch),LS,1.0,0.6831004023551941
+in_domain_test,Variante A (Statisch),LS,1.0,0.7420468926429749
+in_domain_test,Variante A (Statisch),AS,0.0,0.02314627356827259
+in_domain_test,Variante A (Statisch),AS,0.0,0.06237545236945152
+in_domain_test,Variante A (Statisch),AS,0.0,0.01700889877974987
+in_domain_test,Variante A (Statisch),AS,0.0,0.09201931208372116
+in_domain_test,Variante A (Statisch),AS,0.0,0.08835577219724655
+in_domain_test,Variante A (Statisch),AS,0.0,0.02127467282116413
+in_domain_test,Variante A (Statisch),AS,0.0,0.01995968073606491
+in_domain_test,Variante A (Statisch),AS,0.0,0.03675216808915138
+in_domain_test,Variante A (Statisch),AS,0.0,0.03441885858774185
+in_domain_test,Variante A (Statisch),AS,0.0,0.03635413944721222
+in_domain_test,Variante A (Statisch),AS,0.0,0.039893440902233124
+in_domain_test,Variante A (Statisch),AS,0.0,0.014670580625534058
+in_domain_test,Variante A (Statisch),AS,0.0,0.06469974666833878
+in_domain_test,Variante A (Statisch),AS,0.0,0.058167241513729095
+in_domain_test,Variante A (Statisch),AS,0.0,0.017463982105255127
+in_domain_test,Variante A (Statisch),AS,0.0,0.03686138242483139
+in_domain_test,Variante A (Statisch),LS,1.0,0.830636739730835
+in_domain_test,Variante A (Statisch),LS,1.0,0.6045929193496704
+in_domain_test,Variante A (Statisch),LS,1.0,0.8341631293296814
+in_domain_test,Variante A (Statisch),LS,1.0,0.7955821752548218
+in_domain_test,Variante A (Statisch),LS,1.0,0.9640851616859436
+in_domain_test,Variante A (Statisch),AS,0.0,0.2362544685602188
+in_domain_test,Variante A (Statisch),AS,0.0,0.14211851358413696
+in_domain_test,Variante A (Statisch),AS,0.0,0.016110537573695183
+in_domain_test,Variante A (Statisch),AS,0.0,0.10158880054950714
+in_domain_test,Variante A (Statisch),AS,0.0,0.03817795217037201
+in_domain_test,Variante A (Statisch),AS,0.0,0.03568055108189583
+in_domain_test,Variante A (Statisch),AS,0.0,0.02051926590502262
+in_domain_test,Variante A (Statisch),AS,0.0,0.015476741828024387
+in_domain_test,Variante A (Statisch),AS,0.0,0.12692619860172272
+in_domain_test,Variante A (Statisch),LS,1.0,0.8248053789138794
+in_domain_test,Variante A (Statisch),LS,1.0,0.8028402328491211
+in_domain_test,Variante A (Statisch),LS,1.0,0.9224281907081604
+in_domain_test,Variante A (Statisch),LS,1.0,0.8935451507568359
+in_domain_test,Variante A (Statisch),LS,1.0,0.885174572467804
+in_domain_test,Variante A (Statisch),LS,1.0,0.9587070345878601
+in_domain_test,Variante A (Statisch),LS,1.0,0.15508633852005005
+in_domain_test,Variante A (Statisch),LS,1.0,0.21951082348823547
+in_domain_test,Variante A (Statisch),LS,1.0,0.04528442397713661
+in_domain_test,Variante A (Statisch),LS,1.0,0.4337281584739685
+in_domain_test,Variante A (Statisch),AS,0.0,0.22203536331653595
+in_domain_test,Variante A (Statisch),AS,0.0,0.1073954626917839
+in_domain_test,Variante A (Statisch),AS,0.0,0.045756060630083084
+in_domain_test,Variante A (Statisch),AS,0.0,0.06822588294744492
+in_domain_test,Variante A (Statisch),AS,0.0,0.30532270669937134
+in_domain_test,Variante A (Statisch),AS,0.0,0.2241200953722
+in_domain_test,Variante A (Statisch),AS,0.0,0.21418119966983795
+in_domain_test,Variante A (Statisch),LS,1.0,0.9078711867332458
+in_domain_test,Variante A (Statisch),LS,1.0,0.936414897441864
+in_domain_test,Variante A (Statisch),LS,1.0,0.8940194845199585
+in_domain_test,Variante A (Statisch),LS,1.0,0.9210047721862793
+in_domain_test,Variante A (Statisch),LS,1.0,0.7222989797592163
+in_domain_test,Variante A (Statisch),LS,1.0,0.924473226070404
+in_domain_test,Variante A (Statisch),AS,0.0,0.03503910452127457
+in_domain_test,Variante A (Statisch),AS,0.0,0.1258927881717682
+in_domain_test,Variante A (Statisch),AS,0.0,0.020972630009055138
+in_domain_test,Variante A (Statisch),AS,0.0,0.11176542937755585
+in_domain_test,Variante A (Statisch),AS,0.0,0.02228420227766037
+in_domain_test,Variante A (Statisch),LS,1.0,0.9772608876228333
+in_domain_test,Variante A (Statisch),LS,1.0,0.7647026777267456
+in_domain_test,Variante A (Statisch),LS,1.0,0.8099972605705261
+in_domain_test,Variante A (Statisch),LS,1.0,0.8618610501289368
+in_domain_test,Variante A (Statisch),LS,1.0,0.969776451587677
+in_domain_test,Variante A (Statisch),LS,1.0,0.9439874887466431
+in_domain_test,Variante A (Statisch),AS,0.0,0.2867601215839386
+in_domain_test,Variante A (Statisch),AS,0.0,0.3999890983104706
+in_domain_test,Variante A (Statisch),AS,0.0,0.5368511080741882
+in_domain_test,Variante A (Statisch),AS,0.0,0.22650092840194702
+in_domain_test,Variante A (Statisch),AS,0.0,0.1815241277217865
+in_domain_test,Variante A (Statisch),AS,0.0,0.5554533004760742
+in_domain_test,Variante A (Statisch),LS,1.0,0.5374547839164734
+in_domain_test,Variante A (Statisch),LS,1.0,0.7418738007545471
+in_domain_test,Variante A (Statisch),LS,1.0,0.6125499606132507
+in_domain_test,Variante A (Statisch),LS,1.0,0.5797821879386902
+in_domain_test,Variante A (Statisch),LS,1.0,0.6902942657470703
+in_domain_test,Variante A (Statisch),LS,1.0,0.7340257167816162
+in_domain_test,Variante A (Statisch),AS,0.0,0.01905031129717827
+in_domain_test,Variante A (Statisch),AS,0.0,0.19502048194408417
+in_domain_test,Variante A (Statisch),AS,0.0,0.03832129016518593
+in_domain_test,Variante A (Statisch),AS,0.0,0.07593968510627747
+in_domain_test,Variante A (Statisch),AS,0.0,0.15093755722045898
+in_domain_test,Variante A (Statisch),LS,1.0,0.9758782982826233
+in_domain_test,Variante A (Statisch),LS,1.0,0.8733638525009155
+in_domain_test,Variante A (Statisch),LS,1.0,0.9295162558555603
+in_domain_test,Variante A (Statisch),LS,1.0,0.8925164937973022
+in_domain_test,Variante A (Statisch),LS,1.0,0.8614804148674011
+in_domain_test,Variante A (Statisch),AS,0.0,0.04620755836367607
+in_domain_test,Variante A (Statisch),AS,0.0,0.028307843953371048
+in_domain_test,Variante A (Statisch),AS,0.0,0.016735456883907318
+in_domain_test,Variante A (Statisch),AS,0.0,0.02363998256623745
+in_domain_test,Variante A (Statisch),AS,0.0,0.019621824845671654
+in_domain_test,Variante A (Statisch),AS,0.0,0.021623730659484863
+in_domain_test,Variante A (Statisch),LS,1.0,0.7638704776763916
+in_domain_test,Variante A (Statisch),LS,1.0,0.6385724544525146
+in_domain_test,Variante A (Statisch),LS,1.0,0.9310956001281738
+in_domain_test,Variante A (Statisch),LS,1.0,0.7988700866699219
+in_domain_test,Variante A (Statisch),LS,1.0,0.7270231246948242
+in_domain_test,Variante A (Statisch),LS,1.0,0.5930692553520203
+in_domain_test,Variante A (Statisch),LS,1.0,0.9823271036148071
+in_domain_test,Variante A (Statisch),AS,0.0,0.11152854561805725
+in_domain_test,Variante A (Statisch),AS,0.0,0.07744040340185165
+in_domain_test,Variante A (Statisch),AS,0.0,0.016984887421131134
+in_domain_test,Variante A (Statisch),AS,0.0,0.024605419486761093
+in_domain_test,Variante A (Statisch),AS,0.0,0.045887041836977005
+in_domain_test,Variante A (Statisch),AS,0.0,0.03680669143795967
+in_domain_test,Variante A (Statisch),AS,0.0,0.1456836760044098
+in_domain_test,Variante A (Statisch),AS,0.0,0.014702086336910725
+in_domain_test,Variante A (Statisch),AS,0.0,0.11578600108623505
+in_domain_test,Variante A (Statisch),AS,0.0,0.050833314657211304
+in_domain_test,Variante A (Statisch),AS,0.0,0.028219275176525116
+in_domain_test,Variante A (Statisch),AS,0.0,0.06420506536960602
+in_domain_test,Variante A (Statisch),AS,0.0,0.08466370403766632
+in_domain_test,Variante A (Statisch),AS,0.0,0.04381455108523369
+in_domain_test,Variante A (Statisch),AS,0.0,0.10252334922552109
+in_domain_test,Variante A (Statisch),AS,0.0,0.02778993919491768
+in_domain_test,Variante A (Statisch),AS,0.0,0.027868837118148804
+in_domain_test,Variante A (Statisch),AS,0.0,0.020285647362470627
+in_domain_test,Variante A (Statisch),AS,0.0,0.04692311957478523
+in_domain_test,Variante A (Statisch),AS,0.0,0.023086778819561005
+in_domain_test,Variante A (Statisch),AS,0.0,0.0342954657971859
+in_domain_test,Variante A (Statisch),AS,0.0,0.06296995282173157
+in_domain_test,Variante A (Statisch),AS,0.0,0.022774187847971916
+in_domain_test,Variante A (Statisch),AS,0.0,0.016876190900802612
+in_domain_test,Variante A (Statisch),AS,0.0,0.023911861702799797
+in_domain_test,Variante A (Statisch),AS,0.0,0.030475793406367302
+in_domain_test,Variante A (Statisch),AS,0.0,0.06130330637097359
+in_domain_test,Variante A (Statisch),AS,0.0,0.1420089304447174
+in_domain_test,Variante A (Statisch),LS,1.0,0.9253740310668945
+in_domain_test,Variante A (Statisch),AS,0.0,0.021260762587189674
+in_domain_test,Variante A (Statisch),AS,0.0,0.5944976806640625
+in_domain_test,Variante A (Statisch),AS,0.0,0.6460000872612
+in_domain_test,Variante A (Statisch),LS,1.0,0.8542221188545227
+in_domain_test,Variante A (Statisch),LS,1.0,0.9326767921447754
+in_domain_test,Variante A (Statisch),LS,1.0,0.9278509020805359
+in_domain_test,Variante A (Statisch),LS,1.0,0.5892472267150879
+in_domain_test,Variante A (Statisch),AS,0.0,0.07149604707956314
+in_domain_test,Variante A (Statisch),AS,0.0,0.04329274594783783
+in_domain_test,Variante A (Statisch),AS,0.0,0.024081474170088768
+in_domain_test,Variante A (Statisch),AS,0.0,0.05810576677322388
+in_domain_test,Variante A (Statisch),AS,0.0,0.03389308974146843
+in_domain_test,Variante A (Statisch),AS,0.0,0.03788240626454353
+in_domain_test,Variante A (Statisch),AS,0.0,0.022571342065930367
+in_domain_test,Variante A (Statisch),AS,0.0,0.07646375894546509
+in_domain_test,Variante A (Statisch),LS,1.0,0.4332667291164398
+in_domain_test,Variante A (Statisch),LS,1.0,0.7898553609848022
+in_domain_test,Variante A (Statisch),LS,1.0,0.8675772547721863
+in_domain_test,Variante A (Statisch),LS,1.0,0.6965852975845337
+in_domain_test,Variante A (Statisch),LS,1.0,0.6681386232376099
+in_domain_test,Variante A (Statisch),LS,1.0,0.6558849811553955
+in_domain_test,Variante A (Statisch),AS,0.0,0.07922691851854324
+in_domain_test,Variante A (Statisch),AS,0.0,0.04938278719782829
+in_domain_test,Variante A (Statisch),AS,0.0,0.054103605449199677
+in_domain_test,Variante A (Statisch),AS,0.0,0.034095194190740585
+in_domain_test,Variante A (Statisch),AS,0.0,0.04290076717734337
+in_domain_test,Variante A (Statisch),AS,0.0,0.02357594110071659
+in_domain_test,Variante A (Statisch),AS,0.0,0.04880310222506523
+in_domain_test,Variante A (Statisch),AS,0.0,0.024387968704104424
+in_domain_test,Variante A (Statisch),AS,0.0,0.16444508731365204
+in_domain_test,Variante A (Statisch),LS,1.0,0.9077295064926147
+in_domain_test,Variante A (Statisch),LS,1.0,0.783981442451477
+in_domain_test,Variante A (Statisch),LS,1.0,0.8831685781478882
+in_domain_test,Variante A (Statisch),LS,1.0,0.5003042221069336
+in_domain_test,Variante A (Statisch),AS,0.0,0.03854282572865486
+in_domain_test,Variante A (Statisch),AS,0.0,0.04274298995733261
+in_domain_test,Variante A (Statisch),LS,1.0,0.8950233459472656
+in_domain_test,Variante A (Statisch),LS,1.0,0.9584144949913025
+in_domain_test,Variante A (Statisch),LS,1.0,0.943608820438385
+in_domain_test,Variante A (Statisch),LS,1.0,0.978297770023346
+in_domain_test,Variante A (Statisch),AS,0.0,0.07727723568677902
+in_domain_test,Variante A (Statisch),AS,0.0,0.026222078129649162
+in_domain_test,Variante A (Statisch),LS,1.0,0.76317298412323
+in_domain_test,Variante A (Statisch),LS,1.0,0.8162966370582581
+in_domain_test,Variante A (Statisch),LS,1.0,0.8846156001091003
+in_domain_test,Variante A (Statisch),LS,1.0,0.42705264687538147
+in_domain_test,Variante A (Statisch),LS,1.0,0.577020525932312
+in_domain_test,Variante A (Statisch),LS,1.0,0.6244791150093079
+in_domain_test,Variante A (Statisch),LS,1.0,0.5370059609413147
+in_domain_test,Variante A (Statisch),LS,1.0,0.7503937482833862
+in_domain_test,Variante A (Statisch),LS,1.0,0.1987919807434082
+in_domain_test,Variante A (Statisch),AS,0.0,0.05792173370718956
+in_domain_test,Variante A (Statisch),AS,0.0,0.02146758884191513
+in_domain_test,Variante A (Statisch),AS,0.0,0.04871094971895218
+in_domain_test,Variante A (Statisch),AS,0.0,0.02572297304868698
+in_domain_test,Variante A (Statisch),AS,0.0,0.039953846484422684
+in_domain_test,Variante A (Statisch),AS,0.0,0.018030082806944847
+in_domain_test,Variante A (Statisch),AS,0.0,0.02074394002556801
+in_domain_test,Variante A (Statisch),AS,0.0,0.016159800812602043
+in_domain_test,Variante A (Statisch),LS,1.0,0.7975449562072754
+in_domain_test,Variante A (Statisch),LS,1.0,0.9213962554931641
+in_domain_test,Variante A (Statisch),LS,1.0,0.8881456255912781
+in_domain_test,Variante A (Statisch),LS,1.0,0.6885979175567627
+in_domain_test,Variante A (Statisch),LS,1.0,0.9623515605926514
+in_domain_test,Variante A (Statisch),LS,1.0,0.8901098370552063
+in_domain_test,Variante A (Statisch),LS,1.0,0.6780267357826233
+in_domain_test,Variante A (Statisch),AS,0.0,0.3277340233325958
+in_domain_test,Variante A (Statisch),AS,0.0,0.056163012981414795
+in_domain_test,Variante A (Statisch),AS,0.0,0.02822885848581791
+in_domain_test,Variante A (Statisch),AS,0.0,0.01568489521741867
+in_domain_test,Variante A (Statisch),AS,0.0,0.14642345905303955
+in_domain_test,Variante A (Statisch),AS,0.0,0.02639508806169033
+in_domain_test,Variante A (Statisch),AS,0.0,0.09871149063110352
+in_domain_test,Variante A (Statisch),AS,0.0,0.2403937131166458
+in_domain_test,Variante A (Statisch),AS,0.0,0.02360878698527813
+in_domain_test,Variante A (Statisch),LS,1.0,0.9837194085121155
+in_domain_test,Variante A (Statisch),LS,1.0,0.6432837843894958
+in_domain_test,Variante A (Statisch),AS,0.0,0.072462297976017
+in_domain_test,Variante A (Statisch),AS,0.0,0.03245348483324051
+in_domain_test,Variante A (Statisch),AS,0.0,0.03032195009291172
+in_domain_test,Variante A (Statisch),AS,0.0,0.06520240753889084
+in_domain_test,Variante A (Statisch),AS,0.0,0.03717515245079994
+in_domain_test,Variante A (Statisch),AS,0.0,0.02712499164044857
+in_domain_test,Variante A (Statisch),AS,0.0,0.01669403165578842
+in_domain_test,Variante A (Statisch),LS,1.0,0.8771827220916748
+in_domain_test,Variante A (Statisch),LS,1.0,0.4614270031452179
+in_domain_test,Variante A (Statisch),AS,0.0,0.04186369851231575
+in_domain_test,Variante A (Statisch),AS,0.0,0.013967400416731834
+in_domain_test,Variante A (Statisch),AS,0.0,0.07114602625370026
+in_domain_test,Variante A (Statisch),AS,0.0,0.02965623512864113
+in_domain_test,Variante A (Statisch),LS,1.0,0.9155811667442322
+in_domain_test,Variante A (Statisch),LS,1.0,0.8061387538909912
+in_domain_test,Variante A (Statisch),LS,1.0,0.8737999796867371
+in_domain_test,Variante A (Statisch),LS,1.0,0.8444752097129822
+in_domain_test,Variante A (Statisch),LS,1.0,0.9576929807662964
+in_domain_test,Variante A (Statisch),LS,1.0,0.8493924140930176
+in_domain_test,Variante A (Statisch),LS,1.0,0.930020809173584
+in_domain_test,Variante A (Statisch),LS,1.0,0.743207573890686
+in_domain_test,Variante A (Statisch),LS,1.0,0.9003903269767761
+in_domain_test,Variante A (Statisch),LS,1.0,0.8491790294647217
+in_domain_test,Variante A (Statisch),LS,1.0,0.9020683765411377
+in_domain_test,Variante A (Statisch),LS,1.0,0.8096429109573364
+in_domain_test,Variante A (Statisch),LS,1.0,0.9197157621383667
+in_domain_test,Variante A (Statisch),AS,0.0,0.2980262041091919
+in_domain_test,Variante A (Statisch),AS,0.0,0.21395912766456604
+in_domain_test,Variante A (Statisch),AS,0.0,0.06654016673564911
+in_domain_test,Variante A (Statisch),AS,0.0,0.13459773361682892
+in_domain_test,Variante A (Statisch),AS,0.0,0.026793556287884712
+in_domain_test,Variante A (Statisch),AS,0.0,0.13016347587108612
+in_domain_test,Variante A (Statisch),AS,0.0,0.20013180375099182
+in_domain_test,Variante A (Statisch),AS,0.0,0.324430912733078
+in_domain_test,Variante A (Statisch),AS,0.0,0.1252221316099167
+in_domain_test,Variante A (Statisch),AS,0.0,0.03384992107748985
+in_domain_test,Variante A (Statisch),AS,0.0,0.04634203016757965
+in_domain_test,Variante A (Statisch),AS,0.0,0.18076948821544647
+in_domain_test,Variante A (Statisch),AS,0.0,0.03198457136750221
+in_domain_test,Variante A (Statisch),AS,0.0,0.17842942476272583
+in_domain_test,Variante A (Statisch),AS,0.0,0.020218877121806145
+in_domain_test,Variante A (Statisch),LS,1.0,0.9766481518745422
+in_domain_test,Variante A (Statisch),LS,1.0,0.7262863516807556
+in_domain_test,Variante A (Statisch),AS,0.0,0.10853702574968338
+in_domain_test,Variante A (Statisch),AS,0.0,0.35155031085014343
+in_domain_test,Variante A (Statisch),AS,0.0,0.13436158001422882
+in_domain_test,Variante A (Statisch),AS,0.0,0.043117981404066086
+in_domain_test,Variante A (Statisch),AS,0.0,0.26204392313957214
+in_domain_test,Variante A (Statisch),LS,1.0,0.8894983530044556
+in_domain_test,Variante A (Statisch),LS,1.0,0.6228318214416504
+in_domain_test,Variante A (Statisch),LS,1.0,0.7893949151039124
+in_domain_test,Variante A (Statisch),LS,1.0,0.9299696683883667
+in_domain_test,Variante A (Statisch),AS,0.0,0.03867320343852043
+in_domain_test,Variante A (Statisch),AS,0.0,0.017983928322792053
+in_domain_test,Variante A (Statisch),AS,0.0,0.052501436322927475
+in_domain_test,Variante A (Statisch),LS,1.0,0.9683890342712402
+in_domain_test,Variante A (Statisch),LS,1.0,0.9075326919555664
+in_domain_test,Variante A (Statisch),LS,1.0,0.8665257692337036
+in_domain_test,Variante A (Statisch),LS,1.0,0.9306353330612183
+in_domain_test,Variante A (Statisch),LS,1.0,0.9281043410301208
+in_domain_test,Variante A (Statisch),LS,1.0,0.8855264782905579
+in_domain_test,Variante A (Statisch),LS,1.0,0.8411668539047241
+in_domain_test,Variante A (Statisch),AS,0.0,0.20021821558475494
+in_domain_test,Variante A (Statisch),AS,0.0,0.326122909784317
+in_domain_test,Variante A (Statisch),AS,0.0,0.24536865949630737
+in_domain_test,Variante A (Statisch),AS,0.0,0.35506200790405273
+in_domain_test,Variante A (Statisch),AS,0.0,0.07392499595880508
+in_domain_test,Variante A (Statisch),AS,0.0,0.04390221834182739
+in_domain_test,Variante A (Statisch),LS,1.0,0.9799348711967468
+in_domain_test,Variante A (Statisch),AS,0.0,0.024462932720780373
+in_domain_test,Variante A (Statisch),AS,0.0,0.01628357730805874
+in_domain_test,Variante A (Statisch),LS,1.0,0.6344247460365295
+in_domain_test,Variante A (Statisch),AS,0.0,0.02535300701856613
+in_domain_test,Variante A (Statisch),LS,1.0,0.9462518692016602
+in_domain_test,Variante A (Statisch),AS,0.0,0.023274557664990425
+in_domain_test,Variante A (Statisch),AS,0.0,0.0990905836224556
+in_domain_test,Variante A (Statisch),LS,1.0,0.9255131483078003
+in_domain_test,Variante A (Statisch),LS,1.0,0.9653003811836243
+in_domain_test,Variante A (Statisch),AS,0.0,0.016580725088715553
+in_domain_test,Variante A (Statisch),AS,0.0,0.04814675822854042
+in_domain_test,Variante A (Statisch),AS,0.0,0.01546953059732914
+in_domain_test,Variante A (Statisch),LS,1.0,0.6662505269050598
+in_domain_test,Variante A (Statisch),LS,1.0,0.8715179562568665
+in_domain_test,Variante A (Statisch),LS,1.0,0.9799179434776306
+in_domain_test,Variante A (Statisch),LS,1.0,0.9569713473320007
+in_domain_test,Variante A (Statisch),LS,1.0,0.8525925874710083
+in_domain_test,Variante A (Statisch),LS,1.0,0.9065627455711365
+in_domain_test,Variante A (Statisch),LS,1.0,0.7621122002601624
+in_domain_test,Variante A (Statisch),LS,1.0,0.8078691363334656
+in_domain_test,Variante A (Statisch),LS,1.0,0.8323944211006165
+in_domain_test,Variante A (Statisch),LS,1.0,0.9877327680587769
+in_domain_test,Variante A (Statisch),LS,1.0,0.15811793506145477
+in_domain_test,Variante A (Statisch),LS,1.0,0.1808408945798874
+in_domain_test,Variante A (Statisch),AS,0.0,0.09171602874994278
+in_domain_test,Variante A (Statisch),AS,0.0,0.09180443733930588
+in_domain_test,Variante A (Statisch),AS,0.0,0.07771066576242447
+in_domain_test,Variante A (Statisch),AS,0.0,0.07275675982236862
+in_domain_test,Variante A (Statisch),AS,0.0,0.036232560873031616
+in_domain_test,Variante A (Statisch),AS,0.0,0.021989328786730766
+in_domain_test,Variante A (Statisch),AS,0.0,0.014602442272007465
+in_domain_test,Variante A (Statisch),LS,1.0,0.8638268709182739
+in_domain_test,Variante A (Statisch),LS,1.0,0.8095864653587341
+in_domain_test,Variante A (Statisch),LS,1.0,0.8335327506065369
+in_domain_test,Variante A (Statisch),LS,1.0,0.846472442150116
+in_domain_test,Variante A (Statisch),AS,0.0,0.03347230702638626
+in_domain_test,Variante A (Statisch),AS,0.0,0.020755412057042122
+in_domain_test,Variante A (Statisch),AS,0.0,0.05398717150092125
+in_domain_test,Variante A (Statisch),AS,0.0,0.020447924733161926
+in_domain_test,Variante A (Statisch),LS,1.0,0.7355601787567139
+in_domain_test,Variante A (Statisch),LS,1.0,0.8715329766273499
+in_domain_test,Variante A (Statisch),LS,1.0,0.7255380153656006
+in_domain_test,Variante A (Statisch),LS,1.0,0.8314329385757446
+in_domain_test,Variante A (Statisch),LS,1.0,0.94118732213974
+in_domain_test,Variante A (Statisch),LS,1.0,0.905558168888092
+in_domain_test,Variante A (Statisch),LS,1.0,0.9079710245132446
+in_domain_test,Variante A (Statisch),LS,1.0,0.9046486616134644
+in_domain_test,Variante A (Statisch),LS,1.0,0.8649634718894958
+in_domain_test,Variante A (Statisch),LS,1.0,0.8712092638015747
+in_domain_test,Variante A (Statisch),LS,1.0,0.954811155796051
+in_domain_test,Variante A (Statisch),AS,0.0,0.017731647938489914
+in_domain_test,Variante A (Statisch),AS,0.0,0.03164565563201904
+in_domain_test,Variante A (Statisch),AS,0.0,0.0657762736082077
+in_domain_test,Variante A (Statisch),AS,0.0,0.018825246021151543
+in_domain_test,Variante A (Statisch),AS,0.0,0.07087604701519012
+in_domain_test,Variante A (Statisch),AS,0.0,0.060455963015556335
+in_domain_test,Variante A (Statisch),AS,0.0,0.05542195588350296
+in_domain_test,Variante A (Statisch),AS,0.0,0.036280542612075806
+in_domain_test,Variante A (Statisch),AS,0.0,0.019288944080471992
+in_domain_test,Variante A (Statisch),AS,0.0,0.044038619846105576
+in_domain_test,Variante A (Statisch),AS,0.0,0.03789939731359482
+in_domain_test,Variante A (Statisch),AS,0.0,0.023882294073700905
+in_domain_test,Variante A (Statisch),AS,0.0,0.0212180744856596
+in_domain_test,Variante A (Statisch),AS,0.0,0.014646991156041622
+in_domain_test,Variante A (Statisch),AS,0.0,0.01851622760295868
+in_domain_test,Variante A (Statisch),AS,0.0,0.029003174975514412
+in_domain_test,Variante A (Statisch),AS,0.0,0.021667102351784706
+in_domain_test,Variante A (Statisch),AS,0.0,0.02909703366458416
+in_domain_test,Variante A (Statisch),LS,1.0,0.8255141973495483
+in_domain_test,Variante A (Statisch),LS,1.0,0.8349787592887878
+in_domain_test,Variante A (Statisch),LS,1.0,0.7248843908309937
+in_domain_test,Variante A (Statisch),AS,0.0,0.02573387324810028
+in_domain_test,Variante A (Statisch),AS,0.0,0.04115377366542816
+in_domain_test,Variante A (Statisch),AS,0.0,0.02533355914056301
+in_domain_test,Variante A (Statisch),LS,1.0,0.9493463039398193
+in_domain_test,Variante A (Statisch),LS,1.0,0.9645399451255798
+in_domain_test,Variante A (Statisch),LS,1.0,0.9408597946166992
+in_domain_test,Variante A (Statisch),LS,1.0,0.6677815318107605
+in_domain_test,Variante A (Statisch),LS,1.0,0.7337338924407959
+in_domain_test,Variante A (Statisch),LS,1.0,0.10121214389801025
+in_domain_test,Variante A (Statisch),AS,0.0,0.06498143076896667
+in_domain_test,Variante A (Statisch),AS,0.0,0.017142651602625847
+in_domain_test,Variante A (Statisch),AS,0.0,0.019362570717930794
+in_domain_test,Variante A (Statisch),AS,0.0,0.02800847962498665
+in_domain_test,Variante A (Statisch),AS,0.0,0.08285345137119293
+in_domain_test,Variante A (Statisch),LS,1.0,0.9664589762687683
+in_domain_test,Variante A (Statisch),LS,1.0,0.8706001043319702
+in_domain_test,Variante A (Statisch),AS,0.0,0.05166984349489212
+in_domain_test,Variante A (Statisch),AS,0.0,0.09903997927904129
+in_domain_test,Variante A (Statisch),AS,0.0,0.023592624813318253
+in_domain_test,Variante A (Statisch),AS,0.0,0.027504201978445053
+in_domain_test,Variante A (Statisch),LS,1.0,0.8837155699729919
+in_domain_test,Variante A (Statisch),LS,1.0,0.8368794918060303
+in_domain_test,Variante A (Statisch),LS,1.0,0.8815202116966248
+in_domain_test,Variante A (Statisch),LS,1.0,0.9840731024742126
+in_domain_test,Variante A (Statisch),AS,0.0,0.03855399414896965
+in_domain_test,Variante A (Statisch),AS,0.0,0.13624560832977295
+in_domain_test,Variante A (Statisch),AS,0.0,0.033320263028144836
+in_domain_test,Variante A (Statisch),LS,1.0,0.9695602059364319
+in_domain_test,Variante A (Statisch),AS,0.0,0.02645133063197136
+in_domain_test,Variante A (Statisch),AS,0.0,0.10122337937355042
+in_domain_test,Variante A (Statisch),LS,1.0,0.44149050116539
+in_domain_test,Variante A (Statisch),LS,1.0,0.46540123224258423
+in_domain_test,Variante A (Statisch),LS,1.0,0.7218223810195923
+in_domain_test,Variante A (Statisch),LS,1.0,0.7893310785293579
+in_domain_test,Variante A (Statisch),LS,1.0,0.5363527536392212
+in_domain_test,Variante A (Statisch),AS,0.0,0.03472520038485527
+in_domain_test,Variante A (Statisch),AS,0.0,0.028999947011470795
+in_domain_test,Variante A (Statisch),AS,0.0,0.05730804055929184
+in_domain_test,Variante A (Statisch),AS,0.0,0.03933495283126831
+in_domain_test,Variante A (Statisch),AS,0.0,0.08341740071773529
+in_domain_test,Variante A (Statisch),AS,0.0,0.05333474278450012
+in_domain_test,Variante A (Statisch),AS,0.0,0.11688514053821564
+in_domain_test,Variante A (Statisch),AS,0.0,0.7794196605682373
+in_domain_test,Variante A (Statisch),LS,1.0,0.6543596982955933
+in_domain_test,Variante A (Statisch),LS,1.0,0.9027463793754578
+in_domain_test,Variante A (Statisch),LS,1.0,0.9033437371253967
+in_domain_test,Variante A (Statisch),LS,1.0,0.9397189617156982
+in_domain_test,Variante A (Statisch),AS,0.0,0.01690330170094967
+in_domain_test,Variante A (Statisch),AS,0.0,0.1015976294875145
+in_domain_test,Variante A (Statisch),AS,0.0,0.180048868060112
+in_domain_test,Variante A (Statisch),LS,1.0,0.8963286280632019
+in_domain_test,Variante A (Statisch),LS,1.0,0.8765130043029785
+in_domain_test,Variante A (Statisch),LS,1.0,0.9722981452941895
+in_domain_test,Variante A (Statisch),LS,1.0,0.8918182849884033
+in_domain_test,Variante A (Statisch),LS,1.0,0.8840689063072205
+in_domain_test,Variante A (Statisch),LS,1.0,0.8073846101760864
+in_domain_test,Variante A (Statisch),LS,1.0,0.9084429144859314
+in_domain_test,Variante A (Statisch),LS,1.0,0.8294718265533447
+in_domain_test,Variante A (Statisch),LS,1.0,0.9280188083648682
+in_domain_test,Variante A (Statisch),LS,1.0,0.9449893236160278
+in_domain_test,Variante A (Statisch),LS,1.0,0.8514420390129089
+in_domain_test,Variante A (Statisch),LS,1.0,0.9000445604324341
+in_domain_test,Variante A (Statisch),LS,1.0,0.9344685077667236
+in_domain_test,Variante A (Statisch),LS,1.0,0.7323825359344482
+in_domain_test,Variante A (Statisch),AS,0.0,0.02302045375108719
+in_domain_test,Variante A (Statisch),AS,0.0,0.019081782549619675
+in_domain_test,Variante A (Statisch),AS,0.0,0.019238263368606567
+in_domain_test,Variante A (Statisch),AS,0.0,0.02287917770445347
+in_domain_test,Variante A (Statisch),AS,0.0,0.02650352381169796
+in_domain_test,Variante A (Statisch),AS,0.0,0.022747216746211052
+in_domain_test,Variante A (Statisch),AS,0.0,0.018200255930423737
+in_domain_test,Variante A (Statisch),AS,0.0,0.245759978890419
+in_domain_test,Variante A (Statisch),AS,0.0,0.03568220138549805
+in_domain_test,Variante A (Statisch),AS,0.0,0.04713667184114456
+in_domain_test,Variante A (Statisch),AS,0.0,0.03130437806248665
+in_domain_test,Variante A (Statisch),AS,0.0,0.07726803421974182
+in_domain_test,Variante A (Statisch),AS,0.0,0.039757296442985535
+in_domain_test,Variante A (Statisch),AS,0.0,0.09685405343770981
+in_domain_test,Variante A (Statisch),AS,0.0,0.021048828959465027
+in_domain_test,Variante A (Statisch),AS,0.0,0.1967460960149765
+in_domain_test,Variante A (Statisch),AS,0.0,0.0705052837729454
+in_domain_test,Variante A (Statisch),AS,0.0,0.026483051478862762
+in_domain_test,Variante A (Statisch),AS,0.0,0.024323467165231705
+in_domain_test,Variante A (Statisch),AS,0.0,0.029191862791776657
+in_domain_test,Variante A (Statisch),AS,0.0,0.1300891488790512
+in_domain_test,Variante A (Statisch),AS,0.0,0.0440608412027359
+in_domain_test,Variante A (Statisch),AS,0.0,0.15794989466667175
+in_domain_test,Variante A (Statisch),AS,0.0,0.014001663774251938
+in_domain_test,Variante A (Statisch),AS,0.0,0.02280407026410103
+in_domain_test,Variante A (Statisch),AS,0.0,0.03174569830298424
+in_domain_test,Variante A (Statisch),AS,0.0,0.022652624174952507
+in_domain_test,Variante A (Statisch),LS,1.0,0.8569058775901794
+in_domain_test,Variante A (Statisch),LS,1.0,0.9120869636535645
+in_domain_test,Variante A (Statisch),LS,1.0,0.9073063731193542
+in_domain_test,Variante A (Statisch),LS,1.0,0.9681589007377625
+in_domain_test,Variante A (Statisch),LS,1.0,0.9124452471733093
+in_domain_test,Variante A (Statisch),LS,1.0,0.8824995160102844
+in_domain_test,Variante A (Statisch),AS,0.0,0.14989854395389557
+in_domain_test,Variante A (Statisch),AS,0.0,0.01762690767645836
+in_domain_test,Variante A (Statisch),AS,0.0,0.03752908110618591
+in_domain_test,Variante A (Statisch),AS,0.0,0.02346310392022133
+in_domain_test,Variante A (Statisch),AS,0.0,0.022175060585141182
+in_domain_test,Variante A (Statisch),AS,0.0,0.03209546208381653
+in_domain_test,Variante A (Statisch),AS,0.0,0.12941130995750427
+in_domain_test,Variante A (Statisch),LS,1.0,0.8593199253082275
+in_domain_test,Variante A (Statisch),LS,1.0,0.755767822265625
+in_domain_test,Variante A (Statisch),LS,1.0,0.7547890543937683
+in_domain_test,Variante A (Statisch),LS,1.0,0.5829591155052185
+in_domain_test,Variante A (Statisch),LS,1.0,0.5976762175559998
+in_domain_test,Variante A (Statisch),LS,1.0,0.7476670145988464
+in_domain_test,Variante A (Statisch),AS,0.0,0.04869668930768967
+in_domain_test,Variante A (Statisch),AS,0.0,0.11179976165294647
+in_domain_test,Variante A (Statisch),AS,0.0,0.02967698872089386
+in_domain_test,Variante A (Statisch),AS,0.0,0.15819215774536133
+in_domain_test,Variante A (Statisch),AS,0.0,0.052856285125017166
+in_domain_test,Variante A (Statisch),AS,0.0,0.13596811890602112
+in_domain_test,Variante A (Statisch),AS,0.0,0.012489576824009418
+in_domain_test,Variante A (Statisch),AS,0.0,0.0505068339407444
+in_domain_test,Variante A (Statisch),AS,0.0,0.04770899936556816
+in_domain_test,Variante A (Statisch),AS,0.0,0.041535910218954086
+in_domain_test,Variante A (Statisch),AS,0.0,0.027694175019860268
+in_domain_test,Variante A (Statisch),AS,0.0,0.01277703233063221
+in_domain_test,Variante A (Statisch),AS,0.0,0.10379301756620407
+in_domain_test,Variante A (Statisch),AS,0.0,0.05428728833794594
+in_domain_test,Variante A (Statisch),LS,1.0,0.9154278039932251
+in_domain_test,Variante A (Statisch),LS,1.0,0.7540377378463745
+in_domain_test,Variante A (Statisch),LS,1.0,0.7248070240020752
+in_domain_test,Variante A (Statisch),LS,1.0,0.942353367805481
+in_domain_test,Variante A (Statisch),LS,1.0,0.9215712547302246
+in_domain_test,Variante A (Statisch),LS,1.0,0.9647246599197388
+in_domain_test,Variante A (Statisch),AS,0.0,0.021726541221141815
+in_domain_test,Variante A (Statisch),AS,0.0,0.07058490067720413
+in_domain_test,Variante A (Statisch),AS,0.0,0.026203114539384842
+in_domain_test,Variante A (Statisch),AS,0.0,0.01985783874988556
+in_domain_test,Variante A (Statisch),AS,0.0,0.03661316633224487
+in_domain_test,Variante A (Statisch),AS,0.0,0.022020334377884865
+in_domain_test,Variante A (Statisch),LS,1.0,0.5444443225860596
+in_domain_test,Variante A (Statisch),LS,1.0,0.8751108646392822
+in_domain_test,Variante A (Statisch),AS,0.0,0.02141321636736393
+in_domain_test,Variante A (Statisch),AS,0.0,0.016987865790724754
+in_domain_test,Variante A (Statisch),LS,1.0,0.8028240203857422
+in_domain_test,Variante A (Statisch),LS,1.0,0.8392123579978943
+in_domain_test,Variante A (Statisch),LS,1.0,0.6130943894386292
+in_domain_test,Variante A (Statisch),LS,1.0,0.7110685706138611
+in_domain_test,Variante A (Statisch),LS,1.0,0.645697832107544
+in_domain_test,Variante A (Statisch),LS,1.0,0.9852480888366699
+in_domain_test,Variante A (Statisch),AS,0.0,0.20553889870643616
+in_domain_test,Variante A (Statisch),AS,0.0,0.027212923392653465
+in_domain_test,Variante A (Statisch),AS,0.0,0.06404044479131699
+in_domain_test,Variante A (Statisch),AS,0.0,0.017810102552175522
+in_domain_test,Variante A (Statisch),AS,0.0,0.023100871592760086
+in_domain_test,Variante A (Statisch),LS,1.0,0.7255842089653015
+in_domain_test,Variante A (Statisch),LS,1.0,0.8136587142944336
+in_domain_test,Variante A (Statisch),LS,1.0,0.5198166966438293
+in_domain_test,Variante A (Statisch),LS,1.0,0.8347166180610657
+in_domain_test,Variante A (Statisch),LS,1.0,0.3943386971950531
+in_domain_test,Variante A (Statisch),LS,1.0,0.6867639422416687
+in_domain_test,Variante A (Statisch),LS,1.0,0.8213171362876892
+in_domain_test,Variante A (Statisch),LS,1.0,0.6454116702079773
+in_domain_test,Variante A (Statisch),LS,1.0,0.7227581143379211
+in_domain_test,Variante A (Statisch),LS,1.0,0.4624254107475281
+in_domain_test,Variante A (Statisch),AS,0.0,0.14085373282432556
+in_domain_test,Variante A (Statisch),AS,0.0,0.13480253517627716
+in_domain_test,Variante A (Statisch),AS,0.0,0.050316955894231796
+in_domain_test,Variante A (Statisch),AS,0.0,0.02414843440055847
+in_domain_test,Variante A (Statisch),AS,0.0,0.05776989832520485
+in_domain_test,Variante A (Statisch),AS,0.0,0.022731363773345947
+in_domain_test,Variante A (Statisch),LS,1.0,0.8907845616340637
+in_domain_test,Variante A (Statisch),LS,1.0,0.6470378637313843
+in_domain_test,Variante A (Statisch),AS,0.0,0.07888463139533997
+in_domain_test,Variante A (Statisch),AS,0.0,0.030870236456394196
+in_domain_test,Variante A (Statisch),AS,0.0,0.018853776156902313
+in_domain_test,Variante A (Statisch),AS,0.0,0.017979919910430908
+in_domain_test,Variante A (Statisch),AS,0.0,0.023558171465992928
+in_domain_test,Variante A (Statisch),AS,0.0,0.03237488865852356
+in_domain_test,Variante A (Statisch),LS,1.0,0.8407697081565857
+in_domain_test,Variante A (Statisch),LS,1.0,0.9786399602890015
+in_domain_test,Variante A (Statisch),AS,0.0,0.01808849535882473
+in_domain_test,Variante A (Statisch),AS,0.0,0.02035263180732727
+in_domain_test,Variante A (Statisch),LS,1.0,0.8323813080787659
+in_domain_test,Variante A (Statisch),LS,1.0,0.7696484923362732
+in_domain_test,Variante A (Statisch),LS,1.0,0.9277228116989136
+in_domain_test,Variante A (Statisch),LS,1.0,0.9592907428741455
+in_domain_test,Variante A (Statisch),LS,1.0,0.9563295245170593
+in_domain_test,Variante A (Statisch),LS,1.0,0.676983118057251
+in_domain_test,Variante A (Statisch),LS,1.0,0.57669597864151
+in_domain_test,Variante A (Statisch),AS,0.0,0.03363185003399849
+in_domain_test,Variante A (Statisch),AS,0.0,0.04109726846218109
+in_domain_test,Variante A (Statisch),AS,0.0,0.043904438614845276
+in_domain_test,Variante A (Statisch),AS,0.0,0.14811702072620392
+in_domain_test,Variante A (Statisch),AS,0.0,0.09415071457624435
+in_domain_test,Variante A (Statisch),AS,0.0,0.044582121074199677
+in_domain_test,Variante A (Statisch),AS,0.0,0.08756307512521744
+in_domain_test,Variante A (Statisch),AS,0.0,0.07997769862413406
+in_domain_test,Variante A (Statisch),AS,0.0,0.12073908746242523
+in_domain_test,Variante A (Statisch),AS,0.0,0.04330054670572281
+in_domain_test,Variante A (Statisch),AS,0.0,0.043234892189502716
+in_domain_test,Variante A (Statisch),AS,0.0,0.045967862010002136
+in_domain_test,Variante A (Statisch),AS,0.0,0.018138524144887924
+in_domain_test,Variante A (Statisch),LS,1.0,0.8705605864524841
+in_domain_test,Variante A (Statisch),LS,1.0,0.9378136396408081
+in_domain_test,Variante A (Statisch),LS,1.0,0.680880606174469
+in_domain_test,Variante A (Statisch),LS,1.0,0.5784075856208801
+in_domain_test,Variante A (Statisch),LS,1.0,0.4462226331233978
+in_domain_test,Variante A (Statisch),AS,0.0,0.07896124571561813
+in_domain_test,Variante A (Statisch),AS,0.0,0.22591081261634827
+in_domain_test,Variante A (Statisch),AS,0.0,0.08705375343561172
+in_domain_test,Variante A (Statisch),AS,0.0,0.06531301885843277
+in_domain_test,Variante A (Statisch),AS,0.0,0.04255076125264168
+in_domain_test,Variante A (Statisch),AS,0.0,0.11761105805635452
+in_domain_test,Variante A (Statisch),AS,0.0,0.17376630008220673
+in_domain_test,Variante A (Statisch),AS,0.0,0.16173017024993896
+in_domain_test,Variante A (Statisch),AS,0.0,0.09412450343370438
+in_domain_test,Variante A (Statisch),LS,1.0,0.8709485530853271
+in_domain_test,Variante A (Statisch),LS,1.0,0.1564941108226776
+in_domain_test,Variante A (Statisch),AS,0.0,0.03548019379377365
+in_domain_test,Variante A (Statisch),AS,0.0,0.06263160705566406
+in_domain_test,Variante A (Statisch),AS,0.0,0.08999820798635483
+in_domain_test,Variante A (Statisch),AS,0.0,0.10600932687520981
+in_domain_test,Variante A (Statisch),AS,0.0,0.26609084010124207
+in_domain_test,Variante A (Statisch),LS,1.0,0.7788806557655334
+in_domain_test,Variante A (Statisch),LS,1.0,0.6783572435379028
+in_domain_test,Variante A (Statisch),LS,1.0,0.8553217053413391
+in_domain_test,Variante A (Statisch),LS,1.0,0.9567886590957642
+in_domain_test,Variante A (Statisch),AS,0.0,0.17644822597503662
+in_domain_test,Variante A (Statisch),AS,0.0,0.08586874604225159
+in_domain_test,Variante A (Statisch),AS,0.0,0.028652667999267578
+in_domain_test,Variante A (Statisch),AS,0.0,0.10439187288284302
+in_domain_test,Variante A (Statisch),LS,1.0,0.496575266122818
+in_domain_test,Variante A (Statisch),LS,1.0,0.6148143410682678
+in_domain_test,Variante A (Statisch),LS,1.0,0.7321258187294006
+in_domain_test,Variante A (Statisch),LS,1.0,0.5485967397689819
+in_domain_test,Variante A (Statisch),LS,1.0,0.95827716588974
+in_domain_test,Variante A (Statisch),AS,0.0,0.12280857563018799
+in_domain_test,Variante A (Statisch),AS,0.0,0.05405215919017792
+in_domain_test,Variante A (Statisch),AS,0.0,0.06283948570489883
+in_domain_test,Variante A (Statisch),AS,0.0,0.032246630638837814
+in_domain_test,Variante A (Statisch),AS,0.0,0.03263287618756294
+in_domain_test,Variante A (Statisch),AS,0.0,0.02553499862551689
+in_domain_test,Variante A (Statisch),AS,0.0,0.02378397434949875
+in_domain_test,Variante A (Statisch),AS,0.0,0.018871143460273743
+in_domain_test,Variante A (Statisch),AS,0.0,0.016246428713202477
+in_domain_test,Variante A (Statisch),AS,0.0,0.02207106724381447
+in_domain_test,Variante A (Statisch),AS,0.0,0.03479650989174843
+in_domain_test,Variante A (Statisch),AS,0.0,0.028152896091341972
+in_domain_test,Variante A (Statisch),AS,0.0,0.03135419264435768
+in_domain_test,Variante A (Statisch),AS,0.0,0.042483169585466385
+in_domain_test,Variante A (Statisch),AS,0.0,0.11313173919916153
+in_domain_test,Variante A (Statisch),AS,0.0,0.10396997630596161
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9449757933616638
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9632083773612976
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.88995760679245
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8286938071250916
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9924495220184326
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011092226952314377
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009331676177680492
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01029660739004612
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7941485047340393
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.49578869342803955
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6808903217315674
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7072615027427673
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07201921194791794
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011839143931865692
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09668467938899994
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8641144633293152
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9957179427146912
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010407238267362118
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8505484461784363
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9316234588623047
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6862476468086243
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6708029508590698
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.09303377568721771
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08869537711143494
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009259470738470554
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10599303245544434
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.018779007717967033
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8900209069252014
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6322761178016663
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.21340380609035492
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04218268021941185
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011700192466378212
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008511524647474289
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06698654592037201
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.029177764430642128
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7997720837593079
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.2185620665550232
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.052834562957286835
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08338506519794464
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01144418679177761
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.020982470363378525
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9195972084999084
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5156117081642151
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.701919674873352
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010791625827550888
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010787858627736568
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.015605841763317585
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007919304072856903
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8659906387329102
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9897071123123169
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9349052906036377
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9178272485733032
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8932672739028931
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6533451676368713
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04024685546755791
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04472397640347481
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.030960777774453163
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05410971865057945
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06390196830034256
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03880736604332924
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.027357932180166245
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010029295459389687
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8878396153450012
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.2381155788898468
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.021395938470959663
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.020370036363601685
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8243862390518188
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6275829672813416
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8065622448921204
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8575183153152466
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8133221864700317
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06085439398884773
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.058553121984004974
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008859514258801937
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.019717903807759285
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8078441619873047
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.10695704072713852
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.4263974726200104
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.2852979600429535
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9275495409965515
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.00954348873347044
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01610533706843853
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03446408361196518
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.00810215249657631
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6269699335098267
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8469734787940979
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8735458850860596
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06153665482997894
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.020258883014321327
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07529906928539276
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5375924110412598
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6323943734169006
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6473225951194763
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5599833130836487
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7438212633132935
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6750758290290833
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06076646223664284
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09221722185611725
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.019741244614124298
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.024444447830319405
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.11026498675346375
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07407522946596146
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04575757309794426
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09562741965055466
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006571212317794561
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.012807948514819145
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.012607485055923462
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007112111896276474
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04245863854885101
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07176999747753143
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.5852000713348389
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9046481847763062
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9249724745750427
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.805402934551239
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.719571053981781
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8582579493522644
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9287846088409424
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06259245425462723
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.034473590552806854
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10311056673526764
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1088564321398735
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009024295024573803
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0070649185217916965
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07136433571577072
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09651034325361252
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.025941554456949234
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05004693195223808
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.11966054141521454
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009799323044717312
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.044680751860141754
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010019112378358841
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.023097751662135124
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05303848162293434
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02693735808134079
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8633548021316528
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.041966069489717484
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02344151958823204
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.041138533502817154
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05204008147120476
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.34510698914527893
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5914965271949768
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8711632490158081
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9335670471191406
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9167171120643616
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8462179899215698
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.854891300201416
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7085558772087097
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9297425746917725
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.023679088801145554
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07830606400966644
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.024871408939361572
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02727302350103855
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09866555035114288
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.014667431823909283
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006698152981698513
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08633817732334137
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04649583622813225
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.049793921411037445
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05585107579827309
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011275217868387699
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.039477817714214325
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08431693911552429
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05473587289452553
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03126416355371475
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8847686052322388
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7387955188751221
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8691420555114746
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8182141184806824
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9915265440940857
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.11781927198171616
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07048490643501282
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009051486849784851
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07633832097053528
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.015657011419534683
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.026116248220205307
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.013265833258628845
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006536405999213457
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.016303058713674545
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9017752408981323
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8317621946334839
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9809149503707886
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.98524010181427
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8505727648735046
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9418625831604004
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.1668855994939804
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.29419034719467163
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.09192569553852081
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.816301167011261
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.13310186564922333
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09369570016860962
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0691625326871872
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07650265842676163
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.237169548869133
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.2243378609418869
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.13987602293491364
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9488391280174255
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.971062421798706
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8812179565429688
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8777706027030945
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7999501824378967
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9668582081794739
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.026648107916116714
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.047450952231884
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02177378162741661
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05421474203467369
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.012386508285999298
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.982330322265625
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.824214518070221
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.891521155834198
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8193567395210266
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9643152356147766
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9682908654212952
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.24561424553394318
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.15210877358913422
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.5197100639343262
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.113874651491642
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1195782721042633
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.6429766416549683
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5949440002441406
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7321034073829651
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5688925981521606
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5574973225593567
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7296608686447144
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6235601305961609
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.00937192514538765
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.19927948713302612
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.037063296884298325
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.022425776347517967
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.36780011653900146
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9756959080696106
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8674452900886536
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.926522433757782
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8955613970756531
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9933903217315674
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.032300498336553574
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008387597277760506
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.017540138214826584
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01878558285534382
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006742638535797596
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009877323172986507
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7250909805297852
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8221476674079895
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9798178672790527
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9021010398864746
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9101880788803101
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7804473638534546
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9717108607292175
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.12301760911941528
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10341999679803848
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.062272027134895325
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06744614988565445
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.065358005464077
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.044938549399375916
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0617179349064827
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.013058421202003956
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09386606514453888
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04656979441642761
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.017149772495031357
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.059666313230991364
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07286730408668518
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.045527804642915726
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07490234822034836
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.026884078979492188
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.036540575325489044
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008868525736033916
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.18032202124595642
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007684152573347092
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07497462630271912
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07565023005008698
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007039019372314215
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011312227696180344
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.013056213967502117
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007172401994466782
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.039276812225580215
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03494509682059288
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9181554317474365
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01930597983300686
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.6532499194145203
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.991168737411499
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.907427966594696
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9174991846084595
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9633623957633972
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.4981674551963806
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03823389858007431
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.028096070513129234
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.00700995372608304
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03874397277832031
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05424400418996811
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04318622872233391
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010932913050055504
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02614752948284149
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6444005370140076
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8461403846740723
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9562844038009644
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9091731905937195
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7223325371742249
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8244516849517822
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0637437179684639
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05880064517259598
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0430230014026165
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.032600417733192444
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.061121925711631775
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04677659645676613
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.027627235278487206
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009038511663675308
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.021153301000595093
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9464661478996277
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9430233836174011
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.831974983215332
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5517332553863525
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08526556938886642
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06281939148902893
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8999113440513611
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9723024964332581
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9782233834266663
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.991690993309021
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1700158268213272
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0532110333442688
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8106895089149475
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9633926153182983
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9546376466751099
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.4951823055744171
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6314437985420227
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6873180270195007
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5250998735427856
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.966772735118866
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.570383608341217
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07498957216739655
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.017857776954770088
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.052729908376932144
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.016385555267333984
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04450108855962753
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0076757799834012985
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01387942023575306
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008362612687051296
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8656564950942993
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9529280066490173
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7615207433700562
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5625626444816589
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9419164657592773
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9428301453590393
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.541053295135498
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07356070727109909
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.021079683676362038
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0709792822599411
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011306955479085445
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08925950527191162
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01211121492087841
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05174335092306137
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.18205612897872925
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009828036651015282
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.991672933101654
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7091978788375854
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10496088862419128
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.013045638799667358
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.027406856417655945
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03724329546093941
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010410361923277378
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.017493708059191704
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03525259718298912
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8182311654090881
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.4999275207519531
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07298439741134644
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.013304492458701134
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10488970577716827
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03236290439963341
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9121389389038086
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.92152339220047
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7834420800209045
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8606754541397095
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9395818114280701
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7969155311584473
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9340744614601135
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8700182437896729
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8873367309570312
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9476631283760071
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9571639895439148
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8934975266456604
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9861780405044556
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.11292760819196701
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.28683724999427795
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08871030807495117
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1343727558851242
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009038805961608887
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06993349641561508
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1360284984111786
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.36630478501319885
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.2131190150976181
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.024918172508478165
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04965624958276749
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.15286093950271606
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03570320084691048
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.16163267195224762
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02182263322174549
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9848423004150391
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7838003039360046
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09943348169326782
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.20124630630016327
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10140233486890793
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01034619752317667
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03016684576869011
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7948777675628662
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6532881855964661
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9301645159721375
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9340713620185852
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.23948222398757935
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006346185225993395
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0081090796738863
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9773362278938293
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8919722437858582
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9683494567871094
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9756981730461121
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9371848702430725
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9415543675422668
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9865276217460632
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10049349069595337
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.40367361903190613
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.28129592537879944
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.19304032623767853
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08254431933164597
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.2628592550754547
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9754835367202759
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009909280575811863
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006918959319591522
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7450675368309021
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0068939682096242905
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6889487504959106
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010592969134449959
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009801061823964119
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9552223682403564
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8792969584465027
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.027423009276390076
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.057025518268346786
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08795225620269775
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8096218109130859
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8627819418907166
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9831757545471191
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9905458688735962
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9808046221733093
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8518694639205933
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9636853337287903
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7001802325248718
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8759843111038208
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9961905479431152
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7267984747886658
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5360115170478821
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08031260222196579
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05179905146360397
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.052297674119472504
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.019789284095168114
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.027707692235708237
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0167609304189682
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.017056697979569435
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9317966103553772
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7986847758293152
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7994809150695801
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7379786372184753
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02777361124753952
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.054858773946762085
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08322007954120636
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01983565464615822
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7038109302520752
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.827899158000946
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.722796618938446
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9346717596054077
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9703803062438965
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8517054319381714
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9498390555381775
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9236297607421875
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7701643109321594
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.754048764705658
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8987193703651428
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01611415110528469
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03007596731185913
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03047630749642849
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0072067370638251305
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04942461848258972
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04587087780237198
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04808094725012779
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03646323084831238
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.00773613853380084
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05020918324589729
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03450401872396469
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006733435206115246
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010972868651151657
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008377057500183582
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010987931862473488
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03239978477358818
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011503522284328938
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.015216562896966934
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9404125809669495
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.67197585105896
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6645747423171997
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.014378483407199383
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04471230506896973
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07025941461324692
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.983095109462738
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9878718852996826
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9655107259750366
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.675639808177948
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6523535847663879
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.014230677857995033
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04486246034502983
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009777055121958256
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008062398992478848
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010589377023279667
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009523965418338776
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9540343284606934
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7907946705818176
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.11375129222869873
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07382035255432129
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008987395092844963
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011927125044167042
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.919035017490387
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9098916053771973
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8766340613365173
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9927448034286499
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10927049815654755
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.027574915438890457
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009172746911644936
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9953370094299316
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.035245396196842194
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09717235714197159
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5853080749511719
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.555107831954956
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7584678530693054
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7105675339698792
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7346041798591614
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10614267736673355
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07989870011806488
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.028560061007738113
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01688624918460846
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05859779939055443
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07529241591691971
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1000075414776802
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.6540743112564087
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6143923401832581
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8985190391540527
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8826231360435486
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.973381757736206
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0066351196728646755
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06642339378595352
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07670582830905914
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9160110950469971
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9442406892776489
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9890744090080261
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.914650559425354
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9306415319442749
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8975563049316406
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9773930907249451
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8751416206359863
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.932013988494873
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9560268521308899
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8921951651573181
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9611451625823975
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9815226793289185
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7260804772377014
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03723200038075447
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007037883158773184
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009734265506267548
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007662657648324966
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.042618513107299805
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010374200530350208
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008641301654279232
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.3122901916503906
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07274438440799713
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04825955629348755
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.16065680980682373
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0895315557718277
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03180927038192749
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09465281665325165
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.021991563960909843
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.21397505700588226
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.020068662241101265
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011877899058163166
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007309601176530123
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.015620469115674496
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10021413117647171
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.040896810591220856
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10257939249277115
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006099981721490622
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.013771828263998032
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07891915738582611
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02867254987359047
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8024923205375671
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.906907320022583
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9348443746566772
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9851153492927551
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.94028639793396
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9799546599388123
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.15265975892543793
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.00806729681789875
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007847579196095467
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02855195663869381
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.046213578432798386
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.042124923318624496
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06805296987295151
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.864284873008728
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8420625925064087
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7238225936889648
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.587201714515686
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7144335508346558
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9649439454078674
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.016685768961906433
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05253642797470093
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.033059779554605484
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09294003993272781
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04398219659924507
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04409540444612503
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0069597805850207806
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03197179734706879
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03816656395792961
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04606567695736885
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01637950725853443
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.00605117529630661
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.07449480146169662
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01751980558037758
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8682149648666382
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6598668694496155
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8300116062164307
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9442683458328247
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7785390019416809
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9849187135696411
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.044843513518571854
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05485192686319351
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03438698500394821
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006270809099078178
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.033501509577035904
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010450257919728756
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5356711149215698
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9931806325912476
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.016610531136393547
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010143440216779709
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9223148226737976
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8236994743347168
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5210519433021545
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7439480423927307
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6859381794929504
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9857324957847595
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.3359173834323883
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009103596210479736
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04538942500948906
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02210843376815319
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009871584363281727
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7913258075714111
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6615943908691406
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.41085338592529297
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6330901980400085
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.25283950567245483
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5187429189682007
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7142011523246765
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6324419975280762
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8415265679359436
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6021800637245178
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1653214693069458
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1508614867925644
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.014677503146231174
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.019517112523317337
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04816597327589989
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.022304240614175797
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8982110023498535
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6028832793235779
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.21340380609035492
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04218268021941185
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.011700192466378212
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008511524647474289
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.06698654592037201
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.029177764430642128
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.821652352809906
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9936491847038269
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.010034249164164066
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.008880243636667728
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8754106163978577
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9461249709129333
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8326223492622375
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9796261191368103
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9787200689315796
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.801254153251648
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9164683222770691
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09489604085683823
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.14184808731079102
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.19264674186706543
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1929551661014557
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10458594560623169
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09850890934467316
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.17799893021583557
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.145705446600914
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.035863831639289856
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.038540370762348175
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.027665093541145325
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.057115860283374786
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.012575323693454266
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8302862048149109
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.923868715763092
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7383134961128235
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6503721475601196
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5047057867050171
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04129943996667862
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.26833993196487427
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04580601677298546
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.00808499101549387
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0390898771584034
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10291777551174164
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.21940286457538605
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.1086091473698616
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.14120826125144958
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8451260328292847
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.26047444343566895
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.043693091720342636
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.02305656298995018
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09269170463085175
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.08217205852270126
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.23492847383022308
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.7256763577461243
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.8567500710487366
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9083203077316284
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9679965972900391
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.16118280589580536
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.05395326018333435
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.03461187705397606
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.09866020828485489
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.46913936734199524
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.5973576307296753
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.6994041800498962
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.49199792742729187
+in_domain_test,Variante B (Dynamisch),LS,1.0,0.9912996888160706
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.11816104501485825
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01316456962376833
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.0706958994269371
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.009514029137790203
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.029216604307293892
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007302031386643648
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.029697690159082413
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.01272899191826582
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.007256893906742334
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.006184722296893597
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04665207490324974
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.013294188305735588
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.053616419434547424
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.043954603374004364
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.10071825981140137
+in_domain_test,Variante B (Dynamisch),AS,0.0,0.04822421818971634
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9831638932228088
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9560139179229736
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9008459448814392
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8119349479675293
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9895021319389343
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09825100749731064
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09863749891519547
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04336284473538399
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8067956566810608
+in_domain_test,Variante C (Hybrid),LS,1.0,0.4900089204311371
+in_domain_test,Variante C (Hybrid),LS,1.0,0.779340386390686
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5640304088592529
+in_domain_test,Variante C (Hybrid),AS,0.0,0.019515853375196457
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05148600786924362
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18464182317256927
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7917473912239075
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6585115790367126
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03170709311962128
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8600136041641235
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9924212098121643
+in_domain_test,Variante C (Hybrid),LS,1.0,0.685155987739563
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7904989719390869
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8016790747642517
+in_domain_test,Variante C (Hybrid),AS,0.0,0.176595538854599
+in_domain_test,Variante C (Hybrid),AS,0.0,0.052969057112932205
+in_domain_test,Variante C (Hybrid),AS,0.0,0.5493138432502747
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0075683570466935635
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9055355787277222
+in_domain_test,Variante C (Hybrid),LS,1.0,0.63414466381073
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10294018685817719
+in_domain_test,Variante C (Hybrid),AS,0.0,0.036711011081933975
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00860562827438116
+in_domain_test,Variante C (Hybrid),AS,0.0,0.012551733292639256
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09711714833974838
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04215123504400253
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9834784269332886
+in_domain_test,Variante C (Hybrid),LS,1.0,0.36501428484916687
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07690084725618362
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11409406363964081
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02609945274889469
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03149645775556564
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7120312452316284
+in_domain_test,Variante C (Hybrid),LS,1.0,0.556634247303009
+in_domain_test,Variante C (Hybrid),LS,1.0,0.62298583984375
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0043369983322918415
+in_domain_test,Variante C (Hybrid),AS,0.0,0.010908541269600391
+in_domain_test,Variante C (Hybrid),AS,0.0,0.045160092413425446
+in_domain_test,Variante C (Hybrid),AS,0.0,0.006910356692969799
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7868810296058655
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9145641326904297
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9221705198287964
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9565319418907166
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9191902875900269
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7574887871742249
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02031197026371956
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04536548629403114
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08371291309595108
+in_domain_test,Variante C (Hybrid),AS,0.0,0.19550931453704834
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03653044253587723
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06899985671043396
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09225907921791077
+in_domain_test,Variante C (Hybrid),AS,0.0,0.009027908556163311
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9393077492713928
+in_domain_test,Variante C (Hybrid),LS,1.0,0.3434104919433594
+in_domain_test,Variante C (Hybrid),AS,0.0,0.034185606986284256
+in_domain_test,Variante C (Hybrid),AS,0.0,0.008248567581176758
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9533705115318298
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5963317155838013
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8790996670722961
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8490606546401978
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8387793302536011
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06401805579662323
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11845424026250839
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03945665806531906
+in_domain_test,Variante C (Hybrid),AS,0.0,0.057618118822574615
+in_domain_test,Variante C (Hybrid),LS,1.0,0.963720440864563
+in_domain_test,Variante C (Hybrid),LS,1.0,0.11649972200393677
+in_domain_test,Variante C (Hybrid),LS,1.0,0.49737921357154846
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6017473936080933
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8615279197692871
+in_domain_test,Variante C (Hybrid),AS,0.0,0.017692936584353447
+in_domain_test,Variante C (Hybrid),AS,0.0,0.035622984170913696
+in_domain_test,Variante C (Hybrid),AS,0.0,0.030427776277065277
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02240680530667305
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5972796082496643
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8454097509384155
+in_domain_test,Variante C (Hybrid),LS,1.0,0.938086211681366
+in_domain_test,Variante C (Hybrid),AS,0.0,0.061249613761901855
+in_domain_test,Variante C (Hybrid),AS,0.0,0.020384958013892174
+in_domain_test,Variante C (Hybrid),AS,0.0,0.17917385697364807
+in_domain_test,Variante C (Hybrid),LS,1.0,0.572765052318573
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6081795692443848
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5245080590248108
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5088962912559509
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7937914133071899
+in_domain_test,Variante C (Hybrid),LS,1.0,0.914905846118927
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0715828463435173
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06426410377025604
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0135260708630085
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01268708985298872
+in_domain_test,Variante C (Hybrid),AS,0.0,0.14398060739040375
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07721900939941406
+in_domain_test,Variante C (Hybrid),AS,0.0,0.061137858778238297
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05188529193401337
+in_domain_test,Variante C (Hybrid),AS,0.0,0.010469574481248856
+in_domain_test,Variante C (Hybrid),AS,0.0,0.012925966642796993
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12967735528945923
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02560456655919552
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04232366383075714
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06125437840819359
+in_domain_test,Variante C (Hybrid),AS,0.0,0.8270703554153442
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9152122735977173
+in_domain_test,Variante C (Hybrid),LS,1.0,0.92032390832901
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8076481223106384
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7899019718170166
+in_domain_test,Variante C (Hybrid),LS,1.0,0.83159339427948
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9481138586997986
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2232932597398758
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2386791855096817
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10062173008918762
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2960309684276581
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08283553272485733
+in_domain_test,Variante C (Hybrid),AS,0.0,0.012462081387639046
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06954099982976913
+in_domain_test,Variante C (Hybrid),AS,0.0,0.15700678527355194
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0358637236058712
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11005836725234985
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11998291313648224
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02245779149234295
+in_domain_test,Variante C (Hybrid),AS,0.0,0.060112472623586655
+in_domain_test,Variante C (Hybrid),AS,0.0,0.014257572591304779
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02351355366408825
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03191715478897095
+in_domain_test,Variante C (Hybrid),AS,0.0,0.15671826899051666
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8944958448410034
+in_domain_test,Variante C (Hybrid),LS,1.0,0.27022379636764526
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05960829183459282
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03487785905599594
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07138034701347351
+in_domain_test,Variante C (Hybrid),AS,0.0,0.34729817509651184
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6444348096847534
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7457469701766968
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9212802648544312
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9447718262672424
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7889692187309265
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8513280153274536
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7103245854377747
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5805057883262634
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03365214169025421
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07297072559595108
+in_domain_test,Variante C (Hybrid),AS,0.0,0.021672088652849197
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06363315880298615
+in_domain_test,Variante C (Hybrid),AS,0.0,0.059347402304410934
+in_domain_test,Variante C (Hybrid),AS,0.0,0.019494306296110153
+in_domain_test,Variante C (Hybrid),AS,0.0,0.020980408415198326
+in_domain_test,Variante C (Hybrid),AS,0.0,0.035737667232751846
+in_domain_test,Variante C (Hybrid),AS,0.0,0.011444753035902977
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05800376087427139
+in_domain_test,Variante C (Hybrid),AS,0.0,0.043471723794937134
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01004489790648222
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04913325235247612
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10204363614320755
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03036411851644516
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11272196471691132
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8609660863876343
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6265762448310852
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8623870015144348
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8641124963760376
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9896500110626221
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2984715402126312
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11838099360466003
+in_domain_test,Variante C (Hybrid),AS,0.0,0.009203754365444183
+in_domain_test,Variante C (Hybrid),AS,0.0,0.13639160990715027
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04750826582312584
+in_domain_test,Variante C (Hybrid),AS,0.0,0.055111128836870193
+in_domain_test,Variante C (Hybrid),AS,0.0,0.015812521800398827
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00559051102027297
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03243188560009003
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9070332646369934
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8157618641853333
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9940263032913208
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8957316875457764
+in_domain_test,Variante C (Hybrid),LS,1.0,0.847232460975647
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9405919313430786
+in_domain_test,Variante C (Hybrid),LS,1.0,0.19263915717601776
+in_domain_test,Variante C (Hybrid),LS,1.0,0.27201148867607117
+in_domain_test,Variante C (Hybrid),LS,1.0,0.09686795622110367
+in_domain_test,Variante C (Hybrid),LS,1.0,0.762775182723999
+in_domain_test,Variante C (Hybrid),AS,0.0,0.3293578624725342
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1404314637184143
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07629285752773285
+in_domain_test,Variante C (Hybrid),AS,0.0,0.052581027150154114
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18147695064544678
+in_domain_test,Variante C (Hybrid),AS,0.0,0.16713525354862213
+in_domain_test,Variante C (Hybrid),AS,0.0,0.16089963912963867
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9567739963531494
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9573192000389099
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9431164860725403
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9499480128288269
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7912200093269348
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9536400437355042
+in_domain_test,Variante C (Hybrid),AS,0.0,0.017016801983118057
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12341461330652237
+in_domain_test,Variante C (Hybrid),AS,0.0,0.020342666655778885
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10612133890390396
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005626643542200327
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9872828722000122
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8585017919540405
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8157604336738586
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8184407949447632
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9494398832321167
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9259092211723328
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2038089781999588
+in_domain_test,Variante C (Hybrid),AS,0.0,0.4434865415096283
+in_domain_test,Variante C (Hybrid),AS,0.0,0.3333837389945984
+in_domain_test,Variante C (Hybrid),AS,0.0,0.13403774797916412
+in_domain_test,Variante C (Hybrid),AS,0.0,0.15459516644477844
+in_domain_test,Variante C (Hybrid),AS,0.0,0.6122531890869141
+in_domain_test,Variante C (Hybrid),LS,1.0,0.525706946849823
+in_domain_test,Variante C (Hybrid),LS,1.0,0.665560245513916
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5561336874961853
+in_domain_test,Variante C (Hybrid),LS,1.0,0.46439415216445923
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6626491546630859
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5963761210441589
+in_domain_test,Variante C (Hybrid),AS,0.0,0.004017790779471397
+in_domain_test,Variante C (Hybrid),AS,0.0,0.17431147396564484
+in_domain_test,Variante C (Hybrid),AS,0.0,0.012362196110188961
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0590936616063118
+in_domain_test,Variante C (Hybrid),AS,0.0,0.278594046831131
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9932168126106262
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8527726531028748
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9833563566207886
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9411861896514893
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9859758019447327
+in_domain_test,Variante C (Hybrid),AS,0.0,0.061876267194747925
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03234686329960823
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01515506487339735
+in_domain_test,Variante C (Hybrid),AS,0.0,0.022079436108469963
+in_domain_test,Variante C (Hybrid),AS,0.0,0.003406955162063241
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00622876500710845
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7397138476371765
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8603371381759644
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9889464974403381
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8924151659011841
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9590517282485962
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6670837998390198
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9941431879997253
+in_domain_test,Variante C (Hybrid),AS,0.0,0.13774250447750092
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07072471082210541
+in_domain_test,Variante C (Hybrid),AS,0.0,0.056397248059511185
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06488416343927383
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06328204274177551
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05620312690734863
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09762922674417496
+in_domain_test,Variante C (Hybrid),AS,0.0,0.014082701876759529
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09412001073360443
+in_domain_test,Variante C (Hybrid),AS,0.0,0.034812793135643005
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00696457689628005
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0983639806509018
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06936066597700119
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06514480710029602
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07872273027896881
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04055759310722351
+in_domain_test,Variante C (Hybrid),AS,0.0,0.036041274666786194
+in_domain_test,Variante C (Hybrid),AS,0.0,0.014746193774044514
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1095285415649414
+in_domain_test,Variante C (Hybrid),AS,0.0,0.017488013952970505
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06486989557743073
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08551780134439468
+in_domain_test,Variante C (Hybrid),AS,0.0,0.008590799756348133
+in_domain_test,Variante C (Hybrid),AS,0.0,0.013264529407024384
+in_domain_test,Variante C (Hybrid),AS,0.0,0.006218899507075548
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01296936720609665
+in_domain_test,Variante C (Hybrid),AS,0.0,0.053197212517261505
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11838407069444656
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9364708662033081
+in_domain_test,Variante C (Hybrid),AS,0.0,0.016209933906793594
+in_domain_test,Variante C (Hybrid),AS,0.0,0.6168310642242432
+in_domain_test,Variante C (Hybrid),AS,0.0,0.8108740448951721
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9280108213424683
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9597435593605042
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7781829833984375
+in_domain_test,Variante C (Hybrid),LS,1.0,0.4346185028553009
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05328010395169258
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07866507023572922
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01621537283062935
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04445025324821472
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04509871453046799
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04673144593834877
+in_domain_test,Variante C (Hybrid),AS,0.0,0.029027407988905907
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02431420609354973
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5406413078308105
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7512081265449524
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9134505987167358
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7045878171920776
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8049961924552917
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7749300599098206
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03402749449014664
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07198944687843323
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03157687559723854
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05358922481536865
+in_domain_test,Variante C (Hybrid),AS,0.0,0.047489408403635025
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05381281301379204
+in_domain_test,Variante C (Hybrid),AS,0.0,0.14738011360168457
+in_domain_test,Variante C (Hybrid),AS,0.0,0.007391131017357111
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1378735452890396
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9487915635108948
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7821176648139954
+in_domain_test,Variante C (Hybrid),LS,1.0,0.952383816242218
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6372057795524597
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04355474188923836
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04623142257332802
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9391252994537354
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9839232563972473
+in_domain_test,Variante C (Hybrid),LS,1.0,0.988881528377533
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9925011992454529
+in_domain_test,Variante C (Hybrid),AS,0.0,0.14641110599040985
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0877293273806572
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7460128664970398
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9677563905715942
+in_domain_test,Variante C (Hybrid),LS,1.0,0.920906662940979
+in_domain_test,Variante C (Hybrid),LS,1.0,0.4424060583114624
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5021690130233765
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6432978510856628
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6720601320266724
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9201744794845581
+in_domain_test,Variante C (Hybrid),LS,1.0,0.21539215743541718
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18836019933223724
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0131745096296072
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0725921019911766
+in_domain_test,Variante C (Hybrid),AS,0.0,0.019095199182629585
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05330983176827431
+in_domain_test,Variante C (Hybrid),AS,0.0,0.003965510055422783
+in_domain_test,Variante C (Hybrid),AS,0.0,0.010074594989418983
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00506358128041029
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8248107433319092
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9502092599868774
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8324868083000183
+in_domain_test,Variante C (Hybrid),LS,1.0,0.707525908946991
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9804141521453857
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9194186925888062
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5765767097473145
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2936302125453949
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06651671975851059
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06253808736801147
+in_domain_test,Variante C (Hybrid),AS,0.0,0.026549650356173515
+in_domain_test,Variante C (Hybrid),AS,0.0,0.16607452929019928
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01083509624004364
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04201100021600723
+in_domain_test,Variante C (Hybrid),AS,0.0,0.20535847544670105
+in_domain_test,Variante C (Hybrid),AS,0.0,0.008964968845248222
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9913967251777649
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6369646787643433
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08915230631828308
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05703246593475342
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04787140712141991
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08434604853391647
+in_domain_test,Variante C (Hybrid),AS,0.0,0.041191358119249344
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06024034693837166
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0077645499259233475
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9168474674224854
+in_domain_test,Variante C (Hybrid),LS,1.0,0.4792080521583557
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0508686788380146
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00886048935353756
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08248192816972733
+in_domain_test,Variante C (Hybrid),AS,0.0,0.041151028126478195
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8774880170822144
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8620592355728149
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8417187929153442
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8910588622093201
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9165420532226562
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8844015598297119
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8598756194114685
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6380215883255005
+in_domain_test,Variante C (Hybrid),LS,1.0,0.89924156665802
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8781887888908386
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9465059638023376
+in_domain_test,Variante C (Hybrid),LS,1.0,0.878758430480957
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9732657670974731
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2193247377872467
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2958570718765259
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07443325966596603
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0885784924030304
+in_domain_test,Variante C (Hybrid),AS,0.0,0.016879338771104813
+in_domain_test,Variante C (Hybrid),AS,0.0,0.15778209269046783
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18972478806972504
+in_domain_test,Variante C (Hybrid),AS,0.0,0.24965494871139526
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05792411416769028
+in_domain_test,Variante C (Hybrid),AS,0.0,0.028419381007552147
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05148489028215408
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1739320009946823
+in_domain_test,Variante C (Hybrid),AS,0.0,0.047921810299158096
+in_domain_test,Variante C (Hybrid),AS,0.0,0.17961713671684265
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06483858823776245
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9832687377929688
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7250980138778687
+in_domain_test,Variante C (Hybrid),AS,0.0,0.17018599808216095
+in_domain_test,Variante C (Hybrid),AS,0.0,0.22789804637432098
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18494097888469696
+in_domain_test,Variante C (Hybrid),AS,0.0,0.034295469522476196
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1281885951757431
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8882414102554321
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5912229418754578
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9097039103507996
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9865295886993408
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07965922355651855
+in_domain_test,Variante C (Hybrid),AS,0.0,0.008318440988659859
+in_domain_test,Variante C (Hybrid),AS,0.0,0.025930840522050858
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9203042984008789
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9092609882354736
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9149783849716187
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9875528812408447
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8761358261108398
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9890698194503784
+in_domain_test,Variante C (Hybrid),LS,1.0,0.877223014831543
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1884901225566864
+in_domain_test,Variante C (Hybrid),AS,0.0,0.43468618392944336
+in_domain_test,Variante C (Hybrid),AS,0.0,0.27137815952301025
+in_domain_test,Variante C (Hybrid),AS,0.0,0.23586954176425934
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09892360866069794
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2216881960630417
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9905315637588501
+in_domain_test,Variante C (Hybrid),AS,0.0,0.010744448751211166
+in_domain_test,Variante C (Hybrid),AS,0.0,0.006538607645779848
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7176616191864014
+in_domain_test,Variante C (Hybrid),AS,0.0,0.006212695501744747
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7605406045913696
+in_domain_test,Variante C (Hybrid),AS,0.0,0.020636126399040222
+in_domain_test,Variante C (Hybrid),AS,0.0,0.019808897748589516
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9696164727210999
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5243171453475952
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02108193375170231
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03515942394733429
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07451880723237991
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7306677103042603
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8301210403442383
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9963366985321045
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9959611296653748
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8857690095901489
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8586861491203308
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8063464164733887
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7765669226646423
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9061166048049927
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9958491325378418
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5945325493812561
+in_domain_test,Variante C (Hybrid),LS,1.0,0.43515199422836304
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10547810792922974
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12369230389595032
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08543115854263306
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0886833667755127
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08149681240320206
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08806751668453217
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06788066029548645
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8947577476501465
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8605043888092041
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8740744590759277
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8320890069007874
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04417859762907028
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02309947833418846
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0809052363038063
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02242625132203102
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8852159380912781
+in_domain_test,Variante C (Hybrid),LS,1.0,0.87138831615448
+in_domain_test,Variante C (Hybrid),LS,1.0,0.766355037689209
+in_domain_test,Variante C (Hybrid),LS,1.0,0.896647036075592
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9797088503837585
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9084447622299194
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9799714088439941
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9152247905731201
+in_domain_test,Variante C (Hybrid),LS,1.0,0.873932421207428
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8265807628631592
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9376758933067322
+in_domain_test,Variante C (Hybrid),AS,0.0,0.006281092297285795
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06531605869531631
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04221654683351517
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01653880625963211
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07694921642541885
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07446864247322083
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06516002863645554
+in_domain_test,Variante C (Hybrid),AS,0.0,0.033827487379312515
+in_domain_test,Variante C (Hybrid),AS,0.0,0.021326463669538498
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05967964977025986
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0613987110555172
+in_domain_test,Variante C (Hybrid),AS,0.0,0.013487111777067184
+in_domain_test,Variante C (Hybrid),AS,0.0,0.010422454215586185
+in_domain_test,Variante C (Hybrid),AS,0.0,0.004002130590379238
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05064549297094345
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05238638445734978
+in_domain_test,Variante C (Hybrid),AS,0.0,0.016899656504392624
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0052156830206513405
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8301310539245605
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8415868878364563
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6775798797607422
+in_domain_test,Variante C (Hybrid),AS,0.0,0.017998170107603073
+in_domain_test,Variante C (Hybrid),AS,0.0,0.054510921239852905
+in_domain_test,Variante C (Hybrid),AS,0.0,0.015310495160520077
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9960780739784241
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9942203760147095
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9907398223876953
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6843235492706299
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7005120515823364
+in_domain_test,Variante C (Hybrid),LS,1.0,0.012722079642117023
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1312701553106308
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01352486852556467
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00440823333337903
+in_domain_test,Variante C (Hybrid),AS,0.0,0.015150517225265503
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005395971704274416
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9851248264312744
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8430448174476624
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12919050455093384
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10216369479894638
+in_domain_test,Variante C (Hybrid),AS,0.0,0.037286754697561264
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0065439967438578606
+in_domain_test,Variante C (Hybrid),LS,1.0,0.909996509552002
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7615634202957153
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9050769805908203
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9935817718505859
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11528434604406357
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12109173834323883
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005519026890397072
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8280463218688965
+in_domain_test,Variante C (Hybrid),AS,0.0,0.023214612156152725
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18151912093162537
+in_domain_test,Variante C (Hybrid),LS,1.0,0.34864673018455505
+in_domain_test,Variante C (Hybrid),LS,1.0,0.3621756434440613
+in_domain_test,Variante C (Hybrid),LS,1.0,0.791451632976532
+in_domain_test,Variante C (Hybrid),LS,1.0,0.867333710193634
+in_domain_test,Variante C (Hybrid),LS,1.0,0.811826229095459
+in_domain_test,Variante C (Hybrid),AS,0.0,0.034039366990327835
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07072045654058456
+in_domain_test,Variante C (Hybrid),AS,0.0,0.018013691529631615
+in_domain_test,Variante C (Hybrid),AS,0.0,0.008094090037047863
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05081062391400337
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06424833089113235
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11504369229078293
+in_domain_test,Variante C (Hybrid),AS,0.0,0.5987428426742554
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8361698389053345
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9224205017089844
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9213772416114807
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9121327996253967
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005446267779916525
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09889985620975494
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18777845799922943
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9349626898765564
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9148775339126587
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9919764399528503
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9318132996559143
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9127324223518372
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9491472244262695
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9034174680709839
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8942508101463318
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9250259399414062
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8943567872047424
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8659362196922302
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9631134271621704
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9111282825469971
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7082818150520325
+in_domain_test,Variante C (Hybrid),AS,0.0,0.017272084951400757
+in_domain_test,Variante C (Hybrid),AS,0.0,0.055941544473171234
+in_domain_test,Variante C (Hybrid),AS,0.0,0.004314366262406111
+in_domain_test,Variante C (Hybrid),AS,0.0,0.004086039960384369
+in_domain_test,Variante C (Hybrid),AS,0.0,0.058179933577775955
+in_domain_test,Variante C (Hybrid),AS,0.0,0.003303217701613903
+in_domain_test,Variante C (Hybrid),AS,0.0,0.013248411007225513
+in_domain_test,Variante C (Hybrid),AS,0.0,0.22184060513973236
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08866102248430252
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03996583819389343
+in_domain_test,Variante C (Hybrid),AS,0.0,0.042370304465293884
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09006823599338531
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02893279492855072
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12848737835884094
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03321460634469986
+in_domain_test,Variante C (Hybrid),AS,0.0,0.14907576143741608
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03710241988301277
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05307585373520851
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005286915227770805
+in_domain_test,Variante C (Hybrid),AS,0.0,0.010872569866478443
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05870377644896507
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0801125019788742
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07958986610174179
+in_domain_test,Variante C (Hybrid),AS,0.0,0.007357069291174412
+in_domain_test,Variante C (Hybrid),AS,0.0,0.029689451679587364
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04897996410727501
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01661757379770279
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7618462443351746
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9343385100364685
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9463731646537781
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9947342872619629
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9392261505126953
+in_domain_test,Variante C (Hybrid),LS,1.0,0.929448664188385
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1243470311164856
+in_domain_test,Variante C (Hybrid),AS,0.0,0.01292151864618063
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08075704425573349
+in_domain_test,Variante C (Hybrid),AS,0.0,0.007916921749711037
+in_domain_test,Variante C (Hybrid),AS,0.0,0.008395901881158352
+in_domain_test,Variante C (Hybrid),AS,0.0,0.009892658330500126
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09695850312709808
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9270730018615723
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7985668778419495
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5989271402359009
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6017931699752808
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7079277038574219
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8230053782463074
+in_domain_test,Variante C (Hybrid),AS,0.0,0.130789652466774
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07702577859163284
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04596389830112457
+in_domain_test,Variante C (Hybrid),AS,0.0,0.19096939265727997
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03808910772204399
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10960035771131516
+in_domain_test,Variante C (Hybrid),AS,0.0,0.006364433094859123
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07488033175468445
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05302256718277931
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09696491807699203
+in_domain_test,Variante C (Hybrid),AS,0.0,0.018830396234989166
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00560862896963954
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09633075445890427
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07453841716051102
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9296311140060425
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6452937126159668
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6696800589561462
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8824709057807922
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8915733098983765
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9947001934051514
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05348236486315727
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0915709063410759
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03230281546711922
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005381493829190731
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05180507153272629
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02081676572561264
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5366485714912415
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9395530819892883
+in_domain_test,Variante C (Hybrid),AS,0.0,0.02275417186319828
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005386176519095898
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8231154084205627
+in_domain_test,Variante C (Hybrid),LS,1.0,0.779531717300415
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5497040748596191
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6770540475845337
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6569825410842896
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9931966066360474
+in_domain_test,Variante C (Hybrid),AS,0.0,0.16188879311084747
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05134963244199753
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07125567644834518
+in_domain_test,Variante C (Hybrid),AS,0.0,0.024922097101807594
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0033568223007023335
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8058454990386963
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7657384276390076
+in_domain_test,Variante C (Hybrid),LS,1.0,0.48947376012802124
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8249131441116333
+in_domain_test,Variante C (Hybrid),LS,1.0,0.48210379481315613
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7624273300170898
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8345805406570435
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6425520181655884
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7562158703804016
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5332213640213013
+in_domain_test,Variante C (Hybrid),AS,0.0,0.16123366355895996
+in_domain_test,Variante C (Hybrid),AS,0.0,0.092526376247406
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09049055725336075
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005277159158140421
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0783994197845459
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04193200543522835
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9828141927719116
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6079169511795044
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10294018685817719
+in_domain_test,Variante C (Hybrid),AS,0.0,0.036711011081933975
+in_domain_test,Variante C (Hybrid),AS,0.0,0.00860562827438116
+in_domain_test,Variante C (Hybrid),AS,0.0,0.012551733292639256
+in_domain_test,Variante C (Hybrid),AS,0.0,0.09711714833974838
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04215123504400253
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9150493741035461
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9951322674751282
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005446587689220905
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005273271352052689
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8268424272537231
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8468133211135864
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9475785493850708
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9891364574432373
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9669596552848816
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6654087901115417
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6126185655593872
+in_domain_test,Variante C (Hybrid),AS,0.0,0.13874000310897827
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1102900579571724
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07989194989204407
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1420891284942627
+in_domain_test,Variante C (Hybrid),AS,0.0,0.19812296330928802
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11148098856210709
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18216782808303833
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12747766077518463
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1448202133178711
+in_domain_test,Variante C (Hybrid),AS,0.0,0.037697698920965195
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04623722657561302
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0680471807718277
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03586180508136749
+in_domain_test,Variante C (Hybrid),LS,1.0,0.8601180911064148
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9327846765518188
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7114417552947998
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7296034097671509
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5434502363204956
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03750830888748169
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2839879095554352
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12970061600208282
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11048217862844467
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05729285627603531
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1811995506286621
+in_domain_test,Variante C (Hybrid),AS,0.0,0.18392489850521088
+in_domain_test,Variante C (Hybrid),AS,0.0,0.1713140904903412
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12995658814907074
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9183817505836487
+in_domain_test,Variante C (Hybrid),LS,1.0,0.24851559102535248
+in_domain_test,Variante C (Hybrid),AS,0.0,0.057103417813777924
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05689944699406624
+in_domain_test,Variante C (Hybrid),AS,0.0,0.08984296023845673
+in_domain_test,Variante C (Hybrid),AS,0.0,0.10362130403518677
+in_domain_test,Variante C (Hybrid),AS,0.0,0.33815422654151917
+in_domain_test,Variante C (Hybrid),LS,1.0,0.776033878326416
+in_domain_test,Variante C (Hybrid),LS,1.0,0.7798334956169128
+in_domain_test,Variante C (Hybrid),LS,1.0,0.908196210861206
+in_domain_test,Variante C (Hybrid),LS,1.0,0.989510715007782
+in_domain_test,Variante C (Hybrid),AS,0.0,0.15144647657871246
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06611215323209763
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06927548348903656
+in_domain_test,Variante C (Hybrid),AS,0.0,0.13772037625312805
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5368744730949402
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6408984065055847
+in_domain_test,Variante C (Hybrid),LS,1.0,0.6231796145439148
+in_domain_test,Variante C (Hybrid),LS,1.0,0.5307368040084839
+in_domain_test,Variante C (Hybrid),LS,1.0,0.9757260680198669
+in_domain_test,Variante C (Hybrid),AS,0.0,0.11845175176858902
+in_domain_test,Variante C (Hybrid),AS,0.0,0.05975444242358208
+in_domain_test,Variante C (Hybrid),AS,0.0,0.12307345867156982
+in_domain_test,Variante C (Hybrid),AS,0.0,0.016010461375117302
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03929069638252258
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04134923219680786
+in_domain_test,Variante C (Hybrid),AS,0.0,0.034258220344781876
+in_domain_test,Variante C (Hybrid),AS,0.0,0.0129248583689332
+in_domain_test,Variante C (Hybrid),AS,0.0,0.005694170482456684
+in_domain_test,Variante C (Hybrid),AS,0.0,0.010362571105360985
+in_domain_test,Variante C (Hybrid),AS,0.0,0.06825888901948929
+in_domain_test,Variante C (Hybrid),AS,0.0,0.03053881973028183
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07329149544239044
+in_domain_test,Variante C (Hybrid),AS,0.0,0.04688364639878273
+in_domain_test,Variante C (Hybrid),AS,0.0,0.2243538200855255
+in_domain_test,Variante C (Hybrid),AS,0.0,0.07154548913240433
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9773763418197632
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9515876770019531
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8941707015037537
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8654794096946716
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9928458333015442
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07156817615032196
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08714993298053741
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06520906090736389
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7817208170890808
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5118792057037354
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7913060784339905
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7135059833526611
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012024186551570892
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02344760112464428
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.17955617606639862
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8607189059257507
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7491191625595093
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13534222543239594
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8698243498802185
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9876046180725098
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6890822649002075
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7698157429695129
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.14938072860240936
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1668238490819931
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05406690388917923
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.26909375190734863
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.011369381099939346
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9271149039268494
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6350812315940857
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03815384581685066
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04453428089618683
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012978630140423775
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.008290695957839489
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06674443930387497
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.061853475868701935
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9727073907852173
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.2938511371612549
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0940985307097435
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10973422229290009
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012309450656175613
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.034105539321899414
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6799985766410828
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5799044370651245
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6532713770866394
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.006901510525494814
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02304683066904545
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10443061590194702
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010508301667869091
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7962743043899536
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9618282318115234
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9567224979400635
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9186581969261169
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9140151739120483
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7055914402008057
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0117036709561944
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11220122873783112
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08627566695213318
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1215045228600502
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04611954838037491
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10712695866823196
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.035046305507421494
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010374372825026512
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8939744830131531
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.3717309236526489
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.038877323269844055
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02943880669772625
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8830963373184204
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6480212211608887
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8343859314918518
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8976340293884277
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7400185465812683
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03181735798716545
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.013749043457210064
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.013440134935081005
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08898727595806122
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8938100934028625
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.1251174509525299
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.3912879228591919
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.41833043098449707
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9612922072410583
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.008243368938565254
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.013079202733933926
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010968760587275028
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.011457530781626701
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6179938912391663
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8174161314964294
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.900248110294342
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.035082340240478516
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02893780916929245
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.31787049770355225
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5765109062194824
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.49836185574531555
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.4906519651412964
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.4302288293838501
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7316486835479736
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8396017551422119
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0940394252538681
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.035828351974487305
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0292920283973217
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01567663811147213
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10970407724380493
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09295949339866638
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05389077961444855
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09712133556604385
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.009401259012520313
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.031336188316345215
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09932629764080048
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.020518021658062935
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.053764522075653076
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11457465589046478
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.8546375036239624
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9402815699577332
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8896733522415161
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7849075794219971
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7930625677108765
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8630177974700928
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8765825033187866
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.22602196037769318
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.22271379828453064
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10426385700702667
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.22526642680168152
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.013534223660826683
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.020574843510985374
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05898396670818329
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10486415028572083
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.045237913727760315
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09174957126379013
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12960952520370483
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01603272743523121
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07562176138162613
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.020198598504066467
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.015994993969798088
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02464836649596691
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.059171900153160095
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9176279902458191
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.23606199026107788
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.058758631348609924
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0530618391931057
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12835277616977692
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.18084396421909332
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6450214385986328
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8099006414413452
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9423657059669495
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.958265483379364
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8473031520843506
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.85720294713974
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6670287251472473
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7115662693977356
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03460785001516342
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06296294182538986
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.028319360688328743
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07855651527643204
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07662653923034668
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.028574366122484207
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.027962181717157364
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10434696823358536
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.014856354333460331
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.062261465936899185
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07064646482467651
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010659357532858849
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11427286267280579
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08270230889320374
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.022073326632380486
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07949651777744293
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8189011216163635
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.616383969783783
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8198125958442688
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7880825996398926
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9396870732307434
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.17006994783878326
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07383039593696594
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.009079745039343834
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.14878004789352417
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.022729724645614624
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01918986812233925
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010113251395523548
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.011889338493347168
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.060328613966703415
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8656783103942871
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8299363255500793
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9602066278457642
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9205586314201355
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8745864033699036
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9820824861526489
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.2850039303302765
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.33658888936042786
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.10165506601333618
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5535907745361328
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.303754985332489
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.19583909213542938
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06218154728412628
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07137912511825562
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.2248031347990036
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.20008641481399536
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13807682693004608
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9353567957878113
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9514541625976562
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.949508786201477
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9733757972717285
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8682664632797241
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9404581189155579
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.025631485506892204
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08133246004581451
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02775365300476551
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07498637586832047
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010717503726482391
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9884290099143982
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8838524222373962
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8651332259178162
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8212500214576721
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9903594255447388
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9704576730728149
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.35688769817352295
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.3297636806964874
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.42601102590560913
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.24961337447166443
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.25911587476730347
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.6756957769393921
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5625566244125366
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7940220832824707
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6257819533348083
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5013517737388611
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.697869062423706
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6679747104644775
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.009223686531186104
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1983264684677124
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.013973438180983067
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.049792878329753876
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.48576804995536804
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9840821027755737
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7927501797676086
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9560579061508179
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9511155486106873
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9570905566215515
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04677985981106758
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04036223143339157
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.022456536069512367
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02546873316168785
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.013511896133422852
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.014297260902822018
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7306508421897888
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8319570422172546
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9621356725692749
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8927621841430664
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8455657958984375
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7072212100028992
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9925014972686768
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.14805375039577484
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08400581777095795
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01649901270866394
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.042788922786712646
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03621372953057289
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05714110657572746
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11018172651529312
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012729310430586338
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1202293261885643
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.028457796201109886
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.016925986856222153
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12078183889389038
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0868459939956665
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07368931919336319
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.047080688178539276
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04067803546786308
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0731327161192894
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.017300337553024292
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11136366426944733
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.034921057522296906
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.056355129927396774
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0801188051700592
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012162892147898674
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05708518624305725
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02579689212143421
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.041674792766571045
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.050738465040922165
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1851644665002823
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9504329562187195
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.022927993908524513
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.6032853722572327
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.9392420053482056
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9646111726760864
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.935064435005188
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8387613296508789
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5306940674781799
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07195819914340973
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06370687484741211
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.019192516803741455
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03136171028017998
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.059957001358270645
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05015096440911293
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0417642705142498
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.044382382184267044
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5606074929237366
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8213436603546143
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8848111629486084
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8461490869522095
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6961797475814819
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.784601092338562
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.045758165419101715
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04081665724515915
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07018384337425232
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06221771985292435
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06035628542304039
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06091679260134697
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11039377003908157
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.020633487030863762
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07107783854007721
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9303536415100098
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7933672070503235
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8226094245910645
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6257761120796204
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07873404026031494
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02237154357135296
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9547799825668335
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9884583353996277
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9714257121086121
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9940840601921082
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08666586130857468
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06724271923303604
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7506020069122314
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9751276969909668
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9121747612953186
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5297099351882935
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6207478046417236
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6388574838638306
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5295153260231018
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8255908489227295
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.31865543127059937
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11994725465774536
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.015240015462040901
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06258167326450348
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010023851878941059
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04724946618080139
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.006434370297938585
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03520503640174866
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01897631771862507
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7884016633033752
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9381086826324463
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.831698477268219
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6917446851730347
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9645088911056519
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.988408625125885
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7168152332305908
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.23632392287254333
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11083263158798218
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.078949473798275
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01649395190179348
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.18672433495521545
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.019656991586089134
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08477151393890381
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.24715815484523773
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.017446277663111687
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9872404932975769
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6476237177848816
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1368502378463745
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05318472534418106
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06152217090129852
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09055399894714355
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.048387303948402405
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05794898048043251
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.024381110444664955
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.93410724401474
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.47489961981773376
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05065295845270157
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.013722080737352371
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12476016581058502
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05283645913004875
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9323965907096863
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8444558382034302
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8438592553138733
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.849528431892395
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9244174957275391
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8403064012527466
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8317930698394775
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6715386509895325
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.920891284942627
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8296741247177124
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9517103433609009
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8752102851867676
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9832009077072144
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.23068547248840332
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.27063992619514465
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13290797173976898
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09871529787778854
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.020969271659851074
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1643449366092682
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.2202618271112442
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.29725658893585205
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13876813650131226
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.037179604172706604
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04020725563168526
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.19550001621246338
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0476965568959713
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13494086265563965
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.009820995852351189
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9887380599975586
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7030986547470093
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1260993927717209
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.3166465163230896
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.14257954061031342
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.058032531291246414
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1588083803653717
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8721563220024109
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6203053593635559
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9634796977043152
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9832595586776733
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0614742711186409
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.008458542637526989
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03238506242632866
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9833563566207886
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8904804587364197
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.887517511844635
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9861940741539001
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9379734396934509
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9472469687461853
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9800455570220947
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.2466239035129547
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.43261656165122986
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.259045273065567
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.21968673169612885
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.17277559638023376
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1672128587961197
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9902907013893127
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.017678730189800262
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01741034910082817
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7002449631690979
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02351825125515461
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7144761085510254
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012791819870471954
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02934853918850422
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9308527112007141
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9750984311103821
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.025069810450077057
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04963114112615585
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.019983895123004913
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7805245518684387
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7660785913467407
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9925034046173096
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9902371764183044
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8928929567337036
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8529847860336304
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7201483845710754
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7620072364807129
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.819066047668457
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9955946803092957
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5727148652076721
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.4568314552307129
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.17039097845554352
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.15443302690982819
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04882679879665375
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09260943531990051
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07354552298784256
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04132138192653656
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.009414741769433022
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8486131429672241
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8178755044937134
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8057597279548645
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7990166544914246
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.042361900210380554
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0380873903632164
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05668289586901665
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.022627126425504684
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7685369253158569
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.856356680393219
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7997295260429382
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9123362302780151
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9486315250396729
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.878563404083252
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9480648636817932
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9020735025405884
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7899081110954285
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8202369809150696
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9901144504547119
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.014331397600471973
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.028460191562771797
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11419256776571274
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.011567621491849422
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0904637947678566
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06645798683166504
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05924351513385773
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0414867177605629
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.011044011451303959
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.061338167637586594
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0754031240940094
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.014283545315265656
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03757108747959137
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01963847689330578
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04714345186948776
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.031228750944137573
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.029532330110669136
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.014599156565964222
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8540137410163879
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8745853304862976
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.765631377696991
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0472722053527832
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.026675228029489517
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02538098208606243
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9883531928062439
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9892549514770508
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9778701066970825
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6647935509681702
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6872433423995972
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.020514432340860367
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06284739077091217
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.008999323472380638
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.030873464420437813
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.023641537874937057
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01620640605688095
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9626773595809937
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8981108069419861
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.15359826385974884
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12996192276477814
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02315971441566944
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.007926339283585548
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9099066853523254
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7869383096694946
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.944085419178009
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.993219792842865
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.039544302970170975
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12374572455883026
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01290547288954258
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8647148013114929
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02626408450305462
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11632028967142105
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.372955322265625
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.4344542622566223
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7802048325538635
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7450880408287048
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7096827030181885
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.023105354979634285
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07990064471960068
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05860833451151848
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02781008370220661
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04615073278546333
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07907573133707047
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.16581352055072784
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.7744094729423523
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6666846871376038
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9438253045082092
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9435506463050842
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9562128782272339
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.00872199796140194
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13146807253360748
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.22996489703655243
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9140763878822327
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8851037621498108
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.986669659614563
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9050289988517761
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.902441680431366
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8789587020874023
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.932327151298523
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.85426926612854
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8817592859268188
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9030990600585938
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9041977524757385
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9544216990470886
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9023308157920837
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6864566802978516
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05020318552851677
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.016779951751232147
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010996957309544086
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.009851368144154549
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05016271770000458
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.008636539801955223
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.018497444689273834
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.27533385157585144
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08735629916191101
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04930276796221733
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10304758697748184
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07185131311416626
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.049043189734220505
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13135531544685364
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.020091738551855087
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1989104002714157
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.061025284230709076
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04446021094918251
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.016349390149116516
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04474630206823349
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12019754946231842
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06235402822494507
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13148730993270874
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012510684318840504
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.031014736741781235
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07763068377971649
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03719018027186394
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8231230974197388
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9394609928131104
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9438501596450806
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9897157549858093
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9246495962142944
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9805387258529663
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10252968221902847
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.011843054555356503
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.019529609009623528
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012694122269749641
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03484474867582321
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03792393207550049
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.20458929240703583
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8555207252502441
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8043268918991089
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7813966274261475
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5744766592979431
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7441065907478333
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8351901173591614
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1303054690361023
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06199324131011963
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09801439940929413
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.18523411452770233
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04600575566291809
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05842405930161476
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.011002798564732075
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10042572021484375
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07033348083496094
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04356475546956062
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.022038700059056282
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01016656681895256
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08460471034049988
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10539510101079941
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8999752402305603
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.742696225643158
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8544855117797852
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9299134612083435
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9349928498268127
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9902772903442383
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.025844383984804153
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08184351772069931
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03997315466403961
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.006745960563421249
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.05897776037454605
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.021123066544532776
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5576537251472473
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9739032983779907
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02860773541033268
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.011159715242683887
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8355761766433716
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8610312938690186
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5122350454330444
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7788292765617371
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6066916584968567
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9937269687652588
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.23342491686344147
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.010665041394531727
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07567381113767624
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01670757122337818
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0066634719260036945
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7290264368057251
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7995628714561462
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5014405846595764
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7001224160194397
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.36866676807403564
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7096211314201355
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7800913453102112
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5832158923149109
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7408922910690308
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5809279680252075
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12384592741727829
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0732099860906601
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07681915909051895
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.014216283336281776
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06512586027383804
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.022231807932257652
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9109836220741272
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.663834810256958
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03815384581685066
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04453428089618683
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.012978630140423775
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.008290695957839489
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06674443930387497
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.061853475868701935
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8983772397041321
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9926046133041382
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.02445545792579651
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01104537583887577
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7957074642181396
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8208194375038147
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9109031558036804
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9781106114387512
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9884595274925232
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7831851840019226
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7102675437927246
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10291951149702072
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.14418627321720123
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11191868036985397
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.19500049948692322
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.16644515097141266
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.14238210022449493
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13738609850406647
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09498532116413116
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.154310941696167
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07608649134635925
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.047993481159210205
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08083456009626389
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.08155810832977295
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8293530941009521
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9611762166023254
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7255796194076538
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6474519968032837
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.4926837086677551
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.12699542939662933
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.2098570615053177
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.13709957897663116
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07318195700645447
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.061296675354242325
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1411091387271881
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.15154975652694702
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.14032526314258575
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.09593283385038376
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8370727896690369
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.2207423597574234
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07573964446783066
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07853507995605469
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10727660357952118
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07494571059942245
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.30988141894340515
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7617756724357605
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.7476885318756104
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.8887765407562256
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9883438348770142
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.18009592592716217
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.11051705479621887
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06248578801751137
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.1892576515674591
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5162186026573181
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6549971699714661
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.6285849809646606
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.5372481346130371
+in_domain_test,Variante D (Hybrid + Cyclic),LS,1.0,0.9910296201705933
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.10905222594738007
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.04383976384997368
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.07735120505094528
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.01808864437043667
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.038589730858802795
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06871835887432098
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.03520660847425461
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.016869381070137024
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.0105717359110713
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.00922814104706049
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06828474998474121
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.016281187534332275
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06749124079942703
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.06514454632997513
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.15823669731616974
+in_domain_test,Variante D (Hybrid + Cyclic),AS,0.0,0.037640687078237534

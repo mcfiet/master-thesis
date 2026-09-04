@@ -1,0 +1,7 @@
+=== Starting Base Article Scaling Grid (train_fraction) ===
+--- Running Experiment: scale_pairs_f010 (train_fraction=0.10) ---
+--- Running Experiment: scale_pairs_f025 (train_fraction=0.25) ---
+--- Running Experiment: scale_pairs_f050 (train_fraction=0.50) ---
+--- Running Experiment: scale_pairs_f075 (train_fraction=0.75) ---
+--- Running Experiment: scale_pairs_f100 (train_fraction=1.00) ---
+=== Base Article Scaling Grid Completed ===

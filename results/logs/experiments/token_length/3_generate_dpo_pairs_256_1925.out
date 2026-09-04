@@ -1,0 +1,53 @@
+2026-08-28 21:33:33 - INFO - GenerateDPOLadder - Active compute device: cuda
+2026-08-28 21:33:33 - INFO - GenerateDPOLadder - Configured Temperature Ladder: [0.6, 0.7, 0.8, 0.85]
+2026-08-28 21:33:33 - INFO - GenerateDPOLadder - Repetition Penalty: 1.35 | No-Repeat-Ngram: 3
+2026-08-28 21:33:33 - INFO - GenerateDPOLadder - Target Score Margin: >= 0.05
+2026-08-28 21:33:33 - INFO - GenerateDPOLadder - Loading corpus from: data/corpus/corpus_10kgnad_len512_as.json
+2026-08-28 21:33:33 - INFO - GenerateDPOLadder - Loaded 9567 valid records from corpus.
+2026-08-28 21:33:33 - INFO - GenerateDPOLadder - Loading SFT model/tokenizer from: results/models/token_length_exp/sft_len256
+2026-08-28 21:33:34 - INFO - GenerateDPOLadder - Merging SFT LoRA adapter into base Seq2Seq model (facebook/mbart-large-50)...
+2026-08-28 21:33:36 - INFO - GenerateDPOLadder - Configured multilingual tokenizer with src_lang='de_DE' and tgt_lang='de_DE'
+2026-08-28 21:33:36 - INFO - GenerateDPOLadder - Loading Reward Model vocabulary from: data/token_length_exp/mixup_vocab_256.json
+2026-08-28 21:33:36 - INFO - GenerateDPOLadder - Loading BiLSTM Regressor weights from: results/models/token_length_exp/bilstm_mixup_regression_256.pt
+2026-08-28 21:33:36 - INFO - GenerateDPOLadder - Loading SBERT model for semantic evaluation: jinaai/jina-embeddings-v2-base-de
+2026-08-28 21:33:36 - INFO - sentence_transformers.base.model - Loading SentenceTransformer model from jinaai/jina-embeddings-v2-base-de.
+2026-08-28 21:33:41 - INFO - GenerateDPOLadder - Starting Progressive Temperature Ladder generation...
+2026-08-28 21:48:50 - INFO - GenerateDPOLadder - Progress: Batch 25/598 (4.2%) | Total Valid Pairs: 328 | Total Dropped: 72
+2026-08-28 22:04:53 - INFO - GenerateDPOLadder - Progress: Batch 50/598 (8.4%) | Total Valid Pairs: 587 | Total Dropped: 213
+2026-08-28 22:20:36 - INFO - GenerateDPOLadder - Progress: Batch 75/598 (12.5%) | Total Valid Pairs: 881 | Total Dropped: 319
+2026-08-28 22:35:51 - INFO - GenerateDPOLadder - Progress: Batch 100/598 (16.7%) | Total Valid Pairs: 1182 | Total Dropped: 418
+2026-08-28 22:51:10 - INFO - GenerateDPOLadder - Progress: Batch 125/598 (20.9%) | Total Valid Pairs: 1486 | Total Dropped: 514
+2026-08-28 23:06:06 - INFO - GenerateDPOLadder - Progress: Batch 150/598 (25.1%) | Total Valid Pairs: 1807 | Total Dropped: 593
+2026-08-28 23:20:55 - INFO - GenerateDPOLadder - Progress: Batch 175/598 (29.3%) | Total Valid Pairs: 2115 | Total Dropped: 685
+2026-08-28 23:36:33 - INFO - GenerateDPOLadder - Progress: Batch 200/598 (33.4%) | Total Valid Pairs: 2403 | Total Dropped: 797
+2026-08-28 23:52:33 - INFO - GenerateDPOLadder - Progress: Batch 225/598 (37.6%) | Total Valid Pairs: 2675 | Total Dropped: 925
+2026-08-29 00:08:03 - INFO - GenerateDPOLadder - Progress: Batch 250/598 (41.8%) | Total Valid Pairs: 2977 | Total Dropped: 1023
+2026-08-29 00:23:12 - INFO - GenerateDPOLadder - Progress: Batch 275/598 (46.0%) | Total Valid Pairs: 3268 | Total Dropped: 1132
+2026-08-29 00:37:03 - INFO - GenerateDPOLadder - Progress: Batch 300/598 (50.2%) | Total Valid Pairs: 3616 | Total Dropped: 1184
+2026-08-29 00:52:19 - INFO - GenerateDPOLadder - Progress: Batch 325/598 (54.3%) | Total Valid Pairs: 3902 | Total Dropped: 1298
+2026-08-29 01:07:58 - INFO - GenerateDPOLadder - Progress: Batch 350/598 (58.5%) | Total Valid Pairs: 4188 | Total Dropped: 1412
+2026-08-29 01:23:36 - INFO - GenerateDPOLadder - Progress: Batch 375/598 (62.7%) | Total Valid Pairs: 4473 | Total Dropped: 1527
+2026-08-29 01:40:39 - INFO - GenerateDPOLadder - Progress: Batch 400/598 (66.9%) | Total Valid Pairs: 4702 | Total Dropped: 1698
+2026-08-29 01:57:31 - INFO - GenerateDPOLadder - Progress: Batch 425/598 (71.1%) | Total Valid Pairs: 4954 | Total Dropped: 1846
+2026-08-29 02:14:51 - INFO - GenerateDPOLadder - Progress: Batch 450/598 (75.3%) | Total Valid Pairs: 5186 | Total Dropped: 2014
+2026-08-29 02:30:46 - INFO - GenerateDPOLadder - Progress: Batch 475/598 (79.4%) | Total Valid Pairs: 5476 | Total Dropped: 2124
+2026-08-29 02:46:58 - INFO - GenerateDPOLadder - Progress: Batch 500/598 (83.6%) | Total Valid Pairs: 5753 | Total Dropped: 2247
+2026-08-29 03:02:34 - INFO - GenerateDPOLadder - Progress: Batch 525/598 (87.8%) | Total Valid Pairs: 6043 | Total Dropped: 2357
+2026-08-29 03:18:07 - INFO - GenerateDPOLadder - Progress: Batch 550/598 (92.0%) | Total Valid Pairs: 6334 | Total Dropped: 2466
+2026-08-29 03:34:40 - INFO - GenerateDPOLadder - Progress: Batch 575/598 (96.2%) | Total Valid Pairs: 6581 | Total Dropped: 2619
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Progress: Batch 598/598 (100.0%) | Total Valid Pairs: 6805 | Total Dropped: 2762
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - === Temperature Ladder Generation Summary ===
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Total Processed Prompts: 9567
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Valid DPO Pairs Generated: 6805 (71.1% retention)
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Dropped (Margin < 0.05): 2762
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Dropped (Identical/Insufficient/Fragments): 0
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Resolution Breakdown by Temperature:
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder -   - Resolved at T=0.6: 1081 pairs (15.9%)
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder -   - Resolved at T=0.7: 3671 pairs (53.9%)
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder -   - Resolved at T=0.8: 1412 pairs (20.7%)
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder -   - Resolved at T=0.85: 641 pairs (9.4%)
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Score Summary -> Chosen Avg: 0.7154 | Rejected Avg: 0.5996 | Avg Margin: 0.1158
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Saved 5784 training pairs to: data/token_length_exp/dpo_pairs_len256.jsonl
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Saved 1021 validation pairs to: data/token_length_exp/dpo_pairs_len256_eval.jsonl
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - Cleaned up checkpoint file: data/token_length_exp/dpo_pairs_len256.jsonl.checkpoint.jsonl
+2026-08-29 03:50:17 - INFO - GenerateDPOLadder - === Temperature Ladder DPO Generation Complete ===

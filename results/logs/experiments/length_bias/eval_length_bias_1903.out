@@ -1,0 +1,59 @@
+=== Starte Length-Bias & Shortcut Evaluation ===
+Fri Aug 28 20:32:40 UTC 2026
+Using device: cuda
+Loading vocabulary from JSON: data/vocabs/article_vocab.json...
+Vocab size: 13664
+Model loaded successfully.
+Selected dummy token for replacement: '.'
+
+==================================================
+ EXPERIMENT 1: CORRELATION ANALYSIS
+==================================================
+Correlation between text length and predicted 'Simple' probability:
+ - Pearson r:  0.0839 (p-value: 4.7709e-01)
+ - Spearman r: -0.0202 (p-value: 8.6426e-01)
+Interpretation:
+ - Positive r means longer texts get classified as Simple (LS).
+ - Negative r means shorter texts get classified as Simple (LS).
+ - Strong correlation (|r| > 0.6) suggests potential length bias.
+
+==================================================
+ EXPERIMENT 2: CONSTANT TOKEN / DUMMY TEXT TEST
+==================================================
+Method: Replace every word with a dummy token, preserving original length.
+If accuracy remains high, the model is just using sequence length/padding.
+Balanced Accuracy on Dummy Texts: 55.41%
+
+Classification Report (Dummy Texts):
+              precision    recall  f1-score   support
+
+          AS       0.57      0.46      0.51        37
+          LS       0.55      0.65      0.59        37
+
+    accuracy                           0.55        74
+   macro avg       0.56      0.55      0.55        74
+weighted avg       0.56      0.55      0.55        74
+
+
+==================================================
+ EXPERIMENT 3: FIXED-LENGTH TRUNCATION TEST
+==================================================
+Method: Truncate all texts to exactly N tokens, removing length differences.
+Balanced Accuracy (Full sequences, max 512): 87.84%
+Balanced Accuracy (Truncated to exactly 50 tokens):  67.57%
+Balanced Accuracy (Truncated to exactly 100 tokens): 79.73%
+
+Classification Report (100 tokens):
+              precision    recall  f1-score   support
+
+          AS       0.72      0.97      0.83        37
+          LS       0.96      0.62      0.75        37
+
+    accuracy                           0.80        74
+   macro avg       0.84      0.80      0.79        74
+weighted avg       0.84      0.80      0.79        74
+
+
+Ergebnisse erfolgreich gespeichert in: results/evaluation/length_bias_results.csv
+=== Length-Bias Evaluation erfolgreich abgeschlossen ===
+Fri Aug 28 20:32:44 UTC 2026

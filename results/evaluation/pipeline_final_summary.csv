@@ -1,0 +1,3 @@
+Model,Style (Simplicity),SBERT to AS,SBERT to Ref (Gold),Composite Reward,Compression Ratio
+SFT,0.7091 ± 0.1765,0.7946 ± 0.0876,0.7742 ± 0.0973,0.8032 ± 0.0945,0.653
+DPO Ladder,0.9618 ± 0.0261,0.7603 ± 0.0692,0.7708 ± 0.0765,0.9210 ± 0.0182,1.323

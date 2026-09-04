@@ -1,0 +1,451 @@
+{
+    "summary": {
+        "total_ls_articles_scanned": 95,
+        "aligned_pairs_count": 73,
+        "unaligned_articles_count": 22,
+        "total_ls_tokens": 22580,
+        "total_as_tokens": 36453,
+        "average_ls_tokens": 309.3150684931507,
+        "average_as_tokens": 499.35616438356163
+    },
+    "pairs": [
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/FactSheet_07.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 20,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/FactSheet_05.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 20,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/gesetzliche-aufgabe/gesetzliche-aufgabe.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/gesetzliche-aufgabe/gesetzliche-aufgabe-node.html              ",
+            "ls_tokens": 422,
+            "as_tokens": 533
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/LS/2021/20211216_Nachlese_Gewaltschutz.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/AS/2021/20211216_Bericht_GewaltschutzInEinrichtungen.html              ",
+            "ls_tokens": 1707,
+            "as_tokens": 2105
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Raul-Krauthausen_inhalt.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Raul-Krauthausen_inhalt.html              ",
+            "ls_tokens": 66,
+            "as_tokens": 307
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/rechtliches/un-brk/un-brk.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/rechtliches/un-brk/un-brk-node.html              ",
+            "ls_tokens": 182,
+            "as_tokens": 546
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/kultur-im-kleisthaus.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/kultur-im-kleisthaus-node.html              ",
+            "ls_tokens": 196,
+            "as_tokens": 258
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/arbeit/ankuendigung.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/veranstaltungen/sonderseiten/arbeit/ankuendigung.html              ",
+            "ls_tokens": 532,
+            "as_tokens": 381
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/ninialagrande_inhalt.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/ninialagrande_inhalt.html              ",
+            "ls_tokens": 177,
+            "as_tokens": 134
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/inklusionsnewsletter/inklusionsnewsletter.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/inklusionsnewsletter/inklusionsnewsletter-node.html              ",
+            "ls_tokens": 287,
+            "as_tokens": 207
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/Pressemitteilungen/DE/LS/LS_2021/PM19_DresdnerPositionen_LS.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/Pressemitteilungen/DE/AS/2021/PM19_DresdnerPositionen.html              ",
+            "ls_tokens": 745,
+            "as_tokens": 463
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/LS/2024/20240131_T4_Ankuendigung.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/AS/2024/20240131_T4_Ankuendigung.html              ",
+            "ls_tokens": 474,
+            "as_tokens": 312
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/erinnerungskultur-t4/erinnerungskultur-t4.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/erinnerungskultur-t4/erinnerungskultur-t4-node.html              ",
+            "ls_tokens": 119,
+            "as_tokens": 187
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/kulturveranstaltungen/kulturveranstaltungen.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/kulturveranstaltungen/kulturveranstaltungen-node.html              ",
+            "ls_tokens": 166,
+            "as_tokens": 156
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/rechtliches/rechtliches.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/rechtliches/rechtliches-node.html              ",
+            "ls_tokens": 32,
+            "as_tokens": 316
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/Pressemitteilungen/DE/LS/LS_2021/PM20_Schweigen_brechen_LS.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/Pressemitteilungen/DE/AS/2021/PM20_Schweigen_brechen.html              ",
+            "ls_tokens": 1208,
+            "as_tokens": 710
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/kulturveranstaltungen/_kann-weg/2018/2018.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 204,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/schwerpunkte/schwerpunkte.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/schwerpunkte/schwerpunkte-node.html              ",
+            "ls_tokens": 83,
+            "as_tokens": 417
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/rechtliches/behindertengleichstellungsgesetz/behindertengleichstellungsgesetz.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/rechtliches/behindertengleichstellungsgesetz/behindertengleichstellungsgesetz-node.html              ",
+            "ls_tokens": 245,
+            "as_tokens": 434
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/schwerpunkte/wohnen/wohnen.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/schwerpunkte/wohnen/wohnen-node.html              ",
+            "ls_tokens": 129,
+            "as_tokens": 186
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/rechtliches/allgemeines-gleichbehandlungsgesetz/allgemeines-gleichbehandlungsgesetz.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/rechtliches/allgemeines-gleichbehandlungsgesetz/allgemeines-gleichbehandlungsgesetz-node.html              ",
+            "ls_tokens": 369,
+            "as_tokens": 516
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/schwerpunkte/teilhabe-am-arbeitsleben/teilhabe-am-arbeitsleben.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/schwerpunkte/teilhabe-am-arbeitsleben/teilhabe-am-arbeitsleben-node.html              ",
+            "ls_tokens": 427,
+            "as_tokens": 672
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/kontakt-und-medienbereich/pressefotos/pressefotos.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/medienbereich/pressefotos/pressefotos-node.html              ",
+            "ls_tokens": 25,
+            "as_tokens": 134
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/kulturveranstaltungen/_kann-weg/2020/2020.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 204,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/bts/programm.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/veranstaltungen/veranstaltungen-node.html              ",
+            "ls_tokens": 293,
+            "as_tokens": 1125
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/mediathek/mediathek.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 13,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/LS/2026/20260128_T4_Ankuendigung.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/AS/2026/20260128_T4_Ankuendigung.html              ",
+            "ls_tokens": 568,
+            "as_tokens": 410
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/FactSheet_06.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 20,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/kultur-im-kleisthaus-teaser.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/kultur-im-kleisthaus-node.html              ",
+            "ls_tokens": 108,
+            "as_tokens": 258
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/FactSheet_01.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 20,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/Pressemitteilungen/DE/LS/LS_2022/PM04_Ukraine.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/Pressemitteilungen/DE/AS/2022/PM04_Gefl%C3%BCchtete_Ukraine.html              ",
+            "ls_tokens": 1089,
+            "as_tokens": 427
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Helga-Schubert_inhalt.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Helga-Schubert_inhalt.html              ",
+            "ls_tokens": 248,
+            "as_tokens": 173
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Roth-und-Levit_inhalt.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Roth-und-Levit_inhalt.html              ",
+            "ls_tokens": 540,
+            "as_tokens": 234
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/2024_brk-konferenz.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/2024_brk-konferenz.html              ",
+            "ls_tokens": 460,
+            "as_tokens": 346
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/presse-und-aktuelles-teaser.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/presse-und-aktuelles-node.html              ",
+            "ls_tokens": 22,
+            "as_tokens": 1489
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/FactSheet_02.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 20,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/bts/Ankuendigung_bts-ls.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/veranstaltungen/sonderseiten/bts/Ankuendigung_bts.html              ",
+            "ls_tokens": 254,
+            "as_tokens": 345
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/gesundheitsversorgung/ankuendigung.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/veranstaltungen/sonderseiten/gesundheitsversorgung/ankuendigung.html              ",
+            "ls_tokens": 746,
+            "as_tokens": 587
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/FactSheet_03.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 20,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/publikationen/publikationen.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/publikationen-und-erklaerungen/publikationen-und-erklaerungen-node.html              ",
+            "ls_tokens": 508,
+            "as_tokens": 816
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/der-beauftragte.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/der-beauftragte-node.html              ",
+            "ls_tokens": 17,
+            "as_tokens": 150
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Lea-Streisand_inhalt.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Lea-Streisand_inhalt.html              ",
+            "ls_tokens": 66,
+            "as_tokens": 332
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/veranstaltungen.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/veranstaltungen/veranstaltungen-node.html              ",
+            "ls_tokens": 204,
+            "as_tokens": 1125
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/kontakt-und-medienbereich/kontakt-und-medienbereich.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/medienbereich/medienbereich-node.html              ",
+            "ls_tokens": 82,
+            "as_tokens": 257
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/behindertenbeauftragte-in-bundeslaendern/behindertenbeauftragte-in-bundeslaendern.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/behindertenbeauftragte-in-bundeslaendern/behindertenbeauftragte-in-bundeslaendern-node.html              ",
+            "ls_tokens": 160,
+            "as_tokens": 2576
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Johann-Koenig_inhalt.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Johann-Koenig_inhalt.html              ",
+            "ls_tokens": 157,
+            "as_tokens": 86
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/schwerpunkte/gesundheit/gesundheit.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/schwerpunkte/gesundheit/gesundheit-node.html              ",
+            "ls_tokens": 555,
+            "as_tokens": 890
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/lebenslauf/lebenslauf.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/lebenslauf/lebenslauf-node.html              ",
+            "ls_tokens": 334,
+            "as_tokens": 222
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/FactSheet_04.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 20,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/teilhabe-an-kunst-und-kultur/teilhabe-an-kunst-und-kultur.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/teilhabe-an-kunst-und-kultur/teilhabe-an-kunst-und-kultur-node.html              ",
+            "ls_tokens": 192,
+            "as_tokens": 338
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/bildung/ankuendigung.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/veranstaltungen/sonderseiten/bildung/ankuendigung.html              ",
+            "ls_tokens": 479,
+            "as_tokens": 383
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/salon-im-kleisthaus.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/salon-im-kleisthaus-node.html              ",
+            "ls_tokens": 109,
+            "as_tokens": 184
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/LS/2023/20230510_Salon_Streisand_LS.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/AS/2023/20230510_Salon_Streisand.html              ",
+            "ls_tokens": 75,
+            "as_tokens": 332
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/T4/ankuendigung-ls.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/veranstaltungen/sonderseiten/T4/ankuendigung-as.html              ",
+            "ls_tokens": 942,
+            "as_tokens": 618
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/veranstaltungen/sonderseiten/BRKKonferenz/FactSheet_08.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 26,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/Pressemitteilungen/DE/LS/LS_2021/PM21_Geburtstag-Schlichtungsstelle.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/Pressemitteilungen/DE/AS/2021/PM21_Schlichtungsstelle_Geburtstag.html              ",
+            "ls_tokens": 747,
+            "as_tokens": 528
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/rechtliches/sozialgesetzbuch-und-bundesteilhabegesetz/sozialgesetzbuch-und-bundesteilhabegesetz.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/rechtliches/sozialgesetzbuch-und-bundesteilhabegesetz/sozialgesetzbuch-und-bundesteilhabegesetz-node.html              ",
+            "ls_tokens": 335,
+            "as_tokens": 459
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/LS/2022/20220321_Welt_DS_Tag_LS.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/AS/2022/20220321_Welt_DS_Tag.html              ",
+            "ls_tokens": 738,
+            "as_tokens": 688
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/kulturveranstaltungen/_kann-weg/2019/2019.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 204,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/schwerpunkte/barrierefreiheit/barrierefreiheit.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/schwerpunkte/barrierefreiheit/barrierefreiheit-node.html              ",
+            "ls_tokens": 460,
+            "as_tokens": 920
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/service/netiquette/netiquette.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/startseite/startseite-node.html",
+            "ls_tokens": 443,
+            "as_tokens": 261
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/wedel-und-caglar_inhalt.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/wedel-und-caglar_inhalt.html              ",
+            "ls_tokens": 606,
+            "as_tokens": 283
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/kontakt-und-medienbereich/kontakt-und-medienbereich-teaser.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/medienbereich/medienbereich-node.html              ",
+            "ls_tokens": 41,
+            "as_tokens": 257
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/dienstsitz/dienstsitz.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/dienstsitz/dienstsitz-node.html              ",
+            "ls_tokens": 489,
+            "as_tokens": 535
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/service/barrierefreiheit/barrierefreiheit.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/service/barrierefreiheit/barrierefreiheit_node.html              ",
+            "ls_tokens": 332,
+            "as_tokens": 502
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/LS/2025/20250129_T4_Ankuendigung.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/AS/2025/20250129_T4_Ankuendigung.html              ",
+            "ls_tokens": 555,
+            "as_tokens": 370
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/schwerpunkte/kinder-und-jugendliche-mit-behinderungen/kinder-und-jugendliche-mit-behinderungen.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/schwerpunkte/kinder-und-jugendliche-mit-behinderungen/kinder-und-jugendliche-mit-behinderungen-node.html              ",
+            "ls_tokens": 276,
+            "as_tokens": 553
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/der-beauftragte/behindertenbeauftragte-in-bundeslaendern/behindertenbeauftragte-in-bundeslaendern-teaser.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/der-beauftragte/behindertenbeauftragte-in-bundeslaendern/behindertenbeauftragte-in-bundeslaendern-node.html              ",
+            "ls_tokens": 161,
+            "as_tokens": 2576
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/presse-und-aktuelles/presse-und-aktuelles.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/presse-und-aktuelles/presse-und-aktuelles-node.html              ",
+            "ls_tokens": 22,
+            "as_tokens": 1489
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/schwerpunkte/umsetzung-bundesteilhabegesetz/umsetzung-bundesteilhabegesetz.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/schwerpunkte/umsetzung-bundesteilhabegesetz/umsetzung-bundesteilhabegesetz-node.html              ",
+            "ls_tokens": 277,
+            "as_tokens": 398
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/LS/2023/20230616_Digitaltag_LS.html",
+            "as_url": "https://www.behindertenbeauftragter.de/SharedDocs/DerBeauftragteAktuell/DE/AS/2023/20230616_Digitaltag.html              ",
+            "ls_tokens": 130,
+            "as_tokens": 125
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/rechtliches/schwerbehinderung/schwerbehinderung.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/rechtliches/schwerbehinderung/schwerbehinderung-node.html              ",
+            "ls_tokens": 304,
+            "as_tokens": 495
+        },
+        {
+            "ls_url": "https://www.behindertenbeauftragter.de/DE/LS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Felix-Klieser_inhalt.html",
+            "as_url": "https://www.behindertenbeauftragter.de/DE/AS/kultur-im-kleisthaus/salon-im-kleisthaus/gaeste/_documents/Felix-Klieser_inhalt.html              ",
+            "ls_tokens": 74,
+            "as_tokens": 205
+        }
+    ]
+}

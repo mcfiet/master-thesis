@@ -1,0 +1,23 @@
+========================================================================
+STARTING CLASSIFIER STABILITY EVALUATION
+Host: hpc3-liskov
+Date: Tue Sep  1 10:23:09 UTC 2026
+========================================================================
+[PLOT] Generalization-Gap-Plot gespeichert: results/plots/experiments/classifier_stability/generalization_gap_learning_curves.png
+[PLOT] Multi-Seed Boxplots gespeichert: results/plots/experiments/classifier_stability/multi_seed_boxplots.png
+[OK] Zusammenfassung gespeichert: results/evaluation/classifier_stability/classifier_stability_summary.json und results/evaluation/classifier_stability/classifier_stability_summary.csv
+
+================================================================================
+ERGEBNIS-TABELLE (STABILITÄTS-BENCHMARK):
+================================================================================
+                                    Modell    Balanced Acc BAcc (Min - Max)         ROC-AUC    Pair Match
+       BiLSTM Satz-Klassifikator (MajVote)  96.76% ± 0.74%    95.9% - 97.3% 0.9985 ± 0.0013 100.0% ± 0.0%
+        BiLSTM Artikel-Klassifikator (256)  87.57% ± 6.15%    77.0% - 91.9% 0.9672 ± 0.0179  96.2% ± 1.5%
+       BiLSTM Artikel-Klassifikator (1024)  87.03% ± 5.29%    81.1% - 93.2% 0.9533 ± 0.0230  95.7% ± 1.5%
+  BiLSTM Artikel-Klassifikator (1024 Tiny) 84.05% ± 11.48%    64.9% - 94.6% 0.9354 ± 0.0185  93.5% ± 3.1%
+BiLSTM Artikel-Klassifikator (1024 Medium)  83.51% ± 7.84%    71.6% - 93.2% 0.9126 ± 0.0415  95.7% ± 2.4%
+        BiLSTM Artikel-Klassifikator (512)  82.97% ± 9.49%    68.9% - 93.2% 0.9334 ± 0.0387  96.2% ± 1.5%
+             BiLSTM MixUp Regressor (1024)  73.78% ± 2.05%    71.6% - 75.7% 0.9027 ± 0.0478  93.0% ± 4.5%
+========================================================================
+EVALUATION COMPLETE.
+========================================================================

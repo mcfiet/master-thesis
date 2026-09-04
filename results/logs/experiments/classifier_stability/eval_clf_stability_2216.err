@@ -1,0 +1,10 @@
+/home/fisc4884/master-thesis/scripts/experiments/classifier_stability/evaluate_classifier_stability.py:140: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x="Modellname", y="OOD BAcc (%)", ax=axes[0], palette="Set2", showmeans=True,
+/home/fisc4884/master-thesis/scripts/experiments/classifier_stability/evaluate_classifier_stability.py:149: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_plot, x="Modellname", y="Separation Δ", ax=axes[1], palette="Set2", showmeans=True,

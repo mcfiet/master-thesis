@@ -1,0 +1,55 @@
+Log file initialized at: results/logs/regression_train_synthetic_20260829_035020.log
+Aktuelles Arbeitsverzeichnis: /home/fisc4884/master-thesis
+Globaler Seed auf 42 gesetzt.
+Nutze Device: cuda
+Anzahl geladener Artikel: 860
+Anzahl ausgeflachter Text-Samples: 4298
+  Stufe 0.00 (AS): 860 Samples
+  Stufe 0.25: 859 Samples
+  Stufe 0.50: 859 Samples
+  Stufe 0.75: 860 Samples
+  Stufe 1.00 (LS): 860 Samples
+Baue Vokabular:   0%|          | 0/4298 [00:00<?, ?it/s]Baue Vokabular:   2%|1         | 70/4298 [00:00<00:06, 698.34it/s]Baue Vokabular:   4%|3         | 152/4298 [00:00<00:05, 760.39it/s]Baue Vokabular:   5%|5         | 232/4298 [00:00<00:05, 771.06it/s]Baue Vokabular:   7%|7         | 310/4298 [00:00<00:05, 723.55it/s]Baue Vokabular:   9%|8         | 386/4298 [00:00<00:05, 735.89it/s]Baue Vokabular:  11%|#         | 460/4298 [00:00<00:05, 727.37it/s]Baue Vokabular:  13%|#2        | 538/4298 [00:00<00:05, 743.79it/s]Baue Vokabular:  14%|#4        | 613/4298 [00:00<00:04, 741.97it/s]Baue Vokabular:  16%|#6        | 702/4298 [00:00<00:04, 781.29it/s]Baue Vokabular:  18%|#8        | 781/4298 [00:01<00:04, 778.60it/s]Baue Vokabular:  21%|##        | 885/4298 [00:01<00:03, 854.92it/s]Baue Vokabular:  23%|##2       | 984/4298 [00:01<00:03, 894.52it/s]Baue Vokabular:  26%|##6       | 1133/4298 [00:01<00:02, 1072.59it/s]Baue Vokabular:  29%|##8       | 1241/4298 [00:01<00:02, 1026.52it/s]Baue Vokabular:  31%|###1      | 1346/4298 [00:01<00:02, 1032.53it/s]Baue Vokabular:  34%|###3      | 1450/4298 [00:01<00:03, 919.42it/s] Baue Vokabular:  36%|###5      | 1545/4298 [00:01<00:03, 917.10it/s]Baue Vokabular:  38%|###8      | 1639/4298 [00:01<00:03, 885.01it/s]Baue Vokabular:  40%|####      | 1729/4298 [00:02<00:02, 878.54it/s]Baue Vokabular:  42%|####2     | 1818/4298 [00:02<00:02, 866.21it/s]Baue Vokabular:  44%|####4     | 1912/4298 [00:02<00:02, 884.60it/s]Baue Vokabular:  47%|####7     | 2029/4298 [00:02<00:02, 964.24it/s]Baue Vokabular:  50%|####9     | 2145/4298 [00:02<00:02, 1020.89it/s]Baue Vokabular:  52%|#####2    | 2248/4298 [00:02<00:02, 977.76it/s] Baue Vokabular:  55%|#####4    | 2347/4298 [00:02<00:01, 979.21it/s]Baue Vokabular:  57%|#####6    | 2446/4298 [00:02<00:02, 916.79it/s]Baue Vokabular:  59%|#####9    | 2539/4298 [00:02<00:02, 841.52it/s]Baue Vokabular:  62%|######1   | 2660/4298 [00:03<00:01, 939.69it/s]Baue Vokabular:  66%|######5   | 2816/4298 [00:03<00:01, 1101.91it/s]Baue Vokabular:  68%|######8   | 2929/4298 [00:03<00:01, 1059.32it/s]Baue Vokabular:  71%|#######   | 3046/4298 [00:03<00:01, 1088.48it/s]Baue Vokabular:  74%|#######3  | 3165/4298 [00:03<00:01, 1116.68it/s]Baue Vokabular:  77%|#######6  | 3299/4298 [00:03<00:00, 1180.17it/s]Baue Vokabular:  80%|#######9  | 3419/4298 [00:03<00:00, 1172.18it/s]Baue Vokabular:  82%|########2 | 3538/4298 [00:03<00:00, 1173.42it/s]Baue Vokabular:  85%|########5 | 3660/4298 [00:03<00:00, 1186.98it/s]Baue Vokabular:  88%|########7 | 3780/4298 [00:03<00:00, 1168.32it/s]Baue Vokabular:  91%|######### | 3898/4298 [00:04<00:00, 1137.21it/s]Baue Vokabular:  93%|#########3| 4013/4298 [00:04<00:00, 912.56it/s] Baue Vokabular:  96%|#########5| 4112/4298 [00:04<00:00, 871.72it/s]Baue Vokabular:  99%|#########8| 4238/4298 [00:04<00:00, 968.18it/s]Baue Vokabular: 100%|##########| 4298/4298 [00:04<00:00, 955.34it/s]
+Vokabulargröße: 43133 Wörter
+Vokabular gespeichert unter: data/vocabs/synthetic_vocab.json
+Train-Samples: 3438 (aus 688 Artikeln)
+Val-Samples: 860 (aus 172 Artikeln)
+BiLSTMRegressor(
+  (embedding): Embedding(43133, 128, padding_idx=0)
+  (lstm): LSTM(128, 128, batch_first=True, bidirectional=True)
+  (fc): Linear(in_features=256, out_features=1, bias=True)
+  (dropout): Dropout(p=0.3, inplace=False)
+  (sigmoid): Sigmoid()
+)
+Epoche 01/15 | Train MSE: 0.1192 | Val MSE: 0.1130 -> [Modell gespeichert]
+Epoche 02/15 | Train MSE: 0.1045 | Val MSE: 0.1037 -> [Modell gespeichert]
+Epoche 03/15 | Train MSE: 0.0874 | Val MSE: 0.0702 -> [Modell gespeichert]
+Epoche 04/15 | Train MSE: 0.0660 | Val MSE: 0.0645 -> [Modell gespeichert]
+Epoche 05/15 | Train MSE: 0.0561 | Val MSE: 0.0738
+Epoche 06/15 | Train MSE: 0.0564 | Val MSE: 0.0715
+Epoche 07/15 | Train MSE: 0.0501 | Val MSE: 0.0646
+Epoche 08/15 | Train MSE: 0.0464 | Val MSE: 0.0663
+Epoche 09/15 | Train MSE: 0.0429 | Val MSE: 0.0630 -> [Modell gespeichert]
+Epoche 10/15 | Train MSE: 0.0459 | Val MSE: 0.2139
+Epoche 11/15 | Train MSE: 0.0824 | Val MSE: 0.0662
+Epoche 12/15 | Train MSE: 0.0430 | Val MSE: 0.0683
+Epoche 13/15 | Train MSE: 0.0413 | Val MSE: 0.0667
+Epoche 14/15 | Train MSE: 0.0405 | Val MSE: 0.0657
+Epoche 15/15 | Train MSE: 0.0405 | Val MSE: 0.0659
+Trainingsverlauf gespeichert unter: results/models/training_history.json
+============================================================
+OUT-OF-DOMAIN EVALUIERUNG: LEBENSHILFE SYNTHETIK-SET
+============================================================
+Anzahl Evaluierungssamples: 185
+MSE (Mean Squared Error):  0.1295
+MAE (Mean Absolute Error): 0.2652
+Pearson Korrelation r:    0.5016
+Spearman Korrelation rho: 0.4913
+============================================================
+Out-of-Domain Metriken gespeichert unter: results/models/synthetic_eval_metrics.json
+Detail-Vorhersagen gespeichert unter: results/evaluation/synthetic_regressor_lh_eval.csv
+/home/fisc4884/master-thesis/scripts/experiments/synthetic_regressor/regression_train_synthetic.py:374: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=df_eval, x="Zielstufe", y="Vorhergesagter Score", palette="viridis")

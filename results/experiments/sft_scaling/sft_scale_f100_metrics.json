@@ -1,0 +1,18 @@
+{
+  "experiment_name": "sft_scale_f100",
+  "train_fraction": 1.0,
+  "num_train_pairs": 641,
+  "total_available_train_pairs": 641,
+  "best_val_loss": 2.569775390625,
+  "final_train_loss": 2.7013295807453415,
+  "training_time_seconds": 1541.308405637741,
+  "r_style_mean": 0.7758997026327494,
+  "r_sem_as_mean": 0.8880307142798965,
+  "sim_ref_mean": 0.8692525673556972,
+  "composite_reward_mean": 0.8319652084563229,
+  "bleu_mean": 0.03171434277899587,
+  "rouge_l_mean": 0.16989182699905775,
+  "avg_gen_tokens": 458.02702702702703,
+  "truncation_rate_pct": 29.72972972972973,
+  "model_dir": "results/experiments/sft_scaling/sft_scale_f100"
+}

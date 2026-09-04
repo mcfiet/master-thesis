@@ -1,0 +1,5 @@
+  File "/home/fisc4884/master-thesis/scripts/experiments/similarity_threshold/evaluate_all_similarity_thresholds.py", line 188
+    f.write(f"${r['min_sim']:.2f} \\le \\text{{sim}} \\le 0{,}98$ & {int(r['pairs'])} & {r['retention_pct']:.1f}\\,\\% & {int(r['as_tokens']):,} & {int(r['ls_tokens']):,} & {r['token_ratio']:.2f} \\\\\n")
+                                                            ^
+SyntaxError: f-string: expecting a valid expression after '{'
+srun: error: hpc3-liskov: task 0: Exited with exit code 1

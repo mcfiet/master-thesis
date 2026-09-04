@@ -1,0 +1,40 @@
+=== Running Full Evaluation for DPO Loss Aggregation Experiment (Sum vs. Mean) ===
+Sun Aug 30 21:02:46 UTC 2026
+Lade Testdaten aus: data/lebenshilfe/lebenshilfe_dataset_clean.json
+Initialisiere SpaCy Tokenizer...
+Lade Vokabular aus data/vocabs/mixup_vocab.json...
+Lade BiLSTM Regressor aus results/models/bilstm_mixup_regression.pt...
+Lade SBERT Modell (jinaai/jina-embeddings-v2-base-de, max_seq_len=8192)...
+
+======================================================================
+Evaluierung: SFT Baseline (results/models/sft)
+======================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+[MODELL-LADEN] SFT Baseline
+  -> Pfad: results/models/sft
+  -> Instanziierte Modell-Klasse: MBartForConditionalGeneration (torch.float16)
+
+
+======================================================================
+Evaluierung: DPO Sum (Classic) (results/models/loss_aggregation_exp/dpo_sum)
+======================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+[MODELL-LADEN] DPO Sum (Classic)
+  -> Pfad: results/models/loss_aggregation_exp/dpo_sum
+  -> Instanziierte Modell-Klasse: MBartForConditionalGeneration (torch.float16)
+
+
+======================================================================
+Evaluierung: DPO Mean (Length-Normalized) (results/models/loss_aggregation_exp/dpo_mean)
+======================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+[MODELL-LADEN] DPO Mean (Length-Normalized)
+  -> Pfad: results/models/loss_aggregation_exp/dpo_mean
+  -> Instanziierte Modell-Klasse: MBartForConditionalGeneration (torch.float16)
+
+
+[ERFOLG] Zusammenfassung gespeichert: results/evaluation/loss_aggregation_comparison_summary.csv
+[ERFOLG] Details gespeichert: results/evaluation/loss_aggregation_comparison_details.csv
+[ERFOLG] Alle Plots erfolgreich generiert!
+=== Evaluation Completed ===
+Sun Aug 30 21:04:39 UTC 2026

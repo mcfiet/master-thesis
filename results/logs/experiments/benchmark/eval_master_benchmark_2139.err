@@ -1,0 +1,79 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+Few-Shot Inferenz:   0%|          | 0/37 [00:00<?, ?it/s]The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Few-Shot Inferenz:   3%|▎         | 1/37 [00:02<01:38,  2.74s/it]Few-Shot Inferenz:   5%|▌         | 2/37 [00:03<00:48,  1.39s/it]Few-Shot Inferenz:   8%|▊         | 3/37 [00:05<00:58,  1.71s/it]Few-Shot Inferenz:  11%|█         | 4/37 [00:06<00:44,  1.36s/it]Few-Shot Inferenz:  14%|█▎        | 5/37 [00:09<01:05,  2.05s/it]Few-Shot Inferenz:  16%|█▌        | 6/37 [00:09<00:46,  1.51s/it]Few-Shot Inferenz:  19%|█▉        | 7/37 [00:11<00:46,  1.54s/it]Few-Shot Inferenz:  22%|██▏       | 8/37 [00:12<00:41,  1.42s/it]Few-Shot Inferenz:  24%|██▍       | 9/37 [00:14<00:45,  1.63s/it]Few-Shot Inferenz:  27%|██▋       | 10/37 [00:15<00:36,  1.35s/it]Few-Shot Inferenz:  30%|██▉       | 11/37 [00:16<00:33,  1.29s/it]Few-Shot Inferenz:  32%|███▏      | 12/37 [00:17<00:32,  1.28s/it]Few-Shot Inferenz:  35%|███▌      | 13/37 [00:18<00:27,  1.13s/it]Few-Shot Inferenz:  38%|███▊      | 14/37 [00:19<00:21,  1.09it/s]Few-Shot Inferenz:  41%|████      | 15/37 [00:19<00:17,  1.29it/s]Few-Shot Inferenz:  43%|████▎     | 16/37 [00:22<00:31,  1.52s/it]Few-Shot Inferenz:  46%|████▌     | 17/37 [00:34<01:31,  4.56s/it]Few-Shot Inferenz:  49%|████▊     | 18/37 [00:34<01:03,  3.34s/it]Few-Shot Inferenz:  51%|█████▏    | 19/37 [00:35<00:46,  2.61s/it]Few-Shot Inferenz:  54%|█████▍    | 20/37 [00:37<00:40,  2.41s/it]Few-Shot Inferenz:  57%|█████▋    | 21/37 [00:39<00:37,  2.31s/it]Few-Shot Inferenz:  59%|█████▉    | 22/37 [00:51<01:17,  5.14s/it]Few-Shot Inferenz:  62%|██████▏   | 23/37 [00:52<00:52,  3.77s/it]Few-Shot Inferenz:  65%|██████▍   | 24/37 [00:53<00:40,  3.14s/it]Few-Shot Inferenz:  68%|██████▊   | 25/37 [00:56<00:37,  3.11s/it]Few-Shot Inferenz:  70%|███████   | 26/37 [00:58<00:29,  2.72s/it]Few-Shot Inferenz:  73%|███████▎  | 27/37 [00:59<00:20,  2.05s/it]Few-Shot Inferenz:  76%|███████▌  | 28/37 [01:00<00:17,  1.92s/it]Few-Shot Inferenz:  78%|███████▊  | 29/37 [01:01<00:12,  1.51s/it]Few-Shot Inferenz:  81%|████████  | 30/37 [01:02<00:08,  1.29s/it]Few-Shot Inferenz:  84%|████████▍ | 31/37 [01:07<00:15,  2.52s/it]Few-Shot Inferenz:  86%|████████▋ | 32/37 [01:10<00:12,  2.55s/it]Few-Shot Inferenz:  89%|████████▉ | 33/37 [01:11<00:08,  2.14s/it]Few-Shot Inferenz:  92%|█████████▏| 34/37 [01:12<00:06,  2.01s/it]Few-Shot Inferenz:  95%|█████████▍| 35/37 [01:13<00:03,  1.70s/it]Few-Shot Inferenz:  97%|█████████▋| 36/37 [01:15<00:01,  1.57s/it]Few-Shot Inferenz: 100%|██████████| 37/37 [01:16<00:00,  1.45s/it]Few-Shot Inferenz: 100%|██████████| 37/37 [01:16<00:00,  2.06s/it]
+Traceback (most recent call last):
+  File "/home/fisc4884/master-thesis/scripts/evaluation/evaluate_all_models_benchmark.py", line 574, in <module>
+    main()
+    ~~~~^^
+  File "/home/fisc4884/master-thesis/scripts/evaluation/evaluate_all_models_benchmark.py", line 374, in main
+    evaluate_model_outputs("1. Few-Shot Baseline (Qwen-1.5B)", gen_fs, "dec_fs")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/scripts/evaluation/evaluate_all_models_benchmark.py", line 305, in evaluate_model_outputs
+    r_sem = calc_r_sem(as_texts, gen_texts)
+  File "/home/fisc4884/master-thesis/scripts/evaluation/evaluate_all_models_benchmark.py", line 288, in calc_r_sem
+    e_src = sbert.encode(src_list[i : i + 4], batch_size=4, convert_to_tensor=True, show_progress_bar=False)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/sentence_transformers/util/decorators.py", line 41, in wrapper
+    return func(*args, **kwargs)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/sentence_transformers/sentence_transformer/model.py", line 651, in encode
+    out_features = self.forward(features, **kwargs)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/sentence_transformers/base/model.py", line 486, in forward
+    input = module(input, **module_kwargs)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/sentence_transformers/base/modules/transformer.py", line 1046, in forward
+    model_output = model_method(**filtered_kwargs)
+  File "/home/fisc4884/.cache/huggingface/modules/transformers_modules/jinaai/jina_hyphen_bert_hyphen_implementation/f3ec4cf7de7e561007f27c9efc7148b0bd713f81/modeling_bert.py", line 1419, in forward
+    encoder_outputs = self.encoder(
+        embedding_output,
+    ...<8 lines>...
+        return_dict=return_dict,
+    )
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fisc4884/.cache/huggingface/modules/transformers_modules/jinaai/jina_hyphen_bert_hyphen_implementation/f3ec4cf7de7e561007f27c9efc7148b0bd713f81/modeling_bert.py", line 824, in forward
+    layer_outputs = layer_module(
+        hidden_states,
+    ...<6 lines>...
+        output_attentions,
+    )
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fisc4884/.cache/huggingface/modules/transformers_modules/jinaai/jina_hyphen_bert_hyphen_implementation/f3ec4cf7de7e561007f27c9efc7148b0bd713f81/modeling_bert.py", line 621, in forward
+    self_attention_outputs = self.attention(
+        hidden_states,
+    ...<4 lines>...
+        bias=bias,
+    )
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fisc4884/.cache/huggingface/modules/transformers_modules/jinaai/jina_hyphen_bert_hyphen_implementation/f3ec4cf7de7e561007f27c9efc7148b0bd713f81/modeling_bert.py", line 501, in forward
+    self_outputs = self.self(
+        hidden_states,
+    ...<6 lines>...
+        bias,
+    )
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fisc4884/.cache/huggingface/modules/transformers_modules/jinaai/jina_hyphen_bert_hyphen_implementation/f3ec4cf7de7e561007f27c9efc7148b0bd713f81/modeling_bert.py", line 417, in forward
+    attention_probs = nn.functional.softmax(attention_scores + bias, dim=-1)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/functional.py", line 2159, in softmax
+    ret = input.softmax(dim)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 8.29 GiB. GPU 0 has a total capacity of 23.62 GiB of which 2.80 GiB is free. Process 3547572 has 17.27 GiB memory in use. Process 3590762 has 7.71 GiB memory in use. Including non-PyTorch memory, this process has 20.76 GiB memory in use. Process 3591085 has 17.49 GiB memory in use. Of the allocated memory 20.52 GiB is allocated by PyTorch, and 37.62 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+srun: error: hpc3-perlman: task 0: Exited with exit code 1

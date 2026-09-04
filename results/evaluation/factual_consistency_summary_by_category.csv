@@ -1,0 +1,5 @@
+category,sbert_score,nli_factuality,nli_p_contra,ner_jaccard,number_consistency,composite_factuality
+1_Gold_Positives,0.9161,0.4854,0.2349,0.1549,0.6824,0.3015
+2_Real_Model_Hallucinations,0.9035,0.4638,0.2041,0.1653,0.92,0.3873
+3_Random_Shuffle_Negatives,0.556,0.4796,0.2891,0.0008,0.2918,0.0775
+4_Targeted_Minimal_Perturbations,0.8121,0.4027,0.4091,0.6778,0.8167,0.2927

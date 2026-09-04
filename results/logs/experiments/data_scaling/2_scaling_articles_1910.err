@@ -1,0 +1,75 @@
+2026-08-28 21:23:13,493 - INFO - DataScalingExperiment - === Starting Data Scaling Experiment: scale_pairs_f010 ===
+2026-08-28 21:23:13,493 - INFO - DataScalingExperiment - Params: mixtures_per_pair=20, train_fraction=0.10, max_seq_len=1024
+2026-08-28 21:23:13,544 - INFO - DataScalingExperiment - Filtered corpus pairs: 633
+2026-08-28 21:23:13,547 - INFO - DataScalingExperiment - Article pairs used: Train=50 (9.9% of train split), Val=64, Test=64
+2026-08-28 21:23:13,594 - INFO - DataScalingExperiment - Loading existing vocabulary from data/data_scaling/mixup_vocab.json
+2026-08-28 21:23:13,598 - INFO - DataScalingExperiment - Constructing PyTorch Datasets...
+Segmenting Sentences:   0%|          | 0/50 [00:00<?, ?it/s]Segmenting Sentences:  48%|████▊     | 24/50 [00:00<00:00, 231.29it/s]                                                                      Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  48%|████▊     | 31/64 [00:00<00:00, 304.08it/s]Segmenting Sentences:  97%|█████████▋| 62/64 [00:00<00:00, 243.90it/s]                                                                      Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  36%|███▌      | 23/64 [00:00<00:00, 227.82it/s]Segmenting Sentences:  78%|███████▊  | 50/64 [00:00<00:00, 250.69it/s]                                                                      2026-08-28 21:23:14,336 - INFO - DataScalingExperiment - Dataset samples: Train=1000, Val=1280, Test=1280
+2026-08-28 21:23:14,336 - INFO - DataScalingExperiment - Training on device: cuda
+2026-08-28 21:23:23,548 - INFO - DataScalingExperiment - Early stopping triggered at epoch 22
+2026-08-28 21:23:23,548 - INFO - DataScalingExperiment - Training completed in 8.30 seconds. Best Epoch: 14 (Val Loss: 0.0608)
+2026-08-28 21:23:23,548 - INFO - DataScalingExperiment - Evaluating best model on held-out Test-Split...
+2026-08-28 21:23:23,691 - INFO - DataScalingExperiment - === Results for scale_pairs_f010 ===
+2026-08-28 21:23:23,692 - INFO - DataScalingExperiment - Test MSE: 0.06458 | Test MAE: 0.20062 | R2: 0.1705 | Pearson: 0.5146 | Acc: 71.56%
+2026-08-28 21:23:23,692 - INFO - DataScalingExperiment - Saved metrics to results/experiments/data_scaling/scale_pairs_f010_metrics.json
+2026-08-28 21:23:23,910 - INFO - DataScalingExperiment - Saved loss curve plot to results/experiments/data_scaling/scale_pairs_f010_loss_curve.png
+2026-08-28 21:23:26,362 - INFO - DataScalingExperiment - === Starting Data Scaling Experiment: scale_pairs_f025 ===
+2026-08-28 21:23:26,362 - INFO - DataScalingExperiment - Params: mixtures_per_pair=20, train_fraction=0.25, max_seq_len=1024
+2026-08-28 21:23:26,413 - INFO - DataScalingExperiment - Filtered corpus pairs: 633
+2026-08-28 21:23:26,416 - INFO - DataScalingExperiment - Article pairs used: Train=126 (25.0% of train split), Val=64, Test=64
+2026-08-28 21:23:26,461 - INFO - DataScalingExperiment - Loading existing vocabulary from data/data_scaling/mixup_vocab.json
+2026-08-28 21:23:26,464 - INFO - DataScalingExperiment - Constructing PyTorch Datasets...
+Segmenting Sentences:   0%|          | 0/126 [00:00<?, ?it/s]Segmenting Sentences:  19%|█▉        | 24/126 [00:00<00:00, 226.93it/s]Segmenting Sentences:  40%|████      | 51/126 [00:00<00:00, 248.98it/s]Segmenting Sentences:  60%|██████    | 76/126 [00:00<00:00, 241.59it/s]Segmenting Sentences:  80%|████████  | 101/126 [00:00<00:00, 243.33it/s]                                                                        Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  50%|█████     | 32/64 [00:00<00:00, 308.03it/s]Segmenting Sentences:  98%|█████████▊| 63/64 [00:00<00:00, 244.72it/s]                                                                      Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  38%|███▊      | 24/64 [00:00<00:00, 237.95it/s]Segmenting Sentences:  80%|███████▉  | 51/64 [00:00<00:00, 235.60it/s]                                                                      2026-08-28 21:23:27,498 - INFO - DataScalingExperiment - Dataset samples: Train=2520, Val=1280, Test=1280
+2026-08-28 21:23:27,499 - INFO - DataScalingExperiment - Training on device: cuda
+2026-08-28 21:23:35,567 - INFO - DataScalingExperiment - Early stopping triggered at epoch 10
+2026-08-28 21:23:35,567 - INFO - DataScalingExperiment - Training completed in 7.40 seconds. Best Epoch: 2 (Val Loss: 0.0602)
+2026-08-28 21:23:35,567 - INFO - DataScalingExperiment - Evaluating best model on held-out Test-Split...
+2026-08-28 21:23:35,711 - INFO - DataScalingExperiment - === Results for scale_pairs_f025 ===
+2026-08-28 21:23:35,711 - INFO - DataScalingExperiment - Test MSE: 0.06255 | Test MAE: 0.19951 | R2: 0.1965 | Pearson: 0.4832 | Acc: 69.14%
+2026-08-28 21:23:35,711 - INFO - DataScalingExperiment - Saved metrics to results/experiments/data_scaling/scale_pairs_f025_metrics.json
+2026-08-28 21:23:35,934 - INFO - DataScalingExperiment - Saved loss curve plot to results/experiments/data_scaling/scale_pairs_f025_loss_curve.png
+2026-08-28 21:23:38,406 - INFO - DataScalingExperiment - === Starting Data Scaling Experiment: scale_pairs_f050 ===
+2026-08-28 21:23:38,406 - INFO - DataScalingExperiment - Params: mixtures_per_pair=20, train_fraction=0.50, max_seq_len=1024
+2026-08-28 21:23:38,458 - INFO - DataScalingExperiment - Filtered corpus pairs: 633
+2026-08-28 21:23:38,461 - INFO - DataScalingExperiment - Article pairs used: Train=252 (49.9% of train split), Val=64, Test=64
+2026-08-28 21:23:38,506 - INFO - DataScalingExperiment - Loading existing vocabulary from data/data_scaling/mixup_vocab.json
+2026-08-28 21:23:38,510 - INFO - DataScalingExperiment - Constructing PyTorch Datasets...
+Segmenting Sentences:   0%|          | 0/252 [00:00<?, ?it/s]Segmenting Sentences:   9%|▉         | 23/252 [00:00<00:00, 229.35it/s]Segmenting Sentences:  20%|█▉        | 50/252 [00:00<00:00, 247.55it/s]Segmenting Sentences:  30%|██▉       | 75/252 [00:00<00:00, 230.49it/s]Segmenting Sentences:  39%|███▉      | 99/252 [00:00<00:00, 231.38it/s]Segmenting Sentences:  50%|█████     | 127/252 [00:00<00:00, 246.51it/s]Segmenting Sentences:  61%|██████    | 153/252 [00:00<00:00, 248.66it/s]Segmenting Sentences:  71%|███████▏  | 180/252 [00:00<00:00, 251.99it/s]Segmenting Sentences:  83%|████████▎ | 208/252 [00:00<00:00, 259.50it/s]Segmenting Sentences:  95%|█████████▌| 240/252 [00:00<00:00, 277.49it/s]                                                                        Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  48%|████▊     | 31/64 [00:00<00:00, 304.74it/s]Segmenting Sentences:  97%|█████████▋| 62/64 [00:00<00:00, 244.52it/s]                                                                      Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  38%|███▊      | 24/64 [00:00<00:00, 237.67it/s]Segmenting Sentences:  75%|███████▌  | 48/64 [00:00<00:00, 198.50it/s]                                                                      2026-08-28 21:23:40,065 - INFO - DataScalingExperiment - Dataset samples: Train=5040, Val=1280, Test=1280
+2026-08-28 21:23:40,065 - INFO - DataScalingExperiment - Training on device: cuda
+2026-08-28 21:24:49,496 - INFO - DataScalingExperiment - Early stopping triggered at epoch 52
+2026-08-28 21:24:49,496 - INFO - DataScalingExperiment - Training completed in 68.80 seconds. Best Epoch: 44 (Val Loss: 0.0348)
+2026-08-28 21:24:49,496 - INFO - DataScalingExperiment - Evaluating best model on held-out Test-Split...
+2026-08-28 21:24:49,639 - INFO - DataScalingExperiment - === Results for scale_pairs_f050 ===
+2026-08-28 21:24:49,639 - INFO - DataScalingExperiment - Test MSE: 0.03661 | Test MAE: 0.14152 | R2: 0.5297 | Pearson: 0.7675 | Acc: 81.25%
+2026-08-28 21:24:49,639 - INFO - DataScalingExperiment - Saved metrics to results/experiments/data_scaling/scale_pairs_f050_metrics.json
+2026-08-28 21:24:49,861 - INFO - DataScalingExperiment - Saved loss curve plot to results/experiments/data_scaling/scale_pairs_f050_loss_curve.png
+2026-08-28 21:24:52,452 - INFO - DataScalingExperiment - === Starting Data Scaling Experiment: scale_pairs_f075 ===
+2026-08-28 21:24:52,452 - INFO - DataScalingExperiment - Params: mixtures_per_pair=20, train_fraction=0.75, max_seq_len=1024
+2026-08-28 21:24:52,501 - INFO - DataScalingExperiment - Filtered corpus pairs: 633
+2026-08-28 21:24:52,505 - INFO - DataScalingExperiment - Article pairs used: Train=378 (74.9% of train split), Val=64, Test=64
+2026-08-28 21:24:52,551 - INFO - DataScalingExperiment - Loading existing vocabulary from data/data_scaling/mixup_vocab.json
+2026-08-28 21:24:52,555 - INFO - DataScalingExperiment - Constructing PyTorch Datasets...
+Segmenting Sentences:   0%|          | 0/378 [00:00<?, ?it/s]Segmenting Sentences:   6%|▋         | 24/378 [00:00<00:01, 231.44it/s]Segmenting Sentences:  14%|█▍        | 52/378 [00:00<00:01, 252.70it/s]Segmenting Sentences:  21%|██        | 78/378 [00:00<00:01, 246.36it/s]Segmenting Sentences:  28%|██▊       | 105/378 [00:00<00:01, 250.00it/s]Segmenting Sentences:  35%|███▌      | 133/378 [00:00<00:00, 258.55it/s]Segmenting Sentences:  42%|████▏     | 160/378 [00:00<00:00, 257.57it/s]Segmenting Sentences:  50%|████▉     | 188/378 [00:00<00:00, 263.74it/s]Segmenting Sentences:  59%|█████▉    | 224/378 [00:00<00:00, 293.04it/s]Segmenting Sentences:  67%|██████▋   | 254/378 [00:00<00:00, 290.59it/s]Segmenting Sentences:  75%|███████▌  | 284/378 [00:01<00:00, 274.74it/s]Segmenting Sentences:  84%|████████▍ | 317/378 [00:01<00:00, 290.50it/s]Segmenting Sentences:  92%|█████████▏| 347/378 [00:01<00:00, 278.39it/s]Segmenting Sentences:  99%|█████████▉| 376/378 [00:01<00:00, 252.62it/s]                                                                        Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  50%|█████     | 32/64 [00:00<00:00, 318.01it/s]Segmenting Sentences: 100%|██████████| 64/64 [00:00<00:00, 251.51it/s]                                                                      Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  39%|███▉      | 25/64 [00:00<00:00, 246.98it/s]Segmenting Sentences:  80%|███████▉  | 51/64 [00:00<00:00, 246.77it/s]                                                                      2026-08-28 21:24:54,490 - INFO - DataScalingExperiment - Dataset samples: Train=7560, Val=1280, Test=1280
+2026-08-28 21:24:54,490 - INFO - DataScalingExperiment - Training on device: cuda
+2026-08-28 21:25:33,954 - INFO - DataScalingExperiment - Early stopping triggered at epoch 21
+2026-08-28 21:25:33,955 - INFO - DataScalingExperiment - Training completed in 38.79 seconds. Best Epoch: 13 (Val Loss: 0.0420)
+2026-08-28 21:25:33,955 - INFO - DataScalingExperiment - Evaluating best model on held-out Test-Split...
+2026-08-28 21:25:34,099 - INFO - DataScalingExperiment - === Results for scale_pairs_f075 ===
+2026-08-28 21:25:34,099 - INFO - DataScalingExperiment - Test MSE: 0.04151 | Test MAE: 0.16290 | R2: 0.4668 | Pearson: 0.7016 | Acc: 77.03%
+2026-08-28 21:25:34,099 - INFO - DataScalingExperiment - Saved metrics to results/experiments/data_scaling/scale_pairs_f075_metrics.json
+2026-08-28 21:25:34,330 - INFO - DataScalingExperiment - Saved loss curve plot to results/experiments/data_scaling/scale_pairs_f075_loss_curve.png
+2026-08-28 21:25:36,887 - INFO - DataScalingExperiment - === Starting Data Scaling Experiment: scale_pairs_f100 ===
+2026-08-28 21:25:36,887 - INFO - DataScalingExperiment - Params: mixtures_per_pair=20, train_fraction=1.00, max_seq_len=1024
+2026-08-28 21:25:36,938 - INFO - DataScalingExperiment - Filtered corpus pairs: 633
+2026-08-28 21:25:36,940 - INFO - DataScalingExperiment - Article pairs used: Train=505 (100.0% of train split), Val=64, Test=64
+2026-08-28 21:25:36,985 - INFO - DataScalingExperiment - Loading existing vocabulary from data/data_scaling/mixup_vocab.json
+2026-08-28 21:25:36,989 - INFO - DataScalingExperiment - Constructing PyTorch Datasets...
+Segmenting Sentences:   0%|          | 0/505 [00:00<?, ?it/s]Segmenting Sentences:   4%|▍         | 20/505 [00:00<00:02, 196.19it/s]Segmenting Sentences:   9%|▉         | 46/505 [00:00<00:01, 232.02it/s]Segmenting Sentences:  15%|█▍        | 74/505 [00:00<00:01, 252.92it/s]Segmenting Sentences:  21%|██        | 105/505 [00:00<00:01, 273.49it/s]Segmenting Sentences:  27%|██▋       | 134/505 [00:00<00:01, 278.44it/s]Segmenting Sentences:  33%|███▎      | 168/505 [00:00<00:01, 296.61it/s]Segmenting Sentences:  39%|███▉      | 198/505 [00:00<00:01, 296.45it/s]Segmenting Sentences:  45%|████▌     | 228/505 [00:00<00:00, 283.90it/s]Segmenting Sentences:  52%|█████▏    | 262/505 [00:00<00:00, 299.95it/s]Segmenting Sentences:  58%|█████▊    | 293/505 [00:01<00:00, 282.98it/s]Segmenting Sentences:  64%|██████▍   | 322/505 [00:01<00:00, 269.09it/s]Segmenting Sentences:  70%|██████▉   | 353/505 [00:01<00:00, 277.96it/s]Segmenting Sentences:  76%|███████▌  | 382/505 [00:01<00:00, 252.02it/s]Segmenting Sentences:  81%|████████  | 408/505 [00:01<00:00, 247.80it/s]Segmenting Sentences:  86%|████████▌ | 434/505 [00:01<00:00, 238.48it/s]Segmenting Sentences:  93%|█████████▎| 468/505 [00:01<00:00, 264.33it/s]Segmenting Sentences:  99%|█████████▉| 500/505 [00:01<00:00, 278.25it/s]                                                                        Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  52%|█████▏    | 33/64 [00:00<00:00, 323.92it/s]                                                                      Segmenting Sentences:   0%|          | 0/64 [00:00<?, ?it/s]Segmenting Sentences:  36%|███▌      | 23/64 [00:00<00:00, 227.50it/s]Segmenting Sentences:  80%|███████▉  | 51/64 [00:00<00:00, 238.97it/s]                                                                      2026-08-28 21:25:39,406 - INFO - DataScalingExperiment - Dataset samples: Train=10100, Val=1280, Test=1280
+2026-08-28 21:25:39,407 - INFO - DataScalingExperiment - Training on device: cuda
+2026-08-28 21:26:35,189 - INFO - DataScalingExperiment - Early stopping triggered at epoch 22
+2026-08-28 21:26:35,190 - INFO - DataScalingExperiment - Training completed in 55.16 seconds. Best Epoch: 14 (Val Loss: 0.0418)
+2026-08-28 21:26:35,190 - INFO - DataScalingExperiment - Evaluating best model on held-out Test-Split...
+2026-08-28 21:26:35,334 - INFO - DataScalingExperiment - === Results for scale_pairs_f100 ===
+2026-08-28 21:26:35,334 - INFO - DataScalingExperiment - Test MSE: 0.04181 | Test MAE: 0.15794 | R2: 0.4629 | Pearson: 0.7310 | Acc: 81.41%
+2026-08-28 21:26:35,334 - INFO - DataScalingExperiment - Saved metrics to results/experiments/data_scaling/scale_pairs_f100_metrics.json
+2026-08-28 21:26:35,558 - INFO - DataScalingExperiment - Saved loss curve plot to results/experiments/data_scaling/scale_pairs_f100_loss_curve.png

@@ -1,0 +1,484 @@
+{
+  "ITEM_01": {
+    "item_id": "ITEM_01",
+    "style_score": 3,
+    "meaning_score": 1,
+    "flags": {
+      "unsplit_compounds": true,
+      "unclear_logic": true,
+      "hallucination": true
+    },
+    "comment": "Bau-Gebäude ist kein übliches Wort.\nTextfrage zum Eingang wird nicht in den nächsten Sätzen klar beantwortet, das verwirrt.\nEinzelne Sätze gehen Richtung eher Leichte Sprache, durch die unlogischen Worte Abwertung.\nab-gebaut ist überflüssige Trennung (im Verb)\nSchlechte Textlogik bei sich wiedersprechenden Sätzen hintereinander.\n? die Menschen können schneller fahren, weil sie nicht mehr so schnell fahren? - \nTextlogik auch in der Reihenfolge und sinnhaftigkeit der Infos schlecht (Leiche - Baum - Feuerstelle"
+  },
+  "ITEM_02": {
+    "item_id": "ITEM_02",
+    "style_score": 2,
+    "meaning_score": 5,
+    "flags": {},
+    "comment": "Satzgefüge teils schwierig von der Reihenfolge (Nebensatz am Anfang). Lange Sätze. \nVerständlichkeit fast gut, Es könnte noch deutlicher auf die Trennung Einleitung und Regeln hingewiesen werden.\nVereinfachung auf Satzebene erkennbar, auf Wortebene (ausgetauscht u.ä.) nicht so sehr. Daher 2 statt 3"
+  },
+  "ITEM_03": {
+    "item_id": "ITEM_03",
+    "style_score": 3,
+    "meaning_score": 3,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Ich hätte den Teil zu 15/16 Bundesländern vorgezogen. Erst E-Akte, dann 15 Länder machen das und dann warum mach S-A das nicht. Das wäre noch nachvollziehbarer."
+  },
+  "ITEM_04": {
+    "item_id": "ITEM_04",
+    "style_score": 3,
+    "meaning_score": 2,
+    "flags": {
+      "grammar_syntax": true,
+      "hallucination": true,
+      "unsplit_compounds": true
+    },
+    "comment": "Worte wie Rat-Amt scheinen erfunden (zumindest kenne ich die Vorlage nicht). Geht es um Menschen ohne Atemprobleme? Durch diese Stellen Abwertung bei Sinnhaftigkeit und Logik. Grundsätzlich über weite Strecken aber gut aufgebaut und logisch.\nTrennungen folgen keinem Muster, teils lange Worte zusammen. Besonders oft werden eher erfundene Worte getrennt"
+  },
+  "ITEM_05": {
+    "item_id": "ITEM_05",
+    "style_score": 2,
+    "meaning_score": 4,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": "Ich gehe mal davon das, dass der Textanfang sich teils so komisch liest wegen fehlender Umbrüche (Stichworte auf einer Internetseite). So ist es jedenfalls oft kein Satz. Ich werte dafür aber nicht ab.\n"
+  },
+  "ITEM_06": {
+    "item_id": "ITEM_06",
+    "style_score": 4,
+    "meaning_score": 4,
+    "flags": {},
+    "comment": "Trennungen möglich, sonst deutlich Leichte Sprache. Hier muss man sich für die Gewichtung des Fehlers entscheiden. Da grundsätzlich überhaupt nicht getrennt wurde 3 (eine wichtige Regel nie beachtet). Wenn man mehr das andere betrachtet 2.\nVerweis auf eine Stelle außerhalb des Textes führt zu Abwertung bei 2. "
+  },
+  "ITEM_07": {
+    "item_id": "ITEM_07",
+    "style_score": 5,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Einzelne zusätzliche Trennung wäre möglich, aber das ist auch so verständlich."
+  },
+  "ITEM_08": {
+    "item_id": "ITEM_08",
+    "style_score": 1,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": "Da dieser Text nur ein Satz ist, ist Logik im Gedankengang nicht wirklich prüfbar."
+  },
+  "ITEM_09": {
+    "item_id": "ITEM_09",
+    "style_score": 1,
+    "meaning_score": 4,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": "Abwertung bei Logik, da Sätze wie Seite 1 von 6 im Text belassen wurden.\nAuch nicht erklärte Fremdworte, unbekannte Abkürzungen und Sonderzeichen werten diesen Text ab."
+  },
+  "ITEM_10": {
+    "item_id": "ITEM_10",
+    "style_score": 3,
+    "meaning_score": 2,
+    "flags": {
+      "hallucination": true,
+      "unclear_logic": true,
+      "unsplit_compounds": true
+    },
+    "comment": "Uneinheitliche Trennung. Einige Worte sind scheinbar halluziniert. Textlogik ist 2-3, grundsätzlich verständlich, aber die falschen Worte, die in Folgesätzen in der Schreibung wechseln und die unlogische Fragenreihe zum Herzstillstand am Anfang ohne echte Auflösung führen zur Abwertung.\nDie Fragenreihe ohne Antworten führt auch zur Abwertung in der Textlogik. Zumeist sind es einfache Sätze, der Text insgesamt wird aber durch die unbekannten Halluzinierten Worte und die Fragen ohne echte Antworten für originäre Nutzer Leichter Sprache schwerer verständlich. Daher Abwertung."
+  },
+  "ITEM_11": {
+    "item_id": "ITEM_11",
+    "style_score": 2,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": ""
+  },
+  "ITEM_12": {
+    "item_id": "ITEM_12",
+    "style_score": 3,
+    "meaning_score": 2,
+    "flags": {
+      "unsplit_compounds": true,
+      "hallucination": true
+    },
+    "comment": "Einige vielleicht unbekannte Worte wie Unterhalt sind nicht erklärt. Im mittleren Teil ist die Fragenreihe nicht hilfreich. Originäre Nutzer Leichter Sprache hätten Schwierigkeiten nach einer Reihe von 4-5 Fragen alles auf die Antwort zu beziehen. Das müsste für Leichte Sprache umgebaut werden.\nVereinzelte falsche Worte wie Geburts-Urlaub (die dann eines der wenigen getrennten Worte sind).\nDie Textlogik wäre schöner, wenn erst das Amt und seine Hilfeangebote beschrieben würden und dann vielleicht die Beispiele, für einzelne Hilfen. Zwischendrin sind grundsätzliche Logikfehler wie bei der Ablehnung des Antrags durch die beantragende Person."
+  },
+  "ITEM_13": {
+    "item_id": "ITEM_13",
+    "style_score": 2,
+    "meaning_score": 3,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": "Grundsätzlich verständlich. Beispielreihe am Ende wirkt willkürlich und ohne Sinn. Zitate sind nicht gut hervorgehoben (Panter). Artefakte von Zwischenüberschriften\nKonjunktiv genutzt"
+  },
+  "ITEM_14": {
+    "item_id": "ITEM_14",
+    "style_score": 3,
+    "meaning_score": 3,
+    "flags": {},
+    "comment": "Verwendung von : teilweise nicht hilfreich.\nErklärung zu queer ist mit trans und bi als weiteren nicht unbedingte bekannten Worten nicht optimal.\nSatz zur 1. Messe wird am Ende wiederholt"
+  },
+  "ITEM_15": {
+    "item_id": "ITEM_15",
+    "style_score": 5,
+    "meaning_score": 5,
+    "flags": {},
+    "comment": ""
+  },
+  "ITEM_16": {
+    "item_id": "ITEM_16",
+    "style_score": 5,
+    "meaning_score": 3,
+    "flags": {
+      "unclear_logic": true
+    },
+    "comment": "Die Logik des Gedankengangs vom Haus über den Garten der Menschen (ist der beim Haus?) zum Wetter (wozu wird das erwähnt?) ist bei der Kürze des Textes nicht deutlich. Es ist kein Bruch in der Logik, für Leichte Sprache wären aber Zusammenhänge sinnvoll."
+  },
+  "ITEM_17": {
+    "item_id": "ITEM_17",
+    "style_score": 3,
+    "meaning_score": 1,
+    "flags": {
+      "hallucination": true,
+      "unclear_logic": true,
+      "grammar_syntax": true
+    },
+    "comment": "Gar kein logischer Leitfaden.\nTeilweise zu viel Trennung Bürger-Rechts-Vertreter ist der im Gegensatz zum Bürger-Links-Vertreter. \nBücher-Käden könnte auch Tippfehler sein. Aufzählung am Ende ist aber ohne Struktur (Komma oder Spiegelstriche) und endet sinnfrei auf Deutscher. Teilweise auch falscher Satzbau"
+  },
+  "ITEM_18": {
+    "item_id": "ITEM_18",
+    "style_score": 3,
+    "meaning_score": 2,
+    "flags": {
+      "hallucination": true,
+      "grammar_syntax": true
+    },
+    "comment": "Unklar, wer ich ist.\nSchwieriger Gebrauch von Verneinungen, Satzbau teilweise zu zerhackt, daher bei 1. nicht über 3. Sonst ordentliche Trennung und kurze Sätze.\nDer Text hat zum Ende scheinbar mit der Eingangsfrage nichts mehr zu tun."
+  },
+  "ITEM_19": {
+    "item_id": "ITEM_19",
+    "style_score": 4,
+    "meaning_score": 2,
+    "flags": {
+      "hallucination": true,
+      "grammar_syntax": true
+    },
+    "comment": "Fahr-Brücke?\nFür perfekte Leichte Sprache würde ich nicht nur die Auto-Fahrerin sondern alle Auto-Fahrer nehmen, es ist aber knapp an 5 in Frage 1"
+  },
+  "ITEM_20": {
+    "item_id": "ITEM_20",
+    "style_score": 3,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Einige zu lange Sätze.\nSilbentrennung kaum ein Thema durch kurze Worte (Beratungsstelle muss man nicht unbedingt trennen, Blut-Untersuchungen würde ich trennen)"
+  },
+  "ITEM_21": {
+    "item_id": "ITEM_21",
+    "style_score": 3,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Trennung bei Beratungs-Stelle nicht einheitlich.\nErklärungskette bei Berater zu lang.\nKeine Erklärung zu Fachgebieten (Fremdworte)"
+  },
+  "ITEM_22": {
+    "item_id": "ITEM_22",
+    "style_score": 4,
+    "meaning_score": 2,
+    "flags": {
+      "hallucination": true
+    },
+    "comment": "Name Brockhaus nicht einheitlich (Halluzination?). Live Screen wahrscheinlich auch Halluzination (oder dumme Autokorrektur)\nDeutliche Logikfehler: Beraterin kann sich nicht selbst helfen?\nWir wollen nicht teilnehmen, sondern veranstalten. Und wer ist Wir?\nFür mich wäre Frage 2. wahrscheinlich 3, für Menschen mit Lernbehinderung eher wohl 2.\nEher Leicht, man könnte die einfachen Nebensätze wahrscheinlich vermeiden. Auch der fehlende Verweis auf den Ort vom Formular verhindert dort die 5"
+  },
+  "ITEM_23": {
+    "item_id": "ITEM_23",
+    "style_score": 4,
+    "meaning_score": 1,
+    "flags": {
+      "grammar_syntax": true
+    },
+    "comment": "Wortdoppelungen am Anfang sind unnötig lange Worte. \nGrundsätzlich unlogische Sätze machen die Beurteilung der Sprache schwierig. Bei: \"Denn die Polizei sagt: Die Verletzungen von den Menschen sind nicht direkt von den Gewalt-Anschlägen.\" ist das Satzgefüge aber recht lang und das direkt könnte entfallen. Daher 4 statt 5"
+  },
+  "ITEM_24": {
+    "item_id": "ITEM_24",
+    "style_score": 5,
+    "meaning_score": 5,
+    "flags": {
+      "grammar_syntax": true
+    },
+    "comment": ""
+  },
+  "ITEM_25": {
+    "item_id": "ITEM_25",
+    "style_score": 4,
+    "meaning_score": 2,
+    "flags": {
+      "unclear_logic": true,
+      "unsplit_compounds": true
+    },
+    "comment": "\"Das Team heißt: Beauftragte für Menschen und Einrichtungen. Die Beauftragten für Menschen sind die Mitarbeiter von den Behörden in Ihrem Ort. Und sie machen wichtige Entscheidungen. \" Objektiv ist hier unzulässige Verkürzung (Beauftragte für Menschen) und fehlerhafte Inhalte, es sei denn, das ist für eine fiktive Welt, auf die sich der Text bezieht so korrekt.\nDer Satz am Anfang, dass der Text in Leichter Sprache für Menschen mit Behinderungen ist, ist so wahrscheinlich auch nicht korrekt gemeint, eher er erleichtert Menschen mit Behinderungen das Verständnis vom Text.\nSchwierig ist auch der Part mit 3 waagerechte Striche, auf denen etwas steht. Und andere nicht klar erklärte Fachworte wie Akkordeon. \nEin echter Logikfehler ist aber wohl das Thema, wer wem welche Nachrichten senden soll oder darf.\nDie Einordnung vom Text ist schwierig, "
+  },
+  "ITEM_26": {
+    "item_id": "ITEM_26",
+    "style_score": 2,
+    "meaning_score": 4,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": "Trennung teilweise.\nVerständlicher wäre der Text, wenn zu Beginn mal der Name auftaucht. Das ist eine Logiklücke im Textausschnitt. \nTonnage müsste erklärt werden und Satzteile in () sind zu vermeiden, Worte wie Kontribution sind nicht erklärt und die Satzgefüge teils länger."
+  },
+  "ITEM_27": {
+    "item_id": "ITEM_27",
+    "style_score": 3,
+    "meaning_score": 2,
+    "flags": {
+      "grammar_syntax": true,
+      "unsplit_compounds": true
+    },
+    "comment": "unsinnige Verwendung von :\nWorttrennung aus-einander ist eher ein Fehler, genau wie die weitere Trennung von Verben.\nDie getrennten Worte werden am Ende ohne Trennung nochmal geschrieben\nAm Ende vom Text wirde der Anfang schwieriger wiederholt. Das ist logisch und für die Verständlichkeit ungünstig."
+  },
+  "ITEM_28": {
+    "item_id": "ITEM_28",
+    "style_score": 3,
+    "meaning_score": 1,
+    "flags": {
+      "hallucination": true,
+      "unclear_logic": true,
+      "passive_voice": true
+    },
+    "comment": "An der Grenze zwischen völlig unlogisch und schwer nachvollziehbar. Für die Fehler wie sich reparierender Zug kann man sich vielleicht das richtige erschließen. Das gelingt aber den originären Nutzern Leichter Sprache wahrscheinlich nicht.\nDer letzte Satz ist wieder länger und nicht gut vereinfacht. Er wiederholt Angaben vom Anfang."
+  },
+  "ITEM_29": {
+    "item_id": "ITEM_29",
+    "style_score": 4,
+    "meaning_score": 1,
+    "flags": {
+      "hallucination": true,
+      "unclear_logic": true
+    },
+    "comment": "Gelegentlich Passiv.\nDie meisten Sätze sind relativ Leicht und kurz"
+  },
+  "ITEM_30": {
+    "item_id": "ITEM_30",
+    "style_score": 4,
+    "meaning_score": 1,
+    "flags": {
+      "grammar_syntax": true,
+      "hallucination": true,
+      "unclear_logic": true
+    },
+    "comment": "Einzelne längere Sätze. Einige Fremdworte nicht erklärt.\nFalsche Erklärung weniger auf Wortebene aber in Sätzen (Leben in Teichen)."
+  },
+  "ITEM_31": {
+    "item_id": "ITEM_31",
+    "style_score": 3,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Abwertung, da keinerlei Worttrennung"
+  },
+  "ITEM_32": {
+    "item_id": "ITEM_32",
+    "style_score": 1,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": ""
+  },
+  "ITEM_33": {
+    "item_id": "ITEM_33",
+    "style_score": 4,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Keine Trennung zusammengesetzter Worte, aber nur längere Worte, die in der Zielgruppe des Textes mit einer gewissen Wahrscheinlichkeit bekannt sind. Daher 4\nSehr schöner Aufbau"
+  },
+  "ITEM_34": {
+    "item_id": "ITEM_34",
+    "style_score": 2,
+    "meaning_score": 2,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": "Zu Beginn fehlt eine grundsätzliche kurze erklärende Antwort, was der Ring ist. Auch eine klarere Beschreibung, dass die Wegweiser blau sind und Dinge sein können, würde das Verständnis erleichtern. So ist der Text nur schwer nachvollziehbar, für die originäre Zielgruppe Leichter Sprache wahrscheinlich sogar unverständlich (1)\nDie Sätze sind zwar kurz, aber längere Worte wurden nicht getrennt. Es werden unübliche Worte verwendet. Aufzählungen mit Trennung durch . stören den erkennbaren Satz-Zusammenhang. Teilweise lange Sätze\n"
+  },
+  "ITEM_35": {
+    "item_id": "ITEM_35",
+    "style_score": 3,
+    "meaning_score": 1,
+    "flags": {
+      "hallucination": true,
+      "unclear_logic": true
+    },
+    "comment": "überflüssige Trennung von Verben. Überflüssige doppelte Worttrennung. Die unbekannten Worte, die oft falsch gebraucht werden, sind so in der Kombination und Menge schwer verständlich. Insgesamt 3-4\nDie erfundenen Worte machen den Text unverständlich. Und dass ein Amt Gesetze schreibt ist wohl objektiv falsch."
+  },
+  "ITEM_36": {
+    "item_id": "ITEM_36",
+    "style_score": 4,
+    "meaning_score": 1,
+    "flags": {
+      "hallucination": true,
+      "unclear_logic": true,
+      "unsplit_compounds": true,
+      "grammar_syntax": true
+    },
+    "comment": "Fehlende Trennung bei wenigen zu trennenden Worten (Neujahrs-Pinnen/ Neujahr-Spinnen - hier sogar sinntragend), Verben getrennt. Einzelne Sätze relativ lang (Wortzahl).\n\nOrte, Namen und Sportarten werden willkürlich gemischt. Kein guter Aufbau hinsichtlich der verschiedenen Wettbewerbe"
+  },
+  "ITEM_37": {
+    "item_id": "ITEM_37",
+    "style_score": 2,
+    "meaning_score": 4,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Einschränkungen für Reisende und Nutzer des Bahnhofs. - Wenn man solche Sätze im fertigen Dokument als Zwischenüberschriften hat, ist das gut für die Textstruktur und hilfreich. Sonst sind es grammatikalisch falsche Sätze. Bei vielen Worten ist Trennung vielleicht nicht unbedingt nötig, aber Schutz-Gerüst sollte getrennt werden.\nDer letzte Abschnitt zur Bahnhofsmission könnte für Leichte Sprache noch deutlicher mit einem Bezug auf die Probleme von Reisenden beim Umbau angebunden werden, daher 4 statt 5"
+  },
+  "ITEM_38": {
+    "item_id": "ITEM_38",
+    "style_score": 2,
+    "meaning_score": 3,
+    "flags": {
+      "unsplit_compounds": true,
+      "unclear_logic": true,
+      "passive_voice": true
+    },
+    "comment": "Ungewöhnliche Satzstellungen.\nAm Anfang verwirrend, da nicht klar wird, worauf sich das diese bei Hort und anderen Gruppen bezieht (hier 2). Im weiteren dann logisch (dann 4) ergibt gemittelt 3."
+  },
+  "ITEM_39": {
+    "item_id": "ITEM_39",
+    "style_score": 1,
+    "meaning_score": 4,
+    "flags": {
+      "grammar_syntax": true,
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": "Abkürzungen ohne Erklärung. Trennungen innerhalb der Zeile und aller Wortarten ohne Anlass.\nDie logische Reihenfolge der geregelten Punkte ist teilweise vielleicht besser lösbar, wenn thematische Zusammenhänge genutzt werden."
+  },
+  "ITEM_40": {
+    "item_id": "ITEM_40",
+    "style_score": 1,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": ""
+  },
+  "ITEM_41": {
+    "item_id": "ITEM_41",
+    "style_score": 1,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": ""
+  },
+  "ITEM_42": {
+    "item_id": "ITEM_42",
+    "style_score": 2,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Am Anfang wäre vielleicht eine Angabe hilfreich, dass es um eine Aufzählung von Brandfällen geht. Dann kann man sich besser auf den Text einstellen."
+  },
+  "ITEM_43": {
+    "item_id": "ITEM_43",
+    "style_score": 1,
+    "meaning_score": 4,
+    "flags": {
+      "unclear_logic": true,
+      "unsplit_compounds": true,
+      "passive_voice": true
+    },
+    "comment": "Fachworte werden nicht erklärt.\nAm Ende wäre vielleicht eine Überleitung zum Thema Therapeuten sinnvoll, wenn dies die sächsische Position begründen soll. Und auch die Erwähnung des Abiturs könnte logisch mit dem restlichen Text verknüpft werden."
+  },
+  "ITEM_44": {
+    "item_id": "ITEM_44",
+    "style_score": 4,
+    "meaning_score": 1,
+    "flags": {
+      "unclear_logic": true,
+      "hallucination": true
+    },
+    "comment": "Wenn man den Teil zwischen \"... jetzt gibt es für das Krankenhaus Geld.\" und \"das harz-klinikum bekommt ...\" weglässt, hätte man eine kurze logische Meldung. Der Mittelteil ist  relativ frei erfunden zusammengestellt. \nDie Erklärung Kranken-Klinik zu Beginn ist nicht hilfreich.\nEinige Sätze sind für Leichte Sprache relativ lang. Dreifachtrennungen im Wort sind auch für Leichte Sprache eher zu viel."
+  },
+  "ITEM_45": {
+    "item_id": "ITEM_45",
+    "style_score": 4,
+    "meaning_score": 1,
+    "flags": {
+      "hallucination": true,
+      "unsplit_compounds": true
+    },
+    "comment": "Teilweise relativ lange Sätze.\nDie meisten fehlerhaft halluzinierten Worte machen den Text schwerer lesbar, aber nicht unverständlich. Worte wie Bildungs-Professoren haben aber eine ganz andere Bedeutung und weisen eher zur 1 als zur 2."
+  },
+  "ITEM_46": {
+    "item_id": "ITEM_46",
+    "style_score": 3,
+    "meaning_score": 3,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "Texte für die Erklärung der Bedienung von Internetseiten sind in der Regel schwer verständlich, wenn man dazu die Bilder nicht sieht. Daher ist so als Text die Verständlichkeit zur Erklärungsqualität im mittleren Bereich gegeben. An einer Stelle wird eine doppelte Verneinung benutzt, was auch zur Abwertung der Sinnhaftigkeit führt (3-4). Diese doppelte Verneinung führt auch zur Abwertung bei sprachlicher Einfachheit, da es ein klarer Regelverstoß ist. "
+  },
+  "ITEM_47": {
+    "item_id": "ITEM_47",
+    "style_score": 5,
+    "meaning_score": 4,
+    "flags": {},
+    "comment": "Einzelne Sätze sind etwas lang (Einfachheit leichte Tendenz zu 4)\nDer Ablauf zum Prozess der Planungswerkstätten hätte noch etwas klarer formuliert werden können. Die Aussprachehilfe Integration ist vielleicht unnötig."
+  },
+  "ITEM_48": {
+    "item_id": "ITEM_48",
+    "style_score": 4,
+    "meaning_score": 4,
+    "flags": {
+      "grammar_syntax": true,
+      "unsplit_compounds": true
+    },
+    "comment": "\"Behörden für das ganze Land Schleswig - Holstein anderen Gruppen in Schleswig - Holstein. \" dieser Satz ist unfertig. Teilweise sind im Text Artefakte von Bearbeitungsanmerkungen. Diese stören leicht beim Lesen.\nErklärungen zur Bedienung von Internetseiten sind ohne die Seite zu sehen meist nur schwer verständlich. Das wurde hier bei der Erklärungsqualität nicht negativ bewertet."
+  },
+  "ITEM_49": {
+    "item_id": "ITEM_49",
+    "style_score": 3,
+    "meaning_score": 5,
+    "flags": {
+      "unsplit_compounds": true
+    },
+    "comment": "längere Worte wurden nicht immer getrennt. Unbekannte Worte wie \"interaktiver Lernort\" \"hannoversche Stadtgesellschaft\" \"Diskussionsraum\" und \"zivil-courage\" werden  nicht erklärt. Da diese Worte am Textanfang stehen beeinflusst das für die Zielgruppe Leichter Sprache das ganze Lesen des Textes."
+  },
+  "ITEM_50": {
+    "item_id": "ITEM_50",
+    "style_score": 4,
+    "meaning_score": 1,
+    "flags": {
+      "grammar_syntax": true,
+      "unclear_logic": true
+    },
+    "comment": "Trennung an falscher Stelle (Pinse-Loren) und in kurzen Verben, dafür z.B. nicht in Nationalpark. Man könnte den Text wahrscheinlich ohne extra Trennungen bestehen lassen, da Tierpark und Nationalpark ja Worte mit spezieller Bedeutung für den Wortteil Park sind. Einige Worte sind falsch geschrieben (weiter-ansiedelt; Luschse)\nDer Anfangsteil ist logisch aufgebaut. Die Stelle mit \"haben dort nicht mehr lange gelebt\" ist schwierig verständlich. Auch bei der Zahl 90 oder 11 wird es unklar. Gänzlich unklar ist der Teil zu Juno, Jupp und dem Jungen (Mensch!). An dieser Stelle kann man von leichter Halluzination sprechen. Daher für den Gesamttext 1 mit knapper Tendenz zur 2."
+  }
+}

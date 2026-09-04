@@ -1,0 +1,82 @@
+[
+  {
+    "Modell": "Flesch Reading Ease",
+    "Kategorie": "Baseline",
+    "Pearson r (Simplicity)": 0.512845383106623,
+    "Spearman ρ (Rang)": 0.5429216880331256,
+    "Kendall τ": 0.41198243795629874,
+    "Pearson r (Complexity)": 0.512845383106623,
+    "RMSE (normiert)": 0.18609732306535304,
+    "MAE (normiert)": 0.14397399351753395
+  },
+  {
+    "Modell": "Wiener Sachtextformel",
+    "Kategorie": "Baseline",
+    "Pearson r (Simplicity)": 0.5837183166970279,
+    "Spearman ρ (Rang)": 0.601606052806714,
+    "Kendall τ": 0.4634768525595936,
+    "Pearson r (Complexity)": 0.5837183166970281,
+    "RMSE (normiert)": 0.17618297098295654,
+    "MAE (normiert)": 0.1365573081654245
+  },
+  {
+    "Modell": "LIX Lesbarkeitsindex",
+    "Kategorie": "Baseline",
+    "Pearson r (Simplicity)": 0.6320333247219565,
+    "Spearman ρ (Rang)": 0.6563386293101088,
+    "Kendall τ": 0.5147158943451865,
+    "Pearson r (Complexity)": 0.6320333247219567,
+    "RMSE (normiert)": 0.1614995015348984,
+    "MAE (normiert)": 0.12738191339754973
+  },
+  {
+    "Modell": "BiLSTM MixUp Regressor (256)",
+    "Kategorie": "Regressor (256)",
+    "Pearson r (Simplicity)": 0.45908899954522664,
+    "Spearman ρ (Rang)": 0.4846903262756971,
+    "Kendall τ": 0.3692123905256686,
+    "Pearson r (Complexity)": 0.4590889995452267,
+    "RMSE (normiert)": 0.36051854589399074,
+    "MAE (normiert)": 0.30987320144055647
+  },
+  {
+    "Modell": "BiLSTM MixUp Regressor (512)",
+    "Kategorie": "Regressor (512)",
+    "Pearson r (Simplicity)": 0.3459516210332412,
+    "Spearman ρ (Rang)": 0.3474194601709615,
+    "Kendall τ": 0.26416125046346106,
+    "Pearson r (Complexity)": 0.34595162103324123,
+    "RMSE (normiert)": 0.40214740893288253,
+    "MAE (normiert)": 0.34625668245268737
+  },
+  {
+    "Modell": "BiLSTM MixUp Regressor (1024)",
+    "Kategorie": "Regressor (1024)",
+    "Pearson r (Simplicity)": 0.2507532415126786,
+    "Spearman ρ (Rang)": 0.23822719173180526,
+    "Kendall τ": 0.1827720634289811,
+    "Pearson r (Complexity)": 0.25075324151267864,
+    "RMSE (normiert)": 0.4246224466031339,
+    "MAE (normiert)": 0.3633083169474021
+  },
+  {
+    "Modell": "BiLSTM Satz-Klassifikator",
+    "Kategorie": "Klassifikator (Satz)",
+    "Pearson r (Simplicity)": 0.24169425181274815,
+    "Spearman ρ (Rang)": 0.4307129975294749,
+    "Kendall τ": 0.3248715649543421,
+    "Pearson r (Complexity)": 0.24169425181274817,
+    "RMSE (normiert)": 0.5823666040887927,
+    "MAE (normiert)": 0.5392932395731229
+  },
+  {
+    "Modell": "BiLSTM Artikel-Klassifikator (1024)",
+    "Kategorie": "Klassifikator (1024)",
+    "Pearson r (Simplicity)": 0.14826198882403244,
+    "Spearman ρ (Rang)": 0.11867136106863956,
+    "Kendall τ": 0.08752499142761042,
+    "Pearson r (Complexity)": 0.14826198882403246,
+    "RMSE (normiert)": 0.5730062132105459,
+    "MAE (normiert)": 0.5249284154280609
+  }
+]

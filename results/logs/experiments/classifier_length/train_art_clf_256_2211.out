@@ -1,0 +1,67 @@
+Globaler Seed auf 42 gesetzt.
+Log file initialized at: results/logs/experiments/classifier_length/binary_train_article_model_20260901_095534.log
+Aktuelles Arbeitsverzeichnis: /home/fisc4884/master-thesis
+Using device: cuda
+Loading article data from data/analysis/corpus_master.csv with 0.8 <= similarity <= 0.98...
+Found 633 article pairs matching the criteria.
+Tokenizing articles:   0%|          | 0/633 [00:00<?, ?it/s]Tokenizing articles:   4%|3         | 23/633 [00:00<00:02, 225.28it/s]Tokenizing articles:   8%|7         | 50/633 [00:00<00:02, 248.71it/s]Tokenizing articles:  12%|#2        | 76/633 [00:00<00:02, 253.79it/s]Tokenizing articles:  16%|#6        | 104/633 [00:00<00:02, 261.90it/s]Tokenizing articles:  21%|##1       | 136/633 [00:00<00:01, 282.04it/s]Tokenizing articles:  28%|##7       | 177/633 [00:00<00:01, 324.42it/s]Tokenizing articles:  33%|###3      | 211/633 [00:00<00:01, 326.20it/s]Tokenizing articles:  39%|###8      | 244/633 [00:00<00:01, 313.76it/s]Tokenizing articles:  44%|####3     | 276/633 [00:00<00:01, 312.64it/s]Tokenizing articles:  50%|#####     | 319/633 [00:01<00:00, 347.56it/s]Tokenizing articles:  56%|#####6    | 357/633 [00:01<00:00, 355.96it/s]Tokenizing articles:  63%|######2   | 398/633 [00:01<00:00, 371.21it/s]Tokenizing articles:  69%|######9   | 437/633 [00:01<00:00, 374.90it/s]Tokenizing articles:  77%|#######7  | 489/633 [00:01<00:00, 416.80it/s]Tokenizing articles:  84%|########4 | 534/633 [00:01<00:00, 421.03it/s]Tokenizing articles:  92%|#########1| 580/633 [00:01<00:00, 429.56it/s]Tokenizing articles:  98%|#########8| 623/633 [00:01<00:00, 409.55it/s]Tokenizing articles: 100%|##########| 633/633 [00:01<00:00, 357.46it/s]
+Total articles loaded: 1266 (633 LS, 633 AS)
+Vocab size: 13664
+Vokabular gespeichert unter: data/classifier_length_exp/article_vocab_256.json
+Epoch 1:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 1:   3%|3         | 1/29 [00:00<00:07,  3.83it/s]Epoch 1:  86%|########6 | 25/29 [00:00<00:00, 86.87it/s]                                                        Epoch 1 - Loss: 0.6551, Val Loss: 0.6222, Val BAcc: 0.7037
+=> Modell gespeichert (bester Val BAcc: 0.7037) unter results/models/classifier_length_exp/bilstm_article_classifier_256.pt
+Epoch 2:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 2:  86%|########6 | 25/29 [00:00<00:00, 249.70it/s]                                                         Epoch 2 - Loss: 0.5317, Val Loss: 0.6272, Val BAcc: 0.7284
+=> Modell gespeichert (bester Val BAcc: 0.7284) unter results/models/classifier_length_exp/bilstm_article_classifier_256.pt
+Epoch 3:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 3:  86%|########6 | 25/29 [00:00<00:00, 246.75it/s]                                                         Epoch 3 - Loss: 0.3722, Val Loss: 0.8794, Val BAcc: 0.7346
+=> Modell gespeichert (bester Val BAcc: 0.7346) unter results/models/classifier_length_exp/bilstm_article_classifier_256.pt
+Epoch 4:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 4:  90%|########9 | 26/29 [00:00<00:00, 250.46it/s]                                                         Epoch 4 - Loss: 0.3025, Val Loss: 0.3239, Val BAcc: 0.8519
+=> Modell gespeichert (bester Val BAcc: 0.8519) unter results/models/classifier_length_exp/bilstm_article_classifier_256.pt
+Epoch 5:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 5:  90%|########9 | 26/29 [00:00<00:00, 250.65it/s]                                                         Epoch 5 - Loss: 0.1508, Val Loss: 0.1268, Val BAcc: 0.9321
+=> Modell gespeichert (bester Val BAcc: 0.9321) unter results/models/classifier_length_exp/bilstm_article_classifier_256.pt
+Epoch 6:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 6:  90%|########9 | 26/29 [00:00<00:00, 250.80it/s]                                                         Epoch 6 - Loss: 0.1085, Val Loss: 0.1660, Val BAcc: 0.9444
+=> Modell gespeichert (bester Val BAcc: 0.9444) unter results/models/classifier_length_exp/bilstm_article_classifier_256.pt
+Epoch 7:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 7:  90%|########9 | 26/29 [00:00<00:00, 252.02it/s]                                                         Epoch 7 - Loss: 0.0743, Val Loss: 0.5483, Val BAcc: 0.8395
+Epoch 8:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 8:  90%|########9 | 26/29 [00:00<00:00, 251.59it/s]                                                         Epoch 8 - Loss: 0.1324, Val Loss: 0.2334, Val BAcc: 0.9074
+Epoch 9:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 9:  90%|########9 | 26/29 [00:00<00:00, 254.65it/s]                                                         Epoch 9 - Loss: 0.1097, Val Loss: 0.1558, Val BAcc: 0.9383
+Epoch 10:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 10:  90%|########9 | 26/29 [00:00<00:00, 252.04it/s]                                                          Epoch 10 - Loss: 0.0949, Val Loss: 0.4028, Val BAcc: 0.8951
+Epoch 11:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 11:  90%|########9 | 26/29 [00:00<00:00, 255.03it/s]                                                          Epoch 11 - Loss: 0.0877, Val Loss: 0.1432, Val BAcc: 0.9506
+=> Modell gespeichert (bester Val BAcc: 0.9506) unter results/models/classifier_length_exp/bilstm_article_classifier_256.pt
+Epoch 12:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 12:  86%|########6 | 25/29 [00:00<00:00, 245.81it/s]                                                          Epoch 12 - Loss: 0.0860, Val Loss: 0.3541, Val BAcc: 0.8457
+Epoch 13:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 13:  90%|########9 | 26/29 [00:00<00:00, 255.14it/s]                                                          Epoch 13 - Loss: 0.0915, Val Loss: 1.2719, Val BAcc: 0.7840
+Epoch 14:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 14:  86%|########6 | 25/29 [00:00<00:00, 249.81it/s]                                                          Epoch 14 - Loss: 0.9025, Val Loss: 0.4598, Val BAcc: 0.8395
+Epoch 15:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 15:  90%|########9 | 26/29 [00:00<00:00, 255.09it/s]                                                          Epoch 15 - Loss: 0.3555, Val Loss: 0.2788, Val BAcc: 0.8889
+Epoch 16:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 16:  90%|########9 | 26/29 [00:00<00:00, 250.77it/s]                                                          Epoch 16 - Loss: 0.2518, Val Loss: 0.3237, Val BAcc: 0.8148
+Epoch 17:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 17:  90%|########9 | 26/29 [00:00<00:00, 255.27it/s]                                                          Epoch 17 - Loss: 0.3488, Val Loss: 0.5937, Val BAcc: 0.7160
+Epoch 18:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 18:  86%|########6 | 25/29 [00:00<00:00, 249.53it/s]                                                          Epoch 18 - Loss: 0.3052, Val Loss: 0.3383, Val BAcc: 0.8210
+Epoch 19:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 19:  90%|########9 | 26/29 [00:00<00:00, 255.62it/s]                                                          Epoch 19 - Loss: 0.1628, Val Loss: 0.2143, Val BAcc: 0.9136
+Epoch 20:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 20:  86%|########6 | 25/29 [00:00<00:00, 249.36it/s]                                                          Epoch 20 - Loss: 0.1490, Val Loss: 0.2321, Val BAcc: 0.9136
+Epoch 21:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 21:  90%|########9 | 26/29 [00:00<00:00, 254.56it/s]                                                          Epoch 21 - Loss: 0.1530, Val Loss: 0.2415, Val BAcc: 0.8704
+Epoch 22:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 22:  90%|########9 | 26/29 [00:00<00:00, 250.57it/s]                                                          Epoch 22 - Loss: 0.1224, Val Loss: 0.2054, Val BAcc: 0.9198
+Epoch 23:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 23:  90%|########9 | 26/29 [00:00<00:00, 254.36it/s]                                                          Epoch 23 - Loss: 0.1568, Val Loss: 0.4197, Val BAcc: 0.8580
+Epoch 24:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 24:  90%|########9 | 26/29 [00:00<00:00, 251.47it/s]                                                          Epoch 24 - Loss: 0.1475, Val Loss: 0.4124, Val BAcc: 0.8210
+Epoch 25:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 25:  90%|########9 | 26/29 [00:00<00:00, 255.40it/s]                                                          Epoch 25 - Loss: 0.1436, Val Loss: 0.2923, Val BAcc: 0.8704
+Epoch 26:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 26:  86%|########6 | 25/29 [00:00<00:00, 249.45it/s]                                                          Epoch 26 - Loss: 0.1174, Val Loss: 0.2253, Val BAcc: 0.8951
+Early stopping triggered.
+
+Evaluating on Test Set...
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Normal       0.96      0.94      0.95        95
+      Simple       0.94      0.96      0.95        95
+
+    accuracy                           0.95       190
+   macro avg       0.95      0.95      0.95       190
+weighted avg       0.95      0.95      0.95       190
+
+Evaluating Lebenshilfe:   0%|          | 0/37 [00:00<?, ?it/s]Evaluating Lebenshilfe:   3%|2         | 1/37 [00:00<00:09,  3.94it/s]Evaluating Lebenshilfe:  27%|##7       | 10/37 [00:00<00:00, 33.55it/s]Evaluating Lebenshilfe:  41%|####      | 15/37 [00:00<00:00, 37.92it/s]Evaluating Lebenshilfe:  57%|#####6    | 21/37 [00:00<00:00, 43.94it/s]Evaluating Lebenshilfe:  81%|########1 | 30/37 [00:00<00:00, 56.57it/s]Evaluating Lebenshilfe: 100%|##########| 37/37 [00:00<00:00, 50.80it/s]
+
+============================================================
+ LEBENSHILFE DATASET EVALUATION (Article-Level Model)
+============================================================
+Overall Accuracy: 91.89% (Balanced: 91.89%)
+Perfect Pair Match: 31 / 37 (83.8%) - (Both LS & AS correct)
+Avg LS Flesch: 68.92 (AS: 47.41)
+Avg LS Wiener: 4.74 (AS: 8.44)
+Ergebnisse gespeichert unter: results/evaluation/article_model_lh_eval.csv

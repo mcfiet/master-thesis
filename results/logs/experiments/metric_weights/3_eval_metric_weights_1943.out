@@ -1,0 +1,61 @@
+=== Running Metric Weights Evaluation (0.5/0.5 vs 0.7/0.3 vs 1.0/0.0) ===
+Sat Aug 29 14:31:45 UTC 2026
+Loading test data from data/lebenshilfe/lebenshilfe_dataset_clean.json...
+Initializing spacy German tokenizer...
+Loading vocabulary from data/vocabs/mixup_vocab.json...
+Loading BiLSTM Regressor from results/models/bilstm_mixup_regression.pt...
+Loading SBERT model (jinaai/jina-embeddings-v2-base-de, max_seq_len=8192)...
+
+==================================================================
+Evaluating Model: SFT Baseline (results/models/sft)
+==================================================================
+[MODELL-LADEN] SFT Baseline
+  -> Pfad: results/models/sft
+  -> Instanziierte Modell-Klasse: MBartForConditionalGeneration (torch.float16)
+
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+==================================================================
+Evaluating Model: DPO (0.5 Style / 0.5 Sem) (results/models/metric_weights_exp/dpo_w05_w05)
+==================================================================
+[MODELL-LADEN] DPO (0.5 Style / 0.5 Sem)
+  -> Pfad: results/models/metric_weights_exp/dpo_w05_w05
+  -> Instanziierte Modell-Klasse: MBartForConditionalGeneration (torch.float16)
+
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+==================================================================
+Evaluating Model: DPO (0.7 Style / 0.3 Sem) (results/models/metric_weights_exp/dpo_w07_w03)
+==================================================================
+[MODELL-LADEN] DPO (0.7 Style / 0.3 Sem)
+  -> Pfad: results/models/metric_weights_exp/dpo_w07_w03
+  -> Instanziierte Modell-Klasse: MBartForConditionalGeneration (torch.float16)
+
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+==================================================================
+Evaluating Model: DPO (1.0 Style / 0.0 Sem) (results/models/metric_weights_exp/dpo_w10_w00)
+==================================================================
+[MODELL-LADEN] DPO (1.0 Style / 0.0 Sem)
+  -> Pfad: results/models/metric_weights_exp/dpo_w10_w00
+  -> Instanziierte Modell-Klasse: MBartForConditionalGeneration (torch.float16)
+
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+Saved summary results to: results/evaluation/metric_weights_comparison_summary.csv
+Saved detailed results to: results/evaluation/metric_weights_comparison_details.csv
+Saved JSON summary to: results/evaluation/metric_weights_comparison_summary.json
+Saved comparison plot to results/plots/metric_weights_tradeoff_curve.png
+
+==========================================================================================
+EXPERIMENT SUMMARY RESULTS
+==========================================================================================
+               model_name  r_style_mean  r_sem_as_mean  sim_ref_mean  reward_05_05_mean  reward_07_03_mean  reward_10_00_mean  bleu_mean  rougeL_f1_mean  avg_gen_tokens  truncation_rate
+             SFT Baseline      0.729370       0.854447      0.839101           0.791909           0.766893           0.729370   0.006753        0.124114      136.675676         0.459459
+DPO (0.5 Style / 0.5 Sem)      0.950517       0.842526      0.840791           0.896522           0.918120           0.950517   0.009405        0.137789      159.702703         0.432432
+DPO (0.7 Style / 0.3 Sem)      0.950872       0.829533      0.828303           0.890202           0.914470           0.950872   0.007311        0.128600      139.135135         0.405405
+DPO (1.0 Style / 0.0 Sem)      0.962902       0.826564      0.830015           0.894733           0.922001           0.962902   0.006627        0.131440      154.459459         0.405405
+==========================================================================================
+
+=== Evaluation Completed ===
+Sat Aug 29 14:34:23 UTC 2026

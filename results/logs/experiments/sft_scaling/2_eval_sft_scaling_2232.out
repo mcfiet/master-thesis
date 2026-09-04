@@ -1,0 +1,11 @@
+=== Aggregiere SFT Data Scaling Ergebnisse ===
+[ERFOLG] Aggregierte Zusammenfassung (5 Läufe) gespeichert unter: results/experiments/sft_scaling/sft_scaling_summary.csv
+
+=== SFT DATA SCALING ERGEBNIS-TABELLE ===
+experiment_name train_fraction  num_train_pairs r_style_mean r_sem_as_mean sim_ref_mean composite_reward_mean bleu_mean rouge_l_mean avg_gen_tokens truncation_rate_pct training_time_seconds
+ sft_scale_f010         0.1000               64       0.1159        0.8973       0.8503                0.5066    0.0022       0.0637       105.4324             16.2162               52.4988
+ sft_scale_f025         0.2500              160       0.4443        0.9362       0.9014                0.6902    0.0468       0.1827       566.1622             62.1622              373.3154
+ sft_scale_f050         0.5000              320       0.5934        0.9045       0.8794                0.7490    0.0339       0.1736       475.9730             56.7568              512.9254
+ sft_scale_f075         0.7500              481       0.5778        0.9055       0.8783                0.7417    0.0413       0.1669       619.8649             75.6757              588.9254
+ sft_scale_f100         1.0000              641       0.4391        0.9287       0.8912                0.6839    0.0438       0.1841       515.4324             59.4595              616.2306
+=== Aggregation abgeschlossen! ===

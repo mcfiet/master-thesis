@@ -1,0 +1,33 @@
+2026-08-29 14:00:10 - INFO - GenerateDPOLadder - Active compute device: cuda
+2026-08-29 14:00:10 - INFO - GenerateDPOLadder - Configured Temperature Ladder: [0.6, 0.7, 0.8, 0.85]
+2026-08-29 14:00:10 - INFO - GenerateDPOLadder - Repetition Penalty: 1.35 | No-Repeat-Ngram: 3
+2026-08-29 14:00:10 - INFO - GenerateDPOLadder - Target Score Margin: >= 0.05
+2026-08-29 14:00:10 - INFO - GenerateDPOLadder - Loading corpus from: data/corpus/corpus_10kgnad_len512_as.json
+2026-08-29 14:00:10 - INFO - GenerateDPOLadder - Loaded 9567 valid records from corpus.
+2026-08-29 14:00:10 - INFO - GenerateDPOLadder - Loading SFT model/tokenizer from: results/models/token_length_exp/sft_len512
+2026-08-29 14:00:11 - INFO - GenerateDPOLadder - Merging SFT LoRA adapter into base Seq2Seq model (facebook/mbart-large-50)...
+2026-08-29 14:00:13 - INFO - GenerateDPOLadder - Configured multilingual tokenizer with src_lang='de_DE' and tgt_lang='de_DE'
+2026-08-29 14:00:13 - INFO - GenerateDPOLadder - Loading Reward Model vocabulary from: data/token_length_exp/mixup_vocab_512.json
+2026-08-29 14:00:13 - INFO - GenerateDPOLadder - Loading BiLSTM Regressor weights from: results/models/token_length_exp/bilstm_mixup_regression_512.pt
+2026-08-29 14:00:13 - INFO - GenerateDPOLadder - Loading SBERT model for semantic evaluation: jinaai/jina-embeddings-v2-base-de
+2026-08-29 14:00:13 - INFO - sentence_transformers.base.model - Loading SentenceTransformer model from jinaai/jina-embeddings-v2-base-de.
+2026-08-29 14:00:18 - INFO - GenerateDPOLadder - Existing checkpoint detected at: data/token_length_exp/dpo_pairs_len512.jsonl.checkpoint.jsonl
+2026-08-29 14:00:18 - INFO - GenerateDPOLadder - Resumed state: 5969 valid pairs recovered, 9248 records previously processed.
+2026-08-29 14:00:18 - INFO - GenerateDPOLadder - Corpus records remaining: 319 / 9567
+2026-08-29 14:00:18 - INFO - GenerateDPOLadder - Starting Progressive Temperature Ladder generation...
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Progress: Batch 20/20 (100.0%) | Total Valid Pairs: 6139 | Total Dropped: 3428
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - === Temperature Ladder Generation Summary ===
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Total Processed Prompts: 9567
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Valid DPO Pairs Generated: 6139 (64.2% retention)
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Dropped (Margin < 0.05): 3426
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Dropped (Identical/Insufficient/Fragments): 2
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Resolution Breakdown by Temperature:
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder -   - Resolved at T=0.6: 1254 pairs (20.4%)
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder -   - Resolved at T=0.7: 3116 pairs (50.8%)
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder -   - Resolved at T=0.8: 1145 pairs (18.7%)
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder -   - Resolved at T=0.85: 624 pairs (10.2%)
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Score Summary -> Chosen Avg: 0.6885 | Rejected Avg: 0.5775 | Avg Margin: 0.1110
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Saved 5218 training pairs to: data/token_length_exp/dpo_pairs_len512.jsonl
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Saved 921 validation pairs to: data/token_length_exp/dpo_pairs_len512_eval.jsonl
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - Cleaned up checkpoint file: data/token_length_exp/dpo_pairs_len512.jsonl.checkpoint.jsonl
+2026-08-29 14:29:23 - INFO - GenerateDPOLadder - === Temperature Ladder DPO Generation Complete ===

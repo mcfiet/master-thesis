@@ -1,0 +1,18 @@
+Excluding form/questionnaire file: ILS_CAU_Geologiemuseum AD002 Prüfer Mail.docx
+Excluding form/questionnaire file: ILS07 Einwilligung KS DS001 Prüfer.docx
+Excluding form/questionnaire file: ILS08 BwH Entbindung Schweigepflicht AD002 prüfen.docx
+Excluding form/questionnaire file: ILS09 BwH Einverständniserklärung AD001 prüfen.docx
+Excluding form/questionnaire file: ILS FRAGEN Podium - Parlamentarischer Abend - AD001.docx
+Excluding form/questionnaire file: ILS KIWA_Bedarfsumfrage AD002 Prüfer.docx
+Excluding form/questionnaire file: ILS_Impressum ZuMiNET LS.docx
+Excluding form/questionnaire file: ILS Texte MiPi Tablet-Führerschein.docx
+Excluding form/questionnaire file: ILS IIB_MD-Stendal_Textteil_5 001 geprüft.docx
+Excluding form/questionnaire file: ILS Anlage Resozialisierung Hausordungung HL AD001.docx
+Excluding form/questionnaire file: 07 ÖPNV ILS_AD001 Prüfer.docx
+Excluding form/questionnaire file: 16 Beirat Senioren ILS_AD001 Prüfer.docx
+
+Processing complete:
+Total original articles: 49
+Excluded articles: 12
+Cleaned articles saved: 37
+Output saved to: data/lebenshilfe/lebenshilfe_dataset_clean.json

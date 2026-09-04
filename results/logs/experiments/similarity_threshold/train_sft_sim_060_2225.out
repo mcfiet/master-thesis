@@ -1,0 +1,5 @@
+=== Start SFT Training (mBART-50): min_sim = 0.60 ===
+Tue Sep  1 11:15:35 UTC 2026
+trainable params: 8,650,752 || all params: 619,530,240 || trainable%: 1.3963
+=== SFT Training (0.60) abgeschlossen ===
+Tue Sep  1 11:45:06 UTC 2026

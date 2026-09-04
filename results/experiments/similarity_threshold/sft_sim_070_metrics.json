@@ -1,0 +1,22 @@
+{
+  "experiment_name": "sft_sim_070",
+  "model_type": "SFT mBART-50 LoRA",
+  "min_sim": 0.7,
+  "max_sim": 0.98,
+  "num_total_filtered_pairs": 801,
+  "num_train_pairs": 641,
+  "num_val_pairs": 80,
+  "num_test_pairs": 80,
+  "best_val_loss": 2.4506591796875,
+  "final_train_loss": 2.548332238123053,
+  "training_time_seconds": 1506.2096569538116,
+  "r_style_mean": 0.64913980899429,
+  "r_sem_as_mean": 0.8865315084521835,
+  "sim_ref_mean": 0.8676642554031836,
+  "composite_reward_mean": 0.7678356587232368,
+  "bleu_mean": 0.022507541199710945,
+  "rouge_l_mean": 0.15037290934970177,
+  "avg_gen_tokens": 340.05405405405406,
+  "truncation_rate_pct": 37.83783783783784,
+  "model_dir": "results/experiments/similarity_threshold/sft_sim_070"
+}

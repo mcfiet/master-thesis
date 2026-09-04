@@ -1,0 +1,68 @@
+Geladene Test-Samples: 37
+
+======================================================================
+Starte Evaluation der Simplicity-Metrik-Modelle...
+======================================================================
+
+--- Evaluiere Metrik: metric_mixup_256 (max_len=256) ---
+
+--- Evaluiere Metrik: metric_mixup_512 (max_len=512) ---
+
+--- Evaluiere Metrik: metric_mixup_1024 (max_len=1024) ---
+Überspringe Metrik-Modell (Datei fehlt): metric_mixup_500 (results/models/token_length_exp/bilstm_mixup_regression_500.pt)
+Überspringe Metrik-Modell (Datei fehlt): metric_mixup_1000 (results/models/token_length_exp/bilstm_mixup_regression_1000.pt)
+
+--- Evaluiere Metrik: metric_mixup_master (max_len=256) ---
+Metrik-Zusammenfassung gespeichert: results/evaluation/token_length_metric_comparison.csv
+Metrik-Details gespeichert: results/evaluation/token_length_metric_details.csv
+
+--- Zusammenfassung der Simplicity-Metrik-Modelle ---
+       metric_model  max_seq_len  mean_score_ls  std_score_ls  mean_score_as  std_score_as  separation_margin  accuracy_ls_gt_as  margin_short  margin_med  margin_long  acc_short  acc_med  acc_long  length_corr_ls  length_corr_as
+   metric_mixup_256          256       0.762244      0.147751       0.071033      0.078320           0.691211           0.972973      0.590603    0.698112     0.701312        1.0      1.0  0.952381        0.265292        0.051452
+   metric_mixup_512          512       0.723947      0.126003       0.075702      0.095408           0.648245           0.972973      0.581237    0.658572     0.651425        1.0      1.0  0.952381        0.132290       -0.184351
+  metric_mixup_1024         1024       0.709525      0.133074       0.053478      0.092976           0.656048           1.000000      0.599630    0.630450     0.679953        1.0      1.0  1.000000        0.255334        0.108951
+metric_mixup_master          256       0.714340      0.137925       0.053994      0.086678           0.660346           0.972973      0.591444    0.698717     0.646435        1.0      1.0  0.952381        0.080607        0.065797
+Lade SBERT: jinaai/jina-embeddings-v2-base-de
+Jina SBERT max_seq_length gesetzt auf: 1024
+Lade Simplicity Regressor: results/models/token_length_exp/bilstm_mixup_regression_1024.pt
+Überspringe nicht vorhandenes Modell: results/models/mt5_exp/sft_mt5_base
+Überspringe nicht vorhandenes Modell: results/models/mt5_exp/dpo_mt5_base
+
+--- Evaluiere: results/models/token_length_exp/sft_len256 (max_len=256/256, prefix='') ---
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+--- Evaluiere: results/models/token_length_exp/sft_len512 (max_len=512/512, prefix='') ---
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+--- Evaluiere: results/models/token_length_exp/sft_len1024 (max_len=1024/1024, prefix='') ---
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+--- Evaluiere: results/models/token_length_exp/dpo_len256 (max_len=256/256, prefix='') ---
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+--- Evaluiere: results/models/token_length_exp/dpo_len512 (max_len=512/512, prefix='') ---
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+
+--- Evaluiere: results/models/token_length_exp/dpo_len1024 (max_len=1024/1024, prefix='') ---
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+Überspringe nicht vorhandenes Modell: results/models/token_length_jina_exp/dpo_len256_jina
+Überspringe nicht vorhandenes Modell: results/models/token_length_jina_exp/dpo_len512_jina
+Überspringe nicht vorhandenes Modell: results/models/token_length_jina_exp/dpo_len1024_jina
+Überspringe nicht vorhandenes Modell: results/models/token_length_exp/sft_len500
+Überspringe nicht vorhandenes Modell: results/models/token_length_exp/sft_len1000
+Überspringe nicht vorhandenes Modell: results/models/token_length_exp/dpo_len500
+Überspringe nicht vorhandenes Modell: results/models/token_length_exp/dpo_len1000
+Überspringe nicht vorhandenes Modell: results/models/token_length_jina_exp/dpo_len500_jina
+Überspringe nicht vorhandenes Modell: results/models/token_length_jina_exp/dpo_len1000_jina
+
+Erfolgreich gespeichert: results/evaluation/token_length_comparison_summary.csv
+Detailergebnisse gespeichert: results/evaluation/token_length_comparison_detailed.csv
+
+--- Zusammenfassung der Übersetzungs-Modelle (SFT & DPO) ---
+      model  max_len  r_style_mean  r_sem_as_mean  sim_ref_mean  composite_reward_mean  bleu_mean  rouge1_f1_mean  rouge2_f1_mean  rougeL_f1_mean  avg_gen_tokens  compression_ratio_mean  truncation_rate
+ sft_len256      256      0.320574       0.909117      0.882674               0.614845   0.008459        0.212076        0.071278        0.126443      142.972973                0.326395         0.729730
+ sft_len512      512      0.389620       0.923455      0.900909               0.656538   0.020063        0.267322        0.096091        0.153101      207.432432                0.466703         0.243243
+sft_len1024     1024      0.700392       0.905306      0.891083               0.802849   0.029089        0.344763        0.120488        0.170440      353.486486                0.674708         0.270270
+ dpo_len256      256      0.543669       0.910910      0.890230               0.727290   0.014517        0.251370        0.088568        0.142880      169.324324                0.390521         0.486486
+ dpo_len512      512      0.541620       0.916846      0.898934               0.729233   0.019973        0.279639        0.098805        0.151609      216.918919                0.479097         0.189189
+dpo_len1024     1024      0.902295       0.897343      0.896047               0.899819   0.047197        0.401601        0.138993        0.185073      522.432432                0.998962         0.324324

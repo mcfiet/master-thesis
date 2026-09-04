@@ -1,0 +1,45 @@
+2026-08-29 13:29:04 - INFO - GenerateDPOLadder - Active compute device: cuda
+2026-08-29 13:29:04 - INFO - GenerateDPOLadder - Configured Temperature Ladder: [0.6, 0.7, 0.8, 0.85]
+2026-08-29 13:29:04 - INFO - GenerateDPOLadder - Repetition Penalty: 1.35 | No-Repeat-Ngram: 3
+2026-08-29 13:29:04 - INFO - GenerateDPOLadder - Target Score Margin: >= 0.05
+2026-08-29 13:29:04 - INFO - GenerateDPOLadder - Loading corpus from: data/corpus/corpus_10kgnad_len512_as.json
+2026-08-29 13:29:04 - INFO - GenerateDPOLadder - Loaded 9567 valid records from corpus.
+2026-08-29 13:29:04 - INFO - GenerateDPOLadder - Loading SFT model/tokenizer from: results/models/experiments/synthetic_regressor/sft
+2026-08-29 13:29:05 - INFO - GenerateDPOLadder - Merging SFT LoRA adapter into base Seq2Seq model (facebook/mbart-large-50)...
+2026-08-29 13:29:07 - INFO - GenerateDPOLadder - Configured multilingual tokenizer with src_lang='de_DE' and tgt_lang='de_DE'
+2026-08-29 13:29:07 - INFO - GenerateDPOLadder - Loading Reward Model vocabulary from: data/vocabs/synthetic_vocab.json
+2026-08-29 13:29:07 - INFO - GenerateDPOLadder - Loading BiLSTM Regressor weights from: results/models/bilstm_synthetic_regression.pt
+2026-08-29 13:29:07 - INFO - GenerateDPOLadder - Loading SBERT model for semantic evaluation: jinaai/jina-embeddings-v2-base-de
+2026-08-29 13:29:07 - INFO - sentence_transformers.base.model - Loading SentenceTransformer model from jinaai/jina-embeddings-v2-base-de.
+2026-08-29 13:29:12 - INFO - GenerateDPOLadder - Starting Progressive Temperature Ladder generation...
+2026-08-29 13:51:46 - INFO - GenerateDPOLadder - Progress: Batch 25/1196 (2.1%) | Total Valid Pairs: 183 | Total Dropped: 17
+2026-08-29 14:12:55 - INFO - GenerateDPOLadder - Progress: Batch 50/1196 (4.2%) | Total Valid Pairs: 370 | Total Dropped: 30
+2026-08-29 14:35:57 - INFO - GenerateDPOLadder - Progress: Batch 75/1196 (6.3%) | Total Valid Pairs: 564 | Total Dropped: 36
+2026-08-29 15:02:20 - INFO - GenerateDPOLadder - Progress: Batch 100/1196 (8.4%) | Total Valid Pairs: 755 | Total Dropped: 45
+2026-08-29 15:31:21 - INFO - GenerateDPOLadder - Progress: Batch 125/1196 (10.5%) | Total Valid Pairs: 948 | Total Dropped: 52
+2026-08-29 15:55:24 - INFO - GenerateDPOLadder - Progress: Batch 150/1196 (12.5%) | Total Valid Pairs: 1144 | Total Dropped: 56
+2026-08-29 16:20:07 - INFO - GenerateDPOLadder - Progress: Batch 175/1196 (14.6%) | Total Valid Pairs: 1337 | Total Dropped: 63
+2026-08-29 16:49:21 - INFO - GenerateDPOLadder - Progress: Batch 200/1196 (16.7%) | Total Valid Pairs: 1529 | Total Dropped: 71
+2026-08-29 17:08:12 - INFO - GenerateDPOLadder - Progress: Batch 225/1196 (18.8%) | Total Valid Pairs: 1713 | Total Dropped: 87
+2026-08-29 17:29:06 - INFO - GenerateDPOLadder - Progress: Batch 250/1196 (20.9%) | Total Valid Pairs: 1902 | Total Dropped: 98
+2026-08-29 17:47:33 - INFO - GenerateDPOLadder - Progress: Batch 275/1196 (23.0%) | Total Valid Pairs: 2093 | Total Dropped: 107
+2026-08-29 18:04:15 - INFO - GenerateDPOLadder - Progress: Batch 300/1196 (25.1%) | Total Valid Pairs: 2290 | Total Dropped: 110
+2026-08-29 18:25:05 - INFO - GenerateDPOLadder - Progress: Batch 325/1196 (27.2%) | Total Valid Pairs: 2484 | Total Dropped: 116
+2026-08-29 18:45:27 - INFO - GenerateDPOLadder - Progress: Batch 350/1196 (29.3%) | Total Valid Pairs: 2678 | Total Dropped: 122
+2026-08-29 19:01:25 - INFO - GenerateDPOLadder - Progress: Batch 375/1196 (31.4%) | Total Valid Pairs: 2870 | Total Dropped: 130
+2026-08-29 19:31:24 - INFO - GenerateDPOLadder - Progress: Batch 400/1196 (33.4%) | Total Valid Pairs: 3057 | Total Dropped: 143
+2026-08-29 19:52:29 - INFO - GenerateDPOLadder - Progress: Batch 425/1196 (35.5%) | Total Valid Pairs: 3248 | Total Dropped: 152
+2026-08-29 20:11:51 - INFO - GenerateDPOLadder - Progress: Batch 450/1196 (37.6%) | Total Valid Pairs: 3443 | Total Dropped: 157
+2026-08-29 20:35:53 - INFO - GenerateDPOLadder - Progress: Batch 475/1196 (39.7%) | Total Valid Pairs: 3634 | Total Dropped: 166
+2026-08-29 21:03:41 - INFO - GenerateDPOLadder - Progress: Batch 500/1196 (41.8%) | Total Valid Pairs: 3824 | Total Dropped: 176
+2026-08-29 21:33:24 - INFO - GenerateDPOLadder - Progress: Batch 525/1196 (43.9%) | Total Valid Pairs: 4014 | Total Dropped: 186
+2026-08-29 21:57:28 - INFO - GenerateDPOLadder - Progress: Batch 550/1196 (46.0%) | Total Valid Pairs: 4209 | Total Dropped: 191
+2026-08-29 22:20:41 - INFO - GenerateDPOLadder - Progress: Batch 575/1196 (48.1%) | Total Valid Pairs: 4402 | Total Dropped: 198
+2026-08-29 22:36:22 - INFO - GenerateDPOLadder - Progress: Batch 600/1196 (50.2%) | Total Valid Pairs: 4595 | Total Dropped: 205
+2026-08-29 22:56:49 - INFO - GenerateDPOLadder - Progress: Batch 625/1196 (52.3%) | Total Valid Pairs: 4788 | Total Dropped: 212
+2026-08-29 23:23:28 - INFO - GenerateDPOLadder - Progress: Batch 650/1196 (54.3%) | Total Valid Pairs: 4983 | Total Dropped: 217
+2026-08-29 23:46:47 - INFO - GenerateDPOLadder - Progress: Batch 675/1196 (56.4%) | Total Valid Pairs: 5178 | Total Dropped: 222
+2026-08-30 00:03:34 - INFO - GenerateDPOLadder - Progress: Batch 700/1196 (58.5%) | Total Valid Pairs: 5371 | Total Dropped: 229
+2026-08-30 00:23:09 - INFO - GenerateDPOLadder - Progress: Batch 725/1196 (60.6%) | Total Valid Pairs: 5562 | Total Dropped: 238
+2026-08-30 00:47:24 - INFO - GenerateDPOLadder - Progress: Batch 750/1196 (62.7%) | Total Valid Pairs: 5748 | Total Dropped: 252
+2026-08-30 01:08:38 - INFO - GenerateDPOLadder - Progress: Batch 775/1196 (64.8%) | Total Valid Pairs: 5942 | Total Dropped: 258

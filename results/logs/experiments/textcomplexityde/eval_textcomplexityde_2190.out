@@ -1,0 +1,32 @@
+=== Starte TextComplexityDE Benchmark Evaluation (Regressoren & Klassifikatoren) ===
+Mon Aug 31 07:44:22 UTC 2026
+Device: cuda
+Berechne traditionelle Lesbarkeitsbaselines...
+Evaluiere BiLSTM MixUp Regressor (256)...
+Evaluiere BiLSTM MixUp Regressor (512)...
+Evaluiere BiLSTM MixUp Regressor (1024)...
+Evaluiere BiLSTM Satz-Klassifikator...
+[SKIP] BiLSTM Artikel-Klassifikator (256): Checkpoint nicht gefunden (results/models/classifier_length_exp/bilstm_article_classifier_256.pt)
+[SKIP] BiLSTM Artikel-Klassifikator (512): Checkpoint nicht gefunden (results/models/classifier_length_exp/bilstm_article_classifier_512.pt)
+Evaluiere BiLSTM Artikel-Klassifikator (1024)...
+Detail-Vorhersagen gespeichert: results/evaluation/textcomplexityde_all_models_eval.csv
+
+==========================================================================================
+TEXTCOMPLEXITYDE BENCHMARK MASTER TABELLE (N=1.000 Wikipedia-Sätze)
+==========================================================================================
+                             Modell            Kategorie  Pearson r (Simplicity)  Spearman ρ (Rang)  Pearson r (Verständlichkeit)  MAE (normiert)
+                Flesch Reading Ease             Baseline                0.455670           0.455866                     -0.382110        0.174300
+              Wiener Sachtextformel             Baseline                0.539878           0.518735                     -0.465124        0.164194
+               LIX Lesbarkeitsindex             Baseline                0.657281           0.641251                     -0.567389        0.177194
+       BiLSTM MixUp Regressor (256)      Regressor (256)                0.564003           0.548090                     -0.520058        0.487541
+       BiLSTM MixUp Regressor (512)      Regressor (512)                0.542605           0.473798                     -0.505726        0.490304
+      BiLSTM MixUp Regressor (1024)     Regressor (1024)                0.552251           0.626527                     -0.513827        0.496236
+          BiLSTM Satz-Klassifikator Klassifikator (Satz)                0.528487           0.638933                     -0.500742        0.519739
+BiLSTM Artikel-Klassifikator (1024) Klassifikator (1024)                0.464239           0.207428                     -0.442976        0.563419
+Plot gespeichert: results/plots/experiments/textcomplexityde/textcomplexityde_correlation_barchart.png
+Plot gespeichert: results/plots/experiments/textcomplexityde/textcomplexityde_scatter_all_models_grid.png
+Plot gespeichert: results/plots/experiments/textcomplexityde/textcomplexityde_boxplots_all_models_grid.png
+
+[ERFOLG] TextComplexityDE Evaluation abgeschlossen.
+=== TextComplexityDE Evaluation erfolgreich abgeschlossen ===
+Mon Aug 31 07:44:34 UTC 2026

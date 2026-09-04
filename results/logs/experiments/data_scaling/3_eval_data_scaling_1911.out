@@ -1,0 +1,46 @@
+=== Aggregating Data Scaling Experiment Results ===
+Successfully consolidated 13 experiment runs into: results/experiments/data_scaling/scaling_summary.csv
+
+================================================================================
+DATA SCALING EXPERIMENT SUMMARY
+================================================================================
+    experiment_name experiment_group  num_train_article_pairs  mixtures_per_pair  total_train_samples  test_mse  test_mae  test_r2  test_binary_acc  training_time_seconds
+  scale_mixtures_m2 mixtures_scaling                      505                  2                 1010   0.06599   0.20144  0.15239            72.27                   8.48
+  scale_mixtures_m5 mixtures_scaling                      505                  5                 2525   0.05520   0.18061  0.29104            78.36                  25.16
+ scale_mixtures_m10 mixtures_scaling                      505                 10                 5050   0.05773   0.18705  0.25854            73.91                  16.65
+ scale_mixtures_m20 mixtures_scaling                      505                 20                10100   0.04181   0.15794  0.46294            81.41                  54.72
+ scale_mixtures_m40 mixtures_scaling                      505                 40                20200   0.02637   0.11506  0.66128            85.55                 108.80
+ scale_mixtures_m80 mixtures_scaling                      505                 80                40400   0.02075   0.09584  0.73354            87.58                 293.80
+scale_mixtures_m160 mixtures_scaling                      505                160                80800   0.01928   0.09137  0.75238            87.19                 409.43
+scale_mixtures_m320 mixtures_scaling                      505                320               161600   0.01939   0.08797  0.75090            88.05                 741.39
+   scale_pairs_f010    pairs_scaling                       50                 20                 1000   0.06458   0.20062  0.17049            71.56                   8.30
+   scale_pairs_f025    pairs_scaling                      126                 20                 2520   0.06255   0.19951  0.19655            69.14                   7.40
+   scale_pairs_f050    pairs_scaling                      252                 20                 5040   0.03661   0.14152  0.52971            81.25                  68.80
+   scale_pairs_f075    pairs_scaling                      378                 20                 7560   0.04151   0.16290  0.46680            77.03                  38.79
+   scale_pairs_f100    pairs_scaling                      505                 20                10100   0.04181   0.15794  0.46294            81.41                  55.16
+================================================================================
+=== Running Zero-Shot Evaluation on Lebenshilfe Gold Dataset ===
+Successfully saved Lebenshilfe evaluation results to: results/experiments/data_scaling/scaling_lh_summary.csv
+Merged Lebenshilfe metrics into master summary: results/experiments/data_scaling/scaling_summary.csv
+
+===============================================================================================
+LEBENSHILFE (LH) ZERO-SHOT BENCHMARK EVALUATION ACROSS ALL SCALING STEPS
+===============================================================================================
+    experiment_name experiment_group  lh_mean_as  lh_mean_ls  lh_delta  lh_pairwise_acc  lh_binary_acc  lh_auc  lh_mae
+  scale_mixtures_m2 mixtures_scaling      0.2358      0.5663    0.3305            83.78          82.43   85.14  0.3347
+  scale_mixtures_m5 mixtures_scaling      0.1347      0.6222    0.4876            97.30          90.54   96.90  0.2562
+ scale_mixtures_m10 mixtures_scaling      0.1469      0.5208    0.3738            97.30          85.14   96.31  0.3131
+ scale_mixtures_m20 mixtures_scaling      0.1420      0.6738    0.5318            97.30          93.24   99.60  0.2341
+ scale_mixtures_m40 mixtures_scaling      0.1245      0.6918    0.5673            97.30          95.95   99.82  0.2163
+ scale_mixtures_m80 mixtures_scaling      0.0646      0.7760    0.7114            97.30          97.30   99.96  0.1443
+scale_mixtures_m160 mixtures_scaling      0.0962      0.7777    0.6815            97.30          97.30   99.96  0.1593
+scale_mixtures_m320 mixtures_scaling      0.0822      0.7825    0.7003            97.30          97.30   99.89  0.1498
+   scale_pairs_f010    pairs_scaling      0.2163      0.6051    0.3888            94.59          87.84   94.27  0.3056
+   scale_pairs_f025    pairs_scaling      0.2244      0.5558    0.3314            97.30          85.14   93.46  0.3343
+   scale_pairs_f050    pairs_scaling      0.1438      0.6656    0.5218            97.30          91.89   99.45  0.2391
+   scale_pairs_f075    pairs_scaling      0.2708      0.6586    0.3879            97.30          93.24   98.87  0.3061
+   scale_pairs_f100    pairs_scaling      0.1420      0.6738    0.5318            97.30          93.24   99.60  0.2341
+===============================================================================================
+Saved LH scaling curve plot to: results/experiments/data_scaling/plots/lh_scaling_auc_delta.png
+Saved LH best model KDE plot to: results/experiments/data_scaling/plots/lh_kde_separation_m80.png
+=== Evaluation & Aggregation Finished ===

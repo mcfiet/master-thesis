@@ -1,0 +1,8 @@
+=== Starte Master 5-Wege-Benchmark Evaluation auf Lebenshilfe Testset ===
+Sun Aug 30 15:50:15 UTC 2026
+=== 5-Wege Benchmark Runner (cuda) ===
+Geladene Test-Beispiele: 37
+Lade Reward-Modell (BiLSTM) & SBERT...
+
+--- [1/5] Inferenz: Few-Shot Baseline (Qwen-1.5B) ---
+Berechne Metriken für 1. Few-Shot Baseline (Qwen-1.5B)...

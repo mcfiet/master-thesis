@@ -1,0 +1,43 @@
+Globaler Seed auf 42 gesetzt.
+Log file initialized at: results/logs/experiments/rnn_baseline/regression_train_rnn_baseline_20260828_203246.log
+Aktuelles Arbeitsverzeichnis: /home/fisc4884/master-thesis
+Konfiguration:
+  - RNN-Typ: rnn (Bidirektional: False)
+  - Embedding-Dim: 128, Hidden-Dim: 128
+  - Max Seq Len: 256, Batch Size: 64, LR: 0.001, Epochs: 80
+  - Modell-Speicherpfad: results/models/rnn_vanilla_mixup_regression.pt
+  - Vokabular-Pfad: data/vocabs/mixup_vocab.json
+Gefundene Artikelpaare: 633
+Training: 505 Paare, Validierung: 64 Paare, Test: 64 Paare
+Lade bestehendes Vokabular aus data/vocabs/mixup_vocab.json...
+Vokabular-Größe: 20974
+Erstelle PyTorch Datasets...
+Globaler Seed auf 42 gesetzt.
+Segmentiere & Tokenisiere:   0%|          | 0/505 [00:00<?, ?it/s]Segmentiere & Tokenisiere:   3%|3         | 16/505 [00:00<00:03, 157.56it/s]Segmentiere & Tokenisiere:   7%|6         | 34/505 [00:00<00:02, 168.39it/s]Segmentiere & Tokenisiere:  13%|#3        | 66/505 [00:00<00:01, 234.38it/s]Segmentiere & Tokenisiere:  19%|#8        | 95/505 [00:00<00:01, 255.10it/s]Segmentiere & Tokenisiere:  25%|##4       | 126/505 [00:00<00:01, 269.18it/s]Segmentiere & Tokenisiere:  31%|###       | 156/505 [00:00<00:01, 279.23it/s]Segmentiere & Tokenisiere:  37%|###7      | 188/505 [00:00<00:01, 291.28it/s]Segmentiere & Tokenisiere:  43%|####3     | 218/505 [00:00<00:01, 278.06it/s]Segmentiere & Tokenisiere:  49%|####8     | 247/505 [00:00<00:00, 275.95it/s]Segmentiere & Tokenisiere:  55%|#####4    | 276/505 [00:01<00:00, 277.55it/s]Segmentiere & Tokenisiere:  60%|######    | 304/505 [00:01<00:00, 262.68it/s]Segmentiere & Tokenisiere:  66%|######5   | 331/505 [00:01<00:00, 254.05it/s]Segmentiere & Tokenisiere:  71%|#######   | 357/505 [00:01<00:00, 236.78it/s]Segmentiere & Tokenisiere:  77%|#######6  | 387/505 [00:01<00:00, 253.37it/s]Segmentiere & Tokenisiere:  82%|########1 | 413/505 [00:01<00:00, 253.93it/s]Segmentiere & Tokenisiere:  87%|########6 | 439/505 [00:01<00:00, 244.41it/s]Segmentiere & Tokenisiere:  93%|#########3| 472/505 [00:01<00:00, 267.08it/s]Segmentiere & Tokenisiere: 100%|#########9| 504/505 [00:01<00:00, 275.85it/s]Segmentiere & Tokenisiere: 100%|##########| 505/505 [00:01<00:00, 260.71it/s]
+Generiert: 10100 statische Samples.
+Globaler Seed auf 99 gesetzt.
+Segmentiere & Tokenisiere:   0%|          | 0/64 [00:00<?, ?it/s]Segmentiere & Tokenisiere:  52%|#####1    | 33/64 [00:00<00:00, 326.06it/s]Segmentiere & Tokenisiere: 100%|##########| 64/64 [00:00<00:00, 262.22it/s]
+Generiert: 1280 statische Samples.
+Nutze Device: cuda
+Epoch 1:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 1:   1%|          | 1/158 [00:00<00:25,  6.11it/s]Epoch 1:  32%|###1      | 50/158 [00:00<00:00, 230.03it/s]Epoch 1:  63%|######2   | 99/158 [00:00<00:00, 333.48it/s]Epoch 1:  94%|#########4| 149/158 [00:00<00:00, 393.02it/s]                                                           Epoch 01 | Train Loss (MSE): 0.0836 | Val Loss (MSE): 0.0818 | Val MAE: 0.2402
+=> Modell gespeichert (bester Val Loss) unter results/models/rnn_vanilla_mixup_regression.pt
+Epoch 2:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 2:  30%|###       | 48/158 [00:00<00:00, 473.74it/s]Epoch 2:  61%|######    | 96/158 [00:00<00:00, 474.89it/s]Epoch 2:  91%|#########1| 144/158 [00:00<00:00, 475.76it/s]                                                           Epoch 02 | Train Loss (MSE): 0.0795 | Val Loss (MSE): 0.0809 | Val MAE: 0.2391
+=> Modell gespeichert (bester Val Loss) unter results/models/rnn_vanilla_mixup_regression.pt
+Epoch 3:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 3:  30%|###       | 48/158 [00:00<00:00, 470.65it/s]Epoch 3:  61%|######    | 96/158 [00:00<00:00, 470.89it/s]Epoch 3:  91%|#########1| 144/158 [00:00<00:00, 473.71it/s]                                                           Epoch 03 | Train Loss (MSE): 0.0769 | Val Loss (MSE): 0.0808 | Val MAE: 0.2372
+=> Modell gespeichert (bester Val Loss) unter results/models/rnn_vanilla_mixup_regression.pt
+Epoch 4:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 4:  30%|##9       | 47/158 [00:00<00:00, 469.02it/s]Epoch 4:  60%|######    | 95/158 [00:00<00:00, 468.75it/s]Epoch 4:  90%|########9 | 142/158 [00:00<00:00, 467.46it/s]                                                           Epoch 04 | Train Loss (MSE): 0.0776 | Val Loss (MSE): 0.0896 | Val MAE: 0.2546
+Epoch 5:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 5:  30%|##9       | 47/158 [00:00<00:00, 466.46it/s]Epoch 5:  59%|#####9    | 94/158 [00:00<00:00, 467.10it/s]Epoch 5:  90%|########9 | 142/158 [00:00<00:00, 469.13it/s]                                                           Epoch 05 | Train Loss (MSE): 0.0815 | Val Loss (MSE): 0.0831 | Val MAE: 0.2457
+Epoch 6:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 6:  30%|##9       | 47/158 [00:00<00:00, 466.11it/s]Epoch 6:  59%|#####9    | 94/158 [00:00<00:00, 458.59it/s]Epoch 6:  89%|########8 | 140/158 [00:00<00:00, 458.91it/s]                                                           Epoch 06 | Train Loss (MSE): 0.0814 | Val Loss (MSE): 0.0832 | Val MAE: 0.2458
+Epoch 7:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 7:  28%|##8       | 45/158 [00:00<00:00, 449.37it/s]Epoch 7:  58%|#####7    | 91/158 [00:00<00:00, 451.02it/s]Epoch 7:  87%|########6 | 137/158 [00:00<00:00, 453.98it/s]                                                           Epoch 07 | Train Loss (MSE): 0.0809 | Val Loss (MSE): 0.0830 | Val MAE: 0.2454
+Epoch 8:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 8:  28%|##8       | 45/158 [00:00<00:00, 448.87it/s]Epoch 8:  57%|#####6    | 90/158 [00:00<00:00, 449.42it/s]Epoch 8:  85%|########5 | 135/158 [00:00<00:00, 448.02it/s]                                                           Epoch 08 | Train Loss (MSE): 0.0816 | Val Loss (MSE): 0.0834 | Val MAE: 0.2463
+Epoch 9:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 9:  28%|##8       | 45/158 [00:00<00:00, 445.20it/s]Epoch 9:  57%|#####6    | 90/158 [00:00<00:00, 444.09it/s]Epoch 9:  85%|########5 | 135/158 [00:00<00:00, 444.11it/s]                                                           Epoch 09 | Train Loss (MSE): 0.0809 | Val Loss (MSE): 0.0831 | Val MAE: 0.2457
+Epoch 10:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 10:  28%|##7       | 44/158 [00:00<00:00, 437.56it/s]Epoch 10:  56%|#####5    | 88/158 [00:00<00:00, 436.52it/s]Epoch 10:  84%|########3 | 132/158 [00:00<00:00, 436.44it/s]                                                            Epoch 10 | Train Loss (MSE): 0.0812 | Val Loss (MSE): 0.0831 | Val MAE: 0.2457
+Epoch 11:   0%|          | 0/158 [00:00<?, ?it/s]Epoch 11:  27%|##7       | 43/158 [00:00<00:00, 426.72it/s]Epoch 11:  55%|#####5    | 87/158 [00:00<00:00, 430.60it/s]Epoch 11:  83%|########2 | 131/158 [00:00<00:00, 427.10it/s]                                                            Epoch 11 | Train Loss (MSE): 0.0819 | Val Loss (MSE): 0.0835 | Val MAE: 0.2462
+Early Stopping ausgelöst.
+
+==================================================
+Abschließende Validierungsmetriken des besten RNN-Modells:
+- Mean Squared Error (MSE): 0.0808
+- Mean Absolute Error (MAE): 0.2372
+==================================================
+=> Validierungsmetriken gespeichert unter: results/models/rnn_vanilla_mixup_regression_metrics.json

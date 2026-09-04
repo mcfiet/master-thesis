@@ -1,0 +1,360 @@
+========================================================================
+STARTING CLASSIFIER STABILITY TRAINING (MULTI-SEED & CAPACITY)
+Host: hpc3-liskov
+Date: Tue Sep  1 09:59:56 UTC 2026
+========================================================================
+Using device: cuda
+[DATA] Lade Artikel aus data/analysis/corpus_master.csv (Filter: 0.8 <= sim <= 0.98)...
+[DATA] 633 Artikelpaare gefunden.
+[DATA] Geladen: 1266 Dokumente (633 LS, 633 AS)
+[DATA] Lade Einzelsätze aus data/analysis/corpus_master.csv...
+[DATA] Geladen: 61994 Sätze (34880 LS, 27114 AS)
+
+================================================================================
+STARTE MODELLKONFIGURATION: art_256 (Type: classifier, Vocab: 25000, Hidden: 128)
+================================================================================
+
+---> Trainiere art_256 mit Seed 42...
+  Ep  1/30 | TrainLoss: 0.6551 | InVal-BAcc: 70.37% | OOD-BAcc: 52.70% | OOD-Sep: 0.047
+  Ep  5/30 | TrainLoss: 0.1508 | InVal-BAcc: 93.21% | OOD-BAcc: 86.49% | OOD-Sep: 0.718
+  Ep 10/30 | TrainLoss: 0.0949 | InVal-BAcc: 89.51% | OOD-BAcc: 87.84% | OOD-Sep: 0.705
+  Ep 15/30 | TrainLoss: 0.3555 | InVal-BAcc: 88.89% | OOD-BAcc: 82.43% | OOD-Sep: 0.509
+  Ep 20/30 | TrainLoss: 0.1490 | InVal-BAcc: 91.36% | OOD-BAcc: 77.03% | OOD-Sep: 0.512
+  Ep 25/30 | TrainLoss: 0.1436 | InVal-BAcc: 87.04% | OOD-BAcc: 68.92% | OOD-Sep: 0.383
+  Ep 30/30 | TrainLoss: 0.0577 | InVal-BAcc: 92.59% | OOD-BAcc: 95.95% | OOD-Sep: 0.846
+
+---> Trainiere art_256 mit Seed 123...
+  Ep  1/30 | TrainLoss: 0.6634 | InVal-BAcc: 69.75% | OOD-BAcc: 51.35% | OOD-Sep: 0.027
+  Ep  5/30 | TrainLoss: 0.2214 | InVal-BAcc: 91.98% | OOD-BAcc: 82.43% | OOD-Sep: 0.553
+  Ep 10/30 | TrainLoss: 0.0623 | InVal-BAcc: 93.83% | OOD-BAcc: 74.32% | OOD-Sep: 0.480
+  Ep 15/30 | TrainLoss: 0.0442 | InVal-BAcc: 96.30% | OOD-BAcc: 81.08% | OOD-Sep: 0.603
+  Ep 20/30 | TrainLoss: 0.2600 | InVal-BAcc: 95.06% | OOD-BAcc: 90.54% | OOD-Sep: 0.689
+  Ep 25/30 | TrainLoss: 0.0334 | InVal-BAcc: 91.98% | OOD-BAcc: 81.08% | OOD-Sep: 0.637
+  Ep 30/30 | TrainLoss: 0.0259 | InVal-BAcc: 93.83% | OOD-BAcc: 81.08% | OOD-Sep: 0.556
+
+---> Trainiere art_256 mit Seed 456...
+  Ep  1/30 | TrainLoss: 0.6597 | InVal-BAcc: 67.28% | OOD-BAcc: 55.41% | OOD-Sep: 0.049
+  Ep  5/30 | TrainLoss: 0.2971 | InVal-BAcc: 72.84% | OOD-BAcc: 72.97% | OOD-Sep: 0.405
+  Ep 10/30 | TrainLoss: 0.1436 | InVal-BAcc: 93.83% | OOD-BAcc: 75.68% | OOD-Sep: 0.523
+  Ep 15/30 | TrainLoss: 0.0775 | InVal-BAcc: 95.68% | OOD-BAcc: 90.54% | OOD-Sep: 0.732
+  Ep 20/30 | TrainLoss: 0.0384 | InVal-BAcc: 94.44% | OOD-BAcc: 95.95% | OOD-Sep: 0.884
+  Ep 25/30 | TrainLoss: 0.0145 | InVal-BAcc: 95.68% | OOD-BAcc: 91.89% | OOD-Sep: 0.824
+  Ep 30/30 | TrainLoss: 0.0133 | InVal-BAcc: 95.06% | OOD-BAcc: 90.54% | OOD-Sep: 0.770
+
+---> Trainiere art_256 mit Seed 789...
+  Ep  1/30 | TrainLoss: 0.6603 | InVal-BAcc: 72.84% | OOD-BAcc: 51.35% | OOD-Sep: 0.041
+  Ep  5/30 | TrainLoss: 0.2504 | InVal-BAcc: 88.27% | OOD-BAcc: 89.19% | OOD-Sep: 0.678
+  Ep 10/30 | TrainLoss: 0.2672 | InVal-BAcc: 81.48% | OOD-BAcc: 60.81% | OOD-Sep: 0.259
+  Ep 15/30 | TrainLoss: 0.1874 | InVal-BAcc: 83.33% | OOD-BAcc: 59.46% | OOD-Sep: 0.214
+  Ep 20/30 | TrainLoss: 0.0877 | InVal-BAcc: 88.27% | OOD-BAcc: 64.86% | OOD-Sep: 0.298
+  Ep 25/30 | TrainLoss: 0.0378 | InVal-BAcc: 90.74% | OOD-BAcc: 68.92% | OOD-Sep: 0.410
+  Ep 30/30 | TrainLoss: 0.0283 | InVal-BAcc: 93.83% | OOD-BAcc: 74.32% | OOD-Sep: 0.514
+
+---> Trainiere art_256 mit Seed 1024...
+  Ep  1/30 | TrainLoss: 0.6643 | InVal-BAcc: 74.07% | OOD-BAcc: 50.00% | OOD-Sep: 0.035
+  Ep  5/30 | TrainLoss: 0.2937 | InVal-BAcc: 67.90% | OOD-BAcc: 55.41% | OOD-Sep: 0.133
+  Ep 10/30 | TrainLoss: 0.0947 | InVal-BAcc: 88.89% | OOD-BAcc: 75.68% | OOD-Sep: 0.486
+  Ep 15/30 | TrainLoss: 0.0665 | InVal-BAcc: 88.27% | OOD-BAcc: 68.92% | OOD-Sep: 0.377
+  Ep 20/30 | TrainLoss: 0.0289 | InVal-BAcc: 94.44% | OOD-BAcc: 86.49% | OOD-Sep: 0.702
+  Ep 25/30 | TrainLoss: 0.0249 | InVal-BAcc: 96.30% | OOD-BAcc: 82.43% | OOD-Sep: 0.609
+  Ep 30/30 | TrainLoss: 0.0124 | InVal-BAcc: 95.06% | OOD-BAcc: 87.84% | OOD-Sep: 0.755
+
+================================================================================
+STARTE MODELLKONFIGURATION: art_512 (Type: classifier, Vocab: 25000, Hidden: 128)
+================================================================================
+
+---> Trainiere art_512 mit Seed 42...
+  Ep  1/30 | TrainLoss: 0.6571 | InVal-BAcc: 70.99% | OOD-BAcc: 52.70% | OOD-Sep: -0.002
+  Ep  5/30 | TrainLoss: 0.2741 | InVal-BAcc: 87.65% | OOD-BAcc: 67.57% | OOD-Sep: 0.319
+  Ep 10/30 | TrainLoss: 0.1088 | InVal-BAcc: 93.83% | OOD-BAcc: 85.14% | OOD-Sep: 0.672
+  Ep 15/30 | TrainLoss: 0.1287 | InVal-BAcc: 50.62% | OOD-BAcc: 50.00% | OOD-Sep: 0.017
+  Ep 20/30 | TrainLoss: 0.2795 | InVal-BAcc: 87.04% | OOD-BAcc: 62.16% | OOD-Sep: 0.227
+  Ep 25/30 | TrainLoss: 0.1140 | InVal-BAcc: 91.36% | OOD-BAcc: 66.22% | OOD-Sep: 0.374
+  Ep 30/30 | TrainLoss: 0.0266 | InVal-BAcc: 95.06% | OOD-BAcc: 74.32% | OOD-Sep: 0.513
+
+---> Trainiere art_512 mit Seed 123...
+  Ep  1/30 | TrainLoss: 0.6663 | InVal-BAcc: 70.99% | OOD-BAcc: 51.35% | OOD-Sep: -0.004
+  Ep  5/30 | TrainLoss: 0.2625 | InVal-BAcc: 92.59% | OOD-BAcc: 70.27% | OOD-Sep: 0.380
+  Ep 10/30 | TrainLoss: 0.1386 | InVal-BAcc: 88.89% | OOD-BAcc: 67.57% | OOD-Sep: 0.330
+  Ep 15/30 | TrainLoss: 0.1441 | InVal-BAcc: 93.21% | OOD-BAcc: 83.78% | OOD-Sep: 0.611
+  Ep 20/30 | TrainLoss: 0.1615 | InVal-BAcc: 88.27% | OOD-BAcc: 64.86% | OOD-Sep: 0.256
+  Ep 25/30 | TrainLoss: 0.1659 | InVal-BAcc: 88.27% | OOD-BAcc: 62.16% | OOD-Sep: 0.184
+  Ep 30/30 | TrainLoss: 0.0434 | InVal-BAcc: 91.98% | OOD-BAcc: 72.97% | OOD-Sep: 0.441
+
+---> Trainiere art_512 mit Seed 456...
+  Ep  1/30 | TrainLoss: 0.6606 | InVal-BAcc: 65.43% | OOD-BAcc: 54.05% | OOD-Sep: 0.000
+  Ep  5/30 | TrainLoss: 0.2846 | InVal-BAcc: 85.19% | OOD-BAcc: 64.86% | OOD-Sep: 0.313
+  Ep 10/30 | TrainLoss: 0.1541 | InVal-BAcc: 91.98% | OOD-BAcc: 83.78% | OOD-Sep: 0.618
+  Ep 15/30 | TrainLoss: 0.0700 | InVal-BAcc: 96.30% | OOD-BAcc: 83.78% | OOD-Sep: 0.652
+  Ep 20/30 | TrainLoss: 0.0414 | InVal-BAcc: 97.53% | OOD-BAcc: 91.89% | OOD-Sep: 0.777
+  Ep 25/30 | TrainLoss: 0.0220 | InVal-BAcc: 93.21% | OOD-BAcc: 89.19% | OOD-Sep: 0.789
+  Ep 30/30 | TrainLoss: 0.0312 | InVal-BAcc: 94.44% | OOD-BAcc: 77.03% | OOD-Sep: 0.528
+
+---> Trainiere art_512 mit Seed 789...
+  Ep  1/30 | TrainLoss: 0.6584 | InVal-BAcc: 76.54% | OOD-BAcc: 48.65% | OOD-Sep: -0.004
+  Ep  5/30 | TrainLoss: 0.2451 | InVal-BAcc: 77.16% | OOD-BAcc: 75.68% | OOD-Sep: 0.463
+  Ep 10/30 | TrainLoss: 0.4691 | InVal-BAcc: 83.95% | OOD-BAcc: 59.46% | OOD-Sep: 0.079
+  Ep 15/30 | TrainLoss: 0.0747 | InVal-BAcc: 82.10% | OOD-BAcc: 59.46% | OOD-Sep: 0.237
+  Ep 20/30 | TrainLoss: 0.0748 | InVal-BAcc: 95.06% | OOD-BAcc: 77.03% | OOD-Sep: 0.500
+  Ep 25/30 | TrainLoss: 0.0312 | InVal-BAcc: 87.04% | OOD-BAcc: 70.27% | OOD-Sep: 0.434
+  Ep 30/30 | TrainLoss: 0.0299 | InVal-BAcc: 95.68% | OOD-BAcc: 83.78% | OOD-Sep: 0.628
+
+---> Trainiere art_512 mit Seed 1024...
+  Ep  1/30 | TrainLoss: 0.6615 | InVal-BAcc: 76.54% | OOD-BAcc: 51.35% | OOD-Sep: 0.008
+  Ep  5/30 | TrainLoss: 0.2331 | InVal-BAcc: 95.68% | OOD-BAcc: 90.54% | OOD-Sep: 0.642
+  Ep 10/30 | TrainLoss: 0.1070 | InVal-BAcc: 98.15% | OOD-BAcc: 68.92% | OOD-Sep: 0.389
+  Ep 15/30 | TrainLoss: 0.0656 | InVal-BAcc: 93.83% | OOD-BAcc: 72.97% | OOD-Sep: 0.489
+  Ep 20/30 | TrainLoss: 0.2589 | InVal-BAcc: 85.80% | OOD-BAcc: 60.81% | OOD-Sep: 0.281
+  Ep 25/30 | TrainLoss: 0.0207 | InVal-BAcc: 96.30% | OOD-BAcc: 81.08% | OOD-Sep: 0.646
+  Ep 30/30 | TrainLoss: 0.0162 | InVal-BAcc: 96.91% | OOD-BAcc: 94.59% | OOD-Sep: 0.867
+
+================================================================================
+STARTE MODELLKONFIGURATION: art_1024 (Type: classifier, Vocab: 25000, Hidden: 128)
+================================================================================
+
+---> Trainiere art_1024 mit Seed 42...
+  Ep  1/30 | TrainLoss: 0.6638 | InVal-BAcc: 64.81% | OOD-BAcc: 51.35% | OOD-Sep: 0.003
+  Ep  5/30 | TrainLoss: 0.3067 | InVal-BAcc: 69.75% | OOD-BAcc: 71.62% | OOD-Sep: 0.340
+  Ep 10/30 | TrainLoss: 0.2235 | InVal-BAcc: 88.27% | OOD-BAcc: 75.68% | OOD-Sep: 0.462
+  Ep 15/30 | TrainLoss: 0.1076 | InVal-BAcc: 87.04% | OOD-BAcc: 58.11% | OOD-Sep: 0.184
+  Ep 20/30 | TrainLoss: 0.0236 | InVal-BAcc: 95.68% | OOD-BAcc: 74.32% | OOD-Sep: 0.479
+  Ep 25/30 | TrainLoss: 0.0272 | InVal-BAcc: 92.59% | OOD-BAcc: 68.92% | OOD-Sep: 0.387
+  Ep 30/30 | TrainLoss: 0.0365 | InVal-BAcc: 96.30% | OOD-BAcc: 75.68% | OOD-Sep: 0.554
+
+---> Trainiere art_1024 mit Seed 123...
+  Ep  1/30 | TrainLoss: 0.6685 | InVal-BAcc: 72.84% | OOD-BAcc: 48.65% | OOD-Sep: -0.008
+  Ep  5/30 | TrainLoss: 0.4928 | InVal-BAcc: 75.93% | OOD-BAcc: 82.43% | OOD-Sep: 0.430
+  Ep 10/30 | TrainLoss: 0.3385 | InVal-BAcc: 80.86% | OOD-BAcc: 59.46% | OOD-Sep: 0.202
+  Ep 15/30 | TrainLoss: 0.1213 | InVal-BAcc: 87.65% | OOD-BAcc: 70.27% | OOD-Sep: 0.358
+  Ep 20/30 | TrainLoss: 0.0536 | InVal-BAcc: 96.30% | OOD-BAcc: 79.73% | OOD-Sep: 0.600
+  Ep 25/30 | TrainLoss: 0.0166 | InVal-BAcc: 96.30% | OOD-BAcc: 82.43% | OOD-Sep: 0.648
+  Ep 30/30 | TrainLoss: 0.0267 | InVal-BAcc: 96.91% | OOD-BAcc: 85.14% | OOD-Sep: 0.682
+
+---> Trainiere art_1024 mit Seed 456...
+  Ep  1/30 | TrainLoss: 0.6591 | InVal-BAcc: 64.20% | OOD-BAcc: 54.05% | OOD-Sep: 0.006
+  Ep  5/30 | TrainLoss: 0.3413 | InVal-BAcc: 74.69% | OOD-BAcc: 87.84% | OOD-Sep: 0.593
+  Ep 10/30 | TrainLoss: 0.4738 | InVal-BAcc: 72.22% | OOD-BAcc: 55.41% | OOD-Sep: 0.035
+  Ep 15/30 | TrainLoss: 0.1336 | InVal-BAcc: 94.44% | OOD-BAcc: 67.57% | OOD-Sep: 0.323
+  Ep 20/30 | TrainLoss: 0.0430 | InVal-BAcc: 93.21% | OOD-BAcc: 70.27% | OOD-Sep: 0.435
+  Ep 25/30 | TrainLoss: 0.0178 | InVal-BAcc: 94.44% | OOD-BAcc: 82.43% | OOD-Sep: 0.633
+  Ep 30/30 | TrainLoss: 0.0148 | InVal-BAcc: 96.91% | OOD-BAcc: 77.03% | OOD-Sep: 0.525
+
+---> Trainiere art_1024 mit Seed 789...
+  Ep  1/30 | TrainLoss: 0.6633 | InVal-BAcc: 75.31% | OOD-BAcc: 48.65% | OOD-Sep: -0.004
+  Ep  5/30 | TrainLoss: 0.3287 | InVal-BAcc: 85.80% | OOD-BAcc: 62.16% | OOD-Sep: 0.217
+  Ep 10/30 | TrainLoss: 0.0932 | InVal-BAcc: 94.44% | OOD-BAcc: 90.54% | OOD-Sep: 0.736
+  Ep 15/30 | TrainLoss: 0.0815 | InVal-BAcc: 93.83% | OOD-BAcc: 85.14% | OOD-Sep: 0.645
+  Ep 20/30 | TrainLoss: 0.0682 | InVal-BAcc: 94.44% | OOD-BAcc: 82.43% | OOD-Sep: 0.638
+  Ep 25/30 | TrainLoss: 0.0372 | InVal-BAcc: 95.68% | OOD-BAcc: 89.19% | OOD-Sep: 0.770
+  Ep 30/30 | TrainLoss: 0.2319 | InVal-BAcc: 87.04% | OOD-BAcc: 63.51% | OOD-Sep: 0.260
+
+---> Trainiere art_1024 mit Seed 1024...
+  Ep  1/30 | TrainLoss: 0.6657 | InVal-BAcc: 74.69% | OOD-BAcc: 50.00% | OOD-Sep: 0.001
+  Ep  5/30 | TrainLoss: 0.2018 | InVal-BAcc: 88.27% | OOD-BAcc: 82.43% | OOD-Sep: 0.509
+  Ep 10/30 | TrainLoss: 0.1280 | InVal-BAcc: 87.04% | OOD-BAcc: 63.51% | OOD-Sep: 0.258
+  Ep 15/30 | TrainLoss: 0.0568 | InVal-BAcc: 90.74% | OOD-BAcc: 70.27% | OOD-Sep: 0.430
+  Ep 20/30 | TrainLoss: 0.0772 | InVal-BAcc: 97.53% | OOD-BAcc: 83.78% | OOD-Sep: 0.678
+  Ep 25/30 | TrainLoss: 0.0268 | InVal-BAcc: 96.91% | OOD-BAcc: 81.08% | OOD-Sep: 0.619
+  Ep 30/30 | TrainLoss: 0.0152 | InVal-BAcc: 95.68% | OOD-BAcc: 75.68% | OOD-Sep: 0.475
+
+================================================================================
+STARTE MODELLKONFIGURATION: art_1024_tiny (Type: classifier, Vocab: 5000, Hidden: 32)
+================================================================================
+
+---> Trainiere art_1024_tiny mit Seed 42...
+  Ep  1/30 | TrainLoss: 0.6855 | InVal-BAcc: 64.81% | OOD-BAcc: 44.59% | OOD-Sep: 0.000
+  Ep  5/30 | TrainLoss: 0.5139 | InVal-BAcc: 70.99% | OOD-BAcc: 52.70% | OOD-Sep: 0.062
+  Ep 10/30 | TrainLoss: 0.5136 | InVal-BAcc: 58.64% | OOD-BAcc: 71.62% | OOD-Sep: 0.264
+  Ep 15/30 | TrainLoss: 0.4443 | InVal-BAcc: 78.40% | OOD-BAcc: 67.57% | OOD-Sep: 0.279
+  Ep 20/30 | TrainLoss: 0.3320 | InVal-BAcc: 85.19% | OOD-BAcc: 70.27% | OOD-Sep: 0.378
+  Ep 25/30 | TrainLoss: 0.2468 | InVal-BAcc: 91.36% | OOD-BAcc: 81.08% | OOD-Sep: 0.543
+  Ep 30/30 | TrainLoss: 0.1982 | InVal-BAcc: 94.44% | OOD-BAcc: 83.78% | OOD-Sep: 0.619
+
+---> Trainiere art_1024_tiny mit Seed 123...
+  Ep  1/30 | TrainLoss: 0.6898 | InVal-BAcc: 64.20% | OOD-BAcc: 41.89% | OOD-Sep: -0.001
+  Ep  5/30 | TrainLoss: 0.5653 | InVal-BAcc: 66.05% | OOD-BAcc: 50.00% | OOD-Sep: -0.002
+  Ep 10/30 | TrainLoss: 0.3133 | InVal-BAcc: 71.60% | OOD-BAcc: 54.05% | OOD-Sep: 0.073
+  Ep 15/30 | TrainLoss: 0.3282 | InVal-BAcc: 71.60% | OOD-BAcc: 55.41% | OOD-Sep: 0.112
+  Ep 20/30 | TrainLoss: 0.3658 | InVal-BAcc: 83.95% | OOD-BAcc: 66.22% | OOD-Sep: 0.303
+  Ep 25/30 | TrainLoss: 0.1333 | InVal-BAcc: 80.86% | OOD-BAcc: 68.92% | OOD-Sep: 0.336
+  Ep 30/30 | TrainLoss: 0.1254 | InVal-BAcc: 89.51% | OOD-BAcc: 91.89% | OOD-Sep: 0.767
+
+---> Trainiere art_1024_tiny mit Seed 456...
+  Ep  1/30 | TrainLoss: 0.6878 | InVal-BAcc: 62.35% | OOD-BAcc: 48.65% | OOD-Sep: 0.001
+  Ep  5/30 | TrainLoss: 0.5211 | InVal-BAcc: 58.64% | OOD-BAcc: 50.00% | OOD-Sep: 0.002
+  Ep 10/30 | TrainLoss: 0.2632 | InVal-BAcc: 89.51% | OOD-BAcc: 71.62% | OOD-Sep: 0.313
+  Ep 15/30 | TrainLoss: 0.5586 | InVal-BAcc: 79.63% | OOD-BAcc: 54.05% | OOD-Sep: 0.077
+  Ep 20/30 | TrainLoss: 0.2084 | InVal-BAcc: 87.65% | OOD-BAcc: 72.97% | OOD-Sep: 0.359
+  Ep 25/30 | TrainLoss: 0.4526 | InVal-BAcc: 84.57% | OOD-BAcc: 63.51% | OOD-Sep: 0.277
+  Ep 30/30 | TrainLoss: 0.1806 | InVal-BAcc: 94.44% | OOD-BAcc: 86.49% | OOD-Sep: 0.655
+
+---> Trainiere art_1024_tiny mit Seed 789...
+  Ep  1/30 | TrainLoss: 0.6899 | InVal-BAcc: 64.20% | OOD-BAcc: 44.59% | OOD-Sep: -0.002
+  Ep  5/30 | TrainLoss: 0.5626 | InVal-BAcc: 59.88% | OOD-BAcc: 50.00% | OOD-Sep: -0.002
+  Ep 10/30 | TrainLoss: 0.2798 | InVal-BAcc: 85.80% | OOD-BAcc: 74.32% | OOD-Sep: 0.382
+  Ep 15/30 | TrainLoss: 0.2050 | InVal-BAcc: 88.89% | OOD-BAcc: 81.08% | OOD-Sep: 0.515
+  Ep 20/30 | TrainLoss: 0.1763 | InVal-BAcc: 85.80% | OOD-BAcc: 74.32% | OOD-Sep: 0.420
+  Ep 25/30 | TrainLoss: 0.1580 | InVal-BAcc: 90.74% | OOD-BAcc: 93.24% | OOD-Sep: 0.779
+  Ep 30/30 | TrainLoss: 0.1349 | InVal-BAcc: 91.98% | OOD-BAcc: 83.78% | OOD-Sep: 0.627
+
+---> Trainiere art_1024_tiny mit Seed 1024...
+  Ep  1/30 | TrainLoss: 0.6830 | InVal-BAcc: 72.22% | OOD-BAcc: 52.70% | OOD-Sep: 0.001
+  Ep  5/30 | TrainLoss: 0.5457 | InVal-BAcc: 60.49% | OOD-BAcc: 50.00% | OOD-Sep: -0.007
+  Ep 10/30 | TrainLoss: 0.3865 | InVal-BAcc: 74.69% | OOD-BAcc: 62.16% | OOD-Sep: 0.203
+  Ep 15/30 | TrainLoss: 0.2080 | InVal-BAcc: 81.48% | OOD-BAcc: 72.97% | OOD-Sep: 0.357
+  Ep 20/30 | TrainLoss: 0.2738 | InVal-BAcc: 86.42% | OOD-BAcc: 85.14% | OOD-Sep: 0.559
+  Ep 25/30 | TrainLoss: 0.4903 | InVal-BAcc: 87.65% | OOD-BAcc: 62.16% | OOD-Sep: 0.278
+  Ep 30/30 | TrainLoss: 0.1765 | InVal-BAcc: 85.80% | OOD-BAcc: 67.57% | OOD-Sep: 0.340
+
+================================================================================
+STARTE MODELLKONFIGURATION: art_1024_medium (Type: classifier, Vocab: 10000, Hidden: 64)
+================================================================================
+
+---> Trainiere art_1024_medium mit Seed 42...
+  Ep  1/30 | TrainLoss: 0.6794 | InVal-BAcc: 69.14% | OOD-BAcc: 51.35% | OOD-Sep: -0.004
+  Ep  5/30 | TrainLoss: 0.3388 | InVal-BAcc: 87.65% | OOD-BAcc: 81.08% | OOD-Sep: 0.497
+  Ep 10/30 | TrainLoss: 0.2092 | InVal-BAcc: 87.04% | OOD-BAcc: 60.81% | OOD-Sep: 0.200
+  Ep 15/30 | TrainLoss: 0.5362 | InVal-BAcc: 55.56% | OOD-BAcc: 50.00% | OOD-Sep: 0.058
+  Ep 20/30 | TrainLoss: 0.4906 | InVal-BAcc: 70.99% | OOD-BAcc: 56.76% | OOD-Sep: 0.110
+  Ep 25/30 | TrainLoss: 0.2320 | InVal-BAcc: 90.12% | OOD-BAcc: 62.16% | OOD-Sep: 0.241
+  Ep 30/30 | TrainLoss: 0.1008 | InVal-BAcc: 93.83% | OOD-BAcc: 79.73% | OOD-Sep: 0.564
+
+---> Trainiere art_1024_medium mit Seed 123...
+  Ep  1/30 | TrainLoss: 0.6810 | InVal-BAcc: 68.52% | OOD-BAcc: 48.65% | OOD-Sep: 0.001
+  Ep  5/30 | TrainLoss: 0.3548 | InVal-BAcc: 86.42% | OOD-BAcc: 75.68% | OOD-Sep: 0.393
+  Ep 10/30 | TrainLoss: 0.1812 | InVal-BAcc: 90.12% | OOD-BAcc: 85.14% | OOD-Sep: 0.588
+  Ep 15/30 | TrainLoss: 0.1028 | InVal-BAcc: 90.74% | OOD-BAcc: 94.59% | OOD-Sep: 0.806
+  Ep 20/30 | TrainLoss: 0.0626 | InVal-BAcc: 92.59% | OOD-BAcc: 82.43% | OOD-Sep: 0.598
+  Ep 25/30 | TrainLoss: 0.0543 | InVal-BAcc: 97.53% | OOD-BAcc: 90.54% | OOD-Sep: 0.753
+  Ep 30/30 | TrainLoss: 0.0335 | InVal-BAcc: 93.83% | OOD-BAcc: 90.54% | OOD-Sep: 0.777
+
+---> Trainiere art_1024_medium mit Seed 456...
+  Ep  1/30 | TrainLoss: 0.6818 | InVal-BAcc: 65.43% | OOD-BAcc: 52.70% | OOD-Sep: 0.004
+  Ep  5/30 | TrainLoss: 0.4697 | InVal-BAcc: 77.78% | OOD-BAcc: 68.92% | OOD-Sep: 0.310
+  Ep 10/30 | TrainLoss: 0.3337 | InVal-BAcc: 81.48% | OOD-BAcc: 70.27% | OOD-Sep: 0.350
+  Ep 15/30 | TrainLoss: 0.3189 | InVal-BAcc: 90.74% | OOD-BAcc: 71.62% | OOD-Sep: 0.340
+  Ep 20/30 | TrainLoss: 0.1992 | InVal-BAcc: 84.57% | OOD-BAcc: 79.73% | OOD-Sep: 0.578
+  Ep 25/30 | TrainLoss: 0.1434 | InVal-BAcc: 77.16% | OOD-BAcc: 75.68% | OOD-Sep: 0.485
+  Ep 30/30 | TrainLoss: 0.1130 | InVal-BAcc: 86.42% | OOD-BAcc: 86.49% | OOD-Sep: 0.686
+
+---> Trainiere art_1024_medium mit Seed 789...
+  Ep  1/30 | TrainLoss: 0.6854 | InVal-BAcc: 67.90% | OOD-BAcc: 45.95% | OOD-Sep: -0.006
+  Ep  5/30 | TrainLoss: 0.4949 | InVal-BAcc: 65.43% | OOD-BAcc: 58.11% | OOD-Sep: 0.123
+  Ep 10/30 | TrainLoss: 0.2956 | InVal-BAcc: 63.58% | OOD-BAcc: 71.62% | OOD-Sep: 0.358
+  Ep 15/30 | TrainLoss: 0.2012 | InVal-BAcc: 89.51% | OOD-BAcc: 89.19% | OOD-Sep: 0.688
+  Ep 20/30 | TrainLoss: 0.1136 | InVal-BAcc: 79.01% | OOD-BAcc: 66.22% | OOD-Sep: 0.309
+  Ep 25/30 | TrainLoss: 0.1288 | InVal-BAcc: 88.89% | OOD-BAcc: 89.19% | OOD-Sep: 0.729
+  Ep 30/30 | TrainLoss: 0.0932 | InVal-BAcc: 90.74% | OOD-BAcc: 86.49% | OOD-Sep: 0.645
+
+---> Trainiere art_1024_medium mit Seed 1024...
+  Ep  1/30 | TrainLoss: 0.6803 | InVal-BAcc: 72.22% | OOD-BAcc: 51.35% | OOD-Sep: -0.010
+  Ep  5/30 | TrainLoss: 0.3176 | InVal-BAcc: 85.80% | OOD-BAcc: 79.73% | OOD-Sep: 0.486
+  Ep 10/30 | TrainLoss: 0.3469 | InVal-BAcc: 90.12% | OOD-BAcc: 67.57% | OOD-Sep: 0.313
+  Ep 15/30 | TrainLoss: 0.2325 | InVal-BAcc: 91.98% | OOD-BAcc: 72.97% | OOD-Sep: 0.440
+  Ep 20/30 | TrainLoss: 0.1874 | InVal-BAcc: 91.98% | OOD-BAcc: 78.38% | OOD-Sep: 0.573
+  Ep 25/30 | TrainLoss: 0.1617 | InVal-BAcc: 86.42% | OOD-BAcc: 68.92% | OOD-Sep: 0.350
+  Ep 30/30 | TrainLoss: 0.1083 | InVal-BAcc: 95.06% | OOD-BAcc: 71.62% | OOD-Sep: 0.453
+
+================================================================================
+STARTE MODELLKONFIGURATION: sentence_model (Type: classifier, Vocab: 25000, Hidden: 128)
+================================================================================
+
+---> Trainiere sentence_model mit Seed 42...
+  Ep  1/30 | TrainLoss: 0.3891 | InVal-BAcc: 85.40% | OOD-BAcc: 94.59% | OOD-Sep: 0.593
+  Ep  5/30 | TrainLoss: 0.2120 | InVal-BAcc: 89.31% | OOD-BAcc: 95.95% | OOD-Sep: 0.636
+  Ep 10/30 | TrainLoss: 0.1425 | InVal-BAcc: 90.74% | OOD-BAcc: 97.30% | OOD-Sep: 0.614
+  Ep 15/30 | TrainLoss: 0.1066 | InVal-BAcc: 90.65% | OOD-BAcc: 97.30% | OOD-Sep: 0.598
+  Ep 20/30 | TrainLoss: 0.0834 | InVal-BAcc: 90.21% | OOD-BAcc: 98.65% | OOD-Sep: 0.583
+  Ep 25/30 | TrainLoss: 0.0681 | InVal-BAcc: 90.48% | OOD-BAcc: 98.65% | OOD-Sep: 0.591
+  Ep 30/30 | TrainLoss: 0.0544 | InVal-BAcc: 90.00% | OOD-BAcc: 98.65% | OOD-Sep: 0.579
+
+---> Trainiere sentence_model mit Seed 123...
+  Ep  1/30 | TrainLoss: 0.4068 | InVal-BAcc: 82.19% | OOD-BAcc: 91.89% | OOD-Sep: 0.599
+  Ep  5/30 | TrainLoss: 0.2105 | InVal-BAcc: 89.38% | OOD-BAcc: 94.59% | OOD-Sep: 0.614
+  Ep 10/30 | TrainLoss: 0.1461 | InVal-BAcc: 89.86% | OOD-BAcc: 97.30% | OOD-Sep: 0.603
+  Ep 15/30 | TrainLoss: 0.1105 | InVal-BAcc: 89.84% | OOD-BAcc: 94.59% | OOD-Sep: 0.596
+  Ep 20/30 | TrainLoss: 0.0829 | InVal-BAcc: 89.83% | OOD-BAcc: 95.95% | OOD-Sep: 0.601
+  Ep 25/30 | TrainLoss: 0.0687 | InVal-BAcc: 89.44% | OOD-BAcc: 97.30% | OOD-Sep: 0.585
+  Ep 30/30 | TrainLoss: 0.0555 | InVal-BAcc: 89.22% | OOD-BAcc: 95.95% | OOD-Sep: 0.595
+
+---> Trainiere sentence_model mit Seed 456...
+  Ep  1/30 | TrainLoss: 0.4028 | InVal-BAcc: 84.53% | OOD-BAcc: 93.24% | OOD-Sep: 0.592
+  Ep  5/30 | TrainLoss: 0.2152 | InVal-BAcc: 89.95% | OOD-BAcc: 95.95% | OOD-Sep: 0.619
+  Ep 10/30 | TrainLoss: 0.1470 | InVal-BAcc: 90.04% | OOD-BAcc: 95.95% | OOD-Sep: 0.623
+  Ep 15/30 | TrainLoss: 0.1101 | InVal-BAcc: 90.42% | OOD-BAcc: 95.95% | OOD-Sep: 0.595
+  Ep 20/30 | TrainLoss: 0.0847 | InVal-BAcc: 89.90% | OOD-BAcc: 95.95% | OOD-Sep: 0.594
+  Ep 25/30 | TrainLoss: 0.0697 | InVal-BAcc: 89.76% | OOD-BAcc: 97.30% | OOD-Sep: 0.586
+  Ep 30/30 | TrainLoss: 0.0558 | InVal-BAcc: 89.85% | OOD-BAcc: 97.30% | OOD-Sep: 0.570
+
+---> Trainiere sentence_model mit Seed 789...
+  Ep  1/30 | TrainLoss: 0.3939 | InVal-BAcc: 85.16% | OOD-BAcc: 95.95% | OOD-Sep: 0.595
+  Ep  5/30 | TrainLoss: 0.2130 | InVal-BAcc: 88.42% | OOD-BAcc: 94.59% | OOD-Sep: 0.640
+  Ep 10/30 | TrainLoss: 0.1433 | InVal-BAcc: 89.42% | OOD-BAcc: 95.95% | OOD-Sep: 0.622
+  Ep 15/30 | TrainLoss: 0.1088 | InVal-BAcc: 89.52% | OOD-BAcc: 95.95% | OOD-Sep: 0.598
+  Ep 20/30 | TrainLoss: 0.0837 | InVal-BAcc: 89.03% | OOD-BAcc: 95.95% | OOD-Sep: 0.575
+  Ep 25/30 | TrainLoss: 0.0670 | InVal-BAcc: 89.27% | OOD-BAcc: 97.30% | OOD-Sep: 0.582
+  Ep 30/30 | TrainLoss: 0.0566 | InVal-BAcc: 89.07% | OOD-BAcc: 97.30% | OOD-Sep: 0.598
+
+---> Trainiere sentence_model mit Seed 1024...
+  Ep  1/30 | TrainLoss: 0.3978 | InVal-BAcc: 81.77% | OOD-BAcc: 90.54% | OOD-Sep: 0.597
+  Ep  5/30 | TrainLoss: 0.2147 | InVal-BAcc: 88.38% | OOD-BAcc: 95.95% | OOD-Sep: 0.632
+  Ep 10/30 | TrainLoss: 0.1495 | InVal-BAcc: 89.73% | OOD-BAcc: 97.30% | OOD-Sep: 0.620
+  Ep 15/30 | TrainLoss: 0.1069 | InVal-BAcc: 89.77% | OOD-BAcc: 97.30% | OOD-Sep: 0.607
+  Ep 20/30 | TrainLoss: 0.0848 | InVal-BAcc: 89.80% | OOD-BAcc: 97.30% | OOD-Sep: 0.588
+  Ep 25/30 | TrainLoss: 0.0678 | InVal-BAcc: 89.26% | OOD-BAcc: 98.65% | OOD-Sep: 0.596
+  Ep 30/30 | TrainLoss: 0.0574 | InVal-BAcc: 89.31% | OOD-BAcc: 97.30% | OOD-Sep: 0.578
+
+================================================================================
+STARTE MODELLKONFIGURATION: mixup_1024 (Type: regressor, Vocab: 25000, Hidden: 128)
+================================================================================
+
+---> Trainiere mixup_1024 mit Seed 42...
+  Ep  1/30 | TrainLoss: 0.2356 | InVal-BAcc: 64.20% | OOD-BAcc: 51.35% | OOD-Sep: 0.003
+  Ep  5/30 | TrainLoss: 0.1996 | InVal-BAcc: 82.72% | OOD-BAcc: 55.41% | OOD-Sep: 0.074
+  Ep 10/30 | TrainLoss: 0.0417 | InVal-BAcc: 95.06% | OOD-BAcc: 72.97% | OOD-Sep: 0.417
+  Ep 15/30 | TrainLoss: 0.1182 | InVal-BAcc: 72.84% | OOD-BAcc: 52.70% | OOD-Sep: 0.022
+  Ep 20/30 | TrainLoss: 0.0379 | InVal-BAcc: 91.98% | OOD-BAcc: 67.57% | OOD-Sep: 0.286
+  Ep 25/30 | TrainLoss: 0.0213 | InVal-BAcc: 95.68% | OOD-BAcc: 75.68% | OOD-Sep: 0.502
+  Ep 30/30 | TrainLoss: 0.0179 | InVal-BAcc: 95.06% | OOD-BAcc: 85.14% | OOD-Sep: 0.612
+
+---> Trainiere mixup_1024 mit Seed 123...
+  Ep  1/30 | TrainLoss: 0.2379 | InVal-BAcc: 72.84% | OOD-BAcc: 48.65% | OOD-Sep: -0.008
+  Ep  5/30 | TrainLoss: 0.0569 | InVal-BAcc: 50.62% | OOD-BAcc: 50.00% | OOD-Sep: 0.001
+  Ep 10/30 | TrainLoss: 0.0536 | InVal-BAcc: 54.94% | OOD-BAcc: 50.00% | OOD-Sep: 0.013
+  Ep 15/30 | TrainLoss: 0.0734 | InVal-BAcc: 83.33% | OOD-BAcc: 58.11% | OOD-Sep: 0.151
+  Ep 20/30 | TrainLoss: 0.0283 | InVal-BAcc: 91.36% | OOD-BAcc: 64.86% | OOD-Sep: 0.350
+  Ep 25/30 | TrainLoss: 0.0222 | InVal-BAcc: 79.63% | OOD-BAcc: 63.51% | OOD-Sep: 0.256
+  Ep 30/30 | TrainLoss: 0.0068 | InVal-BAcc: 88.89% | OOD-BAcc: 68.92% | OOD-Sep: 0.373
+
+---> Trainiere mixup_1024 mit Seed 456...
+  Ep  1/30 | TrainLoss: 0.2333 | InVal-BAcc: 64.20% | OOD-BAcc: 54.05% | OOD-Sep: 0.006
+  Ep  5/30 | TrainLoss: 0.1047 | InVal-BAcc: 89.51% | OOD-BAcc: 62.16% | OOD-Sep: 0.233
+  Ep 10/30 | TrainLoss: 0.0521 | InVal-BAcc: 63.58% | OOD-BAcc: 54.05% | OOD-Sep: 0.085
+  Ep 15/30 | TrainLoss: 0.2252 | InVal-BAcc: 70.99% | OOD-BAcc: 54.05% | OOD-Sep: 0.021
+  Ep 20/30 | TrainLoss: 0.0978 | InVal-BAcc: 90.74% | OOD-BAcc: 71.62% | OOD-Sep: 0.403
+  Ep 25/30 | TrainLoss: 0.0308 | InVal-BAcc: 93.83% | OOD-BAcc: 77.03% | OOD-Sep: 0.485
+  Ep 30/30 | TrainLoss: 0.0200 | InVal-BAcc: 94.44% | OOD-BAcc: 75.68% | OOD-Sep: 0.497
+
+---> Trainiere mixup_1024 mit Seed 789...
+  Ep  1/30 | TrainLoss: 0.2353 | InVal-BAcc: 75.31% | OOD-BAcc: 48.65% | OOD-Sep: -0.004
+  Ep  5/30 | TrainLoss: 0.1480 | InVal-BAcc: 89.51% | OOD-BAcc: 75.68% | OOD-Sep: 0.393
+  Ep 10/30 | TrainLoss: 0.0313 | InVal-BAcc: 93.83% | OOD-BAcc: 94.59% | OOD-Sep: 0.817
+  Ep 15/30 | TrainLoss: 0.0957 | InVal-BAcc: 86.42% | OOD-BAcc: 59.46% | OOD-Sep: 0.179
+  Ep 20/30 | TrainLoss: 0.0246 | InVal-BAcc: 88.89% | OOD-BAcc: 67.57% | OOD-Sep: 0.393
+  Ep 25/30 | TrainLoss: 0.0258 | InVal-BAcc: 90.74% | OOD-BAcc: 77.03% | OOD-Sep: 0.536
+  Ep 30/30 | TrainLoss: 0.0051 | InVal-BAcc: 86.42% | OOD-BAcc: 85.14% | OOD-Sep: 0.624
+
+---> Trainiere mixup_1024 mit Seed 1024...
+  Ep  1/30 | TrainLoss: 0.2365 | InVal-BAcc: 75.31% | OOD-BAcc: 50.00% | OOD-Sep: 0.001
+  Ep  5/30 | TrainLoss: 0.0603 | InVal-BAcc: 65.43% | OOD-BAcc: 54.05% | OOD-Sep: 0.085
+  Ep 10/30 | TrainLoss: 0.1110 | InVal-BAcc: 87.65% | OOD-BAcc: 55.41% | OOD-Sep: 0.090
+  Ep 15/30 | TrainLoss: 0.0335 | InVal-BAcc: 95.06% | OOD-BAcc: 67.57% | OOD-Sep: 0.327
+  Ep 20/30 | TrainLoss: 0.0363 | InVal-BAcc: 93.21% | OOD-BAcc: 70.27% | OOD-Sep: 0.412
+  Ep 25/30 | TrainLoss: 0.0183 | InVal-BAcc: 96.91% | OOD-BAcc: 74.32% | OOD-Sep: 0.441
+  Ep 30/30 | TrainLoss: 0.0714 | InVal-BAcc: 85.80% | OOD-BAcc: 56.76% | OOD-Sep: 0.140
+
+[OK] Epochen-Trajektorien gespeichert in: results/evaluation/classifier_stability/epoch_trajectories.json
+[OK] Roh-Zusammenfassung gespeichert in: results/evaluation/classifier_stability/seed_summary_raw.csv
+========================================================================
+TRAINING COMPLETE.
+========================================================================

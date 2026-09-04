@@ -1,0 +1,59 @@
+=== Starting Decoder-Only DPO Dataset Generation (48GB GPU, Jina Embeddings) ===
+Fri Aug 28 21:27:00 UTC 2026
+2026-08-28 21:27:03 - INFO - GenerateDPODecoderOnly - Active compute device: cuda
+2026-08-28 21:27:03 - INFO - GenerateDPODecoderOnly - Configured Temperature Ladder: [0.6, 0.7, 0.8, 0.85]
+2026-08-28 21:27:03 - INFO - GenerateDPODecoderOnly - Repetition Penalty: 1.35 | No-Repeat-Ngram: 3
+2026-08-28 21:27:03 - INFO - GenerateDPODecoderOnly - Target Score Margin: >= 0.05
+2026-08-28 21:27:03 - INFO - GenerateDPODecoderOnly - Loading corpus from: data/corpus/corpus_10kgnad_len512_as.json
+2026-08-28 21:27:03 - INFO - GenerateDPODecoderOnly - Loaded 9567 valid records from corpus.
+2026-08-28 21:27:03 - INFO - GenerateDPODecoderOnly - Loading Tokenizer from: Qwen/Qwen2.5-1.5B-Instruct...
+2026-08-28 21:27:04 - INFO - GenerateDPODecoderOnly - Loading SFT Model with adapter from: results/models/decoder_only/sft...
+2026-08-28 21:27:04 - INFO - accelerate.utils.modeling - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+2026-08-28 21:27:05 - INFO - GenerateDPODecoderOnly - Loading standalone SFT model from results/models/decoder_only/sft...
+2026-08-28 21:27:05 - INFO - accelerate.utils.modeling - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+2026-08-28 21:27:06 - INFO - GenerateDPODecoderOnly - Loading Reward Model vocabulary from: data/vocabs/mixup_vocab.json
+2026-08-28 21:27:07 - INFO - GenerateDPODecoderOnly - Loading BiLSTM Regressor weights from: results/models/bilstm_mixup_regression.pt
+2026-08-28 21:27:07 - INFO - GenerateDPODecoderOnly - Loading SBERT model: jinaai/jina-embeddings-v2-base-de
+2026-08-28 21:27:07 - INFO - sentence_transformers.base.model - Loading SentenceTransformer model from jinaai/jina-embeddings-v2-base-de.
+2026-08-28 21:27:12 - INFO - GenerateDPODecoderOnly - Starting Progressive Temperature Ladder generation for Decoder-Only...
+2026-08-28 21:36:09 - INFO - GenerateDPODecoderOnly - Progress: Batch 25/598 (4.2%) | Total Valid Pairs: 400 | Total Dropped: 0
+2026-08-28 21:45:21 - INFO - GenerateDPODecoderOnly - Progress: Batch 50/598 (8.4%) | Total Valid Pairs: 800 | Total Dropped: 0
+2026-08-28 21:54:18 - INFO - GenerateDPODecoderOnly - Progress: Batch 75/598 (12.5%) | Total Valid Pairs: 1200 | Total Dropped: 0
+2026-08-28 22:03:44 - INFO - GenerateDPODecoderOnly - Progress: Batch 100/598 (16.7%) | Total Valid Pairs: 1600 | Total Dropped: 0
+2026-08-28 22:12:54 - INFO - GenerateDPODecoderOnly - Progress: Batch 125/598 (20.9%) | Total Valid Pairs: 2000 | Total Dropped: 0
+2026-08-28 22:22:38 - INFO - GenerateDPODecoderOnly - Progress: Batch 150/598 (25.1%) | Total Valid Pairs: 2400 | Total Dropped: 0
+2026-08-28 22:32:17 - INFO - GenerateDPODecoderOnly - Progress: Batch 175/598 (29.3%) | Total Valid Pairs: 2800 | Total Dropped: 0
+2026-08-28 22:42:06 - INFO - GenerateDPODecoderOnly - Progress: Batch 200/598 (33.4%) | Total Valid Pairs: 3200 | Total Dropped: 0
+2026-08-28 22:51:27 - INFO - GenerateDPODecoderOnly - Progress: Batch 225/598 (37.6%) | Total Valid Pairs: 3600 | Total Dropped: 0
+2026-08-28 23:00:40 - INFO - GenerateDPODecoderOnly - Progress: Batch 250/598 (41.8%) | Total Valid Pairs: 4000 | Total Dropped: 0
+2026-08-28 23:10:20 - INFO - GenerateDPODecoderOnly - Progress: Batch 275/598 (46.0%) | Total Valid Pairs: 4400 | Total Dropped: 0
+2026-08-28 23:19:43 - INFO - GenerateDPODecoderOnly - Progress: Batch 300/598 (50.2%) | Total Valid Pairs: 4800 | Total Dropped: 0
+2026-08-28 23:29:10 - INFO - GenerateDPODecoderOnly - Progress: Batch 325/598 (54.3%) | Total Valid Pairs: 5200 | Total Dropped: 0
+2026-08-28 23:38:37 - INFO - GenerateDPODecoderOnly - Progress: Batch 350/598 (58.5%) | Total Valid Pairs: 5600 | Total Dropped: 0
+2026-08-28 23:48:14 - INFO - GenerateDPODecoderOnly - Progress: Batch 375/598 (62.7%) | Total Valid Pairs: 6000 | Total Dropped: 0
+2026-08-28 23:58:21 - INFO - GenerateDPODecoderOnly - Progress: Batch 400/598 (66.9%) | Total Valid Pairs: 6400 | Total Dropped: 0
+2026-08-29 00:08:06 - INFO - GenerateDPODecoderOnly - Progress: Batch 425/598 (71.1%) | Total Valid Pairs: 6800 | Total Dropped: 0
+2026-08-29 00:17:44 - INFO - GenerateDPODecoderOnly - Progress: Batch 450/598 (75.3%) | Total Valid Pairs: 7200 | Total Dropped: 0
+2026-08-29 00:27:41 - INFO - GenerateDPODecoderOnly - Progress: Batch 475/598 (79.4%) | Total Valid Pairs: 7600 | Total Dropped: 0
+2026-08-29 00:37:27 - INFO - GenerateDPODecoderOnly - Progress: Batch 500/598 (83.6%) | Total Valid Pairs: 8000 | Total Dropped: 0
+2026-08-29 00:47:03 - INFO - GenerateDPODecoderOnly - Progress: Batch 525/598 (87.8%) | Total Valid Pairs: 8400 | Total Dropped: 0
+2026-08-29 00:56:57 - INFO - GenerateDPODecoderOnly - Progress: Batch 550/598 (92.0%) | Total Valid Pairs: 8800 | Total Dropped: 0
+2026-08-29 01:06:49 - INFO - GenerateDPODecoderOnly - Progress: Batch 575/598 (96.2%) | Total Valid Pairs: 9200 | Total Dropped: 0
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly - Progress: Batch 598/598 (100.0%) | Total Valid Pairs: 9567 | Total Dropped: 0
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly - === Temperature Ladder Generation Summary ===
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly - Total Processed Prompts: 9567
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly - Valid DPO Pairs Generated: 9567 (100.0% retention)
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly - Dropped (Margin < 0.05): 0
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly - Dropped (Identical/Insufficient/Fragments): 0
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly - Resolution Breakdown by Temperature:
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly -   - Resolved at T=0.6: 8866 pairs (92.7%)
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly -   - Resolved at T=0.7: 686 pairs (7.2%)
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly -   - Resolved at T=0.8: 14 pairs (0.1%)
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly -   - Resolved at T=0.85: 1 pairs (0.0%)
+2026-08-29 01:16:00 - INFO - GenerateDPODecoderOnly - Score Summary -> Chosen Avg: 0.3920 | Rejected Avg: 0.2290 | Avg Margin: 0.1631
+2026-08-29 01:16:01 - INFO - GenerateDPODecoderOnly - Saved 8131 training pairs to: data/dpo/dpo_preference_pairs_decoder_only.jsonl
+2026-08-29 01:16:01 - INFO - GenerateDPODecoderOnly - Saved 1436 validation pairs to: data/dpo/dpo_preference_pairs_decoder_only_eval.jsonl
+2026-08-29 01:16:01 - INFO - GenerateDPODecoderOnly - Cleaned up checkpoint file: data/dpo/dpo_preference_pairs_decoder_only.jsonl.checkpoint.jsonl
+2026-08-29 01:16:01 - INFO - GenerateDPODecoderOnly - === Temperature Ladder DPO Generation Complete ===
+=== DPO Dataset Generation Complete ===
+Sat Aug 29 01:16:02 UTC 2026

@@ -1,0 +1,979 @@
+{
+    "summary": {
+        "total_ls_articles_scanned": 484,
+        "aligned_pairs_count": 161,
+        "unaligned_articles_count": 323,
+        "total_ls_tokens": 131655,
+        "total_as_tokens": 227266,
+        "average_ls_tokens": 817.7329192546584,
+        "average_as_tokens": 1411.5900621118012
+    },
+    "pairs": [
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/weitsichtigkeit-753261.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/augenkrankheiten/wie-kann-man-weitsichtigkeit-behandeln-733661.html",
+            "ls_tokens": 775,
+            "as_tokens": 2033
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/baldrian-769821.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/baldrian-schlaffoerdernd-und-beruhigend-732989.html",
+            "ls_tokens": 985,
+            "as_tokens": 977
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/magenschleimhaut-entzuendung-722625.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/magen-und-darmerkrankungen/magenschleimhautentzuendung-symptome-diagnose-behandlung-739927.html",
+            "ls_tokens": 674,
+            "as_tokens": 1228
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/zwangsstoerung-912051.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/psychische-krankheiten/zwangsstoerung-ursachen-symptome-und-behandlung-1473831.html",
+            "ls_tokens": 1083,
+            "as_tokens": 1555
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/mandelentzuendung-722661.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/mandelentzuendung-tonsillitis-735745.html",
+            "ls_tokens": 790,
+            "as_tokens": 1258
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/reisedurchfall-769781.html",
+            "as_url": "https://www.apotheken-umschau.de/news/reisedurchfall-welche-medikamente-laut-stiftung-warentest-helfen-715693.html",
+            "ls_tokens": 707,
+            "as_tokens": 1132
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/darmspiegelung-722805.html",
+            "as_url": "https://www.apotheken-umschau.de/diagnose/diagnoseverfahren/darmspiegelung-gruende-vorteile-risiken-734823.html",
+            "ls_tokens": 816,
+            "as_tokens": 1178
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/antibiotika-richtig-einnehmen-761829.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/basiswissen/antibiotika-richtig-einnehmen-715399.html",
+            "ls_tokens": 836,
+            "as_tokens": 743
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/migraene-apps-837725.html",
+            "as_url": "https://www.apotheken-umschau.de/e-health/mit-digitalen-helfern-gegen-die-migraene-837681.html",
+            "ls_tokens": 537,
+            "as_tokens": 617
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/neurodermitis-723297.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/hautkrankheiten/neurodermitis-symptome-und-behandlung-734571.html",
+            "ls_tokens": 954,
+            "as_tokens": 4556
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/wechseljahre-722097.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/erkrankungen-der-weiblichen-geschlechtsorgane/wechseljahre-beginn-symptome-hilfe-bei-beschwerden-736281.html",
+            "ls_tokens": 741,
+            "as_tokens": 445
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/diabetes-typ-1-862049.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/diabetes/typ-1/diabetes-mellitus-typ-1-808607.html",
+            "ls_tokens": 767,
+            "as_tokens": 1043
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/kopflaeuse-769767.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/lausbefall-735073.html",
+            "ls_tokens": 863,
+            "as_tokens": 1480
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/verhuetung/kupferspirale-937179.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetung-kupferspirale-713663.html",
+            "ls_tokens": 841,
+            "as_tokens": 1796
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/stuhlgang-753637.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/magen-und-darmerkrankungen/stuhlgang-was-die-ausscheidungen-verraten-738911.html",
+            "ls_tokens": 792,
+            "as_tokens": 876
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/knochenbruch-788579.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/knochenbruch-768031.html",
+            "ls_tokens": 654,
+            "as_tokens": 354
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/flohsamen-769873.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/indischer-flohsamen-pflanzliches-mittel-gegen-verstopfung-736369.html",
+            "ls_tokens": 861,
+            "as_tokens": 722
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/oberschenkelhals-bruch-769825.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/oberschenkelhalsbruch-schenkelhalsfraktur-748873.html",
+            "ls_tokens": 780,
+            "as_tokens": 1462
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/wegweiser-gesundheitssystem/gesundheitsinformationen-im-internet-1136115.html",
+            "as_url": "https://www.apotheken-umschau.de/e-health/medfluencer-wie-medizin-influencer-wissen-vermitteln-839261.html",
+            "ls_tokens": 1130,
+            "as_tokens": 1502
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/schilddruesenueberfunktion-722735.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/schilddruesenueberfunktion-ursachen-symptome-behandlung-734417.html",
+            "ls_tokens": 889,
+            "as_tokens": 2624
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/erste-hilfe-apps-837713.html",
+            "as_url": "https://www.apotheken-umschau.de/e-health/erste-hilfe-apps-wie-das-smartphone-im-notfall-unterstuetzt-837689.html",
+            "ls_tokens": 671,
+            "as_tokens": 519
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/spinalkanal-stenose-911545.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/neurologische-erkrankungen/lumbale-spinalkanalstenose-wirbelkanalstenose-735261.html",
+            "ls_tokens": 602,
+            "as_tokens": 1637
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/wiederbelebung-796359.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/herzstillstand-so-geht-erste-hilfe-766175.html",
+            "ls_tokens": 483,
+            "as_tokens": 2622
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/syphilis-769763.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/geschlechtskrankheiten/syphilis-lues-733965.html",
+            "ls_tokens": 1201,
+            "as_tokens": 1515
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/geschwuere-im-magen-und-zwoelffingerdarm-786353.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/magen-und-darmerkrankungen/magen-zwoelffingerdarmgeschwuer-734637.html",
+            "ls_tokens": 1107,
+            "as_tokens": 3028
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/l-thyroxin-722969.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/wirkstoffe/l-thyroxin-wirkung-nebenwirkungen-anwendungstipps-719751.html",
+            "ls_tokens": 876,
+            "as_tokens": 1146
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/traubensilberkerze-769869.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/traubensilberkerze-pflanzliche-hilfe-in-den-wechseljahren-736517.html",
+            "ls_tokens": 602,
+            "as_tokens": 487
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/thrombose-749541.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/herz-kreislauf-erkrankungen/thrombose-ursachen-therapien-und-vorbeugung-740009.html",
+            "ls_tokens": 910,
+            "as_tokens": 3152
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/defibrillator-896773.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/therapiearten/defibrillator-neustart-fuer-das-herz-745527.html",
+            "ls_tokens": 578,
+            "as_tokens": 825
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/rueckenschmerzen-906277.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/rueckenschmerzen-was-hilft-734999.html",
+            "ls_tokens": 809,
+            "as_tokens": 2285
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/haemorriden-723237.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/magen-und-darmerkrankungen/haemorrhoiden-ratgeber-739383.html",
+            "ls_tokens": 950,
+            "as_tokens": 1679
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/richtig-inhalieren-942573.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/richtig-inhalieren-so-geht-s-708809.html",
+            "ls_tokens": 590,
+            "as_tokens": 885
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/kurzsichtigkeit-723523.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/augenkrankheiten/kurzsichtigkeit-ursachen-und-therapie-733871.html",
+            "ls_tokens": 769,
+            "as_tokens": 1064
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/bipolare-stoerung-1118963.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/psychische-krankheiten/woran-man-eine-bipolare-stoerung-erkennt-718449.html",
+            "ls_tokens": 1074,
+            "as_tokens": 1598
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/sehnenscheidenentzuendung-722089.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/sehnenscheidenentzuendung-ursachen-beschwerden-behandlung-735129.html",
+            "ls_tokens": 621,
+            "as_tokens": 1471
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/erste-hilfe-fremdkoerper-im-auge-788185.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/fremdkoerper-im-auge-766147.html",
+            "ls_tokens": 401,
+            "as_tokens": 314
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/antazida-769857.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/symptome/sodbrennen-welche-medikamente-helfen-716665.html",
+            "ls_tokens": 552,
+            "as_tokens": 587
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/impfungen-fuer-kinder-und-erwachsene-800069.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/vorsorge/impfungen-fuer-kinder-und-erwachsene-708063.html",
+            "ls_tokens": 920,
+            "as_tokens": 1842
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/arnika-775213.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/arnika-helfer-bei-kleinen-verletzungen-732973.html",
+            "ls_tokens": 487,
+            "as_tokens": 285
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/herzbeutel-entzuendung-936561.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/herz-kreislauf-erkrankungen/herzbeutelentzuendung-perikarditis-734271.html",
+            "ls_tokens": 971,
+            "as_tokens": 2263
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/fieber-richtig-messen-761839.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/symptome/fieber-richtig-messen-so-geht-s-717301.html",
+            "ls_tokens": 861,
+            "as_tokens": 873
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/gerstenkorn-722641.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/augenkrankheiten/gerstenkorn-wie-es-entsteht-und-wieder-weggeht-733561.html",
+            "ls_tokens": 973,
+            "as_tokens": 1078
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/wegweiser-gesundheitssystem/e-rezept-einfache-sprache-1109215.html",
+            "as_url": "https://www.apotheken-umschau.de/e-health/e-rezept/e-rezept-723151.html",
+            "ls_tokens": 783,
+            "as_tokens": 1325
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/akute-bauchspeicheldruesenentzuendung-726169.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/magen-und-darmerkrankungen/akute-bauchspeicheldruesenentzuendung-734221.html",
+            "ls_tokens": 513,
+            "as_tokens": 1419
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/wegweiser-gesundheitssystem/telemedizin-837701.html",
+            "as_url": "https://www.apotheken-umschau.de/e-health/telemedizin-der-digitale-draht-zur-arztpraxis-837657.html",
+            "ls_tokens": 788,
+            "as_tokens": 1015
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/analfissur-723191.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/magen-und-darmerkrankungen/analfissur-afterriss-734043.html",
+            "ls_tokens": 640,
+            "as_tokens": 1380
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/johanniskraut-769807.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/johanniskraut-pflanzliches-mittel-gegen-depression-733191.html",
+            "ls_tokens": 664,
+            "as_tokens": 574
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/karies-761741.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/zahnkrankheiten/karies-733975.html",
+            "ls_tokens": 1173,
+            "as_tokens": 1702
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/die-diabetische-retinopathie-942529.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/diabetes/folgeerkrankungen/diabetische-retinopathie-und-makulopathie-808755.html",
+            "ls_tokens": 767,
+            "as_tokens": 2604
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/kraetze-722743.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/hautkrankheiten/kraetze-ansteckung-symptome-und-behandlung-739623.html",
+            "ls_tokens": 713,
+            "as_tokens": 2074
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/aids-953305.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/hiv-infektion-aids-834345.html",
+            "ls_tokens": 1244,
+            "as_tokens": 2415
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/teufelskralle-769865.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/lindert-teufelskralle-gelenkschmerzen-733503.html",
+            "ls_tokens": 569,
+            "as_tokens": 450
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/unterkuehlungen-800819.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/hautkrankheiten/kaelteschaeden-wie-sie-richtig-reagieren-742217.html",
+            "ls_tokens": 912,
+            "as_tokens": 2235
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/kropf-750463.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/symptome/schilddruese-was-ist-ein-kropf-713381.html",
+            "ls_tokens": 562,
+            "as_tokens": 542
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/bandscheibenvorfall-722983.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/bandscheibenvorfall-symptome-diagnose-therapie-740735.html",
+            "ls_tokens": 989,
+            "as_tokens": 1550
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/verhuetung/kondom-1104727.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetung-kondom-707741.html",
+            "ls_tokens": 1194,
+            "as_tokens": 878
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/parodontitis-753269.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/zahnkrankheiten/parodontitis-symptome-diagnose-therapie-vorbeugen-733985.html",
+            "ls_tokens": 1187,
+            "as_tokens": 1900
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/phobien-865741.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/psychische-krankheiten/phobien-phobische-stoerung-738661.html",
+            "ls_tokens": 986,
+            "as_tokens": 3654
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/akute-mittelohr-entzuendung-722797.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/erkrankungen-der-ohren/akute-mittelohrentzuendung-erkennen-und-behandeln-734211.html",
+            "ls_tokens": 562,
+            "as_tokens": 1619
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/blutbild-937621.html",
+            "as_url": "https://www.apotheken-umschau.de/diagnose/laborwerte/grosses-blutbild-weisse-blutkoerperchen-unter-der-lupe-742561.html",
+            "ls_tokens": 653,
+            "as_tokens": 1101
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/lebensmittel-vergiftung-722055.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/was-tun-bei-einer-lebensmittel-vergiftung-738111.html",
+            "ls_tokens": 911,
+            "as_tokens": 1332
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/verhuetung/verhuetungsring-862665.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetungsring-713727.html",
+            "ls_tokens": 908,
+            "as_tokens": 1120
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/erste-hilfe-bei-einem-schlaganfall-oder-einem-herzinfarkt-797059.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/herzinfarkt-und-schlaganfall-768023.html",
+            "ls_tokens": 558,
+            "as_tokens": 271
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/corona-tests-800247.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/coronavirus/corona-nachweis-die-testverfahren-im-ueberblick-724147.html",
+            "ls_tokens": 897,
+            "as_tokens": 3220
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/multiple-sklerose-722701.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/neurologische-erkrankungen/multiple-sklerose-ms-ursachen-symptome-verlauf-behandlung-735343.html",
+            "ls_tokens": 958,
+            "as_tokens": 1842
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/schlafstoerungen-936207.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/psychische-krankheiten/schlafstoerungen-ursachen-therapien-und-selbsthilfe-1004699.html",
+            "ls_tokens": 1150,
+            "as_tokens": 2566
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/verhuetung/apps-fuer-die-familienplanung-837787.html",
+            "as_url": "https://www.apotheken-umschau.de/e-health/familienplanung-per-app-kann-das-funktionieren-837741.html",
+            "ls_tokens": 823,
+            "as_tokens": 637
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/digitales-blutdruck-management-837841.html",
+            "as_url": "https://www.apotheken-umschau.de/e-health/hilfreich-und-bequem-blutdruck-digital-managen-837737.html",
+            "ls_tokens": 766,
+            "as_tokens": 672
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/schluesselbeinbruch-753253.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/schluesselbeinbruch-740679.html",
+            "ls_tokens": 747,
+            "as_tokens": 1145
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/stabile-seitenlage-796347.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/bewusstlose-lagern-766053.html",
+            "ls_tokens": 596,
+            "as_tokens": 445
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/schmerzmittel-welches-hilft-wann-753623.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/basiswissen/schmerzmittel-welches-hilft-wann-717725.html",
+            "ls_tokens": 816,
+            "as_tokens": 1229
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/entzuendung-der-eileiter-und-eierstoecke-896987.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/eileiterentzuendung-und-eierstockentzuendung-adnexitis-734141.html",
+            "ls_tokens": 752,
+            "as_tokens": 1234
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/tilidin-761733.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/wirkstoffe/tilidin-wirkung-nebenwirkungen-wichtige-hinweise-718755.html",
+            "ls_tokens": 695,
+            "as_tokens": 671
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/zyklus-apps-837717.html",
+            "as_url": "https://www.apotheken-umschau.de/e-health/zyklus-apps-die-digitalen-perioden-tracker-837667.html",
+            "ls_tokens": 583,
+            "as_tokens": 656
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/hexenschuss-750365.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/hexenschuss-was-tun-wenn-ploetzlich-nichts-mehr-geht-735041.html",
+            "ls_tokens": 638,
+            "as_tokens": 1154
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/rheuma-722071.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/rheumatische-erkrankungen/rheuma-erkennen-und-behandeln-708001.html",
+            "ls_tokens": 313,
+            "as_tokens": 345
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/alkohol-sucht-725867.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/psychische-krankheiten/alkoholsucht-alkoholabhaengigkeit-736931.html",
+            "ls_tokens": 1034,
+            "as_tokens": 1592
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/psychotherapie-954435.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/therapiearten/psychotherapien-welche-es-gibt-wann-sie-helfen-832635.html",
+            "ls_tokens": 1066,
+            "as_tokens": 1894
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/laktose-intoleranz-1098199.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/magen-und-darmerkrankungen/laktoseintoleranz-milchzucker-unvertraeglichkeit-738977.html",
+            "ls_tokens": 842,
+            "as_tokens": 2192
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/gallensteine-769771.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/magen-und-darmerkrankungen/gallensteine-behandlung-nicht-immer-noetig-735451.html",
+            "ls_tokens": 783,
+            "as_tokens": 2248
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/vergiftungen-800827.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/bei-kindern/was-tun-bei-vergiftungen-790123.html",
+            "ls_tokens": 739,
+            "as_tokens": 609
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/wegweiser-gesundheitssystem/disease-management-programme-1247821.html",
+            "as_url": "https://www.bundesgesundheitsministerium.de/service/begriffe-von-a-z/c/chronisch-kranke-menschen.html",
+            "ls_tokens": 543,
+            "as_tokens": 517
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/cayennepfeffer-769889.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/cayennepfeffer-hilfreich-gegen-schmerzen-735803.html",
+            "ls_tokens": 557,
+            "as_tokens": 544
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/adipositas-769803.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/adipositas-733691.html",
+            "ls_tokens": 1065,
+            "as_tokens": 2462
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/wegweiser-gesundheitssystem/selbsthilfe-gruppen-1165221.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/was-sind-seltene-krankheiten-und-wo-finden-betroffene-hilfe-947953.html",
+            "ls_tokens": 804,
+            "as_tokens": 2234
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/zahnwurzel-entzuendung-1119187.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/zahnkrankheiten/zahnwurzelentzuendung-743571.html",
+            "ls_tokens": 807,
+            "as_tokens": 1811
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/wunden-richtig-versorgen-788179.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/erste-hilfe-wunden-richtig-versorgen-766065.html",
+            "ls_tokens": 1072,
+            "as_tokens": 978
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/nagelbett-entzuendung-722761.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/hautkrankheiten/nagelbettentzuendung-symptome-und-behandlung-738987.html",
+            "ls_tokens": 971,
+            "as_tokens": 1791
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/altersbedingte-makula-degeneration-769785.html",
+            "as_url": "https://www.apotheken-umschau.de/mein-koerper/augen/der-einfache-netzhaut-check-706475.html",
+            "ls_tokens": 922,
+            "as_tokens": 241
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/spezifische-rueckenschmerzen-912043.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/rueckenschmerzen-was-hilft-734999.html",
+            "ls_tokens": 739,
+            "as_tokens": 2285
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/wadenwickel-1120431.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/therapiearten/wadenwickel-richtig-anwenden-so-geht-s-743397.html",
+            "ls_tokens": 720,
+            "as_tokens": 1057
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/nicht-spezifische-rueckenschmerzen-906943.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/rueckenschmerzen-was-hilft-734999.html",
+            "ls_tokens": 781,
+            "as_tokens": 2285
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/grauer-star-1100087.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/augenkrankheiten/grauer-star-linsentruebung-katarakt-symptome-operation-733619.html",
+            "ls_tokens": 1008,
+            "as_tokens": 1417
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/kehlkopf-entzuendung-753607.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/kehlkopfentzuendung-laryngitis-was-tun-736737.html",
+            "ls_tokens": 985,
+            "as_tokens": 1495
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/distale-radiusfraktur-771193.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/distale-radiusfraktur-beim-erwachsenen-748561.html",
+            "ls_tokens": 839,
+            "as_tokens": 1578
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/wie-verwendet-man-fluessige-arzneimittel-769757.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/basiswissen/tropfen-wie-sie-das-fluessige-arzneimittel-richtig-anwenden-769637.html",
+            "ls_tokens": 837,
+            "as_tokens": 447
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/lungenkrebs-769843.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/krebs/lungenkrebs-symptome-verlauf-therapie-737681.html",
+            "ls_tokens": 1113,
+            "as_tokens": 2144
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/verbrennungen-858533.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/verbrennungen-und-verbruehungen-768119.html",
+            "ls_tokens": 824,
+            "as_tokens": 887
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/besenreiser-722837.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/herz-kreislauf-erkrankungen/besenreiser-schoenheitsmakel-oder-gefaehrlich-742693.html",
+            "ls_tokens": 708,
+            "as_tokens": 1099
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/erkaeltung-761557.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/erkaeltung/erkaeltung-wie-lange-ist-man-ansteckend-713279.html",
+            "ls_tokens": 1059,
+            "as_tokens": 402
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/medikamente-gegen-covid-19-724673.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/coronavirus/medikamente-gegen-covid-19-die-verschiedenen-ansaetze-723603.html",
+            "ls_tokens": 1033,
+            "as_tokens": 1614
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/insektenstich-821989.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/insektenstich-768005.html",
+            "ls_tokens": 638,
+            "as_tokens": 431
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/schleimbeutel-entzuendung-723391.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/schleimbeutelentzuendung-bursitis-735103.html",
+            "ls_tokens": 880,
+            "as_tokens": 1601
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/amlodipin-769839.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/wirkstoffe/was-ist-amlodipin-wie-wirkt-es-750237.html",
+            "ls_tokens": 864,
+            "as_tokens": 1235
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/zahnfleisch-entzuendung-1101701.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/zahnkrankheiten/zahnfleischentzuendung-was-hilft-733995.html",
+            "ls_tokens": 1169,
+            "as_tokens": 1462
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/citalopram-wirkung-und-nebenwirkungen-725981.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/wirkstoffe/citalopram-wirkung-anwendung-und-nebenwirkungen-939111.html",
+            "ls_tokens": 578,
+            "as_tokens": 563
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/verhuetung/pille-805349.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetung-die-pille-707733.html",
+            "ls_tokens": 959,
+            "as_tokens": 3416
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/ingwer-769861.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/ernaehrung/ingwer-gesund-und-vielseitig-713089.html",
+            "ls_tokens": 603,
+            "as_tokens": 1052
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/ohrenschmerzen-1126409.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/symptome/ohrenschmerzen-ursachen-diagnose-therapie-739175.html",
+            "ls_tokens": 1022,
+            "as_tokens": 865
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/fusspilz-1104659.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/fusspilz-symptome-und-behandlung-737271.html",
+            "ls_tokens": 1409,
+            "as_tokens": 2442
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/depressive-verstimmung-1153459.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/psychische-krankheiten/depressive-verstimmung-736827.html",
+            "ls_tokens": 838,
+            "as_tokens": 985
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/paracetamol-723403.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/wirkstoffe/schmerzmittel-fiebersenker-paracetamol-wirkung-dosierung-nebenwirkungen-911255.html",
+            "ls_tokens": 719,
+            "as_tokens": 563
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/thymian-774199.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/echter-thymian-hilfreich-gegen-husten-733477.html",
+            "ls_tokens": 602,
+            "as_tokens": 547
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/osteoporose-896995.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/osteoporose-ursachen-therapie-vorbeugung-734881.html",
+            "ls_tokens": 832,
+            "as_tokens": 1722
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/posttraumatische-belastungsstoerung-ptbs-1097581.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/psychische-krankheiten/posttraumatische-belastungsstoerung-ptbs-740879.html",
+            "ls_tokens": 879,
+            "as_tokens": 745
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/asthma-768147.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/atemwegserkrankungen/asthma-736647.html",
+            "ls_tokens": 941,
+            "as_tokens": 1583
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/niedriger-blutdruck-723115.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/herz-kreislauf-erkrankungen/niedriger-blutdruck-hypotonie-734171.html",
+            "ls_tokens": 890,
+            "as_tokens": 2608
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/blut-transfusion-768157.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/therapiearten/bluttransfusion-erklaert-gruende-ablauf-und-risiken-743337.html",
+            "ls_tokens": 728,
+            "as_tokens": 1173
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/diclofenac-723415.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/wirkstoffe/diclofenac-wirkung-anwendung-nebenwirkungen-718715.html",
+            "ls_tokens": 709,
+            "as_tokens": 957
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/hausmittel-gegen-schnupfen-769789.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/symptome/schnupfen-rhinitis-736785.html",
+            "ls_tokens": 1068,
+            "as_tokens": 1863
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/lippenherpes-761569.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/hautkrankheiten/lippenherpes-ursachen-therapie-vorbeugen-734287.html",
+            "ls_tokens": 1182,
+            "as_tokens": 2957
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/verhuetung/verhuetungsstaebchen-857815.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetungsstaebchen-hormonimplantat-707749.html",
+            "ls_tokens": 784,
+            "as_tokens": 1030
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/muskelfaserriss-und-muskelzerrung-723303.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/sportverletzungen/muskelfaserriss-und-muskelzerrung-735063.html",
+            "ls_tokens": 816,
+            "as_tokens": 1359
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/sprunggelenksbruch-801063.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/sprunggelenkbruch-sprunggelenksfraktur-721307.html",
+            "ls_tokens": 673,
+            "as_tokens": 1641
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/verhuetung/verhuetungspflaster-862847.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetungspflaster-707745.html",
+            "ls_tokens": 861,
+            "as_tokens": 1122
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/ibuprofen-722713.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/wirkstoffe/ibuprofen-wie-es-wirkt-wechselwirkungen-tipps-718699.html",
+            "ls_tokens": 833,
+            "as_tokens": 1245
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/sodbrennen-862575.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/symptome/sodbrennen-moegliche-gruende-und-selbsthilfe-737629.html",
+            "ls_tokens": 729,
+            "as_tokens": 1162
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/parkinson-750505.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/neurologische-erkrankungen/parkinson-krankheit-symptome-ursachen-therapie-733737.html",
+            "ls_tokens": 1163,
+            "as_tokens": 2741
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/magensaeure-blocker-936185.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/basiswissen/magensaeureblocker-wirkung-und-nebenwirkungen-718281.html",
+            "ls_tokens": 511,
+            "as_tokens": 879
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/hausmittel-bei-husten-722633.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/symptome/husten-welche-hausmittel-helfen-715983.html",
+            "ls_tokens": 1109,
+            "as_tokens": 1022
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/baenderriss-am-sprunggelenk-723251.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/sportverletzungen/baenderriss-am-sprunggelenk-741491.html",
+            "ls_tokens": 933,
+            "as_tokens": 2081
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/akute-bronchitis-750471.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/atemwegserkrankungen/akute-bronchitis-anzeichen-verlauf-behandlung-736657.html",
+            "ls_tokens": 873,
+            "as_tokens": 1136
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/ringelroeteln-1136041.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/kinderkrankheiten/was-sind-ringelroeteln-790543.html",
+            "ls_tokens": 791,
+            "as_tokens": 1477
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/morbus-bechterew-912075.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/rheumatische-erkrankungen/morbus-bechterew-spondylitis-ankylosans-740995.html",
+            "ls_tokens": 682,
+            "as_tokens": 2002
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/wegweiser-gesundheitssystem/seelsorge-794415.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/erste-hilfe-fuer-die-seele-766133.html",
+            "ls_tokens": 270,
+            "as_tokens": 170
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/schilddruesenunterfunktion-722601.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/schilddruesenunterfunktion-symptome-und-behandlung-734397.html",
+            "ls_tokens": 762,
+            "as_tokens": 1691
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/verhuetung/dreimonatsspritze-868523.html",
+            "as_url": "https://www.apotheken-umschau.de/gesund-bleiben/sex/verhuetung-dreimonatsspritze-depotspritze-707987.html",
+            "ls_tokens": 1088,
+            "as_tokens": 1142
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/pfefferminze-802797.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/pfefferminze-hilfreich-gegen-kopf-und-bauchschmerzen-733337.html",
+            "ls_tokens": 663,
+            "as_tokens": 629
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/noroviren-infektion-750387.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/noroviren-hochansteckend-und-meldepflichtig-735861.html",
+            "ls_tokens": 875,
+            "as_tokens": 1197
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/mumps-937211.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/kinderkrankheiten/mumps-789601.html",
+            "ls_tokens": 796,
+            "as_tokens": 1092
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/arthrose-der-hand-und-fingergelenke-722669.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/gelenks-und-knochenerkrankungen/arthrose-der-hand-und-fingergelenke-733759.html",
+            "ls_tokens": 655,
+            "as_tokens": 1794
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/nierenbecken-entzuendung-722933.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/nieren-und-harnwegserkrankungen/nierenbeckenentzuendung-symptome-und-behandlung-733919.html",
+            "ls_tokens": 866,
+            "as_tokens": 1328
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/schock-800055.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/bewusstlose-lagern-766053.html",
+            "ls_tokens": 792,
+            "as_tokens": 444
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/pfeiffersches-druesenfieber-722063.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/pfeiffersches-druesenfieber-symptome-ansteckung-behandlung-734069.html",
+            "ls_tokens": 683,
+            "as_tokens": 1785
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/erste-hilfe-blutungen-richtig-versorgen-807921.html",
+            "as_url": "https://www.apotheken-umschau.de/therapie/erste-hilfe/blutungen-768015.html",
+            "ls_tokens": 534,
+            "as_tokens": 466
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/bindehaut-entzuendung-722019.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/augenkrankheiten/bindehautentzuendung-konjunktivitis-733551.html",
+            "ls_tokens": 687,
+            "as_tokens": 1633
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/diabetes-typ-2-868609.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/diabetes/typ-2/diabetes-mellitus-typ-2-808639.html",
+            "ls_tokens": 923,
+            "as_tokens": 1349
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/erste-hilfe/erfrierungen-801001.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/hautkrankheiten/kaelteschaeden-wie-sie-richtig-reagieren-742217.html",
+            "ls_tokens": 871,
+            "as_tokens": 2235
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/nikotin-abhaengigkeit-910543.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/psychische-krankheiten/nikotinabhaengigkeit-737301.html",
+            "ls_tokens": 607,
+            "as_tokens": 1470
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/blasenentzuendung-722027.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/nieren-und-harnwegserkrankungen/blasenentzuendung-erkennen-und-richtig-behandeln-733893.html",
+            "ls_tokens": 735,
+            "as_tokens": 2655
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/arzneimittel-allergie-953249.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/allergien/was-ist-eine-arzneimittelallergie-745317.html",
+            "ls_tokens": 795,
+            "as_tokens": 1048
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/krampfadern-723287.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/herz-kreislauf-erkrankungen/was-kann-man-gegen-krampfadern-tun-734539.html",
+            "ls_tokens": 834,
+            "as_tokens": 5088
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/medikamente-was-sind-wechselwirkungen-761795.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/basiswissen/medikamente-was-sind-wechselwirkungen-721855.html",
+            "ls_tokens": 475,
+            "as_tokens": 679
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/corona-virus-723743.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/coronavirus/coronavirus-was-sie-jetzt-wissen-muessen-723211.html",
+            "ls_tokens": 1009,
+            "as_tokens": 1695
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/fsme-939565.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/fruehsommer-meningoenzephalitis-fsme-vorbeugen-erkennen-und-behandeln-737137.html",
+            "ls_tokens": 894,
+            "as_tokens": 1336
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/schlafapnoe-1104695.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/atemwegserkrankungen/schlafapnoe-symptome-und-behandlung-736763.html",
+            "ls_tokens": 969,
+            "as_tokens": 1476
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/medikamente-heilpflanzen/baerentraube-777515.html",
+            "as_url": "https://www.apotheken-umschau.de/medikamente/heilpflanzen/baerentraube-pflanzlicher-helfer-bei-blasenentzuendung-733005.html",
+            "ls_tokens": 523,
+            "as_tokens": 374
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/gallenblasenentzuendung-869551.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/entzuendung-der-gallenblase-cholezystitis-744145.html",
+            "ls_tokens": 501,
+            "as_tokens": 932
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/krankheiten/nachtschweiss-1098937.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/symptome/nachtschweiss-diagnose-ursachen-therapie-1003595.html",
+            "ls_tokens": 910,
+            "as_tokens": 1379
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/untersuchungen-therapien/impfung-und-covid-19-762305.html",
+            "as_url": "https://www.apotheken-umschau.de/krankheiten-symptome/infektionskrankheiten/coronavirus/die-wichtigsten-fakten-zur-corona-impfung-723499.html",
+            "ls_tokens": 1354,
+            "as_tokens": 1551
+        },
+        {
+            "ls_url": "https://www.apotheken-umschau.de/einfache-sprache/wegweiser-gesundheitssystem/kinderkrankentage-1164647.html",
+            "as_url": "https://www.apotheken-umschau.de/familie/freizeit-alltag/recht-finanzen-familie/telefonische-krankschreibung-regeln-rechte-und-tipps-1036441.html",
+            "ls_tokens": 972,
+            "as_tokens": 1426
+        }
+    ]
+}

@@ -1,0 +1,1477 @@
+dataset,model,true_target,predicted_target
+lebenshilfe_ood,Variante A (Statisch),0.15851852297782898,0.063780277967453
+lebenshilfe_ood,Variante A (Statisch),0.3246951103210449,0.096037857234478
+lebenshilfe_ood,Variante A (Statisch),0.5059795379638672,0.4103457033634186
+lebenshilfe_ood,Variante A (Statisch),0.18999595940113068,0.1265588402748108
+lebenshilfe_ood,Variante A (Statisch),1.0,0.7012808918952942
+lebenshilfe_ood,Variante A (Statisch),1.0,0.5647590756416321
+lebenshilfe_ood,Variante A (Statisch),0.9165622591972351,0.4386763572692871
+lebenshilfe_ood,Variante A (Statisch),0.9595265984535217,0.5932899117469788
+lebenshilfe_ood,Variante A (Statisch),0.16249999403953552,0.03813319653272629
+lebenshilfe_ood,Variante A (Statisch),0.9404096603393555,0.5382174253463745
+lebenshilfe_ood,Variante A (Statisch),0.3728562295436859,0.3398464620113373
+lebenshilfe_ood,Variante A (Statisch),0.43626323342323303,0.5094997882843018
+lebenshilfe_ood,Variante A (Statisch),0.8253373503684998,0.6152383089065552
+lebenshilfe_ood,Variante A (Statisch),0.4408155679702759,0.29718759655952454
+lebenshilfe_ood,Variante A (Statisch),0.9593392610549927,0.4853416383266449
+lebenshilfe_ood,Variante A (Statisch),0.27314284443855286,0.038606081157922745
+lebenshilfe_ood,Variante A (Statisch),0.21796338260173798,0.17130832374095917
+lebenshilfe_ood,Variante A (Statisch),0.3519391119480133,0.18043377995491028
+lebenshilfe_ood,Variante A (Statisch),0.2481076568365097,0.183091402053833
+lebenshilfe_ood,Variante A (Statisch),0.833050012588501,0.3400236666202545
+lebenshilfe_ood,Variante A (Statisch),0.3299282193183899,0.31608203053474426
+lebenshilfe_ood,Variante A (Statisch),0.7439053058624268,0.737544059753418
+lebenshilfe_ood,Variante A (Statisch),0.482566237449646,0.27950459718704224
+lebenshilfe_ood,Variante A (Statisch),0.4969044327735901,0.5831838250160217
+lebenshilfe_ood,Variante A (Statisch),0.5418757200241089,0.433295339345932
+lebenshilfe_ood,Variante A (Statisch),0.8229877352714539,0.5730661153793335
+lebenshilfe_ood,Variante A (Statisch),0.5391608476638794,0.6708534359931946
+lebenshilfe_ood,Variante A (Statisch),0.7114953398704529,0.4874405562877655
+lebenshilfe_ood,Variante A (Statisch),0.7971367835998535,0.6300331354141235
+lebenshilfe_ood,Variante A (Statisch),0.592822253704071,0.40221479535102844
+lebenshilfe_ood,Variante A (Statisch),0.8380604982376099,0.6950120329856873
+lebenshilfe_ood,Variante A (Statisch),0.7234042286872864,0.3469865918159485
+lebenshilfe_ood,Variante A (Statisch),0.6940344572067261,0.5043376684188843
+lebenshilfe_ood,Variante A (Statisch),0.5505587458610535,0.17574742436408997
+lebenshilfe_ood,Variante A (Statisch),0.8982651233673096,0.7624589204788208
+lebenshilfe_ood,Variante A (Statisch),0.33759263157844543,0.43344613909721375
+lebenshilfe_ood,Variante A (Statisch),0.6195240020751953,0.34712615609169006
+lebenshilfe_ood,Variante A (Statisch),0.5428005456924438,0.4866253733634949
+lebenshilfe_ood,Variante A (Statisch),0.5650517344474792,0.5801043510437012
+lebenshilfe_ood,Variante A (Statisch),0.33010023832321167,0.5616664290428162
+lebenshilfe_ood,Variante A (Statisch),0.3528279960155487,0.20858506858348846
+lebenshilfe_ood,Variante A (Statisch),0.05021253973245621,0.06927867978811264
+lebenshilfe_ood,Variante A (Statisch),0.33387306332588196,0.23664812743663788
+lebenshilfe_ood,Variante A (Statisch),0.29438328742980957,0.3721679747104645
+lebenshilfe_ood,Variante A (Statisch),0.5176803469657898,0.42402926087379456
+lebenshilfe_ood,Variante A (Statisch),0.2529260516166687,0.1218414455652237
+lebenshilfe_ood,Variante A (Statisch),0.44796618819236755,0.3224404752254486
+lebenshilfe_ood,Variante A (Statisch),0.2252470999956131,0.09655828773975372
+lebenshilfe_ood,Variante A (Statisch),0.1755101978778839,0.20709478855133057
+lebenshilfe_ood,Variante A (Statisch),0.22093360126018524,0.1790061742067337
+lebenshilfe_ood,Variante A (Statisch),0.1178910955786705,0.42841774225234985
+lebenshilfe_ood,Variante A (Statisch),0.9980168342590332,0.6830461025238037
+lebenshilfe_ood,Variante A (Statisch),0.572903573513031,0.5727037191390991
+lebenshilfe_ood,Variante A (Statisch),0.36512261629104614,0.47765854001045227
+lebenshilfe_ood,Variante A (Statisch),0.11623215675354004,0.5086319446563721
+lebenshilfe_ood,Variante A (Statisch),0.013865239918231964,0.6754276752471924
+lebenshilfe_ood,Variante A (Statisch),0.7748880386352539,0.7951015830039978
+lebenshilfe_ood,Variante A (Statisch),0.3014705777168274,0.6296840906143188
+lebenshilfe_ood,Variante A (Statisch),0.4541427791118622,0.5447070002555847
+lebenshilfe_ood,Variante A (Statisch),0.8715110421180725,0.7203498482704163
+lebenshilfe_ood,Variante A (Statisch),0.34610244631767273,0.3494698703289032
+lebenshilfe_ood,Variante A (Statisch),0.9368420839309692,0.5226600170135498
+lebenshilfe_ood,Variante A (Statisch),0.5942114591598511,0.27499982714653015
+lebenshilfe_ood,Variante A (Statisch),0.21762590110301971,0.13774891197681427
+lebenshilfe_ood,Variante A (Statisch),0.03852889686822891,0.09226075559854507
+lebenshilfe_ood,Variante A (Statisch),0.10729990899562836,0.2051197737455368
+lebenshilfe_ood,Variante A (Statisch),0.8156161904335022,0.5402801036834717
+lebenshilfe_ood,Variante A (Statisch),0.8623548746109009,0.5644864439964294
+lebenshilfe_ood,Variante A (Statisch),0.04100000113248825,0.08977782726287842
+lebenshilfe_ood,Variante A (Statisch),0.8967334032058716,0.7093595266342163
+lebenshilfe_ood,Variante A (Statisch),0.30689653754234314,0.1754915863275528
+lebenshilfe_ood,Variante A (Statisch),0.6461988091468811,0.2994970381259918
+lebenshilfe_ood,Variante A (Statisch),0.053795136511325836,0.03237590566277504
+lebenshilfe_ood,Variante A (Statisch),0.360725075006485,0.14094586670398712
+lebenshilfe_ood,Variante A (Statisch),0.25100672245025635,0.21402308344841003
+lebenshilfe_ood,Variante A (Statisch),1.0,0.9377097487449646
+lebenshilfe_ood,Variante A (Statisch),0.23353752493858337,0.11851254105567932
+lebenshilfe_ood,Variante A (Statisch),0.3677442967891693,0.4322579503059387
+lebenshilfe_ood,Variante A (Statisch),0.48843827843666077,0.3144451379776001
+lebenshilfe_ood,Variante A (Statisch),0.9068047404289246,0.5565481781959534
+lebenshilfe_ood,Variante A (Statisch),0.2951456308364868,0.11090421676635742
+lebenshilfe_ood,Variante A (Statisch),0.06203007698059082,0.20002944767475128
+lebenshilfe_ood,Variante A (Statisch),0.12171253561973572,0.03101673349738121
+lebenshilfe_ood,Variante A (Statisch),0.39821693301200867,0.2894911766052246
+lebenshilfe_ood,Variante A (Statisch),0.8416422009468079,0.6557961106300354
+lebenshilfe_ood,Variante A (Statisch),0.11018364131450653,0.1178889274597168
+lebenshilfe_ood,Variante A (Statisch),0.29120880365371704,0.10235114395618439
+lebenshilfe_ood,Variante A (Statisch),0.7326599359512329,0.3532063364982605
+lebenshilfe_ood,Variante A (Statisch),0.41704824566841125,0.22523686289787292
+lebenshilfe_ood,Variante A (Statisch),0.752913773059845,0.6533170342445374
+lebenshilfe_ood,Variante A (Statisch),0.32875367999076843,0.44019630551338196
+lebenshilfe_ood,Variante A (Statisch),0.8801214098930359,0.8042946457862854
+lebenshilfe_ood,Variante A (Statisch),0.4155268669128418,0.2635858356952667
+lebenshilfe_ood,Variante A (Statisch),0.20963828265666962,0.09589952975511551
+lebenshilfe_ood,Variante A (Statisch),0.4277108311653137,0.34796643257141113
+lebenshilfe_ood,Variante A (Statisch),0.8066783547401428,0.4980649948120117
+lebenshilfe_ood,Variante A (Statisch),0.5844183564186096,0.736854612827301
+lebenshilfe_ood,Variante A (Statisch),0.6001692414283752,0.47358033061027527
+lebenshilfe_ood,Variante A (Statisch),0.39419588446617126,0.21651069819927216
+lebenshilfe_ood,Variante A (Statisch),0.593863308429718,0.3518434464931488
+lebenshilfe_ood,Variante A (Statisch),0.28125,0.4449048638343811
+lebenshilfe_ood,Variante A (Statisch),0.33028361201286316,0.31631502509117126
+lebenshilfe_ood,Variante A (Statisch),0.7231968641281128,0.6041948199272156
+lebenshilfe_ood,Variante A (Statisch),0.40435606241226196,0.5934635996818542
+lebenshilfe_ood,Variante A (Statisch),0.0,0.045064426958560944
+lebenshilfe_ood,Variante A (Statisch),0.2323983907699585,0.29379740357398987
+lebenshilfe_ood,Variante A (Statisch),0.3947676718235016,0.29104745388031006
+lebenshilfe_ood,Variante A (Statisch),0.0,0.1314650923013687
+lebenshilfe_ood,Variante A (Statisch),0.056603774428367615,0.20943346619606018
+lebenshilfe_ood,Variante A (Statisch),0.6277602314949036,0.41406723856925964
+lebenshilfe_ood,Variante A (Statisch),0.3991455137729645,0.37426918745040894
+lebenshilfe_ood,Variante A (Statisch),0.3299304246902466,0.08767446130514145
+lebenshilfe_ood,Variante A (Statisch),0.1364651322364807,0.3668650686740875
+lebenshilfe_ood,Variante A (Statisch),0.9048365950584412,0.7448398470878601
+lebenshilfe_ood,Variante A (Statisch),0.4310847520828247,0.44244804978370667
+lebenshilfe_ood,Variante A (Statisch),0.38738441467285156,0.3548595905303955
+lebenshilfe_ood,Variante A (Statisch),0.8037540912628174,0.6783617734909058
+lebenshilfe_ood,Variante A (Statisch),0.20600366592407227,0.2892723083496094
+lebenshilfe_ood,Variante A (Statisch),0.16145789623260498,0.3363458216190338
+lebenshilfe_ood,Variante A (Statisch),0.11470085382461548,0.3611484169960022
+lebenshilfe_ood,Variante A (Statisch),0.37668776512145996,0.3840717077255249
+lebenshilfe_ood,Variante A (Statisch),0.9227080345153809,0.5692895650863647
+lebenshilfe_ood,Variante A (Statisch),0.20654219388961792,0.15277934074401855
+lebenshilfe_ood,Variante A (Statisch),0.7693057656288147,0.5097895860671997
+lebenshilfe_ood,Variante A (Statisch),0.030846185982227325,0.08084265887737274
+lebenshilfe_ood,Variante A (Statisch),0.5352266430854797,0.39092281460762024
+lebenshilfe_ood,Variante A (Statisch),0.9269744157791138,0.5938796997070312
+lebenshilfe_ood,Variante A (Statisch),0.494870126247406,0.3173336088657379
+lebenshilfe_ood,Variante A (Statisch),0.5734096169471741,0.262616902589798
+lebenshilfe_ood,Variante A (Statisch),0.2925332486629486,0.3189934194087982
+lebenshilfe_ood,Variante A (Statisch),0.7064117193222046,0.6586894989013672
+lebenshilfe_ood,Variante A (Statisch),0.8504930734634399,0.5333731770515442
+lebenshilfe_ood,Variante A (Statisch),0.168212890625,0.09969771653413773
+lebenshilfe_ood,Variante A (Statisch),0.3450442850589752,0.4632238745689392
+lebenshilfe_ood,Variante A (Statisch),0.24368686974048615,0.12352269142866135
+lebenshilfe_ood,Variante A (Statisch),0.5980132222175598,0.46776309609413147
+lebenshilfe_ood,Variante A (Statisch),0.5753295421600342,0.47205713391304016
+lebenshilfe_ood,Variante A (Statisch),0.7025141716003418,0.43960726261138916
+lebenshilfe_ood,Variante A (Statisch),0.779717743396759,0.3865271210670471
+lebenshilfe_ood,Variante A (Statisch),0.20666319131851196,0.258878618478775
+lebenshilfe_ood,Variante A (Statisch),1.0,0.58983314037323
+lebenshilfe_ood,Variante A (Statisch),0.502109706401825,0.46438097953796387
+lebenshilfe_ood,Variante A (Statisch),0.8623574376106262,0.46435579657554626
+lebenshilfe_ood,Variante A (Statisch),1.0,0.5634896159172058
+lebenshilfe_ood,Variante A (Statisch),0.4799599051475525,0.39088746905326843
+lebenshilfe_ood,Variante A (Statisch),0.8200238347053528,0.4773787260055542
+lebenshilfe_ood,Variante A (Statisch),1.0,0.5657455921173096
+lebenshilfe_ood,Variante A (Statisch),0.5157743692398071,0.29542961716651917
+lebenshilfe_ood,Variante A (Statisch),0.6545882225036621,0.24890995025634766
+lebenshilfe_ood,Variante A (Statisch),0.8703962564468384,0.46648335456848145
+lebenshilfe_ood,Variante A (Statisch),0.7912667989730835,0.42220520973205566
+lebenshilfe_ood,Variante A (Statisch),0.13261163234710693,0.24712765216827393
+lebenshilfe_ood,Variante A (Statisch),0.5799498558044434,0.5834324955940247
+lebenshilfe_ood,Variante A (Statisch),1.0,0.7467712759971619
+lebenshilfe_ood,Variante A (Statisch),0.30204081535339355,0.4009310305118561
+lebenshilfe_ood,Variante A (Statisch),0.4487309753894806,0.38510075211524963
+lebenshilfe_ood,Variante A (Statisch),0.09469922631978989,0.2277277112007141
+lebenshilfe_ood,Variante A (Statisch),0.26049089431762695,0.3732958436012268
+lebenshilfe_ood,Variante A (Statisch),0.6221461296081543,0.6155574321746826
+lebenshilfe_ood,Variante A (Statisch),0.5680129528045654,0.2665160894393921
+lebenshilfe_ood,Variante A (Statisch),0.3100045919418335,0.6081574559211731
+lebenshilfe_ood,Variante A (Statisch),0.7349498867988586,0.8598816394805908
+lebenshilfe_ood,Variante A (Statisch),0.6914453506469727,0.6354678869247437
+lebenshilfe_ood,Variante A (Statisch),0.662234902381897,0.47901761531829834
+lebenshilfe_ood,Variante A (Statisch),0.5098276138305664,0.6376310586929321
+lebenshilfe_ood,Variante A (Statisch),0.676246166229248,0.800607442855835
+lebenshilfe_ood,Variante A (Statisch),0.9543424844741821,0.8745619654655457
+lebenshilfe_ood,Variante A (Statisch),0.13716813921928406,0.5244420170783997
+lebenshilfe_ood,Variante A (Statisch),0.6347723007202148,0.6237908005714417
+lebenshilfe_ood,Variante A (Statisch),0.8219373226165771,0.6898004412651062
+lebenshilfe_ood,Variante A (Statisch),0.8348413705825806,0.5628049373626709
+lebenshilfe_ood,Variante A (Statisch),0.6596390604972839,0.43336212635040283
+lebenshilfe_ood,Variante A (Statisch),0.3333333432674408,0.4833225607872009
+lebenshilfe_ood,Variante A (Statisch),0.719261109828949,0.341859370470047
+lebenshilfe_ood,Variante A (Statisch),0.8718934655189514,0.5924663543701172
+lebenshilfe_ood,Variante A (Statisch),0.48755431175231934,0.28090813755989075
+lebenshilfe_ood,Variante A (Statisch),0.2908777892589569,0.34768423438072205
+lebenshilfe_ood,Variante A (Statisch),0.9427159428596497,0.8077979683876038
+lebenshilfe_ood,Variante A (Statisch),0.5487000346183777,0.3909735381603241
+lebenshilfe_ood,Variante A (Statisch),0.617067813873291,0.7935191988945007
+lebenshilfe_ood,Variante A (Statisch),0.41357704997062683,0.6047215461730957
+lebenshilfe_ood,Variante A (Statisch),0.41630780696868896,0.3640429675579071
+lebenshilfe_ood,Variante A (Statisch),0.8395827412605286,0.5868759155273438
+lebenshilfe_ood,Variante A (Statisch),0.5780283808708191,0.43344178795814514
+lebenshilfe_ood,Variante A (Statisch),0.445872038602829,0.38269859552383423
+lebenshilfe_ood,Variante A (Statisch),0.30270490050315857,0.703728437423706
+lebenshilfe_ood,Variante A (Statisch),0.9367388486862183,0.7576751112937927
+lebenshilfe_ood,Variante A (Statisch),0.9424252510070801,0.7424837350845337
+lebenshilfe_ood,Variante A (Statisch),0.646568775177002,0.43333813548088074
+lebenshilfe_ood,Variante A (Statisch),0.9590544104576111,0.5468681454658508
+lebenshilfe_ood,Variante A (Statisch),0.5789695978164673,0.6881476640701294
+lebenshilfe_ood,Variante A (Statisch),0.750110387802124,0.6562198400497437
+lebenshilfe_ood,Variante A (Statisch),0.45049428939819336,0.2627422511577606
+lebenshilfe_ood,Variante A (Statisch),0.9403141140937805,0.6853519678115845
+lebenshilfe_ood,Variante A (Statisch),0.5795944333076477,0.5248869061470032
+lebenshilfe_ood,Variante A (Statisch),0.6974808573722839,0.7908170223236084
+lebenshilfe_ood,Variante A (Statisch),0.40289679169654846,0.5831759572029114
+lebenshilfe_ood,Variante A (Statisch),0.6189665198326111,0.4713875949382782
+lebenshilfe_ood,Variante A (Statisch),0.6717965602874756,0.6127640008926392
+lebenshilfe_ood,Variante A (Statisch),0.8107643723487854,0.7354878783226013
+lebenshilfe_ood,Variante A (Statisch),0.8300561904907227,0.6251198053359985
+lebenshilfe_ood,Variante A (Statisch),0.6382237672805786,0.45928755402565
+lebenshilfe_ood,Variante A (Statisch),0.7945904731750488,0.48023974895477295
+lebenshilfe_ood,Variante A (Statisch),0.9470676779747009,0.7768398523330688
+lebenshilfe_ood,Variante A (Statisch),0.5847759246826172,0.5699300169944763
+lebenshilfe_ood,Variante A (Statisch),0.4209575355052948,0.20969745516777039
+lebenshilfe_ood,Variante A (Statisch),0.873379647731781,0.5719725489616394
+lebenshilfe_ood,Variante A (Statisch),0.7492480278015137,0.5057202577590942
+lebenshilfe_ood,Variante A (Statisch),0.5881979465484619,0.4652009606361389
+lebenshilfe_ood,Variante A (Statisch),0.5742971897125244,0.5166701674461365
+lebenshilfe_ood,Variante A (Statisch),0.18461182713508606,0.19444841146469116
+lebenshilfe_ood,Variante A (Statisch),0.17791606485843658,0.07837007194757462
+lebenshilfe_ood,Variante A (Statisch),0.1904536932706833,0.20540493726730347
+lebenshilfe_ood,Variante A (Statisch),0.15849801898002625,0.05765295773744583
+lebenshilfe_ood,Variante A (Statisch),0.2607296109199524,0.21902361512184143
+lebenshilfe_ood,Variante A (Statisch),0.29208436608314514,0.22887630760669708
+lebenshilfe_ood,Variante A (Statisch),0.17399093508720398,0.19435730576515198
+lebenshilfe_ood,Variante A (Statisch),0.2971014380455017,0.3063894510269165
+lebenshilfe_ood,Variante A (Statisch),0.42942431569099426,0.2686215341091156
+lebenshilfe_ood,Variante A (Statisch),0.901207447052002,0.1414446234703064
+lebenshilfe_ood,Variante A (Statisch),0.37224915623664856,0.32812029123306274
+lebenshilfe_ood,Variante A (Statisch),0.10947290807962418,0.05557657405734062
+lebenshilfe_ood,Variante A (Statisch),0.016393441706895828,0.09030461311340332
+lebenshilfe_ood,Variante A (Statisch),0.410540908575058,0.21035417914390564
+lebenshilfe_ood,Variante A (Statisch),0.6229929327964783,0.46249088644981384
+lebenshilfe_ood,Variante A (Statisch),0.30921369791030884,0.31744471192359924
+lebenshilfe_ood,Variante A (Statisch),0.12807656824588776,0.20789720118045807
+lebenshilfe_ood,Variante A (Statisch),0.21411947906017303,0.1728651076555252
+lebenshilfe_ood,Variante A (Statisch),0.1004566177725792,0.14649735391139984
+lebenshilfe_ood,Variante A (Statisch),0.16041794419288635,0.11787930130958557
+lebenshilfe_ood,Variante A (Statisch),0.04145818576216698,0.05205325782299042
+lebenshilfe_ood,Variante A (Statisch),0.6093466281890869,0.3587948679924011
+lebenshilfe_ood,Variante A (Statisch),0.6053528189659119,0.38154467940330505
+lebenshilfe_ood,Variante A (Statisch),0.8178752064704895,0.5549271702766418
+lebenshilfe_ood,Variante A (Statisch),0.4712871313095093,0.26155993342399597
+lebenshilfe_ood,Variante A (Statisch),0.5208541750907898,0.25272899866104126
+lebenshilfe_ood,Variante A (Statisch),1.0,0.4967719316482544
+lebenshilfe_ood,Variante A (Statisch),0.4982316493988037,0.34049805998802185
+lebenshilfe_ood,Variante A (Statisch),0.699881374835968,0.45835942029953003
+lebenshilfe_ood,Variante A (Statisch),0.3498293459415436,0.2484995722770691
+lebenshilfe_ood,Variante A (Statisch),0.24913254380226135,0.11816376447677612
+lebenshilfe_ood,Variante A (Statisch),0.11387711763381958,0.18120406568050385
+lebenshilfe_ood,Variante A (Statisch),0.2375776469707489,0.39651021361351013
+lebenshilfe_ood,Variante A (Statisch),0.2768022119998932,0.11140434443950653
+lebenshilfe_ood,Variante A (Statisch),0.2577117085456848,0.2984183728694916
+lebenshilfe_ood,Variante A (Statisch),0.3327292501926422,0.2392699122428894
+lebenshilfe_ood,Variante A (Statisch),0.668067216873169,0.3363059461116791
+lebenshilfe_ood,Variante A (Statisch),0.15640273690223694,0.33789369463920593
+lebenshilfe_ood,Variante A (Statisch),0.5183133482933044,0.37934407591819763
+lebenshilfe_ood,Variante A (Statisch),0.4700387418270111,0.4232046604156494
+lebenshilfe_ood,Variante A (Statisch),0.3294367790222168,0.4137848913669586
+lebenshilfe_ood,Variante A (Statisch),0.9007707238197327,0.6907912492752075
+lebenshilfe_ood,Variante A (Statisch),0.4570135772228241,0.4848170876502991
+lebenshilfe_ood,Variante A (Statisch),0.20665083825588226,0.10073070228099823
+lebenshilfe_ood,Variante A (Statisch),0.19961611926555634,0.14973552525043488
+lebenshilfe_ood,Variante A (Statisch),0.29228243231773376,0.40575695037841797
+lebenshilfe_ood,Variante A (Statisch),1.0,0.961035430431366
+lebenshilfe_ood,Variante A (Statisch),0.6438871622085571,0.4230429232120514
+lebenshilfe_ood,Variante A (Statisch),0.7253456115722656,0.4266892373561859
+lebenshilfe_ood,Variante A (Statisch),0.7088838219642639,0.3023647665977478
+lebenshilfe_ood,Variante A (Statisch),0.5295836329460144,0.2838600277900696
+lebenshilfe_ood,Variante A (Statisch),0.252136766910553,0.13831429183483124
+lebenshilfe_ood,Variante A (Statisch),0.5036880970001221,0.4563419818878174
+lebenshilfe_ood,Variante A (Statisch),0.0880376324057579,0.09804107248783112
+lebenshilfe_ood,Variante A (Statisch),0.23645783960819244,0.10990560054779053
+lebenshilfe_ood,Variante A (Statisch),0.302526593208313,0.26945456862449646
+lebenshilfe_ood,Variante A (Statisch),0.8370646834373474,0.6750971078872681
+lebenshilfe_ood,Variante A (Statisch),0.5457324385643005,0.5067723989486694
+lebenshilfe_ood,Variante A (Statisch),0.6010695099830627,0.7385154366493225
+lebenshilfe_ood,Variante A (Statisch),0.5783641338348389,0.4113037884235382
+lebenshilfe_ood,Variante A (Statisch),0.574698805809021,0.3731923997402191
+lebenshilfe_ood,Variante A (Statisch),0.48816028237342834,0.27539339661598206
+lebenshilfe_ood,Variante A (Statisch),0.0,0.05472122132778168
+lebenshilfe_ood,Variante A (Statisch),0.44146502017974854,0.36282241344451904
+lebenshilfe_ood,Variante A (Statisch),1.0,0.35849183797836304
+lebenshilfe_ood,Variante A (Statisch),0.05292792618274689,0.04693925753235817
+lebenshilfe_ood,Variante A (Statisch),0.6147403717041016,0.37632784247398376
+lebenshilfe_ood,Variante A (Statisch),0.8037676811218262,0.31592246890068054
+lebenshilfe_ood,Variante A (Statisch),0.6955516934394836,0.6545270085334778
+lebenshilfe_ood,Variante A (Statisch),0.6931030750274658,0.43934696912765503
+lebenshilfe_ood,Variante A (Statisch),0.6544324159622192,0.3153653144836426
+lebenshilfe_ood,Variante A (Statisch),0.9140418767929077,0.47866418957710266
+lebenshilfe_ood,Variante A (Statisch),0.19273898005485535,0.1053323820233345
+lebenshilfe_ood,Variante A (Statisch),0.5346999168395996,0.32446613907814026
+lebenshilfe_ood,Variante A (Statisch),0.28293752670288086,0.3295094966888428
+lebenshilfe_ood,Variante A (Statisch),0.9885740280151367,0.42621108889579773
+lebenshilfe_ood,Variante A (Statisch),0.19084328413009644,0.041513536125421524
+lebenshilfe_ood,Variante A (Statisch),0.7587647438049316,0.4485459327697754
+lebenshilfe_ood,Variante A (Statisch),0.7648351788520813,0.4780237376689911
+lebenshilfe_ood,Variante A (Statisch),0.2728772461414337,0.1575375199317932
+lebenshilfe_ood,Variante A (Statisch),0.0583035871386528,0.05974271148443222
+lebenshilfe_ood,Variante A (Statisch),0.7731760144233704,0.14482203125953674
+lebenshilfe_ood,Variante A (Statisch),0.13426241278648376,0.0967746376991272
+lebenshilfe_ood,Variante A (Statisch),0.6339976787567139,0.3005194067955017
+lebenshilfe_ood,Variante A (Statisch),0.529503345489502,0.28891560435295105
+lebenshilfe_ood,Variante A (Statisch),0.36794647574424744,0.3068876564502716
+lebenshilfe_ood,Variante A (Statisch),0.6315172910690308,0.36490994691848755
+lebenshilfe_ood,Variante A (Statisch),0.7918993234634399,0.37911415100097656
+lebenshilfe_ood,Variante A (Statisch),0.5290124416351318,0.2120240181684494
+lebenshilfe_ood,Variante A (Statisch),0.5664682388305664,0.4257834255695343
+lebenshilfe_ood,Variante A (Statisch),0.714595377445221,0.5003368258476257
+lebenshilfe_ood,Variante A (Statisch),0.8078745007514954,0.8052637577056885
+lebenshilfe_ood,Variante A (Statisch),0.0961923822760582,0.39528176188468933
+lebenshilfe_ood,Variante A (Statisch),0.2783018946647644,0.11725360155105591
+lebenshilfe_ood,Variante A (Statisch),0.9469547867774963,0.8002244234085083
+lebenshilfe_ood,Variante A (Statisch),0.6733567714691162,0.47195684909820557
+lebenshilfe_ood,Variante A (Statisch),0.6527824401855469,0.919147789478302
+lebenshilfe_ood,Variante A (Statisch),1.0,0.9148169755935669
+lebenshilfe_ood,Variante A (Statisch),0.7758620977401733,0.9736536145210266
+lebenshilfe_ood,Variante A (Statisch),0.42105263471603394,0.2685924470424652
+lebenshilfe_ood,Variante A (Statisch),0.9387755393981934,0.6425051093101501
+lebenshilfe_ood,Variante A (Statisch),0.3133159279823303,0.3997056186199188
+lebenshilfe_ood,Variante A (Statisch),0.0,0.02242281287908554
+lebenshilfe_ood,Variante A (Statisch),0.3861386179924011,0.3578220307826996
+lebenshilfe_ood,Variante A (Statisch),0.7062057852745056,0.5996590852737427
+lebenshilfe_ood,Variante A (Statisch),0.5201511383056641,0.45285332202911377
+lebenshilfe_ood,Variante A (Statisch),0.24953532218933105,0.16078415513038635
+lebenshilfe_ood,Variante A (Statisch),0.9519230723381042,0.7690479159355164
+lebenshilfe_ood,Variante A (Statisch),0.30603447556495667,0.3041495084762573
+lebenshilfe_ood,Variante A (Statisch),0.0,0.020253054797649384
+lebenshilfe_ood,Variante A (Statisch),0.5564903616905212,0.4844542443752289
+lebenshilfe_ood,Variante A (Statisch),0.26886382699012756,0.2813953757286072
+lebenshilfe_ood,Variante A (Statisch),0.10824108123779297,0.11014081537723541
+lebenshilfe_ood,Variante A (Statisch),0.8748603463172913,0.5797890424728394
+lebenshilfe_ood,Variante A (Statisch),0.11406250298023224,0.025213882327079773
+lebenshilfe_ood,Variante A (Statisch),0.2677106559276581,0.19782081246376038
+lebenshilfe_ood,Variante A (Statisch),0.0,0.015792259946465492
+lebenshilfe_ood,Variante A (Statisch),0.41127482056617737,0.4048616886138916
+lebenshilfe_ood,Variante A (Statisch),0.256186306476593,0.30197039246559143
+lebenshilfe_ood,Variante A (Statisch),0.690431535243988,0.3718160092830658
+lebenshilfe_ood,Variante A (Statisch),0.8944050669670105,0.42438626289367676
+lebenshilfe_ood,Variante A (Statisch),0.7438271641731262,0.44008976221084595
+lebenshilfe_ood,Variante A (Statisch),0.7219251394271851,0.2670423984527588
+lebenshilfe_ood,Variante A (Statisch),0.8794117569923401,0.46516185998916626
+lebenshilfe_ood,Variante A (Statisch),0.7523452043533325,0.660957396030426
+lebenshilfe_ood,Variante A (Statisch),0.4485294222831726,0.35350683331489563
+lebenshilfe_ood,Variante A (Statisch),0.4827856123447418,0.2850916385650635
+lebenshilfe_ood,Variante A (Statisch),0.6607707142829895,0.37787768244743347
+lebenshilfe_ood,Variante A (Statisch),0.44639864563941956,0.2586517930030823
+lebenshilfe_ood,Variante A (Statisch),0.6871980428695679,0.5311792492866516
+lebenshilfe_ood,Variante A (Statisch),0.43805310130119324,0.4875717759132385
+lebenshilfe_ood,Variante A (Statisch),0.9807339310646057,0.5568802952766418
+lebenshilfe_ood,Variante A (Statisch),0.4893918037414551,0.4095751941204071
+lebenshilfe_ood,Variante A (Statisch),0.5805876851081848,0.41029679775238037
+lebenshilfe_ood,Variante A (Statisch),0.8194871544837952,0.45704033970832825
+lebenshilfe_ood,Variante A (Statisch),0.5231586694717407,0.37414148449897766
+lebenshilfe_ood,Variante A (Statisch),0.3575371503829956,0.182798832654953
+lebenshilfe_ood,Variante A (Statisch),0.942307710647583,0.6052340269088745
+lebenshilfe_ood,Variante A (Statisch),0.8766430616378784,0.5049590468406677
+lebenshilfe_ood,Variante A (Statisch),0.4774148762226105,0.4649510681629181
+lebenshilfe_ood,Variante A (Statisch),0.4404255449771881,0.20605917274951935
+lebenshilfe_ood,Variante A (Statisch),0.6796116232872009,0.551708996295929
+lebenshilfe_ood,Variante A (Statisch),0.4703929126262665,0.28338783979415894
+lebenshilfe_ood,Variante A (Statisch),0.7602474689483643,0.6797269582748413
+lebenshilfe_ood,Variante A (Statisch),0.6388115286827087,0.4033491909503937
+lebenshilfe_ood,Variante A (Statisch),0.8161290287971497,0.7016119360923767
+lebenshilfe_ood,Variante A (Statisch),0.05269058421254158,0.027014557272195816
+lebenshilfe_ood,Variante A (Statisch),0.2001209259033203,0.03423072770237923
+lebenshilfe_ood,Variante A (Statisch),0.7389277219772339,0.5207748413085938
+lebenshilfe_ood,Variante A (Statisch),0.0,0.2247074544429779
+lebenshilfe_ood,Variante A (Statisch),0.3306327164173126,0.3058069050312042
+lebenshilfe_ood,Variante A (Statisch),0.08759123831987381,0.22837907075881958
+lebenshilfe_ood,Variante A (Statisch),0.3104742467403412,0.32340461015701294
+lebenshilfe_ood,Variante A (Statisch),0.6397502422332764,0.6824281215667725
+lebenshilfe_ood,Variante A (Statisch),0.6293333172798157,0.5483406782150269
+lebenshilfe_ood,Variante A (Statisch),0.668694257736206,0.5208016633987427
+lebenshilfe_ood,Variante A (Statisch),0.06818182021379471,0.3110072910785675
+lebenshilfe_ood,Variante A (Statisch),0.5886970162391663,0.5943261981010437
+lebenshilfe_ood,Variante A (Statisch),0.1878335177898407,0.2707514464855194
+lebenshilfe_ood,Variante B (Dynamisch),0.15851852297782898,0.07778839766979218
+lebenshilfe_ood,Variante B (Dynamisch),0.3246951103210449,0.02828759141266346
+lebenshilfe_ood,Variante B (Dynamisch),0.5059795379638672,0.17074543237686157
+lebenshilfe_ood,Variante B (Dynamisch),0.18999595940113068,0.0667680948972702
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.470742404460907
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.36404547095298767
+lebenshilfe_ood,Variante B (Dynamisch),0.9165622591972351,0.2129240483045578
+lebenshilfe_ood,Variante B (Dynamisch),0.9595265984535217,0.4315318465232849
+lebenshilfe_ood,Variante B (Dynamisch),0.16249999403953552,0.009283346123993397
+lebenshilfe_ood,Variante B (Dynamisch),0.9404096603393555,0.49723318219184875
+lebenshilfe_ood,Variante B (Dynamisch),0.3728562295436859,0.4036135971546173
+lebenshilfe_ood,Variante B (Dynamisch),0.43626323342323303,0.36882561445236206
+lebenshilfe_ood,Variante B (Dynamisch),0.8253373503684998,0.4042718708515167
+lebenshilfe_ood,Variante B (Dynamisch),0.4408155679702759,0.2932908535003662
+lebenshilfe_ood,Variante B (Dynamisch),0.9593392610549927,0.345604807138443
+lebenshilfe_ood,Variante B (Dynamisch),0.27314284443855286,0.10596583038568497
+lebenshilfe_ood,Variante B (Dynamisch),0.21796338260173798,0.20028896629810333
+lebenshilfe_ood,Variante B (Dynamisch),0.3519391119480133,0.1684650033712387
+lebenshilfe_ood,Variante B (Dynamisch),0.2481076568365097,0.11468545347452164
+lebenshilfe_ood,Variante B (Dynamisch),0.833050012588501,0.36815494298934937
+lebenshilfe_ood,Variante B (Dynamisch),0.3299282193183899,0.26452216506004333
+lebenshilfe_ood,Variante B (Dynamisch),0.7439053058624268,0.6729696393013
+lebenshilfe_ood,Variante B (Dynamisch),0.482566237449646,0.3773503303527832
+lebenshilfe_ood,Variante B (Dynamisch),0.4969044327735901,0.5631418824195862
+lebenshilfe_ood,Variante B (Dynamisch),0.5418757200241089,0.4211137592792511
+lebenshilfe_ood,Variante B (Dynamisch),0.8229877352714539,0.5432009100914001
+lebenshilfe_ood,Variante B (Dynamisch),0.5391608476638794,0.6044402718544006
+lebenshilfe_ood,Variante B (Dynamisch),0.7114953398704529,0.4093465209007263
+lebenshilfe_ood,Variante B (Dynamisch),0.7971367835998535,0.566758394241333
+lebenshilfe_ood,Variante B (Dynamisch),0.592822253704071,0.33709853887557983
+lebenshilfe_ood,Variante B (Dynamisch),0.8380604982376099,0.6924000382423401
+lebenshilfe_ood,Variante B (Dynamisch),0.7234042286872864,0.3796330392360687
+lebenshilfe_ood,Variante B (Dynamisch),0.6940344572067261,0.4888356924057007
+lebenshilfe_ood,Variante B (Dynamisch),0.5505587458610535,0.23080620169639587
+lebenshilfe_ood,Variante B (Dynamisch),0.8982651233673096,0.753264844417572
+lebenshilfe_ood,Variante B (Dynamisch),0.33759263157844543,0.4115418791770935
+lebenshilfe_ood,Variante B (Dynamisch),0.6195240020751953,0.3349343538284302
+lebenshilfe_ood,Variante B (Dynamisch),0.5428005456924438,0.47110888361930847
+lebenshilfe_ood,Variante B (Dynamisch),0.5650517344474792,0.6477352380752563
+lebenshilfe_ood,Variante B (Dynamisch),0.33010023832321167,0.5335618853569031
+lebenshilfe_ood,Variante B (Dynamisch),0.3528279960155487,0.22877199947834015
+lebenshilfe_ood,Variante B (Dynamisch),0.05021253973245621,0.05532809719443321
+lebenshilfe_ood,Variante B (Dynamisch),0.33387306332588196,0.32739198207855225
+lebenshilfe_ood,Variante B (Dynamisch),0.29438328742980957,0.3283311724662781
+lebenshilfe_ood,Variante B (Dynamisch),0.5176803469657898,0.3708551228046417
+lebenshilfe_ood,Variante B (Dynamisch),0.2529260516166687,0.09374121576547623
+lebenshilfe_ood,Variante B (Dynamisch),0.44796618819236755,0.3668496608734131
+lebenshilfe_ood,Variante B (Dynamisch),0.2252470999956131,0.08675592392683029
+lebenshilfe_ood,Variante B (Dynamisch),0.1755101978778839,0.27298083901405334
+lebenshilfe_ood,Variante B (Dynamisch),0.22093360126018524,0.21549440920352936
+lebenshilfe_ood,Variante B (Dynamisch),0.1178910955786705,0.3849745988845825
+lebenshilfe_ood,Variante B (Dynamisch),0.9980168342590332,0.650299072265625
+lebenshilfe_ood,Variante B (Dynamisch),0.572903573513031,0.5244147181510925
+lebenshilfe_ood,Variante B (Dynamisch),0.36512261629104614,0.3936674892902374
+lebenshilfe_ood,Variante B (Dynamisch),0.11623215675354004,0.47007718682289124
+lebenshilfe_ood,Variante B (Dynamisch),0.013865239918231964,0.6685768365859985
+lebenshilfe_ood,Variante B (Dynamisch),0.7748880386352539,0.7253603339195251
+lebenshilfe_ood,Variante B (Dynamisch),0.3014705777168274,0.575488805770874
+lebenshilfe_ood,Variante B (Dynamisch),0.4541427791118622,0.6471322178840637
+lebenshilfe_ood,Variante B (Dynamisch),0.8715110421180725,0.6595159769058228
+lebenshilfe_ood,Variante B (Dynamisch),0.34610244631767273,0.3256377577781677
+lebenshilfe_ood,Variante B (Dynamisch),0.9368420839309692,0.5243016481399536
+lebenshilfe_ood,Variante B (Dynamisch),0.5942114591598511,0.5282382369041443
+lebenshilfe_ood,Variante B (Dynamisch),0.21762590110301971,0.1441667377948761
+lebenshilfe_ood,Variante B (Dynamisch),0.03852889686822891,0.1241973340511322
+lebenshilfe_ood,Variante B (Dynamisch),0.10729990899562836,0.1993463933467865
+lebenshilfe_ood,Variante B (Dynamisch),0.8156161904335022,0.5295664072036743
+lebenshilfe_ood,Variante B (Dynamisch),0.8623548746109009,0.6806277632713318
+lebenshilfe_ood,Variante B (Dynamisch),0.04100000113248825,0.11592429131269455
+lebenshilfe_ood,Variante B (Dynamisch),0.8967334032058716,0.7000654339790344
+lebenshilfe_ood,Variante B (Dynamisch),0.30689653754234314,0.24264465272426605
+lebenshilfe_ood,Variante B (Dynamisch),0.6461988091468811,0.3803589344024658
+lebenshilfe_ood,Variante B (Dynamisch),0.053795136511325836,0.06572325527667999
+lebenshilfe_ood,Variante B (Dynamisch),0.360725075006485,0.163131982088089
+lebenshilfe_ood,Variante B (Dynamisch),0.25100672245025635,0.2609262466430664
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.934048056602478
+lebenshilfe_ood,Variante B (Dynamisch),0.23353752493858337,0.12239520251750946
+lebenshilfe_ood,Variante B (Dynamisch),0.3677442967891693,0.4489705562591553
+lebenshilfe_ood,Variante B (Dynamisch),0.48843827843666077,0.36268743872642517
+lebenshilfe_ood,Variante B (Dynamisch),0.9068047404289246,0.5589194297790527
+lebenshilfe_ood,Variante B (Dynamisch),0.2951456308364868,0.13353946805000305
+lebenshilfe_ood,Variante B (Dynamisch),0.06203007698059082,0.1390165090560913
+lebenshilfe_ood,Variante B (Dynamisch),0.12171253561973572,0.0636952668428421
+lebenshilfe_ood,Variante B (Dynamisch),0.39821693301200867,0.40273866057395935
+lebenshilfe_ood,Variante B (Dynamisch),0.8416422009468079,0.6050249338150024
+lebenshilfe_ood,Variante B (Dynamisch),0.11018364131450653,0.10854573547840118
+lebenshilfe_ood,Variante B (Dynamisch),0.29120880365371704,0.2009042203426361
+lebenshilfe_ood,Variante B (Dynamisch),0.7326599359512329,0.34603774547576904
+lebenshilfe_ood,Variante B (Dynamisch),0.41704824566841125,0.27219316363334656
+lebenshilfe_ood,Variante B (Dynamisch),0.752913773059845,0.47608092427253723
+lebenshilfe_ood,Variante B (Dynamisch),0.32875367999076843,0.36783236265182495
+lebenshilfe_ood,Variante B (Dynamisch),0.8801214098930359,0.6953497529029846
+lebenshilfe_ood,Variante B (Dynamisch),0.4155268669128418,0.39366546273231506
+lebenshilfe_ood,Variante B (Dynamisch),0.20963828265666962,0.08737193793058395
+lebenshilfe_ood,Variante B (Dynamisch),0.4277108311653137,0.2752474248409271
+lebenshilfe_ood,Variante B (Dynamisch),0.8066783547401428,0.43480411171913147
+lebenshilfe_ood,Variante B (Dynamisch),0.5844183564186096,0.6446194052696228
+lebenshilfe_ood,Variante B (Dynamisch),0.6001692414283752,0.40421968698501587
+lebenshilfe_ood,Variante B (Dynamisch),0.39419588446617126,0.14915497601032257
+lebenshilfe_ood,Variante B (Dynamisch),0.593863308429718,0.34397217631340027
+lebenshilfe_ood,Variante B (Dynamisch),0.28125,0.2917742133140564
+lebenshilfe_ood,Variante B (Dynamisch),0.33028361201286316,0.28393781185150146
+lebenshilfe_ood,Variante B (Dynamisch),0.7231968641281128,0.6076076626777649
+lebenshilfe_ood,Variante B (Dynamisch),0.40435606241226196,0.41721904277801514
+lebenshilfe_ood,Variante B (Dynamisch),0.0,0.01042517926543951
+lebenshilfe_ood,Variante B (Dynamisch),0.2323983907699585,0.3152809143066406
+lebenshilfe_ood,Variante B (Dynamisch),0.3947676718235016,0.22193045914173126
+lebenshilfe_ood,Variante B (Dynamisch),0.0,0.08720213174819946
+lebenshilfe_ood,Variante B (Dynamisch),0.056603774428367615,0.09253328293561935
+lebenshilfe_ood,Variante B (Dynamisch),0.6277602314949036,0.2480647712945938
+lebenshilfe_ood,Variante B (Dynamisch),0.3991455137729645,0.3304488956928253
+lebenshilfe_ood,Variante B (Dynamisch),0.3299304246902466,0.08381221443414688
+lebenshilfe_ood,Variante B (Dynamisch),0.1364651322364807,0.21311281621456146
+lebenshilfe_ood,Variante B (Dynamisch),0.9048365950584412,0.6913421750068665
+lebenshilfe_ood,Variante B (Dynamisch),0.4310847520828247,0.5321100950241089
+lebenshilfe_ood,Variante B (Dynamisch),0.38738441467285156,0.3958216905593872
+lebenshilfe_ood,Variante B (Dynamisch),0.8037540912628174,0.6116563677787781
+lebenshilfe_ood,Variante B (Dynamisch),0.20600366592407227,0.23000949621200562
+lebenshilfe_ood,Variante B (Dynamisch),0.16145789623260498,0.2792375683784485
+lebenshilfe_ood,Variante B (Dynamisch),0.11470085382461548,0.17181196808815002
+lebenshilfe_ood,Variante B (Dynamisch),0.37668776512145996,0.2427942156791687
+lebenshilfe_ood,Variante B (Dynamisch),0.9227080345153809,0.6022621393203735
+lebenshilfe_ood,Variante B (Dynamisch),0.20654219388961792,0.1291479766368866
+lebenshilfe_ood,Variante B (Dynamisch),0.7693057656288147,0.5940586924552917
+lebenshilfe_ood,Variante B (Dynamisch),0.030846185982227325,0.11132881790399551
+lebenshilfe_ood,Variante B (Dynamisch),0.5352266430854797,0.5366358757019043
+lebenshilfe_ood,Variante B (Dynamisch),0.9269744157791138,0.5317252278327942
+lebenshilfe_ood,Variante B (Dynamisch),0.494870126247406,0.2750875651836395
+lebenshilfe_ood,Variante B (Dynamisch),0.5734096169471741,0.32471129298210144
+lebenshilfe_ood,Variante B (Dynamisch),0.2925332486629486,0.40399327874183655
+lebenshilfe_ood,Variante B (Dynamisch),0.7064117193222046,0.6864776015281677
+lebenshilfe_ood,Variante B (Dynamisch),0.8504930734634399,0.5423313975334167
+lebenshilfe_ood,Variante B (Dynamisch),0.168212890625,0.14893676340579987
+lebenshilfe_ood,Variante B (Dynamisch),0.3450442850589752,0.4318907558917999
+lebenshilfe_ood,Variante B (Dynamisch),0.24368686974048615,0.32279732823371887
+lebenshilfe_ood,Variante B (Dynamisch),0.5980132222175598,0.4727160930633545
+lebenshilfe_ood,Variante B (Dynamisch),0.5753295421600342,0.4780855178833008
+lebenshilfe_ood,Variante B (Dynamisch),0.7025141716003418,0.4748951196670532
+lebenshilfe_ood,Variante B (Dynamisch),0.779717743396759,0.4562150537967682
+lebenshilfe_ood,Variante B (Dynamisch),0.20666319131851196,0.3227197825908661
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.5045256614685059
+lebenshilfe_ood,Variante B (Dynamisch),0.502109706401825,0.46392232179641724
+lebenshilfe_ood,Variante B (Dynamisch),0.8623574376106262,0.4970895051956177
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.674049437046051
+lebenshilfe_ood,Variante B (Dynamisch),0.4799599051475525,0.30996963381767273
+lebenshilfe_ood,Variante B (Dynamisch),0.8200238347053528,0.5032878518104553
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.4449051320552826
+lebenshilfe_ood,Variante B (Dynamisch),0.5157743692398071,0.3458404242992401
+lebenshilfe_ood,Variante B (Dynamisch),0.6545882225036621,0.31286510825157166
+lebenshilfe_ood,Variante B (Dynamisch),0.8703962564468384,0.49645334482192993
+lebenshilfe_ood,Variante B (Dynamisch),0.7912667989730835,0.5075634121894836
+lebenshilfe_ood,Variante B (Dynamisch),0.13261163234710693,0.28312188386917114
+lebenshilfe_ood,Variante B (Dynamisch),0.5799498558044434,0.5895879864692688
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.8412182331085205
+lebenshilfe_ood,Variante B (Dynamisch),0.30204081535339355,0.3917880356311798
+lebenshilfe_ood,Variante B (Dynamisch),0.4487309753894806,0.49000081419944763
+lebenshilfe_ood,Variante B (Dynamisch),0.09469922631978989,0.1768517643213272
+lebenshilfe_ood,Variante B (Dynamisch),0.26049089431762695,0.3574236035346985
+lebenshilfe_ood,Variante B (Dynamisch),0.6221461296081543,0.680713951587677
+lebenshilfe_ood,Variante B (Dynamisch),0.5680129528045654,0.39310169219970703
+lebenshilfe_ood,Variante B (Dynamisch),0.3100045919418335,0.5340641140937805
+lebenshilfe_ood,Variante B (Dynamisch),0.7349498867988586,0.865807294845581
+lebenshilfe_ood,Variante B (Dynamisch),0.6914453506469727,0.632678747177124
+lebenshilfe_ood,Variante B (Dynamisch),0.662234902381897,0.5068332552909851
+lebenshilfe_ood,Variante B (Dynamisch),0.5098276138305664,0.6821911334991455
+lebenshilfe_ood,Variante B (Dynamisch),0.676246166229248,0.7299362421035767
+lebenshilfe_ood,Variante B (Dynamisch),0.9543424844741821,0.9110429883003235
+lebenshilfe_ood,Variante B (Dynamisch),0.13716813921928406,0.40098661184310913
+lebenshilfe_ood,Variante B (Dynamisch),0.6347723007202148,0.601023256778717
+lebenshilfe_ood,Variante B (Dynamisch),0.8219373226165771,0.7718983292579651
+lebenshilfe_ood,Variante B (Dynamisch),0.8348413705825806,0.6029225587844849
+lebenshilfe_ood,Variante B (Dynamisch),0.6596390604972839,0.5107167959213257
+lebenshilfe_ood,Variante B (Dynamisch),0.3333333432674408,0.4808203876018524
+lebenshilfe_ood,Variante B (Dynamisch),0.719261109828949,0.3297925293445587
+lebenshilfe_ood,Variante B (Dynamisch),0.8718934655189514,0.6192935109138489
+lebenshilfe_ood,Variante B (Dynamisch),0.48755431175231934,0.14164963364601135
+lebenshilfe_ood,Variante B (Dynamisch),0.2908777892589569,0.4306791424751282
+lebenshilfe_ood,Variante B (Dynamisch),0.9427159428596497,0.6838459968566895
+lebenshilfe_ood,Variante B (Dynamisch),0.5487000346183777,0.4475248456001282
+lebenshilfe_ood,Variante B (Dynamisch),0.617067813873291,0.7316240072250366
+lebenshilfe_ood,Variante B (Dynamisch),0.41357704997062683,0.5816656351089478
+lebenshilfe_ood,Variante B (Dynamisch),0.41630780696868896,0.38580089807510376
+lebenshilfe_ood,Variante B (Dynamisch),0.8395827412605286,0.6108303666114807
+lebenshilfe_ood,Variante B (Dynamisch),0.5780283808708191,0.48412397503852844
+lebenshilfe_ood,Variante B (Dynamisch),0.445872038602829,0.391740620136261
+lebenshilfe_ood,Variante B (Dynamisch),0.30270490050315857,0.6485822200775146
+lebenshilfe_ood,Variante B (Dynamisch),0.9367388486862183,0.8208719491958618
+lebenshilfe_ood,Variante B (Dynamisch),0.9424252510070801,0.7230745553970337
+lebenshilfe_ood,Variante B (Dynamisch),0.646568775177002,0.46124663949012756
+lebenshilfe_ood,Variante B (Dynamisch),0.9590544104576111,0.5965787172317505
+lebenshilfe_ood,Variante B (Dynamisch),0.5789695978164673,0.6622516512870789
+lebenshilfe_ood,Variante B (Dynamisch),0.750110387802124,0.6606649160385132
+lebenshilfe_ood,Variante B (Dynamisch),0.45049428939819336,0.19350114464759827
+lebenshilfe_ood,Variante B (Dynamisch),0.9403141140937805,0.5845645666122437
+lebenshilfe_ood,Variante B (Dynamisch),0.5795944333076477,0.4370405673980713
+lebenshilfe_ood,Variante B (Dynamisch),0.6974808573722839,0.6336372494697571
+lebenshilfe_ood,Variante B (Dynamisch),0.40289679169654846,0.5151187777519226
+lebenshilfe_ood,Variante B (Dynamisch),0.6189665198326111,0.42519596219062805
+lebenshilfe_ood,Variante B (Dynamisch),0.6717965602874756,0.6313962340354919
+lebenshilfe_ood,Variante B (Dynamisch),0.8107643723487854,0.5467835664749146
+lebenshilfe_ood,Variante B (Dynamisch),0.8300561904907227,0.5375944972038269
+lebenshilfe_ood,Variante B (Dynamisch),0.6382237672805786,0.4568151533603668
+lebenshilfe_ood,Variante B (Dynamisch),0.7945904731750488,0.6190528273582458
+lebenshilfe_ood,Variante B (Dynamisch),0.9470676779747009,0.6955356001853943
+lebenshilfe_ood,Variante B (Dynamisch),0.5847759246826172,0.6282051205635071
+lebenshilfe_ood,Variante B (Dynamisch),0.4209575355052948,0.21385526657104492
+lebenshilfe_ood,Variante B (Dynamisch),0.873379647731781,0.5165145397186279
+lebenshilfe_ood,Variante B (Dynamisch),0.7492480278015137,0.4752751290798187
+lebenshilfe_ood,Variante B (Dynamisch),0.5881979465484619,0.4279087781906128
+lebenshilfe_ood,Variante B (Dynamisch),0.5742971897125244,0.5353075265884399
+lebenshilfe_ood,Variante B (Dynamisch),0.18461182713508606,0.101206935942173
+lebenshilfe_ood,Variante B (Dynamisch),0.17791606485843658,0.07751566171646118
+lebenshilfe_ood,Variante B (Dynamisch),0.1904536932706833,0.17264068126678467
+lebenshilfe_ood,Variante B (Dynamisch),0.15849801898002625,0.05816397815942764
+lebenshilfe_ood,Variante B (Dynamisch),0.2607296109199524,0.2298506647348404
+lebenshilfe_ood,Variante B (Dynamisch),0.29208436608314514,0.19501569867134094
+lebenshilfe_ood,Variante B (Dynamisch),0.17399093508720398,0.34681230783462524
+lebenshilfe_ood,Variante B (Dynamisch),0.2971014380455017,0.29118287563323975
+lebenshilfe_ood,Variante B (Dynamisch),0.42942431569099426,0.3314029574394226
+lebenshilfe_ood,Variante B (Dynamisch),0.901207447052002,0.14316777884960175
+lebenshilfe_ood,Variante B (Dynamisch),0.37224915623664856,0.40267184376716614
+lebenshilfe_ood,Variante B (Dynamisch),0.10947290807962418,0.0804266482591629
+lebenshilfe_ood,Variante B (Dynamisch),0.016393441706895828,0.06997766345739365
+lebenshilfe_ood,Variante B (Dynamisch),0.410540908575058,0.16027233004570007
+lebenshilfe_ood,Variante B (Dynamisch),0.6229929327964783,0.4169658124446869
+lebenshilfe_ood,Variante B (Dynamisch),0.30921369791030884,0.3235017955303192
+lebenshilfe_ood,Variante B (Dynamisch),0.12807656824588776,0.20218825340270996
+lebenshilfe_ood,Variante B (Dynamisch),0.21411947906017303,0.24173136055469513
+lebenshilfe_ood,Variante B (Dynamisch),0.1004566177725792,0.11964379251003265
+lebenshilfe_ood,Variante B (Dynamisch),0.16041794419288635,0.07801032811403275
+lebenshilfe_ood,Variante B (Dynamisch),0.04145818576216698,0.09575334936380386
+lebenshilfe_ood,Variante B (Dynamisch),0.6093466281890869,0.3829573094844818
+lebenshilfe_ood,Variante B (Dynamisch),0.6053528189659119,0.35432305932044983
+lebenshilfe_ood,Variante B (Dynamisch),0.8178752064704895,0.5387176871299744
+lebenshilfe_ood,Variante B (Dynamisch),0.4712871313095093,0.23939694464206696
+lebenshilfe_ood,Variante B (Dynamisch),0.5208541750907898,0.2353024035692215
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.5868604779243469
+lebenshilfe_ood,Variante B (Dynamisch),0.4982316493988037,0.30358198285102844
+lebenshilfe_ood,Variante B (Dynamisch),0.699881374835968,0.5181726813316345
+lebenshilfe_ood,Variante B (Dynamisch),0.3498293459415436,0.22362637519836426
+lebenshilfe_ood,Variante B (Dynamisch),0.24913254380226135,0.12669572234153748
+lebenshilfe_ood,Variante B (Dynamisch),0.11387711763381958,0.13747678697109222
+lebenshilfe_ood,Variante B (Dynamisch),0.2375776469707489,0.3317755162715912
+lebenshilfe_ood,Variante B (Dynamisch),0.2768022119998932,0.08834104239940643
+lebenshilfe_ood,Variante B (Dynamisch),0.2577117085456848,0.30259767174720764
+lebenshilfe_ood,Variante B (Dynamisch),0.3327292501926422,0.267037570476532
+lebenshilfe_ood,Variante B (Dynamisch),0.668067216873169,0.41024067997932434
+lebenshilfe_ood,Variante B (Dynamisch),0.15640273690223694,0.2986767888069153
+lebenshilfe_ood,Variante B (Dynamisch),0.5183133482933044,0.4533120393753052
+lebenshilfe_ood,Variante B (Dynamisch),0.4700387418270111,0.3352046012878418
+lebenshilfe_ood,Variante B (Dynamisch),0.3294367790222168,0.3709056079387665
+lebenshilfe_ood,Variante B (Dynamisch),0.9007707238197327,0.7016666531562805
+lebenshilfe_ood,Variante B (Dynamisch),0.4570135772228241,0.42307326197624207
+lebenshilfe_ood,Variante B (Dynamisch),0.20665083825588226,0.09249583631753922
+lebenshilfe_ood,Variante B (Dynamisch),0.19961611926555634,0.15962019562721252
+lebenshilfe_ood,Variante B (Dynamisch),0.29228243231773376,0.268749475479126
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.8402730226516724
+lebenshilfe_ood,Variante B (Dynamisch),0.6438871622085571,0.39795035123825073
+lebenshilfe_ood,Variante B (Dynamisch),0.7253456115722656,0.40264153480529785
+lebenshilfe_ood,Variante B (Dynamisch),0.7088838219642639,0.3062512278556824
+lebenshilfe_ood,Variante B (Dynamisch),0.5295836329460144,0.1826779842376709
+lebenshilfe_ood,Variante B (Dynamisch),0.252136766910553,0.19105812907218933
+lebenshilfe_ood,Variante B (Dynamisch),0.5036880970001221,0.37049877643585205
+lebenshilfe_ood,Variante B (Dynamisch),0.0880376324057579,0.07502198964357376
+lebenshilfe_ood,Variante B (Dynamisch),0.23645783960819244,0.18360254168510437
+lebenshilfe_ood,Variante B (Dynamisch),0.302526593208313,0.28717246651649475
+lebenshilfe_ood,Variante B (Dynamisch),0.8370646834373474,0.5132245421409607
+lebenshilfe_ood,Variante B (Dynamisch),0.5457324385643005,0.4386153817176819
+lebenshilfe_ood,Variante B (Dynamisch),0.6010695099830627,0.5594967007637024
+lebenshilfe_ood,Variante B (Dynamisch),0.5783641338348389,0.41811516880989075
+lebenshilfe_ood,Variante B (Dynamisch),0.574698805809021,0.4222474694252014
+lebenshilfe_ood,Variante B (Dynamisch),0.48816028237342834,0.34804198145866394
+lebenshilfe_ood,Variante B (Dynamisch),0.0,0.15778744220733643
+lebenshilfe_ood,Variante B (Dynamisch),0.44146502017974854,0.3887612521648407
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.48274990916252136
+lebenshilfe_ood,Variante B (Dynamisch),0.05292792618274689,0.23809714615345
+lebenshilfe_ood,Variante B (Dynamisch),0.6147403717041016,0.47009098529815674
+lebenshilfe_ood,Variante B (Dynamisch),0.8037676811218262,0.3720933496952057
+lebenshilfe_ood,Variante B (Dynamisch),0.6955516934394836,0.6478345990180969
+lebenshilfe_ood,Variante B (Dynamisch),0.6931030750274658,0.42682185769081116
+lebenshilfe_ood,Variante B (Dynamisch),0.6544324159622192,0.31627437472343445
+lebenshilfe_ood,Variante B (Dynamisch),0.9140418767929077,0.5279037356376648
+lebenshilfe_ood,Variante B (Dynamisch),0.19273898005485535,0.13617496192455292
+lebenshilfe_ood,Variante B (Dynamisch),0.5346999168395996,0.26829299330711365
+lebenshilfe_ood,Variante B (Dynamisch),0.28293752670288086,0.40689197182655334
+lebenshilfe_ood,Variante B (Dynamisch),0.9885740280151367,0.41918185353279114
+lebenshilfe_ood,Variante B (Dynamisch),0.19084328413009644,0.06947352737188339
+lebenshilfe_ood,Variante B (Dynamisch),0.7587647438049316,0.47759583592414856
+lebenshilfe_ood,Variante B (Dynamisch),0.7648351788520813,0.47365713119506836
+lebenshilfe_ood,Variante B (Dynamisch),0.2728772461414337,0.20338590443134308
+lebenshilfe_ood,Variante B (Dynamisch),0.0583035871386528,0.07473485171794891
+lebenshilfe_ood,Variante B (Dynamisch),0.7731760144233704,0.23911616206169128
+lebenshilfe_ood,Variante B (Dynamisch),0.13426241278648376,0.057563237845897675
+lebenshilfe_ood,Variante B (Dynamisch),0.6339976787567139,0.3580377399921417
+lebenshilfe_ood,Variante B (Dynamisch),0.529503345489502,0.25447148084640503
+lebenshilfe_ood,Variante B (Dynamisch),0.36794647574424744,0.2878117263317108
+lebenshilfe_ood,Variante B (Dynamisch),0.6315172910690308,0.39987364411354065
+lebenshilfe_ood,Variante B (Dynamisch),0.7918993234634399,0.3108568787574768
+lebenshilfe_ood,Variante B (Dynamisch),0.5290124416351318,0.17468692362308502
+lebenshilfe_ood,Variante B (Dynamisch),0.5664682388305664,0.47612011432647705
+lebenshilfe_ood,Variante B (Dynamisch),0.714595377445221,0.5385772585868835
+lebenshilfe_ood,Variante B (Dynamisch),0.8078745007514954,0.5679637789726257
+lebenshilfe_ood,Variante B (Dynamisch),0.0961923822760582,0.44439518451690674
+lebenshilfe_ood,Variante B (Dynamisch),0.2783018946647644,0.21446138620376587
+lebenshilfe_ood,Variante B (Dynamisch),0.9469547867774963,0.631622850894928
+lebenshilfe_ood,Variante B (Dynamisch),0.6733567714691162,0.46422845125198364
+lebenshilfe_ood,Variante B (Dynamisch),0.6527824401855469,0.7696730494499207
+lebenshilfe_ood,Variante B (Dynamisch),1.0,0.7850181460380554
+lebenshilfe_ood,Variante B (Dynamisch),0.7758620977401733,0.8341147899627686
+lebenshilfe_ood,Variante B (Dynamisch),0.42105263471603394,0.2965478301048279
+lebenshilfe_ood,Variante B (Dynamisch),0.9387755393981934,0.6604268550872803
+lebenshilfe_ood,Variante B (Dynamisch),0.3133159279823303,0.35215628147125244
+lebenshilfe_ood,Variante B (Dynamisch),0.0,0.007856621406972408
+lebenshilfe_ood,Variante B (Dynamisch),0.3861386179924011,0.32200902700424194
+lebenshilfe_ood,Variante B (Dynamisch),0.7062057852745056,0.654169499874115
+lebenshilfe_ood,Variante B (Dynamisch),0.5201511383056641,0.4663943648338318
+lebenshilfe_ood,Variante B (Dynamisch),0.24953532218933105,0.16860125958919525
+lebenshilfe_ood,Variante B (Dynamisch),0.9519230723381042,0.8291617631912231
+lebenshilfe_ood,Variante B (Dynamisch),0.30603447556495667,0.18778719007968903
+lebenshilfe_ood,Variante B (Dynamisch),0.0,0.007360935676842928
+lebenshilfe_ood,Variante B (Dynamisch),0.5564903616905212,0.4513746201992035
+lebenshilfe_ood,Variante B (Dynamisch),0.26886382699012756,0.30443963408470154
+lebenshilfe_ood,Variante B (Dynamisch),0.10824108123779297,0.1370401382446289
+lebenshilfe_ood,Variante B (Dynamisch),0.8748603463172913,0.5809783935546875
+lebenshilfe_ood,Variante B (Dynamisch),0.11406250298023224,0.06732014566659927
+lebenshilfe_ood,Variante B (Dynamisch),0.2677106559276581,0.19364899396896362
+lebenshilfe_ood,Variante B (Dynamisch),0.0,0.007520575076341629
+lebenshilfe_ood,Variante B (Dynamisch),0.41127482056617737,0.3045739531517029
+lebenshilfe_ood,Variante B (Dynamisch),0.256186306476593,0.2679057717323303
+lebenshilfe_ood,Variante B (Dynamisch),0.690431535243988,0.27470138669013977
+lebenshilfe_ood,Variante B (Dynamisch),0.8944050669670105,0.4476633667945862
+lebenshilfe_ood,Variante B (Dynamisch),0.7438271641731262,0.378944993019104
+lebenshilfe_ood,Variante B (Dynamisch),0.7219251394271851,0.13738982379436493
+lebenshilfe_ood,Variante B (Dynamisch),0.8794117569923401,0.37354663014411926
+lebenshilfe_ood,Variante B (Dynamisch),0.7523452043533325,0.6660999059677124
+lebenshilfe_ood,Variante B (Dynamisch),0.4485294222831726,0.3954311013221741
+lebenshilfe_ood,Variante B (Dynamisch),0.4827856123447418,0.1846110075712204
+lebenshilfe_ood,Variante B (Dynamisch),0.6607707142829895,0.35134080052375793
+lebenshilfe_ood,Variante B (Dynamisch),0.44639864563941956,0.20963989198207855
+lebenshilfe_ood,Variante B (Dynamisch),0.6871980428695679,0.534569501876831
+lebenshilfe_ood,Variante B (Dynamisch),0.43805310130119324,0.48121726512908936
+lebenshilfe_ood,Variante B (Dynamisch),0.9807339310646057,0.5923704504966736
+lebenshilfe_ood,Variante B (Dynamisch),0.4893918037414551,0.526947557926178
+lebenshilfe_ood,Variante B (Dynamisch),0.5805876851081848,0.42926719784736633
+lebenshilfe_ood,Variante B (Dynamisch),0.8194871544837952,0.5687700510025024
+lebenshilfe_ood,Variante B (Dynamisch),0.5231586694717407,0.44850194454193115
+lebenshilfe_ood,Variante B (Dynamisch),0.3575371503829956,0.2111692726612091
+lebenshilfe_ood,Variante B (Dynamisch),0.942307710647583,0.6802226305007935
+lebenshilfe_ood,Variante B (Dynamisch),0.8766430616378784,0.49637356400489807
+lebenshilfe_ood,Variante B (Dynamisch),0.4774148762226105,0.33395278453826904
+lebenshilfe_ood,Variante B (Dynamisch),0.4404255449771881,0.3969486653804779
+lebenshilfe_ood,Variante B (Dynamisch),0.6796116232872009,0.3684508204460144
+lebenshilfe_ood,Variante B (Dynamisch),0.4703929126262665,0.3428826928138733
+lebenshilfe_ood,Variante B (Dynamisch),0.7602474689483643,0.6666243076324463
+lebenshilfe_ood,Variante B (Dynamisch),0.6388115286827087,0.5051126480102539
+lebenshilfe_ood,Variante B (Dynamisch),0.8161290287971497,0.6871964335441589
+lebenshilfe_ood,Variante B (Dynamisch),0.05269058421254158,0.11677016317844391
+lebenshilfe_ood,Variante B (Dynamisch),0.2001209259033203,0.10489023476839066
+lebenshilfe_ood,Variante B (Dynamisch),0.7389277219772339,0.6555518507957458
+lebenshilfe_ood,Variante B (Dynamisch),0.0,0.1920163482427597
+lebenshilfe_ood,Variante B (Dynamisch),0.3306327164173126,0.30506882071495056
+lebenshilfe_ood,Variante B (Dynamisch),0.08759123831987381,0.37902387976646423
+lebenshilfe_ood,Variante B (Dynamisch),0.3104742467403412,0.27157822251319885
+lebenshilfe_ood,Variante B (Dynamisch),0.6397502422332764,0.5373906493186951
+lebenshilfe_ood,Variante B (Dynamisch),0.6293333172798157,0.5118776559829712
+lebenshilfe_ood,Variante B (Dynamisch),0.668694257736206,0.41363340616226196
+lebenshilfe_ood,Variante B (Dynamisch),0.06818182021379471,0.4470677673816681
+lebenshilfe_ood,Variante B (Dynamisch),0.5886970162391663,0.6207216382026672
+lebenshilfe_ood,Variante B (Dynamisch),0.1878335177898407,0.2383611649274826
+lebenshilfe_ood,Variante C (Hybrid),0.15851852297782898,0.05694342404603958
+lebenshilfe_ood,Variante C (Hybrid),0.3246951103210449,0.11674539744853973
+lebenshilfe_ood,Variante C (Hybrid),0.5059795379638672,0.28724026679992676
+lebenshilfe_ood,Variante C (Hybrid),0.18999595940113068,0.09976105391979218
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.6650826930999756
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.3347818851470947
+lebenshilfe_ood,Variante C (Hybrid),0.9165622591972351,0.30751919746398926
+lebenshilfe_ood,Variante C (Hybrid),0.9595265984535217,0.6904526948928833
+lebenshilfe_ood,Variante C (Hybrid),0.16249999403953552,0.15082557499408722
+lebenshilfe_ood,Variante C (Hybrid),0.9404096603393555,0.4553395211696625
+lebenshilfe_ood,Variante C (Hybrid),0.3728562295436859,0.4423646032810211
+lebenshilfe_ood,Variante C (Hybrid),0.43626323342323303,0.4690692722797394
+lebenshilfe_ood,Variante C (Hybrid),0.8253373503684998,0.5098108053207397
+lebenshilfe_ood,Variante C (Hybrid),0.4408155679702759,0.34604161977767944
+lebenshilfe_ood,Variante C (Hybrid),0.9593392610549927,0.5466328263282776
+lebenshilfe_ood,Variante C (Hybrid),0.27314284443855286,0.03481002897024155
+lebenshilfe_ood,Variante C (Hybrid),0.21796338260173798,0.19629821181297302
+lebenshilfe_ood,Variante C (Hybrid),0.3519391119480133,0.23663222789764404
+lebenshilfe_ood,Variante C (Hybrid),0.2481076568365097,0.1829935908317566
+lebenshilfe_ood,Variante C (Hybrid),0.833050012588501,0.3892326056957245
+lebenshilfe_ood,Variante C (Hybrid),0.3299282193183899,0.28869542479515076
+lebenshilfe_ood,Variante C (Hybrid),0.7439053058624268,0.7926126718521118
+lebenshilfe_ood,Variante C (Hybrid),0.482566237449646,0.3820289373397827
+lebenshilfe_ood,Variante C (Hybrid),0.4969044327735901,0.5271151661872864
+lebenshilfe_ood,Variante C (Hybrid),0.5418757200241089,0.421087384223938
+lebenshilfe_ood,Variante C (Hybrid),0.8229877352714539,0.4729892313480377
+lebenshilfe_ood,Variante C (Hybrid),0.5391608476638794,0.6805108189582825
+lebenshilfe_ood,Variante C (Hybrid),0.7114953398704529,0.5196981430053711
+lebenshilfe_ood,Variante C (Hybrid),0.7971367835998535,0.5590999126434326
+lebenshilfe_ood,Variante C (Hybrid),0.592822253704071,0.3665447533130646
+lebenshilfe_ood,Variante C (Hybrid),0.8380604982376099,0.6635677814483643
+lebenshilfe_ood,Variante C (Hybrid),0.7234042286872864,0.29645347595214844
+lebenshilfe_ood,Variante C (Hybrid),0.6940344572067261,0.542474091053009
+lebenshilfe_ood,Variante C (Hybrid),0.5505587458610535,0.1625606119632721
+lebenshilfe_ood,Variante C (Hybrid),0.8982651233673096,0.707667887210846
+lebenshilfe_ood,Variante C (Hybrid),0.33759263157844543,0.44999581575393677
+lebenshilfe_ood,Variante C (Hybrid),0.6195240020751953,0.3348671793937683
+lebenshilfe_ood,Variante C (Hybrid),0.5428005456924438,0.5159046649932861
+lebenshilfe_ood,Variante C (Hybrid),0.5650517344474792,0.5854120254516602
+lebenshilfe_ood,Variante C (Hybrid),0.33010023832321167,0.49546507000923157
+lebenshilfe_ood,Variante C (Hybrid),0.3528279960155487,0.2479223608970642
+lebenshilfe_ood,Variante C (Hybrid),0.05021253973245621,0.1219930350780487
+lebenshilfe_ood,Variante C (Hybrid),0.33387306332588196,0.2967177629470825
+lebenshilfe_ood,Variante C (Hybrid),0.29438328742980957,0.4077873229980469
+lebenshilfe_ood,Variante C (Hybrid),0.5176803469657898,0.4183667004108429
+lebenshilfe_ood,Variante C (Hybrid),0.2529260516166687,0.1902802288532257
+lebenshilfe_ood,Variante C (Hybrid),0.44796618819236755,0.39798852801322937
+lebenshilfe_ood,Variante C (Hybrid),0.2252470999956131,0.121406689286232
+lebenshilfe_ood,Variante C (Hybrid),0.1755101978778839,0.27331095933914185
+lebenshilfe_ood,Variante C (Hybrid),0.22093360126018524,0.2501155734062195
+lebenshilfe_ood,Variante C (Hybrid),0.1178910955786705,0.37339991331100464
+lebenshilfe_ood,Variante C (Hybrid),0.9980168342590332,0.6548926830291748
+lebenshilfe_ood,Variante C (Hybrid),0.572903573513031,0.6607946157455444
+lebenshilfe_ood,Variante C (Hybrid),0.36512261629104614,0.41693371534347534
+lebenshilfe_ood,Variante C (Hybrid),0.11623215675354004,0.4405485689640045
+lebenshilfe_ood,Variante C (Hybrid),0.013865239918231964,0.7272036075592041
+lebenshilfe_ood,Variante C (Hybrid),0.7748880386352539,0.7911574840545654
+lebenshilfe_ood,Variante C (Hybrid),0.3014705777168274,0.643807590007782
+lebenshilfe_ood,Variante C (Hybrid),0.4541427791118622,0.6090670824050903
+lebenshilfe_ood,Variante C (Hybrid),0.8715110421180725,0.7280663847923279
+lebenshilfe_ood,Variante C (Hybrid),0.34610244631767273,0.37741848826408386
+lebenshilfe_ood,Variante C (Hybrid),0.9368420839309692,0.5526922345161438
+lebenshilfe_ood,Variante C (Hybrid),0.5942114591598511,0.3273862302303314
+lebenshilfe_ood,Variante C (Hybrid),0.21762590110301971,0.1780349463224411
+lebenshilfe_ood,Variante C (Hybrid),0.03852889686822891,0.14148548245429993
+lebenshilfe_ood,Variante C (Hybrid),0.10729990899562836,0.3004566431045532
+lebenshilfe_ood,Variante C (Hybrid),0.8156161904335022,0.49940454959869385
+lebenshilfe_ood,Variante C (Hybrid),0.8623548746109009,0.7076762318611145
+lebenshilfe_ood,Variante C (Hybrid),0.04100000113248825,0.19172078371047974
+lebenshilfe_ood,Variante C (Hybrid),0.8967334032058716,0.7172762155532837
+lebenshilfe_ood,Variante C (Hybrid),0.30689653754234314,0.24304470419883728
+lebenshilfe_ood,Variante C (Hybrid),0.6461988091468811,0.3059847056865692
+lebenshilfe_ood,Variante C (Hybrid),0.053795136511325836,0.07320985943078995
+lebenshilfe_ood,Variante C (Hybrid),0.360725075006485,0.20999658107757568
+lebenshilfe_ood,Variante C (Hybrid),0.25100672245025635,0.2935868501663208
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.9916644096374512
+lebenshilfe_ood,Variante C (Hybrid),0.23353752493858337,0.14966624975204468
+lebenshilfe_ood,Variante C (Hybrid),0.3677442967891693,0.5177574157714844
+lebenshilfe_ood,Variante C (Hybrid),0.48843827843666077,0.35537973046302795
+lebenshilfe_ood,Variante C (Hybrid),0.9068047404289246,0.50860995054245
+lebenshilfe_ood,Variante C (Hybrid),0.2951456308364868,0.24864552915096283
+lebenshilfe_ood,Variante C (Hybrid),0.06203007698059082,0.20910169184207916
+lebenshilfe_ood,Variante C (Hybrid),0.12171253561973572,0.07575506716966629
+lebenshilfe_ood,Variante C (Hybrid),0.39821693301200867,0.41355782747268677
+lebenshilfe_ood,Variante C (Hybrid),0.8416422009468079,0.6756209135055542
+lebenshilfe_ood,Variante C (Hybrid),0.11018364131450653,0.1444031000137329
+lebenshilfe_ood,Variante C (Hybrid),0.29120880365371704,0.12988893687725067
+lebenshilfe_ood,Variante C (Hybrid),0.7326599359512329,0.4336177110671997
+lebenshilfe_ood,Variante C (Hybrid),0.41704824566841125,0.25045275688171387
+lebenshilfe_ood,Variante C (Hybrid),0.752913773059845,0.5866626501083374
+lebenshilfe_ood,Variante C (Hybrid),0.32875367999076843,0.41960832476615906
+lebenshilfe_ood,Variante C (Hybrid),0.8801214098930359,0.6841620802879333
+lebenshilfe_ood,Variante C (Hybrid),0.4155268669128418,0.3516637980937958
+lebenshilfe_ood,Variante C (Hybrid),0.20963828265666962,0.1703687310218811
+lebenshilfe_ood,Variante C (Hybrid),0.4277108311653137,0.3709335923194885
+lebenshilfe_ood,Variante C (Hybrid),0.8066783547401428,0.5204890370368958
+lebenshilfe_ood,Variante C (Hybrid),0.5844183564186096,0.710839569568634
+lebenshilfe_ood,Variante C (Hybrid),0.6001692414283752,0.4082302749156952
+lebenshilfe_ood,Variante C (Hybrid),0.39419588446617126,0.20382505655288696
+lebenshilfe_ood,Variante C (Hybrid),0.593863308429718,0.34815487265586853
+lebenshilfe_ood,Variante C (Hybrid),0.28125,0.44391751289367676
+lebenshilfe_ood,Variante C (Hybrid),0.33028361201286316,0.32931894063949585
+lebenshilfe_ood,Variante C (Hybrid),0.7231968641281128,0.6008687019348145
+lebenshilfe_ood,Variante C (Hybrid),0.40435606241226196,0.4576819837093353
+lebenshilfe_ood,Variante C (Hybrid),0.0,0.08393427729606628
+lebenshilfe_ood,Variante C (Hybrid),0.2323983907699585,0.3165086507797241
+lebenshilfe_ood,Variante C (Hybrid),0.3947676718235016,0.27343952655792236
+lebenshilfe_ood,Variante C (Hybrid),0.0,0.23272812366485596
+lebenshilfe_ood,Variante C (Hybrid),0.056603774428367615,0.2138553112745285
+lebenshilfe_ood,Variante C (Hybrid),0.6277602314949036,0.30083879828453064
+lebenshilfe_ood,Variante C (Hybrid),0.3991455137729645,0.40194082260131836
+lebenshilfe_ood,Variante C (Hybrid),0.3299304246902466,0.13257350027561188
+lebenshilfe_ood,Variante C (Hybrid),0.1364651322364807,0.30275487899780273
+lebenshilfe_ood,Variante C (Hybrid),0.9048365950584412,0.7135142683982849
+lebenshilfe_ood,Variante C (Hybrid),0.4310847520828247,0.46761155128479004
+lebenshilfe_ood,Variante C (Hybrid),0.38738441467285156,0.3468763530254364
+lebenshilfe_ood,Variante C (Hybrid),0.8037540912628174,0.7489867210388184
+lebenshilfe_ood,Variante C (Hybrid),0.20600366592407227,0.3104988932609558
+lebenshilfe_ood,Variante C (Hybrid),0.16145789623260498,0.2622033655643463
+lebenshilfe_ood,Variante C (Hybrid),0.11470085382461548,0.2455049604177475
+lebenshilfe_ood,Variante C (Hybrid),0.37668776512145996,0.37255236506462097
+lebenshilfe_ood,Variante C (Hybrid),0.9227080345153809,0.5604369640350342
+lebenshilfe_ood,Variante C (Hybrid),0.20654219388961792,0.24731242656707764
+lebenshilfe_ood,Variante C (Hybrid),0.7693057656288147,0.5187996029853821
+lebenshilfe_ood,Variante C (Hybrid),0.030846185982227325,0.14207641780376434
+lebenshilfe_ood,Variante C (Hybrid),0.5352266430854797,0.3642382323741913
+lebenshilfe_ood,Variante C (Hybrid),0.9269744157791138,0.6138767004013062
+lebenshilfe_ood,Variante C (Hybrid),0.494870126247406,0.368443101644516
+lebenshilfe_ood,Variante C (Hybrid),0.5734096169471741,0.23584944009780884
+lebenshilfe_ood,Variante C (Hybrid),0.2925332486629486,0.2629908323287964
+lebenshilfe_ood,Variante C (Hybrid),0.7064117193222046,0.7156422138214111
+lebenshilfe_ood,Variante C (Hybrid),0.8504930734634399,0.6656640768051147
+lebenshilfe_ood,Variante C (Hybrid),0.168212890625,0.2215193510055542
+lebenshilfe_ood,Variante C (Hybrid),0.3450442850589752,0.399868905544281
+lebenshilfe_ood,Variante C (Hybrid),0.24368686974048615,0.22322604060173035
+lebenshilfe_ood,Variante C (Hybrid),0.5980132222175598,0.5875085592269897
+lebenshilfe_ood,Variante C (Hybrid),0.5753295421600342,0.5622312426567078
+lebenshilfe_ood,Variante C (Hybrid),0.7025141716003418,0.5207850337028503
+lebenshilfe_ood,Variante C (Hybrid),0.779717743396759,0.4659043550491333
+lebenshilfe_ood,Variante C (Hybrid),0.20666319131851196,0.4324037730693817
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.5111594200134277
+lebenshilfe_ood,Variante C (Hybrid),0.502109706401825,0.4575727880001068
+lebenshilfe_ood,Variante C (Hybrid),0.8623574376106262,0.4120377004146576
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.6346048712730408
+lebenshilfe_ood,Variante C (Hybrid),0.4799599051475525,0.31111496686935425
+lebenshilfe_ood,Variante C (Hybrid),0.8200238347053528,0.39301884174346924
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.442408949136734
+lebenshilfe_ood,Variante C (Hybrid),0.5157743692398071,0.329465389251709
+lebenshilfe_ood,Variante C (Hybrid),0.6545882225036621,0.2908302843570709
+lebenshilfe_ood,Variante C (Hybrid),0.8703962564468384,0.5084502696990967
+lebenshilfe_ood,Variante C (Hybrid),0.7912667989730835,0.3761933445930481
+lebenshilfe_ood,Variante C (Hybrid),0.13261163234710693,0.2777138650417328
+lebenshilfe_ood,Variante C (Hybrid),0.5799498558044434,0.5653694868087769
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.871371865272522
+lebenshilfe_ood,Variante C (Hybrid),0.30204081535339355,0.3744346499443054
+lebenshilfe_ood,Variante C (Hybrid),0.4487309753894806,0.45935454964637756
+lebenshilfe_ood,Variante C (Hybrid),0.09469922631978989,0.19925329089164734
+lebenshilfe_ood,Variante C (Hybrid),0.26049089431762695,0.3166615068912506
+lebenshilfe_ood,Variante C (Hybrid),0.6221461296081543,0.4772345721721649
+lebenshilfe_ood,Variante C (Hybrid),0.5680129528045654,0.3382002115249634
+lebenshilfe_ood,Variante C (Hybrid),0.3100045919418335,0.5786198973655701
+lebenshilfe_ood,Variante C (Hybrid),0.7349498867988586,0.8805569410324097
+lebenshilfe_ood,Variante C (Hybrid),0.6914453506469727,0.6301330924034119
+lebenshilfe_ood,Variante C (Hybrid),0.662234902381897,0.5206220149993896
+lebenshilfe_ood,Variante C (Hybrid),0.5098276138305664,0.690384030342102
+lebenshilfe_ood,Variante C (Hybrid),0.676246166229248,0.725805401802063
+lebenshilfe_ood,Variante C (Hybrid),0.9543424844741821,0.9102416038513184
+lebenshilfe_ood,Variante C (Hybrid),0.13716813921928406,0.5110703110694885
+lebenshilfe_ood,Variante C (Hybrid),0.6347723007202148,0.7024522423744202
+lebenshilfe_ood,Variante C (Hybrid),0.8219373226165771,0.696793258190155
+lebenshilfe_ood,Variante C (Hybrid),0.8348413705825806,0.5161902904510498
+lebenshilfe_ood,Variante C (Hybrid),0.6596390604972839,0.4890606105327606
+lebenshilfe_ood,Variante C (Hybrid),0.3333333432674408,0.4582349359989166
+lebenshilfe_ood,Variante C (Hybrid),0.719261109828949,0.3089416027069092
+lebenshilfe_ood,Variante C (Hybrid),0.8718934655189514,0.5666768550872803
+lebenshilfe_ood,Variante C (Hybrid),0.48755431175231934,0.24637623131275177
+lebenshilfe_ood,Variante C (Hybrid),0.2908777892589569,0.30863919854164124
+lebenshilfe_ood,Variante C (Hybrid),0.9427159428596497,0.6587746143341064
+lebenshilfe_ood,Variante C (Hybrid),0.5487000346183777,0.41632717847824097
+lebenshilfe_ood,Variante C (Hybrid),0.617067813873291,0.7800588607788086
+lebenshilfe_ood,Variante C (Hybrid),0.41357704997062683,0.6311442852020264
+lebenshilfe_ood,Variante C (Hybrid),0.41630780696868896,0.36608684062957764
+lebenshilfe_ood,Variante C (Hybrid),0.8395827412605286,0.5864143371582031
+lebenshilfe_ood,Variante C (Hybrid),0.5780283808708191,0.4400794506072998
+lebenshilfe_ood,Variante C (Hybrid),0.445872038602829,0.3988337516784668
+lebenshilfe_ood,Variante C (Hybrid),0.30270490050315857,0.6612645983695984
+lebenshilfe_ood,Variante C (Hybrid),0.9367388486862183,0.785794734954834
+lebenshilfe_ood,Variante C (Hybrid),0.9424252510070801,0.6852460503578186
+lebenshilfe_ood,Variante C (Hybrid),0.646568775177002,0.47933104634284973
+lebenshilfe_ood,Variante C (Hybrid),0.9590544104576111,0.6465447545051575
+lebenshilfe_ood,Variante C (Hybrid),0.5789695978164673,0.6731058359146118
+lebenshilfe_ood,Variante C (Hybrid),0.750110387802124,0.7149969935417175
+lebenshilfe_ood,Variante C (Hybrid),0.45049428939819336,0.2644628584384918
+lebenshilfe_ood,Variante C (Hybrid),0.9403141140937805,0.7575660943984985
+lebenshilfe_ood,Variante C (Hybrid),0.5795944333076477,0.4682832658290863
+lebenshilfe_ood,Variante C (Hybrid),0.6974808573722839,0.7337397336959839
+lebenshilfe_ood,Variante C (Hybrid),0.40289679169654846,0.5058695077896118
+lebenshilfe_ood,Variante C (Hybrid),0.6189665198326111,0.5120913982391357
+lebenshilfe_ood,Variante C (Hybrid),0.6717965602874756,0.7011624574661255
+lebenshilfe_ood,Variante C (Hybrid),0.8107643723487854,0.6964725852012634
+lebenshilfe_ood,Variante C (Hybrid),0.8300561904907227,0.5844891667366028
+lebenshilfe_ood,Variante C (Hybrid),0.6382237672805786,0.4691525995731354
+lebenshilfe_ood,Variante C (Hybrid),0.7945904731750488,0.4742715656757355
+lebenshilfe_ood,Variante C (Hybrid),0.9470676779747009,0.6951690912246704
+lebenshilfe_ood,Variante C (Hybrid),0.5847759246826172,0.539604663848877
+lebenshilfe_ood,Variante C (Hybrid),0.4209575355052948,0.26225659251213074
+lebenshilfe_ood,Variante C (Hybrid),0.873379647731781,0.50145024061203
+lebenshilfe_ood,Variante C (Hybrid),0.7492480278015137,0.3634878098964691
+lebenshilfe_ood,Variante C (Hybrid),0.5881979465484619,0.4933491051197052
+lebenshilfe_ood,Variante C (Hybrid),0.5742971897125244,0.4449194669723511
+lebenshilfe_ood,Variante C (Hybrid),0.18461182713508606,0.13678209483623505
+lebenshilfe_ood,Variante C (Hybrid),0.17791606485843658,0.11723323166370392
+lebenshilfe_ood,Variante C (Hybrid),0.1904536932706833,0.2907293140888214
+lebenshilfe_ood,Variante C (Hybrid),0.15849801898002625,0.06781633198261261
+lebenshilfe_ood,Variante C (Hybrid),0.2607296109199524,0.31693631410598755
+lebenshilfe_ood,Variante C (Hybrid),0.29208436608314514,0.3068244159221649
+lebenshilfe_ood,Variante C (Hybrid),0.17399093508720398,0.18364541232585907
+lebenshilfe_ood,Variante C (Hybrid),0.2971014380455017,0.3201284408569336
+lebenshilfe_ood,Variante C (Hybrid),0.42942431569099426,0.2852805256843567
+lebenshilfe_ood,Variante C (Hybrid),0.901207447052002,0.19572938978672028
+lebenshilfe_ood,Variante C (Hybrid),0.37224915623664856,0.31890368461608887
+lebenshilfe_ood,Variante C (Hybrid),0.10947290807962418,0.11215517669916153
+lebenshilfe_ood,Variante C (Hybrid),0.016393441706895828,0.15926720201969147
+lebenshilfe_ood,Variante C (Hybrid),0.410540908575058,0.2248375415802002
+lebenshilfe_ood,Variante C (Hybrid),0.6229929327964783,0.5045426487922668
+lebenshilfe_ood,Variante C (Hybrid),0.30921369791030884,0.35065895318984985
+lebenshilfe_ood,Variante C (Hybrid),0.12807656824588776,0.20591896772384644
+lebenshilfe_ood,Variante C (Hybrid),0.21411947906017303,0.2708711326122284
+lebenshilfe_ood,Variante C (Hybrid),0.1004566177725792,0.1217886283993721
+lebenshilfe_ood,Variante C (Hybrid),0.16041794419288635,0.07268032431602478
+lebenshilfe_ood,Variante C (Hybrid),0.04145818576216698,0.06440948694944382
+lebenshilfe_ood,Variante C (Hybrid),0.6093466281890869,0.3950660824775696
+lebenshilfe_ood,Variante C (Hybrid),0.6053528189659119,0.49493134021759033
+lebenshilfe_ood,Variante C (Hybrid),0.8178752064704895,0.5707066655158997
+lebenshilfe_ood,Variante C (Hybrid),0.4712871313095093,0.317469984292984
+lebenshilfe_ood,Variante C (Hybrid),0.5208541750907898,0.24523454904556274
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.3363901376724243
+lebenshilfe_ood,Variante C (Hybrid),0.4982316493988037,0.25994789600372314
+lebenshilfe_ood,Variante C (Hybrid),0.699881374835968,0.5693138837814331
+lebenshilfe_ood,Variante C (Hybrid),0.3498293459415436,0.31455639004707336
+lebenshilfe_ood,Variante C (Hybrid),0.24913254380226135,0.12179570645093918
+lebenshilfe_ood,Variante C (Hybrid),0.11387711763381958,0.1662817895412445
+lebenshilfe_ood,Variante C (Hybrid),0.2375776469707489,0.3933173418045044
+lebenshilfe_ood,Variante C (Hybrid),0.2768022119998932,0.18597252666950226
+lebenshilfe_ood,Variante C (Hybrid),0.2577117085456848,0.37665095925331116
+lebenshilfe_ood,Variante C (Hybrid),0.3327292501926422,0.35522881150245667
+lebenshilfe_ood,Variante C (Hybrid),0.668067216873169,0.3637811243534088
+lebenshilfe_ood,Variante C (Hybrid),0.15640273690223694,0.3170143961906433
+lebenshilfe_ood,Variante C (Hybrid),0.5183133482933044,0.41700759530067444
+lebenshilfe_ood,Variante C (Hybrid),0.4700387418270111,0.49004799127578735
+lebenshilfe_ood,Variante C (Hybrid),0.3294367790222168,0.3934100270271301
+lebenshilfe_ood,Variante C (Hybrid),0.9007707238197327,0.6601288318634033
+lebenshilfe_ood,Variante C (Hybrid),0.4570135772228241,0.5337675213813782
+lebenshilfe_ood,Variante C (Hybrid),0.20665083825588226,0.07404053956270218
+lebenshilfe_ood,Variante C (Hybrid),0.19961611926555634,0.23063573241233826
+lebenshilfe_ood,Variante C (Hybrid),0.29228243231773376,0.40813326835632324
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.9790967106819153
+lebenshilfe_ood,Variante C (Hybrid),0.6438871622085571,0.43916240334510803
+lebenshilfe_ood,Variante C (Hybrid),0.7253456115722656,0.49079814553260803
+lebenshilfe_ood,Variante C (Hybrid),0.7088838219642639,0.3854235112667084
+lebenshilfe_ood,Variante C (Hybrid),0.5295836329460144,0.3007902503013611
+lebenshilfe_ood,Variante C (Hybrid),0.252136766910553,0.2498469054698944
+lebenshilfe_ood,Variante C (Hybrid),0.5036880970001221,0.46941593289375305
+lebenshilfe_ood,Variante C (Hybrid),0.0880376324057579,0.09508802741765976
+lebenshilfe_ood,Variante C (Hybrid),0.23645783960819244,0.19727835059165955
+lebenshilfe_ood,Variante C (Hybrid),0.302526593208313,0.30290305614471436
+lebenshilfe_ood,Variante C (Hybrid),0.8370646834373474,0.5064122676849365
+lebenshilfe_ood,Variante C (Hybrid),0.5457324385643005,0.45703306794166565
+lebenshilfe_ood,Variante C (Hybrid),0.6010695099830627,0.6451029777526855
+lebenshilfe_ood,Variante C (Hybrid),0.5783641338348389,0.49846571683883667
+lebenshilfe_ood,Variante C (Hybrid),0.574698805809021,0.4761042296886444
+lebenshilfe_ood,Variante C (Hybrid),0.48816028237342834,0.4163438081741333
+lebenshilfe_ood,Variante C (Hybrid),0.0,0.2610459625720978
+lebenshilfe_ood,Variante C (Hybrid),0.44146502017974854,0.38267841935157776
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.5300241112709045
+lebenshilfe_ood,Variante C (Hybrid),0.05292792618274689,0.08247853070497513
+lebenshilfe_ood,Variante C (Hybrid),0.6147403717041016,0.4246424734592438
+lebenshilfe_ood,Variante C (Hybrid),0.8037676811218262,0.2947290241718292
+lebenshilfe_ood,Variante C (Hybrid),0.6955516934394836,0.5709192752838135
+lebenshilfe_ood,Variante C (Hybrid),0.6931030750274658,0.4756104648113251
+lebenshilfe_ood,Variante C (Hybrid),0.6544324159622192,0.3623867332935333
+lebenshilfe_ood,Variante C (Hybrid),0.9140418767929077,0.49013209342956543
+lebenshilfe_ood,Variante C (Hybrid),0.19273898005485535,0.1354302316904068
+lebenshilfe_ood,Variante C (Hybrid),0.5346999168395996,0.2911953628063202
+lebenshilfe_ood,Variante C (Hybrid),0.28293752670288086,0.4038750231266022
+lebenshilfe_ood,Variante C (Hybrid),0.9885740280151367,0.5174850225448608
+lebenshilfe_ood,Variante C (Hybrid),0.19084328413009644,0.08591698110103607
+lebenshilfe_ood,Variante C (Hybrid),0.7587647438049316,0.4641246795654297
+lebenshilfe_ood,Variante C (Hybrid),0.7648351788520813,0.5373616218566895
+lebenshilfe_ood,Variante C (Hybrid),0.2728772461414337,0.14147354662418365
+lebenshilfe_ood,Variante C (Hybrid),0.0583035871386528,0.06959137320518494
+lebenshilfe_ood,Variante C (Hybrid),0.7731760144233704,0.11098922044038773
+lebenshilfe_ood,Variante C (Hybrid),0.13426241278648376,0.2064143419265747
+lebenshilfe_ood,Variante C (Hybrid),0.6339976787567139,0.3008676767349243
+lebenshilfe_ood,Variante C (Hybrid),0.529503345489502,0.3369264602661133
+lebenshilfe_ood,Variante C (Hybrid),0.36794647574424744,0.35603609681129456
+lebenshilfe_ood,Variante C (Hybrid),0.6315172910690308,0.4159489870071411
+lebenshilfe_ood,Variante C (Hybrid),0.7918993234634399,0.37975388765335083
+lebenshilfe_ood,Variante C (Hybrid),0.5290124416351318,0.196827694773674
+lebenshilfe_ood,Variante C (Hybrid),0.5664682388305664,0.3985787630081177
+lebenshilfe_ood,Variante C (Hybrid),0.714595377445221,0.42915579676628113
+lebenshilfe_ood,Variante C (Hybrid),0.8078745007514954,0.7432458996772766
+lebenshilfe_ood,Variante C (Hybrid),0.0961923822760582,0.3380519151687622
+lebenshilfe_ood,Variante C (Hybrid),0.2783018946647644,0.14362744987010956
+lebenshilfe_ood,Variante C (Hybrid),0.9469547867774963,0.7952101230621338
+lebenshilfe_ood,Variante C (Hybrid),0.6733567714691162,0.4886248707771301
+lebenshilfe_ood,Variante C (Hybrid),0.6527824401855469,0.8330894708633423
+lebenshilfe_ood,Variante C (Hybrid),1.0,0.8392753005027771
+lebenshilfe_ood,Variante C (Hybrid),0.7758620977401733,0.872137188911438
+lebenshilfe_ood,Variante C (Hybrid),0.42105263471603394,0.28677651286125183
+lebenshilfe_ood,Variante C (Hybrid),0.9387755393981934,0.6949143409729004
+lebenshilfe_ood,Variante C (Hybrid),0.3133159279823303,0.3921474814414978
+lebenshilfe_ood,Variante C (Hybrid),0.0,0.01108917873352766
+lebenshilfe_ood,Variante C (Hybrid),0.3861386179924011,0.42479798197746277
+lebenshilfe_ood,Variante C (Hybrid),0.7062057852745056,0.6178296804428101
+lebenshilfe_ood,Variante C (Hybrid),0.5201511383056641,0.4098573923110962
+lebenshilfe_ood,Variante C (Hybrid),0.24953532218933105,0.14831194281578064
+lebenshilfe_ood,Variante C (Hybrid),0.9519230723381042,0.6591793298721313
+lebenshilfe_ood,Variante C (Hybrid),0.30603447556495667,0.32495439052581787
+lebenshilfe_ood,Variante C (Hybrid),0.0,0.0028660502284765244
+lebenshilfe_ood,Variante C (Hybrid),0.5564903616905212,0.45196977257728577
+lebenshilfe_ood,Variante C (Hybrid),0.26886382699012756,0.3067021369934082
+lebenshilfe_ood,Variante C (Hybrid),0.10824108123779297,0.11353845149278641
+lebenshilfe_ood,Variante C (Hybrid),0.8748603463172913,0.5352364778518677
+lebenshilfe_ood,Variante C (Hybrid),0.11406250298023224,0.04034436121582985
+lebenshilfe_ood,Variante C (Hybrid),0.2677106559276581,0.16852788627147675
+lebenshilfe_ood,Variante C (Hybrid),0.0,0.0029003170784562826
+lebenshilfe_ood,Variante C (Hybrid),0.41127482056617737,0.3296799659729004
+lebenshilfe_ood,Variante C (Hybrid),0.256186306476593,0.299760639667511
+lebenshilfe_ood,Variante C (Hybrid),0.690431535243988,0.29667937755584717
+lebenshilfe_ood,Variante C (Hybrid),0.8944050669670105,0.3921530246734619
+lebenshilfe_ood,Variante C (Hybrid),0.7438271641731262,0.3954414129257202
+lebenshilfe_ood,Variante C (Hybrid),0.7219251394271851,0.24744178354740143
+lebenshilfe_ood,Variante C (Hybrid),0.8794117569923401,0.49600380659103394
+lebenshilfe_ood,Variante C (Hybrid),0.7523452043533325,0.5849852561950684
+lebenshilfe_ood,Variante C (Hybrid),0.4485294222831726,0.3868231475353241
+lebenshilfe_ood,Variante C (Hybrid),0.4827856123447418,0.20716643333435059
+lebenshilfe_ood,Variante C (Hybrid),0.6607707142829895,0.3736598491668701
+lebenshilfe_ood,Variante C (Hybrid),0.44639864563941956,0.2334478348493576
+lebenshilfe_ood,Variante C (Hybrid),0.6871980428695679,0.5423133969306946
+lebenshilfe_ood,Variante C (Hybrid),0.43805310130119324,0.4513915479183197
+lebenshilfe_ood,Variante C (Hybrid),0.9807339310646057,0.5867846608161926
+lebenshilfe_ood,Variante C (Hybrid),0.4893918037414551,0.45259618759155273
+lebenshilfe_ood,Variante C (Hybrid),0.5805876851081848,0.3328753411769867
+lebenshilfe_ood,Variante C (Hybrid),0.8194871544837952,0.46170690655708313
+lebenshilfe_ood,Variante C (Hybrid),0.5231586694717407,0.3956311345100403
+lebenshilfe_ood,Variante C (Hybrid),0.3575371503829956,0.22796408832073212
+lebenshilfe_ood,Variante C (Hybrid),0.942307710647583,0.6441501975059509
+lebenshilfe_ood,Variante C (Hybrid),0.8766430616378784,0.4488546550273895
+lebenshilfe_ood,Variante C (Hybrid),0.4774148762226105,0.4226659834384918
+lebenshilfe_ood,Variante C (Hybrid),0.4404255449771881,0.2517658472061157
+lebenshilfe_ood,Variante C (Hybrid),0.6796116232872009,0.5100310444831848
+lebenshilfe_ood,Variante C (Hybrid),0.4703929126262665,0.37041959166526794
+lebenshilfe_ood,Variante C (Hybrid),0.7602474689483643,0.6999723315238953
+lebenshilfe_ood,Variante C (Hybrid),0.6388115286827087,0.35232284665107727
+lebenshilfe_ood,Variante C (Hybrid),0.8161290287971497,0.6868593096733093
+lebenshilfe_ood,Variante C (Hybrid),0.05269058421254158,0.04671941697597504
+lebenshilfe_ood,Variante C (Hybrid),0.2001209259033203,0.06953596323728561
+lebenshilfe_ood,Variante C (Hybrid),0.7389277219772339,0.4798141419887543
+lebenshilfe_ood,Variante C (Hybrid),0.0,0.17103728652000427
+lebenshilfe_ood,Variante C (Hybrid),0.3306327164173126,0.3238585889339447
+lebenshilfe_ood,Variante C (Hybrid),0.08759123831987381,0.2898412048816681
+lebenshilfe_ood,Variante C (Hybrid),0.3104742467403412,0.25780123472213745
+lebenshilfe_ood,Variante C (Hybrid),0.6397502422332764,0.5674151182174683
+lebenshilfe_ood,Variante C (Hybrid),0.6293333172798157,0.6211428046226501
+lebenshilfe_ood,Variante C (Hybrid),0.668694257736206,0.4539633095264435
+lebenshilfe_ood,Variante C (Hybrid),0.06818182021379471,0.29102441668510437
+lebenshilfe_ood,Variante C (Hybrid),0.5886970162391663,0.5807182192802429
+lebenshilfe_ood,Variante C (Hybrid),0.1878335177898407,0.2641250789165497
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.15851852297782898,0.06553012877702713
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3246951103210449,0.2018987238407135
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5059795379638672,0.2837643325328827
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.18999595940113068,0.13013122975826263
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.6752840280532837
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.44371163845062256
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9165622591972351,0.48867541551589966
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9595265984535217,0.5112601518630981
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.16249999403953552,0.21039727330207825
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9404096603393555,0.5266749858856201
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3728562295436859,0.38603341579437256
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.43626323342323303,0.4937577247619629
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8253373503684998,0.6108527183532715
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4408155679702759,0.32641395926475525
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9593392610549927,0.5230938792228699
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.27314284443855286,0.08522795885801315
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.21796338260173798,0.20369626581668854
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3519391119480133,0.20751303434371948
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2481076568365097,0.16903623938560486
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.833050012588501,0.4297720491886139
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3299282193183899,0.3687576651573181
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7439053058624268,0.7056310176849365
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.482566237449646,0.32720452547073364
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4969044327735901,0.5315963625907898
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5418757200241089,0.4731224775314331
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8229877352714539,0.53559410572052
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5391608476638794,0.6534427404403687
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7114953398704529,0.5480917096138
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7971367835998535,0.5359811782836914
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.592822253704071,0.37689366936683655
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8380604982376099,0.6922802925109863
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7234042286872864,0.29100775718688965
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6940344572067261,0.4794973134994507
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5505587458610535,0.20394359529018402
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8982651233673096,0.7046982645988464
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.33759263157844543,0.45954927802085876
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6195240020751953,0.3277124762535095
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5428005456924438,0.5276305675506592
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5650517344474792,0.5738478899002075
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.33010023832321167,0.5456628203392029
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3528279960155487,0.22773610055446625
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.05021253973245621,0.1298922896385193
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.33387306332588196,0.27459678053855896
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.29438328742980957,0.41812968254089355
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5176803469657898,0.4415505826473236
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2529260516166687,0.17217029631137848
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.44796618819236755,0.3824414312839508
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2252470999956131,0.11040612310171127
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.1755101978778839,0.2868996858596802
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.22093360126018524,0.22197243571281433
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.1178910955786705,0.3996024429798126
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9980168342590332,0.6259323358535767
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.572903573513031,0.5266243815422058
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.36512261629104614,0.4197372794151306
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.11623215675354004,0.45243358612060547
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.013865239918231964,0.7943425178527832
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7748880386352539,0.8750443458557129
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3014705777168274,0.6663935780525208
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4541427791118622,0.56059730052948
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8715110421180725,0.7379702925682068
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.34610244631767273,0.3530958294868469
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9368420839309692,0.44195908308029175
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5942114591598511,0.21402525901794434
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.21762590110301971,0.1485145390033722
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.03852889686822891,0.1175873726606369
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.10729990899562836,0.19619765877723694
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8156161904335022,0.4524346888065338
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8623548746109009,0.5507875084877014
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.04100000113248825,0.16881634294986725
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8967334032058716,0.6365476250648499
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.30689653754234314,0.1481224149465561
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6461988091468811,0.2899755537509918
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.053795136511325836,0.0608438104391098
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.360725075006485,0.23455463349819183
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.25100672245025635,0.27621394395828247
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.9906725287437439
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.23353752493858337,0.11429199576377869
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3677442967891693,0.4793849587440491
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.48843827843666077,0.34084758162498474
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9068047404289246,0.4900887608528137
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2951456308364868,0.18525882065296173
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.06203007698059082,0.19687366485595703
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.12171253561973572,0.062168460339307785
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.39821693301200867,0.41576799750328064
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8416422009468079,0.6655736565589905
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.11018364131450653,0.13547363877296448
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.29120880365371704,0.17257370054721832
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7326599359512329,0.3960716128349304
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.41704824566841125,0.19640223681926727
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.752913773059845,0.6769745945930481
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.32875367999076843,0.4370589554309845
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8801214098930359,0.7562931180000305
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4155268669128418,0.3485153615474701
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.20963828265666962,0.16661511361598969
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4277108311653137,0.393806129693985
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8066783547401428,0.5142620801925659
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5844183564186096,0.755142092704773
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6001692414283752,0.4368128776550293
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.39419588446617126,0.24458330869674683
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.593863308429718,0.34184348583221436
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.28125,0.4417846202850342
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.33028361201286316,0.30508172512054443
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7231968641281128,0.6664949655532837
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.40435606241226196,0.4336809813976288
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0,0.06733524799346924
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2323983907699585,0.3330557346343994
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3947676718235016,0.28832197189331055
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0,0.2571265697479248
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.056603774428367615,0.19446606934070587
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6277602314949036,0.29355502128601074
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3991455137729645,0.39605462551116943
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3299304246902466,0.10557632148265839
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.1364651322364807,0.21259738504886627
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9048365950584412,0.6661375164985657
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4310847520828247,0.46513935923576355
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.38738441467285156,0.3102222681045532
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8037540912628174,0.6920374035835266
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.20600366592407227,0.2549733519554138
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.16145789623260498,0.33596569299697876
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.11470085382461548,0.2862001657485962
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.37668776512145996,0.35150501132011414
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9227080345153809,0.5613932609558105
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.20654219388961792,0.1833011656999588
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7693057656288147,0.6176129579544067
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.030846185982227325,0.10790489614009857
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5352266430854797,0.4378748834133148
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9269744157791138,0.6110987663269043
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.494870126247406,0.33905404806137085
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5734096169471741,0.2532728314399719
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2925332486629486,0.34115540981292725
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7064117193222046,0.7274525761604309
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8504930734634399,0.576433539390564
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.168212890625,0.17670606076717377
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3450442850589752,0.39896634221076965
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.24368686974048615,0.22787117958068848
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5980132222175598,0.5180723071098328
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5753295421600342,0.5208361148834229
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7025141716003418,0.4610629081726074
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.779717743396759,0.4497114419937134
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.20666319131851196,0.34157541394233704
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.5552687048912048
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.502109706401825,0.4279250502586365
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8623574376106262,0.4502812325954437
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.6294428110122681
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4799599051475525,0.34706687927246094
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8200238347053528,0.4682467579841614
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.5072319507598877
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5157743692398071,0.3541050851345062
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6545882225036621,0.27417081594467163
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8703962564468384,0.4918307960033417
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7912667989730835,0.5125036239624023
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.13261163234710693,0.3985265791416168
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5799498558044434,0.5603513717651367
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.7705833911895752
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.30204081535339355,0.3741683065891266
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4487309753894806,0.3941652476787567
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.09469922631978989,0.2577757239341736
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.26049089431762695,0.3563571572303772
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6221461296081543,0.5528264045715332
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5680129528045654,0.3530064523220062
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3100045919418335,0.6114436388015747
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7349498867988586,0.8662124276161194
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6914453506469727,0.6136388778686523
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.662234902381897,0.545439600944519
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5098276138305664,0.7295096516609192
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.676246166229248,0.7406183481216431
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9543424844741821,0.9234767556190491
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.13716813921928406,0.4188329875469208
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6347723007202148,0.6726232767105103
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8219373226165771,0.7200499773025513
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8348413705825806,0.5175068378448486
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6596390604972839,0.5287466645240784
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3333333432674408,0.5052585601806641
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.719261109828949,0.33669546246528625
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8718934655189514,0.6366280317306519
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.48755431175231934,0.2387017011642456
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2908777892589569,0.40016478300094604
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9427159428596497,0.63639897108078
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5487000346183777,0.44466632604599
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.617067813873291,0.8264964818954468
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.41357704997062683,0.620617687702179
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.41630780696868896,0.3893609941005707
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8395827412605286,0.5882396697998047
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5780283808708191,0.4815386235713959
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.445872038602829,0.37470743060112
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.30270490050315857,0.6490495204925537
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9367388486862183,0.8439493179321289
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9424252510070801,0.645469605922699
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.646568775177002,0.41722574830055237
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9590544104576111,0.6243442296981812
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5789695978164673,0.6989826560020447
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.750110387802124,0.7126959562301636
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.45049428939819336,0.2453782558441162
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9403141140937805,0.6708078384399414
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5795944333076477,0.4614851772785187
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6974808573722839,0.7571502923965454
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.40289679169654846,0.5211459398269653
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6189665198326111,0.44133853912353516
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6717965602874756,0.6628197431564331
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8107643723487854,0.6212580800056458
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8300561904907227,0.5134993195533752
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6382237672805786,0.48651519417762756
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7945904731750488,0.5028451681137085
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9470676779747009,0.6807414889335632
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5847759246826172,0.5894253849983215
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4209575355052948,0.2558942139148712
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.873379647731781,0.5752432346343994
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7492480278015137,0.4494074881076813
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5881979465484619,0.45096784830093384
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5742971897125244,0.5165982842445374
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.18461182713508606,0.14349600672721863
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.17791606485843658,0.10512697696685791
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.1904536932706833,0.2212563455104828
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.15849801898002625,0.05956287309527397
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2607296109199524,0.34185484051704407
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.29208436608314514,0.27156227827072144
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.17399093508720398,0.2901775538921356
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2971014380455017,0.4152553379535675
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.42942431569099426,0.2824341356754303
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.901207447052002,0.21674300730228424
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.37224915623664856,0.35480043292045593
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.10947290807962418,0.09404964745044708
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.016393441706895828,0.1785871684551239
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.410540908575058,0.22974534332752228
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6229929327964783,0.45750078558921814
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.30921369791030884,0.3188526928424835
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.12807656824588776,0.2302316278219223
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.21411947906017303,0.23593635857105255
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.1004566177725792,0.12675824761390686
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.16041794419288635,0.0992143377661705
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.04145818576216698,0.10027655214071274
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6093466281890869,0.4328986704349518
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6053528189659119,0.4516158401966095
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8178752064704895,0.6076486110687256
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4712871313095093,0.300753653049469
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5208541750907898,0.31081217527389526
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.5010244250297546
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4982316493988037,0.3084331750869751
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.699881374835968,0.47081848978996277
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3498293459415436,0.31744638085365295
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.24913254380226135,0.16309373080730438
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.11387711763381958,0.2616627514362335
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2375776469707489,0.35044214129447937
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2768022119998932,0.1977517455816269
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2577117085456848,0.2864537239074707
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3327292501926422,0.3079729974269867
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.668067216873169,0.41315189003944397
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.15640273690223694,0.32224780321121216
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5183133482933044,0.42463159561157227
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4700387418270111,0.49075427651405334
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3294367790222168,0.42892956733703613
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9007707238197327,0.6393343210220337
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4570135772228241,0.5668612122535706
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.20665083825588226,0.08722303062677383
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.19961611926555634,0.20354139804840088
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.29228243231773376,0.3863461911678314
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.8181471228599548
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6438871622085571,0.42106565833091736
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7253456115722656,0.497784823179245
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7088838219642639,0.32055041193962097
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5295836329460144,0.2505720555782318
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.252136766910553,0.11658946424722672
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5036880970001221,0.4882284104824066
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0880376324057579,0.10856574773788452
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.23645783960819244,0.17345422506332397
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.302526593208313,0.27848878502845764
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8370646834373474,0.585719645023346
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5457324385643005,0.5164011120796204
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6010695099830627,0.6598451137542725
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5783641338348389,0.4989510178565979
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.574698805809021,0.4355391561985016
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.48816028237342834,0.40169039368629456
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0,0.164427250623703
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.44146502017974854,0.3607169985771179
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.49040183424949646
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.05292792618274689,0.06843593716621399
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6147403717041016,0.4894547164440155
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8037676811218262,0.2778232991695404
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6955516934394836,0.6817896962165833
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6931030750274658,0.5109305381774902
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6544324159622192,0.38465186953544617
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9140418767929077,0.6024878621101379
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.19273898005485535,0.11872994899749756
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5346999168395996,0.31306007504463196
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.28293752670288086,0.3850902020931244
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9885740280151367,0.5063912272453308
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.19084328413009644,0.10576380789279938
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7587647438049316,0.4847462773323059
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7648351788520813,0.5037411451339722
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2728772461414337,0.16068460047245026
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0583035871386528,0.11116012185811996
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7731760144233704,0.16682958602905273
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.13426241278648376,0.10999101400375366
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6339976787567139,0.30679523944854736
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.529503345489502,0.28596094250679016
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.36794647574424744,0.3115684688091278
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6315172910690308,0.4012167155742645
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7918993234634399,0.3640742301940918
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5290124416351318,0.16289064288139343
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5664682388305664,0.40044257044792175
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.714595377445221,0.44048550724983215
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8078745007514954,0.7495941519737244
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0961923822760582,0.2516942620277405
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2783018946647644,0.11080900579690933
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9469547867774963,0.75221186876297
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6733567714691162,0.5143632888793945
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6527824401855469,0.8319671154022217
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),1.0,0.8815895915031433
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7758620977401733,0.9447720050811768
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.42105263471603394,0.3021436333656311
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9387755393981934,0.7396013736724854
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3133159279823303,0.3588603734970093
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0,0.01393373217433691
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3861386179924011,0.43922659754753113
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7062057852745056,0.6246929168701172
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5201511383056641,0.49062907695770264
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.24953532218933105,0.1731923669576645
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9519230723381042,0.7922133803367615
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.30603447556495667,0.2928135395050049
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0,0.006809762679040432
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5564903616905212,0.4748205542564392
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.26886382699012756,0.31092625856399536
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.10824108123779297,0.1081569641828537
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8748603463172913,0.5786375999450684
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.11406250298023224,0.018663180992007256
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2677106559276581,0.19922615587711334
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0,0.006348612252622843
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.41127482056617737,0.3544193208217621
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.256186306476593,0.29572930932044983
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.690431535243988,0.3419382870197296
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8944050669670105,0.4112333655357361
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7438271641731262,0.39275896549224854
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7219251394271851,0.27641114592552185
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8794117569923401,0.5183550715446472
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7523452043533325,0.7108443975448608
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4485294222831726,0.3620670437812805
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4827856123447418,0.26725509762763977
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6607707142829895,0.3676392138004303
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.44639864563941956,0.2979758083820343
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6871980428695679,0.4715002477169037
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.43805310130119324,0.49114206433296204
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.9807339310646057,0.5665985941886902
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4893918037414551,0.44678783416748047
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5805876851081848,0.41349557042121887
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8194871544837952,0.4943687915802002
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5231586694717407,0.3463350832462311
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3575371503829956,0.1592673808336258
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.942307710647583,0.5679987072944641
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8766430616378784,0.5067108869552612
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4774148762226105,0.4705703854560852
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4404255449771881,0.2335345298051834
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6796116232872009,0.5064406394958496
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.4703929126262665,0.34321698546409607
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7602474689483643,0.7141556739807129
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6388115286827087,0.44382867217063904
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.8161290287971497,0.7399766445159912
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.05269058421254158,0.061000946909189224
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.2001209259033203,0.12416616082191467
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.7389277219772339,0.5661917328834534
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.0,0.2742622494697571
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3306327164173126,0.34615185856819153
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.08759123831987381,0.3390774726867676
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.3104742467403412,0.2964284420013428
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6397502422332764,0.5464838743209839
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.6293333172798157,0.6774594783782959
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.668694257736206,0.4804885685443878
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.06818182021379471,0.39234083890914917
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.5886970162391663,0.5580381751060486
+lebenshilfe_ood,Variante D (Hybrid + Cyclic),0.1878335177898407,0.37725549936294556

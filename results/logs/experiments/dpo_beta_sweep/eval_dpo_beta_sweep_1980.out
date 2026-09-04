@@ -1,0 +1,54 @@
+=== Running Comprehensive DPO Beta Sweep Evaluation ===
+Sat Aug 29 22:46:53 UTC 2026
+Lade Testdaten aus: data/lebenshilfe/lebenshilfe_dataset_clean.json
+[INIT] Device gesetzt auf: cuda
+[INIT] Lade BiLSTM Reward Model aus: results/models/bilstm_mixup_regression.pt
+[INIT] Lade SBERT Modell: jinaai/jina-embeddings-v2-base-de (max_seq_len=8192)
+
+=================================================================
+  EVALUIERE: SFT Baseline (Beta = 0.0)
+  Pfad: results/models/sft
+=================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+  -> Lade Standalone-Modell...
+
+=================================================================
+  EVALUIERE: DPO (Beta = 0.01) (Beta = 0.01)
+  Pfad: results/models/dpo_beta_sweep/dpo_beta_001
+=================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+  -> Lade Standalone-Modell...
+
+=================================================================
+  EVALUIERE: DPO (Beta = 0.05) (Beta = 0.05)
+  Pfad: results/models/dpo_beta_sweep/dpo_beta_005
+=================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+  -> Lade Standalone-Modell...
+
+=================================================================
+  EVALUIERE: DPO (Beta = 0.10) (Beta = 0.1)
+  Pfad: results/models/dpo_beta_sweep/dpo_beta_010
+=================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+  -> Lade Standalone-Modell...
+
+=================================================================
+  EVALUIERE: DPO (Beta = 0.20) (Beta = 0.2)
+  Pfad: results/models/dpo_beta_sweep/dpo_beta_020
+=================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+  -> Lade Standalone-Modell...
+
+=================================================================
+  EVALUIERE: DPO (Beta = 0.50) (Beta = 0.5)
+  Pfad: results/models/dpo_beta_sweep/dpo_beta_050
+=================================================================
+  -> Konfigurierte Ziel-Sprach-ID (de_DE): 250003
+  -> Lade Standalone-Modell...
+
+[ERFOLG] Zusammenfassung gespeichert: results/evaluation/dpo_beta_comparison_summary.csv
+[ERFOLG] Details gespeichert: results/evaluation/dpo_beta_comparison_details.csv
+[ERFOLG] Plot gespeichert: results/plots/experiments/dpo_beta_sweep/dpo_beta_pareto_tradeoff.png
+=== DPO Beta Sweep Evaluation Completed ===
+Sat Aug 29 22:53:14 UTC 2026

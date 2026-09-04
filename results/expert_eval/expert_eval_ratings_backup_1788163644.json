@@ -1,0 +1,12 @@
+{
+  "ITEM_01": {
+    "item_id": "ITEM_01",
+    "style_score": 4,
+    "meaning_score": 3,
+    "flags": {
+      "hallucination": false,
+      "unclear_logic": true
+    },
+    "comment": "fdsaf"
+  }
+}

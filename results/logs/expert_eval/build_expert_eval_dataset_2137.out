@@ -1,0 +1,42 @@
+=== Starte Generierung des 50-Item Experten-Evaluationspools ===
+Sun Aug 30 14:30:15 UTC 2026
+=== Erstelle 50-Item Disjoint Evaluationspool (Seed: 42, Device: cuda) ===
+Web-Korpus geladen: 801 Paare | Held-Out Testset: 81 Artikel
+Lebenshilfe Gold geladen: 37 Artikel
+
+Zuweisung der 48 Studien-Artikel:
+  Bedingung 1 (AS Original): 12 disjunkte Artikel
+  Bedingung 2 (Gold LS):     12 disjunkte Artikel
+  Bedingung 3 (mBART SFT):   12 disjunkte Artikel
+  Bedingung 4 (mBART DPO):   12 disjunkte Artikel
+Lade SFT Modell aus: results/models/token_length_exp/sft_len1024
+Lade DPO Modell aus: results/models/token_length_exp/dpo_len1024
+
+Generiere / extrahiere Übersetzungen für SFT und DPO...
+
+Lade Reward-Modell (BiLSTM MixUp) und SBERT...
+BiLSTM MixUp Regressor erfolgreich geladen aus: results/models/bilstm_mixup_regression.pt
+SentenceTransformer geladen: jinaai/jina-embeddings-v2-base-de
+
+Gesamtzahl zusammengestellter Einzeltexte: 50
+
+Berechne automatisierte Metriken (R_style, R_sem, Flesch, LIX) für alle 50 Texte...
+
+Verblinde und shuffele alle 50 Items...
+Gespeichert: data/expert_eval/blinded_items.json (50 verblindete Items)
+Gespeichert: data/expert_eval/secret_key_mapping.json (Geheimer Auswertungsschlüssel)
+Gespeichert: data/expert_eval/expert_study_master_table.csv (Master-Tabelle mit allen Metriken)
+
+=== Zusammenfassung der 50 Evaluations-Items nach Bedingung ===
+                  r_style  r_sem_as  flesch_de     lix  word_count
+condition                                                         
+AS_Original         0.004     1.000     28.683  51.378     741.000
+Control_Easy_LS     0.938     0.550     69.070  27.780      17.000
+Control_Hard_AS     0.008     0.335    -19.850  82.950      37.000
+Gold_Standard_LS    0.138     0.364     46.975  40.931     790.833
+mBART_DPO           0.018     0.369     33.678  46.846      84.417
+mBART_SFT           0.037     0.404     46.528  38.627     237.750
+
+[FERTIG] Experten-Evaluationspool erfolgreich erstellt!
+=== Experten-Evaluationspool erfolgreich erstellt ===
+Sun Aug 30 14:32:09 UTC 2026

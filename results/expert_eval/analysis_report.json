@@ -1,0 +1,147 @@
+{
+  "sample_size": 50,
+  "pairwise_concordance": {
+    "total_pairs": 1225,
+    "concordant_pairs": 759,
+    "discordant_pairs": 200,
+    "ties_human": 265,
+    "ties_metric": 1,
+    "decided_pairs": 959,
+    "concordance_rate_decided": 79.14,
+    "concordance_rate_total": 61.96
+  },
+  "correlations": [
+    {
+      "Dimension": "Einfachheit (E_style)",
+      "Metrik": "BiLSTM MixUp Regressor (R_style)",
+      "Spearman rho": 0.675,
+      "Kendall tau": 0.5157,
+      "Pearson r": 0.7864,
+      "p-Wert (Spearman)": "7.61e-08"
+    },
+    {
+      "Dimension": "Einfachheit (E_style)",
+      "Metrik": "Flesch Reading Ease (DE)",
+      "Spearman rho": 0.5696,
+      "Kendall tau": 0.4445,
+      "Pearson r": 0.6257,
+      "p-Wert (Spearman)": "1.58e-05"
+    },
+    {
+      "Dimension": "Einfachheit (E_style)",
+      "Metrik": "LIX Lesbarkeitsindex",
+      "Spearman rho": -0.5434,
+      "Kendall tau": -0.4223,
+      "Pearson r": -0.5863,
+      "p-Wert (Spearman)": "4.55e-05"
+    },
+    {
+      "Dimension": "Sinnhaftigkeit (E_meaning)",
+      "Metrik": "SBERT Quelltreue (R_sem_as)",
+      "Spearman rho": 0.1419,
+      "Kendall tau": 0.1137,
+      "Pearson r": 0.3524,
+      "p-Wert (Spearman)": "3.26e-01"
+    }
+  ],
+  "group_statistics": [
+    {
+      "cond_cat": "Control_Hard_AS",
+      "N": 1,
+      "Wortanzahl_Mean": 33.0,
+      "R_style_Mean": 0.3769,
+      "R_sem_Mean": 0.4121,
+      "Flesch_Mean": -21.41,
+      "LIX_Mean": 90.58,
+      "E_style_Mean": 1.0,
+      "E_style_Std": NaN,
+      "E_meaning_Mean": 5.0,
+      "E_meaning_Std": NaN,
+      "Halluzination_Rate": 0.0,
+      "Fehler_Total_Mean": 2.0
+    },
+    {
+      "cond_cat": "AS_Original",
+      "N": 12,
+      "Wortanzahl_Mean": 741.0,
+      "R_style_Mean": 0.1174,
+      "R_sem_Mean": 1.0,
+      "Flesch_Mean": 28.683333333333334,
+      "LIX_Mean": 51.37833333333333,
+      "E_style_Mean": 1.5833333333333333,
+      "E_style_Std": 0.6685579234215215,
+      "E_meaning_Mean": 4.25,
+      "E_meaning_Std": 0.753778361444409,
+      "Halluzination_Rate": 0.0,
+      "Fehler_Total_Mean": 1.9166666666666667
+    },
+    {
+      "cond_cat": "mBART_SFT",
+      "N": 12,
+      "Wortanzahl_Mean": 237.75,
+      "R_style_Mean": 0.7182833333333334,
+      "R_sem_Mean": 0.404125,
+      "Flesch_Mean": 46.528333333333336,
+      "LIX_Mean": 38.626666666666665,
+      "E_style_Mean": 3.0,
+      "E_style_Std": 0.8528028654224418,
+      "E_meaning_Mean": 2.3333333333333335,
+      "E_meaning_Std": 1.5569978883230458,
+      "Halluzination_Rate": 0.5833333333333334,
+      "Fehler_Total_Mean": 2.0
+    },
+    {
+      "cond_cat": "Gold_Standard_LS",
+      "N": 12,
+      "Wortanzahl_Mean": 790.8333333333334,
+      "R_style_Mean": 0.84045,
+      "R_sem_Mean": 0.36366666666666664,
+      "Flesch_Mean": 46.975,
+      "LIX_Mean": 40.93083333333333,
+      "E_style_Mean": 3.9166666666666665,
+      "E_style_Std": 0.90033663737852,
+      "E_meaning_Mean": 4.166666666666667,
+      "E_meaning_Std": 1.0298573010888745,
+      "Halluzination_Rate": 0.0,
+      "Fehler_Total_Mean": 0.8333333333333334
+    },
+    {
+      "cond_cat": "mBART_DPO",
+      "N": 12,
+      "Wortanzahl_Mean": 449.5,
+      "R_style_Mean": 0.9821583333333334,
+      "R_sem_Mean": 0.35696666666666665,
+      "Flesch_Mean": 53.38833333333333,
+      "LIX_Mean": 35.95666666666667,
+      "E_style_Mean": 3.5,
+      "E_style_Std": 0.5222329678670934,
+      "E_meaning_Mean": 1.75,
+      "E_meaning_Std": 1.1381803659589922,
+      "Halluzination_Rate": 0.6666666666666666,
+      "Fehler_Total_Mean": 2.25
+    },
+    {
+      "cond_cat": "Control_Easy_LS",
+      "N": 1,
+      "Wortanzahl_Mean": 17.0,
+      "R_style_Mean": 0.9688,
+      "R_sem_Mean": 0.5497,
+      "Flesch_Mean": 69.07,
+      "LIX_Mean": 27.78,
+      "E_style_Mean": 5.0,
+      "E_style_Std": NaN,
+      "E_meaning_Mean": 3.0,
+      "E_meaning_Std": NaN,
+      "Halluzination_Rate": 0.0,
+      "Fehler_Total_Mean": 1.0
+    }
+  ],
+  "kruskal_wallis": {
+    "statistic": 26.7209,
+    "p_value": 6.736214388397327e-06
+  },
+  "mann_whitney_dpo_vs_sft": {
+    "statistic": 96.0,
+    "p_value": 0.07081489892915237
+  }
+}

@@ -1,0 +1,10 @@
+=== Starting MixUp Multiplier Scaling Grid (mixtures_per_pair) ===
+--- Running Experiment: scale_mixtures_m2 (mixtures_per_pair=2) ---
+--- Running Experiment: scale_mixtures_m5 (mixtures_per_pair=5) ---
+--- Running Experiment: scale_mixtures_m10 (mixtures_per_pair=10) ---
+--- Running Experiment: scale_mixtures_m20 (mixtures_per_pair=20) ---
+--- Running Experiment: scale_mixtures_m40 (mixtures_per_pair=40) ---
+--- Running Experiment: scale_mixtures_m80 (mixtures_per_pair=80) ---
+--- Running Experiment: scale_mixtures_m160 (mixtures_per_pair=160) ---
+--- Running Experiment: scale_mixtures_m320 (mixtures_per_pair=320) ---
+=== MixUp Multiplier Scaling Grid Completed ===

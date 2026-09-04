@@ -1,0 +1,7 @@
+metric,roc_auc,gold_mean,hallu_mean,pert_mean,delta_gold_hallu,delta_gold_pert
+sbert_score,0.7849,0.9161,0.9035,0.8121,0.0126,0.104
+nli_factuality,0.566,0.4854,0.4638,0.4027,0.0217,0.0827
+nli_p_contra,0.5435,0.2349,0.2041,0.4091,0.0308,-0.1742
+ner_jaccard,0.5595,0.1549,0.1653,0.6778,-0.0105,-0.5229
+number_consistency,0.4121,0.6824,0.92,0.8167,-0.2376,-0.1343
+composite_factuality,0.5109,0.3015,0.3873,0.2927,-0.0858,0.0087

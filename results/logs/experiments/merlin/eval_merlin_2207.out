@@ -1,0 +1,33 @@
+=== Starte MERLIN CEFR Benchmark Evaluation (Regressoren & Klassifikatoren) ===
+Tue Sep  1 06:35:38 UTC 2026
+Device: cuda
+Berechne traditionelle Lesbarkeitsbaselines auf Dokumentebene...
+Tokenisiere alle Dokumente einmalig...
+Evaluiere BiLSTM MixUp Regressor (256)...
+Evaluiere BiLSTM MixUp Regressor (512)...
+Evaluiere BiLSTM MixUp Regressor (1024)...
+Evaluiere BiLSTM Satz-Klassifikator...
+[SKIP] BiLSTM Artikel-Klassifikator (256): Checkpoint oder Vokabular nicht gefunden (results/models/classifier_length_exp/bilstm_article_classifier_256.pt)
+[SKIP] BiLSTM Artikel-Klassifikator (512): Checkpoint oder Vokabular nicht gefunden (results/models/classifier_length_exp/bilstm_article_classifier_512.pt)
+Evaluiere BiLSTM Artikel-Klassifikator (1024)...
+Detail-Vorhersagen gespeichert: results/evaluation/merlin_all_models_eval.csv
+
+==========================================================================================
+MERLIN CEFR BENCHMARK MASTER TABELLE (N=1.033 DEUTSCHE DOKUMENTE)
+==========================================================================================
+                             Modell            Kategorie  Pearson r (Simplicity)  Spearman ρ (Rang)  Kendall τ  MAE (normiert)
+                Flesch Reading Ease             Baseline                0.512845           0.542922   0.411982        0.143974
+              Wiener Sachtextformel             Baseline                0.583718           0.601606   0.463477        0.136557
+               LIX Lesbarkeitsindex             Baseline                0.632033           0.656339   0.514716        0.127382
+       BiLSTM MixUp Regressor (256)      Regressor (256)                0.459089           0.484690   0.369212        0.309873
+       BiLSTM MixUp Regressor (512)      Regressor (512)                0.345952           0.347419   0.264161        0.346257
+      BiLSTM MixUp Regressor (1024)     Regressor (1024)                0.250753           0.238227   0.182772        0.363308
+          BiLSTM Satz-Klassifikator Klassifikator (Satz)                0.241694           0.430713   0.324872        0.539293
+BiLSTM Artikel-Klassifikator (1024) Klassifikator (1024)                0.148262           0.118671   0.087525        0.524928
+Plot gespeichert: results/plots/experiments/merlin/merlin_correlation_barchart.png
+Plot gespeichert: results/plots/experiments/merlin/merlin_scatter_all_models_grid.png
+Plot gespeichert: results/plots/experiments/merlin/merlin_boxplots_all_models_grid.png
+
+[ERFOLG] MERLIN CEFR Evaluation abgeschlossen.
+=== MERLIN Evaluation erfolgreich abgeschlossen ===
+Tue Sep  1 06:35:46 UTC 2026

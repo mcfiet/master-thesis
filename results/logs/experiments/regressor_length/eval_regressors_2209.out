@@ -1,0 +1,17 @@
+Device: cuda
+-> Geladen: mix_1024 (results/models/bilstm_mixup_regression.pt)
+Lebenshilfe Artikelpaare: 37
+Detail-CSVs gespeichert unter: results/evaluation/regressor_length_comparison_eval.csv
+
+================================================================================
+REGRESSOR LÄNGEN-BENCHMARK TABELLE (LEBENSHILFE GOLDSTANDARD)
+================================================================================
+                          Modell             Ebene / Input Ø Score (LS) Ø Score (AS) Separation (Δ) Balanced Acc ROC-AUC Perfect Pair Match
+   BiLSTM MixUp Regressor (1024) Dokument ($1.024$ Tokens) 0.710 ± 0.13 0.053 ± 0.09          0.656       97.30%  0.9985     100.0% (37/37)
+  Flesch Reading Ease (Baseline)    Dokument (Silben/Satz) 0.973 ± 0.16 0.189 ± 0.39          0.784       89.19%  0.8919     100.0% (37/37)
+Wiener Sachtextformel (Baseline)      Dokument (Wortlänge) 0.919 ± 0.27 0.108 ± 0.31          0.811       90.54%  0.9054     100.0% (37/37)
+Plot: results/plots/experiments/regressor_length/regressor_kde_length_comparison.png
+Plot: results/plots/experiments/regressor_length/regressor_roc_pr_length_comparison.png
+Plot: results/plots/experiments/regressor_length/regressor_pairwise_trajectories.png
+
+[ERFOLG] Regressor-Längen-Evaluation abgeschlossen.

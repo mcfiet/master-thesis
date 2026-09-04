@@ -1,9 +1,13 @@
-# Obsidian
-# Kompletten Obsidian-Config-Ordner ignorieren (da Livesync genutzt wird oder Einstellungen privat bleiben sollen)
+# Obsidian & IDEs
 .obsidian/
+.idea/
+.vscode/
+*.swp
 
 # OS files
 .DS_Store
+*/.DS_Store
+**/.DS_Store
 Thumbs.db
 .AppleDouble
 .LSOverride
@@ -17,9 +21,19 @@ seafile_content.txt
 seafile_page.html
 *.tmp
 *.log
+texput.log
+jupyter.log
 
-# PyTorch models
+# PyTorch models & heavy weights
 *.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+results/models/
+
+# Checkpoints
+*.checkpoint.jsonl
 
 # Python virtual environment
 .venv/
@@ -30,7 +44,20 @@ ENV/
 **/__pycache__/
 *.py[cod]
 
-
-# Data and experiment results
-data/
-results/
+# LaTeX Build Artifacts (keep main.pdf, ignore intermediate build files)
+thesis/*.aux
+thesis/*.bbl
+thesis/*.bcf
+thesis/*.blg
+thesis/*.fdb_latexmk
+thesis/*.fls
+thesis/*.glo
+thesis/*.ist
+thesis/*.lof
+thesis/*.lot
+thesis/*.out
+thesis/*.run.xml
+thesis/*.toc
+thesis/*.synctex.gz
+thesis/*-SAVE-ERROR
+thesis/page_*.png

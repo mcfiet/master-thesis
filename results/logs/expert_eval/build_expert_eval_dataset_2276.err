@@ -1,0 +1,3 @@
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+[2026-09-02T07:56:55.588] error: *** JOB 2276 ON hpc3-perlman CANCELLED AT 2026-09-02T07:56:55 DUE to SIGNAL Terminated ***
+[2026-09-02T07:56:55.588] error: *** STEP 2276.0 ON hpc3-perlman CANCELLED AT 2026-09-02T07:56:55 DUE to SIGNAL Terminated ***

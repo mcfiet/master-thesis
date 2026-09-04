@@ -1,0 +1,465 @@
+=== Starte SFT Data Scaling Grid (Fractions: 10%, 25%, 50%, 75%, 100%) ===
+==========================================================================
+--- Starte Experiment: sft_scale_f010 (train_fraction=0.10) ---
+==========================================================================
+
+===========================================================================
+SFT DATA SCALING EXPERIMENT: sft_scale_f010
+Train-Fraction: 0.10 | Device: cuda | LR: 0.0001 | Epochs: 25
+Zielverzeichnis: results/experiments/sft_scaling/sft_scale_f010
+===========================================================================
+
+Lade Datensatz aus data/analysis/corpus_master.csv...
+Gefilterte Gesamtartikelpaare: 801
+Split-Übersicht:
+  -> Trainingsdaten (10%): 64 Artikelpaare (aus 641 Pool)
+  -> Validierungsdaten (fest 10%):  80 Artikelpaare
+  -> Held-Out Testset (fest 10%):   80 Artikelpaare
+
+Initialisiere Tokenizer (facebook/mbart-large-50)...
+Lade Basismodell facebook/mbart-large-50...
+Konfiguriere LoRA Adapter (r=16, alpha=32, dropout=0.05)...
+trainable params: 8,650,752 || all params: 619,530,240 || trainable%: 1.3963
+
+--- Starte SFT Training ---
+-> Epoche 1/25 | Train Loss: 3.6079 | Val Loss: 3.4320
+   [+] Bester Val Loss verbessert auf 3.4320. Adapter-Checkpoint gespeichert.
+-> Epoche 2/25 | Train Loss: 3.6929 | Val Loss: 3.6313
+-> Epoche 3/25 | Train Loss: 4.0551 | Val Loss: 4.1388
+-> Epoche 4/25 | Train Loss: 4.4052 | Val Loss: 4.3729
+-> Epoche 5/25 | Train Loss: 4.3925 | Val Loss: 4.0874
+-> Epoche 6/25 | Train Loss: 4.1741 | Val Loss: 3.7976
+-> Epoche 7/25 | Train Loss: 4.0969 | Val Loss: 3.3444
+   [+] Bester Val Loss verbessert auf 3.3444. Adapter-Checkpoint gespeichert.
+-> Epoche 8/25 | Train Loss: 3.6378 | Val Loss: 3.2769
+   [+] Bester Val Loss verbessert auf 3.2769. Adapter-Checkpoint gespeichert.
+-> Epoche 9/25 | Train Loss: 3.6421 | Val Loss: 3.6709
+-> Epoche 10/25 | Train Loss: 4.0377 | Val Loss: 3.7126
+-> Epoche 11/25 | Train Loss: 4.0093 | Val Loss: 3.3541
+-> Epoche 12/25 | Train Loss: 3.4738 | Val Loss: 3.1278
+   [+] Bester Val Loss verbessert auf 3.1278. Adapter-Checkpoint gespeichert.
+-> Epoche 13/25 | Train Loss: 3.2729 | Val Loss: 3.0230
+   [+] Bester Val Loss verbessert auf 3.0230. Adapter-Checkpoint gespeichert.
+-> Epoche 14/25 | Train Loss: 3.1508 | Val Loss: 2.9910
+   [+] Bester Val Loss verbessert auf 2.9910. Adapter-Checkpoint gespeichert.
+-> Epoche 15/25 | Train Loss: 3.1279 | Val Loss: 2.9801
+   [+] Bester Val Loss verbessert auf 2.9801. Adapter-Checkpoint gespeichert.
+-> Epoche 16/25 | Train Loss: 3.0929 | Val Loss: 2.9430
+   [+] Bester Val Loss verbessert auf 2.9430. Adapter-Checkpoint gespeichert.
+-> Epoche 17/25 | Train Loss: 3.0328 | Val Loss: 2.8991
+   [+] Bester Val Loss verbessert auf 2.8991. Adapter-Checkpoint gespeichert.
+-> Epoche 18/25 | Train Loss: 2.9822 | Val Loss: 2.8601
+   [+] Bester Val Loss verbessert auf 2.8601. Adapter-Checkpoint gespeichert.
+-> Epoche 19/25 | Train Loss: 2.9272 | Val Loss: 2.8436
+   [+] Bester Val Loss verbessert auf 2.8436. Adapter-Checkpoint gespeichert.
+-> Epoche 20/25 | Train Loss: 2.8995 | Val Loss: 2.8266
+   [+] Bester Val Loss verbessert auf 2.8266. Adapter-Checkpoint gespeichert.
+-> Epoche 21/25 | Train Loss: 2.8632 | Val Loss: 2.8086
+   [+] Bester Val Loss verbessert auf 2.8086. Adapter-Checkpoint gespeichert.
+-> Epoche 22/25 | Train Loss: 2.8480 | Val Loss: 2.7991
+   [+] Bester Val Loss verbessert auf 2.7991. Adapter-Checkpoint gespeichert.
+-> Epoche 23/25 | Train Loss: 2.8143 | Val Loss: 2.7979
+   [+] Bester Val Loss verbessert auf 2.7979. Adapter-Checkpoint gespeichert.
+-> Epoche 24/25 | Train Loss: 2.8184 | Val Loss: 2.8000
+-> Epoche 25/25 | Train Loss: 2.8088 | Val Loss: 2.8023
+
+Training abgeschlossen in 93.89 Sekunden.
+
+Lade besten LoRA-Adapter und verschmelze fest mit Basismodell (merge_and_unload)...
+[ERFOLG] Vollstaendig fusioniertes Standalone-Modell (ohne Adapter-Reste) unter results/experiments/sft_scaling/sft_scale_f010 gespeichert!
+
+===========================================================================
+STARTE QUANTITATIVE EVALUATION (Lebenshilfe-Benchmark)
+===========================================================================
+Lade Reward-Modelle & NLP-Pipelines...
+  -> Plot: results/experiments/sft_scaling/sft_scale_f010_loss_curve.png
+
+[ERFOLG] Ergebnisse gespeichert:
+  -> JSON: results/experiments/sft_scaling/sft_scale_f010_metrics.json
+  -> CSV:  results/experiments/sft_scaling/sft_scale_f010_details.csv
+
+Kennzahlen für sft_scale_f010 (N=64):
+  Simplicity (R_style): 0.2365
+  Semantik (R_sem_as):  0.9165
+  Treue LS (Sim_ref):   0.8751
+  Composite Reward:     0.5765
+  BLEU / ROUGE-L:       0.0045 / 0.1012
+  Truncation Rate:      83.78%
+  Ø Gen Tokens:         119.8
+==========================================================================
+--- Starte Experiment: sft_scale_f025 (train_fraction=0.25) ---
+==========================================================================
+
+===========================================================================
+SFT DATA SCALING EXPERIMENT: sft_scale_f025
+Train-Fraction: 0.25 | Device: cuda | LR: 0.0001 | Epochs: 25
+Zielverzeichnis: results/experiments/sft_scaling/sft_scale_f025
+===========================================================================
+
+Lade Datensatz aus data/analysis/corpus_master.csv...
+Gefilterte Gesamtartikelpaare: 801
+Split-Übersicht:
+  -> Trainingsdaten (25%): 160 Artikelpaare (aus 641 Pool)
+  -> Validierungsdaten (fest 10%):  80 Artikelpaare
+  -> Held-Out Testset (fest 10%):   80 Artikelpaare
+
+Initialisiere Tokenizer (facebook/mbart-large-50)...
+Lade Basismodell facebook/mbart-large-50...
+Konfiguriere LoRA Adapter (r=16, alpha=32, dropout=0.05)...
+trainable params: 8,650,752 || all params: 619,530,240 || trainable%: 1.3963
+
+--- Starte SFT Training ---
+-> Epoche 1/25 | Train Loss: 3.6652 | Val Loss: 3.5536
+   [+] Bester Val Loss verbessert auf 3.5536. Adapter-Checkpoint gespeichert.
+-> Epoche 2/25 | Train Loss: 4.0988 | Val Loss: 4.2390
+-> Epoche 3/25 | Train Loss: 4.4694 | Val Loss: 3.8881
+-> Epoche 4/25 | Train Loss: 3.9560 | Val Loss: 3.7324
+-> Epoche 5/25 | Train Loss: 3.8081 | Val Loss: 3.1460
+   [+] Bester Val Loss verbessert auf 3.1460. Adapter-Checkpoint gespeichert.
+-> Epoche 6/25 | Train Loss: 3.2715 | Val Loss: 2.9398
+   [+] Bester Val Loss verbessert auf 2.9398. Adapter-Checkpoint gespeichert.
+-> Epoche 7/25 | Train Loss: 3.0916 | Val Loss: 2.8368
+   [+] Bester Val Loss verbessert auf 2.8368. Adapter-Checkpoint gespeichert.
+-> Epoche 8/25 | Train Loss: 2.9671 | Val Loss: 2.7638
+   [+] Bester Val Loss verbessert auf 2.7638. Adapter-Checkpoint gespeichert.
+-> Epoche 9/25 | Train Loss: 2.8677 | Val Loss: 2.7099
+   [+] Bester Val Loss verbessert auf 2.7099. Adapter-Checkpoint gespeichert.
+-> Epoche 10/25 | Train Loss: 2.8136 | Val Loss: 2.7038
+   [+] Bester Val Loss verbessert auf 2.7038. Adapter-Checkpoint gespeichert.
+-> Epoche 11/25 | Train Loss: 2.7676 | Val Loss: 2.6628
+   [+] Bester Val Loss verbessert auf 2.6628. Adapter-Checkpoint gespeichert.
+-> Epoche 12/25 | Train Loss: 2.7430 | Val Loss: 2.6757
+-> Epoche 13/25 | Train Loss: 2.7249 | Val Loss: 2.6396
+   [+] Bester Val Loss verbessert auf 2.6396. Adapter-Checkpoint gespeichert.
+-> Epoche 14/25 | Train Loss: 2.6773 | Val Loss: 2.6318
+   [+] Bester Val Loss verbessert auf 2.6318. Adapter-Checkpoint gespeichert.
+-> Epoche 15/25 | Train Loss: 2.6248 | Val Loss: 2.6008
+   [+] Bester Val Loss verbessert auf 2.6008. Adapter-Checkpoint gespeichert.
+-> Epoche 16/25 | Train Loss: 2.5816 | Val Loss: 2.5910
+   [+] Bester Val Loss verbessert auf 2.5910. Adapter-Checkpoint gespeichert.
+-> Epoche 17/25 | Train Loss: 2.5721 | Val Loss: 2.5987
+-> Epoche 18/25 | Train Loss: 2.5726 | Val Loss: 2.6002
+-> Epoche 19/25 | Train Loss: 2.5342 | Val Loss: 2.5828
+   [+] Bester Val Loss verbessert auf 2.5828. Adapter-Checkpoint gespeichert.
+-> Epoche 20/25 | Train Loss: 2.5144 | Val Loss: 2.5815
+   [+] Bester Val Loss verbessert auf 2.5815. Adapter-Checkpoint gespeichert.
+-> Epoche 21/25 | Train Loss: 2.5045 | Val Loss: 2.5770
+   [+] Bester Val Loss verbessert auf 2.5770. Adapter-Checkpoint gespeichert.
+-> Epoche 22/25 | Train Loss: 2.4835 | Val Loss: 2.5771
+-> Epoche 23/25 | Train Loss: 2.4800 | Val Loss: 2.5679
+   [+] Bester Val Loss verbessert auf 2.5679. Adapter-Checkpoint gespeichert.
+-> Epoche 24/25 | Train Loss: 2.4536 | Val Loss: 2.5634
+   [+] Bester Val Loss verbessert auf 2.5634. Adapter-Checkpoint gespeichert.
+-> Epoche 25/25 | Train Loss: 2.4554 | Val Loss: 2.5669
+
+Training abgeschlossen in 181.74 Sekunden.
+
+Lade besten LoRA-Adapter und verschmelze fest mit Basismodell (merge_and_unload)...
+[ERFOLG] Vollstaendig fusioniertes Standalone-Modell (ohne Adapter-Reste) unter results/experiments/sft_scaling/sft_scale_f025 gespeichert!
+
+===========================================================================
+STARTE QUANTITATIVE EVALUATION (Lebenshilfe-Benchmark)
+===========================================================================
+Lade Reward-Modelle & NLP-Pipelines...
+  -> Plot: results/experiments/sft_scaling/sft_scale_f025_loss_curve.png
+
+[ERFOLG] Ergebnisse gespeichert:
+  -> JSON: results/experiments/sft_scaling/sft_scale_f025_metrics.json
+  -> CSV:  results/experiments/sft_scaling/sft_scale_f025_details.csv
+
+Kennzahlen für sft_scale_f025 (N=160):
+  Simplicity (R_style): 0.3882
+  Semantik (R_sem_as):  0.9100
+  Treue LS (Sim_ref):   0.8867
+  Composite Reward:     0.6491
+  BLEU / ROUGE-L:       0.0051 / 0.1231
+  Truncation Rate:      81.08%
+  Ø Gen Tokens:         135.5
+==========================================================================
+--- Starte Experiment: sft_scale_f050 (train_fraction=0.50) ---
+==========================================================================
+
+===========================================================================
+SFT DATA SCALING EXPERIMENT: sft_scale_f050
+Train-Fraction: 0.50 | Device: cuda | LR: 0.0001 | Epochs: 25
+Zielverzeichnis: results/experiments/sft_scaling/sft_scale_f050
+===========================================================================
+
+Lade Datensatz aus data/analysis/corpus_master.csv...
+Gefilterte Gesamtartikelpaare: 801
+Split-Übersicht:
+  -> Trainingsdaten (50%): 320 Artikelpaare (aus 641 Pool)
+  -> Validierungsdaten (fest 10%):  80 Artikelpaare
+  -> Held-Out Testset (fest 10%):   80 Artikelpaare
+
+Initialisiere Tokenizer (facebook/mbart-large-50)...
+Lade Basismodell facebook/mbart-large-50...
+Konfiguriere LoRA Adapter (r=16, alpha=32, dropout=0.05)...
+trainable params: 8,650,752 || all params: 619,530,240 || trainable%: 1.3963
+
+--- Starte SFT Training ---
+-> Epoche 1/25 | Train Loss: 3.7053 | Val Loss: 3.8413
+   [+] Bester Val Loss verbessert auf 3.8413. Adapter-Checkpoint gespeichert.
+-> Epoche 2/25 | Train Loss: 4.3233 | Val Loss: 3.6280
+   [+] Bester Val Loss verbessert auf 3.6280. Adapter-Checkpoint gespeichert.
+-> Epoche 3/25 | Train Loss: 3.9186 | Val Loss: 3.3245
+   [+] Bester Val Loss verbessert auf 3.3245. Adapter-Checkpoint gespeichert.
+-> Epoche 4/25 | Train Loss: 3.1938 | Val Loss: 2.8203
+   [+] Bester Val Loss verbessert auf 2.8203. Adapter-Checkpoint gespeichert.
+-> Epoche 5/25 | Train Loss: 2.9470 | Val Loss: 2.7230
+   [+] Bester Val Loss verbessert auf 2.7230. Adapter-Checkpoint gespeichert.
+-> Epoche 6/25 | Train Loss: 2.8247 | Val Loss: 2.6729
+   [+] Bester Val Loss verbessert auf 2.6729. Adapter-Checkpoint gespeichert.
+-> Epoche 7/25 | Train Loss: 2.7473 | Val Loss: 2.6175
+   [+] Bester Val Loss verbessert auf 2.6175. Adapter-Checkpoint gespeichert.
+-> Epoche 8/25 | Train Loss: 2.6886 | Val Loss: 2.5900
+   [+] Bester Val Loss verbessert auf 2.5900. Adapter-Checkpoint gespeichert.
+-> Epoche 9/25 | Train Loss: 2.6248 | Val Loss: 2.5537
+   [+] Bester Val Loss verbessert auf 2.5537. Adapter-Checkpoint gespeichert.
+-> Epoche 10/25 | Train Loss: 2.5835 | Val Loss: 2.5408
+   [+] Bester Val Loss verbessert auf 2.5408. Adapter-Checkpoint gespeichert.
+-> Epoche 11/25 | Train Loss: 2.5353 | Val Loss: 2.5257
+   [+] Bester Val Loss verbessert auf 2.5257. Adapter-Checkpoint gespeichert.
+-> Epoche 12/25 | Train Loss: 2.4965 | Val Loss: 2.5162
+   [+] Bester Val Loss verbessert auf 2.5162. Adapter-Checkpoint gespeichert.
+-> Epoche 13/25 | Train Loss: 2.4677 | Val Loss: 2.5050
+   [+] Bester Val Loss verbessert auf 2.5050. Adapter-Checkpoint gespeichert.
+-> Epoche 14/25 | Train Loss: 2.4428 | Val Loss: 2.4956
+   [+] Bester Val Loss verbessert auf 2.4956. Adapter-Checkpoint gespeichert.
+-> Epoche 15/25 | Train Loss: 2.4121 | Val Loss: 2.4781
+   [+] Bester Val Loss verbessert auf 2.4781. Adapter-Checkpoint gespeichert.
+-> Epoche 16/25 | Train Loss: 2.3824 | Val Loss: 2.4659
+   [+] Bester Val Loss verbessert auf 2.4659. Adapter-Checkpoint gespeichert.
+-> Epoche 17/25 | Train Loss: 2.3553 | Val Loss: 2.4605
+   [+] Bester Val Loss verbessert auf 2.4605. Adapter-Checkpoint gespeichert.
+-> Epoche 18/25 | Train Loss: 2.3312 | Val Loss: 2.4514
+   [+] Bester Val Loss verbessert auf 2.4514. Adapter-Checkpoint gespeichert.
+-> Epoche 19/25 | Train Loss: 2.3113 | Val Loss: 2.4414
+   [+] Bester Val Loss verbessert auf 2.4414. Adapter-Checkpoint gespeichert.
+-> Epoche 20/25 | Train Loss: 2.2867 | Val Loss: 2.4391
+   [+] Bester Val Loss verbessert auf 2.4391. Adapter-Checkpoint gespeichert.
+-> Epoche 21/25 | Train Loss: 2.2664 | Val Loss: 2.4293
+   [+] Bester Val Loss verbessert auf 2.4293. Adapter-Checkpoint gespeichert.
+-> Epoche 22/25 | Train Loss: 2.2449 | Val Loss: 2.4203
+   [+] Bester Val Loss verbessert auf 2.4203. Adapter-Checkpoint gespeichert.
+-> Epoche 23/25 | Train Loss: 2.2359 | Val Loss: 2.4242
+-> Epoche 24/25 | Train Loss: 2.2313 | Val Loss: 2.4197
+   [+] Bester Val Loss verbessert auf 2.4197. Adapter-Checkpoint gespeichert.
+-> Epoche 25/25 | Train Loss: 2.2203 | Val Loss: 2.4150
+   [+] Bester Val Loss verbessert auf 2.4150. Adapter-Checkpoint gespeichert.
+
+Training abgeschlossen in 323.54 Sekunden.
+
+Lade besten LoRA-Adapter und verschmelze fest mit Basismodell (merge_and_unload)...
+[ERFOLG] Vollstaendig fusioniertes Standalone-Modell (ohne Adapter-Reste) unter results/experiments/sft_scaling/sft_scale_f050 gespeichert!
+
+===========================================================================
+STARTE QUANTITATIVE EVALUATION (Lebenshilfe-Benchmark)
+===========================================================================
+Lade Reward-Modelle & NLP-Pipelines...
+  -> Plot: results/experiments/sft_scaling/sft_scale_f050_loss_curve.png
+
+[ERFOLG] Ergebnisse gespeichert:
+  -> JSON: results/experiments/sft_scaling/sft_scale_f050_metrics.json
+  -> CSV:  results/experiments/sft_scaling/sft_scale_f050_details.csv
+
+Kennzahlen für sft_scale_f050 (N=320):
+  Simplicity (R_style): 0.3280
+  Semantik (R_sem_as):  0.9166
+  Treue LS (Sim_ref):   0.8821
+  Composite Reward:     0.6223
+  BLEU / ROUGE-L:       0.0041 / 0.1142
+  Truncation Rate:      83.78%
+  Ø Gen Tokens:         124.0
+==========================================================================
+--- Starte Experiment: sft_scale_f075 (train_fraction=0.75) ---
+==========================================================================
+
+===========================================================================
+SFT DATA SCALING EXPERIMENT: sft_scale_f075
+Train-Fraction: 0.75 | Device: cuda | LR: 0.0001 | Epochs: 25
+Zielverzeichnis: results/experiments/sft_scaling/sft_scale_f075
+===========================================================================
+
+Lade Datensatz aus data/analysis/corpus_master.csv...
+Gefilterte Gesamtartikelpaare: 801
+Split-Übersicht:
+  -> Trainingsdaten (75%): 481 Artikelpaare (aus 641 Pool)
+  -> Validierungsdaten (fest 10%):  80 Artikelpaare
+  -> Held-Out Testset (fest 10%):   80 Artikelpaare
+
+Initialisiere Tokenizer (facebook/mbart-large-50)...
+Lade Basismodell facebook/mbart-large-50...
+Konfiguriere LoRA Adapter (r=16, alpha=32, dropout=0.05)...
+trainable params: 8,650,752 || all params: 619,530,240 || trainable%: 1.3963
+
+--- Starte SFT Training ---
+-> Epoche 1/25 | Train Loss: 3.7824 | Val Loss: 4.1233
+   [+] Bester Val Loss verbessert auf 4.1233. Adapter-Checkpoint gespeichert.
+-> Epoche 2/25 | Train Loss: 3.9820 | Val Loss: 3.4931
+   [+] Bester Val Loss verbessert auf 3.4931. Adapter-Checkpoint gespeichert.
+-> Epoche 3/25 | Train Loss: 3.2002 | Val Loss: 2.7870
+   [+] Bester Val Loss verbessert auf 2.7870. Adapter-Checkpoint gespeichert.
+-> Epoche 4/25 | Train Loss: 2.8362 | Val Loss: 2.6312
+   [+] Bester Val Loss verbessert auf 2.6312. Adapter-Checkpoint gespeichert.
+-> Epoche 5/25 | Train Loss: 2.7223 | Val Loss: 2.5539
+   [+] Bester Val Loss verbessert auf 2.5539. Adapter-Checkpoint gespeichert.
+-> Epoche 6/25 | Train Loss: 2.6271 | Val Loss: 2.5318
+   [+] Bester Val Loss verbessert auf 2.5318. Adapter-Checkpoint gespeichert.
+-> Epoche 7/25 | Train Loss: 2.5650 | Val Loss: 2.4944
+   [+] Bester Val Loss verbessert auf 2.4944. Adapter-Checkpoint gespeichert.
+-> Epoche 8/25 | Train Loss: 2.5078 | Val Loss: 2.4812
+   [+] Bester Val Loss verbessert auf 2.4812. Adapter-Checkpoint gespeichert.
+-> Epoche 9/25 | Train Loss: 2.4553 | Val Loss: 2.4419
+   [+] Bester Val Loss verbessert auf 2.4419. Adapter-Checkpoint gespeichert.
+-> Epoche 10/25 | Train Loss: 2.3593 | Val Loss: 2.3356
+   [+] Bester Val Loss verbessert auf 2.3356. Adapter-Checkpoint gespeichert.
+-> Epoche 11/25 | Train Loss: 2.2894 | Val Loss: 2.3188
+   [+] Bester Val Loss verbessert auf 2.3188. Adapter-Checkpoint gespeichert.
+-> Epoche 12/25 | Train Loss: 2.2644 | Val Loss: 2.3064
+   [+] Bester Val Loss verbessert auf 2.3064. Adapter-Checkpoint gespeichert.
+-> Epoche 13/25 | Train Loss: 2.2175 | Val Loss: 2.3079
+-> Epoche 14/25 | Train Loss: 2.1969 | Val Loss: 2.2917
+   [+] Bester Val Loss verbessert auf 2.2917. Adapter-Checkpoint gespeichert.
+-> Epoche 15/25 | Train Loss: 2.1606 | Val Loss: 2.2833
+   [+] Bester Val Loss verbessert auf 2.2833. Adapter-Checkpoint gespeichert.
+-> Epoche 16/25 | Train Loss: 2.1373 | Val Loss: 2.2745
+   [+] Bester Val Loss verbessert auf 2.2745. Adapter-Checkpoint gespeichert.
+-> Epoche 17/25 | Train Loss: 2.1188 | Val Loss: 2.2725
+   [+] Bester Val Loss verbessert auf 2.2725. Adapter-Checkpoint gespeichert.
+-> Epoche 18/25 | Train Loss: 2.0952 | Val Loss: 2.2617
+   [+] Bester Val Loss verbessert auf 2.2617. Adapter-Checkpoint gespeichert.
+-> Epoche 19/25 | Train Loss: 2.0796 | Val Loss: 2.2576
+   [+] Bester Val Loss verbessert auf 2.2576. Adapter-Checkpoint gespeichert.
+-> Epoche 20/25 | Train Loss: 2.0636 | Val Loss: 2.2521
+   [+] Bester Val Loss verbessert auf 2.2521. Adapter-Checkpoint gespeichert.
+-> Epoche 21/25 | Train Loss: 2.0492 | Val Loss: 2.2513
+   [+] Bester Val Loss verbessert auf 2.2513. Adapter-Checkpoint gespeichert.
+-> Epoche 22/25 | Train Loss: 2.0350 | Val Loss: 2.2483
+   [+] Bester Val Loss verbessert auf 2.2483. Adapter-Checkpoint gespeichert.
+-> Epoche 23/25 | Train Loss: 2.0338 | Val Loss: 2.2473
+   [+] Bester Val Loss verbessert auf 2.2473. Adapter-Checkpoint gespeichert.
+-> Epoche 24/25 | Train Loss: 2.0239 | Val Loss: 2.2426
+   [+] Bester Val Loss verbessert auf 2.2426. Adapter-Checkpoint gespeichert.
+-> Epoche 25/25 | Train Loss: 2.0134 | Val Loss: 2.2420
+   [+] Bester Val Loss verbessert auf 2.2420. Adapter-Checkpoint gespeichert.
+
+Training abgeschlossen in 468.46 Sekunden.
+
+Lade besten LoRA-Adapter und verschmelze fest mit Basismodell (merge_and_unload)...
+[ERFOLG] Vollstaendig fusioniertes Standalone-Modell (ohne Adapter-Reste) unter results/experiments/sft_scaling/sft_scale_f075 gespeichert!
+
+===========================================================================
+STARTE QUANTITATIVE EVALUATION (Lebenshilfe-Benchmark)
+===========================================================================
+Lade Reward-Modelle & NLP-Pipelines...
+  -> Plot: results/experiments/sft_scaling/sft_scale_f075_loss_curve.png
+
+[ERFOLG] Ergebnisse gespeichert:
+  -> JSON: results/experiments/sft_scaling/sft_scale_f075_metrics.json
+  -> CSV:  results/experiments/sft_scaling/sft_scale_f075_details.csv
+
+Kennzahlen für sft_scale_f075 (N=481):
+  Simplicity (R_style): 0.4360
+  Semantik (R_sem_as):  0.9290
+  Treue LS (Sim_ref):   0.8919
+  Composite Reward:     0.6825
+  BLEU / ROUGE-L:       0.0093 / 0.1298
+  Truncation Rate:      75.68%
+  Ø Gen Tokens:         146.3
+==========================================================================
+--- Starte Experiment: sft_scale_f100 (train_fraction=1.00) ---
+==========================================================================
+
+===========================================================================
+SFT DATA SCALING EXPERIMENT: sft_scale_f100
+Train-Fraction: 1.00 | Device: cuda | LR: 0.0001 | Epochs: 25
+Zielverzeichnis: results/experiments/sft_scaling/sft_scale_f100
+===========================================================================
+
+Lade Datensatz aus data/analysis/corpus_master.csv...
+Gefilterte Gesamtartikelpaare: 801
+Split-Übersicht:
+  -> Trainingsdaten (100%): 641 Artikelpaare (aus 641 Pool)
+  -> Validierungsdaten (fest 10%):  80 Artikelpaare
+  -> Held-Out Testset (fest 10%):   80 Artikelpaare
+
+Initialisiere Tokenizer (facebook/mbart-large-50)...
+Lade Basismodell facebook/mbart-large-50...
+Konfiguriere LoRA Adapter (r=16, alpha=32, dropout=0.05)...
+trainable params: 8,650,752 || all params: 619,530,240 || trainable%: 1.3963
+
+--- Starte SFT Training ---
+-> Epoche 1/25 | Train Loss: 3.8390 | Val Loss: 4.1858
+   [+] Bester Val Loss verbessert auf 4.1858. Adapter-Checkpoint gespeichert.
+-> Epoche 2/25 | Train Loss: 3.8353 | Val Loss: 3.0358
+   [+] Bester Val Loss verbessert auf 3.0358. Adapter-Checkpoint gespeichert.
+-> Epoche 3/25 | Train Loss: 3.1398 | Val Loss: 2.7797
+   [+] Bester Val Loss verbessert auf 2.7797. Adapter-Checkpoint gespeichert.
+-> Epoche 4/25 | Train Loss: 2.8504 | Val Loss: 2.6305
+   [+] Bester Val Loss verbessert auf 2.6305. Adapter-Checkpoint gespeichert.
+-> Epoche 5/25 | Train Loss: 2.7037 | Val Loss: 2.5305
+   [+] Bester Val Loss verbessert auf 2.5305. Adapter-Checkpoint gespeichert.
+-> Epoche 6/25 | Train Loss: 2.5887 | Val Loss: 2.4741
+   [+] Bester Val Loss verbessert auf 2.4741. Adapter-Checkpoint gespeichert.
+-> Epoche 7/25 | Train Loss: 2.5134 | Val Loss: 2.4388
+   [+] Bester Val Loss verbessert auf 2.4388. Adapter-Checkpoint gespeichert.
+-> Epoche 8/25 | Train Loss: 2.4358 | Val Loss: 2.3805
+   [+] Bester Val Loss verbessert auf 2.3805. Adapter-Checkpoint gespeichert.
+-> Epoche 9/25 | Train Loss: 2.3694 | Val Loss: 2.3434
+   [+] Bester Val Loss verbessert auf 2.3434. Adapter-Checkpoint gespeichert.
+-> Epoche 10/25 | Train Loss: 2.3045 | Val Loss: 2.3088
+   [+] Bester Val Loss verbessert auf 2.3088. Adapter-Checkpoint gespeichert.
+-> Epoche 11/25 | Train Loss: 2.2592 | Val Loss: 2.2915
+   [+] Bester Val Loss verbessert auf 2.2915. Adapter-Checkpoint gespeichert.
+-> Epoche 12/25 | Train Loss: 2.2171 | Val Loss: 2.2692
+   [+] Bester Val Loss verbessert auf 2.2692. Adapter-Checkpoint gespeichert.
+-> Epoche 13/25 | Train Loss: 2.1827 | Val Loss: 2.2492
+   [+] Bester Val Loss verbessert auf 2.2492. Adapter-Checkpoint gespeichert.
+-> Epoche 14/25 | Train Loss: 2.1396 | Val Loss: 2.2247
+   [+] Bester Val Loss verbessert auf 2.2247. Adapter-Checkpoint gespeichert.
+-> Epoche 15/25 | Train Loss: 2.1090 | Val Loss: 2.2194
+   [+] Bester Val Loss verbessert auf 2.2194. Adapter-Checkpoint gespeichert.
+-> Epoche 16/25 | Train Loss: 2.0768 | Val Loss: 2.2013
+   [+] Bester Val Loss verbessert auf 2.2013. Adapter-Checkpoint gespeichert.
+-> Epoche 17/25 | Train Loss: 2.0521 | Val Loss: 2.1865
+   [+] Bester Val Loss verbessert auf 2.1865. Adapter-Checkpoint gespeichert.
+-> Epoche 18/25 | Train Loss: 2.0327 | Val Loss: 2.1741
+   [+] Bester Val Loss verbessert auf 2.1741. Adapter-Checkpoint gespeichert.
+-> Epoche 19/25 | Train Loss: 2.0077 | Val Loss: 2.1700
+   [+] Bester Val Loss verbessert auf 2.1700. Adapter-Checkpoint gespeichert.
+-> Epoche 20/25 | Train Loss: 1.9893 | Val Loss: 2.1671
+   [+] Bester Val Loss verbessert auf 2.1671. Adapter-Checkpoint gespeichert.
+-> Epoche 21/25 | Train Loss: 1.9853 | Val Loss: 2.1565
+   [+] Bester Val Loss verbessert auf 2.1565. Adapter-Checkpoint gespeichert.
+-> Epoche 22/25 | Train Loss: 1.9751 | Val Loss: 2.1549
+   [+] Bester Val Loss verbessert auf 2.1549. Adapter-Checkpoint gespeichert.
+-> Epoche 23/25 | Train Loss: 1.9676 | Val Loss: 2.1524
+   [+] Bester Val Loss verbessert auf 2.1524. Adapter-Checkpoint gespeichert.
+-> Epoche 24/25 | Train Loss: 1.9566 | Val Loss: 2.1527
+-> Epoche 25/25 | Train Loss: 1.9456 | Val Loss: 2.1531
+
+Training abgeschlossen in 580.11 Sekunden.
+
+Lade besten LoRA-Adapter und verschmelze fest mit Basismodell (merge_and_unload)...
+[ERFOLG] Vollstaendig fusioniertes Standalone-Modell (ohne Adapter-Reste) unter results/experiments/sft_scaling/sft_scale_f100 gespeichert!
+
+===========================================================================
+STARTE QUANTITATIVE EVALUATION (Lebenshilfe-Benchmark)
+===========================================================================
+Lade Reward-Modelle & NLP-Pipelines...
+  -> Plot: results/experiments/sft_scaling/sft_scale_f100_loss_curve.png
+
+[ERFOLG] Ergebnisse gespeichert:
+  -> JSON: results/experiments/sft_scaling/sft_scale_f100_metrics.json
+  -> CSV:  results/experiments/sft_scaling/sft_scale_f100_details.csv
+
+Kennzahlen für sft_scale_f100 (N=641):
+  Simplicity (R_style): 0.4468
+  Semantik (R_sem_as):  0.8990
+  Treue LS (Sim_ref):   0.8756
+  Composite Reward:     0.6729
+  BLEU / ROUGE-L:       0.0069 / 0.1262
+  Truncation Rate:      35.14%
+  Ø Gen Tokens:         135.4
+=== SFT Data Scaling Grid Training erfolgreich beendet! ===

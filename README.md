@@ -24,39 +24,37 @@ Das Ziel dieser Arbeit ist die Entwicklung und Evaluierung eines Übersetzungssy
 Das Projekt ist wie folgt organisiert:
 
 ```text
-├── data/
-│   └── texts_lebenshilfe/         # Rohdaten der Lebenshilfe (docx, rtf, odt) aufgeteilt in /as und /ls
-├── docs/
-│   ├── scripts.md                 # Detaillierte Dokumentation aller Python-Skripte
-│   └── notebooks.md               # Detaillierte Dokumentation aller Jupyter Notebooks
+├── data/                         # Parallele Korpora, Vokabulare & experimentelle Datensätze
+│   ├── corpus/                   # Bereinigte Master-Korpora & DPO-Paare
+│   ├── lebenshilfe/              # Unabhängiger Goldstandard der Lebenshilfe S-H
+│   └── ...                       # Experiment-Datensätze (DPO, Skalierung, Metrik-Gewichte)
+├── notebooks/                    # Jupyter Notebooks für Analysen, Training & Evaluation
+├── results/                      # Experiment-Ergebnisse, Metriken, Logs und Plots
+│   ├── evaluation/               # Ergebnis-CSVs und JSON-Metriken
+│   ├── logs/                     # Slurm- und lokale Ausführungsprotokolle
+│   └── plots/                    # Generierte Ergebnis-Diagramme
 ├── scripts/
-│   ├── data_collection/          # Stufe 1 & 2: Crawler und Content-Extraction
-│   ├── preprocessing/            # Datenbereinigung und Datensatzerstellung
-│   ├── evaluation/               # Linguistische & semantische Metriken
-│   ├── modeling/                 # LLM-Synthese & Modellklassifikation
-│   ├── visualization/            # Generierung von Abbildungen
-│   └── README.md                 # Dokumentation der Skripte und Pipeline
-├── results/
-│   ├── aligned_urls/             # Gefundene URL-Paare der Webseiten (.json)
-│   ├── corpus/                   # Roh-Scraping-Ergebnisse pro Quelle (.json)
-│   ├── corpus_cleaned/           # Gefilterte Artikelpaare (.json)
-│   ├── corpus_final/             # Post-prozessierte & bereinigte Artikelpaare (.json)
-│   ├── models/                   # Trainierte Modelle (LSTM, Seq2Seq DPO)
-│   └── *.csv / *.json            # Analyseergebnisse, Metriken und Trainingsdaten
-├── notebooks/
-│   └── *.ipynb                   # Jupyter Notebooks für Modelltraining & Experimente
-├── research/
-│   ├── img/analysis/             # Generierte Abbildungen und Grafiken
-│   └── *.md                      # Analyseberichte, Statistiken und Zusammenfassungen
-├── thesis/
-│   ├── chapters/                 # Die Kapitel der Arbeit (Latex)
-│   ├── options/                  # Konfigurationsdateien und Packages
-│   ├── main.tex                  # Haupt-Dokument der Masterarbeit
-│   └── bibliography.bib          # Literaturverzeichnis
-├── web/
-│   ├── app.py                    # FastAPI-Backend für Text-Evaluation & Übersetzung
-│   └── frontend/                 # Next.js-Frontend für die interaktive Nutzung
-└── requirements.txt              # Python-Abhängigkeiten
+│   ├── data_collection/          # Scraper & Crawler für 12 Webquellen
+│   ├── preprocessing/            # Boilerplate-Bereinigung & Korpusaufbereitung
+│   ├── evaluation/               # Metriken, Benchmarks & Experten-Studienapp
+│   ├── modeling/                 # BiLSTM-Modelle, Tokenisierung & DPO-Tools
+│   ├── experiments/              # Skalierungs-, Translations- & Ablationsexperimente
+│   ├── sbatch/                   # Slurm Batch-Skripte für HPC/GPU-Cluster
+│   └── visualization/            # Skripte zur Abbildungserzeugung
+├── thesis/                       # LaTeX-Quellcode der Masterarbeit
+│   ├── 1.introduction/           # Einleitung & Forschungsfragen
+│   ├── 2.relatedWork/            # Theoretischer Hintergrund & Stand der Forschung
+│   ├── 3.materials/              # Themenblock 1: Datenbasis & Korpus-Erstellung
+│   ├── 4.methodology/            # Themenblock 2: BiLSTM & MixUp-Regressionsmetrik
+│   ├── 5.experimentsAndResults/  # Themenblock 3: SFT, DPO-Alignment & Expertenstudie
+│   ├── 6.discussion/             # Diskussion, Systemgrenzen & Beantwortung der FF
+│   ├── 8.conclusion/             # Fazit & Ausblick
+│   ├── anhang/                   # Detaillierter Anhang mit allen Benchmarks
+│   ├── images/                   # Diagramme und Abbildungen der Thesis
+│   ├── main.tex                  # Hauptdokument
+│   └── Literatur.bib             # Literaturverzeichnis
+├── requirements.txt              # Python-Abhängigkeiten
+└── run_jupyter_server.md         # Anleitung für Remote-Jupyter auf GPU-Servern
 ```
 
 ---
@@ -161,15 +159,15 @@ Das Frontend ist anschließend unter `http://localhost:3000` erreichbar.
 Die schriftliche Ausarbeitung der Arbeit befindet sich im Ordner `thesis/` und basiert auf der Dokumentenklasse `scrreprt` (KOMA-Script).
 
 ### Kapitelstruktur
-
-- `chapters/01_einleitung.tex` - Einleitung
-- `chapters/02_background.tex` - Theoretical Background & Stand der Forschung
-- `chapters/03_datenbasis.tex` - Themenblock 1: Datenbasis & Korpus-Erstellung
-- `chapters/04_metrik.tex` - Themenblock 2: Metrik & Bewerten von Sprachkomplexität
-- `chapters/05_modellierung.tex` - Themenblock 3: Modellierung der Übersetzung & Reward-Guided Fine-Tuning
-- `chapters/06_diskussion.tex` - Diskussion & Gesamtevaluation
-- `chapters/07_fazit.tex` - Fazit & Ausblick
-- `chapters/99_appendix.tex` - Anhang
+ 
+- `1.introduction/target.tex` - Einleitung & Forschungsfragen
+- `2.relatedWork/` - Theoretischer Hintergrund & Stand der Forschung
+- `3.materials/dataset.tex` - Themenblock 1: Datenbasis & Korpus-Erstellung
+- `4.methodology/_methodologies.tex` - Themenblock 2: Metrik & Bewerten von Sprachkomplexität
+- `5.experimentsAndResults/` - Themenblock 3: Modellierung der Übersetzung & Reward-Guided Fine-Tuning
+- `6.discussion/discussion.tex` - Diskussion & Gesamtevaluation
+- `8.conclusion/conclusion.tex` - Fazit & Ausblick
+- `anhang/anhang.tex` - Anhang mit ausführlichen Benchmark-Tabellen & Hyperparametern
 
 ### Kompilieren der Arbeit
 
@@ -408,9 +406,9 @@ Generiert künstliche Zwischenstufen der Komplexität (z. B. 0.25, 0.50, 0.75) z
 - **Befehl (Beispiel):**
   ```bash
   .venv/bin/python scripts/modeling/generate_synthetic_regression_steps.py \
-      --url http://193.175.180.196:8000/v1/chat/completions \
+      --url http://<IP-OR-HOST>:8000/v1/chat/completions \
       --limit 1 \
-      --token RrI6y403jAlUm8v \
+      --token "<YOUR_API_TOKEN>" \
       --model "FlensGen-GPT-OSS-120B"
   ```
 

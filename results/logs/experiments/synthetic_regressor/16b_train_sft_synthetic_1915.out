@@ -1,0 +1,73 @@
+Log file initialized at: results/logs/experiments/synthetic_regressor/train_sft_20260829_035153.log
+Aktuelles Arbeitsverzeichnis: /home/fisc4884/master-thesis
+Globaler Seed auf 42 gesetzt.
+Nutze Device: cuda
+Lade Datensatz aus JSON: data/analysis/corpus_master.json
+Gesamtpaare in JSON: 860
+Paare nach Filterung (0.7 <= Sim <= 0.98): 801
+Gesamtzahl geladener Artikel-Paare: 801
+Trainingsdaten: 680 Paare | Validierungsdaten: 121 Paare
+Starte neues SFT-Training von Basismodell: facebook/mbart-large-50...
+Konfiguriere LoRA für Seq2Seq SFT (r=16, alpha=32, dropout=0.05, targets=['q_proj', 'v_proj', 'k_proj', 'out_proj', 'fc1', 'fc2'])...
+trainable params: 8,650,752 || all params: 619,530,240 || trainable%: 1.3963
+DataLoader erstellt: 85 Batches (Train), 16 Batches (Val).
+Starte SFT Training mit Validation und Early Stopping...
+
+--- Epoche 1/30 ---
+SFT Training:   0%|          | 0/85 [00:00<?, ?it/s]SFT Training:   0%|          | 0/85 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/fisc4884/master-thesis/scripts/modeling/train_sft.py", line 343, in <module>
+    sft_loss = train_sft_epoch(seq2seq_model, train_loader, optimizer, scheduler, ACCUMULATION_STEPS)
+  File "/home/fisc4884/master-thesis/scripts/modeling/train_sft.py", line 285, in train_sft_epoch
+    outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/peft/peft_model.py", line 2432, in forward
+    return self.base_model(
+           ~~~~~~~~~~~~~~~^
+        input_ids=input_ids,
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/peft/tuners/tuners_utils.py", line 333, in forward
+    return self.model.forward(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/transformers/models/mbart/modeling_mbart.py", line 1462, in forward
+    masked_lm_loss = loss_fct(lm_logits.view(-1, self.config.vocab_size), labels.view(-1))
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/modules/loss.py", line 1394, in forward
+    return F.cross_entropy(
+           ~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<4 lines>...
+        label_smoothing=self.label_smoothing,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/fisc4884/master-thesis/.venv/lib/python3.14/site-packages/torch/nn/functional.py", line 3504, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<5 lines>...
+        label_smoothing,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 7.63 GiB. GPU 0 has a total capacity of 23.62 GiB of which 2.09 GiB is free. Process 2673413 has 12.19 GiB memory in use. Process 2923700 has 10.49 GiB memory in use. Process 3390036 has 9.86 GiB memory in use. Including non-PyTorch memory, this process has 21.47 GiB memory in use. Of the allocated memory 21.23 GiB is allocated by PyTorch, and 51.26 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

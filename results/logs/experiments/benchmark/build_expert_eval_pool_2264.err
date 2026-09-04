@@ -1,0 +1,12 @@
+usage: build_expert_evaluation_set.py [-h] [--corpus_csv CORPUS_CSV]
+                                      [--lh_json LH_JSON]
+                                      [--sft_model_path SFT_MODEL_PATH]
+                                      [--dpo_model_path DPO_MODEL_PATH]
+                                      [--base_model_name BASE_MODEL_NAME]
+                                      [--reward_model_path REWARD_MODEL_PATH]
+                                      [--reward_vocab_path REWARD_VOCAB_PATH]
+                                      [--sbert_model_name SBERT_MODEL_NAME]
+                                      [--output_dir OUTPUT_DIR] [--seed SEED]
+                                      [--device DEVICE]
+build_expert_evaluation_set.py: error: unrecognized arguments: --testset_csv data/evaluation_sets/benchmark_translation_testset.csv --sft_mbart_path results/models/sft --dpo_mbart_path results/models/dpo --qwen_base_model Qwen/Qwen2.5-1.5B-Instruct --num_articles 10
+srun: error: hpc3-liskov: task 0: Exited with exit code 2

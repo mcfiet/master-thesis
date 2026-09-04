@@ -1,0 +1,12 @@
+=== Vorbereitung des ungesehenen 10kGNAD Alltagssprache-Korpus für DPO ===
+Fri Aug 28 15:07:04 UTC 2026
+2026-08-28 15:07:07 - INFO - Prepare10kGNAD - Downloading 10kGNAD dataset from: https://raw.githubusercontent.com/tblock/10kGNAD/master/articles.csv
+2026-08-28 15:07:09 - INFO - Prepare10kGNAD - Loaded 9576 articles across categories: {'Web': np.int64(1637), 'Panorama': np.int64(1577), 'International': np.int64(1402), 'Wirtschaft': np.int64(1275), 'Sport': np.int64(1125), 'Inland': np.int64(956), 'Etat': np.int64(628), 'Wissenschaft': np.int64(534), 'Kultur': np.int64(442)}
+2026-08-28 15:10:23 - INFO - Prepare10kGNAD - === Corpus Preparation Completed ===
+2026-08-28 15:10:23 - INFO - Prepare10kGNAD - Total Valid Clean Chunks: 9567
+2026-08-28 15:10:23 - INFO - Prepare10kGNAD - Dropped Duplicate Chunks: 1
+2026-08-28 15:10:23 - INFO - Prepare10kGNAD - Dropped Boilerplate/Noise Chunks: 8
+2026-08-28 15:10:23 - INFO - Prepare10kGNAD - Saved to: data/corpus/corpus_10kgnad_len512_as.json
+2026-08-28 15:10:23 - INFO - Prepare10kGNAD - Token Length Stats -> Min: 50 | Max: 1024 | Avg: 349.8
+=== 10kGNAD Vorbereitung abgeschlossen ===
+Fri Aug 28 15:10:24 UTC 2026

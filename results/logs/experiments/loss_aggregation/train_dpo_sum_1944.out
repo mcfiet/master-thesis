@@ -1,0 +1,32 @@
+=== Training DPO Model with Loss Type: SUM (Classic Summed Log-Probabilities) ===
+Sat Aug 29 11:21:11 UTC 2026
+Globaler Seed auf 42 gesetzt.
+Log file initialized at: results/logs/run_pipeline/train_dpo_20260829_112115.log
+Aktuelles Arbeitsverzeichnis: /home/fisc4884/master-thesis
+Nutze Device: cuda
+Lade Basis-SFT-Modell und Tokenizer aus: results/models/sft...
+================================================================================
+[SPRACHCODE-KONTROLLE] Tokenizer für mBART erfolgreich konfiguriert:
+  -> src_lang: de_DE
+  -> tgt_lang: de_DE
+  -> de_DE Token-ID: 250003
+  -> Test-Target Enkodierung (Token IDs): [250003, 8647, 2]
+================================================================================
+Lade Basismodell 'facebook/mbart-large-50' fuer SFT-Adapter...
+Lade und verschmelze (merge_and_unload) SFT-LoRA-Adapter aus: results/models/sft...
+[ERFOLG] SFT-Adapter erfolgreich in Basisgewichte integriert (SFT ist nun die Basis fuer DPO)!
+Konfiguriere DPO-LoRA auf Basis des SFT-Modells (r=16, alpha=32, dropout=0.05, targets=['q_proj', 'v_proj', 'k_proj', 'out_proj', 'fc1', 'fc2'])...
+trainable params: 8,650,752 || all params: 619,530,240 || trainable%: 1.3963
+Traceback (most recent call last):
+  File "/home/fisc4884/master-thesis/scripts/modeling/train_dpo.py", line 685, in <module>
+    main()
+    ~~~~^^
+  File "/home/fisc4884/master-thesis/scripts/modeling/train_dpo.py", line 482, in main
+    train_dataset = DPOPreferenceDataset(
+        data_file=args.train_file,
+    ...<3 lines>...
+        prompt_prefix=args.prompt_prefix,
+    )
+  File "/home/fisc4884/master-thesis/scripts/modeling/train_dpo.py", line 171, in __init__
+    raise FileNotFoundError(f"Datensatz-Datei nicht gefunden: {data_file}")
+FileNotFoundError: Datensatz-Datei nicht gefunden: data/corpus/dpo_pairs_mixup.jsonl

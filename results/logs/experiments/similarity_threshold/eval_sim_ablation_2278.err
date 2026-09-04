@@ -1,0 +1,9 @@
+2026-09-02 08:34:43,316 - INFO - EvaluateSimilarityAblation - === Konsolidiere Similarity Threshold Experimente ===
+2026-09-02 08:34:43,381 - INFO - EvaluateSimilarityAblation - Gefundene Metriken-Dateien: 6
+2026-09-02 08:34:43,385 - INFO - EvaluateSimilarityAblation - Zusammenfassung gespeichert unter: results/experiments/similarity_threshold/similarity_threshold_summary.csv
+2026-09-02 08:34:43,416 - INFO - EvaluateSimilarityAblation - Details gespeichert unter: results/experiments/similarity_threshold/similarity_threshold_details.csv
+2026-09-02 08:34:43,611 - INFO - EvaluateSimilarityAblation - Plot gespeichert: results/experiments/similarity_threshold/plots/data_retention_and_tokens.png
+2026-09-02 08:34:43,791 - INFO - EvaluateSimilarityAblation - Plot gespeichert: results/experiments/similarity_threshold/plots/mixup_tradeoff_in_vs_ood.png
+2026-09-02 08:34:43,951 - INFO - EvaluateSimilarityAblation - Plot gespeichert: results/experiments/similarity_threshold/plots/sft_tradeoff_style_vs_sem.png
+2026-09-02 08:34:43,953 - INFO - EvaluateSimilarityAblation - LaTeX Tabellen gespeichert unter: results/experiments/similarity_threshold/latex_tables_similarity_ablation.tex
+2026-09-02 08:34:43,953 - INFO - EvaluateSimilarityAblation - === Konsolidierung erfolgreich abgeschlossen! ===

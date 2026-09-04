@@ -1,0 +1,46 @@
+=== Starte Generierung des 50-Item Experten-Evaluationspools auf GPU ===
+Wed Sep  2 08:06:21 UTC 2026
+=== Erstelle 50-Item Disjoint Evaluationspool (Seed: 42, Device: cuda) ===
+Web-Korpus geladen: 801 Paare | Held-Out Testset: 81 Artikel
+Lebenshilfe Gold geladen: 37 Artikel
+
+Zuweisung der 48 Studien-Artikel:
+  Bedingung 1 (AS Original): 12 disjunkte Artikel
+  Bedingung 2 (Gold LS):     12 disjunkte Artikel
+  Bedingung 3 (mBART SFT):   12 disjunkte Artikel
+  Bedingung 4 (mBART DPO):   12 disjunkte Artikel
+
+--- Starte SFT Übersetzung (12 Texte) ---
+Lade Modell aus: results/models/token_length_exp/sft_len1024 (Basis: facebook/mbart-large-50)...
+  -> Erfolgreich als eigenständiges Modell geladen.
+
+--- Starte DPO Übersetzung (12 Texte) ---
+Lade Modell aus: results/models/token_length_exp/dpo_len1024 (Basis: facebook/mbart-large-50)...
+  -> Erfolgreich als eigenständiges Modell geladen.
+
+--- Initialisiere Metrik-Pipeline (BiLSTM Regressor & SBERT) ---
+BiLSTM MixUp Regressor geladen aus: results/models/regressor_length_exp/bilstm_mixup_regression_1024.pt
+SentenceTransformer geladen: jinaai/jina-embeddings-v2-base-de
+
+Gesamtzahl zusammengestellter Einzeltexte: 50
+
+Berechne automatisierte Metriken (R_style, R_sem, Flesch, LIX) für alle 50 Texte...
+
+Verblinde und shuffele alle 50 Items...
+
+[FERTIG] Experten-Evaluationspool erfolgreich erstellt!
+  -> Verblindete Items (Web-App): data/expert_eval/blinded_items.json (50 Items)
+  -> Geheimer Schlüssel:         data/expert_eval/secret_key_mapping.json
+  -> Master-Tabelle CSV:         data/expert_eval/expert_study_master_table.csv
+
+--- Deskriptive Übersicht nach Bedingung ---
+                   r_style  r_sem_as  flesch_de        lix  word_count
+condition                                                             
+AS_Original       0.117400  1.000000  28.683333  51.378333  741.000000
+Control_Easy_LS   0.968800  0.549700  69.070000  27.780000   17.000000
+Control_Hard_AS   0.376900  0.412100 -21.410000  90.580000   33.000000
+Gold_Standard_LS  0.840450  0.363667  46.975000  40.930833  790.833333
+mBART_DPO         0.982158  0.356967  53.388333  35.956667  449.500000
+mBART_SFT         0.718283  0.404125  46.528333  38.626667  237.750000
+=== Experten-Evaluationspool erfolgreich erstellt ===
+Wed Sep  2 08:09:42 UTC 2026

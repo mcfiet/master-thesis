@@ -1,0 +1,14 @@
+experiment_name,experiment_group,mixtures_per_pair,train_fraction,lh_mean_as,lh_mean_ls,lh_delta,lh_pairwise_acc,lh_binary_acc,lh_auc,lh_mae
+scale_mixtures_m2,mixtures_scaling,2,1.0,0.2358,0.5663,0.3305,83.78,82.43,85.14,0.3347
+scale_mixtures_m5,mixtures_scaling,5,1.0,0.1347,0.6222,0.4876,97.3,90.54,96.9,0.2562
+scale_mixtures_m10,mixtures_scaling,10,1.0,0.1469,0.5208,0.3738,97.3,85.14,96.31,0.3131
+scale_mixtures_m20,mixtures_scaling,20,1.0,0.142,0.6738,0.5318,97.3,93.24,99.6,0.2341
+scale_mixtures_m40,mixtures_scaling,40,1.0,0.1245,0.6918,0.5673,97.3,95.95,99.82,0.2163
+scale_mixtures_m80,mixtures_scaling,80,1.0,0.0646,0.776,0.7114,97.3,97.3,99.96,0.1443
+scale_mixtures_m160,mixtures_scaling,160,1.0,0.0962,0.7777,0.6815,97.3,97.3,99.96,0.1593
+scale_mixtures_m320,mixtures_scaling,320,1.0,0.0822,0.7825,0.7003,97.3,97.3,99.89,0.1498
+scale_pairs_f010,pairs_scaling,20,0.1,0.2163,0.6051,0.3888,94.59,87.84,94.27,0.3056
+scale_pairs_f025,pairs_scaling,20,0.25,0.2244,0.5558,0.3314,97.3,85.14,93.46,0.3343
+scale_pairs_f050,pairs_scaling,20,0.5,0.1438,0.6656,0.5218,97.3,91.89,99.45,0.2391
+scale_pairs_f075,pairs_scaling,20,0.75,0.2708,0.6586,0.3879,97.3,93.24,98.87,0.3061
+scale_pairs_f100,pairs_scaling,20,1.0,0.142,0.6738,0.5318,97.3,93.24,99.6,0.2341

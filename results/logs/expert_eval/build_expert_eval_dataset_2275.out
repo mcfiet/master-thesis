@@ -1,0 +1,52 @@
+=== Starte Generierung des 52-Item Experten-Evaluationspools auf GPU ===
+Wed Sep  2 07:56:50 UTC 2026
+=== Erstelle 52-Item Disjoint Evaluationspool (Seed: 42, Device: cuda) ===
+Web-Korpus geladen: 801 Paare | Held-Out Testset: 81 Artikel
+Lebenshilfe Gold geladen: 37 Artikel
+
+Zuweisung der 50 Studien-Artikel auf 5 Bedingungen:
+  Bedingung 1 (AS Original): 10 disjunkte Artikel
+  Bedingung 2 (Gold LS):     10 disjunkte Artikel
+  Bedingung 3 (mBART SFT):   10 disjunkte Artikel
+  Bedingung 4 (mBART DPO):   10 disjunkte Artikel
+  Bedingung 5 (Qwen SFT):    10 disjunkte Artikel
+
+--- Starte mBART SFT Übersetzung (10 Texte) ---
+Lade mBART Modell aus: results/models/token_length_exp/sft_len1024 (Basis: facebook/mbart-large-50)...
+  -> Erfolgreich als eigenständiges Modell geladen.
+
+--- Starte mBART DPO Übersetzung (10 Texte) ---
+Lade mBART Modell aus: results/models/token_length_exp/dpo_len1024 (Basis: facebook/mbart-large-50)...
+  -> Erfolgreich als eigenständiges Modell geladen.
+
+--- Starte Qwen SFT Übersetzung (10 Texte) ---
+Lade Qwen Decoder-Only Modell aus: results/models/decoder_only/sft (Basis: Qwen/Qwen2.5-1.5B-Instruct)...
+  -> Erfolgreich als eigenständiges CausalLM geladen.
+
+--- Initialisiere Metrik-Pipeline (BiLSTM Regressor & SBERT) ---
+BiLSTM MixUp Regressor geladen aus: results/models/regressor_length_exp/bilstm_mixup_regression_1024.pt
+SentenceTransformer geladen: jinaai/jina-embeddings-v2-base-de
+
+Gesamtzahl zusammengestellter Einzeltexte: 52
+
+Berechne automatisierte Metriken (R_style, R_sem, Flesch, LIX) für alle Texte...
+
+Verblinde und shuffele alle 52 Items...
+
+[FERTIG] Experten-Evaluationspool erfolgreich erstellt!
+  -> Verblindete Items (Web-App): data/expert_eval/blinded_items.json (52 Items)
+  -> Geheimer Schlüssel:         data/expert_eval/secret_key_mapping.json
+  -> Master-Tabelle CSV:         data/expert_eval/expert_study_master_table.csv
+
+--- Deskriptive Übersicht nach Bedingung ---
+                  r_style  r_sem_as  flesch_de     lix  word_count
+condition                                                         
+AS_Original       0.13733   1.00000     28.799  51.303       643.6
+Control_Easy_LS   0.96880   0.54970     69.070  27.780        17.0
+Control_Hard_AS   0.37690   0.41210    -21.410  90.580        33.0
+Gold_Standard_LS  0.84296   0.35929     47.448  40.527       937.2
+Qwen_SFT          0.89819   0.33349     50.509  35.039       431.4
+mBART_DPO         0.96627   0.33651     52.352  36.373       353.0
+mBART_SFT         0.68304   0.38566     43.994  40.639       281.8
+=== Experten-Evaluationspool erfolgreich erstellt ===
+Wed Sep  2 08:01:12 UTC 2026

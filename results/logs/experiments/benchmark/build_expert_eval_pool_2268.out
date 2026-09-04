@@ -1,0 +1,46 @@
+=== Erstelle Experten-Evaluationsdatensatz (10 Nicht-Lebenshilfe Domaenen) ===
+Tue Sep  1 14:33:29 UTC 2026
+=== Erstelle 50-Item Disjoint Evaluationspool (Seed: 42, Device: cuda) ===
+Web-Korpus geladen: 801 Paare | Held-Out Testset: 81 Artikel
+Lebenshilfe Gold geladen: 37 Artikel
+
+Zuweisung der 48 Studien-Artikel:
+  Bedingung 1 (AS Original): 12 disjunkte Artikel
+  Bedingung 2 (Gold LS):     12 disjunkte Artikel
+  Bedingung 3 (mBART SFT):   12 disjunkte Artikel
+  Bedingung 4 (mBART DPO):   12 disjunkte Artikel
+
+--- Starte SFT Übersetzung (12 Texte) ---
+Lade Modell aus: results/models/sft (Basis: facebook/mbart-large-50)...
+  -> Erfolgreich als eigenständiges Modell geladen.
+
+--- Starte DPO Übersetzung (12 Texte) ---
+Lade Modell aus: results/models/dpo (Basis: facebook/mbart-large-50)...
+  -> Erfolgreich als eigenständiges Modell geladen.
+
+--- Initialisiere Metrik-Pipeline (BiLSTM Regressor & SBERT) ---
+BiLSTM MixUp Regressor geladen aus: results/models/bilstm_mixup_regression.pt
+SentenceTransformer geladen: jinaai/jina-embeddings-v2-base-de
+
+Gesamtzahl zusammengestellter Einzeltexte: 50
+
+Berechne automatisierte Metriken (R_style, R_sem, Flesch, LIX) für alle 50 Texte...
+
+Verblinde und shuffele alle 50 Items...
+Gespeichert: data/expert_eval/blinded_items.json (50 verblindete Items)
+Gespeichert: data/expert_eval/secret_key_mapping.json (Geheimer Auswertungsschlüssel)
+Gespeichert: data/expert_eval/expert_study_master_table.csv (Master-Tabelle mit allen Metriken)
+
+=== Zusammenfassung der 50 Evaluations-Items nach Bedingung ===
+                  r_style  r_sem_as  flesch_de     lix  word_count
+condition                                                         
+AS_Original         0.079     1.000     28.683  51.378     741.000
+Control_Easy_LS     0.815     0.550     69.070  27.780      17.000
+Control_Hard_AS     0.040     0.331    -19.850  82.950      37.000
+Gold_Standard_LS    0.850     0.365     46.975  40.931     790.833
+mBART_DPO           0.960     0.359     55.587  33.613     554.333
+mBART_SFT           0.680     0.340     46.240  39.321     268.667
+
+[FERTIG] Experten-Evaluationspool erfolgreich erstellt!
+=== Experten-Evaluationsdatensatz erfolgreich erstellt ===
+Tue Sep  1 14:35:56 UTC 2026

@@ -1,0 +1,24 @@
+Device: cuda
+-> Geladen: sent (results/models/bilstm_sentence_classifier.pt)
+-> Geladen: art_256 (results/models/classifier_length_exp/bilstm_article_classifier_256.pt)
+-> Geladen: art_512 (results/models/classifier_length_exp/bilstm_article_classifier_512.pt)
+-> Geladen: art_1024 (results/models/classifier_length_exp/bilstm_article_classifier_1024.pt)
+Lebenshilfe Artikelpaare: 37
+Detail-CSVs gespeichert unter: results/evaluation/classifier_length_comparison_eval.csv
+
+================================================================================
+KLASSIFIKATOR BENCHMARK TABELLE (LEBENSHILFE GOLDSTANDARD)
+================================================================================
+                                    Modell             Ebene / Input Ø Score (LS) Ø Score (AS) Separation (Δ) Balanced Acc ROC-AUC Perfect Pair Match
+BiLSTM Satz-Klassifikator (Sentence-Level)      Satzebene ($N=6901$) 0.721 ± 0.37 0.160 ± 0.29          0.561       79.94%  0.8863    N/A (Satzebene)
+ BiLSTM Satz-Klassifikator (Majority Vote) Dokument ($r_{LS}$ Ratio) 0.719 ± 0.09 0.116 ± 0.13          0.603       98.65%  0.9949     100.0% (37/37)
+        BiLSTM Artikel-Klassifikator (256)   Dokument ($256$ Tokens) 0.756 ± 0.36 0.003 ± 0.00          0.754       90.54%  0.9463      97.3% (36/37)
+        BiLSTM Artikel-Klassifikator (512)   Dokument ($512$ Tokens) 0.781 ± 0.36 0.009 ± 0.03          0.772       90.54%  0.9518      94.6% (35/37)
+       BiLSTM Artikel-Klassifikator (1024) Dokument ($1.024$ Tokens) 0.413 ± 0.40 0.000 ± 0.00          0.413       70.27%  0.9752     100.0% (37/37)
+            Flesch Reading Ease (Baseline)    Dokument (Silben/Satz) 0.973 ± 0.16 0.189 ± 0.39          0.784       89.19%  0.8919     100.0% (37/37)
+          Wiener Sachtextformel (Baseline)      Dokument (Wortlänge) 0.919 ± 0.27 0.108 ± 0.31          0.811       90.54%  0.9054     100.0% (37/37)
+Plot: results/plots/experiments/classifier_length/classifier_kde_length_comparison.png
+Plot: results/plots/experiments/classifier_length/classifier_roc_pr_length_comparison.png
+Plot: results/plots/experiments/classifier_length/classifier_confusion_matrices.png
+
+[ERFOLG] Klassifikator-Längen-Evaluation abgeschlossen.

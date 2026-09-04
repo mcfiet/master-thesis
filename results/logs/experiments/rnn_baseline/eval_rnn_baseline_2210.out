@@ -1,0 +1,5 @@
+=== BiLSTM vs. Vanilla RNN Baseline Evaluation auf Lebenshilfe ===
+Aggregierte Metriken gespeichert in results/evaluation/bilstm_vs_rnn_eval.csv
+Sample-Vorhersagen gespeichert in results/evaluation/bilstm_vs_rnn_predictions.csv
+=== RNN Baseline Evaluation Completed ===
+Tue Sep  1 06:36:01 UTC 2026

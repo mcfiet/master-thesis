@@ -1,0 +1,80 @@
+[
+  {
+    "variant": "base_ls",
+    "mean_flesch_de": 54.254,
+    "mean_delta_flesch": 0.0,
+    "mean_lix": 34.538,
+    "mean_delta_lix": 0.0,
+    "mean_wstf_4": 7.167,
+    "mean_delta_wstf_4": 0.0,
+    "mean_neural_score_256": 0.5529,
+    "mean_delta_neural_score": 0.0,
+    "mean_token_delta": 0.0,
+    "mean_syllable_delta": 0.0
+  },
+  {
+    "variant": "subjunctive_100",
+    "mean_flesch_de": 47.94,
+    "mean_delta_flesch": -6.3136,
+    "mean_lix": 35.673,
+    "mean_delta_lix": 1.1349,
+    "mean_wstf_4": 7.721,
+    "mean_delta_wstf_4": 0.5539,
+    "mean_neural_score_256": 0.2078,
+    "mean_delta_neural_score": -0.3451,
+    "mean_token_delta": 0.0,
+    "mean_syllable_delta": 7.4
+  },
+  {
+    "variant": "passive_100",
+    "mean_flesch_de": 60.294,
+    "mean_delta_flesch": 6.0396,
+    "mean_lix": 37.257,
+    "mean_delta_lix": 2.7192,
+    "mean_wstf_4": 6.967,
+    "mean_delta_wstf_4": -0.2,
+    "mean_neural_score_256": 0.7698,
+    "mean_delta_neural_score": 0.2169,
+    "mean_token_delta": 0.0,
+    "mean_syllable_delta": 4.8
+  },
+  {
+    "variant": "genitive_100",
+    "mean_flesch_de": 60.808,
+    "mean_delta_flesch": 6.5539,
+    "mean_lix": 34.623,
+    "mean_delta_lix": 0.0848,
+    "mean_wstf_4": 5.707,
+    "mean_delta_wstf_4": -1.4605,
+    "mean_neural_score_256": 0.2535,
+    "mean_delta_neural_score": -0.2994,
+    "mean_token_delta": 0.0,
+    "mean_syllable_delta": -6.8
+  },
+  {
+    "variant": "combined_all",
+    "mean_flesch_de": 52.73,
+    "mean_delta_flesch": -1.5245,
+    "mean_lix": 37.485,
+    "mean_delta_lix": 2.947,
+    "mean_wstf_4": 7.031,
+    "mean_delta_wstf_4": -0.1368,
+    "mean_neural_score_256": 0.4274,
+    "mean_delta_neural_score": -0.1255,
+    "mean_token_delta": 0.0,
+    "mean_syllable_delta": 13.0
+  },
+  {
+    "variant": "control_synonyms",
+    "mean_flesch_de": 54.899,
+    "mean_delta_flesch": 0.6445,
+    "mean_lix": 35.208,
+    "mean_delta_lix": 0.6695,
+    "mean_wstf_4": 6.884,
+    "mean_delta_wstf_4": -0.2831,
+    "mean_neural_score_256": 0.4249,
+    "mean_delta_neural_score": -0.128,
+    "mean_token_delta": 0.0,
+    "mean_syllable_delta": 0.4
+  }
+]

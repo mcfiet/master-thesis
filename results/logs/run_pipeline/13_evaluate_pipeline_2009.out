@@ -1,0 +1,18 @@
+=== Evaluierung des finalen DPO Modells vs. SFT Baseline auf dem ungesehenen Lebenshilfe Benchmark ===
+Sun Aug 30 09:17:15 UTC 2026
+2026-08-30 09:17:18 - INFO - EvaluateDPOLadder - Using device: cuda
+2026-08-30 09:17:18 - INFO - EvaluateDPOLadder - Loaded 37 test samples from data/lebenshilfe/lebenshilfe_dataset_clean.json
+2026-08-30 09:17:19 - INFO - sentence_transformers.base.model - Loading SentenceTransformer model from jinaai/jina-embeddings-v2-base-de.
+2026-08-30 09:17:24 - INFO - EvaluateDPOLadder - Generating simplifications for: SFT (results/models/sft)...
+2026-08-30 09:20:43 - INFO - EvaluateDPOLadder - Generating simplifications for: DPO Ladder (results/models/dpo)...
+2026-08-30 09:24:17 - INFO - EvaluateDPOLadder - Saved summary to results/evaluation/pipeline_final_summary.csv
+2026-08-30 09:24:17 - INFO - EvaluateDPOLadder - Saved details to results/evaluation/pipeline_final_details.csv
+
+=================== EVALUATION RESULTS ===================
+     Model Style (Simplicity)     SBERT to AS SBERT to Ref (Gold) Composite Reward Compression Ratio
+       SFT    0.7091 ± 0.1765 0.7946 ± 0.0876     0.7742 ± 0.0973  0.8032 ± 0.0945             0.653
+DPO Ladder    0.9618 ± 0.0261 0.7603 ± 0.0692     0.7708 ± 0.0765  0.9210 ± 0.0182             1.323
+==========================================================
+
+=== Pipeline Evaluierung abgeschlossen ===
+Sun Aug 30 09:24:18 UTC 2026

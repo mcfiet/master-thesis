@@ -1,0 +1,21 @@
+=== Starte Evaluation: MixUp Modell-Varianten Vergleich ===
+Device: cuda
+Korpus geladen: 64 Test-Paare, 505 Trainings-Paare.
+Lebenshilfe geladen: 37 Artikelpaare aus data/lebenshilfe/lebenshilfe_dataset_clean.json
+Lade Vokabular: data/mixup_variants/mixup_vocab.json
+Vokabular-Größe: 20974
+Generiere Trainings-Target-Verteilungs-Sample...
+[OK] Modell geladen: results/models/mixup_variants/bilstm_mixup_regression_static.pt
+[OK] Modell geladen: results/models/mixup_variants/bilstm_mixup_regression_dynamic.pt
+[OK] Modell geladen: results/models/mixup_variants/bilstm_mixup_regression_hybrid.pt
+[OK] Modell geladen: results/models/mixup_variants/bilstm_mixup_regression_hybrid_cyclic.pt
+
+=== 1. In-Domain Test-Split Evaluation ===
+
+=== 2. Out-of-Domain Lebenshilfe Evaluation ===
+
+[OK] Zusammenfassung gespeichert: results/evaluation/mixup_variants_eval.csv
+
+--- Generiere 12 Visualisierungen ---
+=== Evaluation erfolgreich beendet. Alle CSVs und Plots gespeichert. ===
+=== Evaluation der MixUp-Varianten abgeschlossen ===
