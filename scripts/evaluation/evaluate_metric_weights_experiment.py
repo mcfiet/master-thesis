@@ -181,26 +181,17 @@ class MetricWeightsEvaluator:
         if sbert_max_seq_len and hasattr(self.sbert, "max_seq_length"):
             self.sbert.max_seq_length = sbert_max_seq_len
 
-    def text_to_tensor(self, texts: List[str]) -> torch.Tensor:
-        batch_ids = []
-        for text in texts:
-            doc = self.nlp(text)
-            ids = [self.vocab.get(token.text.lower(), 1) for token in doc if not token.is_space]
-            if len(ids) > self.max_seq_len:
-                ids = ids[:self.max_seq_len]
-            else:
-                ids = ids + [0] * (self.max_seq_len - len(ids))
-            batch_ids.append(ids)
-        return torch.tensor(batch_ids, dtype=torch.long, device=self.device)
-
     @torch.no_grad()
     def predict_simplicity(self, texts: List[str], batch_size: int = 32) -> np.ndarray:
         all_preds = []
-        for i in range(0, len(texts), batch_size):
-            batch_texts = texts[i : i + batch_size]
-            tensor = self.text_to_tensor(batch_texts)
-            preds = self.regressor(tensor).squeeze(-1).cpu().numpy()
-            all_preds.extend(preds.tolist() if isinstance(preds, np.ndarray) and preds.ndim > 0 else [float(preds)])
+        for text in texts:
+            doc = self.nlp(text)
+            ids = [self.vocab.get(token.text.lower(), 1) for token in doc if not token.is_space][:self.max_seq_len]
+            if not ids:
+                ids = [0]
+            tensor = torch.tensor([ids], dtype=torch.long, device=self.device)
+            p = self.regressor(tensor).squeeze().item()
+            all_preds.append(float(p))
         return np.array(all_preds)
 
     @torch.no_grad()

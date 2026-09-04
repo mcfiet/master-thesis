@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  expert-eval-app:
+    build:
+      context: ../..
+      dockerfile: scripts/evaluation/Dockerfile
+    image: expert-eval-app:latest
+    container_name: expert_evaluation_server
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    volumes:
+      # Ergebnisse persistent auf dem Host sichern
+      - ../../results/expert_eval:/app/results/expert_eval
+      # Daten einbinden
+      - ../../data/expert_eval:/app/data/expert_eval
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.2"
+          memory: 128M

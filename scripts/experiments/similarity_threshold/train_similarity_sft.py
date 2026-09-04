@@ -418,18 +418,15 @@ def main():
         reward_model.eval()
 
         all_s = []
-        for i in range(0, len(gen_texts), 32):
-            b_txt = gen_texts[i : i + 32]
-            b_ids = []
-            for t in b_txt:
+        with torch.no_grad():
+            for t in gen_texts:
                 doc = nlp(t)
-                ids = [vocab.get(tok.text.lower(), 1) for tok in doc if not tok.is_space]
-                ids = ids[:1024] + [0] * max(0, 1024 - len(ids))
-                b_ids.append(ids)
-            tensor = torch.tensor(b_ids, dtype=torch.long, device=device)
-            with torch.no_grad():
-                preds = reward_model(tensor).squeeze(-1).cpu().numpy()
-            all_s.extend(preds.tolist() if isinstance(preds, np.ndarray) and preds.ndim > 0 else [float(preds)])
+                ids = [vocab.get(tok.text.lower(), 1) for tok in doc if not tok.is_space][:1024]
+                if not ids:
+                    ids = [0]
+                tensor = torch.tensor([ids], dtype=torch.long, device=device)
+                p = reward_model(tensor).squeeze().item()
+                all_s.append(float(p))
         r_style = np.array(all_s)
 
     # SBERT Semantic Similarity

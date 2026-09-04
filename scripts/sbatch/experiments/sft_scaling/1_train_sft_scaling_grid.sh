@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=1_sft_scaling_grid
 #SBATCH --partition=research
-#SBATCH --time=04:00:00
+#SBATCH --time=06:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=24G
 #SBATCH --gres=gpu:mig_24gb:1
@@ -37,18 +37,19 @@ for F in "${FRACTION_VALUES[@]}"; do
         --base_model_name facebook/mbart-large-50 \
         --reward_model_path results/models/bilstm_mixup_regression.pt \
         --reward_vocab_path data/vocabs/mixup_vocab.json \
+        --reward_max_seq_len 1024 \
         --sbert_model_name jinaai/jina-embeddings-v2-base-de \
         --train_fraction ${F} \
         --experiment_name "${EXP_NAME}" \
         --min_sim 0.70 \
         --max_sim 0.98 \
-        --max_source_len 256 \
-        --max_target_len 256 \
+        --max_source_len 1024 \
+        --max_target_len 1024 \
         --batch_size 4 \
         --accumulation_steps 4 \
-        --epochs 25 \
+        --epochs 30 \
         --lr 1e-4 \
-        --patience 6 \
+        --patience 10 \
         --seed 42 \
         --lora_r 16 \
         --lora_alpha 32 \

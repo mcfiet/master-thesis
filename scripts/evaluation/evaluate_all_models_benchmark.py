@@ -221,7 +221,7 @@ def main():
     parser.add_argument("--reward_model_path", default="results/models/bilstm_mixup_regression.pt")
     parser.add_argument("--reward_vocab_path", default="data/vocabs/mixup_vocab.json")
     parser.add_argument("--sbert_model_name", default="jinaai/jina-embeddings-v2-base-de")
-    parser.add_argument("--sbert_max_seq_len", type=int, default=8192, help="Max sequence length for SBERT (default: 8192)")
+    parser.add_argument("--sbert_max_seq_len", type=int, default=1024, help="Max sequence length for SBERT (default: 1024)")
     parser.add_argument("--output_csv", default="results/evaluation/benchmark_5way_decoder_vs_encoder_decoder.csv")
     parser.add_argument("--output_summary", default="results/evaluation/master_benchmark_summary.csv")
     parser.add_argument("--max_source_len", type=int, default=1024)
@@ -272,9 +272,9 @@ def main():
         for t in texts:
             doc = nlp(t)
             tokens = [tok.text.lower() for tok in doc if not tok.is_space]
-            encoded = [stoi.get(tok, stoi.get("<unk>", 1)) for tok in tokens][:256]
-            if len(encoded) < 256:
-                encoded = encoded + [0] * (256 - len(encoded))
+            encoded = [stoi.get(tok, stoi.get("<unk>", 1)) for tok in tokens][:args.max_target_len]
+            if len(encoded) == 0:
+                encoded = [0]
             tensor_in = torch.tensor([encoded], dtype=torch.long, device=args.device)
             with torch.no_grad():
                 pred = bilstm(tensor_in).squeeze().item()

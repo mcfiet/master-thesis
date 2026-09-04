@@ -148,8 +148,9 @@ def main(output_csv: str = "results/evaluation/length_bias_results.csv"):
             
             # 1. Standard prediction
             encoded = vocab.encode(tokens)[:MAX_SEQ_LEN]
-            padded = encoded + [0] * (MAX_SEQ_LEN - len(encoded))
-            tensor = torch.tensor([padded], dtype=torch.long).to(DEVICE)
+            if not encoded:
+                encoded = [0]
+            tensor = torch.tensor([encoded], dtype=torch.long).to(DEVICE)
             
             with torch.no_grad():
                 output = model(tensor).squeeze()
@@ -158,9 +159,8 @@ def main(output_csv: str = "results/evaluation/length_bias_results.csv"):
                 
             # 2. Dummy representation prediction (constant tokens of original length)
             dummy_tokens = [dummy_token] * original_len
-            dummy_encoded = vocab.encode(dummy_tokens)[:MAX_SEQ_LEN]
-            dummy_padded = dummy_encoded + [0] * (MAX_SEQ_LEN - len(dummy_encoded))
-            dummy_tensor = torch.tensor([dummy_padded], dtype=torch.long).to(DEVICE)
+            dummy_encoded = vocab.encode(dummy_tokens)[:MAX_SEQ_LEN] or [0]
+            dummy_tensor = torch.tensor([dummy_encoded], dtype=torch.long).to(DEVICE)
             
             with torch.no_grad():
                 dummy_output = model(dummy_tensor).squeeze()
@@ -169,9 +169,8 @@ def main(output_csv: str = "results/evaluation/length_bias_results.csv"):
                 
             # 3. Fixed length prediction: 50 tokens
             fixed_tokens_50 = tokens[:50]
-            fixed_encoded_50 = vocab.encode(fixed_tokens_50)
-            fixed_padded_50 = fixed_encoded_50 + [0] * (MAX_SEQ_LEN - len(fixed_encoded_50))
-            fixed_tensor_50 = torch.tensor([fixed_padded_50], dtype=torch.long).to(DEVICE)
+            fixed_encoded_50 = vocab.encode(fixed_tokens_50) or [0]
+            fixed_tensor_50 = torch.tensor([fixed_encoded_50], dtype=torch.long).to(DEVICE)
             
             with torch.no_grad():
                 fixed_output_50 = model(fixed_tensor_50).squeeze()
@@ -180,9 +179,8 @@ def main(output_csv: str = "results/evaluation/length_bias_results.csv"):
                 
             # 4. Fixed length prediction: 100 tokens
             fixed_tokens_100 = tokens[:100]
-            fixed_encoded_100 = vocab.encode(fixed_tokens_100)
-            fixed_padded_100 = fixed_encoded_100 + [0] * (MAX_SEQ_LEN - len(fixed_encoded_100))
-            fixed_tensor_100 = torch.tensor([fixed_padded_100], dtype=torch.long).to(DEVICE)
+            fixed_encoded_100 = vocab.encode(fixed_tokens_100) or [0]
+            fixed_tensor_100 = torch.tensor([fixed_encoded_100], dtype=torch.long).to(DEVICE)
             
             with torch.no_grad():
                 fixed_output_100 = model(fixed_tensor_100).squeeze()

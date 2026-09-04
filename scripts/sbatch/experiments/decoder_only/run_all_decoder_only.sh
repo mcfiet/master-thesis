@@ -13,11 +13,11 @@ set -e
 # ==============================================================================
 # Submits all pipeline stages sequentially via SLURM dependencies:
 #   1. SFT Training (SFTTrainer + LoRA)
-#   2. DPO Dataset Generation (Candidate Sampling + Reward Scoring)
+#   2. DPO Dataset Generation (4-Way Array Shards on GPU)
+#   2b. DPO Dataset Merge (Deduplication + Train/Val Split)
 #   3. DPO Training (DPOTrainer + Shared Ref Model)
 #   4. Comprehensive Evaluation (NLP & Leichte Sprache Rules)
 # ==============================================================================
-
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p results/logs/experiments/decoder_only results/plots/experiments/decoder_only results/models/decoder_only data/dpo results/evaluation
@@ -28,19 +28,23 @@ echo "=================================================================="
 
 # Check if sbatch is available (Cluster) or run locally
 if command -v sbatch &> /dev/null; then
-    echo "[1/4] Submitting SFT Training Job..."
+    echo "[1/5] Submitting SFT Training Job..."
     JOB_SFT=$(sbatch --parsable "${SCRIPT_DIR}/1_train_sft_decoder_only.sh")
     echo "  -> SFT Job ID: ${JOB_SFT}"
 
-    echo "[2/4] Submitting DPO Dataset Generation Job (dependency: ${JOB_SFT})..."
-    JOB_GEN=$(sbatch --parsable --dependency=afterok:${JOB_SFT} "${SCRIPT_DIR}/2_generate_dpo_pairs_decoder_only.sh")
-    echo "  -> DPO Dataset Job ID: ${JOB_GEN}"
+    echo "[2/5] Submitting DPO Dataset Generation Array Job (dependency: ${JOB_SFT})..."
+    JOB_GEN=$(sbatch --parsable --dependency=afterok:${JOB_SFT} "${SCRIPT_DIR}/2_generate_dpo_pairs_decoder_only_array.sh")
+    echo "  -> DPO Dataset Array Job ID: ${JOB_GEN}"
 
-    echo "[3/4] Submitting DPO Training Job (dependency: ${JOB_GEN})..."
-    JOB_DPO=$(sbatch --parsable --dependency=afterok:${JOB_GEN} "${SCRIPT_DIR}/3_train_dpo_decoder_only.sh")
+    echo "[3/5] Submitting DPO Merge Job (dependency: ${JOB_GEN})..."
+    JOB_MRG=$(sbatch --parsable --dependency=afterok:${JOB_GEN} "${SCRIPT_DIR}/2b_merge_dpo_pairs_decoder_only.sh")
+    echo "  -> DPO Merge Job ID: ${JOB_MRG}"
+
+    echo "[4/5] Submitting DPO Training Job (dependency: ${JOB_MRG})..."
+    JOB_DPO=$(sbatch --parsable --dependency=afterok:${JOB_MRG} "${SCRIPT_DIR}/3_train_dpo_decoder_only.sh")
     echo "  -> DPO Training Job ID: ${JOB_DPO}"
 
-    echo "[4/4] Submitting Evaluation Job (dependency: ${JOB_DPO})..."
+    echo "[5/5] Submitting Evaluation Job (dependency: ${JOB_DPO})..."
     JOB_EVAL=$(sbatch --parsable --dependency=afterok:${JOB_DPO} "${SCRIPT_DIR}/4_evaluate_decoder_only.sh")
     echo "  -> Evaluation Job ID: ${JOB_EVAL}"
 

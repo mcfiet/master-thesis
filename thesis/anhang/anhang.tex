@@ -1,28 +1,24 @@
 \subsection{Ergänzende Evaluation auf TextComplexityDE (Naderi et al., 2019)}
 \label{sec:anhang_textcomplexityde}
 
-In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur Satzkomplexitäts-Evaluation auf dem \textit{TextComplexityDE}-Benchmark \citep{naderi2019textcomplexityde} ($N = 1.000$ deutsche Wikipedia-Sätze mit menschlichen Likert-Urteilen) dargestellt.
+In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur Satzkomplexitäts-Evaluation auf dem \textit{TextComplexityDE}-Benchmark \citep{naderi2019textcomplexityde} ($N = 1.000$ deutsche Wikipedia-Sätze mit menschlichen Likert-Urteilen) für die MixUp-Regressoren und traditionellen Baselines dargestellt.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Gesamtevaluation aller Modellfamilien auf dem TextComplexityDE-Benchmark ($N = 1.000$ Sätze).}
+\caption[Evaluation auf dem TextComplexityDE-Benchmark]{Evaluation der auf bidirektionalen Long-Short-Term-Memory-Netzwerken basierenden MixUp-Regressoren (BiLSTM) und traditioneller Lesbarkeitsmetriken wie dem Lesbarkeitsindex (LIX), der Wiener Sachtextformel (WSTF) und dem Flesch Reading Ease (Flesch) auf dem TextComplexityDE-Benchmark ($N = 1.000$ deutsche Wikipedia-Einzelsätze, dynamisches Padding) unter Angabe des mittleren absoluten Fehlers (Mean Absolute Error, MAE).}
 \label{tab:anhang_textcomplexityde_master}
 \adjustbox{max width=\textwidth}{%
 \begin{tabular}{@{}llcccc@{}}
 \toprule
 \textbf{Modell} & \textbf{Kategorie} & \textbf{Pearson $r$ (Simplicity)} & \textbf{Spearman $\rho$ (Rang)} & \textbf{Kendall $\tau$} & \textbf{MAE (normiert)} \\
 \midrule
-LIX Lesbarkeitsindex                & Baseline             & $0{,}657$ & $0{,}641$ & $0{,}467$ & $0{,}177$ \\
-BiLSTM Satz-Klassifikator          & Klassifikator (Satz) & $0{,}549$ & $\mathbf{0{,}648}$ & $0{,}468$ & $0{,}509$ \\
-BiLSTM MixUp Regressor ($512$)     & Regressor ($512$)    & $0{,}583$ & $0{,}615$ & $0{,}446$ & $0{,}471$ \\
-BiLSTM Artikel-Klassifikator ($512$)& Klassifikator ($512$)& $\mathbf{0{,}602}$ & $0{,}585$ & $0{,}417$ & $0{,}343$ \\
-BiLSTM MixUp Regressor ($256$)     & Regressor ($256$)    & $0{,}567$ & $0{,}509$ & $0{,}361$ & $0{,}477$ \\
+LIX Lesbarkeitsindex                & Baseline             & $\mathbf{0{,}657}$ & $\mathbf{0{,}641}$ & $0{,}467$ & $0{,}177$ \\
+BiLSTM MixUp Regressor ($256$)     & Regressor ($256$)    & $\mathbf{0{,}620}$ & $0{,}579$ & $0{,}418$ & $\mathbf{0{,}198}$ \\
+BiLSTM MixUp Regressor ($512$)     & Regressor ($512$)    & $0{,}610$ & $0{,}590$ & $0{,}424$ & $0{,}329$ \\
+BiLSTM MixUp Regressor ($1.024$)   & Regressor ($1.024$)  & $0{,}595$ & $\mathbf{0{,}601}$ & $\mathbf{0{,}430}$ & $0{,}473$ \\
 Wiener Sachtextformel              & Baseline             & $0{,}540$ & $0{,}519$ & $0{,}370$ & $0{,}164$ \\
-BiLSTM MixUp Regressor ($1.024$)   & Regressor ($1.024$)  & $0{,}566$ & $0{,}461$ & $0{,}323$ & $0{,}464$ \\
 Flesch Reading Ease                & Baseline             & $0{,}456$ & $0{,}456$ & $0{,}322$ & $0{,}174$ \\
-BiLSTM Artikel-Klassifikator ($256$)& Klassifikator ($256$)& $0{,}394$ & $0{,}227$ & $0{,}151$ & $0{,}576$ \\
-BiLSTM Artikel-Klassifikator ($1.024$)& Klassifikator ($1.024$)& $0{,}417$ & $0{,}193$ & $0{,}128$ & $0{,}557$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -30,22 +26,15 @@ BiLSTM Artikel-Klassifikator ($1.024$)& Klassifikator ($1.024$)& $0{,}417$ & $0{
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{images/textcomplexityde_correlation_barchart.png}
-\caption{Pearson- und Spearman-Korrelationen aller Modelle mit dem menschlichen Einfachheitsurteil auf TextComplexityDE ($N = 1.000$ Sätze).}
+\caption[Korrelationsanalyse auf dem TextComplexityDE-Benchmark]{Korrelationsanalyse auf dem TextComplexityDE-Benchmark ($N = 1.000$ Wikipedia-Sätze) im Vergleich zwischen linearem Zusammenhang (Pearson $r$) und monotonem Rangzusammenhang (Spearman $\rho$) mit dem menschlichen Bewertungsmittelwert (Mean Opinion Score, MOS) für BiLSTM-Modelle, die Wiener Sachtextformel (WSTF), Flesch Reading Ease (FRE) und den Lesbarkeitsindex (LIX).}
 \label{fig:anhang_textcomplexityde_barchart}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/textcomplexityde_scatter_all_models_grid.png}
-\caption{Streudiagramm-Grid aller 10 Modellvarianten gegen den kontinuierlichen menschlichen Einfachheits-Score auf TextComplexityDE inklusive Regressionsgeraden.}
+\caption[Streudiagramm-Grid auf TextComplexityDE]{Streudiagramm-Grid aller Modellansätze gegen den menschlichen Einfachheits-Score (Mean Opinion Score, MOS) auf dem TextComplexityDE-Datensatz ($N = 1.000$ Sätze) für BiLSTM-Architekturen, die Wiener Sachtextformel (WSTF), den Lesbarkeitsindex (LIX) und den Flesch Reading Ease (FRE) inklusive linearer Regressionsgeraden.}
 \label{fig:anhang_textcomplexityde_scatter}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{images/textcomplexityde_boxplots_all_models_grid.png}
-\caption{Boxplot-Verteilungen der Modell-Scores gruppiert nach den diskretisierten Likert-Komplexitätsstufen auf TextComplexityDE.}
-\label{fig:anhang_textcomplexityde_boxplots}
 \end{figure}
 
 \newpage
@@ -57,23 +46,19 @@ In diesem Abschnitt sind die detaillierten statistischen Auswertungen zur Dokume
 \begin{table}[htbp]
 \centering
 \small
-\caption{Gesamtevaluation aller Modellfamilien auf dem MERLIN CEFR-Benchmark ($N = 1.033$ Dokumente).}
+\caption[Evaluation der Regressoren und Baselines auf MERLIN]{Evaluation der BiLSTM-MixUp-Regressoren und traditioneller Formeln (LIX, WSTF, Flesch) auf dem Dokumenten-Benchmark des Gemeinsamen Europäischen Referenzrahmens für Sprachen (CEFR, MERLIN-Korpus mit $N = 1.033$ Volltexten) unter Angabe des mittleren absoluten Fehlers (Mean Absolute Error, MAE).}
 \label{tab:anhang_merlin_master}
 \adjustbox{max width=\textwidth}{%
 \begin{tabular}{@{}llcccc@{}}
 \toprule
 \textbf{Modell} & \textbf{Kategorie} & \textbf{Pearson $r$ (Simplicity)} & \textbf{Spearman $\rho$ (Rang)} & \textbf{Kendall $\tau$} & \textbf{MAE (normiert)} \\
 \midrule
-LIX Lesbarkeitsindex                & Baseline             & $\mathbf{0{,}632}$ & $\mathbf{0{,}656}$ & $0{,}515$ & $0{,}127$ \\
+LIX Lesbarkeitsindex                & Baseline             & $\mathbf{0{,}632}$ & $\mathbf{0{,}656}$ & $\mathbf{0{,}515}$ & $\mathbf{0{,}127}$ \\
 Wiener Sachtextformel              & Baseline             & $0{,}584$ & $0{,}602$ & $0{,}463$ & $0{,}137$ \\
 Flesch Reading Ease                & Baseline             & $0{,}513$ & $0{,}543$ & $0{,}412$ & $0{,}144$ \\
-BiLSTM Artikel-Klassifikator ($512$)& Klassifikator ($512$)& $\mathbf{0{,}386}$ & $0{,}397$ & $0{,}296$ & $0{,}408$ \\
-BiLSTM MixUp Regressor ($512$)     & Regressor ($512$)    & $0{,}348$ & $0{,}352$ & $0{,}268$ & $0{,}346$ \\
-BiLSTM MixUp Regressor ($1.024$)   & Regressor ($1.024$)  & $0{,}327$ & $0{,}328$ & $0{,}251$ & $0{,}347$ \\
-BiLSTM MixUp Regressor ($256$)     & Regressor ($256$)    & $0{,}304$ & $0{,}296$ & $0{,}226$ & $0{,}341$ \\
-BiLSTM Satz-Klassifikator          & Klassifikator (Satz) & $0{,}285$ & $\mathbf{0{,}419}$ & $0{,}319$ & $0{,}483$ \\
-BiLSTM Artikel-Klassifikator ($256$)& Klassifikator ($256$)& $0{,}076$ & $0{,}518$ & $0{,}389$ & $0{,}566$ \\
-BiLSTM Artikel-Klassifikator ($1.024$)& Klassifikator ($1.024$)& $-0{,}049$ & $-0{,}078$ & $-0{,}058$ & $0{,}569$ \\
+BiLSTM MixUp Regressor ($256$)     & Regressor ($256$)    & $\mathbf{0{,}459}$ & $\mathbf{0{,}485}$ & $\mathbf{0{,}369}$ & $\mathbf{0{,}310}$ \\
+BiLSTM MixUp Regressor ($512$)     & Regressor ($512$)    & $0{,}346$ & $0{,}347$ & $0{,}264$ & $0{,}346$ \\
+BiLSTM MixUp Regressor ($1.024$)   & Regressor ($1.024$)  & $0{,}251$ & $0{,}238$ & $0{,}183$ & $0{,}363$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -81,46 +66,32 @@ BiLSTM Artikel-Klassifikator ($1.024$)& Klassifikator ($1.024$)& $-0{,}049$ & $-
 \begin{table}[htbp]
 \centering
 \small
-\caption{Mittelwerte der vorhergesagten Modell-Scores über die 6 CEFR-Stufen im MERLIN-Korpus zur Überprüfung der Monotonie ($A1 \to C2$).}
+\caption[Monotonie-Prüfung der Regressoren über 6 CEFR-Niveaustufen auf MERLIN]{Mittelwerte der vorhergesagten Modell-Scores über sechs Niveaustufen des Gemeinsamen Europäischen Referenzrahmens für Sprachen (CEFR, $A1$ bis $C2$) im MERLIN-Korpus ($N = 1.033$ Texte) zur Überprüfung des monotonen Abfalls für BiLSTM-MixUp-Regressoren und die Wiener Sachtextformel (WSTF).}
 \label{tab:anhang_merlin_monotonie}
 \adjustbox{max width=\textwidth}{%
-\begin{tabular}{@{}lcccccc@{}}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-\textbf{CEFR-Stufe} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($256$)}} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($512$)}} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($1.024$)}} & \shortstack{\textbf{Art.-Klass.}\\\textbf{($512$)}} & \shortstack{\textbf{Satz-Klass.}\\\textbf{(P(LS))}} & \shortstack{\textbf{Wiener}\\\textbf{Formel}} \\
+\textbf{CEFR-Stufe} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($256$)}} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($512$)}} & \shortstack{\textbf{MixUp Reg.}\\\textbf{($1.024$)}} & \shortstack{\textbf{Wiener}\\\textbf{Formel}} \\
 \midrule
-\textbf{A1} (Sehr einfach, $N=57$)   & $0{,}2957$ & $0{,}3353$ & $0{,}3368$ & $\mathbf{0{,}5042}$ & $0{,}3043$ & $-1{,}28$ \\
-\textbf{A2} (Einfach, $N=306$)       & $0{,}3302$ & $0{,}3356$ & $0{,}3596$ & $\mathbf{0{,}4419}$ & $0{,}2537$ & $-1{,}52$ \\
-\textbf{B1} (Mittelstufe, $N=331$)   & $0{,}2966$ & $0{,}2946$ & $0{,}3166$ & $\mathbf{0{,}3385}$ & $0{,}1624$ & $-2{,}38$ \\
-\textbf{B2} (Fortgeschritten, $N=293$)& $0{,}1944$ & $0{,}1762$ & $0{,}2017$ & $\mathbf{0{,}0955}$ & $0{,}0607$ & $-4{,}57$ \\
-\textbf{C1} (Fachsprache, $N=42$)    & $0{,}1241$ & $0{,}1011$ & $0{,}1055$ & $\mathbf{0{,}0730}$ & $0{,}0751$ & $-5{,}30$ \\
-\textbf{C2} (Muttersprachlich, $N=4$)& $0{,}0762$ & $0{,}0686$ & $0{,}0692$ & $\mathbf{0{,}0499}$ & $0{,}0334$ & $-5{,}24$ \\
+\textbf{A1} (Sehr einfach, $N=57$)   & $\mathbf{0{,}3712}$ & $0{,}3411$ & $0{,}2337$ & $-1{,}28$ \\
+\textbf{A2} (Einfach, $N=306$)       & $0{,}3584$ & $0{,}3349$ & $0{,}2572$ & $-1{,}52$ \\
+\textbf{B1} (Mittelstufe, $N=331$)   & $0{,}2888$ & $0{,}2878$ & $0{,}2443$ & $-2{,}38$ \\
+\textbf{B2} (Fortgeschritten, $N=293$)& $0{,}1810$ & $0{,}1866$ & $0{,}1643$ & $-4{,}57$ \\
+\textbf{C1} (Fachsprache, $N=42$)    & $0{,}1085$ & $0{,}1233$ & $0{,}0943$ & $-5{,}30$ \\
+\textbf{C2} (Muttersprachlich, $N=4$)& $0{,}0784$ & $0{,}1078$ & $0{,}0859$ & $-5{,}24$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\textwidth]{images/merlin_correlation_barchart.png}
-\caption{Pearson- und Spearman-Rangkorrelationen aller Modelle auf dem MERLIN CEFR-Benchmark ($N = 1.033$ Volltexte).}
-\label{fig:anhang_merlin_barchart}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
 \includegraphics[width=\textwidth]{images/merlin_scatter_all_models_grid.png}
-\caption{Streudiagramm-Grid aller 10 Modellvarianten gegen das kontinuierliche CEFR-Simplicity-Maß ($1{,}0 = \text{A1} \dots 0{,}0 = \text{C2}$) auf MERLIN inklusive Regressionsgeraden.}
+\caption[Streudiagramm-Grid der Regressoren und Baselines auf MERLIN]{Streudiagramm-Grid der Regressoren und Baselines auf dem MERLIN-Benchmark ($N = 1.033$ Volltexte) gegen die Stufen des Gemeinsamen Europäischen Referenzrahmens (CEFR) für BiLSTM-MixUp-Regressoren, den Lesbarkeitsindex (LIX), die Wiener Sachtextformel (WSTF) und den Flesch Reading Ease (FRE) inklusive linearer Ausgleichsgeraden.}
 \label{fig:anhang_merlin_scatter}
 \end{figure}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{images/merlin_boxplots_all_models_grid.png}
-\caption{Monotonie-Prüfung aller Modellfamilien: Boxplots der vorhergesagten Scores über die 5 CEFR-Stufen ($A1, A2, B1, B2, C1$) auf MERLIN (weiße Punkte kennzeichnen den Mittelwert).}
-\label{fig:anhang_merlin_boxplots}
-\end{figure}
-
 \newpage
-\subsection{Ergänzende Evaluation der Klassifikationsmodelle (In-Domain Sweet-Spot \& Granularitätsvergleich)}
+\subsection{Ergänzende Evaluation der Klassifikationsmodelle (Ähnlichkeitsbereiche \& Granularitätsvergleich)}
 \label{sec:anhang_klassifikatoren}
 
 In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur binären Klassifikation dokumentiert: Tabelle~\ref{tab:sweet_spot_ablation_klassifikation} stellt die In-Domain-Klassifikationsgüte (Balanced Accuracy) über verschiedene Cosine-Similarity-Filterungsbereiche des internen Master-Korpus auf Satz- und Artikelebene gegenüber. Die Abbildungen~\ref{fig:anhang_classifier_kde} bis \ref{fig:anhang_classifier_confusion} visualisieren die Dichteverteilungen, ROC/PR-Kurven und Konfusionsmatrizen auf dem bereinigten \textit{Lebenshilfe}-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze).
@@ -128,7 +99,7 @@ In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur binären 
 \begin{table}[htbp]
 \centering
 \small
-\caption{In-Domain-Klassifikationsgüte (Balanced Accuracy) des BiLSTM in Abhängigkeit vom semantischen Similarity-Bereich und der Granularitätsebene auf dem internen Test-Split.}
+\caption[In-Domain-Klassifikationsgüte über Similarity-Bereiche]{In-Domain-Klassifikationsgüte anhand der ausgewogenen Genauigkeit (Balanced Accuracy, BAcc) des BiLSTM in Abhängigkeit vom Schwellenbereich der Kosinus-Ähnlichkeit ($\text{sim}_{\cos}$ via Jina-v2) und der Granularitätsebene auf dem internen Test-Split des Master-Korpus.}
 \label{tab:sweet_spot_ablation_klassifikation}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
@@ -145,40 +116,40 @@ $0{,}90 \le \text{sim}_{\cos} \le 0{,}98$ & $213$ & $\sim 4.800$ & $90{,}55\,\%$
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{images/classifier_kde_length_comparison.png}
-\caption{Vergleich der Dichteverteilungen (KDE) für Leichte Sprache (LS, grün) und Alltagssprache (AS, blau) über alle Klassifikationsmodi: (a) BiLSTM Satz-Klassifikator (Simple-Sentence-Ratio $r_{LS}$), (b) BiLSTM Artikel-Klassifikator ($256$ Tokens), (c) BiLSTM Artikel-Klassifikator ($512$ Tokens) und (d) BiLSTM Artikel-Klassifikator ($1.024$ Tokens). Man beachte die ausgeprägte Asymmetrie: Während Alltagssprache durch scharfe Peaks bei $0{,}0$ überkonfident separiert wird, bricht die Konfidenz für Leichte Sprache bei längeren Artikelkontexten stark ein.}
+\caption[Dichteverteilungen der Klassifikationswahrscheinlichkeiten auf Lebenshilfe]{Dichteschätzungen (Kernel Density Estimation, KDE) der vorhergesagten Wahrscheinlichkeiten für reine Leichte Sprache (LS) und reine Alltagssprache (AS) auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) im Vergleich zwischen dem BiLSTM-Satzmodell mit Simple-Sentence-Ratio ($r_{\text{LS}}$) und direkten Dokumentmodellen über 256, 512 und 1.024 Tokens.}
 \label{fig:anhang_classifier_kde}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{images/classifier_roc_pr_length_comparison.png}
-\caption{ROC- und Precision-Recall-Kurven der Klassifikationsmodelle auf dem Lebenshilfe-Goldstandard. Das Satzmodell mit Majority-Voting ($r_{LS}$) erzielt den höchsten AUC-Wert ($0{,}9985$) und übertrifft die direkten Artikelmodelle ($256$, $512$, $1.024$ Tokens) deutlich.}
+\caption[ROC- und Precision-Recall-Kurven der Klassifikationsmodelle]{Gegenüberstellung der ROC-Kurven (Receiver Operating Characteristic, ROC-AUC) und Precision-Recall-Kurven (PR-AUC) für Satz- und Artikel-Klassifikationsmodelle auf Basis bidirektionaler Long-Short-Term-Memory-Netzwerke (BiLSTM) auf dem Lebenshilfe-Goldstandard ($N = 74$ Dokumente).}
 \label{fig:anhang_classifier_roc_pr}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/classifier_confusion_matrices.png}
-\caption{Konfusionsmatrizen und relative Performanzmaße der Klassifikatoren: (1) Satz-Modell auf Einzelsatzebene ($N = 6.901$ Sätze), (2) Satz-Modell aggregiert via Majority Voting auf Dokumentebene ($N = 74$ Dokumente), (3) Artikel-Modell auf Dokumentebene sowie (4) vergleichende Gütekriterien im Balkendiagramm.}
+\caption[Konfusionsmatrizen und Gütemaße der BiLSTM-Klassifikatoren]{Konfusionsmatrizen und Performanzmetriken der binären BiLSTM-Klassifikatoren zur Unterscheidung von Alltagssprache (AS) und Leichter Sprache (LS) auf dem Lebenshilfe-Goldstandard unter Aufschlüsselung nach Richtig-Positiven (TP), Richtig-Negativen (TN), Falsch-Positiven (FP) und Falsch-Negativen (FN).}
 \label{fig:anhang_classifier_confusion}
 \end{figure}
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Multi-Seed-Stabilitäts-Benchmark aller Modellvarianten über $K=5$ Zufalls-Seeds ($42, 123, 456, 789, 1024$) auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}
+\caption[Multi-Seed-Stabilitäts-Benchmark der Klassifikatoren]{Multi-Seed-Stabilitäts-Benchmark aller BiLSTM-Klassifikatorvarianten über fünf Zufalls-Initialisierungen auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) unter Angabe von ausgewogener Genauigkeit (Balanced Accuracy), ROC-AUC, Paar-Matching-Genauigkeit (Pair Match) und Majority Voting über Einzelsätze (MajVote).}
 \label{tab:anhang_classifier_stability}
 \adjustbox{max width=\textwidth}{%
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 \textbf{Modellarchitektur} & \textbf{Parameter} & \textbf{Balanced Acc ($\mu \pm \sigma$)} & \textbf{Min -- Max Spread} & \textbf{ROC-AUC ($\mu \pm \sigma$)} & \textbf{Pair Match ($\mu \pm \sigma$)} \\
 \midrule
-BiLSTM Satz-Klassifikator (MajVote)  & $3{,}46\text{ Mio.}$  & $\mathbf{97{,}03\,\% \pm 0{,}60\,\%}$ & $95{,}9\,\% - 97{,}3\,\%$ & $\mathbf{0{,}9966 \pm 0{,}0013}$ & $\mathbf{100{,}0\,\% \pm 0{,}0\,\%}$ \\
-BiLSTM Artikel-1024 (Medium, $10k/64d$) & $\sim 700\text{ Tsd.}$ & $\mathbf{88{,}92\,\% \pm 3{,}75\,\%}$ & $83{,}8\,\% - 93{,}2\,\%$ & $0{,}9468 \pm 0{,}0342$ & $95{,}7\,\% \pm 3{,}1\,\%$ \\
-BiLSTM Artikel-256 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$  & $84{,}32\,\% \pm 8{,}47\,\%$ & $73{,}0\,\% - 93{,}2\,\%$ & $0{,}9675 \pm 0{,}0108$ & $96{,}8\,\% \pm 1{,}2\,\%$ \\
-BiLSTM Artikel-512 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$  & $82{,}16\,\% \pm 6{,}72\,\%$ & $71{,}6\,\% - 89{,}2\,\%$ & $0{,}9208 \pm 0{,}0329$ & $95{,}7\,\% \pm 2{,}4\,\%$ \\
-BiLSTM Artikel-1024 (Tiny, $5k/32d$)  & $\sim 180\text{ Tsd.}$ & $81{,}62\,\% \pm 10{,}14\,\%$ & $73{,}0\,\% - 93{,}2\,\%$ & $0{,}9183 \pm 0{,}0443$ & $94{,}1\,\% \pm 4{,}0\,\%$ \\
-BiLSTM Artikel-1024 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$ & $\mathbf{80{,}00\,\% \pm 9{,}33\,\%}$ & $\mathbf{67{,}6\,\% - 91{,}9\,\%}$ & $0{,}9233 \pm 0{,}0485$ & $95{,}1\,\% \pm 5{,}2\,\%$ \\
+BiLSTM Satz-Klassifikator (MajVote)  & $3{,}46\text{ Mio.}$  & $\mathbf{96{,}76\,\% \pm 0{,}74\,\%}$ & $95{,}9\,\% - 97{,}3\,\%$ & $\mathbf{0{,}9985 \pm 0{,}0013}$ & $\mathbf{100{,}0\,\% \pm 0{,}0\,\%}$ \\
+BiLSTM Artikel-256 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$  & $87{,}57\,\% \pm 6{,}15\,\%$ & $77{,}0\,\% - 91{,}9\,\%$ & $0{,}9672 \pm 0{,}0179$ & $96{,}2\,\% \pm 1{,}5\,\%$ \\
+BiLSTM Artikel-1024 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$ & $87{,}03\,\% \pm 5{,}29\,\%$ & $81{,}1\,\% - 93{,}2\,\%$ & $0{,}9533 \pm 0{,}0230$ & $95{,}7\,\% \pm 1{,}5\,\%$ \\
+BiLSTM Artikel-1024 (Tiny, $5k/32d$)  & $\sim 180\text{ Tsd.}$ & $84{,}05\,\% \pm 11{,}48\,\%$ & $64{,}9\,\% - 94{,}6\,\%$ & $0{,}9354 \pm 0{,}0185$ & $93{,}5\,\% \pm 3{,}1\,\%$ \\
+BiLSTM Artikel-1024 (Medium, $10k/64d$) & $\sim 700\text{ Tsd.}$ & $83{,}51\,\% \pm 7{,}84\,\%$ & $71{,}6\,\% - 93{,}2\,\%$ & $0{,}9126 \pm 0{,}0415$ & $95{,}7\,\% \pm 2{,}4\,\%$ \\
+BiLSTM Artikel-512 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$  & $82{,}97\,\% \pm 9{,}49\,\%$ & $68{,}9\,\% - 93{,}2\,\%$ & $0{,}9334 \pm 0{,}0387$ & $96{,}2\,\% \pm 1{,}5\,\%$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -186,14 +157,14 @@ BiLSTM Artikel-1024 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$ & $\mathbf{80{,}00
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{images/generalization_gap_learning_curves.png}
-\caption{Generalization Gap \& Overfitting-Trajektorien über 30 Epochen (Mittelwert $\pm$ Standardabweichung über 5 Seeds): Verlauf von In-Domain Validation Balanced Accuracy (blau) vs. Out-of-Domain Lebenshilfe Balanced Accuracy (grün).}
+\caption[Generalization Gap und Overfitting-Trajektorien über 30 Epochen]{Generalisation Gap und Overfitting-Trajektorien über 30 Trainingsepochen des BiLSTM mit Mittelwerten und Standardabweichungen über fünf Seeds zum Vergleich von In-Domain-Validierungsgenauigkeit und Out-of-Domain-Genauigkeit (OOD) auf dem Lebenshilfe-Datensatz.}
 \label{fig:anhang_classifier_learning_curves}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{images/multi_seed_boxplots.png}
-\caption{Stabilitäts- und Varianzvergleich über 5 Zufalls-Seeds auf dem Lebenshilfe-Goldstandard: Boxplots von Balanced Accuracy (\%) und Klassenseparation $\Delta$ für alle Modellkonfigurationen.}
+\caption[Stabilitäts- und Varianzvergleich über 5 Seeds auf Lebenshilfe]{Stabilitäts- und Varianzvergleich über fünf Seeds auf dem Lebenshilfe-Goldstandard ($N = 74$ Dokumente) zur Gegenüberstellung von ausgewogener Genauigkeit (Balanced Accuracy) und Klassenseparation ($\Delta$) zwischen Alltagssprache (AS) und Leichter Sprache (LS) auf Basis des Interquartilsabstands (IQR).}
 \label{fig:anhang_classifier_boxplots}
 \end{figure}
 
@@ -214,7 +185,7 @@ Tabelle~\ref{tab:anhang_mixup_varianten_benchmark} stellt die Gütemaße auf dem
 \begin{table}[htbp]
 \centering
 \small
-\caption{Gesamtevaluation der vier MixUp-Trainings- und Sampling-Strategien auf dem internen Test-Split (In-Domain) und dem Lebenshilfe-Goldstandard (Out-of-Domain).}
+\caption[Gesamtevaluation der vier MixUp-Trainings- und Sampling-Strategien]{Gesamtevaluation der vier kontinuierlichen Textmischungsstrategien (MixUp-Varianten A bis D) auf dem internen Test-Split ($N = 2.560$ Mischungen) und dem Lebenshilfe-Goldstandard ($N = 1.476$ Mischungen) unter Gegenüberstellung von mittlerem quadratischem Fehler (Mean Squared Error, MSE), mittlerem absolutem Fehler (Mean Absolute Error, MAE) und ausgewogener Genauigkeit (Balanced Accuracy, BAcc).}
 \label{tab:anhang_mixup_varianten_benchmark}
 \adjustbox{max width=\textwidth}{%
 \begin{tabular}{@{}lcccccccccc@{}}
@@ -223,10 +194,10 @@ Tabelle~\ref{tab:anhang_mixup_varianten_benchmark} stellt die Gütemaße auf dem
 \cmidrule(lr){2-6} \cmidrule(lr){7-11}
 \textbf{Sampling-Strategie} & \textbf{\O{} $\lambda$ (LS)} & \textbf{\O{} $\lambda$ (AS)} & \textbf{BAcc} & \textbf{Reg-MSE} & \textbf{Reg-MAE} & \textbf{\O{} $\lambda$ (LS)} & \textbf{\O{} $\lambda$ (AS)} & \textbf{BAcc} & \textbf{Reg-MSE} & \textbf{Reg-MAE} \\
 \midrule
-Variante A (Statisch)          & $0{,}793$ & $0{,}090$ & $\mathbf{95{,}71\,\%}$ & $0{,}0274$ & $0{,}1238$ & $\mathbf{0{,}738}$ & $0{,}094$ & $\mathbf{94{,}50\,\%}$ & $\mathbf{0{,}0421}$ & $\mathbf{0{,}1569}$ \\
-Variante B (Dynamisch)         & $0{,}788$ & $0{,}085$ & $95{,}07\,\%$ & $\mathbf{0{,}0263}$ & $\mathbf{0{,}1192}$ & $0{,}680$ & $0{,}089$ & $91{,}37\,\%$ & $0{,}0528$ & $0{,}1771$ \\
-Variante C (Hybrid)            & $\mathbf{0{,}807}$ & $0{,}095$ & $95{,}23\,\%$ & $0{,}0279$ & $0{,}1254$ & $0{,}710$ & $0{,}097$ & $91{,}18\,\%$ & $0{,}0468$ & $0{,}1672$ \\
-Variante D (Hybrid + Cyclic LR)& $0{,}802$ & $\mathbf{0{,}075}$ & $95{,}55\,\%$ & $0{,}0274$ & $0{,}1233$ & $0{,}714$ & $\mathbf{0{,}078}$ & $91{,}71\,\%$ & $0{,}0486$ & $0{,}1710$ \\
+Variante A (Statisch)          & $0{,}777$ & $0{,}075$ & $94{,}79\,\%$ & $0{,}0279$ & $0{,}1234$ & $0{,}701$ & $0{,}084$ & $91{,}82\,\%$ & $0{,}0466$ & $0{,}1705$ \\
+Variante B (Dynamisch)         & $\mathbf{0{,}802}$ & $\mathbf{0{,}067}$ & $\mathbf{96{,}08\,\%}$ & $\mathbf{0{,}0267}$ & $\mathbf{0{,}1182}$ & $0{,}701$ & $\mathbf{0{,}073}$ & $93{,}85\,\%$ & $0{,}0493$ & $0{,}1724$ \\
+Variante C (Hybrid)            & $0{,}801$ & $0{,}082$ & $95{,}92\,\%$ & $0{,}0275$ & $0{,}1222$ & $0{,}707$ & $0{,}086$ & $92{,}02\,\%$ & $0{,}0469$ & $0{,}1668$ \\
+Variante D (Hybrid + Cyclic LR)& $0{,}799$ & $0{,}086$ & $95{,}87\,\%$ & $0{,}0275$ & $0{,}1221$ & $\mathbf{0{,}715}$ & $0{,}091$ & $\mathbf{94{,}36\,\%}$ & $\mathbf{0{,}0451}$ & $\mathbf{0{,}1656}$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -234,14 +205,14 @@ Variante D (Hybrid + Cyclic LR)& $0{,}802$ & $\mathbf{0{,}075}$ & $95{,}55\,\%$ 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/mixup_variants_lh_kde.png}
-\caption{KDE-Dichteverteilungen der vorhergesagten Scores für reine Alltagssprache (AS, blau) und reine Leichte Sprache (LS, grün) auf dem Lebenshilfe-Goldstandard im Vergleich zur Zielverteilung im Training (gestrichelte Kurve) für die vier Sampling-Strategien (Varianten A bis D).}
+\caption[KDE-Dichteverteilungen der MixUp-Sampling-Strategien auf Lebenshilfe]{Dichteverteilungen (Kernel Density Estimation, KDE) der vorhergesagten Regressionswerte für reine Alltagssprache (AS) und reine Leichte Sprache (LS) auf dem Lebenshilfe-Goldstandard im Vergleich zur theoretischen Zielverteilung über die vier kontinuierlichen BiLSTM-MixUp-Strategien.}
 \label{fig:anhang_mixup_variants_kde}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{images/mixup_variants_lh_scatter.png}
-\caption{Streudiagramme der Regressionsvorhersagen $\hat{\lambda}$ auf dem Lebenshilfe-Goldstandard: Wahre kontinuierliche Zielwerte $\lambda \in [0{,}0, 1{,}0]$ auf der x-Achse gegen Modellvorhersagen auf der y-Achse inklusive linearer Regressionsgerade (rot) und idealer Diagonalen (gestrichelt) über alle vier Modellvarianten.}
+\caption[Streudiagramme der Regressionsvorhersagen auf Lebenshilfe]{Streudiagramme der Regressionsvorhersagen $\hat{\lambda}$ auf dem Lebenshilfe-Goldstandard ($N = 1.476$ synthetische Textmischungen) gegen den relativen Zeichenlängenanteil Leichter Sprache ($\lambda \in [0{,}0, 1{,}0]$) für die vier kontinuierlichen BiLSTM-MixUp-Strategien inklusive Regressionsgeraden.}
 \label{fig:anhang_mixup_variants_scatter}
 \end{figure}
 
@@ -249,26 +220,19 @@ Variante D (Hybrid + Cyclic LR)& $0{,}802$ & $\mathbf{0{,}075}$ & $95{,}55\,\%$ 
 \subsection{Ergänzende Evaluation der BiLSTM MixUp Regressoren (Längenvergleich \& Trajektorien)}
 \label{sec:anhang_regressoren_laengen}
 
-In diesem Abschnitt sind die ergänzenden grafischen Auswertungen zur Kontextlängen-Ablation der kontinuierlichen BiLSTM MixUp Regressoren ($256$, $512$ und $1.024$ Tokens) auf dem \textit{Lebenshilfe}-Goldstandard dargestellt.
+In diesem Abschnitt sind die ergänzenden grafischen Auswertungen zur Untersuchung der Kontextlängen der kontinuierlichen BiLSTM MixUp Regressoren ($256$, $512$ und $1.024$ Tokens) auf dem \textit{Lebenshilfe}-Goldstandard dargestellt.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{images/regressor_kde_length_comparison.png}
-\caption{KDE-Dichteverteilungen der BiLSTM MixUp Regressoren für Leichte Sprache (LS, grün) und Alltagssprache (AS, blau) über verschiedene Kontextlängen: (a) $256$ Tokens, (b) $512$ Tokens und (c) $1.024$ Tokens. Im Gegensatz zum binären Klassifikator weisen die Regressoren bei allen Längen wohlgeformte, breit separierte Verteilungen auf, wobei das $1.024$-Token-Modell die geringste Varianz und schärfste Trennung erzielt.}
+\caption[KDE-Dichteverteilungen der BiLSTM-MixUp-Regressoren]{Dichteschätzungen (Kernel Density Estimation, KDE) der kontinuierlichen BiLSTM-MixUp-Regressoren für Leichte Sprache (LS) und Alltagssprache (AS) auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) über variierende Kontextfenster von 256, 512 und 1.024 Tokens.}
 \label{fig:anhang_regressor_kde}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\textwidth]{images/regressor_roc_pr_length_comparison.png}
-\caption{ROC- und Precision-Recall-Kurven der BiLSTM MixUp Regressoren ($256$, $512$, $1.024$ Tokens) auf dem Lebenshilfe-Goldstandard. Alle drei Varianten erreichen herausragende Diskriminationswerte ($\text{ROC-AUC} \ge 0{,}998$, $\text{PR-AUC} \ge 0{,}997$), wobei die $1.024$-Token-Konfiguration mit $\text{ROC-AUC} = 0{,}9993$ dominiert.}
-\label{fig:anhang_regressor_roc_pr}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
 \includegraphics[width=0.95\textwidth]{images/regressor_pairwise_trajectories.png}
-\caption{Paarweises Profil der Regressions-Scores und Textlängen-Einfluss: (a) Direkte Gegenüberstellung der vorhergesagten Scores für alle $37$ parallelen Lebenshilfe-Artikelpaare ($\text{LS} > \text{AS}$ bei allen Paaren, $100\,\%$ Perfect Pair Match beim $1.024$-Modell) sowie (b) Korrelation zwischen Dokumentenlänge (Satzanzahl) und resultierendem Einfachheits-Score.}
+\caption[Paarweises Profil der Regressions-Scores und Längeninvarianz]{Paarweises Profil der Regressions-Scores und Überprüfung der Längeninvarianz auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare) zum Nachweis der fehlerfreien Separierbarkeit zwischen Alltagssprache (AS) und Leichter Sprache (LS) über die Textlänge (Pair Match).}
 \label{fig:anhang_regressor_trajectories}
 \end{figure}
 
@@ -285,19 +249,19 @@ Tabelle~\ref{tab:anhang_synthetic_vs_mixup_benchmark} stellt die Evaluierung des
 \begin{table}[htbp]
 \centering
 \small
-\caption{Gesamtevaluation aller Regressoren und linguistischen Baselines auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}
+\caption[Gesamtevaluation aller Regressoren und linguistischen Baselines]{Gesamtevaluation aller kontinuierlichen und diskreten Modellansätze auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) im Vergleich zwischen BiLSTM-MixUp-Regressoren, dem auf großen Sprachmodellen basierenden Synthetischen Regressor (Large Language Models, LLM) und Basisarchitekturen (Recurrent Neural Networks, RNN).}
 \label{tab:anhang_synthetic_vs_mixup_benchmark}
 \adjustbox{max width=\textwidth}{%
 \begin{tabular}{@{}llcccccc@{}}
 \toprule
 \textbf{Modell} & \textbf{Ebene / Input} & \textbf{\O{} Score (LS)} & \textbf{\O{} Score (AS)} & \textbf{Separation ($\Delta$)} & \textbf{Balanced Acc} & \textbf{ROC-AUC} & \textbf{Pair Match} \\
 \midrule
-BiLSTM MixUp Regressor ($1.024$) & Dokument ($1.024$ Tok.) & $\mathbf{0{,}792 \pm 0{,}10}$ & $\mathbf{0{,}067 \pm 0{,}10}$ & $\mathbf{0{,}726}$ & $\mathbf{98{,}65\,\%}$ & $\mathbf{0{,}9993}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
-BiLSTM MixUp Regressor ($512$)  & Dokument ($512$ Tok.)   & $0{,}777 \pm 0{,}12$ & $0{,}062 \pm 0{,}11$ & $0{,}715$ & $98{,}65\,\%$ & $0{,}9985$ & $97{,}3\,\%\; (36/37)$ \\
-BiLSTM MixUp Regressor ($256$)  & Dokument ($256$ Tok.)   & $0{,}724 \pm 0{,}13$ & $0{,}092 \pm 0{,}09$ & $0{,}632$ & $95{,}95\,\%$ & $0{,}9982$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM MixUp Regressor ($1.024$) & Dokument ($1.024$ Tok.) & $\mathbf{0{,}727 \pm 0{,}14}$ & $0{,}100 \pm 0{,}09$ & $0{,}627$ & $97{,}30\,\%$ & $\mathbf{1{,}0000}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
+BiLSTM MixUp Regressor ($512$)  & Dokument ($512$ Tok.)   & $0{,}716 \pm 0{,}12$ & $\mathbf{0{,}069 \pm 0{,}09}$ & $\mathbf{0{,}646}$ & $\mathbf{98{,}65\,\%}$ & $0{,}9993$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM MixUp Regressor ($256$)  & Dokument ($256$ Tok.)   & $0{,}698 \pm 0{,}11$ & $0{,}105 \pm 0{,}09$ & $0{,}593$ & $95{,}95\,\%$ & $0{,}9982$ & $97{,}3\,\%\; (36/37)$ \\
 \midrule
 BiLSTM Synthetischer Regressor  & Dokument (LLM-Stufen)   & $0{,}575 \pm 0{,}35$ & $0{,}145 \pm 0{,}18$ & $0{,}429$ & $78{,}38\,\%$ & $0{,}8495$ & $89{,}2\,\%\; (33/37)$ \\
-Vanilla RNN Baseline (Ablation) & Dokument ($256$ Tok.)   & $0{,}527 \pm 0{,}20$ & $0{,}287 \pm 0{,}17$ & $0{,}240$ & $81{,}08\,\%$ & $0{,}8733$ & $81{,}1\,\%\; (30/37)$ \\
+Vanilla RNN Baseline (Ablation) & Dokument ($256$ Tok.)   & $0{,}443 \pm 0{,}20$ & $0{,}345 \pm 0{,}18$ & $0{,}098$ & $67{,}57\,\%$ & $0{,}7761$ & $70{,}3\,\%\; (26/37)$ \\
 \midrule
 Flesch Reading Ease (Baseline)  & Dokument (Silben/Satz)  & $0{,}973 \pm 0{,}16$ & $0{,}189 \pm 0{,}39$ & $0{,}784$ & $89{,}19\,\%$ & $0{,}8919$ & $100{,}0\,\%\; (37/37)$ \\
 Wiener Sachtextformel (Baseline)& Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27$ & $0{,}108 \pm 0{,}31$ & $0{,}811$ & $90{,}54\,\%$ & $0{,}9054$ & $100{,}0\,\%\; (37/37)$ \\
@@ -310,7 +274,7 @@ Wiener Sachtextformel (Baseline)& Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27
 \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/synthetic_regressor_kde_overview.png}
-    \caption{Dichteverteilungen \& Paarseparation}
+    \caption{Dichteverteilungen (KDE)}
     \label{fig:anhang_synthetic_kde}
 \end{subfigure}
 \hfill
@@ -320,7 +284,7 @@ Wiener Sachtextformel (Baseline)& Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27
     \caption{ROC-Kurven aller Regressoren}
     \label{fig:anhang_synthetic_roc}
 \end{subfigure}
-\caption{Dichteverteilungen (KDE) und Diskriminationsleistung (ROC) des Synthetischen Regressors im Vergleich zu den MixUp-Modellen und Baselines auf dem Lebenshilfe-Goldstandard.}
+\caption[Dichteverteilungen und Diskriminationsleistung des Synthetischen Regressors]{Dichteverteilungen (Kernel Density Estimation, KDE) und Diskriminationsleistung (Receiver Operating Characteristic, ROC) des Synthetischen Regressors im Vergleich zu Satzmischungen und linguistischen Baselines auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) zur Trennung von Alltagssprache (AS) und Leichter Sprache (LS).}
 \label{fig:anhang_synthetic_kde_roc}
 \end{figure}
 
@@ -339,7 +303,7 @@ Wiener Sachtextformel (Baseline)& Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27
     \caption{Residuen-Verteilung \& MAE}
     \label{fig:anhang_synthetic_mae}
 \end{subfigure}
-\caption{Empirische Monotonie- und Fehleranalyse des Synthetischen Regressors über die 5 diskreten LLM-Stufen auf dem Lebenshilfe-Goldstandard ($N=185$ Vorhersagen) im Vergleich zu Sentence-MixUp.}
+\caption[Empirische Monotonie- und Fehleranalyse des Synthetischen Regressors]{Empirische Monotonie- und Fehleranalyse des Synthetischen Regressors über fünf diskrete Stufen großer Sprachmodelle (Large Language Models, LLM) auf dem Lebenshilfe-Goldstandard ($N=185$ Vorhersagen) unter Angabe des mittleren absoluten Fehlers (Mean Absolute Error, MAE) und des Interquartilsabstands (IQR).}
 \label{fig:anhang_synthetic_monotonie}
 \end{figure}
 
@@ -398,3 +362,241 @@ Hier sind die beiden Versionen des Artikels:\\
 \\
 Erstelle nun den Text, der genau auf der Ziel-Stufe \{target\_level\} liegt. Befolge alle stilistischen Richtlinien für diese Stufe. Antworte nur mit dem generierten Text.
 \end{tcolorbox}
+
+\subsection{Ergänzende Auswertung zur SFT-Datenskalierung}
+\label{sec:anhang_sft_scaling}
+
+In diesem Abschnitt sind die vollständigen quantitativen Resultate der Skalierungsstudie für das überwachte Feintuning (Supervised Fine-Tuning, SFT) über variierende Trainingsdatenmengen ($10\,\%$ bis $100\,\%$) auf dem ungesehenen Lebenshilfe-Testset ($N=37$) dokumentiert.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Systematisches Skalierungsverhalten des SFT-Modells]{Systematisches Skalierungsverhalten des überwachten Feintunings (Supervised Fine-Tuning, SFT) auf dem Lebenshilfe-Testset ($N=37$ Artikelpaare) über fünf Datenfraktionen unter Angabe von Stilbewertung ($R_{\text{style}}$ via BiLSTM-MixUp-Regressor), semantischer Quellähnlichkeit ($R_{\text{sem, AS}}$), Composite Reward und Satzabbruchquoten (Truncation).}
+\label{tab:anhang_sft_scaling_results}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+\textbf{Experiment} & \textbf{Fraktion} & \textbf{Paare ($N$)} & \textbf{Val Loss} & \textbf{$R_{\text{style}}$} & \textbf{$R_{\text{sem, AS}}$} & \textbf{Composite} & \textbf{Truncation} \\
+\midrule
+\code{sft_scale_f010} & $10\,\%$  & 64  & 3,7021 & 0,1152 & 0,8965 & 0,5058 & $16{,}22\,\%$ \\
+\code{sft_scale_f025} & $25\,\%$  & 160 & 2,7457 & 0,5559 & 0,9276 & 0,7417 & $70{,}27\,\%$ \\
+\code{sft_scale_f050} & $50\,\%$  & 320 & 2,6454 & 0,5503 & 0,9119 & 0,7311 & $59{,}46\,\%$ \\
+\code{sft_scale_f075} & $75\,\%$  & 481 & 2,7217 & 0,6753 & 0,9028 & 0,7891 & $75{,}68\,\%$ \\
+\textbf{\code{sft_scale_f100}} & $\mathbf{100\,\%}$ & \textbf{641} & \textbf{2,5698} & \textbf{0,7759} & \textbf{0,8880} & \textbf{0,8320} & $\mathbf{29{,}73\,\%}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\newpage
+\subsection{Ergänzende Kenngrößen des DPO-Präferenzdatensatzes (mBART-50)}
+\label{sec:anhang_dpo_preference_stats}
+
+In diesem Abschnitt sind die vollständigen statistischen Kenngrößen des synthetisch generierten DPO-Präferenzdatensatzes (mBART-50 Modell) auf Basis des \textit{10kGNAD}-Prompt-Korpus dokumentiert.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Statistische Kenngrößen des DPO-Präferenzdatensatzes]{Statistische Kenngrößen des generierten Präferenzdatensatzes für die direkte Präferenzoptimierung (Direct Preference Optimization, DPO) auf Basis des multilingualen Sequence-to-Sequence-Modells \texttt{mBART-50} über verschiedene Temperaturstufen $T$ und Belohnungsmargen $\Delta R$.}
+\label{tab:dpo_preference_stats}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}lc@{}}
+\toprule
+\textbf{Metrik / Eigenschaft} & \textbf{Wert (mBART-50 Seq2Seq)} \\
+\midrule
+Verarbeitete Quellprompts & $9.567$ Prompts \\
+Gesamtzahl valide Präferenztripel & $9.246$ Paare ($96{,}6\,\%$ Retention) \\
+-- Trainings-Split ($85\,\%$) & $7.859$ Paare \\
+-- Validierungs-Split ($15\,\%$) & $1.387$ Paare \\
+\midrule
+Mittlerer Score Bevorzugt ($\bar{R}_{\text{chosen}}$) & $0{,}8218$ \\
+Mittlerer Score Abgelehnt ($\bar{R}_{\text{rejected}}$) & $0{,}7007$ \\
+Mittlere Präferenzmarge ($\overline{\Delta R}$) & $\mathbf{0{,}1210}$ \\
+\midrule
+Auflösung nach Temperaturstufen: & \\
+-- Aufgelöst bei $T = 0{,}60$ & $3.008$ Paare ($32{,}5\,\%$) \\
+-- Aufgelöst bei $T = 0{,}70$ & $5.001$ Paare ($54{,}1\,\%$) \\
+-- Aufgelöst bei $T = 0{,}80$ & $1.013$ Paare ($11{,}0\,\%$) \\
+-- Aufgelöst bei $T = 0{,}85$ & $224$ Paare ($2{,}4\,\%$) \\
+-- Ausgeschieden ($\Delta R < 0{,}05$ / Fragmente) & $321$ Prompts ($3{,}4\,\%$) \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\newpage
+\subsection{Ergänzende Evaluation zur Kontextlängenskalierung (SFT vs. DPO)}
+\label{sec:anhang_token_length_ablation}
+
+Tabelle~\ref{tab:anhang_dpo_token_length_ablation} dokumentiert die detaillierten quantitativen Evaluierungsmaße zur Sequenzlängenskalierung ($L_{\max} \in \{256, 512, 1.024\}$ Tokens) für SFT- und DPO-Modelle auf dem Lebenshilfe-Testset ($N=37$).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Vollständiger Skalierungsvergleich von SFT und DPO über Kontextlängen]{Vollständiger Skalierungsvergleich zwischen überwachtem Feintuning (Supervised Fine-Tuning, SFT) und direkter Präferenzoptimierung (Direct Preference Optimization, DPO) über variierende maximale Kontextlängen ($L_{\max}$ in BPE-Tokens) auf dem Lebenshilfe-Testset ($N=37$ Artikelpaare) unter Angabe von BLEU, ROUGE-1, ROUGE-L und Satzabbruchquote (Truncation).}
+\label{tab:anhang_dpo_token_length_ablation}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}lcccccccccrc@{}}
+\toprule
+\textbf{Modell} & \shortstack[c]{\textbf{Max Len}\\\textbf{($L_{\max}$)}} & \textbf{$R_{\text{style}}$} & \textbf{$R_{\text{sem, AS}}$} & \textbf{$\text{Sim}_{\text{ref}}$} & \textbf{Composite} & \textbf{BLEU} & \textbf{ROUGE-1} & \textbf{ROUGE-L} & \shortstack[c]{\textbf{\O{} Gen}\\\textbf{Tokens}} & \textbf{Truncation} \\
+\midrule
+\code{sft_len256} & 256 & 0,3206 & 0,9091 & 0,8827 & 0,6148 & 0,0085 & 0,2121 & 0,1264 & 143,0 & $72{,}97\,\%$ \\
+\code{dpo_len256} & 256 & 0,5437 & 0,9109 & 0,8902 & 0,7273 & 0,0145 & 0,2514 & 0,1429 & 169,3 & $48{,}65\,\%$ \\
+\midrule
+\code{sft_len512} & 512 & 0,3896 & 0,9235 & 0,9009 & 0,6565 & 0,0201 & 0,2673 & 0,1531 & 207,4 & $24{,}32\,\%$ \\
+\code{dpo_len512} & 512 & 0,5416 & 0,9168 & 0,8989 & 0,7292 & 0,0200 & 0,2796 & 0,1516 & 216,9 & $\mathbf{18{,}92\,\%}$ \\
+\midrule
+\textbf{\code{sft_len1024}} & 1.024 & 0,7004 & 0,9053 & 0,8911 & 0,8028 & 0,0291 & 0,3448 & 0,1704 & 353,5 & $27{,}03\,\%$ \\
+\textbf{\code{dpo_len1024}} & \textbf{1.024} & \textbf{0,9023} & \textbf{0,8973} & \textbf{0,8960} & \textbf{0,8998} & \textbf{0,0472} & \textbf{0,4016} & \textbf{0,1851} & \textbf{522,4} & $\mathbf{32{,}43\,\%}$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\newpage
+\subsection{Ergänzende Auswertung zur Einhaltung der Sprachregeln}
+\label{sec:anhang_rule_adherence}
+
+Tabelle~\ref{tab:anhang_dpo_rule_adherence_comparison} dokumentiert die detaillierten linguistischen Regelmetriken des Ausgangstexts (AS), der SFT-Baseline, des DPO-Modells und der menschlichen Goldreferenz (Lebenshilfe Gold).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Detaillierter Vergleich der linguistischen Regeltreue]{Detaillierter Vergleich der linguistischen Regeltreue auf dem Lebenshilfe-Testset ($N=37$ Artikelpaare) im Vergleich zwischen Alltagssprache (AS), dem überwachten Basismodell (Supervised Fine-Tuning, SFT), dem präferenzoptimierten Modell (Direct Preference Optimization, DPO) und der menschlichen Referenz (REF) für Lesbarkeitsmetriken wie Flesch Reading Ease (FRE), Lesbarkeitsindex (LIX) und Wiener Sachtextformel (WSTF).}
+\label{tab:anhang_dpo_rule_adherence_comparison}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Linguistische Dimension / Metrik} & \shortstack[c]{\textbf{Ausgangs-}\\\textbf{text (AS)}} & \shortstack[c]{\textbf{SFT Baseline}\\\textbf{($L=1.024$)}} & \shortstack[c]{\textbf{DPO Modell}\\\textbf{($L=1.024$)}} & \shortstack[c]{\textbf{Goldstandard}\\\textbf{(REF)}} & \shortstack[c]{\textbf{Effekt DPO}\\\textbf{vs. AS / SFT}} \\
+\midrule
+Mittlere Satzlänge (Wörter / Satz, $\downarrow$) & 12,50 & 7,61 ($-34{,}0\,\%$) & \textbf{6,97} & 6,79 & $-39{,}9\,\%$ (nahezu identisch zu Gold) \\
+Anteil langer Sätze ($> 12$ Wörter, $\downarrow$) & $42{,}36\,\%$ & $9{,}28\,\%$ & \textbf{4,76\,\%} & $3{,}33\,\%$ & $-88{,}8\,\%$ (starke Entflechtung) \\
+Nebensatz-Anteil (Subordination, $\downarrow$) & $10{,}84\,\%$ & $4{,}45\,\%$ & \textbf{5,60\,\%} & $1{,}79\,\%$ & $-48{,}3\,\%$ (Fokus auf Hauptsätze) \\
+Passiv-Quote (Passivformen / Satz, $\downarrow$) & $9{,}28\,\%$ & $2{,}26\,\%$ ($-65{,}3\,\%$) & \textbf{0,51\,\%} & $2{,}02\,\%$ & $\mathbf{-89{,}1\,\%}$ (übertrifft Goldstandard!) \\
+Genitiv-Quote (Genitivformen / Satz, $\downarrow$) & $9{,}17\,\%$ & $1{,}59\,\%$ ($-77{,}9\,\%$) & \textbf{0,54\,\%} & $1{,}05\,\%$ & $\mathbf{-93{,}8\,\%}$ (übertrifft Goldstandard!) \\
+Nominalstil-Quote (Nominalisierungen, $\downarrow$) & $4{,}98\,\%$ & $3{,}39\,\%$ ($-28{,}0\,\%$) & \textbf{2,58\,\%} & $3{,}37\,\%$ & $\mathbf{-46{,}5\,\%}$ (übertrifft Goldstandard!) \\
+\midrule
+Flesch Reading Ease (DE, $\uparrow$) & 37,44 & 61,27 ($+23{,}8$) & \textbf{67,56} ($+30{,}1$) & 60,67 & Höchste Lesbarkeit (über Gold) \\
+LIX Lesbarkeitsindex ($\downarrow$) & 54,18 & 38,21 ($-16{,}0$) & \textbf{34,16} ($-20{,}0$) & 38,41 & Geringste Textschwere (über Gold) \\
+Wiener Sachtextformel (WSTF, $\downarrow$) & 11,62 & 6,84 ($-4{,}8$) & \textbf{5,55} ($-6{,}1$) & 7,31 & Einfachste Schulstufe (5. Klasse) \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\newpage
+\subsection{Übersicht der Hyperparameter und Trainingskonfigurationen}
+\label{sec:anhang_hyperparameter}
+
+In diesem Abschnitt sind die vollständigen Hyperparameter und Trainingskonfigurationen für alle in der Arbeit entwickelten Modellkomponenten systematisch zusammengestellt. Tabelle~\ref{tab:hyperparameter_metrik_modelle} dokumentiert die Konfigurationen der neuronalen Klassifikations- und Regressionsmodelle (BiLSTM, Synthetischer Regressor, Baseline). Tabelle~\ref{tab:hyperparameter_generative_modelle} führt die Trainingsparameter der überwachten Übersetzungsmodelle (Supervised Fine-Tuning, SFT) sowie der direkten Präferenzoptimierung (Direct Preference Optimization, DPO) für Sequence-to-Sequence- und Decoder-Only-Architekturen auf.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Hyperparameter der neuronalen Bewertungs- und Regressionsmodelle]{Hyperparameter und Trainingskonfigurationen der neuronalen Bewertungs- und Regressionsmodelle zur Bestimmung der sprachlichen Simplizität (BiLSTM-Klassifikatoren, MixUp-Regressoren, synthetische Regressoren und unidirektionale RNN-Baseline).}
+\label{tab:hyperparameter_metrik_modelle}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Parameter / Eigenschaft} & \shortstack[c]{\textbf{BiLSTM}\\\textbf{Satz-Klassifikator}} & \shortstack[c]{\textbf{BiLSTM Artikel-}\\\textbf{Klassifikator ($256/512/1024$)}} & \shortstack[c]{\textbf{BiLSTM MixUp-}\\\textbf{Regressor ($256/512/1024$)}} & \shortstack[c]{\textbf{RNN Baseline}\\\textbf{(Unidirektional)}} \\
+\midrule
+Tokenizer & \texttt{spaCy de\_core\_news\_sm} & \texttt{spaCy de\_core\_news\_sm} & \texttt{spaCy de\_core\_news\_sm} & \texttt{spaCy de\_core\_news\_sm} \\
+Vokabulargröße ($|V|$) & $\approx 25.000$ & $20.000$ bis $25.000$ & $\approx 25.000$ & $\approx 25.000$ \\
+Einbettungsdimension & $128$ & $128$ & $128$ & $128$ \\
+Hidden-Dimension ($h$) & $128$ & $128$ & $128$ & $128$ \\
+Verkettete Repräsentation ($\mathbf{h}_{\text{out}}$) & $256$ ($2 \times 128$) & $256$ ($2 \times 128$) & $256$ ($2 \times 128$) & $128$ ($1 \times 128$) \\
+Rekurrente Schichten & 2 (bidirektional) & 2 (bidirektional) & 2 (bidirektional) & 2 (unidirektional) \\
+Dropout ($p$) & $0{,}40$ & $0{,}40$ & $0{,}40$ & $0{,}40$ \\
+Klassifikations-/Ausgabekopf & Linear + Sigmoid $\sigma(z)$ & Linear + Sigmoid $\sigma(z)$ & Linear + Sigmoid $\sigma(z)$ & Linear + Sigmoid $\sigma(z)$ \\
+Verlustfunktion & Binary Cross Entropy (BCE) & Binary Cross Entropy (BCE) & Mean Squared Error (MSE) & Mean Squared Error (MSE) \\
+Optimierer & AdamW & AdamW & AdamW & AdamW \\
+Lernrate ($\eta$) & $1 \times 10^{-3}$ & $1 \times 10^{-3}$ & $1 \times 10^{-3}$ & $1 \times 10^{-3}$ \\
+Weight Decay ($\lambda$) & $0{,}01$ & $0{,}01$ & $0{,}01$ & $0{,}01$ \\
+Batch-Größe & 32 & 32 & 64 & 64 \\
+Max. Trainings-Epochen & 100 & 100 & 80 & 80 \\
+Early Stopping Patience & 15 Epochen & 15 Epochen & 15 Epochen & 15 Epochen \\
+Datenaugmentierung / MixUp & -- & -- & 160 Mischungen / Paar & 160 Mischungen / Paar \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Hyperparameter der generativen Übersetzungsmodelle]{Hyperparameter und Trainingskonfigurationen der generativen Übersetzungsmodelle für das überwachte Feintuning (SFT) und die direkte Präferenzoptimierung (DPO) für das multilinguale Sequence-to-Sequence-Modell \texttt{mBART-50} sowie das Decoder-Only-Modell \texttt{Qwen2.5-1.5B-Instruct}.}
+\label{tab:hyperparameter_generative_modelle}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Parameter / Hyperparameter} & \shortstack[c]{\textbf{mBART-50 SFT}\\\textbf{(Seq2Seq)}} & \shortstack[c]{\textbf{mBART-50 DPO}\\\textbf{(Seq2Seq)}} & \shortstack[c]{\textbf{Qwen2.5-1.5B SFT}\\\textbf{(Decoder-Only)}} & \shortstack[c]{\textbf{Qwen2.5-1.5B DPO}\\\textbf{(Decoder-Only)}} \\
+\midrule
+Basismodell & \texttt{mbart-large-50-many-to-many} & \texttt{mbart-large-50-many-to-many} & \texttt{Qwen2.5-1.5B-Instruct} & \texttt{Qwen2.5-1.5B-Instruct} \\
+Parameteranzahl & 611 Mio. & 611 Mio. & 1,54 Mrd. & 1,54 Mrd. \\
+Max. Kontextlänge ($L_{\max}$) & 1.024 Tokens & 1.024 Tokens & 2.048 Tokens & 2.048 Tokens \\
+Trainingsverfahren & Parameter-Efficient (LoRA) & Parameter-Efficient (LoRA) & Parameter-Efficient (LoRA) & Parameter-Efficient (LoRA) \\
+LoRA-Rang ($r$) & 16 & 16 & 8 & 8 \\
+LoRA-Skalierung ($\alpha$) & 32 ($\frac{\alpha}{r} = 2{,}0$) & 32 ($\frac{\alpha}{r} = 2{,}0$) & 16 ($\frac{\alpha}{r} = 2{,}0$) & 16 ($\frac{\alpha}{r} = 2{,}0$) \\
+LoRA-Dropout & $0{,}05$ & $0{,}05$ & $0{,}10$ & $0{,}10$ \\
+LoRA-Zielmodule & \texttt{q/k/v/out\_proj}, \texttt{fc1/fc2} & \texttt{q/k/v/out\_proj}, \texttt{fc1/fc2} & \texttt{q/k/v/o\_proj}, \texttt{gate/up/down\_proj} & \texttt{q/k/v/o\_proj}, \texttt{gate/up/down\_proj} \\
+Lernrate ($\eta$) & $5 \times 10^{-5}$ & $5 \times 10^{-6}$ & $1 \times 10^{-4}$ & $2 \times 10^{-6}$ \\
+DPO-Regularisierung ($\beta$) & -- & $0{,}20$ (Sweep $0{,}01$--$0{,}50$) & -- & $0{,}10$ \\
+DPO-Loss-Aggregation & -- & Token-Summe (\texttt{sum}) & -- & Token-Summe (\texttt{sum}) \\
+Optimierer & AdamW & AdamW & AdamW & AdamW \\
+Weight Decay ($\lambda$) & $0{,}01$ & $0{,}01$ & $0{,}01$ & $0{,}01$ \\
+Warmup-Ratio & $10\,\%$ linear & $10\,\%$ linear & $10\,\%$ linear & $10\,\%$ linear \\
+Batch-Größe (pro Device) & 4 & 2 & 4 & 2 \\
+Gradient Accumulation Steps & 4 & 8 & 4 & 8 \\
+Effektive Batch-Größe & 16 & 16 & 16 & 16 \\
+Trainings-Epochen & 30 (Best: Epoche 25) & 3 & 3 & 3 \\
+Fließkomma-Präzision & FP16 Mixed Precision & FP16 Mixed Precision & Bfloat16 Mixed Precision & Bfloat16 Mixed Precision \\
+Hardware-Umgebung & 1$\times$ NVIDIA A100-SXM4 (80GB) & 1$\times$ NVIDIA A100-SXM4 (80GB) & 1$\times$ NVIDIA A100-SXM4 (80GB) & 1$\times$ NVIDIA A100-SXM4 (80GB) \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\newpage
+\subsection{Synthetischer 256-Token Regel-Sensitivitäts-Benchmark}
+\label{sec:anhang_synthetic_rule_benchmark}
+
+Zur empirischen Überprüfung der Teilmengen-Hypothese und zur systematischen Messung der Fehlbewertungs- und Blindheitsrisiken klassischer Lesbarkeitsmetriken (Abschnitt~\ref{sec:klassifikator_laengen_ablation}) wurde ein kontrollierter synthetischer Benchmark entwickelt ($N = 30$ Textfassungen aus fünf lebensweltlichen Domänen mit jeweils $100$ bis $256$ Tokens bzw. zehn zusammenhängenden Sätzen).
+
+Tabelle~\ref{tab:anhang_synthetic_rule_benchmark_table} fasst die quantitativen Metrikergebnisse über die sechs parallelen Störungsstufen zusammen.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Ergebnisse des synthetischen 256-Token Regel-Benchmarks]{Ergebnisse des synthetischen 256-Token Regel-Benchmarks ($N = 30$ Textvarianten aus fünf Domänen) im Vergleich zwischen der Basis (perfekte Leichte Sprache), den isolierten 100\,\%igen Störungsstufen (Konjunktiv II, Passiv, Genitiv, Kombiniert) sowie der Kontrollgruppe (isomorphe Synonym-Paraphrase) unter Auswertung von Flesch Reading Ease (DE), Lesbarkeitsindex (LIX), Wiener Sachtextformel (WSTF-4) und dem trainierten 256-Token BiLSTM-MixUp-Regressor.}
+\label{tab:anhang_synthetic_rule_benchmark_table}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Störungs-Variante} & \textbf{Flesch DE ($\Delta$)} & \textbf{LIX ($\Delta$)} & \textbf{WSTF-4 ($\Delta$)} & \textbf{BiLSTM 256 ($R_{\text{style}}$)} & \textbf{Relativer Modellabfall} \\
+\midrule
+1. Basis (Perfekte Leichte Sprache) & $54{,}25 \pm 0{,}00$ & $34{,}54 \pm 0{,}00$ & $7{,}17 \pm 0{,}00$ & $0{,}5529 \pm 0{,}00$ & -- \\
+2. Konjunktiv II (100\,\% aller Verben) & $47{,}94\; (-6{,}31)$ & $35{,}67\; (+1{,}13)$ & $7{,}72\; (+0{,}55)$ & $\mathbf{0{,}2078\; (-0{,}3451)}$ & $\mathbf{-62{,}4\,\%}$ \\
+3. Genitiv (100\,\% aller Dative) & $\mathbf{60{,}81\; (+6{,}55)}$ & $34{,}62\; (+0{,}08)$ & $5{,}71\; (-1{,}46)$ & $\mathbf{0{,}2535\; (-0{,}2994)}$ & $\mathbf{-54{,}1\,\%}$ \\
+4. Passiv (100\,\% aller Sätze) & $\mathbf{60{,}29\; (+6{,}04)}$ & $37{,}26\; (+2{,}72)$ & $6{,}97\; (-0{,}20)$ & $0{,}7698\; (+0{,}2169)$ & $+39{,}2\,\%$ \\
+5. Kombiniert (Konjunktiv + Genitiv + Passiv) & $52{,}73\; (-1{,}52)$ & $37{,}49\; (+2{,}95)$ & $7{,}03\; (-0{,}14)$ & $0{,}4274\; (-0{,}1255)$ & $-22{,}7\,\%$ \\
+6. Kontrolle (Isomorphe Synonyme) & $54{,}90\; (+0{,}64)$ & $35{,}21\; (+0{,}67)$ & $6{,}88\; (-0{,}28)$ & $0{,}4249\; (-0{,}1280)$ & $-23{,}1\,\%$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\paragraph{Exemplarischer Volltext-Vergleich aller sechs Varianten (Thema 1: Arztbesuch)}
+Zur qualitativen Nachvollziehbarkeit sind nachfolgend die sechs parallelen Textfassungen des ersten Themas (\enquote{\textit{Der Besuch beim Arzt}}, zehn Sätze) im vollständigen Wortlaut gegenübergestellt:
+
+\begin{enumerate}
+    \item \textbf{Basis (Perfekte Leichte Sprache):}
+    \enquote{Ein Mensch geht zu dem Arzt. Der Arzt untersucht den Patienten genau. Der Patient hat starke Schmerzen im Rücken. Die Assistentin misst den Blutdruck sofort. Der Arzt erklärt die richtige Behandlung. Die Apotheke liefert die neuen Medikamente. Der Patient nimmt die Tabletten mit Wasser. Wegen dem schnellen Handeln hilft die Medizin. Der Mann kann bald wieder schmerzfrei arbeiten. Das Büro von dem Arzt ist modern.}
+    
+    \item \textbf{100\,\% Konjunktiv II (Vollständige Injektion nicht-indikativischer Verben):}
+    \enquote{Ein Mensch geht zu dem Arzt. Der Arzt \textit{untersuchte} den Patienten genau. Der Patient \textit{hätte} starke Schmerzen im Rücken. Die Assistentin \textit{messe} den Blutdruck sofort. Der Arzt \textit{erklärte} die richtige Behandlung. Die Apotheke \textit{lieferte} die neuen Medikamente. Der Patient \textit{nähme} die Tabletten mit Wasser. Wegen dem schnellen Handeln \textit{hülfe} die Medizin. Der Mann \textit{könnte} bald wieder schmerzfrei arbeiten. Das Büro von dem Arzt \textit{wäre} modern.}
+    
+    \item \textbf{100\,\% Vorgangspassiv (Vollständige Injektion agens-abgewandter Passivstrukturen):}
+    \enquote{Ein Mensch wird von dem Arzt untersucht. Der Patient wird von dem Arzt genau untersucht. Starke Schmerzen im Rücken werden von dem Patienten ertragen. Der Blutdruck wird von der Assistentin sofort gemessen. Die richtige Behandlung wird von dem Arzt erklärt. Die neuen Medikamente werden von der Apotheke geliefert. Die Tabletten werden von dem Patienten mit Wasser genommen. Schnelle Hilfe wird von der Medizin geleistet. Die Arbeit wird von dem Mann bald wieder aufgenommen. Das moderne Büro wird von dem Arzt betrieben.}
+    
+    \item \textbf{100\,\% Genitiv (Vollständige Injektion von Genitivattributen statt Dativumschreibungen):}
+    \enquote{Ein Mensch geht des Arztes wegen. Der Arzt untersucht den Patienten \textit{des Hauses}. Der Patient hat starke Schmerzen \textit{des Rückens}. Die Assistentin \textit{des Chefs} misst den Blutdruck. Der Arzt erklärt die Behandlung \textit{des Patienten}. Die Apotheke \textit{des Ortes} liefert die Medikamente. Der Patient nimmt die Tabletten \textit{des Arztes}. Wegen \textit{des} schnellen \textit{Handelns} hilft die Medizin. Der Mann kann wegen \textit{des Erfolgs} schmerzfrei arbeiten. Das Büro \textit{des Arztes} ist modern.}
+    
+    \item \textbf{Kombiniert (Simultane Vollinjektion: Passiv + Konjunktiv + Genitiv):}
+    \enquote{Ein Mensch würde von dem Arzt des Hauses untersucht. Der Patient würde von dem Arzt genau untersucht. Starke Schmerzen des Rückens würden von dem Patienten ertragen. Der Blutdruck des Chefs würde von der Assistentin sofort gemessen. Die richtige Behandlung des Patienten würde von dem Arzt erklärt. Die neuen Medikamente der Apotheke würden geliefert. Die Tabletten des Arztes würden mit Wasser genommen. Schnelle Hilfe des Arztes würde geleistet. Die Arbeit des Mannes würde bald wieder aufgenommen. Das moderne Büro des Arztes würde betrieben.}
+    
+    \item \textbf{Kontrollgruppe (Isomorphe Synonym-Paraphrasen bei 100\,\% identischer Satzstruktur):}
+    \enquote{Eine Person geht zu dem Arzt. Der Arzt prüft den Patienten genau. Der Patient hat große Schmerzen im Rücken. Die Helferin misst den Blutdruck sofort. Der Arzt schildert die richtige Behandlung. Die Apotheke bringt die neuen Medikamente. Der Patient schluckt die Tabletten mit Wasser. Wegen dem raschen Handeln hilft die Medizin. Der Mann vermag bald wieder schmerzfrei arbeiten. Der Raum von dem Arzt ist modern.}
+\end{enumerate}

@@ -1,12 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=3_generate_dpo_pairs_256
 #SBATCH --partition=research
-#SBATCH --time=12:00:00
+#SBATCH --time=06:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/experiments/token_length/%x_%j.out
-#SBATCH --error=results/logs/experiments/token_length/%x_%j.err
+#SBATCH --array=0-3
+#SBATCH --output=results/logs/experiments/token_length/%x_%A_%a.out
+#SBATCH --error=results/logs/experiments/token_length/%x_%A_%a.err
 
 set -e
 
@@ -17,11 +18,16 @@ elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
     source "$HOME/master-thesis/.venv/bin/activate"
 fi
 
-
-
 mkdir -p results/logs/experiments/token_length results/plots/experiments/token_length results/evaluation
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 mkdir -p data/token_length_exp
+
+NUM_SHARDS=4
+SHARD_ID=${SLURM_ARRAY_TASK_ID:-0}
+OUTPUT_FILE="data/token_length_exp/dpo_pairs_len256_shard_${SHARD_ID}.jsonl"
+
+echo "=== Starting Token Length 256 DPO Generation (Shard ${SHARD_ID}/${NUM_SHARDS}) ==="
+date
 
 srun python scripts/modeling/generate_dpo_dataset.py \
     --corpus_path "data/corpus/corpus_10kgnad_len512_as.json" \
@@ -42,6 +48,11 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --w_sem 0.5 \
     --min_score_margin 0.05 \
     --batch_size 16 \
-    --output_file "data/token_length_exp/dpo_pairs_len256.jsonl" \
-    --val_split_ratio 0.15 \
+    --num_shards ${NUM_SHARDS} \
+    --shard_id ${SHARD_ID} \
+    --output_file "${OUTPUT_FILE}" \
+    --val_split_ratio 0.0 \
     --resume
+
+echo "=== Shard ${SHARD_ID} Completed ==="
+date

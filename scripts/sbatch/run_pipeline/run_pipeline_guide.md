@@ -13,7 +13,7 @@ Um Probleme mit fehlenden Pfaden oder fehleranfälligen Ausschlusslisten (`--exc
 Logge dich auf dem Server ein oder führe den folgenden Befehl remote aus, um alle notwendigen Zielverzeichnisse für Logs, Modelle, Plots und Daten anzulegen:
 
 ```bash
-ssh fisc4884@hpc3.hs-flensburg.de "mkdir -p ~/master-thesis/scripts ~/master-thesis/data/{corpus/{1_aligned_urls,2_raw_scraped,3_content_extracted,4_normalized_clean},lebenshilfe/texts_lebenshilfe,analysis/textcomplexityde,evaluation_sets,vocabs,synthetic,dpo,metric_weights_exp} ~/master-thesis/results/{models/{sft,dpo,decoder_only/{sft,dpo,ppo},ppo/seq2seq,loss_aggregation_exp/{dpo_sum,dpo_mean},experiments/synthetic_regressor},logs/{run_pipeline,experiments/{benchmark,context_length_ablation,data_scaling,decoder_only,dpo_beta_sweep,factuality_metric,glossary,length_bias,loss_aggregation,metric_weights,ppo,rnn_baseline,rule_adherence,sft_scaling,synthetic_regressor,textcomplexityde,token_length}},plots/{run_pipeline,experiments/{benchmark,context_length_ablation,decoder_only,dpo_beta_sweep,factuality_metric,glossary,length_bias,loss_aggregation,metric_weights,ppo,rnn_baseline,rule_adherence,sft_scaling,synthetic_regressor,textcomplexityde,token_length}},evaluation}"
+ssh fisc4884@hpc3.hs-flensburg.de "mkdir -p ~/master-thesis/scripts ~/master-thesis/data/{corpus/{1_aligned_urls,2_raw_scraped,3_content_extracted,4_normalized_clean},lebenshilfe/texts_lebenshilfe,analysis/textcomplexityde,evaluation_sets,vocabs,synthetic,dpo,metric_weights_exp,classifier_length_exp,regressor_length_exp,mixup_variants,token_length_exp,expert_eval} ~/master-thesis/results/{models/{sft,dpo,decoder_only/{sft,dpo,ppo},ppo/seq2seq,classifier_length_exp,regressor_length_exp,mixup_variants,token_length_exp,experiments/synthetic_regressor},logs/{run_pipeline,experiments/{benchmark,classifier_length,classifier_stability,context_length_ablation,data_scaling,decoder_only,dpo_beta_sweep,factuality_metric,length_bias,merlin,metric_weights,mixup_variants,ppo,regressor_length,rnn_baseline,rule_adherence,sft_scaling,similarity_threshold,synthetic_regressor,textcomplexityde,token_length}},plots/{run_pipeline,experiments/{benchmark,classifier_length,classifier_stability,context_length_ablation,decoder_only,dpo_beta_sweep,factuality_metric,length_bias,merlin,metric_weights,mixup_variants,ppo,regressor_length,rnn_baseline,rule_adherence,sft_scaling,similarity_threshold,synthetic_regressor,textcomplexityde,token_length}},evaluation/classifier_stability,experiments/similarity_threshold/plots,expert_eval}"
 ```
 
 ---
@@ -74,9 +74,9 @@ python3 -m spacy download de_core_news_sm
 
 ## 2. Start-Befehle (All-in-One & Pipeline-Ausführung)
 
-### 2.1 All-in-One: Gesamt-Orchestrierung (Pipeline + Alle 17 Experimente)
+### 2.1 All-in-One: Gesamt-Orchestrierung (Pipeline + Alle 20 Experimente)
 
-Startet die gesamte Hauptpipeline sowie **sämtliche 17 wissenschaftlichen Experimente und Benchmarks** vollautomatisch mit einer optimierten Slurm-Job-Abhängigkeitskette (`--dependency=afterok`):
+Startet die gesamte Hauptpipeline sowie **sämtliche 20 wissenschaftlichen Experimente und Benchmarks** vollautomatisch mit einer optimierten Slurm-Job-Abhängigkeitskette (`--dependency=afterok`):
 
 ```bash
 # Standard: Startet ab Schritt 02 (da URL-Alignment bereits auf dem Server liegt)
@@ -140,28 +140,32 @@ Falls nur bestimmte Phasen der Pipeline gerechnet oder getestet werden sollen:
 
 ## 4. Experimente & Ablationen (`scripts/sbatch/experiments/`)
 
-Alle 17 wissenschaftlichen Experimente können entweder über den Gesamt-Orchestrierer (`run_all_pipeline_and_experiments.sh`) oder einzeln über ihre jeweiligen Runner ausgeführt werden:
+Alle 20 wissenschaftlichen Experimente können entweder über den Gesamt-Orchestrierer (`run_all_pipeline_and_experiments.sh`) oder einzeln über ihre jeweiligen Runner ausgeführt werden:
 
-| Nr.    | Experiment-Track                          | Verzeichnis / Runner                                                                         | Beschreibung                                                                                             |
-| :----- | :---------------------------------------- | :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
-| **01** | **Factuality & Halluzinations-Benchmark** | `sbatch scripts/sbatch/experiments/metric/factuality_metric/1_run_factuality_metric_experiment.sh` | Vergleich von SBERT vs. NLI vs. NER vs. Number Regex mit ROC-AUC                                         |
-| **02** | **Hurraki Glossar-Extraktion**            | `sbatch scripts/sbatch/experiments/glossary/1_build_glossary.sh`                             | Extraktion komplexer Begriffe und automatische Definitionssuche via Hurraki-API                          |
-| **03** | **Jina Kontextlängen-Ablation**           | `sbatch scripts/sbatch/experiments/metric/context_length_ablation/1_run_context_length_ablation.sh` | Analyse von Truncation-Artefakten (128 vs 256 vs 512 vs 1024 vs 8192)                                    |
-| **04** | **Length-Bias & Shortcut Analyse**        | `sbatch scripts/sbatch/experiments/metric/length_bias/1_check_length_bias.sh`                       | Prüfung des Klassifikators/Regressors auf Längenkorrelationen und Artefakte                              |
-| **05a** | **TextComplexityDE Validierung**          | `sbatch scripts/sbatch/experiments/metric/textcomplexityde/1_evaluate_textcomplexityde.sh`          | Externe Validierung des MixUp-Regressors auf dem Satz-Benchmark (1.000 Wikipedia-Sätze)                  |
-| **05b** | **MERLIN CEFR Validierung**               | `sbatch scripts/sbatch/experiments/metric/merlin/1_evaluate_merlin.sh`                              | Externe Validierung auf Dokumentebene (1.033 Texte) über 5 CEFR-Stufen (A1–C1)                          |
-| **06** | **RNN Baseline vs. BiLSTM**               | `sbatch scripts/sbatch/experiments/metric/rnn_baseline/1_train_rnn_baseline.sh`                     | Vergleich des BiLSTM-Regressors mit Vanilla Elman-RNN und Unidirektionalem LSTM                          |
-| **07** | **SFT Data Scaling Curve**                | `bash scripts/sbatch/experiments/sft_scaling/run_all_sft_scaling.sh`                         | Skalierungskurven des SFT-Modells über Datensatzgrößen (250 bis 2000 Artikel)                            |
-| **08** | **MixUp Data Scaling Grid**               | `bash scripts/sbatch/experiments/metric/data_scaling/run_all_data_scaling.sh`                       | 2D-Grid-Skalierung über Mischungsanzahlen (1k–20k) und Artikelanzahlen                                   |
-| **09** | **Synthetischer Regressor**               | `bash scripts/sbatch/experiments/metric/synthetic_regressor/run_all_synthetic_pipeline.sh`          | 7-stufige Pipeline mit LLM-generierten Zwischenstufen und kontinuierlichem Regressor                     |
-| **10** | **Token Length Ablation (256/512/1024)**  | `bash scripts/sbatch/experiments/token_length/run_all_token_experiments.sh`                  | Untersuchung der Sequenzlänge auf Reward-Modell, SFT-Übersetzung und DPO                                 |
-| **11** | **Quantitative Regel-Adhärenz**           | `sbatch scripts/sbatch/experiments/rule_adherence/1_measure_rule_adherence.sh`               | Messung formaler Leichte-Sprache-Regeln (Satzlänge, Silben, Passiv, Genitive)                            |
-| **12** | **Decoder-Only Pipeline (Qwen 2.5)**      | `bash scripts/sbatch/experiments/decoder_only/run_all_decoder_only.sh`                       | Vollständige Qwen2.5-1.5B Kette: SFT $\rightarrow$ DPO-Gen $\rightarrow$ DPO-Training $\rightarrow$ Eval |
-| **13** | **Metric Weighting Grid**                 | `bash scripts/sbatch/experiments/metric_weights/run_all_metric_weights_experiments.sh`       | Grid-Search über Belohnungsgewichte ($0.5/0.5$, $0.7/0.3$, $1.0/0.0$) in DPO                             |
-| **14** | **Loss Aggregation (Sum vs. Mean)**       | `bash scripts/sbatch/experiments/loss_aggregation/run_all_loss_aggregation_experiments.sh`   | Vergleich von aufsummierten vs. gemittelten Log-Probabilities beim DPO-Loss                              |
-| **15** | **DPO Beta Parameter Sweep**              | `bash scripts/sbatch/experiments/dpo_beta_sweep/run_all_beta_sweep.sh`                       | Parameter-Sweep über $\beta \in \{0.01, 0.05, 0.10, 0.20, 0.50\}$ mit mBART-50                           |
-| **16** | **PPO Reinforcement Learning**            | `bash scripts/sbatch/experiments/ppo/run_all_ppo_experiments.sh`                             | Online PPO-Training für Seq2Seq (mBART-50) und Decoder-Only (Qwen 2.5)                                   |
-| **17** | **Grand Master 5-Wege-Benchmark**         | `sbatch scripts/sbatch/experiments/benchmark/1_run_all_models_benchmark.sh`                  | Gesamtvergleich aller Modellfamilien (mBART SFT/DPO vs. Qwen SFT/DPO vs. Baseline)                       |
+| Nr. | Experiment-Track | Verzeichnis / Runner | Beschreibung |
+| :--- | :--- | :--- | :--- |
+| **01** | **Factuality & Halluzinations-Benchmark** | `sbatch scripts/sbatch/experiments/metric/factuality_metric/1_run_factuality_metric_experiment.sh` | Vergleich von SBERT vs. NLI vs. NER vs. Number Regex mit ROC-AUC |
+| **02** | **Klassifikator-Stabilität & Kapazität** | `bash scripts/sbatch/experiments/metric/classifier_stability/run_all_stability_experiments.sh` | Robustheit, Varianz und Konvergenz über 5 Random Seeds & Epochen-Tracking |
+| **03** | **Klassifikator-Sequenzlänge (256/512/1024)** | `bash scripts/sbatch/experiments/metric/classifier_length/run_all_classifier_experiments.sh` | Analyse des Truncation-Einflusses auf binäre Artikelklassifikation |
+| **04** | **Regressor-Sequenzlänge (256/512/1024)** | `bash scripts/sbatch/experiments/metric/regressor_length/run_all_regressor_experiments.sh` | Isolierte Evaluation des MixUp-Regressors auf Lebenshilfe-Artikeln bei 256/512/1024 |
+| **05** | **MixUp Modell-Varianten (4 Strategien)** | `bash scripts/sbatch/experiments/metric/mixup_variants/run_all_mixup_variants.sh` | Statisch vs. Dynamisch Beta vs. Hybrid vs. Hybrid + Cyclic LR |
+| **06** | **Ähnlichkeitsschwellen (0.60/0.70/0.80)** | `bash scripts/sbatch/experiments/metric/similarity_threshold/run_all_similarity_experiments.sh` | Ablation über SBERT Cosine Similarity Filter auf Korpusgröße, Regressor & SFT |
+| **07** | **Jina Kontextlängen-Ablation** | `sbatch scripts/sbatch/experiments/metric/context_length_ablation/1_run_context_length_ablation.sh` | Analyse von Truncation-Artefakten (128 vs 256 vs 512 vs 1024 vs 8192) |
+| **08** | **Length-Bias & Shortcut Analyse** | `sbatch scripts/sbatch/experiments/metric/length_bias/1_check_length_bias.sh` | Prüfung des Klassifikators/Regressors auf Längenkorrelationen und Artefakte |
+| **09a** | **TextComplexityDE Validierung** | `sbatch scripts/sbatch/experiments/metric/textcomplexityde/1_evaluate_textcomplexityde.sh` | Externe Validierung des MixUp-Regressors auf dem Satz-Benchmark (1.000 Wikipedia-Sätze) |
+| **09b** | **MERLIN CEFR Validierung** | `sbatch scripts/sbatch/experiments/metric/merlin/1_evaluate_merlin.sh` | Externe Validierung auf Dokumentebene (1.033 Texte) über 5 CEFR-Stufen (A1–C1) |
+| **10** | **RNN Baseline vs. BiLSTM** | `sbatch scripts/sbatch/experiments/metric/rnn_baseline/1_train_rnn_baseline.sh` | Vergleich des BiLSTM-Regressors mit Vanilla Elman-RNN und Unidirektionalem LSTM |
+| **11** | **SFT Data Scaling Curve** | `bash scripts/sbatch/experiments/sft_scaling/run_all_sft_scaling.sh` | Skalierungskurven des SFT-Modells über Datensatzgrößen (250 bis 2000 Artikel) |
+| **12** | **MixUp Data Scaling Grid** | `bash scripts/sbatch/experiments/metric/data_scaling/run_all_data_scaling.sh` | Skalierung über synthetische Mischungen (10–160/Paar) und Quellartikel (250–Master) |
+| **13** | **Synthetischer Regressor** | `bash scripts/sbatch/experiments/metric/synthetic_regressor/run_all_synthetic_pipeline.sh` | LLM-Zwischenstufen-Generierung, BiLSTM Regressor-Training & Evaluation gegen MixUp |
+| **14** | **Token Length End-to-End Ablation** | `bash scripts/sbatch/experiments/token_length/run_all_token_experiments.sh` | Vollständige Kette (Reward $\rightarrow$ SFT $\rightarrow$ DPO $\rightarrow$ Eval) für 256/512/1024 Tokens |
+| **15** | **Quantitative Regel-Adhärenz** | `sbatch scripts/sbatch/experiments/rule_adherence/1_measure_rule_adherence.sh` | Messung formaler Leichte-Sprache-Regeln (Satzlänge, Silben, Passiv, Genitive) |
+| **16** | **Decoder-Only Pipeline (Qwen 2.5)** | `bash scripts/sbatch/experiments/decoder_only/run_all_decoder_only.sh` | Vollständige Qwen2.5-1.5B Kette: SFT $\rightarrow$ DPO-Gen $\rightarrow$ DPO-Training $\rightarrow$ Eval |
+| **17** | **Metric Weighting Grid** | `bash scripts/sbatch/experiments/metric_weights/run_all_metric_weights_experiments.sh` | Grid-Search über Belohnungsgewichte ($0.5/0.5$, $0.7/0.3$, $1.0/0.0$) in DPO |
+| **18** | **DPO Beta Parameter Sweep** | `bash scripts/sbatch/experiments/dpo_beta_sweep/run_all_beta_sweep.sh` | Parameter-Sweep über $\beta \in \{0.01, 0.05, 0.10, 0.20, 0.50\}$ mit mBART-50 |
+| **19** | **PPO Reinforcement Learning** | `bash scripts/sbatch/experiments/ppo/run_all_ppo_experiments.sh` | Online PPO-Training für Seq2Seq (mBART-50) und Decoder-Only (Qwen 2.5) |
+| **20** | **Grand Master 5-Wege-Benchmark** | `sbatch scripts/sbatch/experiments/benchmark/1_run_all_models_benchmark.sh` | Gesamtvergleich aller Modellfamilien (mBART SFT/DPO vs. Qwen SFT/DPO vs. Baseline) |
+| **--** | **Experten-Evaluationspool** | `sbatch scripts/sbatch/experiments/benchmark/2_run_expert_eval_benchmark.sh` | 50-Item Blindstudien-Pool (10 Nicht-Lebenshilfe Domänen) für Experten-Bewertung |
 
 ---
 

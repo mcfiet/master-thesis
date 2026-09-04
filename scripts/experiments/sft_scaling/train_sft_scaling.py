@@ -171,6 +171,8 @@ def main():
     parser.add_argument("--patience", type=int, default=6)
     parser.add_argument("--seed", type=int, default=42)
     
+    parser.add_argument("--reward_max_seq_len", type=int, default=1024, help="Max tokens for simplicity reward model evaluation")
+    
     parser.add_argument("--lora_r", type=int, default=16)
     parser.add_argument("--lora_alpha", type=int, default=32)
     parser.add_argument("--lora_dropout", type=float, default=0.05)
@@ -437,18 +439,18 @@ def main():
     # Simplicity
     def predict_simplicity(texts: List[str]) -> np.ndarray:
         all_s = []
-        for i in range(0, len(texts), 64):
-            b_txt = texts[i : i + 64]
-            b_ids = []
-            for t in b_txt:
+        with torch.no_grad():
+            for t in texts:
                 doc = nlp(t)
-                ids = [vocab.get(tok.text.lower(), 1) for tok in doc if not tok.is_space]
-                ids = ids[:256] + [0] * max(0, 256 - len(ids))
-                b_ids.append(ids)
-            tensor = torch.tensor(b_ids, dtype=torch.long, device=device)
-            with torch.no_grad():
-                preds = reward_model(tensor).squeeze(-1).cpu().numpy()
-            all_s.extend(preds.tolist() if isinstance(preds, np.ndarray) and preds.ndim > 0 else [float(preds)])
+                tokens = [tok.text.lower() for tok in doc if not tok.is_space]
+                if getattr(args, "reward_max_seq_len", None) is not None and args.reward_max_seq_len > 0:
+                    tokens = tokens[:args.reward_max_seq_len]
+                ids = [vocab.get(tok, 1) for tok in tokens]
+                if not ids:
+                    ids = [0]
+                tensor = torch.tensor([ids], dtype=torch.long, device=device)
+                p = reward_model(tensor).squeeze().item()
+                all_s.append(float(p))
         return np.array(all_s)
         
     def predict_sbert_sim(t1: List[str], t2: List[str]) -> np.ndarray:

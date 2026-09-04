@@ -55,23 +55,18 @@ def load_vocab_dict(vocab_path):
     return data
 
 def tokenize_and_predict(model, vocab, texts, device, max_len=256):
-    tokenized = []
-    for text in texts:
-        doc = nlp(str(text or ""))
-        tokens = [t.text.lower() for t in doc if not t.is_space]
-        ids = [vocab.get(t, vocab.get("<unk>", 1)) for t in tokens][:max_len]
-        if len(ids) == 0:
-            ids = [0]
-        tokenized.append(ids)
-    
-    padded = np.zeros((len(texts), max_len), dtype=np.int64)
-    for i, seq in enumerate(tokenized):
-        padded[i, :len(seq)] = seq
-    
-    x = torch.tensor(padded, dtype=torch.long, device=device)
+    scores = []
     with torch.no_grad():
-        scores = model(x)
-    return scores.cpu().numpy()
+        for text in texts:
+            doc = nlp(str(text or ""))
+            tokens = [t.text.lower() for t in doc if not t.is_space]
+            ids = [vocab.get(t, vocab.get("<unk>", 1)) for t in tokens][:max_len]
+            if len(ids) == 0:
+                ids = [0]
+            inp = torch.tensor([ids], dtype=torch.long, device=device)
+            p = model(inp).squeeze().item()
+            scores.append(p)
+    return np.array(scores)
 
 def main():
     parser = argparse.ArgumentParser()

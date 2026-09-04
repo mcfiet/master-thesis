@@ -185,7 +185,7 @@ def main():
         f.write("\\begin{tabular}{@{}lrrrrr@{}}\n\\toprule\n")
         f.write("\\textbf{Filterbereich} & \\textbf{Paare} & \\textbf{Retention} & \\textbf{AS Tokens} & \\textbf{LS Tokens} & \\textbf{Token-Ratio} \\\\\n\\midrule\n")
         for _, r in df_corpus_stats.iterrows():
-            f.write(f"${r['min_sim']:.2f} \\le \\text{{sim}} \\le 0{,}98$ & {int(r['pairs'])} & {r['retention_pct']:.1f}\\,\\% & {int(r['as_tokens']):,} & {int(r['ls_tokens']):,} & {r['token_ratio']:.2f} \\\\\n")
+            f.write(f"${r['min_sim']:.2f} \\le \\text{{sim}} \\le 0.98$ & {int(r['pairs'])} & {r['retention_pct']:.1f}\\,\\% & {int(r['as_tokens']):,} & {int(r['ls_tokens']):,} & {r['token_ratio']:.2f} \\\\\n")
         f.write("\\bottomrule\n\\end{tabular}\n\\end{table}\n\n")
 
     logger.info(f"LaTeX Tabellen gespeichert unter: {latex_out_path}")

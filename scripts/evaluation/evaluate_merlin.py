@@ -203,22 +203,19 @@ def main():
         model.load_state_dict(st)
         model.eval()
 
-        tokenized = []
-        for toks in docs_tokens:
-            enc = [vocab.get(tok, 1) if vocab.get(tok, 1) < v_size else 1 for tok in toks][:max_len]
-            if not enc: enc = [0]
-            tokenized.append(enc)
-
-        padded = np.zeros((len(texts), max_len), dtype=np.int64)
-        for i, seq in enumerate(tokenized):
-            padded[i, :len(seq)] = seq
-
-        tensor_x = torch.tensor(padded, dtype=torch.long, device=device)
+        preds_list = []
         with torch.no_grad():
-            if m_type == "reg":
-                preds = model(tensor_x).cpu().numpy()
-            else:
-                preds = torch.sigmoid(model(tensor_x)).cpu().numpy()
+            for toks in docs_tokens:
+                enc = [vocab.get(tok, 1) if vocab.get(tok, 1) < v_size else 1 for tok in toks][:max_len]
+                if not enc:
+                    enc = [0]
+                inp = torch.tensor([enc], dtype=torch.long, device=device)
+                if m_type == "reg":
+                    p = model(inp).squeeze().item()
+                else:
+                    p = torch.sigmoid(model(inp)).squeeze().item()
+                preds_list.append(p)
+        preds = np.array(preds_list)
 
         df_out[f"Pred_{name.replace(' ', '_')}"] = preds
         summary_records.append(evaluate_series(preds, y_simp, y_comp, name, cat))

@@ -66,10 +66,13 @@ echo "Schritt 10 eingereicht (SFT Training): Job ID $JOB10"
 
 # Stufe 5: DPO-Präferenzpaare erzeugen (auf ungesehenem 10kGNAD mit SFT und Reward Model)
 JOB11=$(sbatch --parsable --dependency=afterok:$JOB6:$JOB9:$JOB10 scripts/sbatch/run_pipeline/11_generate_dpo_dataset.sh)
-echo "Schritt 11 eingereicht (DPO Paare generieren): Job ID $JOB11"
+echo "Schritt 11 eingereicht (DPO Paare generieren, 4 Shards): Job ID $JOB11"
+
+JOB11B=$(sbatch --parsable --dependency=afterok:$JOB11 scripts/sbatch/run_pipeline/11b_merge_dpo_dataset.sh)
+echo "Schritt 11b eingereicht (DPO Shards zusammenführen): Job ID $JOB11B"
 
 # Stufe 6: DPO-Training
-JOB12=$(sbatch --parsable --dependency=afterok:$JOB10:$JOB11 scripts/sbatch/run_pipeline/12_train_dpo.sh)
+JOB12=$(sbatch --parsable --dependency=afterok:$JOB10:$JOB11B scripts/sbatch/run_pipeline/12_train_dpo.sh)
 echo "Schritt 12 eingereicht (DPO Training): Job ID $JOB12"
 
 # Stufe 7: Finale Evaluierung auf dem Lebenshilfe Benchmark
@@ -77,7 +80,7 @@ JOB13=$(sbatch --parsable --dependency=afterok:$JOB4:$JOB10:$JOB12 scripts/sbatc
 echo "Schritt 13 eingereicht (Pipeline Evaluierung): Job ID $JOB13"
 
 # Stufe 8: Experten-Evaluationspool erstellen (50 Items, 10 Nicht-Lebenshilfe Domaenen)
-JOB_EXP=$(sbatch --parsable --dependency=afterok:$JOB9:$JOB10:$JOB12 scripts/sbatch/experiments/benchmark/2_run_expert_eval_benchmark.sh)
+JOB_EXP=$(sbatch --parsable --dependency=afterok:$JOB4:$JOB5:$JOB9:$JOB10:$JOB12 scripts/sbatch/experiments/expert_eval/1_build_expert_dataset.sh)
 echo "Experten-Evaluationspool eingereicht (50 Items, verblindet): Job ID $JOB_EXP"
 
 echo "========================================================================"

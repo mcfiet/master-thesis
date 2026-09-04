@@ -11,8 +11,8 @@ set -e
 # ==============================================================================
 # Pipeline Runner: Token Length Experiment (256 vs 512 vs 1024 Tokens)
 # Submits all dependent SLURM jobs sequentially for each length track.
+# Uses 4-way Array Sharding + Auto-Merge for DPO pair generation.
 # ==============================================================================
-
 
 mkdir -p results/logs/experiments/token_length
 SCRIPT_DIR="scripts/sbatch/experiments/token_length"
@@ -31,16 +31,22 @@ JOB_SFT512=$(sbatch --parsable --dependency=afterok:${JOB_M512} ${SCRIPT_DIR}/2_
 JOB_SFT1024=$(sbatch --parsable --dependency=afterok:${JOB_M1024} ${SCRIPT_DIR}/2_train_sft_1024.sh)
 echo "2. SFT Training Jobs submitted: SFT256=$JOB_SFT256, SFT512=$JOB_SFT512, SFT1024=$JOB_SFT1024"
 
-# 3. DPO Pair Generation Jobs (Dependent on respective SFT model)
+# 3. DPO Pair Generation Jobs (4-Way Array Shards, Dependent on respective SFT model)
 JOB_GEN256=$(sbatch --parsable --dependency=afterok:${JOB_SFT256} ${SCRIPT_DIR}/3_generate_dpo_pairs_256.sh)
 JOB_GEN512=$(sbatch --parsable --dependency=afterok:${JOB_SFT512} ${SCRIPT_DIR}/3_generate_dpo_pairs_512.sh)
 JOB_GEN1024=$(sbatch --parsable --dependency=afterok:${JOB_SFT1024} ${SCRIPT_DIR}/3_generate_dpo_pairs_1024.sh)
-echo "3. DPO Generation Jobs submitted: GEN256=$JOB_GEN256, GEN512=$JOB_GEN512, GEN1024=$JOB_GEN1024"
+echo "3. DPO Generation Array Jobs submitted: GEN256=$JOB_GEN256, GEN512=$JOB_GEN512, GEN1024=$JOB_GEN1024"
 
-# 4. DPO Training Jobs (Dependent on respective DPO Pairs dataset)
-JOB_DPO256=$(sbatch --parsable --dependency=afterok:${JOB_GEN256} ${SCRIPT_DIR}/4_train_dpo_256.sh)
-JOB_DPO512=$(sbatch --parsable --dependency=afterok:${JOB_GEN512} ${SCRIPT_DIR}/4_train_dpo_512.sh)
-JOB_DPO1024=$(sbatch --parsable --dependency=afterok:${JOB_GEN1024} ${SCRIPT_DIR}/4_train_dpo_1024.sh)
+# 3b. DPO Shard Merge Jobs (Dependent on respective Array jobs)
+JOB_MRG256=$(sbatch --parsable --dependency=afterok:${JOB_GEN256} ${SCRIPT_DIR}/3b_merge_dpo_pairs_256.sh)
+JOB_MRG512=$(sbatch --parsable --dependency=afterok:${JOB_GEN512} ${SCRIPT_DIR}/3b_merge_dpo_pairs_512.sh)
+JOB_MRG1024=$(sbatch --parsable --dependency=afterok:${JOB_GEN1024} ${SCRIPT_DIR}/3b_merge_dpo_pairs_1024.sh)
+echo "3b. DPO Merge Jobs submitted: MRG256=$JOB_MRG256, MRG512=$JOB_MRG512, MRG1024=$JOB_MRG1024"
+
+# 4. DPO Training Jobs (Dependent on respective merged DPO Pairs dataset)
+JOB_DPO256=$(sbatch --parsable --dependency=afterok:${JOB_MRG256} ${SCRIPT_DIR}/4_train_dpo_256.sh)
+JOB_DPO512=$(sbatch --parsable --dependency=afterok:${JOB_MRG512} ${SCRIPT_DIR}/4_train_dpo_512.sh)
+JOB_DPO1024=$(sbatch --parsable --dependency=afterok:${JOB_MRG1024} ${SCRIPT_DIR}/4_train_dpo_1024.sh)
 echo "4. DPO Training Jobs submitted: DPO256=$JOB_DPO256, DPO512=$JOB_DPO512, DPO1024=$JOB_DPO1024"
 
 # 5. Final Evaluation Job (Runs after all DPO models finish)

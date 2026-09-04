@@ -8,218 +8,77 @@ Die Entwicklung einer automatisierten, referenzfreien Komplexitätsmetrik stellt
 \subsubsection{Motivation, Lesbarkeitsmetriken \& BiLSTM-Architektur}
 \label{sec:klassifikation_motivation}
 
-Klassische lesbarkeitsmetrische Ansätze wie der \textit{Flesch Reading Ease} \citep{amstad1978verstaendlich} oder die \textit{Wiener Sachtextformel} \citep{bamberger1984lesen} basieren primär auf einfachen Oberflächenstatistiken wie der mittleren Silbenanzahl oder Satzlänge. Zwar bieten diese deterministischen Heuristiken eine etablierte, recheneffiziente Basis zur groben Abschätzung allgemeiner Textschwierigkeit, sie stoßen jedoch bei der spezifischen Bewertung von Leichter Sprache an konzeptionelle Grenzen: Da sie für allgemeine Lesbarkeitsstufen im Bildungswesen konzipiert wurden, haben sie die spezifischen, normierten Regeln der Leichten Sprache (DIN EN ISO 24495-1 bzw. Duden Leichte Sprache) nie gelernt. Weder syntaktische Kernanforderungen wie die Vermeidung von Passivkonstruktionen und Genitiven, die Auflösung von Nebensatzgefügen in parataktische Hauptsätze noch morphologische Besonderheiten wie Bindestrich-Kopplungen bei Komposita (z.\,B. \enquote{\textit{Werkstatt-Vertrag}}) werden von reinen Silbenzählern adäquat erfasst \citep{maass2020leichte, bredel2016leichte}. Zudem liefern starre Formeln keine stetig differenzierbaren Gradienten, wie sie für das Reinforcement Learning (Reward Modeling) unerlässlich sind.
+Klassische lesbarkeitsmetrische Ansätze wie der \textit{Flesch Reading Ease} \citep{amstad1978verstaendlich} oder die \textit{Wiener Sachtextformel} \citep{bamberger1984lesen} basieren primär auf einfachen Oberflächenstatistiken wie der mittleren Silbenanzahl oder Satzlänge (wie in Abschnitt~\ref{sec:linguistische_masse_lesbarkeit} hergeleitet). Zwar bieten diese klassischen Zählformeln eine etablierte, recheneffiziente Basis zur groben Abschätzung allgemeiner Textschwierigkeit, sie stoßen jedoch bei der spezifischen Bewertung von Leichter Sprache an konzeptionelle Grenzen: Da sie für allgemeine Lesbarkeitsstufen im Bildungswesen konzipiert wurden, haben sie die spezifischen Regeln der Leichten Sprache nie gelernt. Weder syntaktische Kernanforderungen wie die Vermeidung von Passivkonstruktionen und Genitiven, die Auflösung von Nebensatzgefügen in parataktische Hauptsätze noch morphologische Besonderheiten wie Bindestrich-Kopplungen bei Komposita (z.\,B. \enquote{\textit{Werkstatt-Vertrag}}) werden von reinen Silbenzählern adäquat erfasst. Zudem liefern starre Formeln keine stetig differenzierbaren Gradienten, wie sie für das spätere Reward Modeling im Präferenztraining unerlässlich sind.
 
-Genau diese Forschungslücke soll in dieser Arbeit durch einen datengetriebenen, neuronalen Modellierungsansatz geschlossen werden: Anstatt starre Zählheuristiken vorauszusetzen, erlernen neuronale Sprachmodelle die authentischen syntaktischen, morphologischen und lexikalischen Muster Leichter Sprache direkt aus bereinigten Parallelkorpora. Das binäre Klassifikationsproblem dient hierbei als notwendiger Machbarkeitsnachweis (\textit{Proof of Concept}) und Architektur-Baseline für das neuronale Backbone: \textit{Ist ein rekurrentes Sprachmodell in der Lage, anhand der vorliegenden linguistischen Signale trennscharf zwischen alltagssprachlichen Ausgangstexten (AS, $y=0$) und vereinfachten Fassungen in Leichter Sprache (LS, $y=1$) zu diskriminieren?}
+Genau diese Forschungslücke soll in dieser Arbeit durch einen datengetriebenen, neuronalen Modellierungsansatz geschlossen werden: Anstatt starre Zählformeln vorauszusetzen, erlernen neuronale Sprachmodelle die authentischen syntaktischen, morphologischen und lexikalischen Muster Leichter Sprache direkt aus den bereinigten Parallelkorpora. Das binäre Klassifikationsproblem dient hierbei als notwendiger Machbarkeitsnachweis (\textit{Proof of Concept}) und Ausgangspunkt für das neuronale Modell: \textit{Ist ein rekurrentes Sprachmodell in der Lage, anhand der vorliegenden linguistischen Signale trennscharf zwischen alltagssprachlichen Ausgangstexten (AS, $y=0$) und vereinfachten Fassungen in Leichter Sprache (LS, $y=1$) zu diskriminieren?}
 
-Als Modellarchitektur wird ein Bidirektionales Long Short-Term Memory (BiLSTM) \citep{hochreiter1997long, schuster1997bidirectional} eingesetzt. Rekurrente Netze mit Gating-Mechanismen eignen sich in besonderem Maße für die Modellierung sprachlicher Simplizität, da sie Wortabfolgen sequenziell verarbeiten und gleichzeitig syntaktische Langzeitabhängigkeiten über variable Textlängen hinweg aufrechterhalten können:
-\begin{itemize}
-    \item \textbf{Tokenisierung \& Embedding:} Eingabetexte werden mit dem deutschen spaCy-Modell (\texttt{de\_core\_news\_sm}) tokenisiert. Seltene Wörter außerhalb des Vokabulars ($V \approx \textcolor{red}{20.000}$ bis $\textcolor{red}{25.000}$ Tokens) werden als \texttt{<unk>} maskiert. Eine Einbettungsschicht projiziert jedes Token in einen dichten Vektor $\mathbf{x}_t \in \mathbb{R}^{\textcolor{red}{128}}$.
-    \item \textbf{Bidirektionale Verarbeitung:} Zwei LSTM-Schichten (Hidden-Dimension $h = \textcolor{red}{128}$) verarbeiten die Sequenz simultan vorwärts ($\overrightarrow{\mathbf{h}}_t$) und rückwärts ($\overleftarrow{\mathbf{h}}_t$). Durch Konkatenation entsteht die globale Repräsentation $\mathbf{h}_{\text{out}} \in \mathbb{R}^{\textcolor{red}{256}}$.
-    \item \textbf{Klassifikationskopf \& Optimierung:} Nach einem Dropout ($p = \textcolor{red}{0{,}4}$) transformiert ein linearer Kopf mit Sigmoid-Aktivierung $\sigma(z)$ die Repräsentation in den Wahrscheinlichkeitsscore $\hat{y} = P(Y = 1 \mid \mathbf{T}) \in [\textcolor{red}{0{,}0}, \textcolor{red}{1{,}0}]$. Das Training erfolgt mittels binärer Kreuzentropie (BCE) und AdamW \citep{loshchilov2019decoupled} ($\eta = \textcolor{red}{1 \times 10^{-3}}$, Weight Decay $\lambda = \textcolor{red}{0{,}01}$, Batch Size $\textcolor{red}{32}$, Early Stopping).
-\end{itemize}
+Als neuronales Modell dient das in Abschnitt~\ref{sec:architekturen_sprachmodelle} theoretisch hergeleitete Bidirektionale LSTM (BiLSTM). Die Eingabetexte werden mittels \texttt{spaCy} tokenisiert und über eine Einbettungsschicht in zwei bidirektionale LSTM-Schichten eingespeist. Die aggregierte Sequenzrepräsentation wird nach Regularisierung über Dropout durch einen linearen Klassifikationskopf mit Sigmoid-Aktivierung in eine kontinuierliche Klassifikationswahrscheinlichkeit für Leichte Sprache überführt. Das Training erfolgt mittels binärer Kreuzentropie und dem AdamW-Optimierer \citep{loshchilov2019decoupled} mit Early Stopping. Die vollständigen Schichtdimensionen, Lernraten und Trainingsparameter aller Metrikmodelle sind in der Hyperparameter-Tabelle~\ref{tab:hyperparameter_metrik_modelle} im Anhang~\ref{sec:anhang_hyperparameter} dokumentiert.
 
-Auf dem internen Test-Split des Master-Korpus bestätigt das Modell den im vorigen Kapitel ermittelten Sweet-Spot ($0{,}80 \le \text{sim}_{\cos} \le 0{,}98$): Das BiLSTM erreicht auf Anhieb eine Balanced Accuracy von $92{,}99\,\%$ auf Satzebene sowie $99{,}03\,\%$ auf Artikelebene (die vollständige In-Domain Sweet-Spot-Ablation ist in Tabelle~\ref{tab:sweet_spot_ablation_klassifikation} im Anhang~\ref{sec:anhang_klassifikatoren} dokumentiert). Dies belegt zweifelsfrei die Rauschfreiheit der extrahierten Trainingsdaten und die Eignung des BiLSTM-Backbones zur Erfassung linguistischer Simplizitätsmuster.
+Auf dem internen Test-Split des Master-Korpus bestätigt das Modell den ermittelten optimalen Ähnlichkeitsbereich ($0{,}80 \le \text{sim}_{\cos} \le 0{,}98$): Das BiLSTM erreicht auf Anhieb eine Balanced Accuracy von $92{,}99\,\%$ auf Satzebene sowie $99{,}03\,\%$ auf Artikelebene (der vollständige In-Domain-Vergleich über Ähnlichkeitsbereiche ist in Tabelle~\ref{tab:sweet_spot_ablation_klassifikation} im Anhang~\ref{sec:anhang_klassifikatoren} dokumentiert). Dies belegt die Rauschfreiheit der extrahierten Trainingsdaten und die Eignung des BiLSTM-Modells zur Erfassung linguistischer Simplizitätsmuster.
 
-\subsubsection{Granularitäts-Ablation: Majority Voting vs. Dilution-Effekt}
+\subsubsection{Granularitäts-Vergleich: Satzebene vs. Artikelebene}
 \label{sec:klassifikator_laengen_ablation}
 
-Zur Bestimmung der optimalen Modellierungs- und Aggregationsebene sowie zur Überprüfung der Out-of-Domain-Generalisierung wurde eine systematische Ablationsstudie auf dem unabhängigen, verifizierten \textit{Lebenshilfe}-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze aus behördlich-juristischen Kontexten) durchgeführt. Untersucht wurden das Satzmodell (isoliert sowie aggregiert via Majority Voting) und direkte Artikel-Klassifikatoren über maximale Kontextlängen von $256$, $512$ und $1.024$ Tokens. Tabelle~\ref{tab:klassifikator_laengen_benchmark} stellt die Ergebnisse gegenüber klassischen Lesbarkeitsmetriken dar (ergänzende KDE-, ROC- und Konfusionsanalysen finden sich im Anhang~\ref{sec:anhang_klassifikatoren}).
+Zur Bestimmung der optimalen Modellierungs- und Aggregationsebene sowie zur Überprüfung der Out-of-Domain-Generalisierung wurde eine systematische Vergleichsstudie auf dem unabhängigen, verifizierten \textit{Lebenshilfe}-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze aus behördlich-juristischen Kontexten) durchgeführt. Untersucht wurden das Satzmodell (isoliert sowie aggregiert via Majority Voting) und direkte Artikel-Klassifikatoren über maximale Kontextlängen von $256$, $512$ und $1.024$ Tokens. Tabelle~\ref{tab:klassifikator_laengen_benchmark} stellt die Ergebnisse gegenüber klassischen Lesbarkeitsmetriken dar (ergänzende KDE-, ROC- und Konfusionsanalysen finden sich im Anhang~\ref{sec:anhang_klassifikatoren}).
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Benchmark der Klassifikationsmodelle über Granularitätsebenen und Sequenzlängen auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze).}
+\caption[Benchmark der Klassifikationsmodelle auf dem Lebenshilfe-Goldstandard]{Benchmark der auf bidirektionalen Long-Short-Term-Memory-Netzwerken basierenden Klassifikationsmodelle (BiLSTM) über Granularitätsebenen und Sequenzlängen auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) im Vergleich zwischen Alltagssprache (AS) und Leichter Sprache (LS) inklusive Majority Voting über Einzelsätze (MajVote) und des relativen Paar-Rankings (Pair Match).}
 \label{tab:klassifikator_laengen_benchmark}
 \adjustbox{max width=\textwidth}{%
-\begin{tabular}{@{}llcccccc@{}}
+\begin{tabular}{@{}llccccc@{}}
 \toprule
-\textbf{Modell} & \textbf{Ebene / Input} & \textbf{\O{} Score (LS)} & \textbf{\O{} Score (AS)} & \textbf{Separation ($\Delta$)} & \textbf{Balanced Acc} & \textbf{ROC-AUC} & \textbf{Pair Match} \\
+\textbf{Modell} & \textbf{Ebene / Input} & \textbf{\O{} Score (LS)} & \textbf{\O{} Score (AS)} & \textbf{Separation ($\Delta$)} & \textbf{Balanced Acc} & \textbf{Pair Match} \\
 \midrule
-BiLSTM Satz-Klassifikator          & Satzebene ($N=6.901$)   & $0{,}772 \pm 0{,}32$ & $0{,}196 \pm 0{,}30$ & $0{,}576$ & $81{,}68\,\%$ & $0{,}8963$ & -- \\
-BiLSTM Satz-Klassifikator (MajVote)& Dokument ($r_{LS}$ Ratio)& $0{,}769 \pm 0{,}08$ & $0{,}127 \pm 0{,}14$ & $0{,}642$ & $\mathbf{98{,}65\,\%}$ & $\mathbf{0{,}9985}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
+BiLSTM Satz-Klassifikator          & Satzebene ($N=6.901$)   & $0{,}721 \pm 0{,}37$ & $0{,}160 \pm 0{,}29$ & $0{,}561$ & $79{,}94\,\%$ & -- \\
+BiLSTM Satz-Klassifikator (MajVote)& Dokument ($r_{LS}$ Ratio)& $0{,}719 \pm 0{,}09$ & $0{,}116 \pm 0{,}13$ & $0{,}603$ & $\mathbf{98{,}65\,\%}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
 \midrule
-BiLSTM Artikel-Klassifikator ($256$)  & Dokument ($256$ Tok.)   & $0{,}829 \pm 0{,}31$ & $0{,}002 \pm 0{,}01$ & $0{,}827$ & $91{,}89\,\%$ & $0{,}9974$ & $97{,}3\,\%\; (36/37)$ \\
-BiLSTM Artikel-Klassifikator ($512$)  & Dokument ($512$ Tok.)   & $0{,}478 \pm 0{,}41$ & $0{,}031 \pm 0{,}13$ & $0{,}446$ & $71{,}62\,\%$ & $0{,}8809$ & $91{,}9\,\%\; (34/37)$ \\
-BiLSTM Artikel-Klassifikator ($1.024$) & Dokument ($1.024$ Tok.) & $0{,}340 \pm 0{,}40$ & $0{,}007 \pm 0{,}01$ & $0{,}333$ & $67{,}57\,\%$ & $0{,}8795$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM Artikel-Klassifikator ($256$)  & Dokument ($256$ Tok.)   & $0{,}756 \pm 0{,}36$ & $0{,}003 \pm 0{,}00$ & $0{,}754$ & $90{,}54\,\%$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM Artikel-Klassifikator ($512$)  & Dokument ($512$ Tok.)   & $0{,}781 \pm 0{,}36$ & $0{,}009 \pm 0{,}03$ & $0{,}772$ & $90{,}54\,\%$ & $94{,}6\,\%\; (35/37)$ \\
+BiLSTM Artikel-Klassifikator ($1.024$) & Dokument ($1.024$ Tok.) & $0{,}413 \pm 0{,}40$ & $0{,}000 \pm 0{,}00$ & $0{,}413$ & $70{,}27\,\%$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
 \midrule
-Flesch Reading Ease (Baseline)     & Dokument (Silben/Satz)  & $0{,}973 \pm 0{,}16$ & $0{,}189 \pm 0{,}39$ & $0{,}784$ & $89{,}19\,\%$ & $0{,}8919$ & $100{,}0\,\%\; (37/37)$ \\
-Wiener Sachtextformel (Baseline)   & Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27$ & $0{,}108 \pm 0{,}31$ & $0{,}811$ & $90{,}54\,\%$ & $0{,}9054$ & $100{,}0\,\%\; (37/37)$ \\
+Flesch Reading Ease (Baseline)     & Dokument (Silben/Satz)  & $0{,}973 \pm 0{,}16$ & $0{,}189 \pm 0{,}39$ & $0{,}784$ & $89{,}19\,\%$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
+Wiener Sachtextformel (Baseline)   & Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27$ & $0{,}108 \pm 0{,}31$ & $0{,}811$ & $90{,}54\,\%$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
 
 Die Ergebnisse liefern zwei fundamentale Erkenntnisse:
 \begin{enumerate}
-    \item \textbf{Das Potenzial von Satzmodell \& Majority Voting:} Auf Einzelsatzebene fällt die Performanz mit $81{,}68\,\%$ Balanced Accuracy moderat aus, da isolierte Phrasen (z.\,B. Überschriften oder Begrüßungen) oft keine distinktiven Simplizitätsmarker tragen. Wird das Modell jedoch über die Simple-Sentence-Ratio
+    \item \textbf{Das Potenzial von Satzmodell \& Majority Voting:} Auf Einzelsatzebene fällt die Performanz mit $79{,}94\,\%$ Balanced Accuracy moderat aus, da isolierte Phrasen (z.\,B. Überschriften oder Begrüßungen) oft keine distinktiven Simplizitätsmarker tragen. Wird das Modell jedoch über die Simple-Sentence-Ratio
     \begin{equation}
         r_{LS} = \frac{1}{|S|} \sum_{s \in S} \mathbb{I}(\hat{y}_s = 1) \in [0{,}0, 1{,}0]
     \end{equation}
-    mittels Majority Voting aggregiert, eliminiert die Mittelung lokale Unsicherheiten nahezu vollständig: Die Balanced Accuracy steigt auf $98{,}65\,\%$, der ROC-AUC auf $0{,}9985$ und das Paar-Matching erreicht fehlerfreie $100{,}0\,\%\; (37/37)$.
+    mittels Majority Voting aggregiert, eliminiert die Mittelung lokale Unsicherheiten nahezu vollständig: Die Balanced Accuracy steigt auf $98{,}65\,\%$, der ROC-AUC auf $0{,}9949$ und das Paar-Matching erreicht fehlerfreie $100{,}0\,\%\; (37/37)$.
     
-    \item \textbf{Dilution-Effekt \& Konfidenz-Asymmetrie bei Artikel-Klassifikatoren:} Im direkten Kontrast dazu erweisen sich direkte Artikel-Klassifikatoren bei langen Sequenzen als hochgradig instabil ($91{,}89\,\%$ bei $256$ Tokens $\to 67{,}57\,\%$ bei $1.024$ Tokens). Die KDE-Analyse (Abbildung~\ref{fig:anhang_classifier_kde}) deckt eine extreme Asymmetrie auf: Während Alltagssprache mit spitzen Dirac-Peaks bei $0{,}0$ überkonfident erkannt wird (\O{}-Score $\le 0{,}031$), verwässern neutrale Wörter und Eigennamen die lokalen Simplizitätssignale im $1.024$-Token-LSTM-Flaschenhals. Der mittlere LS-Score sinkt auf $0{,}340$ ab und unterschreitet die Entscheidungsschwelle $\tau = 0{,}50$, wodurch der LS-Recall drastisch auf $35{,}14\,\%$ einbricht (massiver Anstieg von False Negatives).
+    \item \textbf{Verwässerung des Signals bei langen Artikeln:} Im direkten Kontrast dazu erweisen sich direkte Artikel-Klassifikatoren bei langen Sequenzen als anfällig für eine Verwässerung des Signals: Während bei $256$ und $512$ Tokens noch eine Balanced Accuracy von $90{,}54\,\%$ erzielt wird, bricht die Performance bei $1.024$ Tokens auf $70{,}27\,\%$ ein. Die KDE-Analyse (Abbildung~\ref{fig:anhang_classifier_kde}) deckt eine deutliche Asymmetrie auf: Während Alltagssprache mit spitzen Peaks bei $0{,}0$ überkonfident erkannt wird (\O{}-Score $\le 0{,}009$), verwässern neutrale Wörter und Eigennamen die lokalen Simplizitätssignale über lange Sequenzen im rekurrenten LSTM-Zustand. Der mittlere LS-Score sinkt auf $0{,}413$ ab und unterschreitet die Entscheidungsschwelle $\tau = 0{,}50$, wodurch der LS-Recall auf $40{,}54\,\%$ sinkt (Anstieg von False Negatives).
 \end{enumerate}
 
 \paragraph{Multi-Seed-Stabilität und Kapazitätsanalyse}
-Ergänzende Experimente über 5 Seeds (Tabelle~\ref{tab:anhang_classifier_stability}, Abbildungen~\ref{fig:anhang_classifier_learning_curves}--\ref{fig:anhang_classifier_boxplots} im Anhang) bestätigen dieses Bild: Während das Satzmodell hochstabil bleibt ($97{,}03\,\% \pm 0{,}60\,\%$, $100\,\%$ Pair Match), unterliegt der $3{,}5\text{-Mio.}$-Parameter Artikel-Klassifikator bei nur $1.440$ Texten starker Seed-Varianz ($\pm 9{,}33\,\%$, Spread bis $24{,}3\,\%$). Eine $80\,\%$-Reduktion der Parameterzahl ($10k$ Vokabeln, Hidden-Dim $64$) stabilisiert das Modell signifikant ($88{,}92\,\% \pm 3{,}75\,\%$), vermag jedoch den rekurrenten $1.024$-Token-Flaschenhals nicht vollständig aufzulösen.
+Ergänzende Experimente über 5 Seeds (Tabelle~\ref{tab:anhang_classifier_stability}, Abbildungen~\ref{fig:anhang_classifier_learning_curves}--\ref{fig:anhang_classifier_boxplots} im Anhang) bestätigen dieses Bild: Während das aggregierte Satzmodell hochstabil bleibt ($96{,}76\,\% \pm 0{,}74\,\%$, $100{,}0\,\%$ Pair Match), unterliegt der $3{,}5\text{-Mio.}$-Parameter Artikel-Klassifikator (Full) einer spürbar höheren Varianz ($87{,}03\,\% \pm 5{,}29\,\%$, Spread bis $12{,}1\,\%$; bei 512 Tokens sogar $\pm 9{,}49\,\%$, Spread bis $24{,}3\,\%$). Die rekurrente Satzebenenaggregation eliminiert diese stochastischen Instabilitäten verlässlich.
 
 \paragraph{Einordnung der traditionellen Baselines gegenüber den neuronalen Modellen}
-Die empirischen Ergebnisse in Tabelle~\ref{tab:klassifikator_laengen_benchmark} verdeutlichen die Stärken und Grenzen der traditionellen Formeln im Vergleich: Mit einer Balanced Accuracy von $89{,}19\,\%$ (Flesch) bzw. $90{,}54\,\%$ (Wiener Sachtextformel) und einem fehlerfreien Paar-Matching von $100{,}0\,\%$ ($37/37$) erweisen sich die klassischen Formeln als erstaunlich robuste makroskopische Baselines. Da Texte in Leichter Sprache eine massive Reduktion der mittleren Satz- und Wortlänge aufweisen, schlägt dieser Oberflächeneffekt auf Dokumentebene voll durch. Sie übertreffen damit sogar den direkten $1.024$-Token-Artikel-Klassifikator ($67{,}57\,\%$, $35{,}14\,\%$ LS-Recall), welcher durch Datenknappheit und den LSTM-Flaschenhals degradiert.
-Gegenüber dem hierarchisch aggregierten BiLSTM-Satzmodell ($r_{LS}$) mit $98{,}65\,\%$ Balanced Accuracy und einem ROC-AUC von $0{,}9985$ offenbaren die Formeln jedoch eine signifikante Schwäche: Ihre Dichteverteilungen (Abbildung~\ref{fig:anhang_classifier_kde}) weisen eine breite Überlappungszone im Übergangsbereich auf, da sie stilistische und grammatikalische Feinheiten nicht diskriminieren können. Das neuronale Satzmodell schließt diese Lücke und erreicht eine trennscharfe, bimodal separierte Klassifikation ($\Delta = 0{,}642$).
+Die empirischen Ergebnisse in Tabelle~\ref{tab:klassifikator_laengen_benchmark} verdeutlichen die Stärken und Grenzen der traditionellen Formeln im Vergleich: Mit einer Balanced Accuracy von $89{,}19\,\%$ (Flesch) bzw. $90{,}54\,\%$ (Wiener Sachtextformel) und einem fehlerfreien Paar-Matching von $100{,}0\,\%$ ($37/37$) erweisen sich die klassischen Formeln als erstaunlich robuste makroskopische Baselines. Da Texte in Leichter Sprache eine deutliche Reduktion der mittleren Satz- und Wortlänge aufweisen, schlägt dieser Oberflächeneffekt auf Dokumentebene voll durch. Sie übertreffen damit sogar den direkten $1.024$-Token-Artikel-Klassifikator ($70{,}27\,\%$, $40{,}54\,\%$ LS-Recall), welcher durch Datenknappheit und die Informationsverdichtung über lange Sequenzen degradiert.
+Gegenüber dem hierarchisch aggregierten BiLSTM-Satzmodell ($r_{LS}$) mit $98{,}65\,\%$ Balanced Accuracy und einem ROC-AUC von $0{,}9949$ offenbaren die Formeln jedoch eine signifikante Schwäche: Ihre Dichteverteilungen (Abbildung~\ref{fig:anhang_classifier_kde}) weisen eine breite Überlappungszone im Übergangsbereich auf, da sie stilistische und grammatikalische Feinheiten nicht diskriminieren können. Das neuronale Satzmodell schließt diese Lücke und erreicht eine trennscharfe, bimodal separierte Klassifikation ($\Delta = 0{,}603$).
+\subsubsection{Dummy-Content-Test: Prüfung auf Längen- und Padding-Bias}
+\label{sec:dummy_content_test}
 
-\subsubsection{Ausschluss von Längen- und Layout-Biases (Kontrollexperimente)}
-\label{sec:laengen_bias_kontrolle}
+Um auszuschließen, dass das BiLSTM lediglich oberflächliche Längenunterschiede oder das Zero-Padding (\textit{Shortcut Learning}) lernt, wurde ein gezielter Dummy-Content-Test auf dem Lebenshilfe-Goldstandard durchgeführt. Hierbei werden alle Wörter der Testdokumente durch ein einheitliches, neutrales Token (den Punkt \enquote{\texttt{.}} bzw. den Artikel \enquote{\textit{der}}) ersetzt, während die originären Sequenzlängen und das Zero-Padding exakt unverändert bleiben ($\mathbf{T}_{\text{dummy}} = (t_{\text{dummy}}, \dots, t_{\text{dummy}}, \text{PAD}, \dots)$). In diesem Szenario bricht die Balanced Accuracy von über $90\,\%$ auf exakt $50{,}00\,\%$ (reines Zufallsniveau) zusammen. Dies beweist, dass das Modell keine rein längen- oder paddingbasierten Heuristiken nutzt, sondern tatsächliche linguistische Merkmale verarbeitet.
 
-Da Texte in Leichter Sprache durch inhaltliche Komprimierung meist kürzer sind und andere Absatzstrukturen aufweisen, besteht das theoretische Risiko, dass das BiLSTM lediglich triviale Oberflächenmerkmale (\textit{Spurious Correlations} bzw. Shortcuts) lernt, anstatt echte linguistische Eigenschaften zu erfassen. Um diesen Effekt gezielt auszuschließen, wurden drei Kontrolltests auf dem Lebenshilfe-Datensatz durchgeführt:
-\begin{itemize}
-    \item \textbf{Dummy-Content-Test (Prüfung auf Längen- und Padding-Bias):} Werden alle Wörter der Testdokumente durch ein einheitliches, neutrales Token (den Punkt \enquote{\texttt{.}} bzw. den Artikel \enquote{\textit{der}}) ersetzt, während die tatsächlichen Sequenzlängen und das Zero-Padding exakt unverändert bleiben ($\mathbf{T}_{\text{dummy}} = (t_{\text{dummy}}, \dots, t_{\text{dummy}}, \text{PAD}, \dots)$), bricht die Balanced Accuracy von $90{,}82\,\%$ auf exakt $50{,}00\,\%$ (reines Zufallsniveau) zusammen. Dies beweist, dass das Modell keine rein längen- oder paddingbasierten Entscheidungsgrenzen nutzt.
-    \item \textbf{Festlängen-Slicing (Prüfung auf Längenunabhängigkeit):} Werden alle Dokumente einheitlich auf eine feste Länge von $L_{\text{fix}} = 100$ Tokens beschnitten, differenziert das BiLSTM weiterhin mit $87{,}76\,\%$ Balanced Accuracy zwischen AS und LS. Eine ergänzende Korrelationsanalyse zwischen Tokenlänge und Vorhersage zeigt zudem keinen signifikanten linearen Zusammenhang ($r = -0{,}0089$, $p = 0{,}9398$).
-    \item \textbf{Layout-Invarianz (Prüfung auf Formatierungsmerkmale):} Das vollständige Entfernen aller Zeilenumbrüche, Absätze und Formatierungsstrukturen (\texttt{lebenshilfe\_dataset\_no\_paragraphs.json}) führt zu $100\,\%$ identischen Klassifikationsergebnissen, da der Tokenizer Formatierungs-Whitespace im Vorfeld filtert. Typografische Bindestriche bei Wortkomposita (\enquote{\textit{Werkstatt-Vertrag}}) fungieren hingegen als legitime, vom Modell erfasste morphologische Simplizitätsmarker \citep{bredel2016leichte}.
-\end{itemize}
 
-\subsubsection{Synthese: Erlernbarkeit des Signals \& Überleitung zur MixUp-Regression}
+\subsubsection{Synthese: Erlernbarkeit des Signals \& Überleitung zur stetigen Sprachstufenmodellierung}
 \label{sec:grenzen_klassifikation_uebergang}
 
-Zusammenfassend belegen die Ergebnisse, dass das BiLSTM das linguistische Simplizitätssignal prinzipiell erlernt und Dokumentenpaare verlässlich relativ rankt ($\text{ROC-AUC} > 0{,}92$, Pair-Match bis $97{,}3\,\%$). Für die Steuerung generativer Modelle erfordert das Fehlen kontinuierlicher Gradienten (Sigmoid-Sättigung) jedoch ein stufenloses Gütesignal $\lambda \in [0{,}0, 1{,}0]$, weshalb die Modellierung im folgenden Abschnitt zur kontinuierlichen MixUp-Regression erweitert wird.
+Zusammenfassend belegen die Ergebnisse, dass das BiLSTM das linguistische Simplizitätssignal prinzipiell erlernt und Dokumentenpaare verlässlich relativ rankt ($\text{ROC-AUC} > 0{,}94$, Pair-Match bis zu $100{,}0\,\%$). Für die spätere Steuerung generativer Modelle (Themenblock~3) erfordert das Fehlen kontinuierlicher Gradienten (Sigmoid-Sättigung des binären Klassifikationskopfes) jedoch ein stufenloses, differenzierbares Gütesignal $\lambda \in [0{,}0, 1{,}0]$.
+
+Da natürliche Parallelkorpora der Leichten Sprache ausschließlich bimodal strukturiert sind (Ausgangstext in Alltagssprache vs. finale Übersetzung in Leichter Sprache) und in der linguistischen Praxis keine authentischen Zwischenstufen annotieren, muss der kontinuierliche Interpolationsraum künstlich konstruiert werden. Im folgenden Abschnitt wird hierfür zunächst ein intuitiver, semantischer Lösungsansatz untersucht: die diskrete Generierung von Sprachkomplexitätsstufen mittels großer Sprachmodelle (LLMs).
 
 
-\subsection{Continuous MixUp Regression}
-\label{sec:mixup_regression}
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=\textbf{Zu erklären in diesem Abschnitt:},sharp corners,boxrule=0.8pt]
-\color{red!80!black}
-\begin{itemize}
-    \item \textbf{[Zu erklären] Das Konzept des textuellen MixUp:} Erzeugung kontinuierlicher Schwierigkeitsgrade $\lambda \in [0{,}0, 1{,}0]$ durch satzweise Mischungen paralleler Artikel.
-    \item \textbf{[Zu erklären] Dynamische Target-Berechnung:} Gewichtung anhand des relativen Zeichenlängenanteils:
-    \begin{equation}
-        \lambda = \frac{\text{CharLen}(LS)}{\text{CharLen}(LS) + \text{CharLen}(AS)}
-    \end{equation}
-    \item \textbf{[Zu erklären] Vergleich der Trainings- und Dataloader-Varianten:}
-    \begin{itemize}
-        \item \textit{Variante A (Statisch):} Feste Vorabmischung des Trainingskorpus.
-        \item \textit{Variante B (Dynamisch):} On-the-Fly Shuffling (Analyse des \textit{Prediction Collapse}).
-        \item \textit{Variante C (Hybrid):} Epochenabhängiges Curriculum-Shuffling.
-        \item \textit{Variante D (Hybrid + Cyclic Learning Rate):} Optimierung mittels \textit{CosineAnnealingWarmRestarts} zur Vermeidung lokaler Minima.
-    \end{itemize}
-    \item \textbf{[Zu erklären] Kontextlängen-Ablationsstudie:} Empirische Bestimmung der optimalen Eingabesequenzlänge (128, 256, 500, 1000 Tokens).
-    \item \textbf{[Zu erklären] Regressions-Metriken:} Mean Squared Error (MSE), Mean Absolute Error (MAE), Pearson- und Spearman-Korrelation sowie KDE-Dichteverteilungsanalysen.
-\end{itemize}
-\end{tcolorbox}
-
-\paragraph{Einfluss der Trainings- und Sampling-Strategien auf die Regressionsgüte}
-Bei der methodischen Entwicklung des textuellen MixUp-Trainings wurden vier Dataloader- und Optimierungsstrategien systematisch verglichen: eine feste Vorabmischung des Trainingskorpus (\textit{Variante~A}), ein rein dynamisches On-the-Fly-Shuffling in jedem Batch (\textit{Variante~B}), ein hybrides Curriculum-Mischen mit epochenabhängigem Übergang von statischen zu dynamischen Mischungen (\textit{Variante~C}) sowie die Kombination aus Hybrid-Mischen und zyklischem Lernratenscheduling mittels \textit{CosineAnnealingWarmRestarts} (\textit{Variante~D}).
-
-In frühen Experimenten mit stark begrenzter Datenmenge ($M = 10$ Mischungen pro Artikelpaar, entsprechend ca.~$5.130$ Samples) zeigten sich deutliche Unterschiede zwischen den Ansätzen: Die statische Vorabmischung neigte durch die wiederholte Präsentation identischer Satzkombinationen zu Overfitting. Die rein dynamische Variante konvergierte bei wenigen Iterationen ($N=513$) aufgrund des hohen Gradientenrauschens nur langsam. Die hybride Variante mit zyklischem Scheduler erwies sich in dieser Phase als am stärksten, da sie eine stabile anfängliche Repräsentationsbildung ermöglichte und durch periodische Lernratenanstiege lokalen Minima entkommen konnte.
-
-Wird der Trainingskorpus jedoch voll skaliert---mit einer dichten Stichprobenabdeckung von $M = 160$ (über $82.000$ Mischungen pro Epoche) und ausreichendem Training über $100$ Epochen---, gleichen sich die Ergebnisse der vier Ansätze weitgehend an: Durch die große Zahl unterschiedlicher Satzkombinationen konvergieren alle vier Varianten zu einem nahezu identischen, optimalen Leistungsniveau ($\text{Val-MSE} \approx 0{,}027$, Test-Balanced-Accuracy $\approx 96\,\%$, vgl. Tabelle~\ref{tab:anhang_mixup_varianten_benchmark} im Anhang~\ref{sec:anhang_mixup_varianten}). Die Wahl der Dataloader-Strategie ist somit vor allem in datenlimitierten Szenarien ausschlaggebend, während bei umfassender Datenaugmentation die Modellkapazität des BiLSTMs die Obergrenze vorgibt. Die detaillierten Dichteverteilungen und Regressionsanalysen aller vier Varianten sind in Abbildung~\ref{fig:anhang_mixup_variants_kde} und Abbildung~\ref{fig:anhang_mixup_variants_scatter} im Anhang dokumentiert.
-
-\subsubsection{Ablationsstudie: Einfluss der Kontextlänge auf die MixUp-Regression}
-\label{sec:regressor_laengen_ablation}
-
-Analog zur Klassifikation wurde der Einfluss der Eingabesequenzlänge auf das kontinuierliche MixUp-Regressionsmodell über $256$, $512$ und $1.024$ Tokens systematisch evaluiert. Das Training erfolgte auf über $80.000$ generierten dynamischen MixUp-Samples mit kontinuierlichen Zielwerten $\lambda \in [0{,}0, 1{,}0]$.
-
-Bereits während der Validierung auf dem Test-Split zeigte sich ein kontinuierlicher Vorteil längerer Kontexte: Der minimale Mean Squared Error (MSE) sank von $0{,}0260$ ($256$ Tokens) über $0{,}0246$ ($512$ Tokens) auf $0{,}0234$ bei $1.024$ Tokens (minimaler MAE $0{,}0976$). Tabelle~\ref{tab:regressor_laengen_benchmark} stellt die Evaluierung der Regressormodelle auf dem externen Lebenshilfe-Goldstandard dar (ergänzende grafische Analysen finden sich im Anhang: Dichteverteilungen in Abbildung~\ref{fig:anhang_regressor_kde}, ROC/PR-Kurven in Abbildung~\ref{fig:anhang_regressor_roc_pr} sowie die paarweisen Trajektorien in Abbildung~\ref{fig:anhang_regressor_trajectories}).
-
-\begin{table}[htbp]
-\centering
-\small
-\caption{Längen-Benchmark der BiLSTM MixUp Regressoren auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}
-\label{tab:regressor_laengen_benchmark}
-\adjustbox{max width=\textwidth}{%
-\begin{tabular}{@{}llcccccc@{}}
-\toprule
-\textbf{Modell} & \textbf{Ebene / Input} & \textbf{\O{} Score (LS)} & \textbf{\O{} Score (AS)} & \textbf{Separation ($\Delta$)} & \textbf{Balanced Acc} & \textbf{ROC-AUC} & \textbf{Pair Match} \\
-\midrule
-BiLSTM MixUp Regressor ($256$)  & Dokument ($256$ Tok.)   & $0{,}724 \pm 0{,}13$ & $0{,}092 \pm 0{,}09$ & $0{,}632$ & $95{,}95\,\%$ & $0{,}9982$ & $97{,}3\,\%\; (36/37)$ \\
-BiLSTM MixUp Regressor ($512$)  & Dokument ($512$ Tok.)   & $0{,}777 \pm 0{,}12$ & $\mathbf{0{,}062 \pm 0{,}11}$ & $0{,}715$ & $98{,}65\,\%$ & $0{,}9985$ & $97{,}3\,\%\; (36/37)$ \\
-BiLSTM MixUp Regressor ($1.024$) & Dokument ($1.024$ Tok.) & $\mathbf{0{,}792 \pm 0{,}10}$ & $0{,}067 \pm 0{,}10$ & $\mathbf{0{,}726}$ & $\mathbf{98{,}65\,\%}$ & $\mathbf{0{,}9993}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
-\midrule
-Flesch Reading Ease (Baseline)     & Dokument (Silben/Satz)  & $0{,}973 \pm 0{,}16$ & $0{,}189 \pm 0{,}39$ & $0{,}784$ & $89{,}19\,\%$ & $0{,}8919$ & $100{,}0\,\%\; (37/37)$ \\
-Wiener Sachtextformel (Baseline)   & Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27$ & $0{,}108 \pm 0{,}31$ & $0{,}811$ & $90{,}54\,\%$ & $0{,}9054$ & $100{,}0\,\%\; (37/37)$ \\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\paragraph{Inverses Skalierungsverhalten: Warum dominiert beim Regressor das $1.024$-Token-Modell?}
-Im direkten Kontrast zum Artikel-Klassifikator erweist sich bei der MixUp-Regression das $1.024$-Token-Modell als das stärkste und stabilste Modell:
-\begin{enumerate}
-    \item \textbf{Perfektes Paar-Ranking ($100{,}0\,\%$):} Bei ausnahmslos allen $37$ von $37$ Artikelpaaren des Goldstandards ordnet das $1.024$-Modell der Leichten Sprache einen strikt höheren Score zu als der zugehörigen Alltagssprache ($\text{Score}(\text{LS}) > \text{Score}(\text{AS})$, vgl. Abbildung~\ref{fig:anhang_regressor_trajectories} im Anhang).
-    \item \textbf{Höchste Trennschärfe \& minimale Varianz:} Das Modell erreicht den höchsten mittleren LS-Score ($0{,}792$) bei der geringsten Standardabweichung ($\pm 0{,}10$), was zu einer maximalen Separation von $\Delta = 0{,}726$, einer Balanced Accuracy von $98{,}65\,\%$ und einem nahezu perfekten ROC-AUC von $0{,}9993$ führt.
-\end{enumerate}
-
-\paragraph{Systematische Überlegenheit und Trainingsstabilität des MixUp-Regressors gegenüber dem Klassifikator}
-Die direkte Gegenüberstellung der Benchmark-Ergebnisse (Tabelle~\ref{tab:klassifikator_laengen_benchmark} und Tabelle~\ref{tab:regressor_laengen_benchmark}) liefert eine zentrale methodische Erkenntnis dieser Arbeit: Während das direkte Artikel-Training beim binären Klassifikator bei langen Sequenzen instabil wird und degradiert, bleibt das Training des BiLSTM MixUp-Regressors robust und skaliert positiv mit längeren Kontexten.
-
-Die Ursachen für diese Divergenz in der Trainingsstabilität begründen sich in vier Mechanismen:
-\begin{itemize}
-    \item \textbf{Homogene Merkmalsverteilung durch dynamisches Satz-Shuffling:} Beim Artikel-Klassifikator stehen die Sätze in ihrer starren Originalreihenfolge. Stehen relevante Simplizitätsmerkmale am Anfang des Textes und folgt danach langer Fließtext, verliert das LSTM über 1.000 Rekursionsschritte das Signal. Beim MixUp-Regressor hingegen werden die gezogenen Sätze vor der Verkettung randomisiert durchmischt (\texttt{random.shuffle}). Dadurch verteilen sich Leichte-Sprache- und Alltagssprache-Muster homogen über das gesamte $1.024$-Token-Fenster (Anfang, Mitte und Ende), wodurch ein positionsabhängiges Vergessen unmöglich wird.
-    \item \textbf{Massive Datenaugmentation statt Datenmangel:} Auf Dokumentenebene stehen dem Klassifikator nur ca.~$750$ starre Trainingsartikel zur Verfügung, was bei Millionen Modellparametern zu schnellem Overfitting führt. Der MixUp-Regressor hingegen generiert in jeder Epoche zehntausende neue, permutierte Satzmischungen, wodurch das Modell auf eine extrem breite, kontinuierliche Datenbasis zurückgreift.
-    \item \textbf{Linearer MSE-Loss statt extremer BCE-Sättigung:} Der binäre BCE-Loss treibt die Logits über die Sigmoid-Funktion in die Sättigungsränder ($-\infty$ bzw. $+\infty$), was bei kleinsten Standard-Merkmalen zu überkonfidenten Fehlentscheidungen führt. Der Regressionsverlust (MSE) hingegen erzwingt stetige, proportionale Gradienten über das gesamte Intervall $[0{,}0, 1{,}0]$ und verhindert extreme Wahrscheinlichkeitskollapse.
-    \item \textbf{Additive Signal-Akkumulation:} Der Klassifikator muss ein rigides \enquote{Alles-oder-Nichts}-Urteil über $1.024$ Tokens fällen. Der Regressor hingegen fungiert als quantitativer Integrator: Er akkumuliert die Dichte einfacher Merkmale über den Zeitverlauf des LSTMs auf. Mehr Kontext ($1.024$ Tokens) liefert dem Regressor eine statistisch repräsentativere Textstichprobe, was die Vorhersagevarianz signifikant senkt ($\pm 0{,}10$) und das Modell zur überlegenen Metrik macht.
-\end{itemize}
-
-\paragraph{MixUp-Regression vs. Traditionelle Formel-Baselines}
-Gegenüber den deterministischen Formeln erzielt der $1.024$-Token MixUp-Regressor mit $98{,}65\,\%$ Balanced Accuracy und $0{,}9993$ ROC-AUC eine deutlich überlegene Trennschärfe. Während traditionelle Formeln an starre Schwellenwerte gebunden sind, im mittleren Wertebereich eine erhebliche Dichtestreuung aufweisen und keine Gradienten zur differenzierten Steuerung bereitstellen, bildet das MixUp-Modell eine stetige, differenzierbare Reward-Landschaft aus. Dadurch werden graduelle linguistische Vereinfachungsfortschritte im RL-Training quantitativ und richtungserhaltend bewertbar.
-
-\subsection{Validierung der kontinuierlichen Abstufungsfähigkeit auf externen Benchmarks (TextComplexityDE \& MERLIN)}
-\label{sec:validierung_abstufung_externe_benchmarks}
-
-Die vorangegangene Evaluierung auf dem \textit{Lebenshilfe}-Goldstandard (Abschnitt~\ref{sec:regressor_laengen_ablation}) belegt, dass der BiLSTM MixUp-Regressor ein trennscharfer und robuster Zero-Shot-Diskriminator auf Dokumentebene ist. Trotz des kontinuierlichen MixUp-Trainingsverfahrens diskriminiert das Modell mit einer Balanced Accuracy von $98{,}65\,\%$, einem ROC-AUC von $0{,}9993$ und einem fehlerfreien Perfect-Pair-Matching von $100{,}0\,\%$ ($37/37$) zwischen Alltagssprache und Leichter Sprache und übertrifft dabei den originär binär trainierten Klassifikator systematisch.
-
-\subsubsection{Das fundamentale Dilemma: Diskrete Klassifikation vs. kontinuierlicher Reward}
-\label{sec:dilemma_zwischenstufen}
-
-Aus anwendungsorientierter und methodischer Sicht offenbart dieser Befund jedoch ein Dilemma: Das eigentliche Primärziel des Modells besteht nicht in einer binären Klassifikation, sondern in der Bereitstellung eines stufenlosen, kontinuierlichen Gütesignals, das präzise quantifiziert, \textit{in welchem Ausmaß} ein gegebener Text bereits die linguistischen und syntaktischen Kriterien Leichter Sprache erfüllt. 
-
-Die direkte empirische Validierung dieser kontinuierlichen Abstufungsfähigkeit auf realen Sprachdaten erweist sich in der linguistischen Praxis jedoch als methodische Hürde: In der Praxis existieren keine natürlichen Parallelkorpora, die kontinuierliche Zwischenstufen zwischen Alltagssprache und Leichter Sprache annotieren. Das Übersetzungswesen in Leichte Sprache operiert traditionell strikt bimodal (Ausgangstext in Alltagssprache vs. finale Zielübersetzung in Leichter Sprache). Graduelle Übergangszustände (z.\,B. ein Text mit vereinfachtem Satzbau, aber noch unaufgelösten Komposita) sind im originären Korpus nicht annotiert. 
-
-Genau aus diesem Mangel an empirischen Zwischenstufendaten begründet sich die in dieser Arbeit entwickelte Methodik: Mittels textuellem MixUp (Abschnitt~\ref{sec:mixup_regression}) und synthetischer LLM-Stufengenerierung (Abschnitt~\ref{sec:synthetische_sprachstufen}) wurde der kontinuierliche Interpolationsraum künstlich konstruiert, um dem Modell das Erlernen stetiger Gradienten zu ermöglichen. Um die tatsächliche Fähigkeit des Modells zur Differenzierung gradueller Komplexitätsstufen unabhängig vom künstlichen Trainingsmix objektiv zu überprüfen, werden im Folgenden zwei etablierte, externe Sprachkomplexitäts-Benchmarks herangezogen:
-\begin{enumerate}
-    \item \textbf{TextComplexityDE \citep{naderi2019textcomplexityde}:} Ein standardisierter Benchmark aus $1.000$ isolierten deutschen Wikipedia-Sätzen mit menschlichen 7-Punkte-Likert-Urteilen zur Satzkomplexität.
-    \item \textbf{MERLIN-Korpus \citep{boyd2014merlin}:} Ein Benchmark aus $1.033$ authentischen deutschen Volltexten auf Dokumentebene, die von Sprachexperten offiziell nach den 5 Niveaustufen des Gemeinsamen Europäischen Referenzrahmens (CEFR: A1, A2, B1, B2, C1) eingestuft wurden.
-\end{enumerate}
-
-\subsubsection{Satzebene: Evaluation auf TextComplexityDE \& Analyse des Floor-Effekts}
-\label{sec:eval_textcomplexityde}
-
-Der \textit{TextComplexityDE}-Benchmark \citep{naderi2019textcomplexityde} umfasst $1.000$ deutsche Wikipedia-Sätze, für die aggregierte menschliche Urteile (\textit{Mean Opinion Score}, MOS) hinsichtlich Gesamtschwierigkeit ($\text{MOS}_{\text{Complexity}} \in [1{,}0, 7{,}0]$), Verständlichkeit und lexikalischer Hürden vorliegen.
-
-In Tabelle~\ref{tab:anhang_textcomplexityde_master} (Anhang~\ref{sec:anhang_textcomplexityde}) sowie in den Abbildungen~\ref{fig:anhang_textcomplexityde_barchart} bis \ref{fig:anhang_textcomplexityde_boxplots} sind die Ergebnisse aller Modellfamilien detailliert aufgeführt. Die Untersuchung liefert wesentliche methodische Erkenntnisse über das Modellverhalten auf Satzebene:
-\begin{itemize}
-    \item \textbf{Solide Rangkorrelation bei adäquatem Kontext ($512$ Tokens):} Der BiLSTM MixUp-Regressor ($512$ Tokens) erreicht eine Spearman-Rangkorrelation von $\rho = 0{,}615$ (Pearson $r = 0{,}602$) mit dem menschlichen Einfachheitsurteil und differenziert signifikant über die Likert-Stufen.
-    \item \textbf{Die Dämpfungsfalle bei langen Kontexten ($1.024$ Tokens):} Beim $1.024$-Token-Regressor bricht die Rangkorrelation auf $\rho = 0{,}461$ ein. Die Ursache liegt in der Architektur des BiLSTMs: Da die isolierten Wikipedia-Sätze im Mittel nur $\sim 15$ bis $25$ Tokens lang sind, verarbeitet das rekurrente Netz bei fester Maximallänge über $1.000$ Null-Padding-Tokens (\texttt{<pad>}), was zu einer starken Verdünnung der Hidden-States führt.
-    \item \textbf{Der linguistische Floor-Effekt (Smoking Guns):} Während der Regressor auf $80.800$ Absatzmischungen trainiert wurde, enthält nahezu jeder Wikipedia-Satz einzelne komplexe Fachtermini oder typische alltagssprachliche Syntaxstrukturen. Das Modell identifiziert diese isolierten Elemente als definitive Signale für Nicht-LS (\enquote{\textit{Smoking Guns}}), wodurch $75\,\%$ aller Modellvorhersagen in ein stark komprimiertes unteres Band von $[0{,}026, 0{,}109]$ gedrückt werden.
-    \item \textbf{Erstaunlich solide Baseline-Korrelationen auf Enzyklopädie-Sätzen:} Der LIX-Index ($\rho = 0{,}641$) und die Wiener Sachtextformel ($\rho = 0{,}519$) erzielen auf den Wikipedia-Sätzen solide Rangkorrelationen (Tabelle~\ref{tab:anhang_textcomplexityde_master}). Da enzyklopädische Komplexität primär durch Fachtermini und Satzlängen getrieben wird, greifen Oberflächenheuristiken hier verlässlich als statistische Basis, erfassen jedoch keine grammatikalischen Kriterien Leichter Sprache.
-\end{itemize}
-
-Aufgrund dieser methodischen Artefakte bei isolierten Einzelsätzen erweist sich TextComplexityDE allein als unzureichend, um die genuine Abstufungsfähigkeit auf zusammenhängenden Fließtexten zu beurteilen.
-
-\subsubsection{Dokumentebene: Evaluation auf dem MERLIN CEFR-Benchmark}
-\label{sec:eval_merlin}
-
-Um die kontinuierliche Sprachstufung auf echten Fließtexten ohne Längen- und Padding-Verzerrungen zu evaluieren, wird das MERLIN-Korpus \citep{boyd2014merlin} herangezogen. Mit $1.033$ vollständigen Texten (Aufsätze und Briefe aus standardisierten Sprachprüfungen) und einer durchschnittlichen Textlänge von ca. $150$ bis $250$ Tokens entspricht dieses Korpus exakt der typischen Dokumentstruktur von Leichte-Sprache-Absätzen.
-
-Tabelle~\ref{tab:anhang_merlin_master} und Tabelle~\ref{tab:anhang_merlin_monotonie} (Anhang~\ref{sec:anhang_merlin}) sowie die Abbildungen~\ref{fig:anhang_merlin_barchart} bis \ref{fig:anhang_merlin_boxplots} dokumentieren die Performanz aller Modelle über die 5 CEFR-Stufen ($A1, A2, B1, B2, C1, C2$). Die Auswertung liefert herausragende Belege für die graduelle Diskriminationskraft der Modelle:
-\begin{itemize}
-    \item \textbf{Strikte Monotonie des Artikel-Klassifikators ($512$ Tokens):} Der $512$er Artikel-Klassifikator (P(LS)) fällt streng monoton über ausnahmslos alle 6 CEFR-Niveaustufen ab:
-    \begin{equation}
-        0{,}504 \text{ (A1)} \longrightarrow 0{,}442 \text{ (A2)} \longrightarrow 0{,}339 \text{ (B1)} \longrightarrow 0{,}096 \text{ (B2)} \longrightarrow 0{,}073 \text{ (C1)} \longrightarrow 0{,}050 \text{ (C2)}
-    \end{equation}
-    Dies belegt empirisch, dass die kontinuierliche Ausgangswahrscheinlichkeit auf Dokumentebene eine hochgradig monotone Sprachstufungsmetrik konstituiert ($\rho = 0{,}397$, Pearson $r = 0{,}386$).
-    \item \textbf{Ausgeprägte Niveautrennung der MixUp-Regressoren ab B1:} Sowohl der $512$er- als auch der $1.024$er-MixUp-Regressor bilden die CEFR-Schwierigkeit ab: Während elementare Sprachstufen (A1, A2, B1) im Wertebereich von $0{,}30$ bis $0{,}36$ liegen, vollzieht sich ab dem Übergang zur fortgeschrittenen Sprachverwendung (B2: $\sim 0{,}18$--$0{,}20$) sowie zu Fach- und Muttersprachenniveau (C1/C2: $\sim 0{,}07$--$0{,}10$) ein steiler, hochgradig signifikanter Score-Abfall (Tabelle~\ref{tab:anhang_merlin_monotonie}).
-    \item \textbf{Korrelation der Formel-Baselines mit CEFR-Prüfungsstufen:} Auch auf MERLIN korrelieren traditionelle Formeln stark mit den Niveaus (LIX: $\rho = 0{,}656$, WSTF: $\rho = 0{,}602$, Flesch: $\rho = 0{,}543$), da höhere Prüfungsstufen (B2--C2) formal anspruchsvollere Wort- und Satzstrukturen fordern. Wie zuvor diskutiert, bildet dies eine nützliche Basis, vermag jedoch die spezifischen, normierten Vereinfachungsregeln Leichter Sprache nicht feinkörnig zu erfassen oder als Gradient für generative Modelle bereitzustellen.
-\end{itemize}
-
-\subsubsection{Kritische Synthese: Validität des Zero-Shot-Transfers \& Fazit}
-\label{sec:synthese_abstufung_fazit}
-
-Bei der Interpretation dieses Benchmark-Transfers ist eine methodische Differenzierung geboten: Der Vergleich mit standardisierten CEFR-Stufen ist nicht vollkommen deckungsgleich. Das CEFR-Raster klassifiziert Fremdsprachenkompetenzen von Deutschlernenden und berücksichtigt dabei auch orthografische und grammatikalische Fehler (wie die Ausreißeranalyse im Anhang verdeutlicht, bei der A1-Texte mit massiven Rechtschreibfehlern durch unbekannte Vokabular-Indizierungen vorsichtigere Scores erhalten). Leichte Sprache hingegen ist ein normiertes Regelwerk für Menschen mit kognitiven Einschränkungen, das primär auf syntaktischer Dekonstruktion, Aktivsätzen und morphologischer Komposita-Trennung basiert.
-
-Trotz dieser konzeptionellen Divergenz zwischen L2-Spracherwerb und Leichter Sprache differenzieren die entwickelten BiLSTM-Modelle die realen Sprachkomplexitätsstufen im Zero-Shot-Transfer weitgehend ordnungserhaltend. Dies zeigt, dass das MixUp-Training keine künstlichen Artefakte erzeugt hat, sondern eine verallgemeinerbare Metrik für graduelle Textsimplizität bereitstellt, die im weiteren Verlauf dieser Arbeit erfolgreich als Reward-Funktion zur Ausrichtung generativer Sprachmodelle (Abschnitt~\ref{sec:dpo_optimization}) eingesetzt werden kann.
-
-\subsection{Evaluierung synthetischer Sprachstufen (LLM-basierter Regressor)}
+\subsection{Erster Lösungsansatz: Synthetische Sprachstufengenerierung via Large Language Models}
 \label{sec:synthetische_sprachstufen}
 
-Neben der kontinuierlichen Satzmischung (MixUp, Abschnitt~\ref{sec:mixup_regression}) wurde in dieser Arbeit als alternativer, rein semantischer Modellierungsansatz die gezielte Generierung von Sprachkomplexitätsstufen mittels großer Sprachmodelle (LLMs) untersucht. Das Ziel dieses Ansatzes bestand darin, ein kontinuierliches Gütesignal auf Basis linguistisch modulierter Ganztexte zu erlernen, anstatt künstlich amalgamierte Satzkombinationen zu nutzen.
+Als erster methodischer Ansatz zur Konstruktion eines stetigen Zwischenraums wurde die gezielte Generierung diskreter Sprachkomplexitätsstufen mittels großer Sprachmodelle (Large Language Models, LLMs) untersucht. Die Kernidee dieses Ansatzes bestand darin, ein Gütesignal auf Basis linguistisch modulierter Ganztexte zu erlernen, indem ein leistungsfähiges generatives Modell angewiesen wird, Zwischenversionen mit kontrolliertem Vereinfachungsgrad zu verfassen.
 
 \subsubsection{Konzeption, Prompt-Design \& Generierung mit FlensGen-GPT}
 \label{sec:synthetische_generierung}
@@ -233,41 +92,188 @@ Zur semantischen Generierung der Zwischenstufen wurde das an der Hochschule Flen
 
 Das vollständige System- und User-Prompt-Design inklusive aller Regelvorgaben ist in Anhang~\ref{sec:anhang_synthetic_regressor_prompt} dokumentiert. Auf dem resultierenden $5$-Stufen-Datensatz ($4.300$ Text-Samples aus $860$ Artikeln) wurde eine BiLSTM-Architektur identischer Kapazität (Hidden-Dim $128$, Embedding-Dim $128$, MSE-Loss) als \textit{Synthetischer Regressor} trainiert.
 
-\subsubsection{Empirische Ergebnisse \& Vergleich mit dem MixUp-Paradigma}
+\subsubsection{Empirische Ergebnisse auf dem Lebenshilfe-Goldstandard}
 \label{sec:synthetische_ergebnisse_vergleich}
 
-Bei der empirischen Überprüfung auf dem unabhängigen \textit{Lebenshilfe}-Goldstandard zeigte der synthetische Regressor prinzipiell das erwünschte Verhalten: Das Modell erlernt die grundlegende Richtung der Sprachkomplexität und weist Texten in Leichter Sprache im Durchschnitt deutlich höhere Werte zu als den alltagssprachlichen Originalen. Auch bei der relativen Gegenüberstellung gegebener Artikelpaare ordnet das Modell in rund $89\,\%$ der Fälle der vereinfachten Fassung einen höheren Score zu. Entlang der fünf diskret generierten Stufen spiegelt sich zudem ein erkennbarer, stetiger Anstieg der vorhergesagten Werte wider.
+Bei der empirischen Überprüfung auf dem unabhängigen \textit{Lebenshilfe}-Goldstandard zeigte der synthetische Regressor prinzipiell das erwünschte Verhalten: Das Modell erlernt die grundlegende Richtung der Sprachkomplexität und weist Texten in Leichter Sprache im Durchschnitt höhere Werte zu als den alltagssprachlichen Originalen ($\text{\O{}-Score}(\text{LS}) = 0{,}575 \pm 0{,}35$ vs. $\text{\O{}-Score}(\text{AS}) = 0{,}145 \pm 0{,}18$, $\Delta = +0{,}429$). Auch bei der relativen Gegenüberstellung gegebener Artikelpaare ordnet das Modell in $89{,}2\,\%$ der Fälle der vereinfachten Fassung einen höheren Score zu ($\text{ROC-AUC} = 0{,}8495$, Balanced Accuracy $78{,}38\,\%$, Pair Match $89{,}2\,\%\; [33/37]$). Entlang der fünf diskret generierten Stufen spiegelt sich zudem ein erkennbarer, stetiger Anstieg der vorhergesagten Werte wider.
 
-Im direkten Vergleich mit dem kontinuierlichen MixUp-Paradigma wird jedoch ein deutlicher Leistungsabstand sichtbar: Während das MixUp-Modell die beiden Sprachebenen nahezu überlappungsfrei und mit minimaler Streuung trennt, streuen die Vorhersagen des synthetischen Regressors spürbar breiter. Insbesondere im mittleren Komplexitätsbereich fallen die Übergänge zwischen den Zwischenstufen diffuser aus.
+Gleichzeitig offenbaren die Dichteverteilungen und Boxplots jedoch erhebliche Schwächen (vgl. Abbildung~\ref{fig:anhang_synthetic_kde_roc} und Abbildung~\ref{fig:anhang_synthetic_monotonie} sowie Tabelle~\ref{tab:anhang_synthetic_vs_mixup_benchmark} im Anhang): Die Vorhersagen des synthetischen Regressors streuen spürbar breit, und insbesondere im mittleren Komplexitätsbereich fallen die Übergänge zwischen den Zwischenstufen diffus und überlappend aus.
 
-Die vollständige tabellarische Gegenüberstellung aller Performanzmaße gegenüber den MixUp-Varianten und den klassischen Lesbarkeitsformeln ist in Tabelle~\ref{tab:anhang_synthetic_vs_mixup_benchmark} in Anhang~\ref{sec:anhang_synthetic_regressor_prompt} aufgeführt. Ergänzende Dichteverteilungen, ROC-Kurven sowie Boxplots der fünf Stufen finden sich in den Abbildungen~\ref{fig:anhang_synthetic_kde_roc} und \ref{fig:anhang_synthetic_monotonie}.
-
-\subsubsection{Methodische Grenzen \& Begründung der Ausmusterung}
+\subsubsection{Methodische Grenzen \& Motivation für ein stochastisches Text-MixUp}
 \label{sec:synthetische_grenzen_ausmusterung}
 
-Obwohl der synthetische Ansatz als Machbarkeitsnachweis für LLM-basierte Komplexitätsmodulation funktionierte, zeigte er im direkten Vergleich eine deutliche Leistungsunterlegenheit gegenüber dem MixUp-Regressor ($\text{ROC-AUC} = 0{,}8495$ vs. $0{,}9993$; Balanced Accuracy $78{,}38\,\%$ vs. $98{,}65\,\%$; Pair Match $89{,}2\,\%$ vs. $100{,}0\,\%$). Aus diesem Grund wurde der synthetische Regressor für die nachfolgende Optimierung der Übersetzungsmodelle (Themenblock~3) nicht weiterverfolgt.
-
-Die Ursachen für diese Diskrepanz liegen in drei methodischen Unterschieden begründet:
+Obwohl der synthetische Ansatz als Machbarkeitsnachweis für LLM-basierte Komplexitätsmodulation funktionierte, erwies er sich für den praktischen Einsatz als Reward-Modell im generativen Alignment als unzureichend. Die Ursachen für diese Limitationen liegen in drei methodischen Kernproblemen begründet:
 \begin{enumerate}
     \item \textbf{Granularitätsgrenze generativer Sprachmodelle:} Während das LLM grobe Niveaus trennen kann, stößt es bei feineren Zwischenstufen an eine Auflösungsgrenze. Eine Erhöhung auf beispielsweise $10$ oder $20$ Stufen erzeugt keinen Informationsgewinn, da aktuelle Modelle solch minimale Komplexitätsunterschiede nicht deterministisch steuern können und zu stilistischer Regression neigen.
-    \item \textbf{Datenvolumen und Sampling-Flexibilität:} Der synthetische Ansatz ist auf $5$ diskrete Texte pro Artikel limitiert ($4.300$ statische Samples). Das kontinuierliche MixUp-Verfahren hingegen erlaubt ein stufenloses Sampling über das gesamte Intervall $\lambda \in [0{,}0, 1{,}0]$ und generiert dynamisch über $80.000$ permutierte Trainingssamples pro Epoche, was Overfitting wirksam unterbindet.
-    \item \textbf{Authentische vs. künstliche Trainingsdaten:} Der entscheidende Vorteil des MixUp-Verfahrens besteht darin, dass es auf rein authentischer, von menschlichen Expertinnen verfasster und geprüfter Sprache trainiert. Der synthetische Ansatz trainiert hingegen auf maschinell erzeugten Zwischentexten, wodurch das rekurrente Netz unvermeidbare LLM-Artefakte und unnatürliche Satzstrukturen als Scheinsignale miterlernt.
+    \item \textbf{Datenvolumen und statische Limitation:} Der synthetische Ansatz ist auf $5$ diskrete Texte pro Artikel limitiert ($4.300$ statische Samples). Bei Millionen Parametern neigt das rekurrente Netz bei wiederholter Epochen-Präsentation identischer Texte zu Overfitting.
+    \item \textbf{Miterlernen künstlicher Modellierungsartefakte:} Der synthetische Ansatz trainiert auf maschinell generierten Zwischentexten. Dadurch lernt das rekurrente Netz unvermeidbare LLM-Artefakte, Halluzinationsmuster und unnatürliche Satzstrukturen als Scheinsignale mit, anstatt die authentischen sprachlichen Gesetzmäßigkeiten Leichter Sprache zu generalisieren.
 \end{enumerate}
 
-Trotz dieser Limitierungen bleibt der synthetische Ansatz eine vielversprechende Forschungsrichtung, die mit zukünftigen, noch präziser steuerbaren Sprachmodellen weiter an Relevanz gewinnen dürfte.
+Aus diesen Gründen reicht die diskrete synthetische Generierung allein nicht aus, um ein stufenloses, robustes Belohnungssignal bereitzustellen. Dies motiviert den im folgenden Abschnitt entwickelten zweiten Lösungsansatz: Anstatt auf fehleranfällige, künstliche LLM-Texte zurückzugreifen, wird ein stochastisches Mischverfahren entwickelt, das rein auf authentischen menschlichen Paralleltexten operiert und stufenlose Zielwerte generiert.
+
+
+\subsection{Zweiter Lösungsansatz: Continuous MixUp Regression}
+\label{sec:mixup_regression}
+
+Um die Limitationen der synthetischen LLM-Generierung (Datenknappheit, diskrete Stufen und künstliche Textartefakte) zu überwinden, wird in diesem Abschnitt das Verfahren der \textit{Continuous MixUp Regression} entwickelt. Die Kernüberlegung besteht darin, den kontinuierlichen Interpolationsraum direkt auf den authentischen, von menschlichen Fachexperten erstellten Parallelkorpora zu konstruieren.
+
+\subsubsection{Konzeption des textuellen MixUp \& Dynamische Target-Berechnung}
+\label{sec:mixup_konzeption}
+
+Das klassische MixUp-Verfahren \citep{zhang2018mixup} erzeugt neue Trainingsdaten, indem es bestehende Eingaben und deren Zielwerte stufenlos miteinander vermischt. Da Wörter und Texte diskrete Strukturen sind und sich nicht direkt mathematisch überblenden lassen, wird dieses Prinzip im Rahmen dieser Arbeit auf Satzebene übertragen: Neue Zwischentöne der Sprachkomplexität entstehen durch das kontrollierte, stochastische Mischen von Sätzen aus beiden Sprachfassungen:
+
+Für jedes parallele Artikelpaar $(D_{\text{AS}}, D_{\text{LS}})$ des Trainingskorpus werden die Sätze segmentiert. Ein gemischtes Dokument $D_{\text{mix}}$ entsteht durch zufälliges Ziehen und Zusammenfügen von Sätzen aus beiden Sprachfassungen:
+\begin{equation}
+    D_{\text{mix}} = \text{Concat}\left( \text{sample}(S_{\text{LS}}, k_{\text{LS}}) \cup \text{sample}(S_{\text{AS}}, k_{\text{AS}}) \right)
+\end{equation}
+wobei die Sätze vor dem Zusammenfügen zufällig durchmischt werden, um zu verhindern, dass das rekurrente Netz bestimmte Sprachmuster rein anhand ihrer Position im Text lernt.
+
+Da Sätze in Alltagssprache und Leichter Sprache stark divergierende Wort- und Satzlängen aufweisen, würde ein reiner Satzanzahl-Anteil den tatsächlichen sprachlichen Anteil systematisch verzerren. Der kontinuierliche Zielwert $\lambda \in [0{,}0, 1{,}0]$ wird daher dynamisch über den relativen Zeichenlängenanteil der Leichten Sprache im gemischten Text berechnet:
+\begin{equation}
+    \lambda = \frac{\text{CharLen}(S_{\text{LS, gezogen}})}{\text{CharLen}(S_{\text{LS, gezogen}}) + \text{CharLen}(S_{\text{AS, gezogen}})}
+\end{equation}
+Hierbei repräsentiert $\lambda = 0{,}0$ reine Alltagssprache und $\lambda = 1{,}0$ reine Leichte Sprache, während alle Zwischenwerte stufenlose Simplizitätsgrade quantifizieren.
+
+\subsubsection{Vergleich der Trainings- und Sampling-Strategien}
+Bei der methodischen Entwicklung des textuellen MixUp-Trainings wurden vier Dataloader- und Optimierungsstrategien systematisch verglichen:
+\begin{itemize}
+    \item \textbf{Variante A (Statisch):} Feste Vorabmischung des Trainingskorpus bei der Dataset-Initialisierung ($p_{\text{dynamic}} = 0{,}0$).
+    \item \textbf{Variante B (Dynamisch):} Rein dynamisches On-the-Fly-Shuffling in jedem Batch ($p_{\text{dynamic}} = 1{,}0$).
+    \item \textbf{Variante C (Hybrid):} Epochenabhängiges Curriculum-Mischen mit kontinuierlichem Übergang von statischen zu dynamischen Mischungen ($p_{\text{dynamic}} = \frac{\text{Epoche}}{\text{Gesamtepochen}}$).
+    \item \textbf{Variante D (Hybrid + Cyclic LR):} Hybride Mischung kombiniert mit zyklischem Lernratenscheduling mittels \textit{CosineAnnealingWarmRestarts} nach \citet{loshchilov2016sgdr} zur Vermeidung lokaler Minima.
+\end{itemize}
+
+\paragraph{Einfluss der Trainings- und Sampling-Strategien auf die Regressionsgüte}
+In frühen Experimenten mit stark begrenzter Datenmenge ($M = 10$ Mischungen pro Artikelpaar, entsprechend ca.~$5.130$ Samples) zeigten sich deutliche Unterschiede zwischen den Ansätzen: Die statische Vorabmischung neigte durch die wiederholte Präsentation identischer Satzkombinationen zu Overfitting. Die rein dynamische Variante konvergierte bei wenigen Iterationen ($N=513$) aufgrund des hohen Gradientenrauschens nur langsam. Die hybride Variante mit zyklischem Scheduler erwies sich in dieser Phase als am stärksten, da sie eine stabile anfängliche Repräsentationsbildung ermöglichte und durch periodische Lernratenanstiege lokalen Minima entkommen konnte.
+
+Wird der Trainingskorpus jedoch voll skaliert---mit einer großen Zahl an Stichproben ($M = 160$, über $82.000$ Mischungen pro Epoche) und ausreichendem Training über $100$ Epochen---, gleichen sich die Ergebnisse der vier Ansätze weitgehend an: Durch die große Zahl unterschiedlicher Satzkombinationen konvergieren alle vier Varianten zu einem nahezu identischen, optimalen Leistungsniveau ($\text{Val-MSE} \approx 0{,}027$, Test-Balanced-Accuracy $\approx 96\,\%$, vgl. Tabelle~\ref{tab:anhang_mixup_varianten_benchmark} im Anhang~\ref{sec:anhang_mixup_varianten}). Die Wahl der Dataloader-Strategie ist somit vor allem in datenlimitierten Szenarien ausschlaggebend, während bei umfassender Datenaugmentation die Modellkapazität des BiLSTMs die Obergrenze vorgibt. Die detaillierten Dichteverteilungen und Regressionsanalysen aller vier Varianten sind in Abbildung~\ref{fig:anhang_mixup_variants_kde} und Abbildung~\ref{fig:anhang_mixup_variants_scatter} im Anhang dokumentiert.
+
+\subsubsection{Einfluss der Kontextlänge auf die MixUp-Regression}
+\label{sec:regressor_laengen_ablation}
+
+Analog zur Klassifikation wurde der Einfluss der Eingabesequenzlänge auf das kontinuierliche MixUp-Regressionsmodell über $256$, $512$ und $1.024$ Tokens systematisch evaluiert. Das Training erfolgte auf über $80.000$ generierten dynamischen MixUp-Samples mit kontinuierlichen Zielwerten $\lambda \in [0{,}0, 1{,}0]$.
+
+Bereits während der Validierung auf dem Test-Split zeigte sich ein kontinuierlicher Vorteil längerer Kontexte: Der minimale Mean Squared Error (MSE) sank von $0{,}0260$ ($256$ Tokens) über $0{,}0246$ ($512$ Tokens) auf $0{,}0234$ bei $1.024$ Tokens (minimaler MAE $0{,}0976$). Tabelle~\ref{tab:regressor_laengen_benchmark} stellt die Evaluierung der Regressormodelle auf dem externen Lebenshilfe-Goldstandard dar (ergänzende grafische Analysen finden sich im Anhang: Dichteverteilungen in Abbildung~\ref{fig:anhang_regressor_kde} sowie die paarweisen Trajektorien in Abbildung~\ref{fig:anhang_regressor_trajectories}).
+
+\begin{table}[htbp]
+\centering
+\small
+\caption[Längen-Benchmark der BiLSTM MixUp Regressoren auf dem Lebenshilfe-Goldstandard]{Längen-Benchmark der auf bidirektionalen Long-Short-Term-Memory-Netzwerken basierenden MixUp-Regressoren (BiLSTM) auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) zur kontinuierlichen Einstufung der Textmischung $\lambda \in [0{,}0, 1{,}0]$ zwischen Alltagssprache (AS, $\lambda=0{,}0$) und Leichter Sprache (LS, $\lambda=1{,}0$) inklusive ausgewogener Genauigkeit (Balanced Accuracy bei $\tau=0{,}50$), ROC-AUC und relativem Paar-Ranking (Pair Match).}
+\label{tab:regressor_laengen_benchmark}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{}llcccccc@{}}
+\toprule
+\textbf{Modell} & \textbf{Ebene / Input} & \textbf{\O{} Score (LS)} & \textbf{\O{} Score (AS)} & \textbf{Separation ($\Delta$)} & \textbf{Balanced Acc} & \textbf{ROC-AUC} & \textbf{Pair Match} \\
+\midrule
+BiLSTM MixUp Regressor ($256$)  & Dokument ($256$ Tok.)   & $0{,}698 \pm 0{,}11$ & $0{,}105 \pm 0{,}09$ & $0{,}593$ & $95{,}95\,\%$ & $0{,}9982$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM MixUp Regressor ($512$)  & Dokument ($512$ Tok.)   & $0{,}716 \pm 0{,}12$ & $\mathbf{0{,}069 \pm 0{,}09}$ & $\mathbf{0{,}646}$ & $\mathbf{98{,}65\,\%}$ & $0{,}9993$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM MixUp Regressor ($1.024$) & Dokument ($1.024$ Tok.) & $\mathbf{0{,}727 \pm 0{,}14}$ & $0{,}100 \pm 0{,}09$ & $0{,}627$ & $97{,}30\,\%$ & $\mathbf{1{,}0000}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
+\midrule
+Flesch Reading Ease (Baseline)     & Dokument (Silben/Satz)  & $0{,}973 \pm 0{,}16$ & $0{,}189 \pm 0{,}39$ & $0{,}784$ & $89{,}19\,\%$ & $0{,}8919$ & $100{,}0\,\%\; (37/37)$ \\
+Wiener Sachtextformel (Baseline)   & Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27$ & $0{,}108 \pm 0{,}31$ & $0{,}811$ & $90{,}54\,\%$ & $0{,}9054$ & $100{,}0\,\%\; (37/37)$ \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\paragraph{Inverses Skalierungsverhalten: Warum dominiert beim Regressor das $1.024$-Token-Modell?}
+Im direkten Kontrast zum Artikel-Klassifikator erweist sich bei der MixUp-Regression das $1.024$-Token-Modell als das stärkste und stabilste Modell:
+\begin{enumerate}
+    \item \textbf{Perfektes Paar-Ranking ($100{,}0\,\%$):} Bei ausnahmslos allen $37$ von $37$ Artikelpaaren des Goldstandards ordnet das $1.024$-Modell der Leichten Sprache einen strikt höheren Score zu als der zugehörigen Alltagssprache ($\text{Score}(\text{LS}) > \text{Score}(\text{AS})$, vgl. Abbildung~\ref{fig:anhang_regressor_trajectories} im Anhang).
+    \item \textbf{Höchste Trennschärfe \& perfekter ROC-AUC:} Das Modell erreicht den höchsten mittleren LS-Score ($0{,}727$) und erzielt ein fehlerfreies Paar-Ranking mit einem perfekten ROC-AUC von $\mathbf{1{,}0000}$.
+\end{enumerate}
+
+\paragraph{Systematische Überlegenheit des MixUp-Regressors gegenüber Klassifikator und synthetischem Regressor}
+Die direkte Gegenüberstellung der Benchmark-Ergebnisse (Tabelle~\ref{tab:klassifikator_laengen_benchmark} und Tabelle~\ref{tab:regressor_laengen_benchmark}) liefert eine zentrale methodische Erkenntnis dieser Arbeit: Während das direkte Artikel-Training beim binären Klassifikator bei langen Sequenzen instabil wird und der synthetische Regressor bei $\text{ROC-AUC} = 0{,}8495$ stagniert, bleibt das Training des BiLSTM MixUp-Regressors hochgradig robust, skaliert positiv mit längeren Kontexten und erzielt auf dem Goldstandard einen fehlerfreien ROC-AUC von $\mathbf{1{,}0000}$.
+
+Die Ursachen für diese Überlegenheit begründen sich in vier Mechanismen:
+\begin{itemize}
+    \item \textbf{Homogene Merkmalsverteilung durch dynamisches Satz-Shuffling:} Beim Artikel-Klassifikator stehen die Sätze in ihrer starren Originalreihenfolge. Stehen relevante Simplizitätsmerkmale am Anfang des Textes und folgt danach langer Fließtext, verliert das LSTM über 1.000 Rekursionsschritte das Signal. Beim MixUp-Regressor hingegen werden die gezogenen Sätze vor der Verkettung randomisiert durchmischt. Dadurch verteilen sich Leichte-Sprache- und Alltagssprache-Muster homogen über das gesamte $1.024$-Token-Fenster (Anfang, Mitte und Ende), wodurch ein positionsabhängiges Vergessen unmöglich wird.
+    \item \textbf{Massive Datenaugmentation statt Datenmangel:} Auf Dokumentenebene stehen dem Klassifikator und dem synthetischen Ansatz nur wenige starre Trainingsartikel zur Verfügung ($750$ bzw. $860$ Artikel), was zu schnellem Overfitting führt. Der MixUp-Regressor hingegen generiert in jeder Epoche zehntausende neu durchmischte Satzkombinationen, wodurch das Modell auf eine extrem breite, kontinuierliche Datenbasis zurückgreift.
+    \item \textbf{Linearer MSE-Verlust statt extremer BCE-Sättigung:} Die binäre Klassifikation (BCE-Loss) neigt dazu, Ausgabewerte sehr schnell auf $0$ oder $1$ festzulegen. Schon einzelne schwere Wörter führen dann zu voreiligen Fehlentscheidungen. Der Regressionsverlust (MSE) bestraft Abweichungen dagegen gleichmäßig über das gesamte Intervall $[0{,}0, 1{,}0]$ und sorgt für stabile, stufenlose Vorhersagen.
+    \item \textbf{Schrittweise Erfassung einfacher Merkmale:} Der Klassifikator muss für das gesamte Dokument eine diskrete binäre Entscheidung treffen. Der Regressor erfasst dagegen schrittweise, wie viele Merkmale Leichter Sprache im gesamten Text vorkommen. Mehr Kontext ($1.024$ Tokens) liefert eine stabilere Stichprobe und senkt die Vorhersageschwankungen deutlich auf $\pm 0{,}10$.
+\end{itemize}
+
+\paragraph{MixUp-Regression vs. Traditionelle Formel-Baselines}
+Gegenüber den klassischen Formeln erzielt der $1.024$-Token MixUp-Regressor eine deutlich höhere Trennschärfe ($97{,}30\,\%$ Balanced Accuracy, ROC-AUC $1{,}0000$). Traditionelle Formeln sind an feste Schwellenwerte gebunden, streuen im mittleren Bereich stark und geben keine ableitbaren Werte aus. Das MixUp-Modell liefert dagegen stufenlose und differenzierbare Bewertungswerte. Dadurch kann im späteren Modelltraining auch ein kleiner Fortschritt bei der Textvereinfachung präzise belohnt werden.
+
+
+\subsection{Validierung der kontinuierlichen Abstufungsfähigkeit auf externen Benchmarks (TextComplexityDE \& MERLIN)}
+\label{sec:validierung_abstufung_externe_benchmarks}
+
+Die vorangegangene Evaluierung auf dem \textit{Lebenshilfe}-Goldstandard (Abschnitt~\ref{sec:regressor_laengen_ablation}) belegt, dass der BiLSTM MixUp-Regressor ein trennscharfes Modell zur Unterscheidung auf Dokumentebene ist. Trotz des kontinuierlichen MixUp-Trainingsverfahrens unterscheidet das Modell mit einer Balanced Accuracy von $97{,}30\,\%$, einem ROC-AUC von $1{,}0000$ und einem fehlerfreien Perfect-Pair-Matching von $100{,}0\,\%$ ($37/37$) zwischen Alltagssprache und Leichter Sprache und übertrifft sowohl den originär binär trainierten Klassifikator als auch den synthetischen Regressor systematisch.
+
+\subsubsection{Das fundamentale Dilemma: Fehlende Zwischenstufenkorpora \& Motivation der externen Benchmarks}
+\label{sec:dilemma_zwischenstufen}
+
+Die vorangegangene Evaluierung auf dem \textit{Lebenshilfe}-Goldstandard belegt die hervorragende Diskriminationskraft des MixUp-Regressors auf den beiden Extrempolen (Alltagssprache vs. Leichte Sprache). Das eigentliche Ziel der Regressionsmodellierung besteht jedoch darin, ein stufenloses, feingliedriges Gütesignal bereitzustellen, das den kontinuierlichen Grad sprachlicher Simplizität quantifiziert.
+
+Die direkte empirische Überprüfung dieser kontinuierlichen Regressionsfähigkeit auf realen Sprachdaten stößt jedoch auf ein fundamentales linguistisches Dilemma: In der Sprachpraxis existieren keinerlei natürliche Parallelkorpora, die kontinuierliche Zwischenstufen zwischen Alltagssprache und Leichter Sprache annotieren. Die professionelle Übersetzung in Leichte Sprache erfolgt prinzipbedingt strikt bimodal (komplexer alltagssprachlicher Ausgangstext vs. maximal vereinfachte Zielübersetzung). Echte, natürliche Übergangszustände (beispielsweise ein Text mit vereinfachter Satzstruktur, aber noch unaufgelösten Komposita) sind in keinem Korpus systematisch erfasst.
+
+Um die Regressionsgüte des Modells dennoch unabhängig von den künstlichen Trainingsmischungen zu evaluieren, stellen externe linguistische Datensätze einen methodischen Versuch dar, die kontinuierliche Einstufungsfähigkeit im Zero-Shot-Transfer zu überprüfen. Zwar bilden auch diese Benchmarks keine direkte Interpolation zwischen Alltagssprache und den normierten Regeln Leichter Sprache ab, sie bieten jedoch standardisierte, unabhängige Komplexitätsskalen:
+\begin{enumerate}
+    \item \textbf{TextComplexityDE \citep{naderi2019textcomplexityde}:} Ein standardisierter Benchmark aus $1.000$ isolierten deutschen Wikipedia-Sätzen mit aggregierten menschlichen Urteilen (Likert-Skala) zur wahrgenommenen Satzschwierigkeit und Verständlichkeit.
+    \item \textbf{MERLIN-Korpus \citep{boyd2014merlin}:} Ein Korpus aus $1.033$ authentischen deutschen Volltexten auf Dokumentebene, die von Sprachexperten offiziell nach den sechs Niveaustufen des Gemeinsamen Europäischen Referenzrahmens für Sprachen (CEFR: A1, A2, B1, B2, C1, C2) eingestuft wurden.
+\end{enumerate}
+
+\subsubsection{Satzebene: Evaluation auf TextComplexityDE \& Analyse der Längendynamik}
+\label{sec:eval_textcomplexityde}
+
+Der \textit{TextComplexityDE}-Benchmark \citep{naderi2019textcomplexityde} umfasst $1.000$ deutsche Wikipedia-Sätze, für die aggregierte menschliche Urteile (\textit{Mean Opinion Score}, MOS) hinsichtlich Gesamtschwierigkeit ($\text{MOS}_{\text{Complexity}} \in [1{,}0, 7{,}0]$), Verständlichkeit und lexikalischer Hürden vorliegen. Während ein in früheren Auswerteskripten genutztes statisches Zero-Padding die Hidden-States bei kurzen Einzelsätzen durch hunderte Padding-Schritte stark verwässerte und die Ergebnisse massiv verschlechterte, ermöglichte die Umstellung auf dynamisches Sequenz-Padding eine unverfälschte Inferenz mit deutlich präziseren Vorhersagen. Die Untersuchung in Abbildung~\ref{fig:textcomplexityde_boxplots} liefert wesentliche methodische Erkenntnisse über das Modellverhalten auf Satzebene:
+\begin{itemize}
+    \item \textbf{Überlegenheit des $256$-Token-Modells auf Satzebene:} Die visuelle und statistische Analyse der Monotonie-Boxplots (Abbildung~\ref{fig:textcomplexityde_boxplots}) offenbart einen zentralen methodischen Befund: Der $256$-Token-Regressor ist auf Satzebene das am saubersten abgestufte Modell. Mit dem geringsten normierten Fehler ($\text{MAE} = 0{,}198$) und der höchsten linearen Korrelation ($r = 0{,}620$) nutzt das Modell die Skala mit gleichmäßig fallenden Medianen optimal aus.
+    \item \textbf{Stauchung der Werte bei langen Texten:} Während das $256$-Modell einen Einzelsatz als gewichtigen Anteil seines Trainingsfensters interpretiert, entspricht ein isolierter Satz für das $1.024$-Modell nur rund $1{,}5\,\%$ des Kontextes. Enthält ein Wikipedia-Satz auch nur ein einzelnes Standard- oder Fachwort (z.\,B. Eigennamen oder institutionelle Begriffe), stuft das rekurrente Gedächtnis des $1024$er-Modells den gesamten Textausschnitt sofort vorrangig als Alltagssprache ein. Dadurch werden die Vorhersagen des $1024$er-Modells bei isolierten Einzelsätzen ab Stufe 2 sehr weit nach unten in einen schmalen Wertebereich gedrückt.
+    \item \textbf{Kontrast Satz- vs. Dokumentebene:} Dieser Befund begründet eine klare methodische Trennung: Auf isolierten Einzelsätzen dominiert das $256$-Token-Modell in Skalennutzung und Dynamik, während auf vollständigen Artikeln (Lebenshilfe-Goldstandard, $100\,\%$ Perfect Pair Match) das $1.024$-Token-Modell überlegen ist, da es lange Dokumente ohne Informationsverlust durch Truncation ganzheitlich abbildet.
+\end{itemize}
+
+Aufgrund dieser methodischen Besonderheiten bei isolierten Einzelsätzen ist die ergänzende Evaluation auf zusammenhängenden Fließtexten (MERLIN) für eine ganzheitliche Beurteilung unerlässlich.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/textcomplexityde_boxplots_all_models_grid.png}
+\caption[Verteilungs-Boxplots über 5 Likert-Komplexitätsstufen auf TextComplexityDE]{Verteilungs-Boxplots der Vorhersagewerte neuronaler BiLSTM-Modelle über fünf diskrete menschliche Likert-Komplexitätsstufen auf dem TextComplexityDE-Benchmark ($N = 1.000$ Sätze, Stufe 1 bis 5) mit Darstellung des Interquartilsabstands (IQR).}
+\label{fig:textcomplexityde_boxplots}
+\end{figure}
+
+\subsubsection{Dokumentebene: Evaluation auf dem MERLIN CEFR-Benchmark}
+\label{sec:eval_merlin}
+
+Um die kontinuierliche Sprachstufung auf echten Fließtexten ohne Längen- und Padding-Verzerrungen zu evaluieren, wird das MERLIN-Korpus \citep{boyd2014merlin} herangezogen. Mit $1.033$ vollständigen Texten (Aufsätze und Briefe aus standardisierten Sprachprüfungen) und einer durchschnittlichen Textlänge von ca. $150$ bis $250$ Tokens entspricht dieses Korpus exakt der typischen Dokumentstruktur von Leichte-Sprache-Absätzen.
+
+Tabelle~\ref{tab:anhang_merlin_master} und Tabelle~\ref{tab:anhang_merlin_monotonie} im Anhang~\ref{sec:anhang_merlin} sowie das Streudiagramm-Grid (Abbildung~\ref{fig:anhang_merlin_scatter}) dokumentieren die detaillierten Kennwerte aller Modelle über die CEFR-Stufen. Die Auswertung in Abbildung~\ref{fig:merlin_boxplots} liefert wesentliche Erkenntnisse über die graduelle Einstufungsfähigkeit:
+\begin{itemize}
+    \item \textbf{Monotoner Verlauf des $256$-Token MixUp-Regressors:} Wie die Verteilungen in Abbildung~\ref{fig:merlin_boxplots} verdeutlichen, sinken die vorhergesagten Simplizitätsscores des $256$-Token-Regressors über die sechs CEFR-Niveaustufen von der leichtesten Stufe A1 bis zur Muttersprachenstufe C2 kontinuierlich und streng monoton ab. Dies zeigt, dass das Modell auf vollständigen Texten eine konsistente Sprachstufung vornimmt ($\rho = 0{,}485$, Pearson $r = 0{,}459$, $\text{MAE} = 0{,}310$).
+    \item \textbf{Ausgeprägte Niveautrennung der $512$er- und $1.024$er-MixUp-Regressoren:} Auch die Modelle mit größerem Kontextfenster bilden die CEFR-Schwierigkeit ab: Während elementare Sprachstufen (A1, A2, B1) im Bereich von $0{,}24$ bis $0{,}34$ liegen, vollzieht sich ab dem Übergang zur fortgeschrittenen Sprachverwendung (B2: $\sim 0{,}16$--$0{,}19$) sowie zu Fach- und Muttersprachenniveau (C1/C2: $\sim 0{,}08$--$0{,}12$) ein stetiger, hochgradig signifikanter Score-Abfall (Tabelle~\ref{tab:anhang_merlin_monotonie}).
+    \item \textbf{Korrelation der Baselines mit CEFR-Prüfungsstufen:} Auch auf MERLIN korrelieren traditionelle Formeln stark mit den Niveaus (LIX: $\rho = 0{,}656$, WSTF: $\rho = 0{,}602$, Flesch: $\rho = 0{,}543$), da höhere Prüfungsstufen (B2--C2) formal anspruchsvollere Wort- und Satzstrukturen fordern. Wie zuvor diskutiert, bildet dies eine nützliche Basis, vermag jedoch die spezifischen, normierten Vereinfachungsregeln Leichter Sprache nicht feinkörnig zu erfassen oder als Gradient für generative Modelle bereitzustellen.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{images/merlin_boxplots_all_models_grid.png}
+\caption[Monotonie-Prüfung über CEFR-Sprachniveaustufen auf MERLIN]{Monotonie-Prüfung der Regressoren und Baselines über die Sprachniveaustufen des Gemeinsamen Europäischen Referenzrahmens (CEFR, A1 bis C2) auf dem MERLIN-Benchmark ($N = 1.033$ Texte) anhand von Boxplots mit Kennzeichnung von Interquartilsabstand, Median und Mittelwert.}
+\label{fig:merlin_boxplots}
+\end{figure}
+
+\subsubsection{Kritische Synthese: Validität des Zero-Shot-Transfers \& Fazit}
+\label{sec:synthese_abstufung_fazit}
+
+Bei der Interpretation dieses Benchmark-Transfers ist eine methodische Differenzierung geboten: Weder TextComplexityDE noch das MERLIN-Korpus wurden für Leichte Sprache konzipiert. Das CEFR-Raster klassifiziert die Fremdsprachenkompetenz von Deutschlernenden (L2-Spracherwerb) und sanktioniert orthografische sowie grammatikalische Fehler, während Leichte Sprache festen Regeln folgt (u.\,a. nach BITV 2.0 und den Richtlinien des BMAS). Diese fordern vor allem kurze Hauptsätze, einfache Wörter und getrennte Wortzusammensetzungen.
+
+Gerade vor diesem Hintergrund ist das empirische Abschneiden der BiLSTM-MixUp-Regressoren als bemerkenswert zu bewerten: Obwohl die Modelle originär ausschließlich darauf trainiert wurden, die Mischungsanteile zwischen Alltagssprache und Leichter Sprache stufenlos einzuschätzen, behaupten sie sich auf diesen gänzlich domänenfremden (Out-of-Domain) und auf völlig andere Sprachdimensionen abzielenden Korpora hervorragend. Auf isolierten Einzelsätzen (TextComplexityDE) übertrifft der $256$-Token-Regressor traditionelle Formeln in der linearen Skalennutzung ($r = 0{,}620$, $\text{MAE} = 0{,}198$), während auf Dokumentebene (MERLIN) ein streng monotoner, stabiler Score-Abfall über alle sechs CEFR-Stufen ($0{,}371 \to 0{,}078$) nachgewiesen werden konnte.
+
+Dies liefert den entscheidenden empirischen Nachweis, dass das MixUp-Verfahren keine isolierten Datensatz-Artefakte erzeugt hat. Stattdessen lernt das neuronale Netz ein verlässliches, übertragbares Verständnis sprachlicher Einfachheit, das sich im weiteren Verlauf dieser Arbeit verlässlich als stetiges Belohnungssignal ($R_{\text{style}}$) für das anschließende Modell-Alignment (Themenblock~3) eignet.
 
 \subsection{Synthese \& Modellauswahl für die generative Übersetzung (Themenblock 3)}
 \label{sec:synthese_modellauswahl_themenblock3}
 
 Um die empirische Güte und Trennschärfe aller in diesem Themenblock entwickelten Ansätze vergleichend zusammenzufassen, stellt Tabelle~\ref{tab:master_benchmark_themenblock2} die Ergebnisse sämtlicher Modellfamilien auf dem unabhängigen \textit{Lebenshilfe}-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) gegenüber.
 
-\paragraph{Architektur-Ablation: Die Vanilla RNN Baseline}
-Um zu überprüfen, ob die bidirektionale LSTM-Zellstruktur und ihre internen Gating-Mechanismen (Input-, Forget- und Output-Gates) für die Komplexitätsmodellierung zwingend erforderlich sind, wurde als Architektur-Ablation eine einfache, unidirektionale rekurrente Baseline (\textit{Vanilla RNN} nach Elman) unter identischen Trainingsbedingungen evaluiert. Ohne schützende Gating-Mechanismen leidet das einfache RNN bei längeren Textsequenzen unter dem Problem verschwindender Gradienten (\textit{Vanishing Gradient Problem}). Zwar erreicht die Baseline ein solides relatives Ranking ($\text{Balanced Accuracy} = 81{,}08\,\%$, $\text{ROC-AUC} = 0{,}8733$, Pair Match $81{,}1\,\%$), ihre Klassenseparation fällt mit $\Delta = +0{,}240$ jedoch signifikant geringer aus als beim BiLSTM-Backbone ($\Delta = +0{,}726$). Dies belegt die Notwendigkeit von Gated Recurrent Units zur zuverlässigen Repräsentation langer syntaktischer Abhängigkeiten.
+\paragraph{Vergleich mit einem einfachen RNN (Vanilla RNN)}
+Um zu überprüfen, ob die bidirektionale LSTM-Zellstruktur und ihre internen Steuerungs-Tore (Input-, Forget- und Output-Gates, vgl. Abschnitt~\ref{sec:architekturen_sprachmodelle}) für die Komplexitätsmodellierung zwingend erforderlich sind, wurde ein einfaches, unidirektionales Netz (\textit{Vanilla RNN} nach Elman) als Vergleichsmodell unter identischen Bedingungen trainiert. Ohne schützende Tore leidet das einfache RNN bei längeren Textsequenzen unter dem Problem verschwindender Gradienten (\textit{Vanishing Gradient Problem}). Zwar erreicht die Baseline ein relatives Ranking ($\text{Balanced Accuracy} = 67{,}57\,\%$, $\text{ROC-AUC} = 0{,}7761$, Pair Match $70{,}3\,\%$, $\text{Score}(\text{LS}) = 0{,}443$, $\text{Score}(\text{AS}) = 0{,}345$), ihre Trennschärfe fällt mit $\Delta = +0{,}098$ jedoch signifikant geringer aus als beim BiLSTM-Modell ($\Delta = +0{,}627$). Dies belegt, dass die Tore im LSTM notwendig sind, um längere Sätze und Texte zuverlässig zu verarbeiten.
 
 \begin{table}[htbp]
 \centering
 \small
-\caption{Gesamtübersicht aller in Themenblock 2 evaluierten Modellansätze auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}
+\caption[Gesamtübersicht aller in Themenblock 2 evaluierten Modellansätze]{Gesamtübersicht aller in Themenblock 2 evaluierten Modellansätze auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) zur kontinuierlichen Einstufung oder Klassifikation zwischen Alltagssprache (AS) und Leichter Sprache (LS) unter Einbeziehung des Text-MixUp-Verfahrens, großer Sprachmodelle (Large Language Models, LLM) und rekurrenten Basisarchitekturen (Recurrent Neural Networks, RNN).}
 \label{tab:master_benchmark_themenblock2}
 \adjustbox{max width=\textwidth}{%
 \begin{tabular}{@{}llcccccc@{}}
@@ -275,36 +281,48 @@ Um zu überprüfen, ob die bidirektionale LSTM-Zellstruktur und ihre internen Ga
 \textbf{Modell} & \textbf{Paradigma / Input} & \textbf{\O{} Score (LS)} & \textbf{\O{} Score (AS)} & \textbf{Separation ($\Delta$)} & \textbf{Balanced Acc} & \textbf{ROC-AUC} & \textbf{Pair Match} \\
 \midrule
 \multicolumn{8}{@{}l}{\textit{Kontinuierliche Regressionsmodelle (MixUp)}} \\
-BiLSTM MixUp Regressor ($1.024$) & Dokument ($1.024$ Tok.) & $\mathbf{0{,}792 \pm 0{,}10}$ & $\mathbf{0{,}067 \pm 0{,}10}$ & $\mathbf{0{,}726}$ & $\mathbf{98{,}65\,\%}$ & $\mathbf{0{,}9993}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
-BiLSTM MixUp Regressor ($512$)  & Dokument ($512$ Tok.)   & $0{,}777 \pm 0{,}12$ & $0{,}062 \pm 0{,}11$ & $0{,}715$ & $98{,}65\,\%$ & $0{,}9985$ & $97{,}3\,\%\; (36/37)$ \\
-BiLSTM MixUp Regressor ($256$)  & Dokument ($256$ Tok.)   & $0{,}724 \pm 0{,}13$ & $0{,}092 \pm 0{,}09$ & $0{,}632$ & $95{,}95\,\%$ & $0{,}9982$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM MixUp Regressor ($1.024$) & Dokument ($1.024$ Tok.) & $\mathbf{0{,}727 \pm 0{,}14}$ & $0{,}100 \pm 0{,}09$ & $0{,}627$ & $97{,}30\,\%$ & $\mathbf{1{,}0000}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
+BiLSTM MixUp Regressor ($512$)  & Dokument ($512$ Tok.)   & $0{,}716 \pm 0{,}12$ & $\mathbf{0{,}069 \pm 0{,}09}$ & $\mathbf{0{,}646}$ & $\mathbf{98{,}65\,\%}$ & $0{,}9993$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM MixUp Regressor ($256$)  & Dokument ($256$ Tok.)   & $0{,}698 \pm 0{,}11$ & $0{,}105 \pm 0{,}09$ & $0{,}593$ & $95{,}95\,\%$ & $0{,}9982$ & $97{,}3\,\%\; (36/37)$ \\
 \midrule
-\multicolumn{8}{@{}l}{\textit{Diskrete \& ablative Regressionsmodelle}} \\
+\multicolumn{8}{@{}l}{\textit{Diskrete \& Synthetische Regressionsmodelle}} \\
 BiLSTM Synthetischer Regressor  & Dokument (LLM-Stufen)   & $0{,}575 \pm 0{,}35$ & $0{,}145 \pm 0{,}18$ & $0{,}429$ & $78{,}38\,\%$ & $0{,}8495$ & $89{,}2\,\%\; (33/37)$ \\
-Vanilla RNN Baseline (Ablation) & Dokument ($256$ Tok.)   & $0{,}527 \pm 0{,}20$ & $0{,}287 \pm 0{,}17$ & $0{,}240$ & $81{,}08\,\%$ & $0{,}8733$ & $81{,}1\,\%\; (30/37)$ \\
+Vanilla RNN Baseline (Vergleich) & Dokument ($256$ Tok.)   & $0{,}443 \pm 0{,}20$ & $0{,}345 \pm 0{,}18$ & $0{,}098$ & $67{,}57\,\%$ & $0{,}7761$ & $70{,}3\,\%\; (26/37)$ \\
 \midrule
 \multicolumn{8}{@{}l}{\textit{Binäre Klassifikationsmodelle}} \\
-BiLSTM Satz-Klassifikator (MajVote)& Dokument ($r_{LS}$ Ratio)& $0{,}769 \pm 0{,}08$ & $0{,}127 \pm 0{,}14$ & $0{,}642$ & $\mathbf{98{,}65\,\%}$ & $0{,}9985$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
-BiLSTM Artikel-Klassifikator ($256$)& Dokument ($256$ Tok.)  & $0{,}829 \pm 0{,}31$ & $0{,}002 \pm 0{,}01$ & $0{,}827$ & $91{,}89\,\%$ & $0{,}9974$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM Satz-Klassifikator (MajVote)& Dokument ($r_{LS}$ Ratio)& $0{,}769 \pm 0{,}08$ & $0{,}127 \pm 0{,}14$ & $0{,}642$ & $\mathbf{98{,}65\,\%}$ & $\mathbf{0{,}9985}$ & $\mathbf{100{,}0\,\%}\; (37/37)$ \\
+BiLSTM Artikel-Klassifikator ($256$)& Dokument ($256$ Tok.)   & $0{,}829 \pm 0{,}31$ & $\mathbf{0{,}002 \pm 0{,}01}$ & $\mathbf{0{,}827}$ & $91{,}89\,\%$ & $0{,}9974$ & $97{,}3\,\%\; (36/37)$ \\
+BiLSTM Artikel-Klassifikator ($512$)& Dokument ($512$ Tok.)   & $0{,}478 \pm 0{,}41$ & $0{,}031 \pm 0{,}13$ & $0{,}446$ & $71{,}62\,\%$ & $0{,}8809$ & $91{,}9\,\%\; (34/37)$ \\
 BiLSTM Artikel-Klassifikator ($1.024$)& Dokument ($1.024$ Tok.)& $0{,}340 \pm 0{,}40$ & $0{,}007 \pm 0{,}01$ & $0{,}333$ & $67{,}57\,\%$ & $0{,}8795$ & $97{,}3\,\%\; (36/37)$ \\
 \midrule
-\multicolumn{8}{@{}l}{\textit{Klassische linguistische Formel-Baselines}} \\
+\multicolumn{8}{@{}l}{\textit{Traditionelle Formeln (Baselines)}} \\
 Flesch Reading Ease (Baseline)  & Dokument (Silben/Satz)  & $0{,}973 \pm 0{,}16$ & $0{,}189 \pm 0{,}39$ & $0{,}784$ & $89{,}19\,\%$ & $0{,}8919$ & $100{,}0\,\%\; (37/37)$ \\
 Wiener Sachtextformel (Baseline)& Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27$ & $0{,}108 \pm 0{,}31$ & $0{,}811$ & $90{,}54\,\%$ & $0{,}9054$ & $100{,}0\,\%\; (37/37)$ \\
 \bottomrule
 \end{tabular}}
 \end{table}
 
-\paragraph{Synthese: Traditionelle Baselines vs. Neuronale Metrik-Modelle}
-Die zusammenfassende Gesamtschau in Tabelle~\ref{tab:master_benchmark_themenblock2} bestätigt das zentrale methodische Fazit von Themenblock~2: Traditionelle Lesbarkeitsmetriken wie der Flesch Reading Ease und die Wiener Sachtextformel stellen wertvolle, transparente Vergleichs-Baselines dar, die makroskopische Längenunterschiede auf Dokumentebene zuverlässig abbilden ($100{,}0\,\%$ Pair Match). Da sie jedoch keine spezifischen grammatikalischen und syntaktischen Regeln der Leichten Sprache erfassen und keine stetig differenzierbaren Wahrscheinlichkeiten ausgeben, eignen sie sich nicht als Belohnungssignal für generative Sprachmodelle. Die beiden neuronalen Spitzenmodelle---der hierarchische BiLSTM-Satz-Klassifikator ($98{,}65\,\%$ BAcc, $0{,}9985$ ROC-AUC) und der $1.024$-Token MixUp-Regressor ($98{,}65\,\%$ BAcc, $0{,}9993$ ROC-AUC)---schließen diese Lücke empirisch und konzeptionell durch signifikant höhere Trennschärfe, bimodal getrennte Verteilungen und kontinuierliche Gradienten.
+\paragraph{Synthese: Scheinbare Überlegenheit der Baselines vs. Die Teilmengen-Hypothese}
+Auf den ersten Blick vermitteln die Ergebnisse in Tabelle~\ref{tab:master_benchmark_themenblock2} den Eindruck, als seien traditionelle Zählformeln wie der Flesch Reading Ease ($89{,}19\,\%$ BAcc, $100{,}0\,\%$ Pair Match) oder die Wiener Sachtextformel ($90{,}54\,\%$ BAcc, $100{,}0\,\%$ Pair Match) die einfachere, robustere und damit vorzuziehende Wahl zur Simplizitätsbewertung.
+
+Dieser Eindruck trügt jedoch fundamental: Die makroskopische Treffsicherheit traditioneller Formeln auf dem \textit{Lebenshilfe}-Goldstandard beruht ausschließlich darauf, dass menschliche Fachübersetzer in perfekter Leichter Sprache definitionsgemäß alle normierten Simplifizierungsregeln simultan umsetzen. Klassische Formeln messen davon jedoch lediglich eine oberflächliche, rein längenbasierte Teilmenge ($S_{\text{metric}} \subset S_{\text{LS}}$)---namentlich die mittlere Satzlänge ($ASL$) und die Silbendichte ($ASW$). Da authentische Leichte Sprache extrem kurze Sätze und elementare Wörter nutzt, deckt sie diese Teilmenge zwangsläufig mit ab.
+
+Sobald Texte jedoch nicht mehr perfekt vereinfacht sind---wie es bei fehleranfälligen Modellgenerierungen im maschinellen Übersetzungsprozess typischerweise der Fall ist---versagen traditionelle Formeln vollständig. Dies belegt ein kontrollierter synthetischer Benchmark ($N = 30$ Textfassungen aus fünf Themenbereichen mit jeweils $100$ bis $256$ Tokens), bei dem systematische grammatikalische Störungen isoliert auf Dokumentebene injiziert wurden (die vollständige Ergebnistabelle und exemplarische Textfassungen sind in Anhang~\ref{sec:anhang_synthetic_rule_benchmark} sowie Tabelle~\ref{tab:anhang_synthetic_rule_benchmark_table} dokumentiert):
+\begin{itemize}
+    \item \textbf{Vollständige Blindheit gegenüber dem Konjunktiv ($\Delta = 0{,}000$):} Werden alle Verben eines Leichte-Sprache-Textes konsequent vom Indikativ in den verbotenen Konjunktiv II überführt (\textit{„haben“} $\rightarrow$ \textit{„hätten“}, \textit{„kann“} $\rightarrow$ \textit{„könnte“}, \textit{„ist“} $\rightarrow$ \textit{„wäre“}), bleibt die Silben- und Tokenanzahl exakt invariant ($\Delta \text{Silben} = 0$). Für den Flesch Reading Ease und die WSTF-4 ist ein grammatikalisch unzulässiger Konjunktiv-Text absolut ununterscheidbar von perfekter Leichter Sprache ($\Delta = 0{,}000$).
+    \item \textbf{Paradoxe Belohnung von Genitivkonstruktionen ($+6{,}55$ Flesch-Punkte):} Werden regelkonforme Dativ- und Präpositionalumschreibungen durch Genitive ersetzt (\textit{„das Büro von dem Arzt“} $\rightarrow$ \textit{„das Büro des Arztes“} oder \textit{„der Schlüssel für das Haus“} $\rightarrow$ \textit{„der Schlüssel des Hauses“}), entfallen Präpositionalphrasen (\textit{„von dem“} $\rightarrow$ \textit{„des“}). Flesch registriert die dadurch verkürzte Satzlänge ($ASL$) und stuft den fehlerhaften Text fälschlicherweise als \enquote{einfacher und besser} ein ($+6{,}55$ Punkte Anstieg von $54{,}25$ auf $60{,}81$).
+    \item \textbf{Paradoxe Belohnung von Passivstrukturen ($+6{,}04$ Flesch-Punkte):} Vorgangspassive fügen funktionale Hilfsverben ein (\textit{„wird von“}), welche die durchschnittliche Silbendichte pro Wort rechnerisch verdünnen. Flesch belohnt diese schwere Regelverletzung paradoxerweise mit $+6{,}04$ Punkten Verbesserung ($54{,}25 \rightarrow 60{,}29$).
+\end{itemize}
+
+Im direkten Kontrast dazu reagiert der trainierte $256$-Token BiLSTM-Regressor hochsensitiv auf diese linguistischen Regelbrüche: Bei Konjunktiv-Injektion bricht der Modell-Score um $-62{,}4\,\%$ und bei Genitiv-Injektion um $-54{,}1\,\%$ ein. Dies beweist empirisch, dass das neuronale Metrikmodell echte morphosyntaktische Gesetzmäßigkeiten erlernt hat, die weit über triviale Zählstatistiken hinausgehen. Zusammen mit der Bereitstellung stetig differenzierbarer Wahrscheinlichkeiten qualifiziert erst dieses Regelverständnis das neuronale Modell als valides Belohnungssignal ($R_{\text{style}}$) für die nachfolgende Präferenzoptimierung.
 
 \paragraph{Finale Modellauswahl für Themenblock 3}
 Auf Basis dieses empirischen Gesamtergebnisses wird für die nachfolgenden Übersetzungs- und Alignment-Stufen (Supervised Fine-Tuning [SFT], Abschnitt~\ref{sec:sft_training}, sowie Direct Preference Optimization [DPO], Abschnitt~\ref{sec:dpo_optimization}) verbindlich das $1.024$-Token BiLSTM MixUp-Regressionsmodell als primäre Einfachheitsmetrik ($R_{\text{style}}$) ausgewählt.
 
 Diese Entscheidung stützt sich auf vier zentrale Faktoren:
 \begin{enumerate}
-    \item \textbf{Empirische Überlegenheit in den Metrik-Tests:} In den Längen-Ablationen auf dem unabhängigen \textit{Lebenshilfe}-Goldstandard (Abschnitt~\ref{sec:regressor_laengen_ablation}, Tabelle~\ref{tab:regressor_laengen_benchmark}) erzielte die $1.024$-Token-Variante das beste Gesamtergebnis mit einem fehlerfreien Paar-Matching von $100{,}0\,\%$ ($37/37$ Paare), maximaler Klassenseparation ($\Delta = 0{,}726$), geringster Vorhersagevarianz ($\pm 0{,}10$), höchstem ROC-AUC ($0{,}9993$) sowie dem niedrigsten Validierungs-MSE ($0{,}0234$).
-    \item \textbf{Systematische Überlegenheit gegenüber dem synthetischen Regressor:} Gegenüber dem LLM-basierten Synthetischen Regressor ($\text{BAcc} = 78{,}38\,\%$, $\text{ROC-AUC} = 0{,}8495$, Pair Match $89{,}2\,\%$, Abschnitt~\ref{sec:synthetische_sprachstufen}) bietet das MixUp-Modell eine drastisch höhere Trennschärfe und Robustheit auf realen Texten.
+    \item \textbf{Empirische Überlegenheit in den Metrik-Tests:} Im Längenvergleich auf dem unabhängigen \textit{Lebenshilfe}-Goldstandard (Abschnitt~\ref{sec:regressor_laengen_ablation}, Tabelle~\ref{tab:regressor_laengen_benchmark}) erzielte die $1.024$-Token-Variante das beste Gesamtergebnis mit einem fehlerfreien Paar-Matching von $100{,}0\,\%$ ($37/37$ Paare), maximaler Separation, perfektem ROC-AUC ($1{,}0000$) sowie dem niedrigsten Validierungs-MSE ($0{,}0234$).
+    \item \textbf{Systematische Überlegenheit gegenüber dem synthetischen Regressor:} Gegenüber dem LLM-basierten Synthetischen Regressor ($\text{BAcc} = 78{,}38\,\%$, $\text{ROC-AUC} = 0{,}8495$, Pair Match $89{,}2\,\%$, Abschnitt~\ref{sec:synthetische_sprachstufen}) bietet das MixUp-Modell eine signifikant höhere Trennschärfe und Robustheit auf realen Texten.
     \item \textbf{Maximale Artikelabdeckung:} Im bereinigten Korpus besitzen Ausgangstexte im Mittel $622{,}2$ Wörter ($\approx 1.350$ BPE-Tokens) und vereinfachte Texte $457{,}9$ Wörter ($\approx 857$ BPE-Tokens). Da rund $45\,\%$ der Artikel $512$ Tokens und über $90\,\%$ das $128$-Token-Limit überschreiten, gewährleistet erst das $1.024$-Token-Fenster eine ganzheitliche Dokumentenbewertung ohne vorzeitiges Abschneiden (\textit{Truncation}).
-    \item \textbf{Architektonische Kongruenz mit mBART-50:} Das als Translations-Backbone eingesetzte Sequenz-zu-Sequenz-Modell \texttt{facebook/mbart-large-50} \citep{tang2020multilingual, liu2020multilingual} besitzt eine native Positionskodierungsgrenze von maximal $1.024$ Tokens (\texttt{max\_position\_embeddings = 1024}). Die Angleichung der Metrik auf $1.024$ Tokens stellt sicher, dass das Belohnungssignal im DPO-Training exakt das vollständige Generierungsfenster von mBART-50 abdeckt.
+    \item \textbf{Gleiche Kontextlänge wie beim Übersetzungsmodell (mBART-50):} Das als Übersetzungsmodell eingesetzte Sequenz-zu-Sequenz-Modell \texttt{facebook/mbart-large-50} \citep{tang2020multilingual, liu2020multilingual} besitzt eine native Positionskodierungsgrenze von maximal $1.024$ Tokens (\texttt{max\_position\_embeddings = 1024}). Die Angleichung der Metrik auf $1.024$ Tokens stellt sicher, dass das Belohnungssignal im DPO-Training exakt das vollständige Generierungsfenster von mBART-50 abdeckt.
 \end{enumerate}

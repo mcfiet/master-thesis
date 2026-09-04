@@ -24,45 +24,23 @@ Im Zentrum dieser Arbeit steht die folgende übergreifende Leitfrage:
     \textbf{\large Wie lässt sich die automatische Übersetzung in Leichte Sprache (LS) durch die Kombination aus rauschbereinigten Korpora, kontinuierlichen Simplizitätsmetriken und zielgerichteten Alignment-Strategien (DPO) systematisch optimieren und validieren?}
 \end{tcolorbox}
 
-Zur systematischen Beantwortung dieser Leitfrage werden sechs forschungsleitende Kernfragen (FF1 bis FF6) formuliert, die den logischen Bogen über die drei methodischen Hauptsäulen der Arbeit spannen:
+Zur systematischen Beantwortung dieser Leitfrage werden vier forschungsleitende Kernfragen (FF1 bis FF4) formuliert, die den logischen Bogen über die methodischen Hauptsäulen der Arbeit spannen:
 
 \begin{enumerate}
-    \item \textbf{Datenbasis \& Korpusqualität (Themenblock 1):}
-    \begin{itemize}
-        \item \textbf{FF1 (Quellenheterogenität \& Web-Rauschen):} \textit{Inwieweit existiert im deutschsprachigen Web eine hinreichende und qualitativ konsistente Datenbasis für Leichte Sprache, und welche Vorverarbeitungsschritte sind erforderlich, um domänenspezifisches Web-Rauschen (Boilerplate, Teaser, maschinelle Vorübersetzungen) zu eliminieren?}
-        \item \textbf{FF2 (Artikel- vs. Satzebene \& Informationsverlust):} \textit{Welche Vor- und Nachteile bietet eine artikelbasierte Modellierung gegenüber satzweiser Segmentierung für das Übersetzen in Leichte Sprache, und wie lässt sich der inhärente Konflikt zwischen syntaktischer Simplifikation und semantischem Informationsverlust (Faktenerhalt) quantifizieren?}
-    \end{itemize}
+    \item \textbf{FF1 (Datenbasis \& Korpusqualität -- Themenblock 1):}\\
+    \textit{Wie lässt sich aus heterogenen Webquellen ein qualitativ hochwertiges, artikelbasiertes Parallelkorpus für die deutsche Leichte Sprache automatisiert gewinnen, bereinigen und semantisch filtern?}
     
-    \item \textbf{Metrik \& Kontinuierliche Simplizitäts-Modellierung (Themenblock 2):}
-    \begin{itemize}
-        \item \textbf{FF3 (Kontinuierliche Regression ohne Zwischenkorpora):} \textit{Wie kann ein kontinuierliches Regressionsmodell zur Messung des Vereinfachungsgrads trainiert werden, wenn in realen Korpora ausschließlich binäre Extremzustände (Standardsprache vs. Leichte Sprache) ohne natürliche Zwischenstufen vorliegen?}
-    \end{itemize}
+    \item \textbf{FF2 (Metrik \& Sprachkomplexität -- Themenblock 2):}\\
+    \textit{Wie kann auf Basis rein bimodal vorliegender Sprachdaten eine stufenlose, differenzierbare Metrik zur referenzfreien Bewertung von Textsimplizität modelliert und validiert werden?}
 
-    \item \textbf{Übersetzung, Alignment \& Expertenvalidierung (Themenblock 3 \& Diskussion):}
-    \begin{itemize}
-        \item \textbf{FF4 (Dateneffizienz \& PEFT/LoRA):} \textit{In welchem Maße können vortrainierte Sequenz-zu-Sequenz-Modelle bei extrem begrenzter Datenmenge (~800--1.000 Artikelpaare) die komplexen syntaktischen und lexikalischen Regeln der Leichten Sprache erlernen, ohne in Memorization und Overfitting zu verfallen?}
-        \item \textbf{FF5 (Reward-Guided Alignment via DPO):} \textit{Inwiefern kann das Signal eines kontinuierlich trainierten Simplizitäts-Regressors genutzt werden, um ein vortrainiertes Übersetzungsmodell über Direct Preference Optimization (DPO) gezielt auf die Eigenheiten Leichter Sprache auszurichten, ohne die semantische Faktentreue zu kompromittieren?}
-        \item \textbf{FF6 (Expertenvalidierung \& Ökologische Validität):} \textit{Wie valide korrelieren automatisierte Bewertungsmetriken mit dem qualitativen Urteil von Fachkräften für Leichte Sprache (Lebenshilfe Kiel), und in welchem Maße sind Modellübersetzungen von professionellen Humanübersetzungen unterscheidbar?}
-    \end{itemize}
+    \item \textbf{FF3 (Übersetzungsmodellierung \& Alignment -- Themenblock 3):}\\
+    \textit{Inwieweit sind generative Sprachmodelle in der Lage, die Regeln der Leichten Sprache anhand eines automatisiert akquirierten Web-Datensatzes zu erlernen, und wie lassen sich diese Modelle mithilfe eines gelernten Reward-Signals gezielt weiter anpassen?}
+    
+    \item \textbf{FF4 (Expertenvalidierung \& Ökologische Validität -- Diskussion):}\\
+    \textit{Inwieweit stimmen die automatisierten Modell- und Metrikbewertungen mit dem qualitativen Urteil einer Fachkraft für Leichte Sprache (Lebenshilfe Kiel) in der Praxis überein?}
 \end{enumerate}
 
 \subsection{Aufbau der Arbeit}
 \label{sec:aufbau_der_arbeit}
 
-Die vorliegende Arbeit folgt einer logischen Struktur, die sich an den drei Säulen des entwickelten Übersetzungssystems orientiert:
-
-\begin{itemize}
-    \item \textbf{Kapitel 2 (Theoretischer Hintergrund)} legt das theoretische und linguistische Fundament. Es definiert das Konzept der Leichten Sprache und grenzt dieses formal sowie rechtlich von der Einfachen Sprache ab.
-    
-    \item \textbf{Kapitel 3 (Stand der Forschung)} stellt den aktuellen wissenschaftlichen Stand strukturiert entlang der drei Säulen Datenbasis, Komplexitätsmetriken und maschinelle Übersetzungsverfahren dar und leitet die bestehenden Forschungslücken ab.
-    
-    \item \textbf{Kapitel 4 (Themenblock 1: Datenbasis \& Korpus-Erstellung)} beschreibt die erste Stufe der Pipeline. Im Fokus steht das Crawling paralleler Webtexte, die domänenspezifische Datenbereinigung und die qualitative Filterung mittels semantischer Embeddings.
-    
-    \item \textbf{Kapitel 5 (Themenblock 2: Metrik \& Bewerten von Sprachkomplexität)} widmet sich der zweiten Stufe: der Entwicklung von Klassifikationsmodellen (BiLSTM vs. SBERT) und dem Entwurf einer \textit{Continuous MixUp Regression} zur stufenlosen Komplexitätsbewertung.
-    
-    \item \textbf{Kapitel 6 (Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning)} stellt das eigentliche Übersetzungsmodell vor. Hierbei werden die Implementierung des Supervised Fine-Tunings (SFT) sowie das Reward-Guided Fine-Tuning (DPO) zur Regeleinhaltung evaluiert.
-    
-    \item \textbf{Kapitel 7 (Diskussion \& Gesamtevaluation)} führt die Ergebnisse der drei Stufen zusammen, beantwortet systematisch die aufgeworfenen Forschungsfragen und beleuchtet kritisch die Systemrestriktionen sowie Fragen zur Faktentreue.
-    
-    \item \textbf{Kapitel 8 (Fazit \& Ausblick)} fasst die Kernergebnisse der Arbeit zusammen und gibt einen Ausblick auf zukünftige Forschungsarbeiten und praktische Anwendungsfelder.
-\end{itemize}
+Die vorliegende Arbeit gliedert sich in acht aufeinander aufbauende Abschnitte: Nach der Darlegung der linguistischen Grundlagen (Abschnitt~\ref{sec:theoretischer_hintergrund}) und des aktuellen Forschungsstands (Abschnitt~\ref{sec:stand_der_forschung}) bildet die dreistufige Übersetzungspipeline den methodischen Kern. Themenblock~1 (Abschnitt~\ref{sec:themenblock1_datenbasis}) widmet sich der automatisierten Akquise, Bereinigung und semantischen Qualitätssicherung des parallelen Web-Korpus. In Themenblock~2 (Abschnitt~\ref{sec:themenblock2_metrik}) werden die Konzeption und empirische Validierung der kontinuierlichen Komplexitätsmetrik dargelegt. Themenblock~3 (Abschnitt~\ref{sec:themenblock3_translation}) beschreibt das generative Übersetzungsmodell mittels Supervised Fine-Tuning, Reward-Guided DPO-Alignment und verblindeter Expertenvalidierung. Eine zusammenführende Diskussion mit systematischer Beantwortung der Forschungsfragen (Abschnitt~\ref{sec:diskussion}) sowie ein Fazit mit Ausblick (Abschnitt~\ref{sec:fazit_ausblick}) runden die Arbeit ab.

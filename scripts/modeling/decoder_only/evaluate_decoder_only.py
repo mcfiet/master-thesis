@@ -112,9 +112,8 @@ def score_text_style(text: str, model: nn.Module, vocab: Dict[str, int], device:
     tokens = re.findall(r"\b\w+\b", str(text).lower())
     indices = [vocab.get(t, 1) for t in tokens][:max_len]
     if not indices:
-        return 0.0
-    padded = indices + [0] * (max_len - len(indices))
-    tensor = torch.tensor([padded], dtype=torch.long).to(device)
+        indices = [0]
+    tensor = torch.tensor([indices], dtype=torch.long).to(device)
     with torch.no_grad():
         score = model(tensor).item()
     return float(score)

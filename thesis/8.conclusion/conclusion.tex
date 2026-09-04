@@ -1,3 +1,34 @@
 \subsection{Zusammenfassung der Kernergebnisse}
+\label{sec:fazit_kernergebnisse}
+
+Der Abbau sprachlicher Barrieren ist eine grundlegende Voraussetzung für gesellschaftliche Teilhabe, Chancengleichheit und selbstbestimmte Information. Insbesondere vor dem Hintergrund gesetzlicher Vorgaben wie dem Barrierefreiheitsstärkungsgesetz (BFSG) steht die Praxis vor der Herausforderung, komplexe Alltagstexte verlässlich und in großem Umfang in verständliche Leichte Sprache zu übertragen. Die vorliegende Masterarbeit hat hierfür ein in sich geschlossenes, modulares Framework entwickelt, optimiert und empirisch evaluiert, das den gesamten Prozess von der Datenakquise über die stufenlose Komplexitätsbewertung bis zum generativen Modell-Alignment umfasst.
+
+Die methodische Umsetzung und die empirischen Ergebnisse lassen sich anhand dreier zentraler Säulen zusammenfassen:
+
+\paragraph{1. Automatisierte Korpusgewinnung und Qualitätsfilterung:}
+Aus $12$ heterogenen Webquellen wurde ein artikelbasiertes Parallelkorpus für deutsche Leichte Sprache automatisiert aufgebaut. Durch den Einsatz von DOM-Content-Isolation, regelbasierten Filterkaskaden und einer semantischen Sweet-Spot-Filterung ($[0{,}60; 0{,}98]$) mittels Text-Embeddings konnten $860$ konsistente Artikelpaare gewonnen werden. Die Bereinigungsschritte eliminierten dominante Web-Verzerrungen wie stereotype Klickaufforderungen oder vorangestellte Rubriken-Kennungen vollständig und schufen eine robuste Trainingsgrundlage für alle nachfolgenden Modelle.
+
+\paragraph{2. Kontinuierliche Sprachkomplexitätsmetrik via MixUp:}
+Um die Einschränkungen klassischer Lesbarkeitsformeln zu überwinden, die bei grammatikalischen Regelbrüchen versagen, wurde ein neuronaler BiLSTM-MixUp-Regressor konzipiert. Durch das kontrollierte Mischen der Vektordarstellungen von Alltagssprache und Leichter Sprache lernt das Modell stufenlose Übergänge der Textschwere, ohne auf fehlerhafte synthetische Texte zurückgreifen zu müssen. Die Metrik erzielte auf dem unabhängigen Testset der Lebenshilfe eine hohe Rangtreue von fast $80\,\%$, korrelierte stark mit dem qualitativen Expertenurteil ($\rho = 0{,}6750$) und bewies eine stabile Generalisierungsfähigkeit auf externen Sprachkorpora wie MERLIN und TextComplexityDE.
+
+\paragraph{3. Zweistufige Modellierung und Regelschärfung via DPO:}
+In der Übersetzung zeigte sich eine komplementäre Arbeitsteilung zwischen überwachtem Feintuning (SFT) und Präferenzoptimierung (DPO). Während SFT das grundlegende syntaktische Gerüst etablierte und die Satzlänge von $12{,}50$ auf $7{,}61$ Wörter halbierte, schärfte das DPO-Alignment anhand des gelernten MixUp-Belohnungssignals die formale Regeleinhaltung gezielt nach. DPO reduzierte Passiv- und Genitivstrukturen auf unter $1\,\%$ und verbesserte die Lesbarkeit spürbar. Die verblindete Expertenstudie bestätigte diese systematische Qualitätssteigerung über alle Modellstufen hinweg (Alltagssprache $1{,}58 \to$ SFT $3{,}00 \to$ DPO $3{,}50 \to$ Goldstandard $3{,}92$).
+
+Zusammenfassend belegt die Arbeit die prinzipielle Funktionsfähigkeit einer autonomen, referenzfreien Übersetzungspipeline für deutsche Leichte Sprache. Das modulare System liefert den methodischen Nachweis, dass sich formale Vereinfachungsregeln durch zielgerichtete Präferenzoptimierung ohne manuellen Annotationsaufwand erfolgreich in generativen Sprachmodellen verankern lassen.
 
 \subsection{Ausblick \& Zukünftige Forschungsarbeiten}
+\label{sec:fazit_ausblick_zukunft}
+
+Aufbauend auf den Erkenntnissen und identifizierten Systemgrenzen dieser Arbeit ergeben sich für die zukünftige Forschung vier zentrale Entwicklungs- und Verbesserungspotenziale:
+
+\paragraph{1. Qualitätssteigerung und feingliedriges Alignment des Ausgangskorpus:}
+Die Skalierungsanalyse und die Expertenbewertung haben eindeutig gezeigt, dass die Qualität der Trainingsdaten der mit Abstand wirksamste Hebel für bessere Modellergebnisse ist. Der wichtigste nächste Schritt besteht daher im Aufbau noch präziser zusammengestellter Parallelkorpora mit feingliedrigem semantischem Satz- und Abschnitts-Alignment. Hochwertig ausgerichtete Textpaare, die frei von redaktionellen Unschärfen sind und den Inhalt des Originals exakt abbilden, ermöglichen es sowohl der Komplexitätsmetrik als auch den Übersetzungsmodellen, von Beginn an inhaltlich saubere und faktengetreue Vereinfachungsmuster zu erlernen.
+
+\paragraph{2. Erweiterung der Reward-Funktionen um NLI-basierte Faktentreue:}
+Die qualitative Fehleranalyse deckte auf, dass reine Embedding-Metriken blind für isolierte Faktenverzerrungen und erfundene Erklärungen bleiben. Um die inhaltliche Zuverlässigkeit generativer Übersetzungen abzusichern, müssen automatisierte Belohnungsfunktionen im DPO-Training künftig um Modelle zur natürlichen Sprachinferenz (Natural Language Inference, NLI) und Konsistenzprüfungen erweitert werden. Ein solches Mehrebenen-Signal kann inhaltliche Widersprüche und unbelegte Zusatzaussagen gezielt sanktionieren und so formale Einfachheit mit verlässlicher Faktentreue verbinden.
+
+\paragraph{3. Partizipative Verständnistests mit der realen Zielgruppe:}
+Während Fachexperten vor allem die formale Einhaltung linguistischer Regelwerke beurteilen, lässt sich die tatsächliche Verständlichkeit im Alltag nur im direkten Austausch mit den betroffenen Personen prüfen. Zukünftige Studien sollten daher empirische Lese- und Verständnistests mit Menschen mit Lernschwierigkeiten, geringer Lesekompetenz oder Deutsch als Zweitsprache durchführen. Nur so lässt sich das in der Praxis beobachtete binäre Abbruchverhalten bei komplexen Satzgefügen unter realen Lese-Bedingungen quantifizieren und für die Modelloptimierung nutzen.
+
+\paragraph{4. Layoutgestaltung und typografische Strukturierung:}
+Leichte Sprache definiert sich nicht allein über den Text, sondern umfasst essenzielle visuelle und typografische Vorgaben: Dazu gehören das Ein-Satz-pro-Zeile-Prinzip, optische Trennzeichen bei Sinnabschnitten sowie eine leserfreundliche typografische Gliederung. Wie bereits \citet{battisti2020corpus} gezeigt haben, spielen typografische Merkmale, Zeilenstrukturen und visuelle Absätze eine entscheidende Rolle für die Lesbarkeit und das Textverständnis. Ein wichtiger nächster Schritt für die Übersetzungspipeline besteht daher darin, neben der reinen Textvereinfachung auch die regelkonforme Zeilentrennung, Absatzformatierung und visuelle Textstrukturierung automatisiert zu generieren.

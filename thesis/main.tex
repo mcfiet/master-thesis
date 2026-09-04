@@ -16,6 +16,7 @@
 \RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
 \usepackage{amsmath, amssymb}
 \usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta, fit, backgrounds, calc}
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{acronym}
@@ -32,6 +33,7 @@
 \usepackage{caption}
 \pgfplotsset{compat=1.18}
 \usepackage{adjustbox}
+\usepackage[a4paper, margin=3.6cm]{geometry}
 
 \DeclareDelimFormat{nameyeardelim}{\addcomma\space}
 \providecommand{\apashortdash}{-}
@@ -44,11 +46,15 @@
 % \setcounter{secnumdepth}{4}
 
 \linespread{1.3} % setzt den Zeilenabstand nach oben auf 1,5
+\emergencystretch=3em % avoid overfull lines from long \texttt{} file names / URLs
 \begin{document}
 \pagenumbering{gobble} % Unterdrückt die Seitennummerierung
 \input{titlepage}
 \newpage
 \input{deckblatt}
+
+\newpage
+\input{abstract}
 
 \newpage
 \input{ai_declaration}
@@ -64,7 +70,7 @@
 
 \newpage
 \pagenumbering{arabic} % Beginnt die Nummerierung ab hier mit 1
-\section{Einleitung}
+\section{Einleitung}\label{sec:einleitung}
 \input{1.introduction/target}
 
 \newpage
@@ -76,23 +82,23 @@
 \input{2.relatedWork/standDerForschung}
 
 \newpage
-\section{Themenblock 1: Datenbasis \& Korpus-Erstellung}
+\section{Themenblock 1: Datenbasis \& Korpus-Erstellung}\label{sec:themenblock1_datenbasis}
 \input{3.materials/dataset}
 
 \newpage
-\section{Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}
+\section{Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}\label{sec:themenblock2_metrik}
 \input{4.methodology/_methodologies}
 
 \newpage
-\section{Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}
+\section{Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}\label{sec:themenblock3_translation}
 \input{5.experimentsAndResults/_experiments}
 
 \newpage
-\section{Diskussion \& Gesamtevaluation}
+\section{Diskussion \& Gesamtevaluation}\label{sec:diskussion}
 \input{6.discussion/discussion}
 
 \newpage
-\section{Fazit \& Ausblick}
+\section{Fazit \& Ausblick}\label{sec:fazit_ausblick}
 \input{8.conclusion/conclusion}
 
 

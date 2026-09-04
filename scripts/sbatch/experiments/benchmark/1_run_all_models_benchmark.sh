@@ -35,6 +35,7 @@ srun python scripts/evaluation/evaluate_all_models_benchmark.py \
     --reward_model_path "results/models/bilstm_mixup_regression.pt" \
     --reward_vocab_path "data/vocabs/mixup_vocab.json" \
     --sbert_model_name "jinaai/jina-embeddings-v2-base-de" \
+    --sbert_max_seq_len 1024 \
     --output_csv "results/evaluation/benchmark_5way_decoder_vs_encoder_decoder.csv" \
     --output_summary "results/evaluation/master_benchmark_summary.csv"
 

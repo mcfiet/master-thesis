@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – Experten-Evaluation Leichte Sprache</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --primary: #0f172a;
+      --primary-hover: #1e293b;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    /* Auth Screen */
+    #auth-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(248, 250, 252, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .auth-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 32px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      text-align: left;
+    }
+    .auth-card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .auth-card p { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 20px; }
+    .auth-input {
+      width: 100%;
+      padding: 10px 12px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+      font-family: var(--font-mono);
+      outline: none;
+    }
+    .auth-input:focus { border-color: var(--accent); }
+    .auth-btn {
+      width: 100%;
+      padding: 10px;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .auth-btn:hover { background: var(--primary-hover); }
+    .auth-error { color: var(--danger); font-size: 0.85rem; margin-top: 10px; display: none; }
+
+    /* Dashboard Layout */
+    .dashboard-container {
+      max-width: 1500px;
+      margin: 0 auto;
+      display: none;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header-title h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    .header-title p { color: var(--text-muted); font-size: 0.875rem; margin-top: 2px; }
+    .header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: #ffffff; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { background: #ffffff; color: #334155; border: 1px solid #cbd5e1; }
+    .btn-secondary:hover { background: #f1f5f9; }
+    .btn-danger { background: #ffffff; color: var(--danger); border: 1px solid #fecaca; }
+    .btn-danger:hover { background: #fef2f2; }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.025em; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; margin-top: 4px; color: var(--text); }
+    .stat-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 250px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-size: 0.875rem;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .filter-select {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-size: 0.875rem;
+      outline: none;
+      cursor: pointer;
+    }
+    .filter-select:focus { border-color: var(--accent); }
+
+    /* Data Table */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+    th {
+      background: #f8fafc;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+      font-size: 0.8rem;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+      color: #334155;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fafc; }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    .badge-dpo { background: #f3e8ff; color: #6b21a8; border-color: #e9d5ff; }
+    .badge-sft { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+    .badge-gold { background: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+    .badge-as { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+    .badge-ctrl { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+
+    .badge-web { background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; }
+    .badge-lh { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; }
+
+    .rating-badge {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .unrated { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15, 23, 42, 0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 24px;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      width: 100%;
+      max-width: 900px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+    }
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .text-box {
+      background: #f8fafc;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 14px;
+      white-space: pre-wrap;
+      color: #1e293b;
+    }
+    .text-box-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 6px;
+      letter-spacing: 0.025em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Password Overlay -->
+  <div id="auth-overlay">
+    <div class="auth-card">
+      <h2>Admin-Authentifizierung</h2>
+      <p>Bitte Admin-Passwort eingeben, um Schlüssel und Live-Scores einzusehen.</p>
+      <input type="password" id="admin-pass" class="auth-input" placeholder="Passwort..." autofocus>
+      <button onclick="authenticate()" class="auth-btn">Anmelden</button>
+      <div id="auth-error" class="auth-error">Falsches Passwort. Bitte erneut versuchen.</div>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Container -->
+  <div id="dashboard-container" class="dashboard-container">
+    <header>
+      <div class="header-title">
+        <h1>Master Thesis – Admin Dashboard</h1>
+        <p>Entblindete Übersicht aller 50 Items, Datenquellen, Modell-Scores & Experten-Bewertungen</p>
+      </div>
+      <div class="header-actions">
+        <a href="/" class="btn btn-secondary" target="_blank">Zur Experten-Web-App</a>
+        <button onclick="downloadRatingsJSON()" class="btn btn-secondary">Ratings JSON</button>
+        <button onclick="downloadMasterCSV()" class="btn btn-primary">Master CSV Export</button>
+        <button onclick="confirmResetRatings()" class="btn btn-danger">Ratings zurücksetzen</button>
+      </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Gesamtanzahl Items</div>
+        <div class="stat-value" id="stat-total-items">50</div>
+        <div class="stat-desc">Vollständig disjunkte Artikel</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Bewerteter Fortschritt</div>
+        <div class="stat-value" id="stat-rated-progress" style="color: var(--accent)">0 / 50</div>
+        <div class="stat-desc" id="stat-rated-pct">0 % abgeschlossen</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ø DPO R_style Score</div>
+        <div class="stat-value" id="stat-dpo-style">0.933</div>
+        <div class="stat-desc">mBART-50 DPO len1024</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ø SFT R_style Score</div>
+        <div class="stat-value" id="stat-sft-style">0.668</div>
+        <div class="stat-desc">mBART-50 SFT len1024</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ø Gold Standard Score</div>
+        <div class="stat-value" id="stat-gold-style" style="color: var(--success)">0.850</div>
+        <div class="stat-desc">Menschliche Referenz</div>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <input type="text" id="search-input" class="search-input" placeholder="Suche nach Item-ID, Text oder Quelle..." oninput="filterTable()">
+      <select id="filter-condition" class="filter-select" onchange="filterTable()">
+        <option value="">Alle Bedingungen (50 Items)</option>
+        <option value="mBART_DPO">mBART DPO (12x)</option>
+        <option value="mBART_SFT">mBART SFT (12x)</option>
+        <option value="Gold_Standard_LS">Gold Standard LS (12x)</option>
+        <option value="AS_Original">AS Original (12x)</option>
+        <option value="Control">Kontrollen (2x)</option>
+      </select>
+      <select id="filter-domain" class="filter-select" onchange="filterTable()">
+        <option value="">Alle Domänen</option>
+        <option value="In-Domain Held-Out">Web-Korpus Held-Out (30x)</option>
+        <option value="Out-of-Domain">Lebenshilfe Out-of-Domain (18x)</option>
+        <option value="Control">Kalibrierung (2x)</option>
+      </select>
+      <select id="filter-status" class="filter-select" onchange="filterTable()">
+        <option value="">Alle Status</option>
+        <option value="rated">Bereits bewertet</option>
+        <option value="unrated">Noch offen</option>
+      </select>
+    </div>
+
+    <!-- Data Table -->
+    <div class="table-container">
+      <table id="master-table">
+        <thead>
+          <tr>
+            <th>Item-ID</th>
+            <th>Bedingung</th>
+            <th>Herkunft / Domäne</th>
+            <th>R_style</th>
+            <th>R_sem (AS)</th>
+            <th>Flesch</th>
+            <th>LIX</th>
+            <th>Wörter</th>
+            <th>Experten-Note</th>
+            <th>Fehler-Tags</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Rows will be injected here dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Detail Text Modal -->
+  <div id="text-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <h2 id="modal-item-id" style="font-size: 1.1rem; font-weight: 700; color: var(--text);">ITEM_XX</h2>
+          <span id="modal-condition-badge" class="badge">Condition</span>
+          <span id="modal-domain-badge" class="badge">Domain</span>
+        </div>
+        <button onclick="closeModal()" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;">Schließen</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-box">
+          <div class="text-box-title">Präsentierter Text</div>
+          <div id="modal-eval-text"></div>
+        </div>
+        <div class="text-box">
+          <div class="text-box-title">Original Alltagssprache (AS)</div>
+          <div id="modal-as-text" style="color: #475569;"></div>
+        </div>
+        <div class="text-box">
+          <div class="text-box-title">Gold-Standard (Referenz)</div>
+          <div id="modal-gold-text" style="color: #15803d;"></div>
+        </div>
+        <div class="text-box" style="background: #fffbeb; border-color: #fef3c7;">
+          <div class="text-box-title" style="color: #92400e;">Experten-Kommentar</div>
+          <div id="modal-comment" style="font-style: italic; color: #78350f;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let adminToken = "";
+    let masterData = [];
+    let liveRatings = {};
+
+    document.getElementById('admin-pass').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') authenticate();
+    });
+
+    async function authenticate() {
+      const pass = document.getElementById('admin-pass').value;
+      const errorDiv = document.getElementById('auth-error');
+      
+      try {
+        const res = await fetch(`/api/admin_data?token=${encodeURIComponent(pass)}`);
+        if (!res.ok) {
+          errorDiv.style.display = 'block';
+          return;
+        }
+        const data = await res.json();
+        adminToken = pass;
+        masterData = data.items || [];
+        liveRatings = data.ratings || {};
+
+        document.getElementById('auth-overlay').style.display = 'none';
+        document.getElementById('dashboard-container').style.display = 'block';
+        
+        renderDashboard();
+      } catch (err) {
+        errorDiv.textContent = "Verbindungsfehler zum Server.";
+        errorDiv.style.display = 'block';
+      }
+    }
+
+    function renderDashboard() {
+      updateStats();
+      renderTable(masterData);
+    }
+
+    function updateStats() {
+      const total = masterData.length;
+      let ratedCount = 0;
+
+      masterData.forEach(item => {
+        const r = liveRatings[item.blinded_item_id];
+        if (r && (r.simplicity_score !== undefined || r.style_score !== undefined)) {
+          ratedCount++;
+        }
+      });
+
+      document.getElementById('stat-total-items').textContent = total;
+      document.getElementById('stat-rated-progress').textContent = `${ratedCount} / ${total}`;
+      const pct = total > 0 ? Math.round((ratedCount / total) * 100) : 0;
+      document.getElementById('stat-rated-pct').textContent = `${pct} % abgeschlossen`;
+    }
+
+    function getConditionBadge(cond) {
+      if (cond === 'mBART_DPO') return `<span class="badge badge-dpo">mBART DPO</span>`;
+      if (cond === 'mBART_SFT') return `<span class="badge badge-sft">mBART SFT</span>`;
+      if (cond === 'Gold_Standard_LS') return `<span class="badge badge-gold">Gold Standard LS</span>`;
+      if (cond === 'AS_Original') return `<span class="badge badge-as">AS Original</span>`;
+      return `<span class="badge badge-ctrl">${cond}</span>`;
+    }
+
+    function renderTable(items) {
+      const tbody = document.getElementById('table-body');
+      tbody.innerHTML = '';
+
+      items.forEach(item => {
+        const rating = liveRatings[item.blinded_item_id] || {};
+        const score = rating.simplicity_score || rating.style_score;
+        const flags = rating.errors || (rating.flags ? Object.keys(rating.flags).filter(k => rating.flags[k]) : []);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-family: var(--font-mono); font-weight: 600; color: #0f172a;">${item.blinded_item_id}</td>
+          <td>${getConditionBadge(item.condition)}</td>
+          <td>
+            <span class="badge ${item.source_domain === 'lebenshilfe' ? 'badge-lh' : 'badge-web'}">
+              ${item.domain_type || item.source_domain}
+            </span>
+          </td>
+          <td style="font-family: var(--font-mono); font-weight: 600; color: ${item.r_style > 0.6 ? 'var(--success)' : (item.r_style > 0.2 ? 'var(--text)' : 'var(--text-muted)')};">
+            ${item.r_style !== undefined ? item.r_style.toFixed(3) : '-'}
+          </td>
+          <td style="font-family: var(--font-mono);">${item.r_sem_as !== undefined ? item.r_sem_as.toFixed(3) : '-'}</td>
+          <td style="font-family: var(--font-mono);">${item.flesch_de !== undefined ? item.flesch_de.toFixed(1) : '-'}</td>
+          <td style="font-family: var(--font-mono);">${item.lix !== undefined ? item.lix.toFixed(1) : '-'}</td>
+          <td>${item.word_count || '-'}</td>
+          <td>
+            ${score ? `<span class="rating-badge">${score} / 5</span>` : `<span class="unrated">Offen</span>`}
+          </td>
+          <td>
+            ${flags.length > 0 ? flags.map(f => `<span class="badge" style="background:#fef2f2; color:#991b1b; border: 1px solid #fecaca; margin-right:4px;">${f}</span>`).join('') : '<span style="color:var(--text-muted); font-size:0.8rem;">Keine</span>'}
+          </td>
+          <td>
+            <button onclick="openModal('${item.blinded_item_id}')" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.75rem;">
+              Details
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterTable() {
+      const search = document.getElementById('search-input').value.toLowerCase();
+      const condFilter = document.getElementById('filter-condition').value;
+      const domainFilter = document.getElementById('filter-domain').value;
+      const statusFilter = document.getElementById('filter-status').value;
+
+      const filtered = masterData.filter(item => {
+        const rating = liveRatings[item.blinded_item_id] || {};
+        const isRated = (rating.simplicity_score !== undefined || rating.style_score !== undefined);
+
+        if (search) {
+          const matchId = item.blinded_item_id.toLowerCase().includes(search);
+          const matchText = (item.evaluation_text || "").toLowerCase().includes(search);
+          const matchSrc = (item.source_article_id || "").toLowerCase().includes(search);
+          if (!matchId && !matchText && !matchSrc) return false;
+        }
+
+        if (condFilter && !item.condition.includes(condFilter)) return false;
+        if (domainFilter && item.domain_type !== domainFilter) return false;
+        if (statusFilter === 'rated' && !isRated) return false;
+        if (statusFilter === 'unrated' && isRated) return false;
+
+        return true;
+      });
+
+      renderTable(filtered);
+    }
+
+    function openModal(itemId) {
+      const item = masterData.find(x => x.blinded_item_id === itemId);
+      if (!item) return;
+
+      const rating = liveRatings[itemId] || {};
+
+      document.getElementById('modal-item-id').textContent = `${item.blinded_item_id} (${item.source_article_id})`;
+      document.getElementById('modal-condition-badge').innerHTML = getConditionBadge(item.condition);
+      document.getElementById('modal-domain-badge').textContent = item.domain_type || item.source_domain;
+      document.getElementById('modal-eval-text').textContent = item.evaluation_text || "";
+      document.getElementById('modal-as-text').textContent = item.source_text_as || "Kein AS Quelltext";
+      document.getElementById('modal-gold-text').textContent = item.target_text_ls_gold || "Keine Referenz";
+      document.getElementById('modal-comment').textContent = rating.comment ? `„${rating.comment}“` : "Kein Kommentar hinterlegt.";
+
+      document.getElementById('text-modal').style.display = 'flex';
+    }
+
+    function closeModal(e) {
+      if (!e || e.target === document.getElementById('text-modal')) {
+        document.getElementById('text-modal').style.display = 'none';
+      }
+    }
+
+    function downloadRatingsJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(liveRatings, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `expert_eval_ratings_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    function downloadMasterCSV() {
+      window.open(`/api/export_master_csv?token=${encodeURIComponent(adminToken)}`, '_blank');
+    }
+
+    async function confirmResetRatings() {
+      const confirmPass = prompt("Warnung: Möchtest du wirklich alle gespeicherten Experten-Bewertungen zurücksetzen?\n\nBitte gib zur Bestätigung das Admin-Passwort ein:");
+      if (!confirmPass) return;
+
+      try {
+        const res = await fetch(`/api/admin/reset_ratings?token=${encodeURIComponent(confirmPass)}`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ password: confirmPass })
+        });
+
+        if (!res.ok) {
+          alert("Fehler: Falsches Admin-Passwort. Zurücksetzen abgebrochen.");
+          return;
+        }
+
+        liveRatings = {};
+        localStorage.removeItem('expert_eval_ratings');
+        alert("Alle Bewertungen wurden erfolgreich zurückgesetzt. (Ein automatisches Backup wurde auf dem Server gesichert).");
+        renderDashboard();
+      } catch (err) {
+        alert("Fehler beim Zurücksetzen: " + err);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -184,7 +184,9 @@ def main():
                 for s in doc.sents:
                     toks = [t.text.lower() for t in s if not t.is_space]
                     if toks:
-                        enc = [vocabs["sent"].get(t, 1) for t in toks][:100] + [0] * (100 - len(toks))
+                        enc = [vocabs["sent"].get(t, 1) for t in toks][:100]
+                        if not enc:
+                            enc = [0]
                         with torch.no_grad():
                             p = torch.sigmoid(models["sent"](torch.tensor([enc]).to(device)).squeeze()).item()
                         probs.append(p)
@@ -207,8 +209,8 @@ def main():
             if length_key in models:
                 ls_toks = [t.text.lower() for t in ls_doc if not t.is_space][:max_l]
                 as_toks = [t.text.lower() for t in as_doc if not t.is_space][:max_l]
-                enc_l = [vocabs[length_key].get(t, 1) for t in ls_toks] + [0] * (max_l - len(ls_toks))
-                enc_a = [vocabs[length_key].get(t, 1) for t in as_toks] + [0] * (max_l - len(as_toks))
+                enc_l = [vocabs[length_key].get(t, 1) for t in ls_toks] or [0]
+                enc_a = [vocabs[length_key].get(t, 1) for t in as_toks] or [0]
                 with torch.no_grad():
                     p_ls = torch.sigmoid(models[length_key](torch.tensor([enc_l]).to(device)).squeeze()).item()
                     p_as = torch.sigmoid(models[length_key](torch.tensor([enc_a]).to(device)).squeeze()).item()

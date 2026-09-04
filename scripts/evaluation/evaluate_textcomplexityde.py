@@ -212,24 +212,21 @@ def main():
         model.load_state_dict(st)
         model.eval()
 
-        tokenized = []
-        for s in sentences:
-            doc = nlp(str(s or ""))
-            toks = [t.text.lower() for t in doc if not t.is_space]
-            enc = [vocab.get(t, 1) for t in toks][:max_len]
-            if not enc: enc = [0]
-            tokenized.append(enc)
-
-        padded = np.zeros((len(sentences), max_len), dtype=np.int64)
-        for i, seq in enumerate(tokenized):
-            padded[i, :len(seq)] = seq
-
-        tensor_x = torch.tensor(padded, dtype=torch.long, device=device)
+        preds_list = []
         with torch.no_grad():
-            if m_type == "reg":
-                preds = model(tensor_x).cpu().numpy()
-            else:
-                preds = torch.sigmoid(model(tensor_x)).cpu().numpy()
+            for s in sentences:
+                doc = nlp(str(s or ""))
+                toks = [t.text.lower() for t in doc if not t.is_space]
+                enc = [vocab.get(t, 1) for t in toks][:max_len]
+                if not enc:
+                    enc = [0]
+                inp = torch.tensor([enc], dtype=torch.long, device=device)
+                if m_type == "reg":
+                    p = model(inp).squeeze().item()
+                else:
+                    p = torch.sigmoid(model(inp)).squeeze().item()
+                preds_list.append(p)
+        preds = np.array(preds_list)
 
         df_out[f"Pred_{name.replace(' ', '_')}"] = preds
         summary_records.append(evaluate_series(preds, y_simp, y_comp, y_und, y_lex, name, cat))

@@ -124,8 +124,9 @@ def main(output_csv: str = "results/evaluation/eval_sentence_classifier.csv", ou
     
     def predict_sentence(tokens):
         encoded = vocab.encode(tokens)[:MAX_SEQ_LEN]
-        padded = encoded + [0] * (MAX_SEQ_LEN - len(encoded))
-        tensor = torch.tensor([padded], dtype=torch.long).to(DEVICE)
+        if not encoded:
+            encoded = [0]
+        tensor = torch.tensor([encoded], dtype=torch.long).to(DEVICE)
         
         with torch.no_grad():
             output = model(tensor).squeeze()

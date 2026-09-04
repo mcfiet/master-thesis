@@ -1,14 +1,24 @@
 \babel@toc {ngerman}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Übersicht des akquirierten Rohdatenbestands (Stufe 1 der Pipeline) nach Quellen.}}{21}{table.caption.3}%
-\contentsline {table}{\numberline {2}{\ignorespaces Übersicht des Pipeline-Funnels von Stufe 1 (Rohdaten) zu Stufe 2 (Bereinigt \& Normalisiert) nach Quellen.}}{27}{table.caption.4}%
-\contentsline {table}{\numberline {3}{\ignorespaces Übersicht der quantitativen Korpusstatistiken des bereinigten Master-Datensatzes ($N=830$).}}{32}{table.caption.5}%
-\contentsline {table}{\numberline {4}{\ignorespaces Benchmark der Klassifikationsmodelle über Granularitätsebenen und Sequenzlängen auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze).}}{42}{table.caption.14}%
-\contentsline {table}{\numberline {5}{\ignorespaces Längen-Benchmark der BiLSTM MixUp Regressoren auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}}{48}{table.caption.18}%
-\contentsline {table}{\numberline {6}{\ignorespaces Gesamtübersicht aller in Themenblock 2 evaluierten Modellansätze auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}}{57}{table.caption.23}%
-\contentsline {table}{\numberline {7}{\ignorespaces Gesamtevaluation aller Modellfamilien auf dem TextComplexityDE-Benchmark ($N = 1.000$ Sätze).}}{76}{table.caption.32}%
-\contentsline {table}{\numberline {8}{\ignorespaces Gesamtevaluation aller Modellfamilien auf dem MERLIN CEFR-Benchmark ($N = 1.033$ Dokumente).}}{79}{table.caption.36}%
-\contentsline {table}{\numberline {9}{\ignorespaces Mittelwerte der vorhergesagten Modell-Scores über die 6 CEFR-Stufen im MERLIN-Korpus zur Überprüfung der Monotonie ($A1 \to C2$).}}{79}{table.caption.37}%
-\contentsline {table}{\numberline {10}{\ignorespaces In-Domain-Klassifikationsgüte (Balanced Accuracy) des BiLSTM in Abhängigkeit vom semantischen Similarity-Bereich und der Granularitätsebene auf dem internen Test-Split.}}{80}{table.caption.41}%
-\contentsline {table}{\numberline {11}{\ignorespaces Multi-Seed-Stabilitäts-Benchmark aller Modellvarianten über $K=5$ Zufalls-Seeds ($42, 123, 456, 789, 1024$) auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}}{81}{table.caption.45}%
-\contentsline {table}{\numberline {12}{\ignorespaces Gesamtevaluation der vier MixUp-Trainings- und Sampling-Strategien auf dem internen Test-Split (In-Domain) und dem Lebenshilfe-Goldstandard (Out-of-Domain).}}{86}{table.caption.48}%
-\contentsline {table}{\numberline {13}{\ignorespaces Gesamtevaluation aller Regressoren und linguistischen Baselines auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente).}}{91}{table.caption.54}%
+\contentsline {table}{\numberline {1}{\ignorespaces Übersicht des akquirierten Rohdatenbestands nach Quellen}}{18}{table.caption.4}%
+\contentsline {table}{\numberline {2}{\ignorespaces Übersicht der quantitativen Korpusstatistiken}}{25}{table.caption.5}%
+\contentsline {table}{\numberline {3}{\ignorespaces Benchmark der Klassifikationsmodelle auf dem Lebenshilfe-Goldstandard}}{31}{table.caption.10}%
+\contentsline {table}{\numberline {4}{\ignorespaces Längen-Benchmark der BiLSTM MixUp Regressoren auf dem Lebenshilfe-Goldstandard}}{37}{table.caption.14}%
+\contentsline {table}{\numberline {5}{\ignorespaces Gesamtübersicht aller in Themenblock 2 evaluierten Modellansätze}}{44}{table.caption.21}%
+\contentsline {table}{\numberline {6}{\ignorespaces Einfluss der Token-Kontextlänge auf die SFT-Generierungsqualität}}{49}{table.caption.26}%
+\contentsline {table}{\numberline {7}{\ignorespaces Untersuchung der Gewichtung bei der kombinierten Bewertung auf dem Lebenshilfe-Testset}}{53}{table.caption.28}%
+\contentsline {table}{\numberline {8}{\ignorespaces Regularisierungsparameter $\beta $ im Lebenshilfe-Test}}{55}{table.caption.30}%
+\contentsline {table}{\numberline {9}{\ignorespaces Ergebnisse der empirischen Experten-Evaluation}}{61}{table.caption.34}%
+\contentsline {table}{\numberline {10}{\ignorespaces Evaluation auf dem TextComplexityDE-Benchmark}}{84}{table.caption.59}%
+\contentsline {table}{\numberline {11}{\ignorespaces Evaluation der Regressoren und Baselines auf MERLIN}}{86}{table.caption.62}%
+\contentsline {table}{\numberline {12}{\ignorespaces Monotonie-Prüfung der Regressoren über 6 CEFR-Niveaustufen auf MERLIN}}{86}{table.caption.63}%
+\contentsline {table}{\numberline {13}{\ignorespaces In-Domain-Klassifikationsgüte über Similarity-Bereiche}}{88}{table.caption.65}%
+\contentsline {table}{\numberline {14}{\ignorespaces Multi-Seed-Stabilitäts-Benchmark der Klassifikatoren}}{88}{table.caption.69}%
+\contentsline {table}{\numberline {15}{\ignorespaces Gesamtevaluation der vier MixUp-Trainings- und Sampling-Strategien}}{92}{table.caption.72}%
+\contentsline {table}{\numberline {16}{\ignorespaces Gesamtevaluation aller Regressoren und linguistischen Baselines}}{95}{table.caption.77}%
+\contentsline {table}{\numberline {17}{\ignorespaces Systematisches Skalierungsverhalten des SFT-Modells}}{98}{table.caption.80}%
+\contentsline {table}{\numberline {18}{\ignorespaces Statistische Kenngrößen des DPO-Präferenzdatensatzes}}{99}{table.caption.81}%
+\contentsline {table}{\numberline {19}{\ignorespaces Vollständiger Skalierungsvergleich von SFT und DPO über Kontextlängen}}{100}{table.caption.82}%
+\contentsline {table}{\numberline {20}{\ignorespaces Detaillierter Vergleich der linguistischen Regeltreue}}{101}{table.caption.83}%
+\contentsline {table}{\numberline {21}{\ignorespaces Hyperparameter der neuronalen Bewertungs- und Regressionsmodelle}}{102}{table.caption.84}%
+\contentsline {table}{\numberline {22}{\ignorespaces Hyperparameter der generativen Übersetzungsmodelle}}{102}{table.caption.85}%
+\contentsline {table}{\numberline {23}{\ignorespaces Ergebnisse des synthetischen 256-Token Regel-Benchmarks}}{103}{table.caption.86}%

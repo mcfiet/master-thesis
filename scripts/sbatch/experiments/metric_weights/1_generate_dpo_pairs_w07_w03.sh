@@ -1,12 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=1_gen_dpo_w07_w03
 #SBATCH --partition=research
-#SBATCH --time=12:00:00
+#SBATCH --time=06:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/experiments/metric_weights/%x_%j.out
-#SBATCH --error=results/logs/experiments/metric_weights/%x_%j.err
+#SBATCH --array=0-3
+#SBATCH --output=results/logs/experiments/metric_weights/%x_%A_%a.out
+#SBATCH --error=results/logs/experiments/metric_weights/%x_%A_%a.err
 
 set -e
 
@@ -17,11 +18,14 @@ elif [ -f "$HOME/master-thesis/.venv/bin/activate" ]; then
     source "$HOME/master-thesis/.venv/bin/activate"
 fi
 
-
 mkdir -p data/metric_weights_exp
 mkdir -p results/logs/experiments/metric_weights results/plots/experiments/metric_weights results/evaluation
 
-echo "=== Generating DPO Preference Pairs (w_style=0.7, w_sem=0.3) ==="
+NUM_SHARDS=4
+SHARD_ID=${SLURM_ARRAY_TASK_ID:-0}
+OUTPUT_FILE="data/metric_weights_exp/dpo_pairs_w07_w03_shard_${SHARD_ID}.jsonl"
+
+echo "=== Generating DPO Preference Pairs w07_w03 (Shard ${SHARD_ID}/${NUM_SHARDS}) ==="
 date
 
 srun python scripts/modeling/generate_dpo_dataset.py \
@@ -43,9 +47,11 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --w_sem 0.3 \
     --min_score_margin 0.05 \
     --batch_size 16 \
-    --output_file "data/metric_weights_exp/dpo_pairs_w07_w03.jsonl" \
-    --val_split_ratio 0.15 \
+    --num_shards ${NUM_SHARDS} \
+    --shard_id ${SHARD_ID} \
+    --output_file "${OUTPUT_FILE}" \
+    --val_split_ratio 0.0 \
     --resume
 
-echo "=== Generation Completed ==="
+echo "=== Shard ${SHARD_ID} Completed ==="
 date

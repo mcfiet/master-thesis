@@ -102,8 +102,9 @@ def main(output_csv: str = "results/evaluation/eval_article_classifier.csv", out
     def predict(text):
         tokens = [t.text.lower() for t in nlp(text) if not t.is_space]
         encoded = vocab.encode(tokens)[:MAX_SEQ_LEN]
-        padded = encoded + [0] * (MAX_SEQ_LEN - len(encoded))
-        tensor = torch.tensor([padded], dtype=torch.long).to(DEVICE)
+        if not encoded:
+            encoded = [0]
+        tensor = torch.tensor([encoded], dtype=torch.long).to(DEVICE)
         
         with torch.no_grad():
             output = model(tensor).squeeze()

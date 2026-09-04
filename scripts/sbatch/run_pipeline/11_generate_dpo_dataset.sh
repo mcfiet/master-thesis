@@ -1,12 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=11_generate_dpo_dataset
 #SBATCH --partition=research
-#SBATCH --time=12:00:00
+#SBATCH --time=06:00:00
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:mig_24gb:1
-#SBATCH --output=results/logs/run_pipeline/%x_%j.out
-#SBATCH --error=results/logs/run_pipeline/%x_%j.err
+#SBATCH --array=0-3
+#SBATCH --output=results/logs/run_pipeline/%x_%A_%a.out
+#SBATCH --error=results/logs/run_pipeline/%x_%A_%a.err
 
 set -e
 
@@ -21,8 +22,11 @@ mkdir -p data/corpus
 mkdir -p results/logs/run_pipeline results/plots/run_pipeline results/evaluation
 unset SLURM_MEM_PER_CPU SLURM_MEM_PER_GPU
 
+NUM_SHARDS=4
+SHARD_ID=${SLURM_ARRAY_TASK_ID:-0}
+OUTPUT_FILE="data/corpus/dpo_pairs_mixup_shard_${SHARD_ID}.jsonl"
 
-echo "=== Start DPO-Präferenzdatengenerierung auf ungesehenem 10kGNAD Korpus ==="
+echo "=== Start DPO-Präferenzdatengenerierung (Shard ${SHARD_ID}/${NUM_SHARDS}) ==="
 date
 
 srun python scripts/modeling/generate_dpo_dataset.py \
@@ -44,9 +48,11 @@ srun python scripts/modeling/generate_dpo_dataset.py \
     --w_style 0.5 \
     --w_sem 0.5 \
     --batch_size 8 \
-    --output_file "data/corpus/dpo_pairs_mixup.jsonl" \
-    --val_split_ratio 0.15 \
+    --num_shards ${NUM_SHARDS} \
+    --shard_id ${SHARD_ID} \
+    --output_file "${OUTPUT_FILE}" \
+    --val_split_ratio 0.0 \
     --resume
 
-echo "=== DPO Datengenerierung abgeschlossen ==="
+echo "=== Shard ${SHARD_ID} abgeschlossen ==="
 date
