@@ -123,34 +123,18 @@ graph TD
 
 ---
 
-## Web-Applikation (Frontend & Backend)
+## Web-Applikation (Experten-Evaluation)
 
-Die Web-Applikation bietet eine intuitive Schnittstelle, um Texte bezüglich ihrer sprachlichen Komplexität zu evaluieren und diese mithilfe der feingetunten Modelle in Leichte Sprache zu übersetzen.
-
-### 1. FastAPI-Backend starten
-
-Das Backend lädt die trainierten Regressor-Modelle (MixUp & Synthetic) sowie die Übersetzungsmodelle und stellt entsprechende API-Endpunkte zur Verfügung.
+Für die Experten-Evaluation steht ein eigenständiger Webserver mit verblindetem Rating-Interface und Admin-Dashboard bereit (`scripts/evaluation/serve_expert_app.py`):
 
 ```bash
-# Aus dem Hauptverzeichnis ausführen
-uvicorn web.app:app --host 127.0.0.1 --port 8000 --reload
+# Server für Experten-Evaluation starten
+python scripts/evaluation/serve_expert_app.py --port 8085
 ```
 
-- **API-Status:** `http://127.0.0.1:8000/api/status`
-- **Evaluation:** `/api/evaluate` (Berechnet Einfachheits-Scores)
-- **Übersetzung:** `/api/translate` (Übersetzt AS in LS)
-
-### 2. Next.js-Frontend starten
-
-Das moderne UI ermöglicht die Eingabe von Alltagssprache, zeigt die berechneten Komplexitätsmetriken und liefert die Übersetzung.
-
-```bash
-cd web/frontend
-npm install
-npm run dev
-```
-
-Das Frontend ist anschließend unter `http://localhost:3000` erreichbar.
+- **Experten-Interface:** `http://localhost:8085/` (Verblindete Modell-Bewertung)
+- **Admin-Dashboard:** `http://localhost:8085/admin` (Passwort-geschützt: Side-by-Side-Analyse & Live-Statistiken)
+- **Ratings-Speicherung:** `results/expert_eval/expert_eval_ratings.json`
 
 ---
 
