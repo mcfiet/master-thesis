@@ -36,14 +36,14 @@ SOURCE_CONFIGS = [
             });
             return target ? (target.closest('p') || target) : null;
         }""",
-        "ls_badge_text": "🎯 Alignment-Link: Referenz auf Standard-Fachartikel (AS)",
+        "ls_badge_text": "Alignment-Link: Referenz auf Standard-Fachartikel (AS)",
         "as_selector_js": """() => {
             return document.querySelector('h1.article-header__title') || 
                    document.querySelector('.article-header') || 
                    document.querySelector('h1') || 
                    document.querySelector('article');
         }""",
-        "as_badge_text": "🎯 Standardsprachlicher Fachartikel (AS-Zielseite)"
+        "as_badge_text": "Standardsprachlicher Fachartikel (AS-Zielseite)"
     },
     {
         "id": "behindertenbeauftragter",
@@ -59,7 +59,7 @@ SOURCE_CONFIGS = [
                    document.querySelector('.navServiceMeta') ||
                    document.querySelector('.c-language-switch');
         }""",
-        "ls_badge_text": "🎯 Alignment-Wechsler: Umschaltung auf Alltagssprache (AS)",
+        "ls_badge_text": "Alignment-Wechsler: Umschaltung auf Alltagssprache (AS)",
         "ls_scroll_top": True,
         "as_selector_js": """() => {
             return document.querySelector('li.navServiceLS') || 
@@ -67,7 +67,7 @@ SOURCE_CONFIGS = [
                    document.querySelector('.navServiceMeta') || 
                    document.querySelector('header');
         }""",
-        "as_badge_text": "🎯 Umschalter zu Leichter Sprache (LS) aus AS-Sicht",
+        "as_badge_text": "Umschalter zu Leichter Sprache (LS) aus AS-Sicht",
         "as_scroll_top": True
     },
     {
@@ -96,7 +96,7 @@ SOURCE_CONFIGS = [
                 pAS.style.padding = '8px';
                 
                 const bAS = document.createElement('div');
-                bAS.innerText = '🎯 Standardsprache (AS-Absatz)';
+                bAS.innerText = 'Standardsprache (AS-Absatz)';
                 bAS.style.position = 'absolute';
                 bAS.style.top = '-30px';
                 bAS.style.left = '0';
@@ -120,7 +120,7 @@ SOURCE_CONFIGS = [
                 pLS.style.marginTop = '35px';
                 
                 const bLS = document.createElement('div');
-                bLS.innerText = '🎯 Leichte Sprache (LS-Absatz)';
+                bLS.innerText = 'Leichte Sprache (LS-Absatz)';
                 bLS.style.position = 'absolute';
                 bLS.style.top = '-30px';
                 bLS.style.left = '0';
@@ -133,7 +133,7 @@ SOURCE_CONFIGS = [
                 pLS.appendChild(bLS);
             }
         }""",
-        "ls_badge_text": "🎯 Parallele Struktur: Blau = AS-Absatz, Grün = LS-Absatz"
+        "ls_badge_text": "Parallele Struktur: Blau = AS-Absatz, Grün = LS-Absatz"
     },
     {
         "id": "hamburg",
@@ -148,14 +148,14 @@ SOURCE_CONFIGS = [
                    document.querySelector('.km1-language-bar__btn-wrapper') || 
                    document.querySelector('a.original-text');
         }""",
-        "ls_badge_text": "🎯 Alignment-Bar: 'Originaltext'-Button zum Fachartikel",
+        "ls_badge_text": "Alignment-Bar: 'Originaltext'-Button zum Fachartikel",
         "as_selector_js": """() => {
             return document.querySelector('.km1-language-bar') || 
                    document.querySelector('h1.km1-heading') || 
                    document.querySelector('h1') || 
                    document.querySelector('.km1-article-header');
         }""",
-        "as_badge_text": "🎯 Standardsprachlicher Fachartikel (AS-Gegenstück)"
+        "as_badge_text": "Standardsprachlicher Fachartikel (AS-Gegenstück)"
     },
     {
         "id": "hannover",
@@ -170,7 +170,7 @@ SOURCE_CONFIGS = [
                    document.querySelector('a.icon-schwere-sprache-dkl') || 
                    Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('alltagssprache'));
         }""",
-        "ls_badge_text": "🎯 Alignment-Button: 'Zur Seite in Alltagssprache'",
+        "ls_badge_text": "Alignment-Button: 'Zur Seite in Alltagssprache'",
         "as_selector_js": """() => {
             return document.querySelector('a.leicht') || 
                    document.querySelector('a.icon-leichte-sprache-dkl') || 
@@ -178,7 +178,7 @@ SOURCE_CONFIGS = [
                    document.querySelector('h1') || 
                    document.querySelector('article');
         }""",
-        "as_badge_text": "🎯 Standardsprachlicher Artikel (AS-Gegenstück)"
+        "as_badge_text": "Standardsprachlicher Artikel (AS-Gegenstück)"
     },
     {
         "id": "koeln",
@@ -192,14 +192,14 @@ SOURCE_CONFIGS = [
             const link = Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('alltags-sprache lesen'));
             return link ? (link.closest('p') || link) : null;
         }""",
-        "ls_badge_text": "🎯 Alignment-Link: 'Alltags-Sprache lesen'",
+        "ls_badge_text": "Alignment-Link: 'Alltags-Sprache lesen'",
         "as_selector_js": """() => {
             return document.querySelector('h1#inhalt') || 
                    document.querySelector('h1') || 
                    document.querySelector('.infobox') || 
                    document.querySelector('main');
         }""",
-        "as_badge_text": "🎯 Zugehörige Dienstleistungsseite (Standardsprache)"
+        "as_badge_text": "Zugehörige Dienstleistungsseite (Standardsprache)"
     },
     {
         "id": "main_taunus",
@@ -213,13 +213,13 @@ SOURCE_CONFIGS = [
             return document.querySelector('a[title*=\"Alltags-Sprache\"]') || 
                    Array.from(document.querySelectorAll('a')).find(a => (a.getAttribute('title') || '').includes('Alltags-Sprache') || a.innerText.toLowerCase().includes('alltags-sprache'));
         }""",
-        "ls_badge_text": "🎯 Alignment-Button: 'Auf Alltags-Sprache umstellen'",
+        "ls_badge_text": "Alignment-Button: 'Auf Alltags-Sprache umstellen'",
         "as_selector_js": """() => {
             return document.querySelector('a[title*=\"Leichte-Sprache\"]') || 
                    Array.from(document.querySelectorAll('a')).find(a => (a.getAttribute('title') || '').includes('Leichte-Sprache') || a.innerText.toLowerCase().includes('leichte sprache')) ||
                    document.querySelector('header');
         }""",
-        "as_badge_text": "🎯 Gegenüberstellung: Umschalter 'Auf Leichte-Sprache umstellen'"
+        "as_badge_text": "Gegenüberstellung: Umschalter 'Auf Leichte-Sprache umstellen'"
     },
     {
         "id": "mdr",
@@ -233,13 +233,13 @@ SOURCE_CONFIGS = [
             const hl = Array.from(document.querySelectorAll('.conHeadline, h3, h4, p, div')).find(e => e.innerText.toLowerCase().includes('schwerer sprache lesen'));
             return hl ? (hl.closest('.box') || hl) : null;
         }""",
-        "ls_badge_text": "🎯 Alignment-Box: 'In schwerer Sprache lesen' (MDR Teaser)",
+        "ls_badge_text": "Alignment-Box: 'In schwerer Sprache lesen' (MDR Teaser)",
         "as_selector_js": """() => {
             return document.querySelector('h1.article-header__title') || 
                    document.querySelector('.article-header') || 
                    document.querySelector('h1');
         }""",
-        "as_badge_text": "🎯 Zugehöriger redaktioneller Nachrichtenartikel (AS)"
+        "as_badge_text": "Zugehöriger redaktioneller Nachrichtenartikel (AS)"
     },
     {
         "id": "sozialpolitik",
@@ -252,13 +252,13 @@ SOURCE_CONFIGS = [
         "ls_selector_js": """() => {
             return Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('standardsprache'));
         }""",
-        "ls_badge_text": "🎯 Alignment-Schalter: 'Standardsprache'",
+        "ls_badge_text": "Alignment-Schalter: 'Standardsprache'",
         "as_selector_js": """() => {
             return Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('leichte sprache') || a.innerText.toLowerCase().includes('einfache sprache')) || 
                    document.querySelector('h1') || 
                    document.querySelector('main');
         }""",
-        "as_badge_text": "🎯 Alignment-Gegenstück: 'Einfache Sprache' Umschalter (AS-Sicht)"
+        "as_badge_text": "Alignment-Gegenstück: 'Einfache Sprache' Umschalter (AS-Sicht)"
     },
     {
         "id": "stuttgart",
@@ -271,13 +271,13 @@ SOURCE_CONFIGS = [
         "ls_selector_js": """() => {
             return Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('artikel in alltags-sprache') || (a.getAttribute('href') || '').includes('sp:out='));
         }""",
-        "ls_badge_text": "🎯 Alignment-Button: 'Artikel in Alltags-Sprache'",
+        "ls_badge_text": "Alignment-Button: 'Artikel in Alltags-Sprache'",
         "as_selector_js": """() => {
             return Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('artikel in leichter sprache') || (a.getAttribute('href') || '').includes('out=easy')) ||
                    document.querySelector('h1') || 
                    document.querySelector('main');
         }""",
-        "as_badge_text": "🎯 Alignment-Button: 'Artikel in Leichter Sprache' (AS-Sicht)"
+        "as_badge_text": "Alignment-Button: 'Artikel in Leichter Sprache' (AS-Sicht)"
     },
     {
         "id": "taz",
@@ -291,13 +291,13 @@ SOURCE_CONFIGS = [
             const link = Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('schweren') && (a.innerText.toLowerCase().includes('text') || a.innerText.toLowerCase().includes('artikel')));
             return link ? (link.closest('p') || link) : null;
         }""",
-        "ls_badge_text": "🎯 Alignment-Quellverweis: Link zum Ausgangsartikel (AS)",
+        "ls_badge_text": "Alignment-Quellverweis: Link zum Ausgangsartikel (AS)",
         "as_selector_js": """() => {
             return document.querySelector('h1.secthead, h1.article, h1') || 
                    document.querySelector('article') || 
                    document.querySelector('.article-header');
         }""",
-        "as_badge_text": "🎯 Originaler redaktioneller Hintergrundartikel (AS)"
+        "as_badge_text": "Originaler redaktioneller Hintergrundartikel (AS)"
     },
     {
         "id": "wiesbaden",
@@ -312,13 +312,13 @@ SOURCE_CONFIGS = [
                    document.querySelector('a[href*=\"easylanguage\"]') ||
                    Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('leichte sprache') || a.innerText.toLowerCase().includes('alltagssprache'));
         }""",
-        "ls_badge_text": "🎯 Alignment-Toggle: 'Leichte Sprache' (Aktiviert)",
+        "ls_badge_text": "Alignment-Toggle: 'Leichte Sprache' (Aktiviert)",
         "as_selector_js": """() => {
             return document.querySelector('.SP-Link--simple-language') || 
                    document.querySelector('a[href*=\"easylanguage\"]') || 
                    Array.from(document.querySelectorAll('a')).find(a => a.innerText.toLowerCase().includes('leichte sprache'));
         }""",
-        "as_badge_text": "🎯 Alignment-Toggle: 'Leichte Sprache' (In AS-Ansicht)"
+        "as_badge_text": "Alignment-Toggle: 'Leichte Sprache' (In AS-Ansicht)"
     }
 ]
 
@@ -539,7 +539,7 @@ async def capture_source(browser, cfg, output_dir, timeout=40000):
             print(f"  Note: element closeup skipped: {e}")
             
     except Exception as e:
-        print(f"  ❌ Error capturing LS page for {name}: {e}")
+        print(f"  [FAIL] Error capturing LS page for {name}: {e}")
         traceback.print_exc()
     finally:
         await page_ls.close()
@@ -556,7 +556,7 @@ async def capture_source(browser, cfg, output_dir, timeout=40000):
                 await apply_annotation_and_highlight(
                     page_as,
                     selector_js=cfg["as_selector_js"],
-                    badge_text=cfg.get("as_badge_text", "🎯 Standardsprache (AS-Gegenstück)"),
+                    badge_text=cfg.get("as_badge_text", "Standardsprache (AS-Gegenstück)"),
                     color="#2563eb", # Vibrant Blue
                     scroll_top=cfg.get("as_scroll_top", False)
                 )
@@ -574,7 +574,7 @@ async def capture_source(browser, cfg, output_dir, timeout=40000):
                 print(f"  ✓ Created Side-by-Side Comparison: {combo_path}")
                 
         except Exception as e:
-            print(f"  ❌ Error capturing AS page for {name}: {e}")
+            print(f"  [FAIL] Error capturing AS page for {name}: {e}")
             traceback.print_exc()
         finally:
             await page_as.close()
@@ -623,7 +623,7 @@ def generate_html_gallery(results_list, output_dir):
             <div class="media-grid">
                 {f'''
                 <div class="media-item">
-                    <div class="media-label">📌 Leichte Sprache (LS) mit hervorgehobenem Alignment-Element</div>
+                    <div class="media-label">Leichte Sprache (LS) mit hervorgehobenem Alignment-Element</div>
                     <a href="{viewport_rel}" target="_blank">
                         <img src="{viewport_rel}" alt="{name} Viewport Screenshot" loading="lazy" />
                     </a>
@@ -632,7 +632,7 @@ def generate_html_gallery(results_list, output_dir):
                 
                 {f'''
                 <div class="media-item">
-                    <div class="media-label">🔍 Zoom / Detailansicht des Alignment-Elements</div>
+                    <div class="media-label">Zoom / Detailansicht des Alignment-Elements</div>
                     <a href="{closeup_rel}" target="_blank">
                         <img src="{closeup_rel}" alt="{name} Element Close-up" class="closeup-img" loading="lazy" />
                     </a>
@@ -857,7 +857,7 @@ def generate_html_gallery(results_list, output_dir):
 """
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(full_html)
-    print(f"\n✨ Interactive HTML Gallery generated at: {html_path}")
+    print(f"\nInteractive HTML Gallery generated at: {html_path}")
 
 
 def generate_markdown_report(results_list, output_dir):
@@ -933,7 +933,7 @@ def generate_markdown_report(results_list, output_dir):
         
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
-    print(f"✨ Markdown Summary Report generated at: {md_path}")
+    print(f"Markdown Summary Report generated at: {md_path}")
 
 
 async def main_async(args):
@@ -968,7 +968,7 @@ async def main_async(args):
     # Generate reports
     generate_html_gallery(results, output_dir)
     generate_markdown_report(results, output_dir)
-    print("\n✅ All screenshots and reports successfully created!")
+    print("\n[OK] All screenshots and reports successfully created!")
 
 
 def main():

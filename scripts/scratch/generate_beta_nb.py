@@ -158,7 +158,7 @@ nb_data = {
     "    sample_indices = [0, 1, 2]\n",
     "    for idx in sample_indices:\n",
     "        print('=' * 90)\n",
-    "        print(f'🔍 BEISPIEL {idx + 1}')\n",
+    "        print(f'BEISPIEL {idx + 1}')\n",
     "        print('=' * 90)\n",
     "        first_row = df_details[df_details['model_name'] == df_details['model_name'].unique()[0]].iloc[idx]\n",
     "        print(f\"[AS-ORIGINAL]:\\n{first_row.get('as_text', '')[:250]}...\\n\")\n",

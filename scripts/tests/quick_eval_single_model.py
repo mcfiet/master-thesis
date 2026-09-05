@@ -20,7 +20,7 @@ def main():
     test_file = sys.argv[3] if len(sys.argv) > 3 else "data/lebenshilfe/lebenshilfe_dataset_clean.json"
 
     print("=" * 80)
-    print(f"🔍 Schnelltest für Modell: {model_path}")
+    print(f"Schnelltest für Modell: {model_path}")
     print(f"   Basis-Modell: {base_model}")
     print(f"   Test-Datei: {test_file}")
     print("=" * 80)
@@ -75,10 +75,10 @@ def main():
         pred = tokenizer.decode(outs[0], skip_special_tokens=True).strip()
 
         print("-" * 80)
-        print(f"📌 [BEISPIEL {idx + 1}]")
-        print(f"▶️ QUELLTEXT (AS): {src[:150]}...")
-        print(f"✅ REFERENZ (LS):  {ref[:150]}...")
-        print(f"🤖 GENERIERT:     {pred}")
+        print(f"[BEISPIEL {idx + 1}]")
+        print(f"QUELLTEXT (AS): {src[:150]}...")
+        print(f"REFERENZ (LS):  {ref[:150]}...")
+        print(f"GENERIERT:     {pred}")
         print("-" * 80)
 
 

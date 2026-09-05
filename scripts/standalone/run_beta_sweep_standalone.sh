@@ -20,7 +20,7 @@ mkdir -p results/plots/experiments/dpo_beta_sweep
 mkdir -p results/evaluation
 
 echo "================================================================================"
-echo "🚀 Starting DPO Beta Sweep (Standalone Mode)"
+echo "Starting DPO Beta Sweep (Standalone Mode)"
 echo "================================================================================"
 
 # Check for CUDA GPU
@@ -39,13 +39,13 @@ SFT_MODEL="results/models/sft"
 
 # Verify prerequisites
 if [ ! -d "$SFT_MODEL" ]; then
-    echo "❌ Error: SFT model directory not found at '$SFT_MODEL'."
+    echo "[FAIL] Error: SFT model directory not found at '$SFT_MODEL'."
     echo "Please ensure the SFT checkpoint is copied to '$SFT_MODEL'."
     exit 1
 fi
 
 if [ ! -f "$TRAIN_FILE" ]; then
-    echo "❌ Error: Training dataset not found at '$TRAIN_FILE'."
+    echo "[FAIL] Error: Training dataset not found at '$TRAIN_FILE'."
     exit 1
 fi
 
@@ -57,7 +57,7 @@ train_single_beta() {
     local NAME=$2
     local GPU_ID=$3
 
-    echo "▶️ [Start] Training Beta = $BETA ($NAME) on GPU $GPU_ID..."
+    echo "[Start] Training Beta = $BETA ($NAME) on GPU $GPU_ID..."
     CUDA_VISIBLE_DEVICES=$GPU_ID python scripts/modeling/train_dpo.py \
         --model_name_or_path "$SFT_MODEL" \
         --train_file "$TRAIN_FILE" \
@@ -77,18 +77,18 @@ train_single_beta() {
         --max_target_len 256 \
         --log_dir "results/logs/experiments/dpo_beta_sweep" \
         > "results/logs/experiments/dpo_beta_sweep/train_${NAME}.out" 2>&1
-    echo "✅ [Done] Training Beta = $BETA ($NAME) finished successfully!"
+    echo "[OK] [Done] Training Beta = $BETA ($NAME) finished successfully!"
 }
 
 # If multiple GPUs are available (>= 5), run all in parallel
 if [ "$NUM_GPUS" -ge 5 ]; then
-    echo "⚡ Multi-GPU mode: Running all 5 Beta trainings concurrently across 5 GPUs..."
+    echo "Multi-GPU mode: Running all 5 Beta trainings concurrently across 5 GPUs..."
     for i in "${!BETAS[@]}"; do
         train_single_beta "${BETAS[$i]}" "${NAMES[$i]}" "$i" &
     done
     wait
 elif [ "$NUM_GPUS" -ge 2 ]; then
-    echo "⚡ Multi-GPU mode: Dispatching across $NUM_GPUS GPUs..."
+    echo "Multi-GPU mode: Dispatching across $NUM_GPUS GPUs..."
     for i in "${!BETAS[@]}"; do
         GPU_ID=$((i % NUM_GPUS))
         train_single_beta "${BETAS[$i]}" "${NAMES[$i]}" "$GPU_ID" &
@@ -98,14 +98,14 @@ elif [ "$NUM_GPUS" -ge 2 ]; then
     done
     wait
 else
-    echo "🔄 Single-GPU mode: Running 5 Beta trainings sequentially..."
+    echo "Single-GPU mode: Running 5 Beta trainings sequentially..."
     for i in "${!BETAS[@]}"; do
         train_single_beta "${BETAS[$i]}" "${NAMES[$i]}" "0"
     done
 fi
 
 echo "================================================================================"
-echo "📊 All 5 DPO Models trained successfully! Starting full evaluation..."
+echo "All 5 DPO Models trained successfully! Starting full evaluation..."
 echo "================================================================================"
 
 python scripts/evaluation/evaluate_dpo_beta_experiment.py \
@@ -122,7 +122,7 @@ python scripts/evaluation/evaluate_dpo_beta_experiment.py \
     --batch_size 4
 
 echo "================================================================================"
-echo "🎉 DPO Beta Sweep Pipeline completely finished!"
+echo "DPO Beta Sweep Pipeline completely finished!"
 echo "Summary: results/evaluation/dpo_beta_comparison_summary.csv"
 echo "Details: results/evaluation/dpo_beta_comparison_details.csv"
 echo "================================================================================"

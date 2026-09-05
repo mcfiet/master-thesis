@@ -32,9 +32,9 @@ def main():
         for s in eval_scripts:
             res = subprocess.run([sys.executable, s, "--help"], capture_output=True, text=True)
             if res.returncode == 0:
-                print(f"✅ {s} OK")
+                print(f"[OK] {s} OK")
             else:
-                print(f"❌ {s} Fehler: {res.stderr[:80]}")
+                print(f"[FAIL] {s} Fehler: {res.stderr[:80]}")
     else:
         print("1. EVALUATION SCRIPTS TEST SKIPPED (--fast mode)")
 
@@ -45,14 +45,14 @@ def main():
         sb_ok = os.path.exists(sbatch_script)
         if not (nb_ok and sb_ok):
             all_ok = False
-        print(f"{'✅' if nb_ok and sb_ok else '❌'} {nb}")
+        print(f"{'[OK]' if nb_ok and sb_ok else '[FAIL]'} {nb}")
         print(f"   -> Ausgabedatei : {out_csv}")
         print(f"   -> Sbatch-Job   : {sbatch_script}")
 
     if all_ok:
-        print("\n🎉 GESAMTSTATUS: 100% BEREIT FÜR SBATCH PIPELINE RUNS, EXPERIMENTE & NOTEBOOK AUSWERTUNGEN!")
+        print("\nGESAMTSTATUS: 100% BEREIT FÜR SBATCH PIPELINE RUNS, EXPERIMENTE & NOTEBOOK AUSWERTUNGEN!")
     else:
-        print("\n⚠️ EINIGE PFADE ODER DATEIEN FEHLEN!")
+        print("\n[WARN] EINIGE PFADE ODER DATEIEN FEHLEN!")
         sys.exit(1)
 
 

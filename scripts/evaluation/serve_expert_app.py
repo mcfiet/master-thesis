@@ -305,8 +305,8 @@ def main():
     admin_url = f"http://{display_host}:{server_port}/admin"
 
     print(f"\n========================================================")
-    print(f" 🌐 Experten-App (Verblindet):  {url}")
-    print(f" 🔐 Admin-Dashboard:            {admin_url} (Passwort: {ADMIN_PASSWORD})")
+    print(f" Experten-App (Verblindet):  {url}")
+    print(f" Admin-Dashboard:            {admin_url} (Passwort: {ADMIN_PASSWORD})")
     print(f" Listening on: {args.host}:{args.port}")
     print(f" Live-Speicherung in: results/expert_eval/expert_eval_ratings.json")
     print(f" Beenden mit Strg+C")

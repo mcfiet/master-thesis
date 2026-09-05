@@ -102,7 +102,7 @@ def analyze_pair(tokenizer, sample: Dict[str, str], pair_idx: int):
     print(f"  • Im konkatenierten String an Index {lost_token_idx}: {C_RED}'{lost_token_str}' (ID: {lost_token_id}){C_RESET}")
     print(f"  • Tatsächlicher TRL-Loss-Start ab Index {p_len}:    {C_BLUE}'{trl_start_token_str}' (ID: {trl_start_token_id}){C_RESET}")
     
-    print(f"\n  {C_RED}{C_BOLD}❌ FEHLERBEWEIS:{C_RESET} Das Wort {C_RED}'{lost_token_str}'{C_RESET} wird von TRL als Teil des Prompts wegmaskiert!")
+    print(f"\n  {C_RED}{C_BOLD}[FAIL] FEHLERBEWEIS:{C_RESET} Das Wort {C_RED}'{lost_token_str}'{C_RESET} wird von TRL als Teil des Prompts wegmaskiert!")
     print(f"     -> Das Modell erhält für das allererste Wort {C_RED}'{lost_token_str}'{C_RESET} keinen Loss-Gradienten.")
 
     # 3. Detaillierte Token-Tabelle an der Schnittstelle
@@ -121,14 +121,14 @@ def analyze_pair(tokenizer, sample: Dict[str, str], pair_idx: int):
             trl_status = f"{C_YELLOW}Prompt (0){C_RESET}"
             native_status = f"{C_YELLOW}Encoder Input{C_RESET}"
         elif idx == p_len - 1:
-            trl_status = f"{C_RED}{C_BOLD}Maskiert (0) ❌{C_RESET}"
-            native_status = f"{C_GREEN}{C_BOLD}Decoder Target 1 ✅{C_RESET}"
+            trl_status = f"{C_RED}{C_BOLD}Maskiert (0) [FAIL]{C_RESET}"
+            native_status = f"{C_GREEN}{C_BOLD}Decoder Target 1 [OK]{C_RESET}"
         elif idx == p_len:
             trl_status = f"{C_GREEN}Loss Start (1){C_RESET}"
-            native_status = f"{C_GREEN}Decoder Target 2 ✅{C_RESET}"
+            native_status = f"{C_GREEN}Decoder Target 2 [OK]{C_RESET}"
         else:
             trl_status = f"{C_GREEN}Loss (1){C_RESET}"
-            native_status = f"{C_GREEN}Decoder Target ✅{C_RESET}"
+            native_status = f"{C_GREEN}Decoder Target [OK]{C_RESET}"
             
         highlight = C_BOLD if idx in [p_len - 1, p_len] else ""
         print(f"{highlight}{idx:<7}{C_RESET} | {highlight}{p_tok:<22}{C_RESET} | {highlight}{c_tok:<22}{C_RESET} | {trl_status:<24} | {native_status}")
