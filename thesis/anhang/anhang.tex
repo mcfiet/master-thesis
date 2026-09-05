@@ -83,13 +83,6 @@ BiLSTM MixUp Regressor ($1.024$)   & Regressor ($1.024$)  & $0{,}251$ & $0{,}238
 \end{tabular}}
 \end{table}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{images/merlin_scatter_all_models_grid.png}
-\caption[Streudiagramm-Grid der Regressoren und Baselines auf MERLIN]{Streudiagramm-Grid der Regressoren und Baselines auf dem MERLIN-Benchmark ($N = 1.033$ Volltexte) gegen die Stufen des Gemeinsamen Europäischen Referenzrahmens (CEFR) für BiLSTM-MixUp-Regressoren, den Lesbarkeitsindex (LIX), die Wiener Sachtextformel (WSTF) und den Flesch Reading Ease (FRE) inklusive linearer Ausgleichsgeraden.}
-\label{fig:anhang_merlin_scatter}
-\end{figure}
-
 \newpage
 \subsection{Ergänzende Evaluation der Klassifikationsmodelle (Ähnlichkeitsbereiche \& Granularitätsvergleich)}
 \label{sec:anhang_klassifikatoren}
@@ -132,40 +125,6 @@ $0{,}90 \le \text{sim}_{\cos} \le 0{,}98$ & $213$ & $\sim 4.800$ & $90{,}55\,\%$
 \includegraphics[width=\textwidth]{images/classifier_confusion_matrices.png}
 \caption[Konfusionsmatrizen und Gütemaße der BiLSTM-Klassifikatoren]{Konfusionsmatrizen und Performanzmetriken der binären BiLSTM-Klassifikatoren zur Unterscheidung von Alltagssprache (AS) und Leichter Sprache (LS) auf dem Lebenshilfe-Goldstandard unter Aufschlüsselung nach Richtig-Positiven (TP), Richtig-Negativen (TN), Falsch-Positiven (FP) und Falsch-Negativen (FN).}
 \label{fig:anhang_classifier_confusion}
-\end{figure}
-
-\begin{table}[htbp]
-\centering
-\small
-\caption[Multi-Seed-Stabilitäts-Benchmark der Klassifikatoren]{Multi-Seed-Stabilitäts-Benchmark aller BiLSTM-Klassifikatorvarianten über fünf Zufalls-Initialisierungen auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) unter Angabe von ausgewogener Genauigkeit (Balanced Accuracy), ROC-AUC, Paar-Matching-Genauigkeit (Pair Match) und Majority Voting über Einzelsätze (MajVote).}
-\label{tab:anhang_classifier_stability}
-\adjustbox{max width=\textwidth}{%
-\begin{tabular}{@{}lccccc@{}}
-\toprule
-\textbf{Modellarchitektur} & \textbf{Parameter} & \textbf{Balanced Acc ($\mu \pm \sigma$)} & \textbf{Min -- Max Spread} & \textbf{ROC-AUC ($\mu \pm \sigma$)} & \textbf{Pair Match ($\mu \pm \sigma$)} \\
-\midrule
-BiLSTM Satz-Klassifikator (MajVote)  & $3{,}46\text{ Mio.}$  & $\mathbf{96{,}76\,\% \pm 0{,}74\,\%}$ & $95{,}9\,\% - 97{,}3\,\%$ & $\mathbf{0{,}9985 \pm 0{,}0013}$ & $\mathbf{100{,}0\,\% \pm 0{,}0\,\%}$ \\
-BiLSTM Artikel-256 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$  & $87{,}57\,\% \pm 6{,}15\,\%$ & $77{,}0\,\% - 91{,}9\,\%$ & $0{,}9672 \pm 0{,}0179$ & $96{,}2\,\% \pm 1{,}5\,\%$ \\
-BiLSTM Artikel-1024 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$ & $87{,}03\,\% \pm 5{,}29\,\%$ & $81{,}1\,\% - 93{,}2\,\%$ & $0{,}9533 \pm 0{,}0230$ & $95{,}7\,\% \pm 1{,}5\,\%$ \\
-BiLSTM Artikel-1024 (Tiny, $5k/32d$)  & $\sim 180\text{ Tsd.}$ & $84{,}05\,\% \pm 11{,}48\,\%$ & $64{,}9\,\% - 94{,}6\,\%$ & $0{,}9354 \pm 0{,}0185$ & $93{,}5\,\% \pm 3{,}1\,\%$ \\
-BiLSTM Artikel-1024 (Medium, $10k/64d$) & $\sim 700\text{ Tsd.}$ & $83{,}51\,\% \pm 7{,}84\,\%$ & $71{,}6\,\% - 93{,}2\,\%$ & $0{,}9126 \pm 0{,}0415$ & $95{,}7\,\% \pm 2{,}4\,\%$ \\
-BiLSTM Artikel-512 (Full, $25k/128d$) & $3{,}46\text{ Mio.}$  & $82{,}97\,\% \pm 9{,}49\,\%$ & $68{,}9\,\% - 93{,}2\,\%$ & $0{,}9334 \pm 0{,}0387$ & $96{,}2\,\% \pm 1{,}5\,\%$ \\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.95\textwidth]{images/generalization_gap_learning_curves.png}
-\caption[Generalization Gap und Overfitting-Trajektorien über 30 Epochen]{Generalisation Gap und Overfitting-Trajektorien über 30 Trainingsepochen des BiLSTM mit Mittelwerten und Standardabweichungen über fünf Seeds zum Vergleich von In-Domain-Validierungsgenauigkeit und Out-of-Domain-Genauigkeit (OOD) auf dem Lebenshilfe-Datensatz.}
-\label{fig:anhang_classifier_learning_curves}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.95\textwidth]{images/multi_seed_boxplots.png}
-\caption[Stabilitäts- und Varianzvergleich über 5 Seeds auf Lebenshilfe]{Stabilitäts- und Varianzvergleich über fünf Seeds auf dem Lebenshilfe-Goldstandard ($N = 74$ Dokumente) zur Gegenüberstellung von ausgewogener Genauigkeit (Balanced Accuracy) und Klassenseparation ($\Delta$) zwischen Alltagssprache (AS) und Leichter Sprache (LS) auf Basis des Interquartilsabstands (IQR).}
-\label{fig:anhang_classifier_boxplots}
 \end{figure}
 
 \newpage
@@ -217,7 +176,7 @@ Variante D (Hybrid + Cyclic LR)& $0{,}799$ & $0{,}086$ & $95{,}87\,\%$ & $0{,}02
 \end{figure}
 
 \newpage
-\subsection{Ergänzende Evaluation der BiLSTM MixUp Regressoren (Längenvergleich \& Trajektorien)}
+\subsection{Ergänzende Evaluation der BiLSTM MixUp Regressoren (Längenvergleich)}
 \label{sec:anhang_regressoren_laengen}
 
 In diesem Abschnitt sind die ergänzenden grafischen Auswertungen zur Untersuchung der Kontextlängen der kontinuierlichen BiLSTM MixUp Regressoren ($256$, $512$ und $1.024$ Tokens) auf dem \textit{Lebenshilfe}-Goldstandard dargestellt.
@@ -227,13 +186,6 @@ In diesem Abschnitt sind die ergänzenden grafischen Auswertungen zur Untersuchu
 \includegraphics[width=0.95\textwidth]{images/regressor_kde_length_comparison.png}
 \caption[KDE-Dichteverteilungen der BiLSTM-MixUp-Regressoren]{Dichteschätzungen (Kernel Density Estimation, KDE) der kontinuierlichen BiLSTM-MixUp-Regressoren für Leichte Sprache (LS) und Alltagssprache (AS) auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente) über variierende Kontextfenster von 256, 512 und 1.024 Tokens.}
 \label{fig:anhang_regressor_kde}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.95\textwidth]{images/regressor_pairwise_trajectories.png}
-\caption[Paarweises Profil der Regressions-Scores und Längeninvarianz]{Paarweises Profil der Regressions-Scores und Überprüfung der Längeninvarianz auf dem Lebenshilfe-Goldstandard ($N = 37$ Artikelpaare) zum Nachweis der fehlerfreien Separierbarkeit zwischen Alltagssprache (AS) und Leichter Sprache (LS) über die Textlänge (Pair Match).}
-\label{fig:anhang_regressor_trajectories}
 \end{figure}
 
 \newpage
@@ -288,31 +240,14 @@ Wiener Sachtextformel (Baseline)& Dokument (Wortlänge)    & $0{,}919 \pm 0{,}27
 \label{fig:anhang_synthetic_kde_roc}
 \end{figure}
 
-\begin{figure}[htbp]
-\centering
-\begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/synthetic_regressor_regression_boxplots.png}
-    \caption{Stufenmonotonie \& Boxplots}
-    \label{fig:anhang_synthetic_box}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/synthetic_regressor_residuals_mae.png}
-    \caption{Residuen-Verteilung \& MAE}
-    \label{fig:anhang_synthetic_mae}
-\end{subfigure}
-\caption[Empirische Monotonie- und Fehleranalyse des Synthetischen Regressors]{Empirische Monotonie- und Fehleranalyse des Synthetischen Regressors über fünf diskrete Stufen großer Sprachmodelle (Large Language Models, LLM) auf dem Lebenshilfe-Goldstandard ($N=185$ Vorhersagen) unter Angabe des mittleren absoluten Fehlers (Mean Absolute Error, MAE) und des Interquartilsabstands (IQR).}
-\label{fig:anhang_synthetic_monotonie}
-\end{figure}
-
+\clearpage
 \subsubsection{Prompt-Design zur Generierung synthetischer Zwischenstufen}
 
 Zur Erzeugung der synthetischen Zwischenstufen ($0{,}25$, $0{,}50$, $0{,}75$) wurde das Open-Source-Modell \texttt{FlensGen-GPT-OSS-120B} (gehostet an der Hochschule Flensburg) per API mit folgender System- und User-Prompt-Struktur parametrisiert (Sampling-Temperatur $T = 0{,}2$, Top-p $0{,}95$):
 
-\begin{tcolorbox}[colback=gray!5!white,colframe=gray!60!black,title=\textbf{System-Prompt: Synthetische Komplexitätsabstufung},sharp corners,boxrule=0.8pt]
-\small\ttfamily
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!60!black,title=\textbf{System-Prompt: Synthetische Komplexitätsabstufung},sharp corners,boxrule=0.8pt,top=1.5mm,bottom=1.5mm,boxsep=1.5mm]
+\linespread{1.0}\selectfont
+\footnotesize\ttfamily
 Du bist ein Experte für die deutsche Sprache und Textvereinfachung.\\
 Dir wird ein Artikel in zwei verschiedenen Schwierigkeitsgraden vorgelegt:\\
 1. Leichte Sprache (LS / Stufe 1.0): Extrem vereinfacht, kurze Sätze, sehr einfache Satzstruktur, oft mit Zeilenumbrüchen nach jedem Satzteil, geringe Wortkomplexität, keine Fremdwörter, Fachbegriffe werden direkt erklärt.\\
@@ -348,8 +283,9 @@ Wichtige Regeln:\\
 3. Gib ausschließlich den neu generierten Text zurück. Keine Metakommentare, keine Erklärungen, keine Anmerkungen, keine Markdown-Codeblöcke. Beginne direkt mit dem Text des Artikels.
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=gray!5!white,colframe=gray!60!black,title=\textbf{User-Prompt-Template: Übergabe der Artikelpaare},sharp corners,boxrule=0.8pt]
-\small\ttfamily
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!60!black,title=\textbf{User-Prompt-Template: Übergabe der Artikelpaare},sharp corners,boxrule=0.8pt,top=1.5mm,bottom=1.5mm,boxsep=1.5mm]
+\linespread{1.0}\selectfont
+\footnotesize\ttfamily
 Hier sind die beiden Versionen des Artikels:\\
 \\
 \#\#\# Version 1: Leichte Sprache (LS / Stufe 1.0):\\
@@ -545,7 +481,6 @@ Gradient Accumulation Steps & 4 & 8 & 4 & 8 \\
 Effektive Batch-Größe & 16 & 16 & 16 & 16 \\
 Trainings-Epochen & 30 (Best: Epoche 25) & 3 & 3 & 3 \\
 Fließkomma-Präzision & FP16 Mixed Precision & FP16 Mixed Precision & Bfloat16 Mixed Precision & Bfloat16 Mixed Precision \\
-Hardware-Umgebung & 1$\times$ NVIDIA A100-SXM4 (80GB) & 1$\times$ NVIDIA A100-SXM4 (80GB) & 1$\times$ NVIDIA A100-SXM4 (80GB) & 1$\times$ NVIDIA A100-SXM4 (80GB) \\
 \bottomrule
 \end{tabular}}
 \end{table}

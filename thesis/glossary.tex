@@ -1,12 +1,47 @@
 \makeglossaries
 
-\newglossaryentry{Data Science}
+\newglossaryentry{ATS}
 {
-        name=Data Science,
-        description={\glqq Data science is the scientific discipline that studies everything related to data, from data acquisition, data storage, data analysis, data cleaning, data visualization, data interpretation, making decisions based on data, determining how to create value from data and how to communicate insights relevant to the business. ...Data science makes use of data mining, machine learning, AI techniques and also other approaches such as: heuristics algorithms, operational research, statistics, causal inference, etc. Practitioners of data science are typically skilled in mathematics, statistics, programming, machine learning, big data tools and communicating the results.\grqq{} \cite{kulin-2021-ML-performance-improvments}}
+    name={ATS (Automatic Text Simplification)},
+    description={Automatische maschinelle Textvereinfachung zur gezielten Reduktion linguistischer Komplexität auf syntaktischer, lexikalischer und struktureller Ebene.}
 }
-\newglossaryentry{Data Mining}
+\newglossaryentry{LS}
 {
-        name=Data Mining,
-        description={\glqq Data mining aims to understand and discover new, previously unseen knowledge in the data. The term mining refers to extracting content by digging. Applying this analogy to data, it may mean to extract insights by digging into data. A simple definition of data mining is: Data mining refers to the application of algorithms for extracting patterns from data. Data mining tends to focus on solving actual problems encountered in practice by exploiting algorithms developed by the ML community.\grqq{} \cite{kulin-2021-ML-performance-improvments}}
+    name={LS (Leichte Sprache)},
+    description={Stark reglementierte und gesetzlich normierte barrierefreie Sprachvariante des Deutschen zur Maximierung der Verständlichkeit für Menschen mit Lernschwierigkeiten oder kognitiven Einschränkungen.}
+}
+\newglossaryentry{AS}
+{
+    name={AS (Alltagssprache)},
+    description={Deutsche Standardsprache und behördliche Fachsprache der ursprünglichen Ausgangstexte vor der Vereinfachung.}
+}
+\newglossaryentry{DPO}
+{
+    name={DPO (Direct Preference Optimization)},
+    description={Verfahren zur mathematisch geschlossenen Präferenzoptimierung generativer Sprachmodelle auf Paarvergleichen ohne separates Belohnungsmodell \citep{rafailov2023direct}.}
+}
+\newglossaryentry{SFT}
+{
+    name={SFT (Supervised Fine-Tuning)},
+    description={Überwachtes Feintuning neuronaler Sprachmodelle auf parallelen Textpaaren zur Etablierung grundlegender Übersetzungsmuster.}
+}
+\newglossaryentry{LoRA}
+{
+    name={LoRA (Low-Rank Adaptation)},
+    description={Parametereffiziente Feintuning-Methode, welche die Gewichtsmatrizen neuronaler Schichten durch niederrangige Matrizenzerlegungen adaptiert \citep{hu2022lora}.}
+}
+\newglossaryentry{SARI}
+{
+    name={SARI},
+    description={Referenzbasierte Evaluierungsmetrik für Textvereinfachungen, die N-Gramm-Präzision und -Recall für Hinzufügungen, Löschungen und Beibehaltungen separat quantifiziert \citep{xu2016optimizing}.}
+}
+\newglossaryentry{MATTR}
+{
+    name={MATTR (Moving-Average Type-Token Ratio)},
+    description={Längenunabhängiges Maß der lexikalischen Vielfalt durch Berechnung der Type-Token-Ratio über ein gleitendes Wortfenster \citep{covington2010cutting}.}
+}
+\newglossaryentry{BITV}
+{
+    name={BITV 2.0},
+    description={Barrierefreie-Informationstechnik-Verordnung; deutsche Rechtsverordnung zur barrierefreien Gestaltung digitaler Angebote öffentlicher Stellen nach dem BGG.}
 }
