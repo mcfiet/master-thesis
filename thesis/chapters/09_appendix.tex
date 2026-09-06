@@ -1,7 +1,7 @@
 \subsection{Ergänzende Evaluation auf TextComplexityDE (Naderi et al., 2019)}
 \label{sec:anhang_textcomplexityde}
 
-In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur Satzkomplexitäts-Evaluation auf dem \textit{TextComplexityDE}-Benchmark \citep{naderi2019textcomplexityde} ($N = 1.000$ deutsche Wikipedia-Sätze mit menschlichen Likert-Urteilen) für die MixUp-Regressoren und traditionellen Baselines dargestellt.
+In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur Bewertung der Satzkomplexität auf dem \textit{TextComplexityDE}-Benchmark \citep{naderi2019textcomplexityde} ($N = 1.000$ deutsche Wikipedia-Sätze mit menschlichen Likert-Bewertungen) für die MixUp-Regressoren und traditionellen Baselines dargestellt.
 
 \begin{table}[htbp]
 \centering
@@ -87,7 +87,7 @@ BiLSTM MixUp Regressor ($1.024$)   & Regressor ($1.024$)  & $0{,}251$ & $0{,}238
 \subsection{Ergänzende Evaluation der Klassifikationsmodelle (Ähnlichkeitsbereiche \& Granularitätsvergleich)}
 \label{sec:anhang_klassifikatoren}
 
-In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur binären Klassifikation dokumentiert: Tabelle~\ref{tab:sweet_spot_ablation_klassifikation} stellt die In-Domain-Klassifikationsgüte (Balanced Accuracy) über verschiedene Cosine-Similarity-Filterungsbereiche des internen Master-Korpus auf Satz- und Artikelebene gegenüber. Die Abbildungen~\ref{fig:anhang_classifier_kde} bis \ref{fig:anhang_classifier_confusion} visualisieren die Dichteverteilungen, ROC/PR-Kurven und Konfusionsmatrizen auf dem bereinigten \textit{Lebenshilfe}-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze).
+In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zur binären Klassifikation dokumentiert: Tabelle~\ref{tab:sweet_spot_ablation_klassifikation} stellt die In-Domain-Klassifikationsgüte (Balanced Accuracy) über verschiedene Filterungsbereiche der Kosinus-Ähnlichkeit des internen Master-Korpus auf Satz- und Artikelebene gegenüber. Die Abbildungen~\ref{fig:anhang_classifier_kde} bis \ref{fig:anhang_classifier_confusion} visualisieren die Dichteverteilungen, ROC/PR-Kurven und Konfusionsmatrizen auf dem bereinigten \textit{Lebenshilfe}-Goldstandard ($N = 37$ Artikelpaare / $74$ Dokumente, $6.901$ Einzelsätze).
 
 \begin{table}[htbp]
 \centering
@@ -131,7 +131,7 @@ $0{,}90 \le \text{sim}_{\cos} \le 0{,}98$ & $213$ & $\sim 4.800$ & $90{,}55\,\%$
 \subsection{Ergänzende Evaluation der MixUp Trainings- und Sampling-Strategien (Varianten A--D)}
 \label{sec:anhang_mixup_varianten}
 
-In diesem Abschnitt sind die empirischen Benchmark-Ergebnisse und grafischen Analysen zu den vier untersuchten Dataloader- und Optimierungsstrategien des kontinuierlichen BiLSTM MixUp-Regressors dokumentiert:
+In diesem Abschnitt sind die empirischen Benchmark-Ergebnisse und grafischen Analysen zu den vier untersuchten Dataloader- und Optimierungsstrategien des kontinuierlichen BiLSTM-MixUp-Regressors dokumentiert:
 \begin{itemize}
     \item \textbf{Variante A (Statisch):} Feste Vorabmischung und Shuffling bei der Initialisierung des Datasets ($p_{\text{dynamic}} = 0{,}0$).
     \item \textbf{Variante B (Dynamisch):} Rein dynamisches On-the-Fly-Mischen und Shuffling pro Batch ($p_{\text{dynamic}} = 1{,}0$).
@@ -192,7 +192,7 @@ In diesem Abschnitt sind die ergänzenden grafischen Auswertungen zur Untersuchu
 \subsection{Ergänzende Evaluation des Synthetischen Regressors \& Prompt-Design}
 \label{sec:anhang_synthetic_regressor_prompt}
 
-In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zum BiLSTM Synthetischen Regressor sowie das vollständige Prompt-Design zur Erzeugung der Zwischenstufen dokumentiert.
+In diesem Abschnitt sind die ergänzenden empirischen Auswertungen zum synthetischen BiLSTM-Regressor sowie das vollständige Prompt-Design zur Erzeugung der Zwischenstufen dokumentiert.
 
 \subsubsection{Master-Benchmark auf dem Lebenshilfe-Goldstandard}
 
@@ -327,7 +327,7 @@ In diesem Abschnitt sind die vollständigen quantitativen Resultate der Skalieru
 \subsection{Ergänzende Kenngrößen des DPO-Präferenzdatensatzes (mBART-50)}
 \label{sec:anhang_dpo_preference_stats}
 
-In diesem Abschnitt sind die vollständigen statistischen Kenngrößen des synthetisch generierten DPO-Präferenzdatensatzes (mBART-50 Modell) auf Basis des \textit{10kGNAD}-Prompt-Korpus dokumentiert.
+In diesem Abschnitt sind die vollständigen statistischen Kenngrößen des synthetisch generierten DPO-Präferenzdatensatzes (mBART-50-Modell) auf Basis des \textit{10kGNAD}-Prompt-Korpus dokumentiert.
 
 \begin{table}[htbp]
 \centering
@@ -405,9 +405,9 @@ Tabelle~\ref{tab:anhang_dpo_rule_adherence_comparison} dokumentiert die detailli
 Mittlere Satzlänge (Wörter / Satz, $\downarrow$) & 12,50 & 7,61 ($-34{,}0\,\%$) & \textbf{6,97} & 6,79 & $-39{,}9\,\%$ (nahezu identisch zu Gold) \\
 Anteil langer Sätze ($> 12$ Wörter, $\downarrow$) & $42{,}36\,\%$ & $9{,}28\,\%$ & \textbf{4,76\,\%} & $3{,}33\,\%$ & $-88{,}8\,\%$ (starke Entflechtung) \\
 Nebensatz-Anteil (Subordination, $\downarrow$) & $10{,}84\,\%$ & $4{,}45\,\%$ & \textbf{5,60\,\%} & $1{,}79\,\%$ & $-48{,}3\,\%$ (Fokus auf Hauptsätze) \\
-Passiv-Quote (Passivformen / Satz, $\downarrow$) & $9{,}28\,\%$ & $2{,}26\,\%$ ($-65{,}3\,\%$) & \textbf{0,51\,\%} & $2{,}02\,\%$ & $\mathbf{-89{,}1\,\%}$ (übertrifft Goldstandard!) \\
-Genitiv-Quote (Genitivformen / Satz, $\downarrow$) & $9{,}17\,\%$ & $1{,}59\,\%$ ($-77{,}9\,\%$) & \textbf{0,54\,\%} & $1{,}05\,\%$ & $\mathbf{-93{,}8\,\%}$ (übertrifft Goldstandard!) \\
-Nominalstil-Quote (Nominalisierungen, $\downarrow$) & $4{,}98\,\%$ & $3{,}39\,\%$ ($-28{,}0\,\%$) & \textbf{2,58\,\%} & $3{,}37\,\%$ & $\mathbf{-46{,}5\,\%}$ (übertrifft Goldstandard!) \\
+Passiv-Quote (Passivformen / Satz, $\downarrow$) & $9{,}28\,\%$ & $2{,}26\,\%$ ($-65{,}3\,\%$) & \textbf{0,51\,\%} & $2{,}02\,\%$ & $\mathbf{-89{,}1\,\%}$ (übertrifft Goldstandard) \\
+Genitiv-Quote (Genitivformen / Satz, $\downarrow$) & $9{,}17\,\%$ & $1{,}59\,\%$ ($-77{,}9\,\%$) & \textbf{0,54\,\%} & $1{,}05\,\%$ & $\mathbf{-93{,}8\,\%}$ (übertrifft Goldstandard) \\
+Nominalstil-Quote (Nominalisierungen, $\downarrow$) & $4{,}98\,\%$ & $3{,}39\,\%$ ($-28{,}0\,\%$) & \textbf{2,58\,\%} & $3{,}37\,\%$ & $\mathbf{-46{,}5\,\%}$ (übertrifft Goldstandard) \\
 \midrule
 Flesch Reading Ease (DE, $\uparrow$) & 37,44 & 61,27 ($+23{,}8$) & \textbf{67,56} ($+30{,}1$) & 60,67 & Höchste Lesbarkeit (über Gold) \\
 LIX Lesbarkeitsindex ($\downarrow$) & 54,18 & 38,21 ($-16{,}0$) & \textbf{34,16} ($-20{,}0$) & 38,41 & Geringste Textschwere (über Gold) \\
@@ -489,7 +489,7 @@ Fließkomma-Präzision & FP16 Mixed Precision & FP16 Mixed Precision & Bfloat16 
 \subsection{Synthetischer 256-Token Regel-Sensitivitäts-Benchmark}
 \label{sec:anhang_synthetic_rule_benchmark}
 
-Zur empirischen Überprüfung der Teilmengen-Hypothese und zur systematischen Messung der Fehlbewertungs- und Blindheitsrisiken klassischer Lesbarkeitsmetriken (Abschnitt~\ref{sec:klassifikator_laengen_ablation}) wurde ein kontrollierter synthetischer Benchmark entwickelt ($N = 30$ Textfassungen aus fünf lebensweltlichen Domänen mit jeweils $100$ bis $256$ Tokens bzw. zehn zusammenhängenden Sätzen).
+Zur empirischen Überprüfung der Teilmengen-Hypothese und zur systematischen Messung der Messunsicherheiten und Fehlbewertungsrisiken klassischer Lesbarkeitsmetriken (Abschnitt~\ref{sec:klassifikator_laengen_ablation}) wurde ein kontrollierter synthetischer Benchmark entwickelt ($N = 30$ Textfassungen aus fünf lebensweltlichen Domänen mit jeweils $100$ bis $256$ Tokens bzw. zehn zusammenhängenden Sätzen).
 
 Tabelle~\ref{tab:anhang_synthetic_rule_benchmark_table} fasst die quantitativen Metrikergebnisse über die sechs parallelen Störungsstufen zusammen.
 
