@@ -20,7 +20,8 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{acronym}
-\usepackage{glossaries}
+\usepackage{longtable}
+\usepackage[nonumberlist]{glossaries}
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage[most]{tcolorbox}
@@ -66,8 +67,6 @@
 \tableofcontents
 \thispagestyle{empty}
 
-
-
 \newpage
 \pagenumbering{arabic} % Beginnt die Nummerierung ab hier mit 1
 \section{Einleitung}\label{sec:einleitung}
@@ -101,19 +100,12 @@
 \section{Fazit \& Ausblick}\label{sec:fazit_ausblick}
 \input{8.conclusion/conclusion}
 
-
-
-
-% ---------- ANHANG
+% ==========================================
+% VERZEICHNISSE & LITERATUR
+% ==========================================
 \newpage
-%\addcontentsline{toc}{section}{Anhang}
-%\section*{Appendix}
-\section{Anhang}
-
-% \input{acronyms}
-\newpage
-\section*{Glossar}
-\addcontentsline{toc}{section}{Glossar}
+\section*{Abkürzungsverzeichnis}
+\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
 \printglossary[title=, toctitle=]
 
 \newpage
@@ -127,16 +119,16 @@
 \addcontentsline{toc}{section}{Tabellenverzeichnis}
 \renewcommand{\listtablename}{}   % unterdrückt Titel
 \listoftables
-%\input{codeAvailability} %TODO
 
 \newpage
-%\addcontentsline{toc}{subsection}{Literaturverzeichnis}
-% \nocite{*}
-
 \printbibliography[title=Literaturverzeichnis, heading=bibintoc]
 
-
+% ==========================================
+% ANHANG (ganz am Schluss)
+% ==========================================
 \newpage
+\appendix
+\section{Anhang}\label{sec:anhang}
 \input{anhang/anhang}
 
 \end{document}

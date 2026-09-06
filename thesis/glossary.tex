@@ -1,47 +1,302 @@
 \makeglossaries
 
-\newglossaryentry{ATS}
-{
-    name={ATS (Automatic Text Simplification)},
-    description={Automatische maschinelle Textvereinfachung zur gezielten Reduktion linguistischer Komplexität auf syntaktischer, lexikalischer und struktureller Ebene.}
+\newglossarystyle{acronymalign}{%
+  \renewenvironment{theglossary}%
+    {\begin{longtable}[l]{@{}p{2.6cm}p{\dimexpr\textwidth-2.6cm-2\tabcolsep\relax}@{}}}%
+    {\end{longtable}}%
+  \renewcommand*{\glossaryheader}{}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand*{\glossentry}[2]{%
+    \textbf{\glstarget{##1}{\glossentryname{##1}}} &
+    \glossentrydesc{##1}\tabularnewline\addlinespace[2pt]
+  }%
+  \renewcommand*{\subglossentry}[3]{%
+    & \glossentrydesc{##2}\tabularnewline\addlinespace[2pt]
+  }%
+  \renewcommand*{\glsgroupskip}{}%
 }
-\newglossaryentry{LS}
+\setglossarystyle{acronymalign}
+
+\newglossaryentry{TenKGNAD}
 {
-    name={LS (Leichte Sprache)},
-    description={Stark reglementierte und gesetzlich normierte barrierefreie Sprachvariante des Deutschen zur Maximierung der Verständlichkeit für Menschen mit Lernschwierigkeiten oder kognitiven Einschränkungen.}
+    name={10kGNAD},
+    description={10k German News Articles Dataset}
 }
+
+\newglossaryentry{ALiBi}
+{
+    name={ALiBi},
+    description={Attention with Linear Biases}
+}
+
 \newglossaryentry{AS}
 {
-    name={AS (Alltagssprache)},
-    description={Deutsche Standardsprache und behördliche Fachsprache der ursprünglichen Ausgangstexte vor der Vereinfachung.}
+    name={AS},
+    description={Alltagssprache}
 }
-\newglossaryentry{DPO}
+
+\newglossaryentry{ATS}
 {
-    name={DPO (Direct Preference Optimization)},
-    description={Verfahren zur mathematisch geschlossenen Präferenzoptimierung generativer Sprachmodelle auf Paarvergleichen ohne separates Belohnungsmodell \citep{rafailov2023direct}.}
+    name={ATS},
+    description={Automatic Text Simplification}
 }
-\newglossaryentry{SFT}
+
+\newglossaryentry{BAcc}
 {
-    name={SFT (Supervised Fine-Tuning)},
-    description={Überwachtes Feintuning neuronaler Sprachmodelle auf parallelen Textpaaren zur Etablierung grundlegender Übersetzungsmuster.}
+    name={BAcc},
+    description={Balanced Accuracy}
 }
-\newglossaryentry{LoRA}
+
+\newglossaryentry{BCE}
 {
-    name={LoRA (Low-Rank Adaptation)},
-    description={Parametereffiziente Feintuning-Methode, welche die Gewichtsmatrizen neuronaler Schichten durch niederrangige Matrizenzerlegungen adaptiert \citep{hu2022lora}.}
+    name={BCE},
+    description={Binary Cross-Entropy}
 }
-\newglossaryentry{SARI}
+
+\newglossaryentry{BFSG}
 {
-    name={SARI},
-    description={Referenzbasierte Evaluierungsmetrik für Textvereinfachungen, die N-Gramm-Präzision und -Recall für Hinzufügungen, Löschungen und Beibehaltungen separat quantifiziert \citep{xu2016optimizing}.}
+    name={BFSG},
+    description={Barrierefreiheitsstärkungsgesetz}
 }
-\newglossaryentry{MATTR}
+
+\newglossaryentry{BGG}
 {
-    name={MATTR (Moving-Average Type-Token Ratio)},
-    description={Längenunabhängiges Maß der lexikalischen Vielfalt durch Berechnung der Type-Token-Ratio über ein gleitendes Wortfenster \citep{covington2010cutting}.}
+    name={BGG},
+    description={Behindertengleichstellungsgesetz}
 }
+
 \newglossaryentry{BITV}
 {
     name={BITV 2.0},
-    description={Barrierefreie-Informationstechnik-Verordnung; deutsche Rechtsverordnung zur barrierefreien Gestaltung digitaler Angebote öffentlicher Stellen nach dem BGG.}
+    description={Barrierefreie-Informationstechnik-Verordnung}
 }
+
+\newglossaryentry{BiLSTM}
+{
+    name={BiLSTM},
+    description={Bidirektionales Long Short-Term Memory}
+}
+
+\newglossaryentry{BLEU}
+{
+    name={BLEU},
+    description={Bilingual Evaluation Understudy}
+}
+
+\newglossaryentry{BMAS}
+{
+    name={BMAS},
+    description={Bundesministerium für Arbeit und Soziales}
+}
+
+\newglossaryentry{BPE}
+{
+    name={BPE},
+    description={Byte-Pair Encoding}
+}
+
+\newglossaryentry{CEFR}
+{
+    name={CEFR},
+    description={Common European Framework of Reference for Languages}
+}
+
+\newglossaryentry{DETECT}
+{
+    name={DETECT},
+    description={Direct Evaluation of Text-simplification Effectiveness, Clarity, and Transparency}
+}
+
+\newglossaryentry{DOM}
+{
+    name={DOM},
+    description={Document Object Model}
+}
+
+\newglossaryentry{DPO}
+{
+    name={DPO},
+    description={Direct Preference Optimization}
+}
+
+\newglossaryentry{FRE}
+{
+    name={FRE},
+    description={Flesch Reading Ease}
+}
+
+\newglossaryentry{GeSR}
+{
+    name={GeSR},
+    description={Gemeinsamer Europäischer Referenzrahmen für Sprachen}
+}
+
+\newglossaryentry{KDE}
+{
+    name={KDE},
+    description={Kernel Density Estimation}
+}
+
+\newglossaryentry{LIX}
+{
+    name={LIX},
+    description={Läsbarhetsindex (Lesbarkeitsindex)}
+}
+
+\newglossaryentry{LLM}
+{
+    name={LLM},
+    description={Large Language Model}
+}
+
+\newglossaryentry{LoRA}
+{
+    name={LoRA},
+    description={Low-Rank Adaptation}
+}
+
+\newglossaryentry{LS}
+{
+    name={LS},
+    description={Leichte Sprache}
+}
+
+\newglossaryentry{LSTM}
+{
+    name={LSTM},
+    description={Long Short-Term Memory}
+}
+
+\newglossaryentry{MAE}
+{
+    name={MAE},
+    description={Mean Absolute Error}
+}
+
+\newglossaryentry{MATTR}
+{
+    name={MATTR},
+    description={Moving-Average Type-Token Ratio}
+}
+
+\newglossaryentry{mBART}
+{
+    name={mBART},
+    description={Multilingual Bidirectional and Auto-Regressive Transformers}
+}
+
+\newglossaryentry{MOS}
+{
+    name={MOS},
+    description={Mean Opinion Score}
+}
+
+\newglossaryentry{MSE}
+{
+    name={MSE},
+    description={Mean Squared Error}
+}
+
+\newglossaryentry{NER}
+{
+    name={NER},
+    description={Named Entity Recognition}
+}
+
+\newglossaryentry{NLI}
+{
+    name={NLI},
+    description={Natural Language Inference}
+}
+
+\newglossaryentry{NLP}
+{
+    name={NLP},
+    description={Natural Language Processing}
+}
+
+\newglossaryentry{OOD}
+{
+    name={OOD},
+    description={Out-Of-Domain}
+}
+
+\newglossaryentry{PEFT}
+{
+    name={PEFT},
+    description={Parameter-Efficient Fine-Tuning}
+}
+
+\newglossaryentry{PPO}
+{
+    name={PPO},
+    description={Proximal Policy Optimization}
+}
+
+\newglossaryentry{PRAUC}
+{
+    name={PR-AUC},
+    description={Precision-Recall Area Under Curve}
+}
+
+\newglossaryentry{RLHF}
+{
+    name={RLHF},
+    description={Reinforcement Learning from Human/AI Feedback}
+}
+
+\newglossaryentry{RNN}
+{
+    name={RNN},
+    description={Recurrent Neural Network}
+}
+
+\newglossaryentry{ROCAUC}
+{
+    name={ROC-AUC},
+    description={Receiver Operating Characteristic Area Under Curve}
+}
+
+\newglossaryentry{ROUGE}
+{
+    name={ROUGE},
+    description={Recall-Oriented Understudy for Gisting Evaluation}
+}
+
+\newglossaryentry{SARI}
+{
+    name={SARI},
+    description={System Accessibility and Readability Index}
+}
+
+\newglossaryentry{SBERT}
+{
+    name={SBERT},
+    description={Sentence-BERT}
+}
+
+\newglossaryentry{Seq2Seq}
+{
+    name={Seq2Seq},
+    description={Sequence-to-Sequence}
+}
+
+\newglossaryentry{SFT}
+{
+    name={SFT},
+    description={Supervised Fine-Tuning}
+}
+
+\newglossaryentry{TTR}
+{
+    name={TTR},
+    description={Type-Token-Ratio}
+}
+
+\newglossaryentry{WSTF}
+{
+    name={WSTF},
+    description={Wiener Sachtextformel}
+}
+
+\glsaddall

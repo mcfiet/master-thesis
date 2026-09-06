@@ -1,0 +1,67 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{glssymbols}\relax \glsresetentrylist %
+\glossentry{TenKGNAD}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{A}\relax \glsresetentrylist %
+\glossentry{ALiBi}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{AS}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{ATS}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{B}\relax \glsresetentrylist %
+\glossentry{BAcc}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{BCE}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{BFSG}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{BGG}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{BiLSTM}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{BITV}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{BLEU}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{BMAS}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{BPE}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{C}\relax \glsresetentrylist %
+\glossentry{CEFR}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{D}\relax \glsresetentrylist %
+\glossentry{DETECT}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{DOM}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{DPO}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{F}\relax \glsresetentrylist %
+\glossentry{FRE}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{G}\relax \glsresetentrylist %
+\glossentry{GeSR}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{K}\relax \glsresetentrylist %
+\glossentry{KDE}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{L}\relax \glsresetentrylist %
+\glossentry{LIX}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{LLM}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{LoRA}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{LS}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{LSTM}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{M}\relax \glsresetentrylist %
+\glossentry{MAE}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{MATTR}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{mBART}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{MOS}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{MSE}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{N}\relax \glsresetentrylist %
+\glossentry{NER}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{NLI}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{NLP}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{O}\relax \glsresetentrylist %
+\glossentry{OOD}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{P}\relax \glsresetentrylist %
+\glossentry{PEFT}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{PPO}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{PRAUC}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{R}\relax \glsresetentrylist %
+\glossentry{RLHF}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{RNN}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{ROCAUC}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{ROUGE}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossentry{SARI}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{SBERT}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{Seq2Seq}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\glossentry{SFT}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{T}\relax \glsresetentrylist %
+\glossentry{TTR}{\glossaryentrynumbers{\relax \glsignore{0}}}\glsgroupskip
+\glsgroupheading{W}\relax \glsresetentrylist %
+\glossentry{WSTF}{\glossaryentrynumbers{\relax \glsignore{0}}}%
+\end{theglossary}\glossarypostamble
