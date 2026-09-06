@@ -3,9 +3,9 @@
 \subsection{Das Konzept der Leichten Sprache}
 \label{sec:konzept_leichte_sprache}
 
-Das Konzept der Leichten Sprache (LS) stellt eine stark reglementierte Sprachvariante der deutschen Standardsprache dar, die primär darauf abzielt, Barrierefreiheit in der schriftlichen Kommunikation für Menschen mit kognitiven Einschränkungen, Lernschwierigkeiten oder geringer Lese- und Schreibkompetenz zu gewährleisten \citep{bmas2025ratgeber}. Syntaktisch zeichnet sich LS unter anderem durch kurze Hauptsätze (Subjekt-Prädikat-Objekt), den Verzicht auf Nebensätze, Passivkonstruktionen, den Genitiv sowie den Konjunktiv aus. Auf lexikalischer Ebene werden abstrakte Begriffe durch konkrete Beispiele ersetzt, und lange zusammengesetzte Wörter werden mittels typografischer Hilfsmittel wie Bindestrichen oder dem Mediopunkt (z.~B. \textit{Bundestags-Wahl} oder \textit{Bundestags·wahl}) morphologisch segmentiert.
+Die Leichte Sprache (LS) ist eine geregelte Sprachvariante des Deutschen. Sie soll Barrierefreiheit in der schriftlichen Kommunikation für Menschen mit Lernschwierigkeiten, kognitiven Einschränkungen oder geringer Lese- und Schreibkompetenz ermöglichen \citep{bmas2025ratgeber}. Syntaktisch zeichnet sich LS durch kurze Hauptsätze in Subjekt-Prädikat-Objekt-Struktur sowie den Verzicht auf Nebensätze, Passivformen, Genitive und Konjunktive aus. Auf lexikalischer Ebene werden abstrakte Begriffe durch konkrete Umschreibungen oder Beispiele ersetzt. Lange Komposita werden typografisch durch Bindestriche oder den Mediopunkt gegliedert (z.~B. \textit{Bundestags-Wahl} oder \textit{Bundestags·wahl}).
 
-Vom Konzept der Leichten Sprache ist die sogenannte \textit{Einfache Sprache} (Plain German) abzugrenzen. Während die Leichte Sprache als hochspezialisierte Sprachvariante mit strengen, normierten Richtlinien konzipiert ist und in Deutschland rechtlich durch die Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) für öffentliche Stellen vorgeschrieben wird \citep{bitv2019}, besitzt die Einfache Sprache ein weitaus weniger restriktives Regelwerk \citep{bund2026barrierefreiheit}. Letztere richtet sich an eine breitere Zielgruppe (wie Menschen mit Deutsch als Zweitsprache oder funktionale Alphabeten) und lässt komplexere Satzstrukturen sowie einen größeren Wortschatz zu. Ein weiterer kritischer Unterschied liegt im Qualitätssicherungsprozess: Texte in Leichter Sprache müssen zwingend von Personen aus der primären Zielgruppe auf ihre Verständlichkeit hin geprüft werden, was bei Texten in Einfacher Sprache nicht vorgeschrieben ist \citep{bund2026barrierefreiheit}.
+Von der Leichten Sprache ist die sogenannte \textit{Einfache Sprache} (Plain German) zu unterscheiden. Während Leichte Sprache festen Richtlinien folgt und in Deutschland für öffentliche Stellen durch die Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) rechtlich verankert ist \citep{bitv2019}, besitzt Einfache Sprache ein weniger restriktives Regelwerk \citep{bund2026barrierefreiheit}. Sie richtet sich an eine breitere Zielgruppe — etwa Menschen mit Deutsch als Zweitsprache oder funktionale Analphabeten — und erlaubt komplexere Satzstrukturen sowie einen größeren Wortschatz. Ein wesentlicher Unterschied betrifft zudem die Qualitätssicherung: Texte in Leichter Sprache müssen verpflichtend durch Personen aus der Zielgruppe auf Verständlichkeit geprüft werden, was bei Einfacher Sprache nicht vorgeschrieben ist \citep{bund2026barrierefreiheit}.
 
 \subsection{Linguistische Maße \& Lesbarkeitsmetriken}
 \label{sec:linguistische_masse_lesbarkeit}
@@ -22,7 +22,7 @@ Traditionelle Lesbarkeitsformeln schätzen die Textschwierigkeit deterministisch
     \begin{equation}
         \text{WSTF} = 0{,}1935 \cdot \text{MS} + 0{,}1672 \cdot \text{SL} + 0{,}1297 \cdot \text{IW} - 0{,}0327 \cdot \text{ES} - 0{,}875
     \end{equation}
-    mit dem Prozentsatz an Wörtern mit mindestens drei Silben ($\text{MS}$), der mittleren Satzlänge ($\text{SL}$), dem Prozentsatz an Wörtern mit mehr als sechs Buchstaben ($\text{IW}$) und dem Anteil einsilbiger Wörter ($\text{ES}$). Ein niedrigerer Wert indiziert leichtere Lesbarkeit (z.\,B. Stufe 4--6 für Grund- und Hauptschulniveau).
+    mit dem Prozentsatz an Wörtern mit mindestens drei Silben ($\text{MS}$), der mittleren Satzlänge ($\text{SL}$), dem Prozentsatz an Wörtern mit mehr als sechs Buchstaben ($\text{IW}$) und dem Anteil einsilbiger Wörter ($\text{ES}$). Niedrigere Werte stehen für eine leichtere Lesbarkeit (z.\,B. Stufen 4--6 für Grund- und Hauptschulniveau).
     \item \textbf{LIX-Lesbarkeitsindex nach \citet{bjornsson1968readability}:} Der LIX quantifiziert die Lesbarkeit sprachunabhängig als Summe der mittleren Satzlänge und des Prozentanteils langer Wörter ($> 6$ Zeichen, $\text{LW}$):
     \begin{equation}
         \text{LIX} = \frac{\text{Wörter}}{\text{Sätze}} + \left( \frac{\text{LW}}{\text{Wörter}} \cdot 100 \right)
@@ -30,18 +30,18 @@ Traditionelle Lesbarkeitsformeln schätzen die Textschwierigkeit deterministisch
 \end{enumerate}
 
 \subsubsection{Lexikalische Diversität: TTR vs. MATTR}
-Die lexikalische Vielfalt eines Textes wird traditionell über die \textit{Type-Token-Ratio} ($\text{TTR} = |V| / N$, \citealp{chotlos1944studies, templin1957certain}) gemessen, wobei $|V|$ die Anzahl distinkter Worttypen und $N$ die Gesamtwortzahl bezeichnet. Mit zunehmender Textlänge wächst die Anzahl neuer Worttypen jedoch degressiv an, da sich Funktionswörter und zentrale Begriffe im fortlaufenden Text unvermeidlich wiederholen. Dadurch weisen längere Texte mathematisch bedingt stets eine niedrigere TTR auf als kurze Absätze, was den Vergleich unterschiedlich langer Sprachfassungen systematisch verzerrt.
+Die lexikalische Vielfalt eines Textes wird traditionell über die \textit{Type-Token-Ratio} ($\text{TTR} = |V| / N$, \citealp{chotlos1944studies, templin1957certain}) gemessen, wobei $|V|$ die Anzahl distinkter Worttypen und $N$ die Gesamtwortzahl bezeichnet. Mit zunehmender Textlänge flacht der Zuwachs neuer Worttypen jedoch naturgemäß ab, da sich Funktionswörter und Kernbegriffe im fortlaufenden Text wiederholen. Längere Texte weisen daher systematisch eine niedrigere TTR auf als kurze Abschnitte, was den direkten Vergleich unterschiedlich langer Texte verzerrt.
 
-Um diese Längenverzerrung aufzuheben, etablierte sich die \textit{Moving-Average Type-Token-Ratio} (MATTR) nach \citet{covington2010cutting}. Die MATTR berechnet die TTR kontinuierlich über ein gleitendes Fenster fester Wortbreite $W$ (standardmäßig $W = 50$):
+Um diesen Längeneinfluss zu eliminieren, verwendet man die \textit{Moving-Average Type-Token-Ratio} (MATTR) nach \citet{covington2010cutting}. Die MATTR berechnet die TTR über ein gleitendes Fenster fester Wortbreite $W$ (standardmäßig $W = 50$):
 \begin{equation}
     \text{MATTR}_W = \frac{1}{N - W + 1} \sum_{i=1}^{N - W + 1} \frac{|V_{i, W}|}{W}
 \end{equation}
-wobei $|V_{i, W}|$ die Anzahl eindeutiger Worttypen im $i$-ten Fenster repräsentiert. Die MATTR ist mathematisch strikt invariant gegenüber der Gesamtlänge des Dokuments.
+wobei $|V_{i, W}|$ die Anzahl distinkter Worttypen im $i$-ten Fenster angibt. Die MATTR ist dadurch unabhängig von der Gesamtlänge des Textes.
 
 \subsubsection{Faktenerhalt \& Faktentreue (Named Entity Recognition)}
-Zur Überprüfung der semantischen Konsistenz und des Erhalts von Sachverhalten wird das Verfahren der \textit{Named Entity Recognition} (NER) herangezogen, welches benannte Entitäten (z.\,B. Personen, Organisationen, Orte) automatisiert identifiziert \citep{nadeau2007survey}. In dieser Arbeit werden die Entitäten mit der Bibliothek \texttt{spaCy} \citep{honnibal2020spacy} und dem deutschen Sprachmodell \texttt{de\_core\_news\_lg} extrahiert.
+Zur Überprüfung des inhaltlichen Faktenerhalts wird \textit{Named Entity Recognition} (NER) eingesetzt. Das Verfahren extrahiert benannte Entitäten wie Personen, Organisationen und Orte \citep{nadeau2007survey}. In dieser Arbeit erfolgt die Entitätenerkennung mit \texttt{spaCy} \citep{honnibal2020spacy} über das deutsche Sprachmodell \texttt{de\_core\_news\_lg}.
 
-In Anlehnung an Arbeiten zur Faktizität bei der Textvereinfachung \citep{devaraj2021evaluating} wird der Entitätenabgleich über zwei Mengenmaße formalisiert: Für die Entitätenmenge $E_{\text{AS}}$ des Ausgangstexts und $E_{\text{LS}}$ der vereinfachten Fassung definiert sich der bidirektionale Abgleich über:
+In Anlehnung an \citet{devaraj2021evaluating} wird der Entitätenabgleich über zwei Mengenmaße definiert: Für die Entitätenmenge $E_{\text{AS}}$ des Ausgangstexts und $E_{\text{LS}}$ der vereinfachten Fassung gilt:
 \begin{align}
     \text{Faktenerhalt (Recall}_{\text{AS} \to \text{LS}}\text{)} &= \frac{|E_{\text{AS}} \cap E_{\text{LS}}|}{|E_{\text{AS}}|} \\
     \text{Faktentreue (Recall}_{\text{LS} \to \text{AS}}\text{)} &= \frac{|E_{\text{AS}} \cap E_{\text{LS}}|}{|E_{\text{LS}}|}
@@ -54,24 +54,24 @@ Hierbei bezeichnet $|E_{\text{AS}} \cap E_{\text{LS}}|$ die Anzahl der in beiden
 Neuronale Sprachmodelle verarbeiten Text über mathematische Repräsentationen. Der Prozess gliedert sich in Tokenisierung, Einbettung und Vektordistanzberechnung:
 
 \subsubsection{Subword-Tokenisierung}
-Klassische wortbasierte Vokabulare leiden unter dem Problem unbekannter Wörter. Moderne neuronale Modelle nutzen daher Subword-Tokenisierer wie Byte-Pair Encoding (BPE) nach \citet{sennrich2016neural} oder SentencePiece. Ausgehend von atomaren Zeichen werden frequente Zeichenpaare iterativ zu Subwort-Einheiten zusammengefügt. Dadurch können seltene zusammengesetzte Wörter (z.\,B. \textit{Behindertengleichstellungsgesetz}) deterministisch in bekannte Sub-Tokens aufgespalten werden, während ein kompaktes, geschlossenes Vokabular fester Größe gewahrt bleibt.
+Reine wortbasierte Vokabulare scheitern häufig an Wörtern außerhalb des Trainingslexikons (Out-of-Vocabulary, OOV). Moderne neuronale Modelle nutzen daher Subword-Tokenisierer wie Byte-Pair Encoding (BPE) nach \citet{sennrich2016neural} oder SentencePiece. Ausgehend von Einzelzeichen werden häufige Zeichenpaare iterativ zu Subwort-Einheiten verschmolzen. Dadurch lassen sich auch seltene Komposita (z.\,B. \textit{Behindertengleichstellungsgesetz}) in bekannte Sub-Tokens zerlegen, während die Vokabulargröße kompakt und fest begrenzt bleibt.
 
 \subsubsection{Text-Embeddings \& Sentence-BERT (SBERT)}
-Diskrete Wörter besitzen keine mathematische Abstandsmetrik. \textit{Embeddings} bilden Wörter daher auf Vektoren $\mathbf{e} \in \mathbb{R}^d$ ab, sodass semantisch ähnliche Begriffe im Vektorraum nah beieinander liegen.
+Wörter liegen zunächst als diskrete Symbole ohne inhärente Abstandsmetrik vor. \textit{Embeddings} bilden Wörter auf kontinuierliche Vektoren $\mathbf{e} \in \mathbb{R}^d$ ab, sodass semantisch ähnliche Begriffe im Vektorraum eng benachbart sind.
 
-Um ganze Sätze oder Absätze zu vergleichen, stößt Standard-BERT \citep{devlin2019bert} an Effizienzgrenzen: Ein paarweiser Vergleich erfordert dort, beide Sätze gemeinsam als Paar durch alle Modellschichten zu leiten (\textit{Cross-Encoder}), was bei großen Textmengen mit $\mathcal{O}(N^2)$ skaliert. \textit{Sentence-BERT} (SBERT) nach \citet{reimers2019sentence} löst dies über eine siamesische Architektur (\textit{Bi-Encoder}): Zwei identische BERT-Netzwerke mit geteilten Gewichten erzeugen über ein \textit{Mean-Pooling} für jeden Text separat einen festen Satzvektor $\mathbf{u} \in \mathbb{R}^d$. Durch Vortraining auf semantische Textähnlichkeit repräsentiert dieser Vektor die Gesamtaussage, sodass sich Textähnlichkeiten im Vektorraum extrem effizient über die Kosinus-Ähnlichkeit berechnen lassen.
+Für den paarweisen Vergleich ganzer Sätze oder Absätze ist das Standard-BERT-Modell \citep{devlin2019bert} rechenintensiv: Beide Sequenzen müssen gemeinsam als Paar durch alle Transformerschichten propagiert werden (\textit{Cross-Encoder}), was bei $N$ Texten mit $\mathcal{O}(N^2)$ skaliert. \textit{Sentence-BERT} (SBERT) nach \citet{reimers2019sentence} umgeht diesen Engpass über eine siamesische Architektur (\textit{Bi-Encoder}): Zwei identische BERT-Netzwerke mit geteilten Gewichten berechnen über \textit{Mean-Pooling} separate Vektoren $\mathbf{u} \in \mathbb{R}^d$ für jeden Text. Auf dieser Basis können semantische Ähnlichkeiten im Vektorraum effizient über die Kosinus-Ähnlichkeit ermittelt werden.
 
 \subsubsection{Long-Context-Embeddings \& ALiBi-Attention}
-Klassische Transformer-Einbettungen (wie MiniLM) besitzen eine strikte Längenbegrenzung von $128$ bis $512$ Tokens, da sie starre Positionskodierungen nutzen. Bei längeren Texten müssen Dokumente abgeschnitten werden (\textit{Truncation}), was zu Informationsverlust führt.
+Herkömmliche Transformer-Modelle (wie MiniLM) sind durch statische Positionskodierungen meist auf Sequenzlängen von $128$ bis $512$ Tokens begrenzt. Längere Dokumente müssen daher abgeschnitten werden (\textit{Truncation}), was zu Informationsverlust führt.
 
-Das in dieser Arbeit zur Dokumentenfilterung genutzte Modell \texttt{jina-embeddings-v2-base-de} \citep{gunther2023jina} löst diese Beschränkung durch den Einsatz von \textit{Attention with Linear Biases} (ALiBi) nach \citet{press2021train}. Anstelle starrer Positionsvektoren bestraft ALiBi die Aufmerksamkeit zwischen zwei Wörtern linear anhand ihres relativen Abstands im Text. Dies ermöglicht es dem Modell, Eingaben von bis zu $8.192$ Tokens flexibel zu verarbeiten, sodass selbst lange Artikel und behördliche Verordnungen vollständig ohne Informationsverlust vektorisiert werden können.
+Das in dieser Arbeit zur Dokumentenfilterung genutzte Modell \texttt{jina-embeddings-v2-base-de} \citep{gunther2023jina} überwindet diese Grenze mithilfe von \textit{Attention with Linear Biases} (ALiBi) nach \citet{press2021train}. Anstelle absoluter Positionsvektoren addiert ALiBi eine lineare Distanzstrafe direkt auf die Aufmerksamkeitsmatrix (Attention Scores) der Token-Paare. Dies erlaubt die Verarbeitung von Sequenzen mit bis zu $8.192$ Tokens, sodass auch längere behördliche Texte und Artikel vollständig eingebettet werden können.
 
 \subsubsection{Semantische Ähnlichkeitsmessung}
 Die inhaltliche Nähe zweier Sequenzen $x$ und $y$ mit den Einbettungen $\mathbf{u} = \text{Embed}(x)$ und $\mathbf{v} = \text{Embed}(y)$ wird über die Kosinus-Ähnlichkeit im Vektorraum quantifiziert:
 \begin{equation}
     \text{sim}_{\cos}(\mathbf{u}, \mathbf{v}) = \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|_2 \|\mathbf{v}\|_2} \in [-1, 1]
 \end{equation}
-Für Normalisierungszwecke auf das Standardintervall $[0, 1]$ wird die lineare Transformation $\text{sim}_{\text{norm}} = \frac{\text{sim}_{\cos} + 1}{2}$ genutzt.
+Zur Normalisierung auf das Intervall $[0, 1]$ dient die lineare Skalierung $\text{sim}_{\text{norm}} = \frac{\text{sim}_{\cos} + 1}{2}$.
 
 \subsection{Architekturen moderner neuronaler Sprachmodelle}
 \label{sec:architekturen_sprachmodelle}
@@ -79,51 +79,51 @@ Für Normalisierungszwecke auf das Standardintervall $[0, 1]$ wird die lineare T
 In der modernen Computerlinguistik bilden rekurrente Architekturen und Aufmerksamkeits-basierte Transformer-Netzwerke die beiden dominanten Modellparadigmen.
 
 \subsubsection{Rekurrente Neuronale Netze, LSTM \& BiLSTM}
-Klassische rekurrente neuronale Netze (\textit{RNNs} nach Elman) verarbeiten Text sequenziell Wort für Wort und aktualisieren in jedem Schritt einen internen Zustand (\textit{Hidden State} $\mathbf{h}_t$). Bei längeren Texten führt dies beim Training über viele Zeitschritte jedoch zum Problem verschwindender Gradienten (\textit{Vanishing Gradient Problem}), sodass das Modell Zusammenhänge zu weiter zurückliegenden Wörtern schnell vergisst.
+Klassische rekurrente neuronale Netze (\textit{RNNs}) verarbeiten Sequenzen schrittweise und aktualisieren in jedem Zeitschritt einen internen Zustand (\textit{Hidden State} $\mathbf{h}_t$). Bei längeren Textfolgen führt das Training über viele Zeitschritte zum Problem verschwindender Gradienten (\textit{Vanishing Gradient Problem}), wodurch weiter zurückliegende Kontextinformationen verloren gehen.
 
-Das \textit{Long Short-Term Memory} (LSTM) nach \citet{hochreiter1997long} löst dieses Problem durch einen kontinuierlichen Speicherkanal (Zellzustand $\mathbf{C}_t$) und drei Steuerungstore (\textit{Gates}):
+Das \textit{Long Short-Term Memory} (LSTM) nach \citet{hochreiter1997long} adressiert diese Limitierung über einen dedizierten Zellzustand $\mathbf{C}_t$ sowie drei funktionale Steuerungstore (\textit{Gates}):
 \begin{itemize}
-    \item \textbf{Forget Gate:} Entscheidet anhand des aktuellen Wortes und des bisherigen Kontexts, welche alten Informationen aus dem Zellgedächtnis verworfen werden.
-    \item \textbf{Input Gate:} Bestimmt, welche neuen Informationen aus der aktuellen Eingabe in den Zellzustand aufgenommen werden.
-    \item \textbf{Output Gate:} Reguliert, welche Teile des internen Gedächtnisses als Ausgabezustand $\mathbf{h}_t$ an den nächsten Zeitschritt weitergegeben werden.
+    \item \textbf{Forget Gate:} Reguliert, welche Anteile des vorherigen Zellzustands $\mathbf{C}_{t-1}$ verworfen werden.
+    \item \textbf{Input Gate:} Steuert, welche neuen Informationen aus der aktuellen Eingabe in den Zellzustand einfließen.
+    \item \textbf{Output Gate:} Bestimmt, welche Anteile des aktualisierten Zellzustands $\mathbf{C}_t$ als neuer Hidden State $\mathbf{h}_t$ ausgegeben werden.
 \end{itemize}
 
 Das \textit{Bidirektionale LSTM} (BiLSTM) nach \citet{schuster1997bidirectional} erweitert diese Architektur, indem es den Text gleichzeitig in zwei Richtungen verarbeitet: Eine Vorwärts-Schicht liest den Satz von links nach rechts, während eine parallele Rückwärts-Schicht den Satz von rechts nach links durchläuft. Durch das Zusammenführen beider Zustände kann das Modell an jeder Textposition simultan den gesamten vorherigen und nachfolgenden Kontext erfassen.
 
 \subsubsection{Transformer \& Attention-Mechanismus}
-Das von \citet{vaswani2017attention} eingeführte Transformer-Paradigma verzichtet vollständig auf die schrittweise sequentielle Verarbeitung von RNNs und verarbeitet alle Wörter eines Textes simultan parallel.
+Die Transformer-Architektur \citep{vaswani2017attention} löst die rein sequentielle Abarbeitung rekurrenter Netze durch eine vollständig parallele Verarbeitung der gesamten Sequenz ab.
 
-Das Herzstück bildet der \textit{Self-Attention-Mechanismus} (Selbstaufmerksamkeit): Anstatt Informationen über viele Zwischenschritte weiterzureichen, kann jedes Wort im Text direkt eine Beziehung zu jedem anderen Wort aufbauen — unabhängig von der Distanz im Satz:
-\begin{itemize}
-    \item \textbf{Queries, Keys \& Values:} Für jedes Wort prüft das Modell über Suchanfragen (\textit{Queries}) und Schlüsselvektoren (\textit{Keys}), welche anderen Wörter im Satz für das aktuelle Verständnis relevant sind, und aggregiert deren Bedeutungsinhalte (\textit{Values}) gewichtet.
-    \item \textbf{Multi-Head Attention:} Dieser Prozess läuft in mehreren parallelen Aufmerksamkeitsköpfen gleichzeitig ab. Dadurch kann das Modell simultan verschiedene sprachliche Aspekte erfassen — etwa grammatikalische Satzstrukturen in einem Kopf und thematische Zusammenhänge in einem anderen.
-\end{itemize}
+Grundlage hierfür ist der \textit{Scaled Dot-Product Attention}-Mechanismus. Die Eingabesequenz wird über trainierbare Projektionsmatrizen in Abfragen (\textit{Queries} $\mathbf{Q}$), Schlüssel (\textit{Keys} $\mathbf{K}$) und Werte (\textit{Values} $\mathbf{V}$) überführt. Die Aufmerksamkeitsgewichte berechnen sich über das skalierte Skalarprodukt:
+\begin{equation}
+    \text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left( \frac{\mathbf{Q} \mathbf{K}^T}{\sqrt{d_k}} \right) \mathbf{V}
+\end{equation}
+Über \textit{Multi-Head Attention} wird dieser Mechanismus mehrfach parallel mit unterschiedlichen Projektionsräumen ausgeführt. Dadurch kann das Modell an jeder Token-Position zeitgleich unterschiedliche syntaktische und semantische Relationen im Satz erfassen.
 
 \subsubsection{Transformer-Modellfamilien im NLP}
 Je nach Verknüpfung der Aufmerksamkeitsschichten werden drei primäre Architekturtypen unterschieden:
 \begin{enumerate}
     \item \textbf{Sequence-to-Sequence / Encoder-Decoder-Modelle:} Diese Architektur (wie BART nach \citet{lewis2020bart} sowie dessen mehrsprachige Erweiterungen mBART-25 \citep{liu2020multilingual} und mBART-50 \citep{tang2020multilingual}) kombiniert einen bidirektionalen Encoder zur vollständigen Erfassung des Ausgangstextes mit einem autoregressiven Decoder. Der Decoder generiert die Zielsequenz Token für Token und greift über \textit{Cross-Attention} auf die kontextualisierten Repräsentationen des Encoders zu. Sprachspezifische Tokens (wie \texttt{de\_DE} in mBART-50) steuern dabei die Zielsprache.
-    \item \textbf{Causal Decoder-Only-Modelle:} Modelle wie LLaMA, Mistral oder Qwen nutzen ausschließlich kausal maskierte Aufmerksamkeitsschichten (\textit{Causal Masking}), bei denen jedes Token nur auf vorausgegangene Tokens blicken darf. Sie werden über die autoregressive Vorhersage des nächsten Tokens (\textit{Next-Token Prediction}) vortrainiert und über Prompting oder Instruction Fine-Tuning gesteuert.
+    \item \textbf{Causal Decoder-Only-Modelle:} Modelle wie LLaMA, Mistral oder Qwen nutzen ausschließlich kausal maskierte Aufmerksamkeitsschichten (\textit{Causal Masking}), sodass jedes Token nur auf vorangegangene Positionen zugreifen kann. Sie werden über die autoregressive Vorhersage des nächsten Tokens (\textit{Next-Token Prediction}) vortrainiert und über Prompting oder Instruction Fine-Tuning gesteuert.
     \item \textbf{Bidirektionale Encoder-Only-Modelle:} Modelle wie BERT \citep{devlin2019bert} oder GBERT verarbeiten Eingabesequenzen vollständig bidirektional. Sie eignen sich für Sequenzklassifikation und Einbettungsgenerierung, nicht jedoch zur autoregressiven Textgenerierung.
 \end{enumerate}
 
 \subsection{Feinabstimmung \& Parameter-Efficient Fine-Tuning (PEFT)}
 \label{sec:peft_lora_theorie}
 
-Das Vortraining von Sprachmodellen auf riesigen Korpora vermittelt breites Sprachwissen. Um Modelle auf spezifische Zielaufgaben wie die Textvereinfachung auszurichten, existieren unterschiedliche Adaptionsstrategien.
+Das unüberwachte Vortraining großer Sprachmodelle vermittelt allgemeine linguistische Repräsentationen. Um Modelle auf zielspezifische Aufgaben wie die Textvereinfachung auszurichten, existieren verschiedene Adaptionsstrategien.
 
 \subsubsection{Supervised Fine-Tuning (SFT)}
 Beim überwachten Feintuning (\textit{Supervised Fine-Tuning}, SFT) lernt das vortrainierte Sprachmodell anhand von parallelen Datenpaaren (z.\,B. komplexer Ausgangstext und Zielübersetzung in Leichter Sprache). Das Modell wird darauf trainiert, für jeden Eingabetext Schritt für Schritt die wahrscheinlichsten Folgewörter der menschlichen Referenzübersetzung zu erzeugen.
 
-Bei einem vollständigen Feintuning (\textit{Full Fine-Tuning}) werden alle Milliarden Modellparameter gleichzeitig aktualisiert. Dies erfordert jedoch enorme Hardware-Ressourcen und birgt das Risiko des katastrophalen Vergessens (\textit{Catastrophic Forgetting}), bei dem das Modell grundlegendes Sprach- und Weltwissen verliert.
+Bei einem vollständigen Feintuning (\textit{Full Fine-Tuning}) werden alle Modellparameter aktualisiert. Dies erfordert erhebliche Hardware-Ressourcen und birgt das Risiko des katastrophalen Vergessens (\textit{Catastrophic Forgetting}), bei dem zuvor erlernte generalistische Fähigkeiten des Modells degradieren.
 
 \subsubsection{Low-Rank Adaptation (LoRA)}
 Um Modelle ressourceneffizient anzupassen, führte \citet{hu2022lora} die \textit{Low-Rank Adaptation} (LoRA) im Rahmen von \textit{Parameter-Efficient Fine-Tuning} (PEFT) ein:
 \begin{itemize}
-    \item \textbf{Einfrieren der Hauptgewichte:} Die vortrainierten Basisgewichte des Sprachmodells werden vollständig fixiert und während des Trainings nicht verändert.
-    \item \textbf{Niedrigdimensionale Adaptermatrizen:} Stattdessen werden an den Aufmerksamkeitsschichten kleine Zusatzmatrizen angehängt, deren Parameterzahl über einen niedrigen Rang (typischerweise $r \in \{8, 16, 32\}$) stark komprimiert wird.
+    \item \textbf{Fixierung der Basisgewichte:} Die vortrainierten Modellgewichte $\mathbf{W}_0 \in \mathbb{R}^{d \times k}$ bleiben während des gesamten Trainings eingefroren.
+    \item \textbf{Niedrigrang-Zerlegung des Gewichts-Updates:} Das Parameter-Update $\Delta \mathbf{W}$ wird durch das Produkt zweier kleiner Matrizen niedrigen Rangs approximiert: $\Delta \mathbf{W} = \mathbf{B} \mathbf{A}$, mit $\mathbf{B} \in \mathbb{R}^{d \times r}$, $\mathbf{A} \in \mathbb{R}^{r \times k}$ und Rang $r \ll \min(d, k)$.
 \end{itemize}
-Hierdurch reduziert LoRA die Zahl der trainierbaren Parameter um über $99\,\%$, was den Speicherbedarf drastisch senkt. Nach dem Training können die gelernten Adapter nahtlos in das Basismodell verschmolzen werden (\textit{Weight Merging}), sodass bei der Textgenerierung keinerlei zusätzliche Rechenzeit anfällt. Zudem können die Adapter im Speicher flexibel aktiviert und deaktiviert werden (\texttt{disable\_adapter()}), um während des Alignment-Trainings direkt auf das unberührte Ausgangsmodell als Referenz zuzugreifen.
+Hierdurch reduziert LoRA die Zahl der trainierbaren Parameter typischerweise um über $99\,\%$, was den Speicher- und Rechenbedarf beim Training minimiert. Nach dem Training können die Adaptermatrizen durch einfache Addition $\mathbf{W} = \mathbf{W}_0 + \frac{\alpha}{r}\mathbf{B}\mathbf{A}$ direkt in das Basismodell integriert werden (\textit{Weight Merging}), wodurch zur Inferenzzeit keine zusätzliche Latenz entsteht.
 
 \subsection{Präferenzoptimierung \& Reinforcement Learning (RLHF \& DPO)}
 \label{sec:rlhf_dpo_ppo_theorie}
@@ -133,24 +133,24 @@ Da reines SFT lediglich die statistische Wortverteilung des Trainingskorpus nach
 \subsubsection{Das klassische RLHF-Paradigma \& PPO}
 Im klassischen \textit{Reinforcement Learning from Human/AI Feedback} (RLHF) nach \citet{ouyang2022training} wird zunächst ein separates Reward-Modell trainiert, das Textqualität mit einem skalaren Punktwert bewertet. Anschließend wird das Sprachmodell über \textit{Proximal Policy Optimization} (PPO) \citep{schulman2017proximal} optimiert, indem das Modell während des Trainings Texte online generiert und anhand des Rewards anpasst.
 
-In der Praxis bringt PPO jedoch erhebliche Herausforderungen mit sich: Es erfordert, bis zu vier große Modelle gleichzeitig im GPU-Speicher zu halten (Actor, Critic, Reward- und Referenzmodell), und leidet unter hoher Trainingsinstabilität sowie erheblichem Rechenaufwand.
+In der praktischen Umsetzung ist PPO mit hohem Rechen- und Speicheraufwand verbunden, da bis zu vier Modellinstanzen gleichzeitig vorgehalten werden müssen (Akteurs-, Kritiker-, Reward- und Referenzmodell). Zudem neigt das Online-Verfahren zu Trainingsinstabilitäten und erfordert eine feinteilige Hyperparameterabstimmung.
 
 \subsubsection{Direct Preference Optimization (DPO)}
 \label{sec:dpo_theorie}
-Um diese Hürden zu überwinden, entwickelten \citet{rafailov2023direct} die \textit{Direct Preference Optimization} (DPO). DPO verzichtet vollständig auf ein separates Reward-Modell und dynamische Generierungsschleifen zur Trainingszeit. Stattdessen wird das Modell direkt auf Offline-Präferenzpaaren $(x, y_w, y_l)$ trainiert, wobei $y_w$ die bevorzugte (z.\,B. hohe Einfachheit und Faktentreue) und $y_l$ die abgelehnte Textvariante darstellt:
+Die \textit{Direct Preference Optimization} (DPO) nach \citet{rafailov2023direct} umgeht diese Komplexität, indem sie die implizite Belohnungsfunktion des Bradley-Terry-Präferenzmodells direkt über die Sprachmodell-Policy parametrisiert. DPO verzichtet vollständig auf ein separates Reward-Modell sowie dynamisches Online-Sampling. Stattdessen wird die Policy $\pi_\theta$ direkt auf statischen Präferenzpaaren $(x, y_w, y_l)$ optimiert, wobei $y_w$ die bevorzugte und $y_l$ die abgelehnte Sequenz darstellt:
 \begin{equation}
     \mathcal{L}_{\text{DPO}}(\theta; \pi_{\text{ref}}) = - \mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}_{\text{pref}}} \left[ \log \sigma \left( \beta \log \frac{\pi_\theta(y_w \mid x)}{\pi_{\text{ref}}(y_w \mid x)} - \beta \log \frac{\pi_\theta(y_l \mid x)}{\pi_{\text{ref}}(y_l \mid x)} \right) \right]
     \label{eq:dpo_loss}
 \end{equation}
-Hierbei steuert der Hyperparameter $\beta$ als Temperatur, wie stark das trainierte Modell an die ursprüngliche Basis-Policy $\pi_{\text{ref}}$ gebunden bleibt, um Sprachfluss und Grammatik zu bewahren. DPO ermöglicht somit ein stabiles, speichereffizientes Alignment auf die Zielregeln der Leichten Sprache.
+Der Hyperparameter $\beta$ kontrolliert dabei die Regularisierung gegenüber der Referenz-Policy $\pi_{\text{ref}}$ (KL-Divergenz-Strafe), um ein Abdriften des Sprachflusses zu verhindern. DPO ermöglicht dadurch ein stabiles und speichereffizientes Alignment.
 
 \subsection{Generierungs- und Decoding-Strategien}
 \label{sec:decoding_strategien_theorie}
 
-Bei der Textgenerierung bestimmt die sogenannte Decoding-Strategie, wie das Sprachmodell aus den berechneten Wortwahrscheinlichkeiten den finalen Satz zusammenbaut:
+Bei der autoregressiven Textgenerierung bestimmt die Decoding-Strategie, wie aus den modellierten Wahrscheinlichkeitsverteilungen $P(y_t \mid y_{<t}, x)$ die finale Zielsequenz generiert wird:
 \begin{enumerate}
-    \item \textbf{Greedy Search vs. Beam Search:} \textit{Greedy Search} wählt in jedem Schritt stur das Wort mit der aktuell höchsten Einzelwahrscheinlichkeit. Das ist sehr schnell, kann das Modell jedoch in sprachliche Sackgassen führen. \textit{Beam Search} verfolgt stattdessen parallel die $B$ aussichtsreichsten Satzanfänge (Pfade bzw. \textit{Beams}) gleichzeitig. Erst am Satzende wird der Pfad mit der besten Gesamtwahrscheinlichkeit ausgewählt, was zu grammatikalisch stabileren und flüssigeren Sätzen führt.
-    \item \textbf{Zufallsbasiertes Sampling \& Top-p (Nucleus):} Um flexiblere Texte zu erzeugen, wird beim \textit{Sampling} aus den Wortwahrscheinlichkeiten stochastisch ausgewählt. Die \textit{Temperatur} $T$ steuert dabei, wie vorhersehbar (niedrige Temperatur) oder abwechslungsreich (hohe Temperatur) die Wortwahl ausfällt. Beim \textit{Top-p (Nucleus) Sampling} werden unpassende, seltene Wörter abgeschnitten, indem nur die obersten Wörter berücksichtigt werden, deren addierte Wahrscheinlichkeit einen Schwellenwert (z.\,B. $p = 0{,}9$) erreicht.
-    \item \textbf{Wiederholungsstrafen (\textit{Repetition Penalty} \& N-Gramm-Sperren):} Bei stark repetitiven Texten (wie stichpunktartigen Aufzählungen in Leichter Sprache) neigen Modelle dazu, in Wort- und Satzwiederholungen zu verfallen. Eine \textit{Repetition Penalty} verringert die Wahrscheinlichkeit für bereits genutzte Wörter künstlich. Über ein \textit{N-Gram Banning} (\texttt{no\_repeat\_ngram\_size}) wird zudem strikt verhindert, dass identische Wortfolgen (z.\,B. Dreiwortgruppen) mehrfach im selben Text vorkommen.
+    \item \textbf{Greedy Search vs. Beam Search:} \textit{Greedy Search} wählt in jedem Zeitschritt deterministisch das Token mit der höchsten Einzelwahrscheinlichkeit $\arg\max_{y_t} P(y_t \mid y_{<t}, x)$. Dies ist recheneffizient, kann jedoch zu suboptimalen lokalen Maxima führen. \textit{Beam Search} verfolgt stattdessen zu jedem Schritt die $B$ wahrscheinlichsten Teilhypothesen (\textit{Beams}). Am Sequenzende wird der Pfad mit der höchsten kumulierten Wahrscheinlichkeit ausgewählt, was in der Regel zu syntaktisch stabileren Generierungen führt.
+    \item \textbf{Stochastisches Sampling \& Top-p (Nucleus):} Beim \textit{Sampling} wird das nächste Token stochastisch aus der Wahrscheinlichkeitsverteilung gezogen. Eine Temperatur $T > 0$ skaliert die Logits ($z_i / T$) und bestimmt, ob die Verteilung spitzer (geringere Varianz) oder flacher (höhere Diversität) ausfällt. Beim \textit{Top-p (Nucleus) Sampling} wird die Auswahl auf die kleinste Menge an Tokens beschränkt, deren kumulierte Wahrscheinlichkeit einen Schwellenwert $p$ erreicht, wodurch unwahrscheinliche Tokens aus dem Verteilungsende (\textit{Tail}) abgeschnitten werden.
+    \item \textbf{Wiederholungsstrafen (\textit{Repetition Penalty} \& N-Gramm-Sperren):} Insbesondere bei einfacher oder stichpunktartiger Sprache neigen Sprachmodelle zu unerwünschten Repetitionen. Eine \textit{Repetition Penalty} reduziert die Logits bereits generierter Tokens multiplikativ. Ein \textit{N-Gram Banning} (\texttt{no\_repeat\_ngram\_size}) setzt die Wahrscheinlichkeit für Tokens auf null, die zu einer Wiederholung bereits aufgetretener $n$-Gramme fester Länge führen würden.
 \end{enumerate}
 
