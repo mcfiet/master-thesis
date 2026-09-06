@@ -19,7 +19,6 @@
 \usetikzlibrary{positioning, shapes.geometric, arrows.meta, fit, backgrounds, calc}
 \usepackage{float}
 \usepackage{hyperref}
-\usepackage{acronym}
 \usepackage{longtable}
 \usepackage[nonumberlist]{glossaries}
 \usepackage{tabularx}
@@ -39,8 +38,8 @@
 \DeclareDelimFormat{nameyeardelim}{\addcomma\space}
 \providecommand{\apashortdash}{-}
 
-\addbibresource{Literatur.bib}
-\input{glossary}
+\addbibresource{literatur.bib}
+\input{frontmatter/06_glossary}
 
 
 % \setcounter{tocdepth}{4}
@@ -50,18 +49,18 @@
 \emergencystretch=3em % avoid overfull lines from long \texttt{} file names / URLs
 \begin{document}
 \pagenumbering{gobble} % Unterdrückt die Seitennummerierung
-\input{titlepage}
+\input{frontmatter/01_cover}
 \newpage
-\input{deckblatt}
+\input{frontmatter/02_deckblatt}
 
 \newpage
-\input{abstract}
+\input{frontmatter/03_abstract}
 
 \newpage
-\input{ai_declaration}
+\input{frontmatter/04_ai_declaration}
 
 \newpage
-\input{eigenstaendigkeits}
+\input{frontmatter/05_declaration_of_originality}
 
 \newpage
 \tableofcontents
@@ -70,35 +69,35 @@
 \newpage
 \pagenumbering{arabic} % Beginnt die Nummerierung ab hier mit 1
 \section{Einleitung}\label{sec:einleitung}
-\input{1.introduction/target}
+\input{chapters/01_introduction}
 
 \newpage
 \section{Theoretischer Hintergrund}
-\input{2.relatedWork/theoretischerHintergrund}
+\input{chapters/02_theoretical_background}
 
 \newpage
 \section{Stand der Forschung}
-\input{2.relatedWork/standDerForschung}
+\input{chapters/03_related_work}
 
 \newpage
 \section{Themenblock 1: Datenbasis \& Korpus-Erstellung}\label{sec:themenblock1_datenbasis}
-\input{3.materials/dataset}
+\input{chapters/04_corpus_creation}
 
 \newpage
 \section{Themenblock 2: Metrik \& Bewerten von Sprachkomplexität}\label{sec:themenblock2_metrik}
-\input{4.methodology/_methodologies}
+\input{chapters/05_complexity_metric}
 
 \newpage
 \section{Themenblock 3: Modellierung der Übersetzung \& Reward-Guided Fine-Tuning}\label{sec:themenblock3_translation}
-\input{5.experimentsAndResults/_experiments}
+\input{chapters/06_translation_model}
 
 \newpage
 \section{Diskussion \& Gesamtevaluation}\label{sec:diskussion}
-\input{6.discussion/discussion}
+\input{chapters/07_discussion}
 
 \newpage
 \section{Fazit \& Ausblick}\label{sec:fazit_ausblick}
-\input{8.conclusion/conclusion}
+\input{chapters/08_conclusion}
 
 % ==========================================
 % VERZEICHNISSE & LITERATUR
@@ -129,6 +128,6 @@
 \newpage
 \appendix
 \section{Anhang}\label{sec:anhang}
-\input{anhang/anhang}
+\input{chapters/09_appendix}
 
 \end{document}

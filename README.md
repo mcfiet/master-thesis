@@ -42,17 +42,11 @@ Das Projekt ist wie folgt organisiert:
 │   ├── sbatch/                   # Slurm Batch-Skripte für HPC/GPU-Cluster
 │   └── visualization/            # Skripte zur Abbildungserzeugung
 ├── thesis/                       # LaTeX-Quellcode der Masterarbeit
-│   ├── 1.introduction/           # Einleitung & Forschungsfragen
-│   ├── 2.relatedWork/            # Theoretischer Hintergrund & Stand der Forschung
-│   ├── 3.materials/              # Themenblock 1: Datenbasis & Korpus-Erstellung
-│   ├── 4.methodology/            # Themenblock 2: BiLSTM & MixUp-Regressionsmetrik
-│   ├── 5.experimentsAndResults/  # Themenblock 3: SFT, DPO-Alignment & Expertenstudie
-│   ├── 6.discussion/             # Diskussion, Systemgrenzen & Beantwortung der FF
-│   ├── 8.conclusion/             # Fazit & Ausblick
-│   ├── anhang/                   # Detaillierter Anhang mit allen Benchmarks
+│   ├── frontmatter/              # Vorspann (Titelblatt, Deckblatt, Abstract, KI-Erklärung, Glossar)
+│   ├── chapters/                 # Hauptkapitel (01_introduction bis 09_appendix)
 │   ├── images/                   # Diagramme und Abbildungen der Thesis
 │   ├── main.tex                  # Hauptdokument
-│   └── Literatur.bib             # Literaturverzeichnis
+│   └── literatur.bib             # Literaturverzeichnis
 ├── requirements.txt              # Python-Abhängigkeiten
 └── run_jupyter_server.md         # Anleitung für Remote-Jupyter auf GPU-Servern
 ```
@@ -140,18 +134,27 @@ python scripts/evaluation/serve_expert_app.py --port 8085
 
 ## Masterarbeit (LaTeX-Dokumentation)
 
-Die schriftliche Ausarbeitung der Arbeit befindet sich im Ordner `thesis/` und basiert auf der Dokumentenklasse `scrreprt` (KOMA-Script).
+Die schriftliche Ausarbeitung der Arbeit befindet sich im Ordner `thesis/`.
 
-### Kapitelstruktur
- 
-- `1.introduction/target.tex` - Einleitung & Forschungsfragen
-- `2.relatedWork/` - Theoretischer Hintergrund & Stand der Forschung
-- `3.materials/dataset.tex` - Themenblock 1: Datenbasis & Korpus-Erstellung
-- `4.methodology/_methodologies.tex` - Themenblock 2: Metrik & Bewerten von Sprachkomplexität
-- `5.experimentsAndResults/` - Themenblock 3: Modellierung der Übersetzung & Reward-Guided Fine-Tuning
-- `6.discussion/discussion.tex` - Diskussion & Gesamtevaluation
-- `8.conclusion/conclusion.tex` - Fazit & Ausblick
-- `anhang/anhang.tex` - Anhang mit ausführlichen Benchmark-Tabellen & Hyperparametern
+### Dateistruktur
+
+- **Vorspann (`frontmatter/`):**
+  - `01_cover.tex` - Schmutztitel / Deckblatt mit HS-Logo
+  - `02_deckblatt.tex` - Offizielles Hochschul-Prüfungsdeckblatt
+  - `03_abstract.tex` - Kurzfassung / Abstract
+  - `04_ai_declaration.tex` - Erklärung zur Nutzung generativer KI
+  - `05_declaration_of_originality.tex` - Eigenständigkeitserklärung
+  - `06_glossary.tex` - Abkürzungsverzeichnis & Glossardefinitionen
+- **Kapitel (`chapters/`):**
+  - `01_introduction.tex` - Section 1: Einleitung & Forschungsfragen
+  - `02_theoretical_background.tex` - Section 2: Theoretischer Hintergrund
+  - `03_related_work.tex` - Section 3: Stand der Forschung
+  - `04_corpus_creation.tex` - Section 4: Themenblock 1 (Datenbasis & Korpus-Erstellung)
+  - `05_complexity_metric.tex` - Section 5: Themenblock 2 (Metrik & Bewerten von Sprachkomplexität)
+  - `06_translation_model.tex` - Section 6: Themenblock 3 (Modellierung der Übersetzung & Reward-Guided Fine-Tuning)
+  - `07_discussion.tex` - Section 7: Diskussion & Gesamtevaluation
+  - `08_conclusion.tex` - Section 8: Fazit & Ausblick
+  - `09_appendix.tex` - Anhang mit ausführlichen Benchmark-Tabellen & Hyperparametern
 
 ### Kompilieren der Arbeit
 
